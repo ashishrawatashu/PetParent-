@@ -1,7 +1,10 @@
 package com.cynoteck.petofyparents.api;
 
+import com.cynoteck.petofyparents.parameter.forgetPassRequest.ForgetPassRequest;
 import com.cynoteck.petofyparents.parameter.loginParameter.Loginparams;
 import com.cynoteck.petofyparents.parameter.otpRequest.SendOtpRequest;
+import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
+import com.cynoteck.petofyparents.response.forgetAndChangePassResponse.PasswordResponse;
 import com.cynoteck.petofyparents.response.loginResponse.LoginRegisterResponse;
 import com.cynoteck.petofyparents.response.otpResponse.OtpResponse;
 
@@ -18,14 +21,25 @@ import retrofit2.http.Part;
 public interface ApiInterface {
 
     //TODO================LOGIN=============================
+
     @POST("User/Login")
     Call<LoginRegisterResponse> loginApi(@Body Loginparams loginparams);
 
     //TODO=============SEND OTP TO USER======================
+
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("common/SendOtp")
     Call<OtpResponse> senOtp(@Header("Authorization") String auth, @Body SendOtpRequest inPetRegisterRequest);
 
+    //TODO=============Register API============================
+
+    @POST("User/Registration")
+    Call<LoginRegisterResponse> registerApi(@Body Registerparams registerparams);
+
+    //TODO============Forget Password API=======================
+
+    @POST("user/forgotpassword")
+    Call<PasswordResponse> getPasswordResponse(@Body ForgetPassRequest forgetPassRequest);
 }
 
 

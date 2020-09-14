@@ -9,7 +9,7 @@ import android.net.ConnectivityManager;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.cynoteck.petofyvet.R;
+import com.cynoteck.petofyparents.R;
 
 import androidx.appcompat.app.AlertDialog;
 

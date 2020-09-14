@@ -1,13 +1,12 @@
 package com.cynoteck.petofyparents.activty;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import retrofit2.Response;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -100,7 +99,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             }
         }
 
-        FirebaseInstanceId.getInstance().getInstanceId()
+        /*FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -115,7 +114,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                         Log.d(TAG, msg);
 
                     }
-                });
+                });*/
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
         {
             NotificationChannel notificationChannel=new NotificationChannel(channel_id, channel_name, NotificationManager.IMPORTANCE_DEFAULT);
@@ -382,6 +381,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         Log.e("errrrr", t.getLocalizedMessage());
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -406,6 +406,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         super.onResume();
     }
 
+    @SuppressLint("MissingPermission")
     private void getDeviceId() {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
