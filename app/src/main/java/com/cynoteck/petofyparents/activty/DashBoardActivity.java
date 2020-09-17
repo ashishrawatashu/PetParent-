@@ -8,15 +8,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.api.ApiResponse;
+import com.cynoteck.petofyparents.utils.Config;
 
 public class DashBoardActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
     TextView logout;
+    boolean exit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
 
     public void initialize()
     {
+        Config.count = 1;
         logout=findViewById(R.id.logout);
         logout.setOnClickListener(this);
     }
@@ -66,5 +72,29 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
     @Override
     public void onError(Throwable t, String key) {
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Log.e("count", String.valueOf(Config.count));
+        Log.e("exit", String.valueOf(exit));
+        if (Config.count == 1) {
+            if (exit) {
+                super.onBackPressed();
+                finishAffinity();
+                System.exit(0);
+                return;
+            } else {
+                Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 2000);
+            }
+        }
     }
 }
