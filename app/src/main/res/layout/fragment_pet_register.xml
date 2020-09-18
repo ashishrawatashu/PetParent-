@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+tools:context=".fragments.PetRegisterFragment">
+
+<androidx.cardview.widget.CardView
+    app:cardElevation="5dp"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/whiteColor"
+    tools:ignore="MissingConstraints">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/search_register_pet"
+            android:layout_alignParentStart="true"
+            android:layout_margin="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:src="@drawable/searchicon"
+            android:layout_alignParentLeft="true" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/back_arrow_IV"
+            android:layout_marginRight="5dp"
+            android:padding="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/back_arrow"
+            android:layout_alignParentLeft="true" />
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_marginBottom="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/back_arrow_IV"
+            android:id="@+id/search_boxRL"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:background="@drawable/searchbox"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/back_arrow_IV">
+
+            <EditText
+                android:id="@+id/search_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="Search pet...."
+                android:imeOptions="actionSearch"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:singleLine="true"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/regiter_pet_headline_TV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/register_pets"
+            android:textColor="#000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:visibility="visible"
+            android:id="@+id/register_add_TV"
+            android:layout_margin="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_add" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+<com.facebook.shimmer.ShimmerFrameLayout
+    android:visibility="visible"
+    android:layout_below="@+id/toolbar"
+    android:id="@+id/shimmer_view_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    shimmer:duration="800">
+
+    <!-- Adding 3 rows of placeholders -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/list_loading_style" />
+        <include layout="@layout/list_loading_style" />
+        <include layout="@layout/list_loading_style" />
+        <include layout="@layout/list_loading_style" />
+        <include layout="@layout/list_loading_style" />
+        <include layout="@layout/list_loading_style" />
+        <include layout="@layout/list_loading_style" />
+        <include layout="@layout/list_loading_style" />
+
+
+        <include layout="@layout/list_loading_style" />
+
+    </LinearLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>
+
+
+<androidx.recyclerview.widget.RecyclerView
+    android:background="@color/list_background"
+    android:id="@+id/register_pet_RV"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/toolbar"/>
+
+</RelativeLayout>

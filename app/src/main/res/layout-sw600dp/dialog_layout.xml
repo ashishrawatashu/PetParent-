@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteColor">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Option"
+        android:textColor="@color/colorPrimary"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"/>
+
+   <androidx.cardview.widget.CardView
+       android:id="@+id/component_layout"
+       android:layout_below="@+id/header"
+       android:layout_width="match_parent"
+       android:layout_height="100dp"
+       android:layout_marginTop="5dp"
+       app:cardCornerRadius="5dp"
+       android:layout_marginRight="5dp"
+       android:layout_marginLeft="5dp">
+
+       <TextView
+           android:id="@+id/select_camera"
+           android:layout_width="match_parent"
+           android:layout_height="45dp"
+           android:text="Select Camera"
+           android:textSize="18sp"
+           android:padding="10dp"
+           android:textColor="@color/whiteColor"
+           android:background="@color/colorPrimary"
+           android:gravity="center|left"/>
+
+       <TextView
+           android:id="@+id/select_gallery"
+           android:layout_width="match_parent"
+           android:layout_height="45dp"
+           android:text="Select Gallery"
+           android:textSize="18sp"
+           android:padding="10dp"
+           android:textColor="@color/whiteColor"
+           android:background="@color/colorPrimary"
+           android:gravity="center|left"
+           android:layout_marginTop="55dp"/>
+   </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/cancel_dialog"
+        android:layout_below="@+id/component_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="5dp"/>
+
+</RelativeLayout>
