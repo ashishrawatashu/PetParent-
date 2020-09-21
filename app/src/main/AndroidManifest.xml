@@ -38,6 +38,7 @@
         <activity android:name=".activty.RegisterActivity" />
         <activity android:name=".activty.LoginActivity" />
         <activity android:name=".activty.DashBoardActivity" />
+        <activity android:name=".activty.SelectPetReportsActivity" />
         <activity android:name=".activty.SplasScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
