@@ -133,7 +133,8 @@ public class ReportsFragment extends Fragment implements ApiResponse, RegisterRe
                         petList_RV.setAdapter(reportsAdapter);
                         reportsAdapter.notifyDataSetChanged();
                         mShimmerViewContainer.setVisibility(View.GONE);
-                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.stopShimmer();
+
                     }
                 }
 
@@ -185,13 +186,13 @@ public class ReportsFragment extends Fragment implements ApiResponse, RegisterRe
     @Override
     public void onResume() {
         super.onResume();
-        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.startShimmer();
 
     }
 
     @Override
     public void onPause() {
-        mShimmerViewContainer.stopShimmerAnimation();
+        mShimmerViewContainer.stopShimmer();
         super.onPause();
     }
 

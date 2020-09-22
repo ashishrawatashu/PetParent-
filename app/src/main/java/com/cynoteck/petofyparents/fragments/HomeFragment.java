@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
         reports_CV=view.findViewById(R.id.reports_CV);
         all_staff_CV = view.findViewById(R.id.staff_CV);
         allPets_CV=view.findViewById(R.id.allPets_CV);
-        appoint_CV=view.findViewById(R.id.appoint_CV);
+        appoint_CV=view.findViewById(R.id.appointment_CV);
         logout=view.findViewById(R.id.logout);
 
         allPets_CV.setOnClickListener(this);
@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
 
                 break;
 
-            case R.id.appoint_CV:
+            case R.id.appointment_CV:
                 AppointementFragment appointementFragment = new AppointementFragment();
                 replaceFragment(appointementFragment);
 

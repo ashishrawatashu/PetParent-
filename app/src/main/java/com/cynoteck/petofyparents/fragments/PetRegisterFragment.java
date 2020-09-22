@@ -160,7 +160,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                         register_pet_RV.setAdapter(registerPetAdapter);
                         registerPetAdapter.notifyDataSetChanged();
                         categoryRecordArrayList = getPetListResponse.getData().getPetList();
-                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.stopShimmer();
                         search_register_pet.setVisibility(View.VISIBLE);
                         mShimmerViewContainer.setVisibility(View.GONE);
 
@@ -193,7 +193,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     public void onResume() {
         super.onResume();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
-        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.startShimmer();
         if (Config.backCall.equals("Added")) {
             Config.backCall ="";
             getPetList();

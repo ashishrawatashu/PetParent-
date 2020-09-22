@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activty.SelectPetReportsActivity">
+    tools:context=".activty.ReportsCommonActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/reports_type_frame"/>
 
     <androidx.cardview.widget.CardView
         app:cardElevation="10dp"
@@ -19,37 +15,36 @@
         android:background="@color/whiteColor"
         tools:ignore="MissingConstraints">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
+
+            <ImageView
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/back_arrow_IV"
+                android:padding="8dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_arrow" />
+
+
             <TextView
+                android:layout_marginRight="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/back_arrow_IV"
                 android:id="@+id/reports_headline_TV"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
                 android:gravity="center"
-                android:text="@string/selectReports"
                 android:textColor="#000"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/back_arrow_IV"
-                android:padding="8dp"
-                android:visibility="visible"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/back_arrow" />
-
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
 
     <androidx.cardview.widget.CardView
         android:layout_marginTop="5dp"
@@ -228,183 +223,12 @@
         android:layout_below="@id/petInfo_CV"
         android:background="@color/green_divider"/>
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
+        android:background="@color/list_background"
+        android:id="@+id/report_type_frame"
         android:layout_below="@id/view_green_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:background="@color/list_background"
-            android:id="@+id/reports_list_RL"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reports_types_RV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_below="@+id/reports_types_RV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:id="@+id/xray_layout"
-                    android:background="@drawable/reports_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageView
-                        android:layout_marginLeft="20dp"
-                        android:layout_alignParentStart="true"
-                        android:id="@+id/view_xrayReport_IV"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/viewreports_icon"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:gravity="start"
-                        android:paddingLeft="20dp"
-                        android:textSize="18dp"
-                        android:textColor="@color/black_color"
-                        android:layout_centerInParent="true"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/report_xrayReport_TV"
-                        android:text="@string/xrayReport"
-                        android:layout_toRightOf="@id/view_xrayReport_IV"/>
-
-
-                    <ImageView
-                        android:layout_alignParentEnd="true"
-                        android:layout_toRightOf="@+id/report_xrayReport_TV"
-                        android:layout_marginLeft="20dp"
-                        android:id="@+id/view_xrayReport_arrow"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/forward_arrow"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"/>
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/lab_test_layout"
-                    android:background="@drawable/reports_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageView
-                        android:layout_marginLeft="20dp"
-                        android:layout_alignParentStart="true"
-                        android:id="@+id/view_labTestReport_IV"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/viewreports_icon"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:gravity="start"
-                        android:paddingLeft="20dp"
-                        android:textSize="18dp"
-                        android:textColor="@color/black_color"
-                        android:layout_centerInParent="true"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/report_labTestReport_TV"
-                        android:text="@string/labTestReport"
-                        android:layout_toRightOf="@id/view_labTestReport_IV"/>
-
-
-                    <ImageView
-                        android:layout_alignParentEnd="true"
-                        android:layout_toRightOf="@+id/report_labTestReport_TV"
-                        android:layout_marginLeft="20dp"
-                        android:id="@+id/view_labTestReport_arrow"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/forward_arrow"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"/>
-
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/hospitalization_layout"
-                    android:background="@drawable/reports_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                    <ImageView
-                        android:layout_marginLeft="20dp"
-                        android:layout_alignParentStart="true"
-                        android:id="@+id/view_Hospitalization_IV"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/viewreports_icon"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:gravity="start"
-                        android:paddingLeft="20dp"
-                        android:textSize="18dp"
-                        android:textColor="@color/black_color"
-                        android:layout_centerInParent="true"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/report_Hospitalization_TV"
-                        android:text="@string/Hospitalization"
-                        android:layout_toRightOf="@id/view_Hospitalization_IV"/>
-
-
-                    <ImageView
-                        android:layout_alignParentEnd="true"
-                        android:layout_toRightOf="@+id/report_Hospitalization_TV"
-                        android:layout_marginLeft="20dp"
-                        android:id="@+id/view_Hospitalization_arrow"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/forward_arrow"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"/>
-
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-
-
-
-    </androidx.core.widget.NestedScrollView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        android:layout_height="match_parent"/>
 
 
 </RelativeLayout>
