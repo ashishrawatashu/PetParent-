@@ -76,4 +76,6 @@ public class HospitalizationReportsAdapter extends RecyclerView.Adapter<Hospital
 
         }
     }
+
+
 }

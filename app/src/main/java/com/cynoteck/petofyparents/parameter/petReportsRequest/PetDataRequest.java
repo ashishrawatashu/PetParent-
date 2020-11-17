@@ -1,22 +1,21 @@
 package com.cynoteck.petofyparents.parameter.petReportsRequest;
 
 public class PetDataRequest {
-    private PetDataParams getPetDataParams;
+    private PetDataParams data;
 
     public PetDataParams getData ()
     {
-        return getPetDataParams;
+        return data;
     }
 
     public void setData (PetDataParams data)
     {
-        this.getPetDataParams = data;
+        this.data = data;
     }
 
     @Override
     public String toString()
     {
-        return "ClassPojo [data = "+getPetDataParams+"]";
+        return "ClassPojo [data = "+data+"]";
     }
-
 }

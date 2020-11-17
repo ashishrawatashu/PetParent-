@@ -48,6 +48,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.ACCESS_NETWORK_STATE;
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
@@ -129,18 +130,19 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private boolean checkPermission() {
 
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+        int result11 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
         int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
         int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_PHONE_STATE);
         int result3 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
         int result4 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
         int result5 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_WIFI_STATE);
         int result6 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_NETWORK_STATE);
-        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED &&  result2 == PackageManager.PERMISSION_GRANTED  && result3 == PackageManager.PERMISSION_GRANTED &&  result4 == PackageManager.PERMISSION_GRANTED && result5 == PackageManager.PERMISSION_GRANTED &&  result6 == PackageManager.PERMISSION_GRANTED;
+        return result == PackageManager.PERMISSION_GRANTED && result11 == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED &&  result2 == PackageManager.PERMISSION_GRANTED  && result3 == PackageManager.PERMISSION_GRANTED &&  result4 == PackageManager.PERMISSION_GRANTED && result5 == PackageManager.PERMISSION_GRANTED &&  result6 == PackageManager.PERMISSION_GRANTED;
 
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION,CAMERA,READ_PHONE_STATE,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,ACCESS_WIFI_STATE,ACCESS_NETWORK_STATE}, PERMISSION_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION,CAMERA,READ_PHONE_STATE,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,ACCESS_WIFI_STATE,ACCESS_NETWORK_STATE}, PERMISSION_REQUEST_CODE);
 
     }
 
@@ -330,6 +332,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         login_editor.putString("study", responseLogin.getData().getVetRQualification());
         login_editor.putString("vetid", responseLogin.getData().getVetRegistrationNumber());
         login_editor.putString("onlineAppoint", responseLogin.getData().getOnlineAppointmentStatus());
+        login_editor.putString("twoFactAuth", responseLogin.getData().getEnableTwoStepVerification());
 
         Config.token = responseLogin.getResponseLogin().getToken();
         login_editor.putString("loggedIn", "loggedIn");

@@ -14,15 +14,20 @@ public class Config {
     public  static  int count =1;
     public static String token="";
     public static String user_id="";
+    public static String user_name="";
+    public static String user_phone="";
+    public static String user_emial="";
+    public static String user_address="";
+    public static String user_study="";
+    public static String user_Veterian_id="";
+    public static String user_online="";
+    public static String user_url="";
+    public static String user_details="";
+    public static String two_fact_auth_status="";
     public static String user_Veterian_name="";
     public static String user_Veterian_phone="";
     public static String user_Veterian_emial="";
     public static String user_Veterian_address="";
-    public static String user_Veterian_study="";
-    public static String user_Veterian_id="";
-    public static String user_Veterian_online="";
-    public static String user_Veterian_url="";
-    public static String user_Veterian_details="";
 
     public static String type="";
     public static String backCall="";

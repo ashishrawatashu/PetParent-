@@ -153,4 +153,15 @@
     <string name="sunday">Sunday</string>
     <string name="fcm_token">FCM Token: %s</string>
     <string name="Editprofile">Edit Profile</string>
+    <string name="profile_home">PROFILE</string>
+    <string name="bookAppointment">Book Appointment</string>
+    <string name="payPaymet">Proceed Payment</string>
+    <string name="veterinarianName">Vet Name</string>
+    <string name="MeetingTopic">Meeting Topic</string>
+    <string name="StartTime">Start Time</string>
+    <string name="EndTime">End Time</string>
+    <string name="Date">Date</string>
+    <string name="pet_register">Pet Register</string>
+    <string name="Mypets">My Pets</string>
+
 </resources>

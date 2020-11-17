@@ -21,17 +21,18 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.MyViewHolder> implements Filterable {
+public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.MyViewHolder> /*implements Filterable*/ {
+
     Context context;
-    List<PetList> profileList;
-    List<PetList> filterProfileList;
+    ArrayList<PetList> profileList;
+    //ArrayList<PetList> filterProfileList;
     private ViewDeatilsAndIdCardClick onProductItemClickListner;
 
-    public RegisterPetAdapter(Context context, List<PetList> profileList, ViewDeatilsAndIdCardClick onProductItemClickListner) {
+    public RegisterPetAdapter(Context context, ArrayList<PetList> profileList, ViewDeatilsAndIdCardClick onProductItemClickListner) {
         this.context = context;
         this.profileList = profileList;
         this.onProductItemClickListner=onProductItemClickListner;
-        filterProfileList = new ArrayList<>(profileList);
+        //filterProfileList = new ArrayList<>(profileList);
     }
 
     @NonNull
@@ -60,46 +61,46 @@ public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.
         return profileList.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return filterList;
-    }
-
-    private Filter filterList = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-
-            List<PetList> filteredList = new ArrayList<>();
-            if (constraint == null || constraint.length()==0){
-                filteredList.addAll(filterProfileList);
-            }else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (PetList item : filterProfileList){
-                    if (item.getPetUniqueId().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }else if (item.getContactNumber().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }else if (item.getPetName().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }else if (item.getPetParentName().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }
-                }
-            }
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = filteredList;
-
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            profileList.clear();
-            profileList.addAll((List<PetList>)results.values);
-            notifyDataSetChanged();
-
-        }
-    };
+//    @Override
+//    public Filter getFilter() {
+//        return filterList;
+//    }
+//
+//    private Filter filterList = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence constraint) {
+//
+//            List<PetList> filteredList = new ArrayList<>();
+//            if (constraint == null || constraint.length()==0){
+//                filteredList.addAll(filterProfileList);
+//            }else {
+//                String filterPattern = constraint.toString().toLowerCase().trim();
+//                for (PetList item : filterProfileList){
+//                    if (item.getPetUniqueId().toLowerCase().contains(filterPattern)){
+//                        filteredList.add(item);
+//                    }else if (item.getContactNumber().toLowerCase().contains(filterPattern)){
+//                        filteredList.add(item);
+//                    }else if (item.getPetName().toLowerCase().contains(filterPattern)){
+//                        filteredList.add(item);
+//                    }else if (item.getPetParentName().toLowerCase().contains(filterPattern)){
+//                        filteredList.add(item);
+//                    }
+//                }
+//            }
+//            FilterResults filterResults = new FilterResults();
+//            filterResults.values = filteredList;
+//
+//            return filterResults;
+//        }
+//
+//        @Override
+//        protected void publishResults(CharSequence constraint, FilterResults results) {
+//            profileList.clear();
+//            profileList.addAll((List<PetList>)results.values);
+//            notifyDataSetChanged();
+//
+//        }
+//    };
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView petRegImage_IV;

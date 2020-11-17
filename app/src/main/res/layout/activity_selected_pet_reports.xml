@@ -385,10 +385,18 @@
 
 
 
-
     </androidx.core.widget.NestedScrollView>
 
-
+    <WebView
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/webview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:ignore="WebViewLayout" />
 
 
 

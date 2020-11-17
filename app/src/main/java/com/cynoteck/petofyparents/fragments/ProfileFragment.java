@@ -1,66 +1,118 @@
 package com.cynoteck.petofyparents.fragments;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
+import com.cynoteck.petofyparents.activty.ChangePasswordActivity;
+import com.cynoteck.petofyparents.activty.LoginActivity;
+import com.cynoteck.petofyparents.activty.SettingActivity;
+import com.cynoteck.petofyparents.api.ApiResponse;
+import com.cynoteck.petofyparents.utils.Config;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ProfileFragment extends Fragment {
+import retrofit2.Response;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class ProfileFragment extends Fragment implements View.OnClickListener, ApiResponse {
+    TextView tv,heder,parent_name_TV,parent_email_TV,parent_address_TV,parent_phone_TV;
+    ImageView parent_profile_pic;
+    View view;
+    RelativeLayout setings_layout,logout_layout,changePass_layout;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
+        initization();
+        getParentInfo();
+
+        return view;
+
+    }
+
+    private void getParentInfo() {
+        Glide.with(this)
+                .load(Config.user_url)
+                .into(parent_profile_pic);
+        parent_name_TV.setText(Config.user_name);
+        parent_email_TV.setText(Config.user_emial);
+        parent_address_TV.setText(Config.user_address);
+        parent_phone_TV.setText(Config.user_phone);
+
+    }
+
+    private void initization() {
+        setings_layout=view.findViewById(R.id.setings_layout);
+        logout_layout=view.findViewById(R.id.logout_layout);
+        changePass_layout=view.findViewById(R.id.changePass_layout);
+        parent_email_TV = view.findViewById(R.id.parent_email_TV);
+        parent_name_TV = view.findViewById(R.id.parent_name_TV);
+        parent_address_TV = view.findViewById(R.id.parent_address_TV);
+        parent_phone_TV = view.findViewById(R.id.parent_phone_TV);
+        parent_profile_pic = view.findViewById(R.id.parent_profile_pic);
+
+        setings_layout.setOnClickListener(this);
+        logout_layout.setOnClickListener(this);
+        changePass_layout.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.changePass_layout:
+
+                Intent changePass = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(changePass);
+                break;
+            case R.id.setings_layout:
+                Intent setting = new Intent(getContext(), SettingActivity.class);
+                startActivity(setting);
+
+                break;
+
+            case R.id.logout_layout:
+                SharedPreferences preferences =getActivity().getSharedPreferences("userdetails",0);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                getActivity().finish();
+                break;
+
+        }
+    }
+
+    @Override
+    public void onResponse(Response arg0, String key) {
+
+    }
+
+    @Override
+    public void onError(Throwable t, String key) {
+
     }
 }

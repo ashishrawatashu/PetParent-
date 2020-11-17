@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.MyViewHolder> implements Filterable {
+
     Context context;
     List<PetList> profileList;
     List<PetList> filterProfileList;
@@ -128,4 +129,6 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.MyViewHo
 
         }
     }
+
+
 }
