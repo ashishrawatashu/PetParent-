@@ -118,12 +118,15 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     private Button upload;
     private String baseUrl;
 
+    String addType="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pet_register);
 
+        Intent intent = getIntent();
+        intent.getStringExtra("appointment");
         init();
         requestMultiplePermissions();
         currentDateAndTime();
@@ -296,24 +299,24 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     pet_address.setError(null);
                     calenderView.setError(null);
                 }
-                else if(strPetParentName.isEmpty())
-                {
-                    pet_name.setError(null);
-                    pet_parent_name.setError("Enter Parent Name");
-                    pet_contact_number.setError(null);
-                    pet_description.setError(null);
-                    pet_address.setError(null);
-                    calenderView.setError(null);
-                }
-                else if(strPetContactNumber.isEmpty())
-                {
-                    pet_name.setError(null);
-                    pet_parent_name.setError(null);
-                    pet_contact_number.setError("Enter Contact Number");
-                    pet_description.setError(null);
-                    pet_address.setError(null);
-                    calenderView.setError(null);
-                }
+//                else if(strPetParentName.isEmpty())
+//                {
+//                    pet_name.setError(null);
+//                    pet_parent_name.setError("Enter Parent Name");
+//                    pet_contact_number.setError(null);
+//                    pet_description.setError(null);
+//                    pet_address.setError(null);
+//                    calenderView.setError(null);
+//                }
+//                else if(strPetContactNumber.isEmpty())
+//                {
+//                    pet_name.setError(null);
+//                    pet_parent_name.setError(null);
+//                    pet_contact_number.setError("Enter Contact Number");
+//                    pet_description.setError(null);
+//                    pet_address.setError(null);
+//                    calenderView.setError(null);
+//                }
                 else if(strPetDescription.isEmpty())
                 {
                     pet_name.setError(null);
@@ -323,15 +326,15 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     pet_address.setError(null);
                     calenderView.setError(null);
                 }
-                else if(strPetAdress.isEmpty())
-                {
-                    pet_name.setError(null);
-                    pet_parent_name.setError(null);
-                    pet_contact_number.setError(null);
-                    pet_description.setError(null);
-                    pet_address.setError("Enter Pet Address");
-                    calenderView.setError(null);
-                }
+//                else if(strPetAdress.isEmpty())
+//                {
+//                    pet_name.setError(null);
+//                    pet_parent_name.setError(null);
+//                    pet_contact_number.setError(null);
+//                    pet_description.setError(null);
+//                    pet_address.setError("Enter Pet Address");
+//                    calenderView.setError(null);
+//                }
                 else if(strPetBirthDay.isEmpty())
                 {
                     pet_name.setError(null);
@@ -378,9 +381,9 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     data.setPetColorId(strSpnrColorId);
                     data.setPetBreedId(strSpnrBreedId);
                     data.setPetName(strPetName);
-                    data.setPetParentName(strPetParentName);
-                    data.setContactNumber(strPetContactNumber);
-                    data.setAddress(strPetAdress);
+                    data.setPetParentName(Config.user_name);
+                    data.setContactNumber(Config.user_phone);
+                    data.setAddress(Config.user_address);
                     data.setDescription(strPetDescription);
                     data.setCreateDate(currentDateandTime);
                     data.setDateOfBirth(strPetBirthDay);
@@ -995,8 +998,9 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
                         Toast.makeText(this, "Pet Added Successfully ", Toast.LENGTH_SHORT).show();
-                        Config.backCall = "Added";
-                        onBackPressed();
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK, intent);
+                        finish();
                     }else if (responseCode==614){
                         Toast.makeText(this, addPetValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     }else {

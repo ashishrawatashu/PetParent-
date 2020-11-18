@@ -58,7 +58,7 @@ tools:context=".activty.AddPetRegister" >
     app:layout_constraintStart_toStartOf="parent"
     android:layout_height="50dp"
     app:civ_border_color="#cccc"
-    android:src="@drawable/profile_img_icon"
+    android:src="@drawable/ic_baseline_photo_camera_24"
     android:layout_marginTop="10dp"/>
 
 <TextView
@@ -293,6 +293,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <TextView
+            android:visibility="gone"
             android:layout_below="@id/add_pet_color_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -305,6 +306,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <EditText
+            android:visibility="gone"
             android:layout_below="@id/pet_patent_TV"
             android:inputType="text"
             android:maxLines="1"
@@ -322,6 +324,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <TextView
+            android:visibility="gone"
             android:layout_below="@id/pet_parent_name_ET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -334,6 +337,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <EditText
+            android:visibility="gone"
             android:layout_below="@id/pet_contact_TV"
             android:inputType="phone"
             android:maxLines="1"
@@ -379,6 +383,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <TextView
+            android:visibility="gone"
             android:layout_below="@id/pet_desc_ET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -391,6 +396,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <EditText
+            android:visibility="gone"
             android:layout_below="@id/pet_address_TV"
             android:inputType="text"
             android:maxLines="1"
@@ -408,6 +414,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <TextView
+            android:visibility="gone"
             android:layout_below="@id/pet_address_ET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -419,6 +426,7 @@ tools:context=".activty.AddPetRegister" >
             android:textColor="@color/grey_add_pet"/>
 
         <TextView
+            android:visibility="gone"
             android:layout_below="@id/pet_images_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -432,6 +440,7 @@ tools:context=".activty.AddPetRegister" >
 
 
         <ImageView
+            android:visibility="gone"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
             android:layout_below="@id/pet_images_info"
@@ -441,6 +450,7 @@ tools:context=".activty.AddPetRegister" >
             android:src="@drawable/add_img_icon" />
 
         <ImageView
+            android:visibility="gone"
             android:layout_marginRight="10dp"
             android:layout_below="@id/pet_images_info"
             android:layout_toRightOf="@+id/service_cat_img_one"
@@ -450,6 +460,7 @@ tools:context=".activty.AddPetRegister" >
             android:src="@drawable/add_img_icon" />
 
         <ImageView
+            android:visibility="gone"
             android:layout_marginRight="10dp"
             android:layout_below="@id/pet_images_info"
             android:layout_toRightOf="@+id/service_cat_img_two"
@@ -459,6 +470,7 @@ tools:context=".activty.AddPetRegister" >
             android:src="@drawable/add_img_icon" />
 
         <ImageView
+            android:visibility="gone"
             android:layout_marginRight="10dp"
             android:layout_below="@id/pet_images_info"
             android:layout_toRightOf="@+id/service_cat_img_three"
@@ -467,6 +479,7 @@ tools:context=".activty.AddPetRegister" >
             android:layout_height="50dp"
             android:src="@drawable/add_img_icon" />
         <ImageView
+            android:visibility="gone"
             android:layout_marginRight="10dp"
             android:layout_below="@id/pet_images_info"
             android:layout_toRightOf="@+id/service_cat_img_four"

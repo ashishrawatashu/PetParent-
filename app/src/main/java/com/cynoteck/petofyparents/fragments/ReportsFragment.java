@@ -103,8 +103,8 @@ public class ReportsFragment extends Fragment implements ApiResponse, RegisterRe
 
     private void getPetList() {
         PetDataParams getPetDataParams = new PetDataParams();
-        getPetDataParams.setPageNumber("1");
-        getPetDataParams.setPageSize("5");
+        getPetDataParams.setPageNumber(1);
+        getPetDataParams.setPageSize(10);
         getPetDataParams.setSearch_Data("0");
         PetDataRequest getPetDataRequest = new PetDataRequest();
         getPetDataRequest.setData(getPetDataParams);
@@ -166,6 +166,8 @@ public class ReportsFragment extends Fragment implements ApiResponse, RegisterRe
         data.putString("pet_sex",categoryRecordArrayList.get(position).getPetSex());
         data.putString("pet_owner_name",categoryRecordArrayList.get(position).getPetParentName());
         data.putString("pet_owner_contact",categoryRecordArrayList.get(position).getContactNumber());
+        data.putString("pet_encryt_id",categoryRecordArrayList.get(position).getEncryptedId());
+        data.putString("pet_age",categoryRecordArrayList.get(position).getPetAge());
 
         selectReportsIntent.putExtras(data);
         startActivity(selectReportsIntent);

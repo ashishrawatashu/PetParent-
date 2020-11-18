@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import retrofit2.Response;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
@@ -25,7 +21,6 @@ import com.cynoteck.petofyparents.fragments.PetRegisterFragment;
 import com.cynoteck.petofyparents.fragments.ProfileFragment;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.google.android.material.card.MaterialCardView;
 
 public class DashBoardActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
@@ -49,14 +44,15 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
         Log.e("token",Config.token);
         Config.user_id=sharedPreferences.getString("userId", "");
         Log.e("user_id",Config.user_id);
-        Config.user_Veterian_phone=sharedPreferences.getString("phoneNumber", "");
-        Config.user_Veterian_emial=sharedPreferences.getString("email", "");
-        Config.user_Veterian_name=sharedPreferences.getString("firstName", "")+" "+sharedPreferences.getString("lastName", "");
-        Config.user_Veterian_address=sharedPreferences.getString("address", "");
-        Config.user_Veterian_online=sharedPreferences.getString("onlineAppoint", "");
-        Config.user_Veterian_id=sharedPreferences.getString("vetid", "");
-        Config.user_Veterian_study=sharedPreferences.getString("study", "");
-        Config.user_Veterian_url=sharedPreferences.getString("profilePic", "");
+        Config.user_phone=sharedPreferences.getString("phoneNumber", "");
+        Config.user_emial=sharedPreferences.getString("email", "");
+        Config.user_name=sharedPreferences.getString("firstName", "")+" "+sharedPreferences.getString("lastName", "");
+        Config.user_address=sharedPreferences.getString("address", "");
+        Config.user_online=sharedPreferences.getString("onlineAppoint", "");
+        Config.user_id=sharedPreferences.getString("vetid", "");
+        Config.user_study=sharedPreferences.getString("study", "");
+        Config.user_url=sharedPreferences.getString("profilePic", "");
+        Config.two_fact_auth_status=sharedPreferences.getString("twoFactAuth", "");
 
         if (savedInstanceState == null) {
             HomeFragment homeFragment = new HomeFragment();

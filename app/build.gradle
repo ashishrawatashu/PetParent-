@@ -60,4 +60,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.2.4'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
+    implementation 'com.razorpay:checkout:1.5.16'
+
+    implementation "com.jakewharton:butterknife:10.1.0"
+    annotationProcessor "com.jakewharton:butterknife-compiler:10.1.0"
 }

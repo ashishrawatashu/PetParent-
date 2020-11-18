@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.cynoteck.petofyparents">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -29,8 +31,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activty.GetPetDetailsActivity"></activity>
-        <activity android:name=".activty.PetIdCardActivity"
+        <activity android:name=".activty.PaymentScreenActivity"></activity>
+        <activity android:name=".activty.AddUpdateAppointmentActivity" />
+        <activity android:name=".activty.VetListActivity" />
+        <activity android:name=".activty.UpdateParentProfileActivity" />
+        <activity android:name=".activty.ChangePasswordActivity" />
+        <activity android:name=".activty.SettingActivity" />
+        <activity android:name=".activty.GetPetDetailsActivity" />
+        <activity
+            android:name=".activty.PetIdCardActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".activty.AddPetRegister" />

@@ -2,18 +2,18 @@ package com.cynoteck.petofyparents.parameter.petReportsRequest;
 
 public class PetDataParams {
 
-    private String PageNumber;
+    private int PageNumber;
 
     private String search_Data;
 
-    private String pageSize;
+    private int pageSize;
 
-    public String getPageNumber ()
+    public int getPageNumber ()
     {
         return PageNumber;
     }
 
-    public void setPageNumber (String PageNumber)
+    public void setPageNumber (int PageNumber)
     {
         this.PageNumber = PageNumber;
     }
@@ -28,12 +28,12 @@ public class PetDataParams {
         this.search_Data = search_Data;
     }
 
-    public String getPageSize ()
+    public int getPageSize ()
     {
         return pageSize;
     }
 
-    public void setPageSize (String pageSize)
+    public void setPageSize (int pageSize)
     {
         this.pageSize = pageSize;
     }

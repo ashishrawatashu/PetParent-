@@ -1,10 +1,19 @@
 package com.cynoteck.petofyparents.api;
 
 import com.cynoteck.petofyparents.parameter.addParamRequest.AddPetRequset;
+import com.cynoteck.petofyparents.parameter.appointmentParams.AppointmentsStatusRequest;
+import com.cynoteck.petofyparents.parameter.appointmentParams.CreateAppointRequest;
+import com.cynoteck.petofyparents.parameter.appointmentParams.UpdateAppointmentRequest;
+import com.cynoteck.petofyparents.parameter.changePassRequest.ChangePassRequest;
 import com.cynoteck.petofyparents.parameter.forgetPassRequest.ForgetPassRequest;
+import com.cynoteck.petofyparents.parameter.getOrderDetailsParms.GetOrderRequest;
 import com.cynoteck.petofyparents.parameter.getPetListRequest.GetPetListRequest;
+import com.cynoteck.petofyparents.parameter.getVetListParams.GetVetListRequest;
+import com.cynoteck.petofyparents.parameter.immunizationRequest.ImmunizationRequest;
 import com.cynoteck.petofyparents.parameter.loginParameter.Loginparams;
+import com.cynoteck.petofyparents.parameter.newPetEntryParams.NewPetRequest;
 import com.cynoteck.petofyparents.parameter.otpRequest.SendOtpRequest;
+import com.cynoteck.petofyparents.parameter.paymentHistoryStaus.PaymentHistoryRequest;
 import com.cynoteck.petofyparents.parameter.petBreedRequest.BreedParams;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetClinicVisitDetailsRequest;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
@@ -18,18 +27,29 @@ import com.cynoteck.petofyparents.response.addPet.petAgeResponse.PetAgeValueResp
 import com.cynoteck.petofyparents.response.addPet.petColorResponse.PetColorValueResponse;
 import com.cynoteck.petofyparents.response.addPet.petSizeResponse.PetSizeValueResponse;
 import com.cynoteck.petofyparents.response.addPet.uniqueIdResponse.UniqueResponse;
+import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentDetailsResponse;
+import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointmentResponse;
+import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
 import com.cynoteck.petofyparents.response.forgetAndChangePassResponse.PasswordResponse;
+import com.cynoteck.petofyparents.response.getAppointmentsStatusResponse.AppointmentStatusResponse;
+import com.cynoteck.petofyparents.response.getImmunizationReport.PetImmunizationRecordResponse;
 import com.cynoteck.petofyparents.response.getLabTestReportResponse.getPetLabWorkListResponse.PetLabWorkResponse;
+import com.cynoteck.petofyparents.response.getOrderResponse.GetOrderResponse;
 import com.cynoteck.petofyparents.response.getPetDetailsResponse.GetPetResponse;
 import com.cynoteck.petofyparents.response.getPetHospitalizationResponse.getHospitalizationListResponse.GetPetHospitalizationResponse;
 import com.cynoteck.petofyparents.response.getPetIdCardResponse.PetIdCardResponse;
+import com.cynoteck.petofyparents.response.getPetParentResponse.GetPetParentResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.GetReportsTypeResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getClinicVisitDetails.GetClinicVisitsDetailsResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetClinicVisitsListsResponse.GetPetClinicVisitListResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.GetPetListResponse;
+import com.cynoteck.petofyparents.response.getVetListResponse.GetVetListResponse;
 import com.cynoteck.petofyparents.response.getXRayReports.getPetTestAndXRayResponse.GetPetTestAndXRayResponse;
 import com.cynoteck.petofyparents.response.loginResponse.LoginRegisterResponse;
+import com.cynoteck.petofyparents.response.newPetResponse.NewPetRegisterResponse;
 import com.cynoteck.petofyparents.response.otpResponse.OtpResponse;
+import com.cynoteck.petofyparents.response.paymentStatusResponse.PaymentStatusResponse;
+import com.cynoteck.petofyparents.response.twofactAuthResponse.TwoFactAuthResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 
 import okhttp3.MultipartBody;
@@ -177,6 +197,71 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pethealthrecord/GetClinicVisit")
     Call<GetClinicVisitsDetailsResponse> getClinicVisitDetails(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/UpdateVeterinarian")
+    Call<PasswordResponse> getPasswordResponse(@Header("Authorization") String auth, @Body ChangePassRequest changePassRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/EnableTwoStepAuthentication")
+    Call<TwoFactAuthResponse> enableDisableTowFactorAuth(@Header("Authorization") String auth,
+                                                         @Body GetPetListRequest addPetRequset);
+
+
+
+    //APPOINTMENTS......................
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/GetPetParentList")
+    Call<GetPetParentResponse> getPetParentList(@Header("Authorization") String auth);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("appointment/GetAppointmentById")
+    Call<AppointmentDetailsResponse> getAppointmentsDetails(@Header("Authorization") String auth,
+                                                            @Body GetPetListRequest addPetRequset);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("appointment/getappointment")
+    Call<GetAppointmentResponse> getAppointment(@Header("Authorization") String auth);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("appointment/GetVeterinarianList")
+    Call<GetVetListResponse> getVetList(@Header("Authorization") String auth, @Body GetVetListRequest getVetListRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("appointment/UpdateAppointment")
+    Call<CreateAppointmentResponse> updateAppointment(@Header("Authorization") String auth, @Body UpdateAppointmentRequest updateAppointmentRequest);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("appointment/CreateAppointment")
+    Call<CreateAppointmentResponse> createAppointment(@Header("Authorization") String auth, @Body CreateAppointRequest createAppointRequest);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/AddPetToRegister")
+    Call<NewPetRegisterResponse> addPetToRegister(@Header("Authorization") String auth, @Body NewPetRequest newPetRequest);
+
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("paymentgateway/GetOrder")
+    Call<GetOrderResponse> getOrderDetails(@Header("Authorization") String auth, @Body GetOrderRequest getOrderRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("paymentgateway/PaymentHistory")
+    Call<PaymentStatusResponse> getPaymentHistory(@Header("Authorization") String auth, @Body PaymentHistoryRequest paymentHistoryRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("Appointment/CancelAppointment")
+    Call<AppointmentStatusResponse> cancelAppointment(@Header("Authorization") String auth, @Body AppointmentsStatusRequest appointmentsStatusRequest);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/ViewPetVaccination")
+    Call<PetImmunizationRecordResponse> viewPetVaccination(@Header("Authorization") String auth, @Body ImmunizationRequest immunizationRequest);
+
 
 }
 
