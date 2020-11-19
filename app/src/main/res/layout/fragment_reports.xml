@@ -90,6 +90,7 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_below="@+id/toolbar"
         android:id="@+id/shimmer_view_container"
@@ -125,7 +126,6 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/petList_RV"
         android:background="@color/list_background"
         android:layout_width="match_parent"

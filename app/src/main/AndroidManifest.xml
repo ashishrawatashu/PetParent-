@@ -31,7 +31,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activty.PaymentScreenActivity"></activity>
+        <activity android:name=".activty.DonationActivity"></activity>
+        <activity android:name=".activty.AdoptionActivity" />
+        <activity android:name=".activty.PaymentScreenActivity" />
         <activity android:name=".activty.AddUpdateAppointmentActivity" />
         <activity android:name=".activty.VetListActivity" />
         <activity android:name=".activty.UpdateParentProfileActivity" />
