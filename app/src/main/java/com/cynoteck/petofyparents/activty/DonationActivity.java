@@ -3,17 +3,23 @@ package com.cynoteck.petofyparents.activty;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.adapter.MyAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-public class DonationActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
+
+public class DonationActivity extends AppCompatActivity implements View.OnClickListener {
 
     TabLayout tabLayout;
     ViewPager viewPager;
+    TextView do_you_want_add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,9 @@ public class DonationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donation);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
+        do_you_want_add=(TextView) findViewById(R.id.do_you_want_add);
+
+        do_you_want_add.setOnClickListener(this);
 
         tabLayout.addTab(tabLayout.newTab().setText("Pending"));
         tabLayout.addTab(tabLayout.newTab().setText("Rejected"));
@@ -52,5 +61,15 @@ public class DonationActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.do_you_want_add:
+                 startActivity(new Intent(this,DoYouWantAdoptActivity.class));
+                break;
+        }
     }
 }

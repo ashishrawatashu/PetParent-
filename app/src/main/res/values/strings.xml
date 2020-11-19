@@ -41,6 +41,8 @@
     <string name="petGender">Pet Gender</string>
     <string name="petParent">Pet Parent</string>
     <string name="petname">Pet Name</string>
+    <string name="petColor">Pet Color</string>
+    <string name="petBreed">Pet Breedr</string>
     <string name="nature_of_visits">Nature Of Visit*</string>
     <string name="color">Color</string>
     <string name="petcolor"><![CDATA[Brown & White]]></string>
@@ -72,6 +74,8 @@
     <string name="acitivated">Activated</string>
     <string name="add_staff">Add Staff</string>
     <string name="edit_staff">Edit Staff</string>
+    <string name="edit">EDIT</string>
+    <string name="view_deatails">VIEW DETAILS</string>
     <string name="update">Update</string>
     <string name="test_x_ray">Test/X-rays</string>
     <string name="managePet">Manage Pet-labwork</string>
@@ -176,5 +180,7 @@
     <string name="Step_three_title">VERIFY REQUEST AND USER</string>
     <string name="Step_four">Step 4</string>
     <string name="Step_four_title">APPROVE / REJECT</string>
+    <string name="do_you_want_adopt_pet">Do you want to adopt a pet ?</string>
+    <string name="donate_a_pet">DONATE A PET</string>
 
 </resources>

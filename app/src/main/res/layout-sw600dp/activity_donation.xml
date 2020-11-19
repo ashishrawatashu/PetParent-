@@ -21,10 +21,23 @@
             android:layout_height="match_parent"
             android:text="@string/donation"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:textStyle="bold"/>
 
     </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/do_you_want_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:text="@string/do_you_want_adopt_pet"
+        android:gravity="right"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        />
 
 
     <com.google.android.material.tabs.TabLayout
@@ -32,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteColor"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/do_you_want_add"
         tools:ignore="MissingConstraints"
         app:tabIndicatorHeight="4dp">
     </com.google.android.material.tabs.TabLayout>
@@ -43,6 +56,6 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         tools:layout_editor_absoluteX="8dp"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="150dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

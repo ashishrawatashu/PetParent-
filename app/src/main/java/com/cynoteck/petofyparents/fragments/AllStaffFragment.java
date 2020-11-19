@@ -19,8 +19,6 @@ public class AllStaffFragment extends Fragment implements View.OnClickListener {
     CardView adoption_CV,donation_CV;
     View view;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

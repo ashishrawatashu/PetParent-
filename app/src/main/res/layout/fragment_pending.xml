@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.PendingFragment"
+    tools:context=".fragments.RejectFragment"
     android:layout_marginTop="5dp">
 
     <!-- TODO: Update blank fragment layout -->
@@ -43,10 +43,20 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/petList_RV"
+        android:id="@+id/donation_pending_RV"
         android:background="@color/list_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_below="@+id/toolbar"
+        tools:listitem="@layout/adoption_list_adopter"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/no_record_fpond"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No Record Found"
+        android:textSize="18sp"
+        android:textColor="@color/black_color"/>
 
 </RelativeLayout>

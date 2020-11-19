@@ -30,6 +30,7 @@ import com.cynoteck.petofyparents.response.addPet.uniqueIdResponse.UniqueRespons
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentDetailsResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointmentResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
+import com.cynoteck.petofyparents.response.donationResponse.DonationResponseList;
 import com.cynoteck.petofyparents.response.forgetAndChangePassResponse.PasswordResponse;
 import com.cynoteck.petofyparents.response.getAppointmentsStatusResponse.AppointmentStatusResponse;
 import com.cynoteck.petofyparents.response.getImmunizationReport.PetImmunizationRecordResponse;
@@ -51,6 +52,7 @@ import com.cynoteck.petofyparents.response.otpResponse.OtpResponse;
 import com.cynoteck.petofyparents.response.paymentStatusResponse.PaymentStatusResponse;
 import com.cynoteck.petofyparents.response.twofactAuthResponse.TwoFactAuthResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
+import com.google.gson.JsonObject;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -198,28 +200,33 @@ public interface ApiInterface {
     @POST("pethealthrecord/GetClinicVisit")
     Call<GetClinicVisitsDetailsResponse> getClinicVisitDetails(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
 
+    //TODO=======Update Veterinarian Details=====================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/UpdateVeterinarian")
     Call<PasswordResponse> getPasswordResponse(@Header("Authorization") String auth, @Body ChangePassRequest changePassRequest);
+
+    //TODO========ENABLE.DISABLE TWO FACTOR AUTHENTICATION=======
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/EnableTwoStepAuthentication")
     Call<TwoFactAuthResponse> enableDisableTowFactorAuth(@Header("Authorization") String auth,
                                                          @Body GetPetListRequest addPetRequset);
 
-
-
-    //APPOINTMENTS......................
+    //TODO========APPOINTMENTS===================================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/GetPetParentList")
     Call<GetPetParentResponse> getPetParentList(@Header("Authorization") String auth);
 
+    //TODO=======GET  APPOINTMENTS BY APPOINTMENT ID=============
+
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("appointment/GetAppointmentById")
     Call<AppointmentDetailsResponse> getAppointmentsDetails(@Header("Authorization") String auth,
                                                             @Body GetPetListRequest addPetRequset);
+
+    //TODO=======GET APPOINTMENTS================================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("appointment/getappointment")
@@ -229,38 +236,65 @@ public interface ApiInterface {
     @POST("appointment/GetVeterinarianList")
     Call<GetVetListResponse> getVetList(@Header("Authorization") String auth, @Body GetVetListRequest getVetListRequest);
 
+    //TODO=======Get Veterinarian List============================
+
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("appointment/UpdateAppointment")
     Call<CreateAppointmentResponse> updateAppointment(@Header("Authorization") String auth, @Body UpdateAppointmentRequest updateAppointmentRequest);
 
+    //TODO======CREATE APPOINTMENTS===============================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("appointment/CreateAppointment")
     Call<CreateAppointmentResponse> createAppointment(@Header("Authorization") String auth, @Body CreateAppointRequest createAppointRequest);
 
+    //TODO======ADD A PET TO VET REGISTER========================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pethealthrecord/AddPetToRegister")
     Call<NewPetRegisterResponse> addPetToRegister(@Header("Authorization") String auth, @Body NewPetRequest newPetRequest);
 
-
+    //TODO========GET ORDER=====================================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("paymentgateway/GetOrder")
     Call<GetOrderResponse> getOrderDetails(@Header("Authorization") String auth, @Body GetOrderRequest getOrderRequest);
 
+    //TODO========Payment History===============================
+
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("paymentgateway/PaymentHistory")
     Call<PaymentStatusResponse> getPaymentHistory(@Header("Authorization") String auth, @Body PaymentHistoryRequest paymentHistoryRequest);
+
+    //TODO==========CancelAppointment===========================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("Appointment/CancelAppointment")
     Call<AppointmentStatusResponse> cancelAppointment(@Header("Authorization") String auth, @Body AppointmentsStatusRequest appointmentsStatusRequest);
 
+    //TODO==========View Pet Vaccination Details=================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pethealthrecord/ViewPetVaccination")
     Call<PetImmunizationRecordResponse> viewPetVaccination(@Header("Authorization") String auth, @Body ImmunizationRequest immunizationRequest);
+
+    //TODO==========GET DONATION REQUEST LIST PENDING=====================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @GET("social-service/get-donation-request-list/1")
+    Call<DonationResponseList> viewPetVaccinationPending(@Header("Authorization") String auth);
+
+    //TODO==========GET DONATION REQUEST LIST ACCEPTED=====================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @GET("social-service/get-donation-request-list/2")
+    Call<DonationResponseList> viewPetVaccinationAccepted(@Header("Authorization") String auth);
+
+    //TODO==========GET DONATION REQUEST LIST REJECTED=====================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @GET("social-service/get-donation-request-list/3")
+    Call<DonationResponseList> viewPetVaccinationRejected(@Header("Authorization") String auth);
 
 
 }
