@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cynoteck.petofyparents.R;
+import com.cynoteck.petofyparents.activty.DoYouWantAdoptActivity;
 import com.cynoteck.petofyparents.activty.PaymentScreenActivity;
 import com.cynoteck.petofyparents.adapter.AppointmentListAdapter;
 import com.cynoteck.petofyparents.adapter.DateListAdapter;
@@ -129,11 +130,33 @@ public class PendingFragment extends Fragment implements ApiResponse, DonationCl
 
     @Override
     public void onItemClickView(int position) {
-        Log.d("poditionView",""+position);
+
     }
 
     @Override
     public void onItemClickEdit(int position) {
-        Log.d("poditionEdit",""+position);
+        Intent intent=new Intent(getActivity(), DoYouWantAdoptActivity.class);
+        intent.putExtra("id",data.get(position).getId());
+        intent.putExtra("petCategory",data.get(position).getCategory());
+        intent.putExtra("petSex",data.get(position).getPetSex());
+        intent.putExtra("petAge",data.get(position).getPetAge());
+        intent.putExtra("petSize",data.get(position).getPetSize());
+        intent.putExtra("petColor",data.get(position).getPetColor());
+        intent.putExtra("petBreed",data.get(position).getPetBreed());
+        intent.putExtra("petName",data.get(position).getPetName());
+        intent.putExtra("petDescription",data.get(position).getDescription());
+        intent.putExtra("petAddress",data.get(position).getAddress());
+        intent.putExtra("state",data.get(position).getState());
+        intent.putExtra("city",data.get(position).getCity());
+        intent.putExtra("donarName",data.get(position).getDonarName());
+        intent.putExtra("phoneNumber",data.get(position).getPhoneNumber());
+        intent.putExtra("encryptedId",data.get(position).getEncryptedId());
+        intent.putExtra("imageOne",data.get(position).getFirstServiceImageUrl());
+        intent.putExtra("imageTwo",data.get(position).getSecondServiceImageUrl());
+        intent.putExtra("imageThree",data.get(position).getThirdServiceImageUrl());
+        intent.putExtra("imageFour",data.get(position).getFourthServiceImageUrl());
+        intent.putExtra("imageFive",data.get(position).getFifthServiceImageUrl());
+        intent.putExtra("type","update");
+        startActivity(intent);
     }
 }

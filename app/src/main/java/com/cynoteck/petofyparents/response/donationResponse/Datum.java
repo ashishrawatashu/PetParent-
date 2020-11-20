@@ -6,45 +6,45 @@ import java.util.List;
 
 public class Datum {
 
-    private Double id;
+    private String id;
     private String userId;
-    private Integer petCategoryId;
-    private Double petSexId;
-    private Double petAgeId;
-    private Double petSizeId;
-    private Double petColorId;
-    private Double petBreedId;
+    private String petCategoryId;
+    private String petSexId;
+    private String petAgeId;
+    private String petSizeId;
+    private String petColorId;
+    private String petBreedId;
     private String petName;
     private String description;
     private String address;
-    private Object cityId;
-    private Object stateId;
-    private Double requestStatusId;
+    private String cityId;
+    private String stateId;
+    private String requestStatusId;
     private String requestDate;
-    private Object firstServiceImageUrl;
-    private Object secondServiceImageUrl;
-    private Object thirdServiceImageUrl;
-    private Object fourthServiceImageUrl;
-    private Object fifthServiceImageUrl;
+    private String firstServiceImageUrl;
+    private String secondServiceImageUrl;
+    private String thirdServiceImageUrl;
+    private String fourthServiceImageUrl;
+    private String fifthServiceImageUrl;
     private String encryptedId;
     private String donarName;
-    private Object phoneNumber;
+    private String phoneNumber;
     private String status;
     private String category;
-    private Object reasonToReject;
-    private Object petCategory;
-    private Object requestStatus;
+    private String reasonToReject;
+    private String petCategory;
+    private String requestStatus;
     private User user;
-    private List<Object> petAdoption = null;
+    private List<String> petAdoption = null;
     private List<PetImageList> petImageList = null;
-    private Object petTypeList;
-    private Object petSexList;
-    private Object petAgeList;
-    private Object petSizeList;
-    private Object petColorList;
-    private Object petBreedList;
-    private Object cityList;
-    private Object stateList;
+    private String petTypeList;
+    private String petSexList;
+    private String petAgeList;
+    private String petSizeList;
+    private String petColorList;
+    private String petBreedList;
+    private String cityList;
+    private String stateList;
     private String petType;
     private String petSex;
     private String petAge;
@@ -53,23 +53,23 @@ public class Datum {
     private String petBreed;
     private String city;
     private String state;
-    private Object role;
-    private Object otherBreedName;
-    private Object otherColorName;
-    private Object otherSizeName;
-    private Object otherAgeName;
-    private Object ngoUserId;
-    private Object ngoList;
-    private Integer numberOfRecords;
-    private Integer pageNumber;
+    private String role;
+    private String otherBreedName;
+    private String otherColorName;
+    private String otherSizeName;
+    private String otherAgeName;
+    private String ngoUserId;
+    private String ngoList;
+    private String numberOfRecords;
+    private String pageNumber;
     private String requestUpdateDate;
     private RequestToNgoModel requestToNgoModel;
 
-    public Double getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Double id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -81,51 +81,51 @@ public class Datum {
         this.userId = userId;
     }
 
-    public Integer getPetCategoryId() {
+    public String getPetCategoryId() {
         return petCategoryId;
     }
 
-    public void setPetCategoryId(Integer petCategoryId) {
+    public void setPetCategoryId(String petCategoryId) {
         this.petCategoryId = petCategoryId;
     }
 
-    public Double getPetSexId() {
+    public String getPetSexId() {
         return petSexId;
     }
 
-    public void setPetSexId(Double petSexId) {
+    public void setPetSexId(String petSexId) {
         this.petSexId = petSexId;
     }
 
-    public Double getPetAgeId() {
+    public String getPetAgeId() {
         return petAgeId;
     }
 
-    public void setPetAgeId(Double petAgeId) {
+    public void setPetAgeId(String petAgeId) {
         this.petAgeId = petAgeId;
     }
 
-    public Double getPetSizeId() {
+    public String getPetSizeId() {
         return petSizeId;
     }
 
-    public void setPetSizeId(Double petSizeId) {
+    public void setPetSizeId(String petSizeId) {
         this.petSizeId = petSizeId;
     }
 
-    public Double getPetColorId() {
+    public String getPetColorId() {
         return petColorId;
     }
 
-    public void setPetColorId(Double petColorId) {
+    public void setPetColorId(String petColorId) {
         this.petColorId = petColorId;
     }
 
-    public Double getPetBreedId() {
+    public String getPetBreedId() {
         return petBreedId;
     }
 
-    public void setPetBreedId(Double petBreedId) {
+    public void setPetBreedId(String petBreedId) {
         this.petBreedId = petBreedId;
     }
 
@@ -153,27 +153,27 @@ public class Datum {
         this.address = address;
     }
 
-    public Object getCityId() {
+    public String getCityId() {
         return cityId;
     }
 
-    public void setCityId(Object cityId) {
+    public void setCityId(String cityId) {
         this.cityId = cityId;
     }
 
-    public Object getStateId() {
+    public String getStateId() {
         return stateId;
     }
 
-    public void setStateId(Object stateId) {
+    public void setStateId(String stateId) {
         this.stateId = stateId;
     }
 
-    public Double getRequestStatusId() {
+    public String getRequestStatusId() {
         return requestStatusId;
     }
 
-    public void setRequestStatusId(Double requestStatusId) {
+    public void setRequestStatusId(String requestStatusId) {
         this.requestStatusId = requestStatusId;
     }
 
@@ -185,43 +185,43 @@ public class Datum {
         this.requestDate = requestDate;
     }
 
-    public Object getFirstServiceImageUrl() {
+    public String getFirstServiceImageUrl() {
         return firstServiceImageUrl;
     }
 
-    public void setFirstServiceImageUrl(Object firstServiceImageUrl) {
+    public void setFirstServiceImageUrl(String firstServiceImageUrl) {
         this.firstServiceImageUrl = firstServiceImageUrl;
     }
 
-    public Object getSecondServiceImageUrl() {
+    public String getSecondServiceImageUrl() {
         return secondServiceImageUrl;
     }
 
-    public void setSecondServiceImageUrl(Object secondServiceImageUrl) {
+    public void setSecondServiceImageUrl(String secondServiceImageUrl) {
         this.secondServiceImageUrl = secondServiceImageUrl;
     }
 
-    public Object getThirdServiceImageUrl() {
+    public String getThirdServiceImageUrl() {
         return thirdServiceImageUrl;
     }
 
-    public void setThirdServiceImageUrl(Object thirdServiceImageUrl) {
+    public void setThirdServiceImageUrl(String thirdServiceImageUrl) {
         this.thirdServiceImageUrl = thirdServiceImageUrl;
     }
 
-    public Object getFourthServiceImageUrl() {
+    public String getFourthServiceImageUrl() {
         return fourthServiceImageUrl;
     }
 
-    public void setFourthServiceImageUrl(Object fourthServiceImageUrl) {
+    public void setFourthServiceImageUrl(String fourthServiceImageUrl) {
         this.fourthServiceImageUrl = fourthServiceImageUrl;
     }
 
-    public Object getFifthServiceImageUrl() {
+    public String getFifthServiceImageUrl() {
         return fifthServiceImageUrl;
     }
 
-    public void setFifthServiceImageUrl(Object fifthServiceImageUrl) {
+    public void setFifthServiceImageUrl(String fifthServiceImageUrl) {
         this.fifthServiceImageUrl = fifthServiceImageUrl;
     }
 
@@ -241,11 +241,11 @@ public class Datum {
         this.donarName = donarName;
     }
 
-    public Object getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Object phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -265,27 +265,27 @@ public class Datum {
         this.category = category;
     }
 
-    public Object getReasonToReject() {
+    public String getReasonToReject() {
         return reasonToReject;
     }
 
-    public void setReasonToReject(Object reasonToReject) {
+    public void setReasonToReject(String reasonToReject) {
         this.reasonToReject = reasonToReject;
     }
 
-    public Object getPetCategory() {
+    public String getPetCategory() {
         return petCategory;
     }
 
-    public void setPetCategory(Object petCategory) {
+    public void setPetCategory(String petCategory) {
         this.petCategory = petCategory;
     }
 
-    public Object getRequestStatus() {
+    public String getRequestStatus() {
         return requestStatus;
     }
 
-    public void setRequestStatus(Object requestStatus) {
+    public void setRequestStatus(String requestStatus) {
         this.requestStatus = requestStatus;
     }
 
@@ -297,11 +297,11 @@ public class Datum {
         this.user = user;
     }
 
-    public List<Object> getPetAdoption() {
+    public List<String> getPetAdoption() {
         return petAdoption;
     }
 
-    public void setPetAdoption(List<Object> petAdoption) {
+    public void setPetAdoption(List<String> petAdoption) {
         this.petAdoption = petAdoption;
     }
 
@@ -313,67 +313,67 @@ public class Datum {
         this.petImageList = petImageList;
     }
 
-    public Object getPetTypeList() {
+    public String getPetTypeList() {
         return petTypeList;
     }
 
-    public void setPetTypeList(Object petTypeList) {
+    public void setPetTypeList(String petTypeList) {
         this.petTypeList = petTypeList;
     }
 
-    public Object getPetSexList() {
+    public String getPetSexList() {
         return petSexList;
     }
 
-    public void setPetSexList(Object petSexList) {
+    public void setPetSexList(String petSexList) {
         this.petSexList = petSexList;
     }
 
-    public Object getPetAgeList() {
+    public String getPetAgeList() {
         return petAgeList;
     }
 
-    public void setPetAgeList(Object petAgeList) {
+    public void setPetAgeList(String petAgeList) {
         this.petAgeList = petAgeList;
     }
 
-    public Object getPetSizeList() {
+    public String getPetSizeList() {
         return petSizeList;
     }
 
-    public void setPetSizeList(Object petSizeList) {
+    public void setPetSizeList(String petSizeList) {
         this.petSizeList = petSizeList;
     }
 
-    public Object getPetColorList() {
+    public String getPetColorList() {
         return petColorList;
     }
 
-    public void setPetColorList(Object petColorList) {
+    public void setPetColorList(String petColorList) {
         this.petColorList = petColorList;
     }
 
-    public Object getPetBreedList() {
+    public String getPetBreedList() {
         return petBreedList;
     }
 
-    public void setPetBreedList(Object petBreedList) {
+    public void setPetBreedList(String petBreedList) {
         this.petBreedList = petBreedList;
     }
 
-    public Object getCityList() {
+    public String getCityList() {
         return cityList;
     }
 
-    public void setCityList(Object cityList) {
+    public void setCityList(String cityList) {
         this.cityList = cityList;
     }
 
-    public Object getStateList() {
+    public String getStateList() {
         return stateList;
     }
 
-    public void setStateList(Object stateList) {
+    public void setStateList(String stateList) {
         this.stateList = stateList;
     }
 
@@ -441,75 +441,75 @@ public class Datum {
         this.state = state;
     }
 
-    public Object getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Object role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Object getOtherBreedName() {
+    public String getOtherBreedName() {
         return otherBreedName;
     }
 
-    public void setOtherBreedName(Object otherBreedName) {
+    public void setOtherBreedName(String otherBreedName) {
         this.otherBreedName = otherBreedName;
     }
 
-    public Object getOtherColorName() {
+    public String getOtherColorName() {
         return otherColorName;
     }
 
-    public void setOtherColorName(Object otherColorName) {
+    public void setOtherColorName(String otherColorName) {
         this.otherColorName = otherColorName;
     }
 
-    public Object getOtherSizeName() {
+    public String getOtherSizeName() {
         return otherSizeName;
     }
 
-    public void setOtherSizeName(Object otherSizeName) {
+    public void setOtherSizeName(String otherSizeName) {
         this.otherSizeName = otherSizeName;
     }
 
-    public Object getOtherAgeName() {
+    public String getOtherAgeName() {
         return otherAgeName;
     }
 
-    public void setOtherAgeName(Object otherAgeName) {
+    public void setOtherAgeName(String otherAgeName) {
         this.otherAgeName = otherAgeName;
     }
 
-    public Object getNgoUserId() {
+    public String getNgoUserId() {
         return ngoUserId;
     }
 
-    public void setNgoUserId(Object ngoUserId) {
+    public void setNgoUserId(String ngoUserId) {
         this.ngoUserId = ngoUserId;
     }
 
-    public Object getNgoList() {
+    public String getNgoList() {
         return ngoList;
     }
 
-    public void setNgoList(Object ngoList) {
+    public void setNgoList(String ngoList) {
         this.ngoList = ngoList;
     }
 
-    public Integer getNumberOfRecords() {
+    public String getNumberOfRecords() {
         return numberOfRecords;
     }
 
-    public void setNumberOfRecords(Integer numberOfRecords) {
+    public void setNumberOfRecords(String numberOfRecords) {
         this.numberOfRecords = numberOfRecords;
     }
 
-    public Integer getPageNumber() {
+    public String getPageNumber() {
         return pageNumber;
     }
 
-    public void setPageNumber(Integer pageNumber) {
+    public void setPageNumber(String pageNumber) {
         this.pageNumber = pageNumber;
     }
 

@@ -5,6 +5,7 @@ import com.cynoteck.petofyparents.parameter.appointmentParams.AppointmentsStatus
 import com.cynoteck.petofyparents.parameter.appointmentParams.CreateAppointRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.UpdateAppointmentRequest;
 import com.cynoteck.petofyparents.parameter.changePassRequest.ChangePassRequest;
+import com.cynoteck.petofyparents.parameter.donateParamRequest.DonatePetRequest;
 import com.cynoteck.petofyparents.parameter.forgetPassRequest.ForgetPassRequest;
 import com.cynoteck.petofyparents.parameter.getOrderDetailsParms.GetOrderRequest;
 import com.cynoteck.petofyparents.parameter.getPetListRequest.GetPetListRequest;
@@ -19,6 +20,7 @@ import com.cynoteck.petofyparents.parameter.petReportsRequest.PetClinicVisitDeta
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.VisitTypeRequest;
 import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
+import com.cynoteck.petofyparents.parameter.updateDonation.UpdateDonationRequest;
 import com.cynoteck.petofyparents.parameter.updateRequest.updateParamRequest.UpdatePetRequest;
 import com.cynoteck.petofyparents.response.addPet.addPetResponse.AddPetValueResponse;
 import com.cynoteck.petofyparents.response.addPet.breedResponse.BreedCatRespose;
@@ -30,6 +32,8 @@ import com.cynoteck.petofyparents.response.addPet.uniqueIdResponse.UniqueRespons
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentDetailsResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointmentResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
+import com.cynoteck.petofyparents.response.cityResponse.CityResponseModel;
+import com.cynoteck.petofyparents.response.stateResponse.StateResponse;
 import com.cynoteck.petofyparents.response.donationResponse.DonationResponseList;
 import com.cynoteck.petofyparents.response.forgetAndChangePassResponse.PasswordResponse;
 import com.cynoteck.petofyparents.response.getAppointmentsStatusResponse.AppointmentStatusResponse;
@@ -296,6 +300,27 @@ public interface ApiInterface {
     @GET("social-service/get-donation-request-list/3")
     Call<DonationResponseList> viewPetVaccinationRejected(@Header("Authorization") String auth);
 
+    //TODO==========GET STATE===============================================
+
+    @GET("common/GetState")
+    Call<StateResponse> getState();
+
+    //TODO==========Get City================================================
+
+    @GET("common/GetCity")
+    Call<CityResponseModel> getCity();
+
+    //TODO==========SEND PET DONATION REQUEST===============================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/donate-a-pet")
+    Call<JsonObject> donateAPet(@Header("Authorization") String auth, @Body DonatePetRequest donatePetRequest);
+
+    //TODO==============UPDATE DONATION REQUEST=============================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/update-donation-request")
+    Call<JsonObject> updateDonationRequest(@Header("Authorization") String auth, @Body UpdateDonationRequest updateDonationRequest);
 
 }
 

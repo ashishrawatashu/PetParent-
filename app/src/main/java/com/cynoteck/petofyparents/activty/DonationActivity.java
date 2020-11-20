@@ -68,7 +68,9 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId())
         {
             case R.id.do_you_want_add:
-                 startActivity(new Intent(this,DoYouWantAdoptActivity.class));
+                 Intent intent=new Intent(this,DoYouWantAdoptActivity.class);
+                 intent.putExtra("type","new");
+                 startActivity(intent);
                 break;
         }
     }
