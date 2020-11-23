@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whiteColor">
+
+    <com.google.android.material.card.MaterialCardView
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/donation_details"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:orientation="vertical">
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:weightSum="2"
+              android:background="@color/grayColorCodeLight">
+
+                 <LinearLayout
+                     android:layout_width="0dp"
+                     android:layout_height="250dp"
+                     android:layout_weight=".5"
+                     android:orientation="vertical"
+                     android:weightSum="5"
+                     android:layout_marginTop="5dp"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="10dp">
+
+                     <ImageView
+                         android:id="@+id/imageOne"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:src="@drawable/process_one"
+                         android:background="@drawable/square_shape"
+                         android:scaleType="centerInside"/>
+
+                     <ImageView
+                         android:id="@+id/imageTwo"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:src="@drawable/process_one"
+                         android:background="@drawable/square_shape"
+                         android:layout_marginTop="5dp"
+                         android:scaleType="centerInside"/>
+
+                     <ImageView
+                         android:id="@+id/imageThree"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:src="@drawable/process_one"
+                         android:background="@drawable/square_shape"
+                         android:layout_marginTop="5dp"
+                         android:scaleType="centerInside"/>
+
+                     <ImageView
+                         android:id="@+id/imageFour"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:src="@drawable/process_one"
+                         android:background="@drawable/square_shape"
+                         android:layout_marginTop="5dp"
+                         android:scaleType="centerInside"/>
+
+                     <ImageView
+                         android:id="@+id/imageFive"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="1"
+                         android:src="@drawable/process_one"
+                         android:background="@drawable/square_shape"
+                         android:layout_marginTop="5dp"
+                         android:scaleType="centerInside"/>
+
+
+
+                 </LinearLayout>
+
+              <LinearLayout
+                  android:layout_width="0dp"
+                  android:layout_weight="1.5"
+                  android:layout_height="200dp"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginRight="10dp">
+                  <ImageView
+                      android:id="@+id/fronImage"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:src="@drawable/process_one"
+                      android:scaleType="centerInside"/>
+
+
+              </LinearLayout>
+
+
+
+          </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/petNameGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jerry (Female)"
+            android:textSize="18sp"
+            android:textColor="@color/black_color"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/updateDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updated on Tuesday, 25 August 2020 14:08:30 PM"
+            android:textSize="15sp"
+            android:textColor="#F7931E"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pet Age:"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/petAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adult"
+                android:textSize="16sp"
+                android:textColor="#F7931E"
+                android:layout_marginLeft="5dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pet Breed:"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"
+                android:layout_marginLeft="50dp"/>
+
+            <TextView
+                android:id="@+id/petBreed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:textSize="16sp"
+                android:textColor="#F7931E"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pet Color:"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"/>
+
+            <TextView
+                android:id="@+id/petColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Black"
+                android:textSize="16sp"
+                android:textColor="#F7931E"
+                android:layout_marginLeft="5dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pet Size:"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"
+                android:layout_marginLeft="40dp"/>
+
+            <TextView
+                android:id="@+id/petSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:textSize="16sp"
+                android:textColor="#F7931E"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/donar_details"
+                android:textSize="20sp"
+                android:textColor="@color/black_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/donarName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Pramod Rana"
+                    android:textSize="16sp"
+                    android:textColor="#F7931E"
+                    android:drawableLeft="@drawable/ic_baseline_person"/>
+
+                <TextView
+                    android:id="@+id/donarContact"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="999-788-7756"
+                    android:textSize="16sp"
+                    android:textColor="#F7931E"
+                    android:drawableLeft="@drawable/ic_baseline_phone"/>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/donrEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="pramod.rana@cynoteck.com"
+                android:textColor="#F7931E"
+                android:textSize="16sp"
+                android:drawableLeft="@drawable/ic_baseline_email"/>
+
+            <TextView
+                android:id="@+id/donarAdress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="address"
+                android:textColor="#F7931E"
+                android:textSize="16sp"
+                android:drawableLeft="@drawable/ic_baseline_home"
+                android:layout_gravity="left|top"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

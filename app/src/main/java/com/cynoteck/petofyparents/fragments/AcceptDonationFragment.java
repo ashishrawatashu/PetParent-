@@ -28,7 +28,7 @@ import java.util.List;
 
 import retrofit2.Response;
 
-public class AcceptFragment extends Fragment implements ApiResponse, DonationClickListener {
+public class AcceptDonationFragment extends Fragment implements ApiResponse, DonationClickListener {
 
     View view;
     RecyclerView donation_pending_RV;

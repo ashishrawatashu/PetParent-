@@ -18,6 +18,8 @@
     <string name="petofy">PETOFY</string>
     <string name="petofyparent">PETOFY PARENTS</string>
     <string name="donation">DONATION</string>
+    <string name="adoption_toolbar">ADOPTION</string>
+    <string name="donation_details">DONATION DETAILS</string>
     <string name="adpotion_donation">ADOPTION &amp; DONATION</string>
     <string name="CheckInternet">Check your internet connection</string>
 
@@ -182,5 +184,6 @@
     <string name="Step_four_title">APPROVE / REJECT</string>
     <string name="do_you_want_adopt_pet">Do you want to adopt a pet ?</string>
     <string name="donate_a_pet">DONATE A PET</string>
+    <string name="donar_details"><u>Donar Details</u></string>
 
 </resources>

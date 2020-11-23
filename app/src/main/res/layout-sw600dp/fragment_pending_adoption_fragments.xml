@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.PendingDonationFragment"
-    android:layout_marginTop="5dp">
+    tools:context=".fragments.PendingAdoptionFragments">
 
     <!-- TODO: Update blank fragment layout -->
+   
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_below="@+id/toolbar"
         android:id="@+id/shimmer_view_container"

@@ -29,6 +29,7 @@ import com.cynoteck.petofyparents.response.addPet.petAgeResponse.PetAgeValueResp
 import com.cynoteck.petofyparents.response.addPet.petColorResponse.PetColorValueResponse;
 import com.cynoteck.petofyparents.response.addPet.petSizeResponse.PetSizeValueResponse;
 import com.cynoteck.petofyparents.response.addPet.uniqueIdResponse.UniqueResponse;
+import com.cynoteck.petofyparents.response.adoptionResponse.AdoptionResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentDetailsResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointmentResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
@@ -321,6 +322,24 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("social-service/update-donation-request")
     Call<JsonObject> updateDonationRequest(@Header("Authorization") String auth, @Body UpdateDonationRequest updateDonationRequest);
+
+    //TODO==============GET ADOPTION REQUEST LIST PENDING ===================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/get-adoption-request-list/1")
+    Call<AdoptionResponse> getAdoptionRequestListPending(@Header("Authorization") String auth);
+
+    //TODO==============GET ADOPTION REQUEST LIST ACCEPT===================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/get-adoption-request-list/2")
+    Call<AdoptionResponse> getAdoptionRequestListAccept(@Header("Authorization") String auth);
+
+    //TODO==============GET ADOPTION REQUEST LIST REJECT ===================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/get-adoption-request-list/3")
+    Call<AdoptionResponse> getAdoptionRequestListReject(@Header("Authorization") String auth);
 
 }
 

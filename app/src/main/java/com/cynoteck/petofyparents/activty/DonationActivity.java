@@ -10,10 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.adapter.MyAdapter;
+import com.cynoteck.petofyparents.adapter.MyAdapterDonation;
 import com.google.android.material.tabs.TabLayout;
-
-import org.w3c.dom.Text;
 
 public class DonationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,7 +38,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
         tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#6fac00"));
 
-        final MyAdapter adapter = new MyAdapter(this,getSupportFragmentManager(), tabLayout.getTabCount());
+        final MyAdapterDonation adapter = new MyAdapterDonation(this,getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -68,7 +66,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId())
         {
             case R.id.do_you_want_add:
-                 Intent intent=new Intent(this,DoYouWantAdoptActivity.class);
+                 Intent intent=new Intent(this, DoYouWantDonateActivity.class);
                  intent.putExtra("type","new");
                  startActivity(intent);
                 break;

@@ -1,9 +1,7 @@
 package com.cynoteck.petofyparents.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,44 +12,51 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.activty.DoYouWantAdoptActivity;
-import com.cynoteck.petofyparents.activty.PaymentScreenActivity;
-import com.cynoteck.petofyparents.adapter.AppointmentListAdapter;
-import com.cynoteck.petofyparents.adapter.DateListAdapter;
+import com.cynoteck.petofyparents.activty.DoYouWantDonateActivity;
 import com.cynoteck.petofyparents.adapter.DonationAdopter;
+import com.cynoteck.petofyparents.adapter.DonationImagesAdopter;
 import com.cynoteck.petofyparents.api.ApiClient;
-import com.cynoteck.petofyparents.api.ApiInterface;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
-import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentList;
-import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
 import com.cynoteck.petofyparents.response.donationResponse.Datum;
 import com.cynoteck.petofyparents.response.donationResponse.DonationResponseList;
-import com.cynoteck.petofyparents.utils.AppointmentsClickListner;
+import com.cynoteck.petofyparents.response.donationResponse.PetImageList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.DonationClickListener;
+import com.cynoteck.petofyparents.utils.ImagesOnClick;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Response;
 
-public class PendingFragment extends Fragment implements ApiResponse, DonationClickListener {
+public class PendingDonationFragment extends Fragment implements ApiResponse, DonationClickListener, ImagesOnClick {
 
     View view;
     RecyclerView donation_pending_RV;
     ShimmerFrameLayout shimmer_view_container;
     Methods methods;
     DonationAdopter donationAdopter;
+    DonationImagesAdopter donationImagesAdopter;
     List<Datum> data;
     TextView no_record_fpond;
+    Dialog dialog;
+    List<PetImageList> images;
+
+    LinearLayout image_LL;
+    ImageView fronImage;
+    RecyclerView imagesLis;
+    TextView petNameGender,updateDetails,petAge,petBreed,petColor,petSize,donarName,donarContact,donrEmail,donarAdress;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,12 +135,23 @@ public class PendingFragment extends Fragment implements ApiResponse, DonationCl
 
     @Override
     public void onItemClickView(int position) {
-
+        images=data.get(position).getPetImageList();
+        String petName=data.get(position).getPetName();
+        String petGendr=data.get(position).getPetSex();
+        String updateData=data.get(position).getRequestUpdateDate();
+        String petAge=data.get(position).getPetAge();
+        String petBreed=data.get(position).getPetBreed();
+        String petColor=data.get(position).getPetColor();
+        String petSize=data.get(position).getPetSize();
+        String donarName=data.get(position).getDonarName();
+        String donarContact=data.get(position).getPhoneNumber();
+        String donarAddress=data.get(position).getAddress();
+        viewDetailsDailog(images,petName,petGendr,updateData,petAge,petBreed,petColor,petSize,donarName,donarContact,donarAddress);
     }
 
     @Override
     public void onItemClickEdit(int position) {
-        Intent intent=new Intent(getActivity(), DoYouWantAdoptActivity.class);
+        Intent intent=new Intent(getActivity(), DoYouWantDonateActivity.class);
         intent.putExtra("id",data.get(position).getId());
         intent.putExtra("petCategory",data.get(position).getCategory());
         intent.putExtra("petSex",data.get(position).getPetSex());
@@ -158,5 +174,73 @@ public class PendingFragment extends Fragment implements ApiResponse, DonationCl
         intent.putExtra("imageFive",data.get(position).getFifthServiceImageUrl());
         intent.putExtra("type","update");
         startActivity(intent);
+    }
+
+    private void viewDetailsDailog(List<PetImageList> images,String strpetName,String strpetGendr,String strupdateData,String strpetAge,String strpetBreed,String strpetColor,String strpetSize,String strdonarName,String strdonarContact,String strdonarAddress)
+    {
+        dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.donate_pet_details_dialog);
+
+        fronImage=dialog.findViewById(R.id.fronImage);
+        imagesLis=dialog.findViewById(R.id.images);
+        image_LL=dialog.findViewById(R.id.image_LL);
+
+        petNameGender=dialog.findViewById(R.id.petNameGender);
+        updateDetails=dialog.findViewById(R.id.updateDetails);
+        petAge=dialog.findViewById(R.id.petAge);
+        petBreed=dialog.findViewById(R.id.petBreed);
+        petColor=dialog.findViewById(R.id.petColor);
+        petSize=dialog.findViewById(R.id.petSize);
+        donarName=dialog.findViewById(R.id.donarName);
+        donarContact=dialog.findViewById(R.id.donarContact);
+        donrEmail=dialog.findViewById(R.id.donrEmail);
+        donarAdress=dialog.findViewById(R.id.donarAdress);
+
+        Log.d("ImaGeOne",""+images.size());
+
+        if(images.size()>0)
+        {
+            image_LL.setVisibility(View.VISIBLE);
+            Glide.with(getContext())
+                    .load(images.get(0).getPetImageUrl())
+                    .into(fronImage);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            imagesLis.setLayoutManager(linearLayoutManager);
+            donationImagesAdopter  = new DonationImagesAdopter(getContext(),images,this);
+            imagesLis.setAdapter(donationImagesAdopter);
+            donationImagesAdopter.notifyDataSetChanged();
+        }
+        else
+        {
+            image_LL.setVisibility(View.GONE);
+        }
+
+        petNameGender.setText(strpetName+"( "+strpetGendr+" )");
+        updateDetails.setText("Updated on "+strupdateData);
+        petAge.setText(strpetAge);
+        petBreed.setText(strpetBreed);
+        petColor.setText(strpetColor);
+        petSize.setText(strpetSize);
+        donarName.setText(strdonarName);
+        donarContact.setText(strdonarContact);
+        donarAdress.setText(strdonarAddress);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(lp);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.show();
+    }
+
+    @Override
+    public void onImgeClick(int position) {
+        Glide.with(getContext())
+                .load(images.get(position).getPetImageUrl())
+                .into(fronImage);
     }
 }

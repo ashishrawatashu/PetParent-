@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activty.DoYouWantAdoptActivity">
+    tools:context=".activty.DoYouWantDonateActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
