@@ -19,6 +19,7 @@
     <string name="petofyparent">PETOFY PARENTS</string>
     <string name="donation">DONATION</string>
     <string name="adoption_toolbar">ADOPTION</string>
+    <string name="find_pet_for_adoption">FIND PET FOR ADOPTION</string>
     <string name="donation_details">DONATION DETAILS</string>
     <string name="adpotion_donation">ADOPTION &amp; DONATION</string>
     <string name="CheckInternet">Check your internet connection</string>
@@ -77,6 +78,7 @@
     <string name="add_staff">Add Staff</string>
     <string name="edit_staff">Edit Staff</string>
     <string name="edit">EDIT</string>
+    <string name="accepted">ACCEPTED</string>
     <string name="view_deatails">VIEW DETAILS</string>
     <string name="update">Update</string>
     <string name="test_x_ray">Test/X-rays</string>

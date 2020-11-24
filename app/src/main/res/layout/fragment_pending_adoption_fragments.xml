@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        tools:listitem="@layout/adoption_list_adopter"/>
+        tools:listitem="@layout/donation_list_adopter"/>
 
     <TextView
         android:visibility="gone"

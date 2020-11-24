@@ -1,6 +1,7 @@
 package com.cynoteck.petofyparents.api;
 
 import com.cynoteck.petofyparents.parameter.addParamRequest.AddPetRequset;
+import com.cynoteck.petofyparents.parameter.adoptionListRequest.AdoptionListRequestModel;
 import com.cynoteck.petofyparents.parameter.appointmentParams.AppointmentsStatusRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.CreateAppointRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.UpdateAppointmentRequest;
@@ -29,6 +30,7 @@ import com.cynoteck.petofyparents.response.addPet.petAgeResponse.PetAgeValueResp
 import com.cynoteck.petofyparents.response.addPet.petColorResponse.PetColorValueResponse;
 import com.cynoteck.petofyparents.response.addPet.petSizeResponse.PetSizeValueResponse;
 import com.cynoteck.petofyparents.response.addPet.uniqueIdResponse.UniqueResponse;
+import com.cynoteck.petofyparents.response.adoptionListResponse.AdoptionListResponse;
 import com.cynoteck.petofyparents.response.adoptionResponse.AdoptionResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentDetailsResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointmentResponse;
@@ -68,6 +70,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -340,6 +343,12 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("social-service/get-adoption-request-list/3")
     Call<AdoptionResponse> getAdoptionRequestListReject(@Header("Authorization") String auth);
+
+    //TODO==============GET LIST OF PETS READY FOR ADOPTION==================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/get-adoption-list")
+    Call<AdoptionListResponse> getAdoptionList(@Header("Authorization") String auth, @Body AdoptionListRequestModel adoptionListRequestModel);
 
 }
 
