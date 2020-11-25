@@ -33,12 +33,14 @@ import com.cynoteck.petofyparents.response.addPet.petSizeResponse.PetSizeValueRe
 import com.cynoteck.petofyparents.response.adoptionListResponse.AdoptionListResponse;
 import com.cynoteck.petofyparents.response.adoptionListResponse.PetDonationList;
 import com.cynoteck.petofyparents.response.cityResponse.CityResponseModel;
+import com.cynoteck.petofyparents.response.donationResponse.PetImageList;
 import com.cynoteck.petofyparents.response.stateResponse.StateResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.utils.AdoptionListOnClick;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +56,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
     Methods methods;
     AdoptionListAdopter adoptionListAdopter;
     List<PetDonationList> petDonationLists;
+    List<String> petImageLists;
 
     ArrayList<String> petTypeList,petBreedList,petAgeList,petColorList,petSizeList,petSexList;
     HashMap<String,String> petTypeHashMap,petBreedHashMap,petAgeHashMap,petColorHashMap,petSizeHashMap,petSexHashMap;
@@ -234,6 +237,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
                         adoption_RV.setAdapter(adoptionListAdopter);
                         adoptionListAdopter.notifyDataSetChanged();
                         petDonationLists = adoptionListResponse.getData().getPetDonationList();
+
 
                     }else if (responseCode==614){
                         Toast.makeText(this, adoptionListResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
@@ -518,6 +522,20 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onItemClick(int position) {
+        Intent intent=new Intent(DoYouWantAdoptActivity.this,AdoptionPetDetailsActivity.class);
+        intent.putExtra("image",petDonationLists.get(position).getPetImageList().get(0).getPetImageUrl());
+        intent.putExtra("pet_id",petDonationLists.get(position).getId());
+        intent.putExtra("pet_name",petDonationLists.get(position).getPetName());
+        intent.putExtra("pet_gender",petDonationLists.get(position).getPetCategory());
+        intent.putExtra("pet_age",petDonationLists.get(position).getPetAge());
+        intent.putExtra("pet_breed",petDonationLists.get(position).getPetBreed());
+        intent.putExtra("pet_color",petDonationLists.get(position).getPetColor());
+        intent.putExtra("pet_size",petDonationLists.get(position).getPetSize());
+        intent.putExtra("donar_name",petDonationLists.get(position).getDonarName());
+        intent.putExtra("donar_phone",petDonationLists.get(position).getPhoneNumber());
+        intent.putExtra("donar_mail","");
+        intent.putExtra("donar_address",petDonationLists.get(position).getAddress());
+        startActivity(intent);
 
     }
 }

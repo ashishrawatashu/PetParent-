@@ -2,6 +2,7 @@ package com.cynoteck.petofyparents.api;
 
 import com.cynoteck.petofyparents.parameter.addParamRequest.AddPetRequset;
 import com.cynoteck.petofyparents.parameter.adoptionListRequest.AdoptionListRequestModel;
+import com.cynoteck.petofyparents.parameter.adoptionRequest.AdoptionRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.AppointmentsStatusRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.CreateAppointRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.UpdateAppointmentRequest;
@@ -349,6 +350,12 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("social-service/get-adoption-list")
     Call<AdoptionListResponse> getAdoptionList(@Header("Authorization") String auth, @Body AdoptionListRequestModel adoptionListRequestModel);
+
+    //TODO=============SEND ADOPTION REQUEST==================================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/send-adoption-request")
+    Call<JsonObject> sendAdoptionRequest(@Header("Authorization") String auth, @Body AdoptionRequest adoptionRequest);
 
 }
 

@@ -126,41 +126,62 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:weightSum="2">
 
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Pet Age:"
-                    android:textSize="18sp"
-                    android:textColor="@color/black_color"/>
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/petAge"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pet Age:"
+                        android:textSize="18sp"
+                        android:textColor="@color/black_color"/>
+
+                    <TextView
+                        android:id="@+id/petAge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adult"
+                        android:textSize="16sp"
+                        android:textColor="#F7931E" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Adult"
-                    android:textSize="16sp"
-                    android:textColor="#F7931E"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pet Breed:"
-                    android:textSize="18sp"
-                    android:textColor="@color/black_color"
-                    android:layout_marginLeft="50dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pet Breed:"
+                        android:textSize="18sp"
+                        android:textColor="@color/black_color" />
 
-                <TextView
-                    android:id="@+id/petBreed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NA"
-                    android:textSize="16sp"
-                    android:textColor="#F7931E"
-                    android:layout_marginLeft="5dp"/>
+                    <TextView
+                        android:id="@+id/petBreed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NA"
+                        android:textSize="16sp"
+                        android:textColor="#F7931E" />
+
+
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
 
@@ -176,41 +197,61 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:weightSum="2">
 
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Pet Color:"
-                    android:textSize="18sp"
-                    android:textColor="@color/black_color"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/petColor"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pet Color:"
+                        android:textSize="18sp"
+                        android:textColor="@color/black_color"/>
+
+                    <TextView
+                        android:id="@+id/petColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Black"
+                        android:textSize="16sp"
+                        android:textColor="#F7931E" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Black"
-                    android:textSize="16sp"
-                    android:textColor="#F7931E"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pet Size:"
+                        android:textSize="18sp"
+                        android:textColor="@color/black_color" />
+
+                    <TextView
+                        android:id="@+id/petSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NA"
+                        android:textSize="16sp"
+                        android:textColor="#F7931E" />
+
+                </LinearLayout>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pet Size:"
-                    android:textSize="18sp"
-                    android:textColor="@color/black_color"
-                    android:layout_marginLeft="40dp"/>
 
-                <TextView
-                    android:id="@+id/petSize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NA"
-                    android:textSize="16sp"
-                    android:textColor="#F7931E"
-                    android:layout_marginLeft="5dp"/>
+
+
 
             </LinearLayout>
 
