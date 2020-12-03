@@ -2,6 +2,7 @@ package com.cynoteck.petofyparents.activty;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +58,11 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
     Methods methods;
     AdoptionListAdopter adoptionListAdopter;
     List<PetDonationList> petDonationLists;
-    List<String> petImageLists;
+
+    NestedScrollView nestedSV;
+    ProgressBar progressBar;
+
+    int pageNumber=1,pageSize=10;
 
     ArrayList<String> petTypeList,petBreedList,petAgeList,petColorList,petSizeList,petSexList;
     HashMap<String,String> petTypeHashMap,petBreedHashMap,petAgeHashMap,petColorHashMap,petSizeHashMap,petSexHashMap;
@@ -82,6 +88,8 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
         petSize=findViewById(R.id.petSize);
         petColor=findViewById(R.id.petColor);
         petBreed=findViewById(R.id.petBreed);
+        nestedSV=findViewById(R.id.nestedSV);
+        progressBar=findViewById(R.id.progressBar);
 
         rest_TV=findViewById(R.id.rest_TV);
         rest_TV.setOnClickListener(this);
@@ -110,6 +118,18 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
         {
             methods.isInternetOn();
         }
+
+        nestedSV.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if(scrollY==v.getChildAt(0).getMeasuredHeight()-v.getMeasuredHeight())
+                {
+                    pageSize++;
+                    progressBar.setVisibility(View.VISIBLE);
+                    getAdoptionList();
+                }
+            }
+        });
 
     }
 
@@ -197,8 +217,8 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
         adoptionListParameter.setPetBreedId(strSpnrBreedId);
 
         AdoptionListHeader adoptionListHeader=new AdoptionListHeader();
-        adoptionListHeader.setPageNumber("1");
-        adoptionListHeader.setPageSize("5");
+        adoptionListHeader.setPageNumber(pageNumber);
+        adoptionListHeader.setPageSize(pageSize);
         adoptionListHeader.setSearchData("");
 
         AdoptionListRequestModel adoptionListRequestModel=new AdoptionListRequestModel();
@@ -237,7 +257,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
                         adoption_RV.setAdapter(adoptionListAdopter);
                         adoptionListAdopter.notifyDataSetChanged();
                         petDonationLists = adoptionListResponse.getData().getPetDonationList();
-
+                        progressBar.setVisibility(View.GONE);
 
                     }else if (responseCode==614){
                         Toast.makeText(this, adoptionListResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();

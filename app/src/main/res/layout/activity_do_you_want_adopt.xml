@@ -26,121 +26,140 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <ScrollView
+
+    <LinearLayout
+        android:id="@+id/filter_restLL"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        android:layout_marginTop="55dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black_color"
+            android:drawableLeft="@drawable/filter"/>
+
+        <TextView
+            android:id="@+id/rest_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black_color"
+            android:drawableLeft="@drawable/refresh"
+            android:layout_marginLeft="20dp"
+            android:paddingLeft="5dp"/>
+
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/filter_spinnerLL"
+        app:layout_constraintTop_toBottomOf="@+id/filter_restLL"
+        app:layout_constraintStart_toStartOf="@+id/filter_restLL"
+        app:layout_constraintEnd_toEndOf="@+id/filter_restLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:scrollbars="none"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/petType"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/spinner_background"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/petGender"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginLeft="5dp"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/petAge"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginLeft="5dp"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/petSize"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginLeft="5dp"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/petColor"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginLeft="5dp"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/petBreed"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginLeft="5dp"/>
+
+
+
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedSV"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        app:layout_constraintTop_toBottomOf="@+id/filter_spinnerLL"
+        app:layout_constraintStart_toStartOf="@+id/filter_spinnerLL"
+        app:layout_constraintEnd_toEndOf="@+id/filter_spinnerLL"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Filter"
-                    android:textSize="18sp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/black_color"
-                    android:drawableLeft="@drawable/filter"/>
-
-                <TextView
-                    android:id="@+id/rest_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reset"
-                    android:textSize="18sp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/black_color"
-                    android:drawableLeft="@drawable/refresh"
-                    android:layout_marginLeft="20dp"
-                    android:paddingLeft="5dp"/>
-
-
-            </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:scrollbars="none"
-                android:layout_marginTop="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/petType"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/spinner_background"/>
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/petGender"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/spinner_background"
-                        android:layout_marginLeft="5dp"/>
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/petAge"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/spinner_background"
-                        android:layout_marginLeft="5dp"/>
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/petSize"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/spinner_background"
-                        android:layout_marginLeft="5dp"/>
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/petColor"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/spinner_background"
-                        android:layout_marginLeft="5dp"/>
-
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/petBreed"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/spinner_background"
-                        android:layout_marginLeft="5dp"/>
-
-
-
-                </LinearLayout>
-
-
-            </HorizontalScrollView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/adoption_RV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 tools:listitem="@layout/adoption_list" />
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
         </LinearLayout>
 
 
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 

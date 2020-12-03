@@ -1,23 +1,23 @@
 package com.cynoteck.petofyparents.parameter.adoptionListRequest;
 
 public class AdoptionListHeader {
-    private String pageNumber;
-    private String pageSize;
+    private int pageNumber;
+    private int pageSize;
     private String searchData;
 
-    public String getPageNumber() {
+    public int getPageNumber() {
         return pageNumber;
     }
 
-    public void setPageNumber(String pageNumber) {
+    public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
 
-    public String getPageSize() {
+    public int getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(String pageSize) {
+    public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
 

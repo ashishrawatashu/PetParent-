@@ -2,9 +2,6 @@ package com.cynoteck.petofyparents.response.addPet.addPetResponse;
 
 import com.cynoteck.petofyparents.response.Header;
 import com.cynoteck.petofyparents.response.Response;
-
-;
-
 public class AddPetValueResponse {
   private Header header;
 

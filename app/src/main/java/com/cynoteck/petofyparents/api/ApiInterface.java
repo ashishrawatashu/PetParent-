@@ -170,7 +170,7 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/AddPet")
-    Call<AddPetValueResponse> addNewPet(@Header("Authorization") String auth,
+    Call<JsonObject> addNewPet(@Header("Authorization") String auth,
                                         @Body AddPetRequset addPetRequset);
 
     //TODO========Get Reprts Type API===========================

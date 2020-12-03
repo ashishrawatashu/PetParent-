@@ -9,7 +9,7 @@ tools:context=".fragments.HomeFragment">
 
 <com.google.android.material.card.MaterialCardView
     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-    app:cardElevation="35dp"
+    app:cardElevation="15dp"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
@@ -39,7 +39,7 @@ tools:context=".fragments.HomeFragment">
 <LinearLayout
     android:orientation="vertical"
     android:weightSum="2"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="30dp"
     android:layout_below="@id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="match_parent">

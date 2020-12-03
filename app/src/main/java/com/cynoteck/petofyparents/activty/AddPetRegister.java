@@ -52,6 +52,7 @@ import com.cynoteck.petofyparents.response.addPet.uniqueIdResponse.UniqueRespons
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
+import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -87,7 +88,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             slctImgThree="0",slctImgFour="0",slctImgFive="0",strProfileImgUrl="",strFirstImgUrl="",strSecondImgUrl="",
             strThirdImgUrl="",strFourthImUrl="",strFifthImgUrl="";
     Dialog dialog;
-
     Methods methods;
     DatePickerDialog picker;
     ArrayList<String> petType;
@@ -831,7 +831,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
     private void addPetData(AddPetRequset addPetRequset) {
         methods.showCustomProgressBarDialog(this);
-        ApiService<AddPetValueResponse> service = new ApiService<>();
+        ApiService<JsonObject> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().addNewPet(Config.token,addPetRequset), "AddPet");
         Log.e("DATALOG","check1=> "+addPetRequset);
 
@@ -994,17 +994,24 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             case "AddPet":
                 try {
                     Log.d("AddPet",arg0.body().toString());
-                    AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
-                    int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
+                    JsonObject addPetValueResponse = (JsonObject) arg0.body();
+
+                    JsonObject response = addPetValueResponse.getAsJsonObject("response");
+                    Log.d("hhshshhs",""+response);
+
+                    int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));
+                    if(responseCode==109)
+                    {
+                        methods.customProgressDismiss();
                         Toast.makeText(this, "Pet Added Successfully ", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
                         finish();
-                    }else if (responseCode==614){
-                        Toast.makeText(this, addPetValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        methods.customProgressDismiss();
+                        Toast.makeText(this, "Try Again!!", Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch(Exception e) {

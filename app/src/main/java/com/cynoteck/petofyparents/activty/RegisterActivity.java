@@ -89,7 +89,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                     LoginRegisterResponse registerResponse = (LoginRegisterResponse) response.body();
                     int responseCode = Integer.parseInt(registerResponse.getResponseLogin().getResponseCode());
                     if (responseCode==109){
-                        Toast.makeText(this, registerResponse.getResponseLogin().getResponseMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "You are registered as a pet parent with petofy", Toast.LENGTH_SHORT).show();
                     }else if(responseCode==615) {
                         Toast.makeText(this, registerResponse.getResponseLogin().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     }else {
