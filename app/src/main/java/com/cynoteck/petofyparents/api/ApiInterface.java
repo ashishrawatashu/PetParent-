@@ -88,7 +88,7 @@ public interface ApiInterface {
 
     //TODO=============Register API============================
 
-    @POST("User/Registration")
+    @POST("User/PetParentRegistration")
     Call<LoginRegisterResponse> registerApi(@Body Registerparams registerparams);
 
     //TODO============Forget Password API=======================
