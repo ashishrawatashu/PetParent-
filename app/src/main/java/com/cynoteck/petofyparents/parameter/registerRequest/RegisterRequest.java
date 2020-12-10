@@ -14,6 +14,8 @@ public class RegisterRequest
 
     private String ConfirmPassword;
 
+    private String roleName;
+
     public String getEmail ()
     {
         return Email;
@@ -74,9 +76,17 @@ public class RegisterRequest
         this.ConfirmPassword = ConfirmPassword;
     }
 
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
     @Override
     public String toString()
     {
-        return "ClassPojo [Email = "+Email+", FirstName = "+FirstName+", PhoneNumber = "+PhoneNumber+", LastName = "+LastName+", Password = "+Password+", ConfirmPassword = "+ConfirmPassword+"]";
+        return "ClassPojo [Email = "+Email+", FirstName = "+FirstName+", PhoneNumber = "+PhoneNumber+", LastName = "+LastName+", Password = "+Password+", ConfirmPassword = "+ConfirmPassword+", roleName = "+roleName+"]";
     }
 }

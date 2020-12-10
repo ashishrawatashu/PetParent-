@@ -195,6 +195,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                     data.setFirstName(firstName);
                     data.setLastName(lastName);
                     data.setPhoneNumber(phoneNumber);
+                    data.setRoleName("Customer");
                     registerparams.setData(data);
                     if(methods.isInternetOn())
                     {

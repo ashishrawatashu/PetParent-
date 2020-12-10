@@ -116,6 +116,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
                     }
                 });*/
+
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
         {
             NotificationChannel notificationChannel=new NotificationChannel(channel_id, channel_name, NotificationManager.IMPORTANCE_DEFAULT);
@@ -228,7 +229,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 } else if (!otp.equals(strResponseOtp)) {
                     pet_parent_otp.setError("Enter Wrong OTP");
                 } else {
+                    if(responseLogin.getData().getUserRole().equals("Customer"))
                     loginSucess();
+                    else
+                    Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -275,7 +279,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
 
                         } else {
-                            loginSucess();
+                            if(responseLogin.getData().getUserRole().equals("Customer"))
+                                loginSucess();
+                            else
+                                Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                         }
 
                     } else if (responseCode == 614) {
