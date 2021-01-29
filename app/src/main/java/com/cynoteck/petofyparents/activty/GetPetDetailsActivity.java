@@ -1,20 +1,10 @@
 package com.cynoteck.petofyparents.activty;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
-import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Response;
-
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.icu.util.Calendar;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -33,6 +23,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
+
+import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -68,13 +63,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class GetPetDetailsActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse {
+import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Response;
 
+public class GetPetDetailsActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse {
     Methods methods;
     TextView peto_details_reg_number;
     AppCompatSpinner add_details_pet_type,add_details_pet_age,add_details_pet_sex,add_details_pet_breed,add_detils_pet_color,
@@ -113,7 +114,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     Bitmap bitmap, thumbnail;
     String capImage;
 
-    String pet_id = "",currentDateandTime="",strPetCategory="",strPetName="",strPetParentName="",
+    String pet_id = "",currentDateandTime="",strPetCategory="",strPetName="",strPetParentName="",image_url="",
             strPetContactNumber="",strPetDescription="",strPetAdress="",strPetBirthDay="",
             strSpnerItemPetNm="",getStrSpnerItemPetNmId="",strSpnrBreed="",strSpnrBreedId="",petUniqueId="",
             strSpnrAge="",strSpnrAgeId="",strSpnrColor="",strSpnrColorId="",strSpnrSize="",strSpneSizeId="",
@@ -123,11 +124,11 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     Dialog dialog;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_pet_details);
-
         methods = new Methods(this);
         currentDateAndTime();
         Bundle extras = getIntent().getExtras();
@@ -156,6 +157,16 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
             strSpnrColor = extras.getString("pet_color");
             strPetParentName = extras.getString("pet_parent");
             strPetContactNumber = extras.getString("pet_parent_contact");
+            image_url = extras.getString("image_url");
+            Log.d("jjsjsjjs",""+image_url);
+
+            if(image_url!=null)
+           {
+               Glide.with(this)
+                       .load(image_url)
+                       .into(pet_Details_profile_image);
+           }
+
 
             pet_details_name.setText(strPetName);
             pet_details_parent_name.setText(strPetParentName);
@@ -176,7 +187,6 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         {
             methods.DialogInternet();
         }
-
     }
 
     private void init() {
@@ -215,7 +225,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         service_details_cat_img_four.setOnClickListener(this);
         service_detils_cat_img_five.setOnClickListener(this);
         peto_details_reg_number.setOnClickListener(this);
-        // id_card.setOnClickListener(this);
+       // id_card.setOnClickListener(this);
 
     }
 
@@ -340,24 +350,24 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     pet_details_address.setError(null);
                     calenderTextViewDetails.setError(null);
                 }
-                else if(strPetDescription.isEmpty())
-                {
-                    pet_details_name.setError(null);
-                    pet_details_parent_name.setError(null);
-                    pet_deatils_contact_number.setError(null);
-                    pet_deatils_description.setError("Enter Description");
-                    pet_details_address.setError(null);
-                    calenderTextViewDetails.setError(null);
-                }
-                else if(strPetAdress.isEmpty())
-                {
-                    pet_details_name.setError(null);
-                    pet_details_parent_name.setError(null);
-                    pet_deatils_contact_number.setError(null);
-                    pet_deatils_description.setError(null);
-                    pet_details_address.setError("Enter Pet Address");
-                    calenderTextViewDetails.setError(null);
-                }
+//                else if(strPetDescription.isEmpty())
+//                {
+//                    pet_details_name.setError(null);
+//                    pet_details_parent_name.setError(null);
+//                    pet_deatils_contact_number.setError(null);
+//                    pet_deatils_description.setError("Enter Description");
+//                    pet_details_address.setError(null);
+//                    calenderTextViewDetails.setError(null);
+//                }
+//                else if(strPetAdress.isEmpty())
+//                {
+//                    pet_details_name.setError(null);
+//                    pet_details_parent_name.setError(null);
+//                    pet_deatils_contact_number.setError(null);
+//                    pet_deatils_description.setError(null);
+//                    pet_details_address.setError("Enter Pet Address");
+//                    calenderTextViewDetails.setError(null);
+//                }
                 else if(strPetBirthDay.isEmpty())
                 {
                     pet_details_name.setError(null);
@@ -376,10 +386,10 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 {
                     Toast.makeText(this, "Select Breed!!", Toast.LENGTH_SHORT).show();
                 }
-                else if(strSpnrAge.isEmpty()||(strSpnrAge.equals("Select Pet Age")))
-                {
-                    Toast.makeText(this, "Select Pet Age!!", Toast.LENGTH_SHORT).show();
-                }
+//                else if(strSpnrAge.isEmpty()||(strSpnrAge.equals("Select Pet Age")))
+//                {
+//                    Toast.makeText(this, "Select Pet Age!!", Toast.LENGTH_SHORT).show();
+//                }
                 else if(strSpnrSex.isEmpty()||(strSpnrSex.equals("Pet Sex")))
                 {
                     Toast.makeText(this, "Select Pet Sex!!", Toast.LENGTH_SHORT).show();
@@ -399,7 +409,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     data.setId(pet_id);
                     data.setPetCategoryId(getStrSpnerItemPetNmId);
                     data.setPetSexId(strSpnrSexId);
-                    data.setPetAgeId(strSpnrAgeId);
+                    data.setPetAgeId("1.0");
                     data.setPetSizeId(strSpneSizeId);
                     data.setPetColorId(strSpnrColorId);
                     data.setPetBreedId(strSpnrBreedId);
@@ -407,7 +417,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     data.setPetParentName(strPetParentName);
                     data.setContactNumber(strPetContactNumber);
                     data.setAddress(strPetAdress);
-                    data.setDescription(strPetDescription);
+                    data.setDescription("Description");
                     data.setCreateDate(currentDateandTime);
                     data.setDateOfBirth(strPetBirthDay);
 
@@ -489,7 +499,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     GetPetResponse getPetResponse = (GetPetResponse) arg0.body();
                     int responseCode = Integer.parseInt(getPetResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
 
                         pet_details_name.setText(getPetResponse.getData().getPetName());
                         pet_details_parent_name.setText(getPetResponse.getData().getPetParentName());
@@ -646,7 +656,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     if (responseCode== 109){
                         Config.backCall = "hit";
                         onBackPressed();
-                        Toast.makeText(this, "Sucessss", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Update Succesfully ", Toast.LENGTH_SHORT).show();
                     }else if (responseCode==614){
                         Toast.makeText(this, addPetValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     }else {
@@ -663,7 +673,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     ImageResponse imageResponse = (ImageResponse) arg0.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
-                        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
                         if(selctProflImage.equals("1")){
                             strProfileImgUrl=imageResponse.getData().getDocumentUrl();
                             selctProflImage="0";
@@ -908,14 +918,14 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
 
 
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         startActivityForResult(galleryIntent, GALLERY);
     }
 
     private void takePhotoFromCamera() {
 
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
 
     }
@@ -959,8 +969,6 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                         service_detils_cat_img_five.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-
-
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1197,8 +1205,8 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     private void requestMultiplePermissions() {
         Dexter.withActivity(this)
                 .withPermissions(
-                        android.Manifest.permission.CAMERA,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
@@ -1239,4 +1247,5 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         Log.e("DATALOG","check1=> "+addPetRequset);
 
     }
+
 }

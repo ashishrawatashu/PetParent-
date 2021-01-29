@@ -42,7 +42,8 @@
         <activity android:name=".activty.UpdateParentProfileActivity" />
         <activity android:name=".activty.ChangePasswordActivity" />
         <activity android:name=".activty.SettingActivity" />
-        <activity android:name=".activty.GetPetDetailsActivity" />
+        <activity android:name=".activty.PetProfileActivity"/>
+        <activity android:name=".activty.GetPetDetailsActivity"/>
         <activity
             android:name=".activty.PetIdCardActivity"
             android:screenOrientation="landscape"

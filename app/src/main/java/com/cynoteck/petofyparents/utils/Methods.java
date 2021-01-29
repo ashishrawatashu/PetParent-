@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.cynoteck.petofyparents.R;
+import com.google.gson.Gson;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -396,6 +397,10 @@ public class Methods {
             e.printStackTrace();
         }
         return false;
+    }
+    public String getRequestJson(Object object) {
+        Gson gson = new Gson();
+        return gson.toJson(object);
     }
 
 

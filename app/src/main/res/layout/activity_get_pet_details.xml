@@ -34,7 +34,7 @@
                 android:layout_height="0dp"
                 android:text="@string/pet_details"
                 android:textColor="@color/black_color"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <ImageView
@@ -68,7 +68,7 @@
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:text="PETO-1138  "
+        android:text=""
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -233,6 +233,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/add_details_pet_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -244,6 +245,7 @@
                 android:textColor="@color/grey_add_pet"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
+                android:visibility="gone"
                 android:layout_below="@id/pet_age_TV"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
@@ -357,6 +359,7 @@
                 android:textColor="@color/grey_add_pet"/>
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/pet_deatils_contact_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -369,6 +372,7 @@
 
 
             <EditText
+                android:visibility="gone"
                 android:layout_below="@id/pet_desce_TV"
                 android:inputType="text"
                 android:maxLines="1"
@@ -415,6 +419,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/pet_details_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -426,6 +431,7 @@
                 android:textColor="@color/grey_add_pet"/>
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/pet_images_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -439,6 +445,7 @@
 
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_below="@id/pet_images_info"
@@ -448,6 +455,7 @@
                 android:src="@drawable/add_img_icon" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginRight="10dp"
                 android:layout_below="@id/pet_images_info"
                 android:layout_toRightOf="@+id/service_details_cat_img_one"
@@ -457,6 +465,7 @@
                 android:src="@drawable/add_img_icon" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginRight="10dp"
                 android:layout_below="@id/pet_images_info"
                 android:layout_toRightOf="@+id/service_details_cat_img_two"
@@ -466,6 +475,7 @@
                 android:src="@drawable/add_img_icon" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_marginRight="10dp"
                 android:layout_below="@id/pet_images_info"
                 android:layout_toRightOf="@+id/service_details_cat_img_three"
@@ -473,7 +483,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/add_img_icon" />
+
             <ImageView
+                android:visibility="gone"
                 android:layout_marginRight="10dp"
                 android:layout_below="@id/pet_images_info"
                 android:layout_toRightOf="@+id/service_details_cat_img_four"
@@ -504,7 +516,7 @@
         android:layout_alignParentBottom="true"
         android:theme="@style/MatButton"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="Update"
+        android:text="UPDATE"
         android:layout_centerInParent="true"
         android:layout_width="0dp"
         android:layout_marginTop="10dp"

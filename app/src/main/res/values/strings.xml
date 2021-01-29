@@ -25,6 +25,8 @@
     <string name="CheckInternet">Check your internet connection</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="LastPrescription">Last Prescription</string>
+    <string name="immunizationChartLabel">Immunization Chart</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">Cancel</string>
     <string name="details">Details</string>
@@ -32,6 +34,7 @@
     <string name="update_profile">Veterinarian Account</string>
     <string name="address">Address</string>
     <string name="postal_code">Postal Code</string>
+    <string name="register_pets_home">PET REGISTER</string>
     <string name="website">Website</string>
     <string name="social_media_url">Social Media URL</string>
     <string name="vet_registration_number">Vet Registration Number</string>

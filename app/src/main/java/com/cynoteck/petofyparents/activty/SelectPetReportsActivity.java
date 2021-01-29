@@ -45,8 +45,7 @@ import retrofit2.Response;
 
 public class SelectPetReportsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener {
 
-
-    String pet_unique_id, pet_name,pet_sex, pet_owner_name,pet_owner_contact,pet_id,pet_encryt_id,pet_age;
+    String pet_unique_id, pet_name,pet_sex, pet_owner_name,pet_owner_contact,pet_id,pet_encryt_id,pet_age,pet_DOB,pet_encrypted_id;
     ImageView back_arrow_IV;
     TextView pet_name_TV,pet_sex_TV,pet_id_TV,pet_owner_name_TV,pet_owner_phone_no_TV;
     VisitTypesAdapter visitTypesAdapter;
@@ -58,20 +57,18 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
     Methods methods;
     WebView webview;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_pet_reports);
-
         methods = new Methods(this);
         init();
         setDeatils();
         getVisitTypes();
-
     }
 
     private void setDeatils() {
+
         pet_name_TV.setText(pet_name);
         pet_sex_TV.setText("("+pet_sex+")");
         pet_owner_name_TV.setText(pet_owner_name);
@@ -90,6 +87,8 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
         pet_owner_name =extras.getString("pet_owner_name");
         pet_encryt_id = extras.getString("pet_encryt_id");
         pet_age = extras.getString("pet_age");
+        pet_DOB =extras.getString("pet_DOB");
+        pet_encrypted_id =extras.getString("pet_encrypted_id");
         reports_types_RV=findViewById(R.id.reports_types_RV);
         back_arrow_IV = findViewById(R.id.back_arrow_IV);
         pet_name_TV = findViewById(R.id.pet_name_TV);
@@ -117,6 +116,7 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
     private void getVisitTypes() {
         ApiService<GetReportsTypeResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getReportsType(Config.token), "GetReportsType");
+//        methods.getRequestJson()
     }
 
     @Override
@@ -129,17 +129,14 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
 
             case R.id.xray_layout:
                 intentStaticReports("7.0");
-
                 break;
 
             case R.id.lab_test_layout:
                 intentStaticReports("8.0");
-
                 break;
 
             case R.id.hospitalization_layout:
                 intentStaticReports("9.0");
-
                 break;
         }
 
@@ -272,9 +269,24 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
             Log.d("GetImmunization",immunizationRequest.toString());
         }
 
-        else if (getReportsTypeData.get(position).getId().equals("")){
+        else {
 
-        }else if (getReportsTypeData.get(position).getId().equals("")){
+            Intent selectReportsIntent = new Intent(this, ReportsCommonActivity.class);
+            Bundle data = new Bundle();
+            data.putString("pet_id",pet_id);
+            data.putString("pet_name",pet_name);
+            data.putString("pet_unique_id",pet_unique_id);
+            data.putString("pet_sex",pet_sex);
+            data.putString("pet_owner_name",pet_owner_name);
+            data.putString("pet_owner_contact",pet_owner_contact);
+            data.putString("reports_id",getReportsTypeData.get(position).getId());
+            data.putString("button_type","view");
+            data.putString("pet_DOB",pet_DOB);
+            data.putString("pet_encrypted_id",pet_encrypted_id);
+            selectReportsIntent.putExtras(data);
+            startActivity(selectReportsIntent);
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+
 
         }
 
