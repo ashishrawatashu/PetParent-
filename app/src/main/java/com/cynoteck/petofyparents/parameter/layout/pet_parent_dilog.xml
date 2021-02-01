@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/city_search_layout_popup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_transparent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/whitereccround"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logo_petofy"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"/>
+
+        <RelativeLayout
+            android:id="@+id/action_bar_data"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/whiteColor"
+            android:layout_below="@id/logo_image"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/back_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                app:srcCompat="@drawable/back_arrow"
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/ed_parent"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/back_icon"
+                android:hint="Search pet parent.... "
+                android:paddingLeft="5dp"
+                android:textColor="@color/black_color"
+                android:textColorHint="@color/gray_code_dark"
+                android:textSize="15sp"
+                android:background="@drawable/searchbox"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/recent_searches_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/action_bar_data"
+            android:layout_marginTop="10dp"
+            android:background="@color/whiteColor">
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pet_parent_list_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

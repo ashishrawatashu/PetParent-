@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    tools:context=".activities.BankAccountDetailsActivity">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="1dp"
+        app:cardElevation="30dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/back_arrow_IV"
+                android:padding="8dp"
+                android:visibility="visible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_arrow" />
+
+            <TextView
+                android:gravity="center"
+                android:paddingRight="25dp"
+                android:id="@+id/create_headline_TV"
+                android:layout_width="0dp"
+                android:text="@string/addAccount"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back_arrow_IV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/black_color"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/name_for_bank_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/name"
+        android:textColor="@color/grey_add_pet" />
+
+    <EditText
+        android:id="@+id/name_for_bank_ET"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center_vertical"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="25dp"
+        android:textColor="@color/grey_add_pet"
+        app:layout_constraintEnd_toEndOf="@id/name_for_bank_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_for_bank_TV" />
+
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_for_bank_ET"
+        android:id="@+id/email_for_bank_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/emailtext"
+        android:textColor="@color/grey_add_pet" />
+
+    <EditText
+        android:id="@+id/email_for_bank_ET"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center_vertical"
+        android:hint="@string/email"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="25dp"
+        android:textColor="@color/grey_add_pet"
+        app:layout_constraintEnd_toEndOf="@id/email_for_bank_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_for_bank_TV" />
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_for_bank_ET"
+        android:id="@+id/contact_for_bank_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/phoneNumber"
+        android:textColor="@color/grey_add_pet" />
+
+    <EditText
+        android:id="@+id/contact_for_bank_ET"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center_vertical"
+        android:hint="@string/phoneNumber"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="25dp"
+        android:textColor="@color/grey_add_pet"
+        app:layout_constraintEnd_toEndOf="@id/contact_for_bank_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contact_for_bank_TV" />
+
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contact_for_bank_ET"
+        android:id="@+id/ifsc_for_bank_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/ifsc"
+        android:textColor="@color/grey_add_pet" />
+
+    <EditText
+        android:textAllCaps="true"
+        android:maxLength="11"
+        android:id="@+id/ifsc_for_bank_ET"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center_vertical"
+        android:hint="@string/ifsc"
+        android:maxLines="1"
+        android:paddingLeft="25dp"
+        android:textColor="@color/grey_add_pet"
+        app:layout_constraintEnd_toEndOf="@id/ifsc_for_bank_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ifsc_for_bank_TV" />
+
+    <TextView
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ifsc_for_bank_ET"
+        android:id="@+id/ifsc_for_bank_details_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="State Bank Of India, SANGLAKOTI, GARHWAL, UTTARAKHAND" />
+
+    <ProgressBar
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ifsc_for_bank_ET"
+        android:id="@+id/progressBar"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="start"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ifsc_for_bank_details_TV"
+        android:id="@+id/account_for_bank_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/accountNumber"
+        android:textColor="@color/grey_add_pet" />
+
+    <EditText
+        android:id="@+id/account_for_bank_ET"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center_vertical"
+        android:hint="@string/accountNumber"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="25dp"
+        android:textColor="@color/grey_add_pet"
+        app:layout_constraintEnd_toEndOf="@id/account_for_bank_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_for_bank_TV" />
+
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_for_bank_ET"
+        android:id="@+id/confirm_account_for_bank_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/confirmAccount"
+        android:textColor="@color/grey_add_pet" />
+
+    <EditText
+        android:id="@+id/confirm_account_for_bank_ET"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center_vertical"
+        android:hint="@string/confirmAccount"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="25dp"
+        android:textColor="@color/grey_add_pet"
+        app:layout_constraintEnd_toEndOf="@id/confirm_account_for_bank_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirm_account_for_bank_TV" />
+
+
+
+    <Button
+        android:id="@+id/add_account_BT"
+        android:background="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textColor="@color/whiteColor"
+        android:layout_width="0dp"
+        android:text="Add Account"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

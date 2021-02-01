@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ImmunizationChartActivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="1dp"
+        app:cardElevation="30dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/back_arrow_IV"
+                android:padding="8dp"
+                android:visibility="visible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_arrow" />
+
+            <TextView
+                android:gravity="center"
+                android:paddingRight="25dp"
+                android:id="@+id/immu_pet_headline_TV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/immunizationtToolbar"
+                app:layout_constraintStart_toEndOf="@id/back_arrow_IV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/black_color"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        app:cardElevation="10dp"
+        android:elevation="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:id="@+id/createNew_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="180dp"
+                android:id="@+id/pet_type"
+                android:background="@drawable/spinner_background"
+                android:layout_width="0dp"
+                android:layout_height="40dp" />
+
+            <LinearLayout
+
+                app:layout_constraintStart_toEndOf="@id/pet_type"
+                app:layout_constraintTop_toTopOf="@id/pet_type"
+                app:layout_constraintBottom_toBottomOf="@id/pet_type"
+                android:id="@+id/create_new_immu"
+                android:layout_width="0dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:background="@drawable/oval"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/createNew"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:drawableRight="@drawable/ic_baseline_add_white"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        app:cardElevation="5dp"
+        android:elevation="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintTop_toBottomOf="@id/createNew_card"
+        android:id="@+id/immue_list_card"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/immue_list_head_LL"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:layout_weight="2"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_color"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/ageGroup"/>
+
+                <TextView
+                    android:textColor="@color/black_color"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/primaryVaccineName"/>
+
+
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/immue_list_RV"
+        app:layout_constraintTop_toBottomOf="@+id/immue_list_card"
+        app:layout_constraintStart_toStartOf="@+id/immue_list_card"
+        app:layout_constraintEnd_toEndOf="@+id/immue_list_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

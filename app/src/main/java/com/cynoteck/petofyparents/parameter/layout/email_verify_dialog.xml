@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/city_search_layout_popup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_transparent"
+    android:layout_centerVertical="true"
+    >
+
+    <RelativeLayout
+        android:background="@drawable/white_round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        >
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/verify_email"
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="@color/black_color"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"/>
+
+        <View
+            android:background="@color/grayColor"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:layout_below="@id/heading"
+            android:layout_marginTop="4dp"/>
+        <RelativeLayout
+            android:id="@+id/staff_details_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/heading">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/email_information_detailsLL">
+
+
+                <TextView
+                    android:lineHeight="28dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/email_id_msg_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/verify_email_deatils"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/email_information_detailsLL"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+
+<!--                <Button-->
+<!--                    android:id="@+id/update_cancel_button"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:background="@drawable/deactivate_status"-->
+<!--                    android:text="@string/cancel"-->
+<!--                    android:textColor="@color/whiteColor" />-->
+
+                <Button
+                    android:id="@+id/login_button"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/login_bt_bg"
+                    android:text="Continue"
+                    android:textColor="@color/whiteColor"
+                    android:layout_marginLeft="20dp"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

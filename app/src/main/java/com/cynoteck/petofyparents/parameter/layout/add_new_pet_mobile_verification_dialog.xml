@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp"
+    android:background="@color/whiteColor">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Parent Mobile Number"
+        android:textSize="25sp"
+        android:textColor="#000"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mobile_numberTL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pet_parent_mobile_number"
+            android:layout_width="match_parent"
+            android:maxLines="1"
+            android:inputType="number"
+            android:maxLength="10"
+            android:paddingRight="45dp"
+            android:hint="Enter valid Mob Number*"
+            android:textSize="16sp"
+            android:gravity="left"
+            android:layout_height="50dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/submit_parent_mob_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Send"
+        android:textColor="#fff"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/cancelMobileDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

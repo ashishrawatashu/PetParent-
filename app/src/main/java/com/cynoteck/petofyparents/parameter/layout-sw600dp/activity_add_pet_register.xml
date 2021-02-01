@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="@color/whiteColor"
-    tools:context=".activty.AddPetRegister" >
+    android:background="@color/whiteColor">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/toolbar"
@@ -58,10 +57,11 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_height="50dp"
         app:civ_border_color="#cccc"
-        android:src="@drawable/ic_baseline_photo_camera_24"
+        android:src="@drawable/profile_img_icon"
         android:layout_marginTop="10dp"/>
 
     <TextView
+        android:visibility="gone"
         android:text="PETO-1138  "
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -87,6 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/top_view_line"
@@ -176,20 +177,75 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
 
-
-            <TextView
+            <LinearLayout
                 android:layout_below="@id/add_pet_sex_dialog"
+                android:id="@+id/date_of_birth_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/pet_dob_TV"
-                android:text="@string/dateofbirth"
-                android:gravity="center_vertical"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/grey_add_pet"/>
+                android:weightSum="2"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pet_dob_TV"
+                    android:text="@string/dateofbirth"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/grey_add_pet"/>
+
+                <CheckBox
+                    android:id="@+id/convert_yr_to_age"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="days/month/year"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/date_of_birth_layout"
+                android:visibility="gone"
+                android:id="@+id/day_and_age_layout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/age_wise"
+                    android:background="@drawable/spinner_background"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:id="@+id/age_neumeric"
+                    android:hint="Age"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:paddingLeft="25dp"
+                    android:background="@drawable/edit_text_background"
+                    android:textColor="@color/grey_add_pet"/>
+
+
+
+            </LinearLayout>
+
 
             <TextView
-                android:layout_below="@id/pet_dob_TV"
+                android:layout_below="@id/day_and_age_layout"
                 android:id="@+id/calenderTextView_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -205,6 +261,21 @@
 
             <TextView
                 android:layout_below="@id/calenderTextView_dialog"
+                android:id="@+id/ageViewTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:paddingLeft="25dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/deactivate_red"/>
+
+            <TextView
+                android:visibility="gone"
+                android:layout_below="@id/ageViewTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/add_pet_size_TV"
@@ -215,6 +286,7 @@
                 android:textColor="@color/grey_add_pet"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
+                android:visibility="gone"
                 android:layout_below="@id/add_pet_size_TV"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
@@ -226,6 +298,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/add_pet_size_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -237,6 +310,7 @@
                 android:textColor="@color/grey_add_pet"/>
 
             <androidx.appcompat.widget.AppCompatSpinner
+                android:visibility="gone"
                 android:layout_below="@id/pet_age_TV"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
@@ -293,7 +367,6 @@
 
 
             <TextView
-                android:visibility="gone"
                 android:layout_below="@id/add_pet_color_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -304,28 +377,44 @@
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/grey_add_pet"/>
 
-
-            <EditText
-                android:visibility="gone"
+            <LinearLayout
                 android:layout_below="@id/pet_patent_TV"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingLeft="25dp"
+                android:id="@+id/pet_parent_name_layout"
+                android:paddingLeft="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/pet_parent_name_ET"
-                android:hint="@string/ParentName"
-                android:gravity="center_vertical"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/edit_text_background"
-                android:textColor="@color/grey_add_pet"/>
+                android:layout_marginRight="20dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/parent_address"
+                    android:background="@drawable/spinner_background"
+                    android:layout_width="0dp"
+                    android:layout_weight=".8"
+                    android:layout_height="match_parent" />
+
+                <AutoCompleteTextView
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.2"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/pet_parent_name_ET"
+                    android:hint="@string/ParentName"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edit_text_background"
+                    android:textColor="@color/grey_add_pet"/>
+
+            </LinearLayout>
 
 
             <TextView
-                android:visibility="gone"
-                android:layout_below="@id/pet_parent_name_ET"
+                android:layout_below="@id/pet_parent_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/pet_contact_TV"
@@ -336,8 +425,7 @@
                 android:textColor="@color/grey_add_pet"/>
 
 
-            <EditText
-                android:visibility="gone"
+            <AutoCompleteTextView
                 android:layout_below="@id/pet_contact_TV"
                 android:inputType="phone"
                 android:maxLines="1"
@@ -354,6 +442,7 @@
                 android:textColor="@color/grey_add_pet"/>
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/pet_contact_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -366,6 +455,7 @@
 
 
             <EditText
+                android:visibility="gone"
                 android:layout_below="@id/pet_desce_TV"
                 android:inputType="text"
                 android:maxLines="1"
@@ -383,7 +473,6 @@
 
 
             <TextView
-                android:visibility="gone"
                 android:layout_below="@id/pet_desc_ET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -396,7 +485,6 @@
 
 
             <EditText
-                android:visibility="gone"
                 android:layout_below="@id/pet_address_TV"
                 android:inputType="text"
                 android:maxLines="1"

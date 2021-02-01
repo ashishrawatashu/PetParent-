@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.SelectPetReportsActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/reports_type_frame"/>
+
+    <androidx.cardview.widget.CardView
+        app:cardElevation="10dp"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/reports_headline_TV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/selectReports"
+                android:textColor="#000"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/back_arrow_IV"
+                android:padding="8dp"
+                android:visibility="visible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/back_arrow" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="5dp"
+        android:id="@+id/petInfo_CV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
+
+
+        <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/pet_info_LL"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_color"
+                    android:text="@string/petname"/>
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_color"
+                    android:text="@string/petId"/>
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_color"
+                    android:text="@string/petParent"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/double_dot_LL"
+                android:layout_toRightOf="@id/pet_info_LL"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_color"
+                    android:text="@string/double_Dot"/>
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_color"
+                    android:text="@string/double_Dot"/>
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_color"
+                    android:text="@string/double_Dot"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_toRightOf="@id/double_dot_LL"
+                android:id="@+id/pet_all_info_ll"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/pet_name_TV"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grayColorCode"
+                        android:text=""/>
+
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/pet_name_TV"
+                        android:id="@+id/pet_sex_TV"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grayColorCode"/>
+
+                </RelativeLayout>
+
+
+
+                <TextView
+                    android:id="@+id/pet_id_TV"
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grayColorCode"
+                    android:text=""/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/pet_owner_name_TV"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grayColorCode" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/pet_owner_name_TV"
+                        android:id="@+id/pet_owner_phone_no_TV"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grayColorCode"
+                        android:text="(735-104-040-97)"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/view_green_line"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_below="@id/petInfo_CV"
+        android:background="@color/green_divider"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/view_green_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:background="@color/list_background"
+            android:id="@+id/reports_list_RL"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reports_types_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_below="@+id/reports_types_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/xray_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/view_xrayReport_IV"
+                            android:src="@drawable/viewreports_icon"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/view_xrayReport_IV"
+                            app:layout_constraintEnd_toStartOf="@+id/view_xrayReport_arrow"
+                            android:gravity="start"
+                            android:paddingLeft="20dp"
+                            android:textSize="18dp"
+                            android:textColor="@color/black_color"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/report_xrayReport_TV"
+                            android:text="@string/xrayReport" />
+
+
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/view_xrayReport_arrow"
+                            android:src="@drawable/forward_arrow"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    android:id="@+id/lab_test_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/view_labTestReport_IV"
+                            android:src="@drawable/viewreports_icon"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/view_labTestReport_IV"
+                            app:layout_constraintEnd_toStartOf="@+id/view_labTestReport_arrow"
+                            android:gravity="start"
+                            android:paddingLeft="20dp"
+                            android:textSize="18dp"
+                            android:textColor="@color/black_color"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/report_labTestReport_TV"
+                            android:text="@string/labTestReport" />
+
+
+                        <ImageView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/view_labTestReport_arrow"
+                            android:src="@drawable/forward_arrow"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/hospitalization_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/view_Hospitalization_IV"
+                            android:src="@drawable/viewreports_icon"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/view_Hospitalization_IV"
+                            app:layout_constraintEnd_toStartOf="@+id/view_Hospitalization_arrow"
+                            android:gravity="start"
+                            android:paddingLeft="20dp"
+                            android:textSize="18dp"
+                            android:textColor="@color/black_color"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/report_Hospitalization_TV"
+                            android:text="@string/Hospitalization" />
+
+
+                        <ImageView
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/view_Hospitalization_arrow"
+                            android:src="@drawable/forward_arrow"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"/>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

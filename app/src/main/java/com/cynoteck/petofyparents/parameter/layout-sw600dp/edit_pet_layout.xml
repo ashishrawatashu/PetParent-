@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main"
+    android:background="@color/whiteColor">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="1dp"
+        app:cardElevation="30dp">
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:gravity="center"
+        android:elevation="31dp"
+        android:id="@+id/regiter_pet_headline_TV"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        android:text="@string/editpet"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        android:textColor="@color/black_color"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="PETO-1138"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/peto_edit_reg_number_dialog"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"/>
+
+            <View
+                android:id="@+id/top_edit_view_line"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="#cccc"
+                app:layout_constraintTop_toBottomOf="@id/peto_edit_reg_number_dialog"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/top_edit_view_line"
+                android:id="@+id/pet_edit_category_TV"
+                app:layout_constraintStart_toStartOf="@id/top_edit_view_line"
+                app:layout_constraintEnd_toEndOf="@id/top_edit_view_line"
+                android:text="@string/pet_category"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_category_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/add_edit_pet_type"
+                android:background="@drawable/spinner_background"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/add_edit_pet_type"
+                android:id="@+id/pet_edit_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/add_edit_pet_type"
+                android:text="@string/pet_name"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <EditText
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_name_TV"
+                android:id="@+id/pet_edit_name_ET"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/pet_edit_name_TV"
+                android:hint="@string/pet_name"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/edit_text_background"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_name_ET"
+                android:id="@+id/pet_edit_gender_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/petGender"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_gender_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/add_edit_pet_sex_dialog"
+                android:background="@drawable/spinner_background"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/add_edit_pet_sex_dialog"
+                android:id="@+id/pet_edit_dob_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/dateofbirth"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_dob_TV"
+                android:id="@+id/calenderTextView_edit_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:paddingLeft="25dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="12/05/2020"
+                android:background="@drawable/cal_background"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/calenderTextView_edit_dialog"
+                android:id="@+id/add_edit_pet_size_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/size"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/add_edit_pet_size_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/add_edit_pet_size_dialog"
+                android:background="@drawable/spinner_background"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/add_edit_pet_size_dialog"
+                android:id="@+id/pet_edit_age_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/age"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_age_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/add_edit_pet_age_dialog"
+                android:background="@drawable/spinner_background"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/add_edit_pet_age_dialog"
+                android:id="@+id/pet_edit_breed_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/breed"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_breed_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/add_edit_pet_breed_dialog"
+                android:background="@drawable/spinner_background"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/add_edit_pet_breed_dialog"
+                android:id="@+id/pet_edit_color_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/color"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_color_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/add_edit_pet_color_dialog"
+                android:background="@drawable/spinner_background"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/add_edit_pet_color_dialog"
+                android:id="@+id/pet_edit_patent_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/add_edit_pet_type"
+                android:text="@string/petParent"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <EditText
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_patent_TV"
+                android:id="@+id/pet_edit_parent_name_ET"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/pet_edit_name_TV"
+                android:hint="@string/ParentName"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/edit_text_background"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_parent_name_ET"
+                android:id="@+id/pet_edit_contact_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/add_edit_pet_type"
+                android:text="@string/phoneNumber"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <EditText
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_contact_TV"
+                android:id="@+id/pet_edit_contact_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/pet_edit_name_TV"
+                android:hint="@string/phoneNumber"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/edit_text_background"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:background="@drawable/cancel_button_back"
+                android:layout_marginLeft="50dp"
+                android:id="@+id/cancel_edit_dialog"
+                android:layout_width="0dp"
+                android:text="@string/cancel"
+                android:textColor="#e1002e"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pet_edit_contact_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/save_edit_changes_dialog"/>
+
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:background="@drawable/save_changes_back"
+                android:text="@string/save"
+                android:textColor="#6fac00"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="50dp"
+                android:id="@+id/save_edit_changes_dialog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pet_edit_contact_number"
+                app:layout_constraintStart_toEndOf="@id/cancel_edit_dialog"
+                app:layout_constraintTop_toTopOf="@id/cancel_edit_dialog"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

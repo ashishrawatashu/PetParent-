@@ -12,6 +12,7 @@ import com.cynoteck.petofyparents.parameter.forgetPassRequest.ForgetPassRequest;
 import com.cynoteck.petofyparents.parameter.getOrderDetailsParms.GetOrderRequest;
 import com.cynoteck.petofyparents.parameter.getPetListRequest.GetPetListRequest;
 import com.cynoteck.petofyparents.parameter.getVetListParams.GetVetListRequest;
+import com.cynoteck.petofyparents.parameter.getpetAgeRequest.GetPetAgeRequestData;
 import com.cynoteck.petofyparents.parameter.immunizationRequest.ImmunizationRequest;
 import com.cynoteck.petofyparents.parameter.loginParameter.Loginparams;
 import com.cynoteck.petofyparents.parameter.newPetEntryParams.NewPetRequest;
@@ -22,6 +23,7 @@ import com.cynoteck.petofyparents.parameter.petReportsRequest.PetClinicVisitDeta
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.VisitTypeRequest;
 import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
+import com.cynoteck.petofyparents.parameter.searchPetParentRequest.SearchPetParentRequestData;
 import com.cynoteck.petofyparents.parameter.updateDonation.UpdateDonationRequest;
 import com.cynoteck.petofyparents.parameter.updateRequest.updateParamRequest.UpdatePetRequest;
 import com.cynoteck.petofyparents.response.addPet.addPetResponse.AddPetValueResponse;
@@ -37,6 +39,10 @@ import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentDetail
 import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointmentResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
 import com.cynoteck.petofyparents.response.cityResponse.CityResponseModel;
+import com.cynoteck.petofyparents.response.dateOfBirthResponse.DateOfBirthResponse;
+import com.cynoteck.petofyparents.response.getPetAgeResponse.GetPetAgeresponseData;
+import com.cynoteck.petofyparents.response.getPetParrentnameReponse.GetPetParentResponseData;
+import com.cynoteck.petofyparents.response.petAgeUnitResponse.PetAgeUnitResponseData;
 import com.cynoteck.petofyparents.response.stateResponse.StateResponse;
 import com.cynoteck.petofyparents.response.donationResponse.DonationResponseList;
 import com.cynoteck.petofyparents.response.forgetAndChangePassResponse.PasswordResponse;
@@ -71,6 +77,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
@@ -356,6 +363,30 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("social-service/send-adoption-request")
     Call<JsonObject> sendAdoptionRequest(@Header("Authorization") String auth, @Body AdoptionRequest adoptionRequest);
+
+    //GET DATE OF BIRTH........................................
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @GET("pet/GetPetDateOfBirth/{data}")
+    Call<DateOfBirthResponse> GetPetDateOfBirth(@Header("Authorization") String auth, @Path("data") String data);
+
+    //GET PET AGE STRING......................................
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pet/GetPetAgeString")
+    Call<GetPetAgeresponseData> getPetAgeString(@Header("Authorization") String auth, @Body GetPetAgeRequestData getPetAgeRequestData);
+
+    //GET PET AGE UNIT LIST..................................
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pet/GetPetAgeUnit")
+    Call<PetAgeUnitResponseData> getPetAgeUnit(@Header("Authorization") String auth);
+
+    //SEARCH PET PARENT.......................................
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pet/SearchPetParent")
+    Call<GetPetParentResponseData> searchPetParent(@Header("Authorization") String auth, @Body SearchPetParentRequestData getPetAgeRequestData);
 
 }
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/white_round"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ask parent and Enter OTP"
+            android:textSize="25sp"
+            android:textColor="#000"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otp_TL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pet_parent_otp"
+                android:layout_width="match_parent"
+                android:maxLines="1"
+                android:inputType="number"
+                android:paddingRight="45dp"
+                android:hint="Enter OTP*"
+                android:textSize="16sp"
+                android:gravity="left"
+                android:layout_height="50dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submit_parent_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/submit"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/cancelOtpDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

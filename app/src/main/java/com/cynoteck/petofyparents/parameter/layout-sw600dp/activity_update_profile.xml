@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.UpdateProfileActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        app:cardElevation="20dp"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:padding="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_arrow"
+                android:id="@+id/back_arrow"/>
+
+            <TextView
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/EditprofileToolbar"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ScrollView
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/update_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/first_name_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/firstName"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <EditText
+                android:id="@+id/first_name_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="First Name"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/first_name_TV" />
+
+
+            <TextView
+                android:id="@+id/last_name_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/first_name_updt"
+                android:text="@string/lastname"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/last_name_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/lastname"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/last_name_TV" />
+
+
+
+            <TextView
+                android:id="@+id/email_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/last_name_updt"
+                android:text="@string/emailtext"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <EditText
+                android:id="@+id/email_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/emailtext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_TV" />
+
+
+            <TextView
+                android:id="@+id/phone_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/email_updt"
+                android:text="@string/phoneNumber"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/phone_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/phoneNumber"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_TV" />
+
+            <TextView
+                android:id="@+id/clinicCode_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/phone_updt"
+                android:hint="@string/clinicCode"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/clinicCode_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/clinicCode"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clinicCode_TV" />
+
+            <LinearLayout
+                android:id="@+id/online_layout"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/clinicCode_updt"
+                android:weightSum="2.5"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/online_CB"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Enable Online Appointment"
+                    android:gravity="center_vertical"/>
+
+                <EditText
+                    android:visibility="gone"
+                    android:id="@+id/online_charges_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="Online Consultant Charges(INR)"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="25dp"
+                    android:inputType="number"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"/>
+
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/address_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/online_layout"
+                android:text="@string/address"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/address_updt"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address_TV" />
+
+            <LinearLayout
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/country_LL"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_updt"
+                app:layout_constraintEnd_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:background="@drawable/spinner_background"
+                    android:id="@+id/country_spnr_updt"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:background="@drawable/spinner_background"
+                    android:id="@+id/state_spnr_updt"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/pincode_LL"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/country_LL"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:background="@drawable/spinner_background"
+                    android:id="@+id/city_spnr_updt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:paddingLeft="20dp"
+                    android:hint="@string/postal_code"
+                    android:id="@+id/postal_code_updt"
+                    android:layout_width="match_parent"
+                    android:inputType="number"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edit_text_background"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/website_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/pincode_LL"
+                android:text="@string/website"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/website_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/website"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/website_TV" />
+
+            <TextView
+                android:id="@+id/social_media_url"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/website_updt"
+                android:text="@string/social_media_url"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/social_media_url_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/social_media_url"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/social_media_url" />
+
+            <TextView
+                android:id="@+id/vet_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/social_media_url_updt"
+                android:text="@string/vet_registration_number"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/registration_num_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/vet_registration_number"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vet_no" />
+
+
+            <TextView
+                android:id="@+id/vet_study_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/registration_num_updt"
+                android:text="@string/vet_qualification"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <EditText
+                android:id="@+id/vet_qualification_updt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/vet_qualification"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vet_study_TV" />
+
+            <TextView
+                android:id="@+id/select_catTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/vet_qualification_updt"
+                android:text="Select Category"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <TextView
+                android:id="@+id/select_Category"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:text="Select Category"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/select_catTV" />
+
+
+
+            <TextView
+                android:id="@+id/select_serviceTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/select_Category"
+                android:text="Select Services"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <TextView
+                android:id="@+id/select_service_Category"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:text="Select Services"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/select_serviceTV" />
+
+
+            <TextView
+                android:id="@+id/cat_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/select_service_Category"
+                android:text="Category Images"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+
+            <LinearLayout
+
+                app:layout_constraintTop_toBottomOf="@id/cat_image"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                android:id="@+id/cat_images_LL"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/category_img_one"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_img_icon" />
+
+                <ImageView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/category_img_two"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_img_icon"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/service_cat_img_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="@id/first_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/cat_images_LL"
+                android:text="Service Images"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/grey_add_pet"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/image_section"
+                android:weightSum="5"
+                android:layout_marginTop="5dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/service_cat_img_TV"
+                app:layout_constraintStart_toStartOf="@id/first_name_TV"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/service_cat_img_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_img_icon"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/service_cat_img_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_img_icon"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/service_cat_img_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_img_icon"
+                    android:layout_weight="1"/>
+
+
+                <ImageView
+                    android:layout_marginRight="5dp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/service_cat_img_four"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_img_icon"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:id="@+id/service_cat_img_five"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_img_icon"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="25dp"
+        android:textColor="@color/whiteColor"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:theme="@style/MatButton"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:id="@+id/update_profile"
+        android:text="@string/updateProfileButton"
+        android:layout_centerInParent="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    tools:context=".activities.AddEditImmunizationActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="1dp"
+        app:cardElevation="30dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/back_arrow_IV"
+                android:padding="8dp"
+                android:visibility="visible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_arrow" />
+
+            <TextView
+                android:gravity="center"
+                android:paddingRight="25dp"
+                android:id="@+id/create_headline_TV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back_arrow_IV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/black_color"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/create_Edit_immui_BT"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="1.0">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/pet_category_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/pet_category"
+                android:textColor="@color/grey_add_pet" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:paddingLeft="25dp"
+                android:id="@+id/pet_category_ACS"
+                app:layout_constraintTop_toBottomOf="@id/pet_category_TV"
+                app:layout_constraintStart_toStartOf="@id/pet_category_TV"
+                app:layout_constraintEnd_toEndOf="@id/pet_category_TV"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/spinner_background"/>
+
+
+            <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pet_category_ACS"
+                android:id="@+id/serial_number_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/serialNumber"
+                android:textColor="@color/grey_add_pet" />
+
+
+            <EditText
+                android:id="@+id/serial_number_ET"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/serialNumber"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/serial_number_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/serial_number_TV" />
+
+
+            <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/serial_number_ET"
+                android:id="@+id/pet_age_unit_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/age_unit"
+                android:textColor="@color/grey_add_pet" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:paddingLeft="25dp"
+                android:id="@+id/pet_age_unit_ACS"
+                app:layout_constraintTop_toBottomOf="@id/pet_age_unit_TV"
+                app:layout_constraintStart_toStartOf="@id/pet_age_unit_TV"
+                app:layout_constraintEnd_toEndOf="@id/pet_age_unit_TV"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/spinner_background"/>
+
+            <LinearLayout
+                android:id="@+id/age_LL_1"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/pet_age_unit_ACS"
+                app:layout_constraintStart_toStartOf="@id/pet_age_unit_ACS"
+                app:layout_constraintEnd_toEndOf="@id/pet_age_unit_ACS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/minimum_age_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/miniAge"
+                    android:textColor="@color/grey_add_pet" />
+
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/maxmum_age_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/maxAge"
+                    android:textColor="@color/grey_add_pet" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/age_LL_2"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/age_LL_1"
+                app:layout_constraintStart_toStartOf="@id/age_LL_1"
+                app:layout_constraintEnd_toEndOf="@id/age_LL_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="25dp"
+                    android:background="@drawable/edit_text_background"
+                    android:layout_weight="1"
+                    android:id="@+id/minimum_age_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/grey_add_pet" />
+
+
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="25dp"
+                    android:background="@drawable/edit_text_background"
+                    android:layout_weight="1"
+                    android:id="@+id/maxmum_age_ET"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/grey_add_pet" />
+
+
+            </LinearLayout>
+
+            <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/age_LL_2"
+                android:id="@+id/primary_vaccine_name_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/primaryVaccineName"
+                android:textColor="@color/grey_add_pet" />
+
+            <EditText
+                android:id="@+id/primary_vaccine_name_ET"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/primaryVaccineName"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/primary_vaccine_name_TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/primary_vaccine_name_TV" />
+
+
+            <CheckBox
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/primary_vaccine_name_ET"
+                android:id="@+id/booster_one_CB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/boosterone"
+                android:textColor="@color/grey_add_pet" />
+
+            <TextView
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/booster_one_CB"
+                android:id="@+id/days_gap_booster_one_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/boosterOneGap"
+                android:textColor="@color/grey_add_pet" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/booster_one_ET"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/boosterone"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/pet_category_ACS"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/days_gap_booster_one_TV" />
+
+
+
+            <CheckBox
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/booster_one_ET"
+                android:id="@+id/booster_two_CB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/boostertwo"
+                android:textColor="@color/grey_add_pet" />
+
+            <TextView
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/booster_two_CB"
+                android:id="@+id/days_gap_booster_two_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/boosterTwoGap"
+                android:textColor="@color/grey_add_pet" />
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/booster_two_ET"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="@string/boostertwo"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/grey_add_pet"
+                app:layout_constraintEnd_toEndOf="@id/pet_category_ACS"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/days_gap_booster_two_TV" />
+
+
+
+            <CheckBox
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/booster_two_ET"
+                android:id="@+id/Is_Periodic_Vaccine_CB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/isperiodicvaccine"
+                android:textColor="@color/grey_add_pet" />
+
+            <TextView
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Is_Periodic_Vaccine_CB"
+                android:id="@+id/is_periodic_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="@string/VaccinationPeriod"
+                android:textColor="@color/grey_add_pet" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:paddingLeft="25dp"
+                android:visibility="gone"
+                android:id="@+id/is_periodic_ACS"
+                app:layout_constraintTop_toBottomOf="@id/is_periodic_TV"
+                app:layout_constraintStart_toStartOf="@id/is_periodic_TV"
+                app:layout_constraintEnd_toEndOf="@id/is_periodic_TV"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/spinner_background"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/create_Edit_immui_BT"
+        android:background="@color/colorPrimary"
+        android:textSize="25dp"
+        android:textColor="@color/whiteColor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

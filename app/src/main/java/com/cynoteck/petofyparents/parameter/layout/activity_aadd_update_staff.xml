@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    tools:context=".activities.AddUpdateStaffActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:elevation="30dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                android:id="@+id/add_staff_headline_TV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/add_new_staff"
+                android:textColor="@color/black_color"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/back_arrow_IV"
+                android:padding="8dp"
+                android:visibility="visible"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back_arrow" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:id="@+id/scroolView"
+      app:layout_constraintBottom_toTopOf="@id/add_staff_BT"
+      app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toTopOf="parent"
+              android:id="@+id/staff_prefix_TV"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              android:text="@string/prefix"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <androidx.appcompat.widget.AppCompatSpinner
+              app:layout_constraintTop_toBottomOf="@+id/staff_prefix_TV"
+              app:layout_constraintStart_toStartOf="@+id/staff_prefix_TV"
+              android:layout_marginTop="10dp"
+              android:id="@+id/staff_prefix_ACP"
+              android:background="@drawable/spinner_background"
+              android:layout_width="200dp"
+              android:layout_weight=".8"
+              android:layout_height="50dp" />
+
+          <TextView
+              android:visibility="gone"
+              android:id="@+id/staff_permission_TV"
+              app:layout_constraintTop_toTopOf="@id/staff_prefix_ACP"
+              app:layout_constraintBottom_toBottomOf="@id/staff_prefix_ACP"
+              app:layout_constraintStart_toEndOf="@id/staff_prefix_ACP"
+              app:layout_constraintEnd_toEndOf="parent"
+              android:layout_width="0dp"
+              android:layout_height="50dp"
+              android:layout_alignParentEnd="true"
+              android:layout_alignParentRight="true"
+              android:layout_marginRight="10dp"
+              android:padding="5dp"
+              android:text="Permission"
+              android:textSize="20sp"
+              android:gravity="center"
+              android:textColor="@color/colorPrimary"
+              android:textStyle="bold"/>
+
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@id/staff_prefix_ACP"
+              android:id="@+id/staff_first_name_TV"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:text="@string/firstName"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <EditText
+              android:inputType="text"
+              android:maxLines="1"
+              android:paddingLeft="25dp"
+              android:layout_width="0dp"
+              android:layout_height="50dp"
+              app:layout_constraintTop_toBottomOf="@id/staff_first_name_TV"
+              android:id="@+id/staff_first_name_ET"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:hint="@string/firstName"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              android:background="@drawable/edit_text_background"
+              android:textColor="@color/grey_add_pet"/>
+
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@id/staff_first_name_ET"
+              android:id="@+id/staff_last_name_TV"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:text="@string/lastname"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <EditText
+              android:inputType="text"
+              android:maxLines="1"
+              android:paddingLeft="25dp"
+              android:layout_width="0dp"
+              android:layout_height="50dp"
+              app:layout_constraintTop_toBottomOf="@id/staff_last_name_TV"
+              android:id="@+id/staff_last_name_ET"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:hint="@string/lastname"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              android:background="@drawable/edit_text_background"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@id/staff_last_name_ET"
+              android:id="@+id/staff_email_TV"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:text="@string/emailtext"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <EditText
+              android:inputType="text"
+              android:maxLines="1"
+              android:paddingLeft="25dp"
+              android:layout_width="0dp"
+              android:layout_height="50dp"
+              app:layout_constraintTop_toBottomOf="@id/staff_email_TV"
+              android:id="@+id/staff_email_ET"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:hint="@string/email"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              android:background="@drawable/edit_text_background"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@id/staff_email_ET"
+              android:id="@+id/staff_password_CL"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:textColor="@color/grey_add_pet">
+
+
+              <TextView
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:id="@+id/staff_password_TV"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:text="Password"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:textColor="@color/grey_add_pet"/>
+
+
+              <EditText
+                  android:inputType="textPassword"
+                  android:maxLines="1"
+                  android:paddingLeft="25dp"
+                  android:layout_width="0dp"
+                  android:layout_height="50dp"
+                  app:layout_constraintTop_toBottomOf="@id/staff_password_TV"
+                  android:id="@+id/staff_password_ET"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="@id/staff_password_TV"
+                  android:hint="@string/password"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/edit_text_background"
+                  android:textColor="@color/grey_add_pet"/>
+
+
+              <TextView
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@id/staff_password_ET"
+                  android:id="@+id/staff__confirm_password_TV"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="@id/staff_password_TV"
+                  android:text="@string/confirmPassword"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:textColor="@color/grey_add_pet"/>
+
+
+              <EditText
+                  android:inputType="textPassword"
+                  android:maxLines="1"
+                  android:paddingLeft="25dp"
+                  android:layout_width="0dp"
+                  android:layout_height="50dp"
+                  app:layout_constraintTop_toBottomOf="@id/staff__confirm_password_TV"
+                  android:id="@+id/staff_confirm_password_ET"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="@id/staff_password_TV"
+                  android:hint="@string/password"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/edit_text_background"
+                  android:textColor="@color/grey_add_pet"/>
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+          <TextView
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@id/staff_password_CL"
+              android:id="@+id/staff__phone_TV"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:text="@string/phoneNumber"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <EditText
+              android:inputType="phone"
+              android:maxLines="1"
+              android:paddingLeft="25dp"
+              android:layout_width="0dp"
+              android:layout_height="50dp"
+              app:layout_constraintTop_toBottomOf="@id/staff__phone_TV"
+              android:id="@+id/staff_phone_ET"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="@id/staff_prefix_TV"
+              android:hint="@string/phoneNumber"
+              android:gravity="center_vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
+              android:background="@drawable/edit_text_background"
+              android:textColor="@color/grey_add_pet"/>
+
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/for_dr_layout_CL"
+              android:visibility="gone"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/staff_phone_ET"
+              app:layout_constraintStart_toStartOf="parent">
+
+              <TextView
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:id="@+id/staff_qualifications_TV"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:text="@string/qualification"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:textColor="@color/grey_add_pet"/>
+
+              <EditText
+                  android:inputType="text"
+                  android:maxLines="1"
+                  android:paddingLeft="25dp"
+                  android:layout_width="0dp"
+                  android:layout_height="50dp"
+                  app:layout_constraintTop_toBottomOf="@id/staff_qualifications_TV"
+                  android:id="@+id/staff_qualification_ET"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="@id/staff_qualifications_TV"
+                  android:hint="@string/qualification"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/edit_text_background"
+                  android:textColor="@color/grey_add_pet"/>
+
+
+              <TextView
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@id/staff_qualification_ET"
+                  android:id="@+id/staff_reg_number_TV"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="@id/staff_qualifications_TV"
+                  android:text="@string/regNumber"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:textColor="@color/grey_add_pet"/>
+
+
+              <EditText
+                  android:inputType="text"
+                  android:maxLines="1"
+                  android:paddingLeft="25dp"
+                  android:layout_width="0dp"
+                  android:layout_height="50dp"
+                  app:layout_constraintTop_toBottomOf="@id/staff_reg_number_TV"
+                  android:id="@+id/staff_reg_number_ET"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="@id/staff_qualifications_TV"
+                  android:hint="@string/regNumber"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:background="@drawable/edit_text_background"
+                  android:textColor="@color/grey_add_pet"/>
+
+
+
+              <CheckBox
+                  android:id="@+id/show_name_prec_CB"
+                  app:layout_constraintTop_toBottomOf="@id/staff_reg_number_ET"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp"
+                  android:layout_weight="1"
+                  android:layout_marginLeft="20dp"
+                  android:text="Show name in prescription"
+                  android:gravity="center_vertical"/>
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </ScrollView>
+
+
+    <Button
+        android:background="@color/colorPrimary"
+        android:text="@string/add_staff"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:textColor="@color/whiteColor"
+        android:id="@+id/add_staff_BT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/scroolView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

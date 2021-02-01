@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:id="@+id/update_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"/>
+
+                <View
+                    android:visibility="gone"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/view_TV"
+                    android:layout_width="35dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/black_color"
+                        android:text="Vet Name"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:layout_weight="1.4"
+                        android:gravity="start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/black_color"
+                        android:text=":"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/vet_name_TV"
+                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/grayColorCode"
+                        android:text="Ashish Rawat" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/black_color"
+                        android:text="Visit Date"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:layout_weight="1.4"
+                        android:gravity="start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/black_color"
+                        android:text=":"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/visit_date_TV"
+                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/grayColorCode"
+                        android:text="09/05/2000"  />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/black_color"
+                        android:text="Reason of Visit"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:layout_weight="1.4"
+                        android:gravity="start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/black_color"
+                        android:text=":"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/reson_of_visit_TV"
+                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/grayColorCode"
+                        android:text="Immunization vaccine: Rabies Canine, 3 yrs" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="8dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/black_color"
+                        android:text="Follow-up Date"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:layout_weight="1.4"
+                        android:gravity="start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/black_color"
+                        android:text=":"
+                        android:textStyle="bold"/>
+
+
+                    <TextView
+                        android:id="@+id/followUp_date_TV"
+                        android:layout_weight="0.7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@color/grayColorCode"
+                        android:text="09/05/2020" />
+
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

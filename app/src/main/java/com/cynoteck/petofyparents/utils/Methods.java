@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import org.json.JSONArray;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -377,7 +378,33 @@ public class Methods {
                 "</html>";
         return str;
     }
+    public String getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
 
+    public float getDays(String DoB, String currentDate )
+    {
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+        String dateBeforeString = DoB;
+        String dateAfterString = currentDate;
+        float daysBetween=0;
+        try {
+            Date dateBefore = myFormat.parse(dateBeforeString);
+            Date dateAfter = myFormat.parse(dateAfterString);
+            long difference = dateAfter.getTime() - dateBefore.getTime();
+            daysBetween = (difference / (1000*60*60*24));
+            /* You can also convert the milliseconds to days using this method
+             * float daysBetween =
+             *         TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS)
+             */
+            System.out.println("Number of Days between dates: "+daysBetween);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return daysBetween;
+    }
     public boolean checktimings(String time, String endtime) {
 
         String pattern = "dd/MM/yyyy hh:mm a";

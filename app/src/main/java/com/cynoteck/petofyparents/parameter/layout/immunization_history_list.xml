@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:weightSum="4"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black_color"
+                    android:textSize="15sp"
+                    android:layout_weight="0.8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Immunization Date"/>
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/black_color"
+                    android:textSize="18sp"
+                    android:layout_weight="1.3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=":"/>
+
+                <TextView
+                    android:id="@+id/immunization_dt"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_weight="0.8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="35-30 Days"/>
+
+
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/up_IV"
+                        android:visibility="invisible"
+                        android:padding="10dp"
+                        android:src="@drawable/arr_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/down_IV"
+                        android:visibility="visible"
+                        android:rotation="-90"
+                        android:padding="10dp"
+                        android:src="@drawable/arr_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/vaccine_type_expand_LL"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:gravity="start"
+                        android:textColor="@color/black_color"
+                        android:textSize="15sp"
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vaccine Class"/>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color"
+                        android:textSize="18sp"
+                        android:layout_weight="1.3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/vaccine_cls"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="start"
+                        android:text="Pubby Dp"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black_color"
+                        android:textSize="15sp"
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vaccine"/>
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color"
+                        android:textSize="18sp"
+                        android:layout_weight="1.3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/vaccine"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Vaccine"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:weightSum="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_marginBottom="10dp"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black_color"
+                        android:textSize="15sp"
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Next Due Date"/>
+
+                    <TextView
+                        android:textColor="@color/black_color"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_weight="1.3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=":"/>
+
+                    <TextView
+                        android:id="@+id/nxt_due_dt"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:textSize="18sp"
+                        android:layout_weight="0.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vaccine"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

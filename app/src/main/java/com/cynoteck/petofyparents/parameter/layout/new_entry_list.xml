@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:weightSum="4"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical"
+    android:background="@color/whiteColor">
+
+    <LinearLayout
+        android:id="@+id/petDeatils_LL"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".9"
+            android:weightSum="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Pet Name"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:gravity="center|left"/>
+
+            <TextView
+                android:id="@+id/pet_nm_prnt_nm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="MINU (Peto-1080)\n Pradeep Rawat(999-7777-2541)"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:text="Visit Date"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:gravity="center|left"/>
+
+            <TextView
+                android:id="@+id/visit_dt"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="10/08/2020"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".9"
+            android:weightSum="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Nature of Visit"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:gravity="center|left"/>
+
+            <TextView
+                android:id="@+id/nature_of_visit"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Health Problem\n(Treatment)"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:text="Follow-up Date"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:gravity="center|left"/>
+
+            <TextView
+                android:id="@+id/follow_up_dt"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="10/08/2020"
+                android:textSize="10sp"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".8"
+        android:orientation="horizontal"
+        android:gravity="end"
+        >
+
+        <Button
+            android:id="@+id/prescription"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false"
+            android:layout_marginRight="28dp"
+            android:layout_marginTop="8dp"
+            android:padding="4dp"
+            android:drawableLeft="@drawable/download_icon"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/whiteColor" />
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

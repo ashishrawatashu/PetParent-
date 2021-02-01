@@ -44,11 +44,11 @@
         <activity android:name=".activty.SettingActivity" />
         <activity android:name=".activty.PetProfileActivity"/>
         <activity android:name=".activty.GetPetDetailsActivity"/>
+        <activity android:name=".activty.AddPetRegister"/>
         <activity
             android:name=".activty.PetIdCardActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".activty.AddPetRegister" />
         <activity android:name=".activty.ForgetPasswordActivity" />
         <activity android:name=".activty.RegisterActivity" />
         <activity android:name=".activty.LoginActivity" />

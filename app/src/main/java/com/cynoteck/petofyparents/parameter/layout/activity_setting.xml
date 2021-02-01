@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SettingActivity">
+
+    <androidx.cardview.widget.CardView
+        android:elevation="5dp"
+        app:cardElevation="5dp"
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/back_arrow_IV"
+            android:padding="8dp"
+            android:visibility="visible"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/back_arrow" />
+
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:gravity="center"
+        android:elevation="6dp"
+        android:id="@+id/setting_TV"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        android:text="@string/SettingsToolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        android:textColor="@color/black_color"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/two_fact_auth_TV"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black_color"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/two_fact_auth_SC"
+        app:track="@drawable/track"
+        android:thumb="@drawable/thumb"
+        android:layout_gravity="end"
+        android:layout_marginLeft="10dp"
+        android:layout_width="0dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/two_fact_auth_TV"
+        app:layout_constraintTop_toTopOf="@id/two_fact_auth_TV"
+        app:layout_constraintBottom_toBottomOf="@id/two_fact_auth_TV"/>
+
+
+    <TextView
+        android:id="@+id/immunization_chart_TV"
+        app:layout_constraintTop_toBottomOf="@+id/two_fact_auth_TV"
+        app:layout_constraintStart_toStartOf="@+id/two_fact_auth_TV"
+        app:layout_constraintEnd_toEndOf="@id/two_fact_auth_SC"
+        android:layout_marginTop="10dp"
+        android:text="@string/immunizationChart"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/black_color"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/bank_account_details_TV"
+        app:layout_constraintTop_toBottomOf="@+id/immunization_chart_TV"
+        app:layout_constraintStart_toStartOf="@+id/immunization_chart_TV"
+        app:layout_constraintEnd_toEndOf="@id/two_fact_auth_SC"
+        android:layout_marginTop="10dp"
+        android:text="@string/BankAccount"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/black_color"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

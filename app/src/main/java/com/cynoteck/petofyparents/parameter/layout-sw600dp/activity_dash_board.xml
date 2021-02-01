@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cynoteck.petofyOPHR.activities.DashBoardActivity">
+
+
+
+
+    <FrameLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/card1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/content_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        />
+
+
+    <com.google.android.material.card.MaterialCardView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardElevation="35dp"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:id="@+id/card1"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/botton_LL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <RelativeLayout
+                android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+                android:gravity="center"
+                android:id="@+id/homeRL"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/icHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/home_normal_icon"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+                android:id="@+id/profileRL"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/icProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/profile_normal_icon"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+                android:id="@+id/petRegisterRL"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/icPetRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/pet_normal_icon"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+                android:id="@+id/appointmentRL"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/icAppointment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/appointment_normal_icon"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!--<include
+        android:id="@+id/include"
+        layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:visibility="visible" />
+-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -38,15 +38,11 @@ import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataParams;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.GetPetListResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
-import com.cynoteck.petofyparents.response.loginRegisterResponse.UserPermissionMasterList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.utils.ViewDeatilsAndIdCardClick;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -197,26 +193,10 @@ public class PetRegisterFragment extends Fragment implements  ApiResponse, ViewD
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.register_add_TV:
-                userTYpe = sharedPreferences.getString("user_type", "");
-                if (userTYpe.equals("Vet Staff")){
-                    Gson gson = new Gson();
-                    String json = sharedPreferences.getString("userPermission", null);
-                    Type type = new TypeToken<ArrayList<UserPermissionMasterList>>() {}.getType();
-                    ArrayList<UserPermissionMasterList> arrayList = gson.fromJson(json, type);
-                    Log.e("ArrayList",arrayList.toString());
-                    Log.d("UserType",userTYpe);
-                    if (arrayList.get(0).getIsSelected().equals("true")) {
-                        startActivity(new Intent(getActivity(),AddPetRegister.class));
 
-                    }else {
-                        Toast.makeText(context, "Permission not allowed!!", Toast.LENGTH_SHORT).show();
-                    }
-                }else if (userTYpe.equals("Veterinarian")){
-                    startActivity(new Intent(getActivity(),AddPetRegister.class));
+                    startActivity(new Intent(getActivity(), AddPetRegister.class));
 
-                }
-
-                break;
+                    break;
             case R.id.search_register_pet:
 
                 search_boxRL.setVisibility(View.VISIBLE);
