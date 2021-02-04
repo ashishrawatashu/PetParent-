@@ -226,7 +226,7 @@
                     android:layout_height="match_parent" />
 
                 <EditText
-                    android:inputType="text"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:layout_width="0dp"
                     android:layout_weight="1"

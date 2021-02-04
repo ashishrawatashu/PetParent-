@@ -49,11 +49,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         petId = extras.getString("pet_id");
 
         pet_profile_image_IV=findViewById(R.id.pet_profile_image_IV);
-        image_one=findViewById(R.id.image_one);
-        image_two=findViewById(R.id.image_two);
-        image_three=findViewById(R.id.image_three);
-        image_four=findViewById(R.id.image_four);
-        image_five=findViewById(R.id.image_five);
+
         pet_name_TV=findViewById(R.id.pet_name_TV);
         pet_sex_TV=findViewById(R.id.pet_sex_TV);
         pet_parent_TV=findViewById(R.id.pet_parent_TV);

@@ -317,6 +317,7 @@
                         android:textColor="@color/black_color"
                         android:layout_centerInParent="true"
                         android:layout_width="250dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:id="@+id/report_labTestReport_TV"
                         android:text="@string/labTestReport"
