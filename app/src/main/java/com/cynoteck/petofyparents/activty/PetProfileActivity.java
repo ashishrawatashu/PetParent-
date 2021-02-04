@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class PetProfileActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
     Methods methods;
     String petId="",imagerl="";
-    ImageView pet_profile_image_IV, image_one,image_two,image_three,image_four,image_five,edit_image;
+    ImageView pet_profile_image_IV, image_one,image_two,image_three,image_four,image_five,edit_image, back_arrow_pp;;
     TextView pet_name_TV, pet_sex_TV,pet_parent_TV,pet_id_TV,pet_deatils_TV,phone_one,pet_email_id_TV,phone_two,address_line_one_TV,address_line_two_TV;
     GetPetResponse getPetResponse;
     boolean reloadData=false;
@@ -61,8 +61,9 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         address_line_one_TV=findViewById(R.id.address_line_one_TV);
         address_line_two_TV=findViewById(R.id.address_line_two_TV);
         edit_image=findViewById(R.id.edit_image);
-
+        back_arrow_pp=findViewById(R.id.back_arrow_pp);
         edit_image.setOnClickListener(this);
+        back_arrow_pp.setOnClickListener(this);
 
         GetPetListParams getPetListParams = new GetPetListParams();
         getPetListParams.setId(petId);
@@ -112,8 +113,9 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                         intent.putExtra("image_url",getPetResponse.getData().getPetProfileImageUrl());
                         startActivity(intent);
 
-
-
+                break;
+            case R.id.back_arrow_IV:
+                onBackPressed();
                 break;
 
         }
