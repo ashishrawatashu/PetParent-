@@ -1,5 +1,7 @@
 package com.cynoteck.petofyparents.response.addPet.addPetResponse;
 
+import com.cynoteck.petofyparents.response.getAppointmentsStatusResponse.User;
+
 public class AddPetModel {
     private String sizeId;
 
@@ -65,7 +67,7 @@ public class AddPetModel {
 
     private String ageId;
 
-    private String user;
+    private User user;
 
     private String age;
 
@@ -389,12 +391,12 @@ public class AddPetModel {
         this.ageId = ageId;
     }
 
-    public String getUser ()
+    public User getUser ()
     {
         return user;
     }
 
-    public void setUser (String user)
+    public void setUser (User user)
     {
         this.user = user;
     }

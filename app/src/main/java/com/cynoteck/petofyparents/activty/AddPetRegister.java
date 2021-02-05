@@ -566,10 +566,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.pet_submit:
                 strPetName= pet_name.getText().toString().trim();
-                strPetParentName = pet_parent_name.getText().toString().trim();
-                strPetContactNumber = pet_contact_number.getText().toString().trim();
+//                strPetParentName = pet_parent_name.getText().toString().trim();
+//                strPetContactNumber = pet_contact_number.getText().toString().trim();
                 strPetDescription = pet_description.getText().toString().trim();
-                strPetAdress = pet_address.getText().toString().trim();
+//                strPetAdress = pet_address.getText().toString().trim();
                 strPetBirthDay = calenderView.getText().toString().trim();
 
                 if(strPetName.isEmpty())
@@ -582,26 +582,26 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     pet_address.setError(null);
                     calenderView.setError(null);
                 }
-                else if(strPetParentName.isEmpty())
-                {
-                    Toast.makeText(this, "Enter Parent Name", Toast.LENGTH_SHORT).show();
-                    pet_name.setError(null);
-                    pet_parent_name.setError("Enter Parent Name");
-                    pet_contact_number.setError(null);
-                    pet_description.setError(null);
-                    pet_address.setError(null);
-                    calenderView.setError(null);
-                }
-                else if(strPetContactNumber.isEmpty())
-                {
-                    Toast.makeText(this, "Enter Contact Number", Toast.LENGTH_SHORT).show();
-                    pet_name.setError(null);
-                    pet_parent_name.setError(null);
-                    pet_contact_number.setError("Enter Contact Number");
-                    pet_description.setError(null);
-                    pet_address.setError(null);
-                    calenderView.setError(null);
-                }
+//                else if(strPetParentName.isEmpty())
+//                {
+//                    Toast.makeText(this, "Enter Parent Name", Toast.LENGTH_SHORT).show();
+//                    pet_name.setError(null);
+//                    pet_parent_name.setError("Enter Parent Name");
+//                    pet_contact_number.setError(null);
+//                    pet_description.setError(null);
+//                    pet_address.setError(null);
+//                    calenderView.setError(null);
+//                }
+//                else if(strPetContactNumber.isEmpty())
+//                {
+//                    Toast.makeText(this, "Enter Contact Number", Toast.LENGTH_SHORT).show();
+//                    pet_name.setError(null);
+//                    pet_parent_name.setError(null);
+//                    pet_contact_number.setError("Enter Contact Number");
+//                    pet_description.setError(null);
+//                    pet_address.setError(null);
+//                    calenderView.setError(null);
+//                }
 //                else if(strPetAdress.isEmpty())
 //                {
 //                    Toast.makeText(this, "Enter Pet Address", Toast.LENGTH_SHORT).show();
@@ -670,6 +670,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     addPetRequset.setAddPetParams(data);
                     if(methods.isInternetOn())
                     {
+
                         addPetData(addPetRequset);
                     }
                     else
@@ -1111,10 +1112,11 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     }
 
     private void addPetData(AddPetRequset addPetRequset) {
+        Log.e("yes","yes");
         methods.showCustomProgressBarDialog(this);
-        ApiService<JsonObject> service = new ApiService<>();
+        ApiService<AddPetValueResponse> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().addNewPet(Config.token,addPetRequset), "AddPet");
-        Log.e("DATALOG","check1=> "+addPetRequset);
+        Log.e("DATALOG","check1=> "+methods.getRequestJson(addPetRequset));
 
     }
 
@@ -1373,11 +1375,12 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 try {
                     Log.d("AddPet",arg0.body().toString());
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
+                    Log.d("addPetValueResponse",""+ addPetValueResponse);
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
                         Toast.makeText(this, "Pet Added Successfully ", Toast.LENGTH_SHORT).show();
-                        Config.backCall = "Added";
-                        onBackPressed();
+                        setResult(RESULT_OK);
+                        finish();
                     }else if (responseCode==614){
                         Toast.makeText(this, addPetValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     }else {
@@ -1436,7 +1439,8 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onError(Throwable t, String key) {
-
+        Log.e("error",""+t.getLocalizedMessage());
+       methods.customProgressDismiss();
     }
 
 

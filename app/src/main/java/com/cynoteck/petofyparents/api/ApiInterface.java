@@ -7,6 +7,7 @@ import com.cynoteck.petofyparents.parameter.appointmentParams.AppointmentsStatus
 import com.cynoteck.petofyparents.parameter.appointmentParams.CreateAppointRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.UpdateAppointmentRequest;
 import com.cynoteck.petofyparents.parameter.changePassRequest.ChangePassRequest;
+import com.cynoteck.petofyparents.parameter.checkpetInVetRegister.InPetRegisterRequest;
 import com.cynoteck.petofyparents.parameter.donateParamRequest.DonatePetRequest;
 import com.cynoteck.petofyparents.parameter.forgetPassRequest.ForgetPassRequest;
 import com.cynoteck.petofyparents.parameter.getOrderDetailsParms.GetOrderRequest;
@@ -26,6 +27,7 @@ import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
 import com.cynoteck.petofyparents.parameter.searchPetParentRequest.SearchPetParentRequestData;
 import com.cynoteck.petofyparents.parameter.updateDonation.UpdateDonationRequest;
 import com.cynoteck.petofyparents.parameter.updateRequest.updateParamRequest.UpdatePetRequest;
+import com.cynoteck.petofyparents.response.InPetVeterian.InPetVeterianResponse;
 import com.cynoteck.petofyparents.response.addPet.addPetResponse.AddPetValueResponse;
 import com.cynoteck.petofyparents.response.addPet.breedResponse.BreedCatRespose;
 import com.cynoteck.petofyparents.response.addPet.imageUpload.ImageResponse;
@@ -177,7 +179,7 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/AddPet")
-    Call<JsonObject> addNewPet(@Header("Authorization") String auth,
+    Call<AddPetValueResponse> addNewPet(@Header("Authorization") String auth,
                                         @Body AddPetRequset addPetRequset);
 
     //TODO========Get Reprts Type API===========================
@@ -212,9 +214,16 @@ public interface ApiInterface {
 
     //TODO=======Get Clinic Visit Details API====================
 
+
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pethealthrecord/GetClinicVisit")
     Call<GetClinicVisitsDetailsResponse> getClinicVisitDetails(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
+
+    //CHECK IF A PET EXIST PET IN VET REGISTER........................................
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/CheckPetInVetRegister")
+    Call<InPetVeterianResponse> checkPetInVetRegister(@Header("Authorization") String auth, @Body InPetRegisterRequest inPetRegisterRequest);
 
     //TODO=======Update Veterinarian Details=====================
 

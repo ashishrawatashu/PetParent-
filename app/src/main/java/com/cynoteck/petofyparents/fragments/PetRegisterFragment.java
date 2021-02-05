@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -47,6 +48,8 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import retrofit2.Response;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -190,11 +193,25 @@ public class PetRegisterFragment extends Fragment implements  ApiResponse, ViewD
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1)
+        {
+            if(resultCode==RESULT_OK){
+                mShimmerViewContainer.startShimmer();
+
+                    getPetList(page,pagelimit);
+                }
+            }
+        }
+
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.register_add_TV:
 
-                    startActivity(new Intent(getActivity(), AddPetRegister.class));
+                    startActivityForResult(new Intent(getActivity(), AddPetRegister.class),1);
 
                     break;
             case R.id.search_register_pet:

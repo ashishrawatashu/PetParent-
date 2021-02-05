@@ -114,7 +114,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                         startActivity(intent);
 
                 break;
-            case R.id.back_arrow_IV:
+            case R.id.back_arrow_pp:
                 onBackPressed();
                 break;
 
