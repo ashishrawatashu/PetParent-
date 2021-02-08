@@ -19,26 +19,22 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.activty.DashBoardActivity;
 import com.cynoteck.petofyparents.activty.LoginActivity;
-import com.cynoteck.petofyparents.activty.SelectPetReportsActivity;
+import com.cynoteck.petofyparents.activty.SearchActivity;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
 import com.cynoteck.petofyparents.parameter.checkpetInVetRegister.InPetRegisterRequest;
-import com.cynoteck.petofyparents.parameter.checkpetInVetRegister.InPetregisterParams;
 import com.cynoteck.petofyparents.response.InPetVeterian.InPetVeterianResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, ApiResponse {
 
@@ -52,6 +48,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     AutoCompleteTextView search_box_add_new;
     CardView reports_CV, all_staff_CV, allPets_CV,appoint_CV;
     ArrayList<String> petUniueId=null;
+    Intent intent;
 
     @Override
     public void onAttach(Context context) {
@@ -98,92 +95,96 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.new_pet_search:
-                if(search_box_add_new.getText().toString().isEmpty()){
-                    search_boxRL.setVisibility(View.VISIBLE);
-                    staff_headline_TV.setVisibility(View.GONE);
-                    back_arrow_IV_new_entry.setVisibility(View.VISIBLE);
-                }
-                else{
-                    String petoUniqueIdSplit = search_box_add_new.getText().toString().substring(0,4);
-                    Log.d("petoUniqueIdSplit",""+petoUniqueIdSplit);
-                    if(petoUniqueIdSplit.equals("PETO"))
-                    {
-                        if(petUniueId.contains(search_box_add_new.getText().toString())==true)
-                        {
-                            search_boxRL.setVisibility(View.VISIBLE);
-                            staff_headline_TV.setVisibility(View.GONE);
-                            InputMethodManager imm1 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm1.hideSoftInputFromWindow(search_box_add_new.getWindowToken(), 0);
-                            back_arrow_IV_new_entry.setVisibility(View.VISIBLE);
-                            String value=petExistingSearch.get(search_box_add_new.getText().toString());
-                            Log.d("kakakka",""+value);
-                            StringTokenizer st = new StringTokenizer(value, ",");
-                            String PetUniqueId = st.nextToken();
-                            String PetName = st.nextToken();
-                            String PetParentName = st.nextToken();
-                            String PetSex = st.nextToken();
-                            String petAge = st.nextToken();
-                            String Id = st.nextToken();
-                            String pet_DOB = st.nextToken();
-                            String pet_encrypted_id = st.nextToken();
-                            Log.d("ppppp",""+PetUniqueId+" "+PetName+" "+PetParentName+" "+PetSex+" "+petAge+" "+Id+" "+pet_DOB+" "+pet_encrypted_id);
-                            Intent petDetailsIntent = new Intent(getActivity().getApplication(), SelectPetReportsActivity.class);
-                            Bundle data = new Bundle();
-                            data.putString("pet_id",Id);
-                            data.putString("pet_name",PetName);
-                            data.putString("pet_parent",PetParentName);
-                            data.putString("pet_sex",PetSex);
-                            data.putString("pet_age",petAge);
-                            data.putString("pet_unique_id",PetUniqueId);
-                            data.putString("pet_DOB",pet_DOB);
-                            data.putString("pet_encrypted_id",pet_encrypted_id);
-                            petDetailsIntent.putExtras(data);
-                            startActivity(petDetailsIntent);
-                        }
-                        else
-                        {
-                            Log.d("Add Anotheer Veterian","vet");
-                            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                            alertDialog.setTitle("Are you sure?");
-                            alertDialog.setMessage("This pet is not registered with you. Do you want to add ?");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            InPetRegisterRequest inPetRegisterRequest = new InPetRegisterRequest();
-                                            InPetregisterParams inPetregisterParams = new InPetregisterParams();
-                                            Log.d("kkakakka",""+search_box_add_new.getText().toString());
-                                            inPetregisterParams.setUniqueId(search_box_add_new.getText().toString());
-                                            inPetRegisterRequest.setData(inPetregisterParams);
-                                            if (methods.isInternetOn()) {
-                                                chkVetInregister(inPetRegisterRequest);
-                                                clearSearch();
-                                            } else {
-                                                methods.DialogInternet();
-                                            }
-                                            dialog.dismiss();
-                                        }
-                                    });
-                            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            dialogInterface.dismiss();
-                                        }
-                                    });
-                            alertDialog.show();
-                        }
-                    }
-                    else{
-                        search_box_add_new.requestFocus();
-                        search_boxRL.setVisibility(View.VISIBLE);
-                        staff_headline_TV.setVisibility(View.GONE);
-                        InputMethodManager imm1 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm1.showSoftInput(search_box_add_new, InputMethodManager.SHOW_IMPLICIT);
-                        back_arrow_IV_new_entry.setVisibility(View.VISIBLE);
-                    }
-
-                }
+           intent = new Intent(getContext(), SearchActivity.class);
+           startActivity(intent);
                 break;
+
+//                if(search_box_add_new.getText().toString().isEmpty()){
+//                    search_boxRL.setVisibility(View.VISIBLE);
+//                    staff_headline_TV.setVisibility(View.GONE);
+//                    back_arrow_IV_new_entry.setVisibility(View.VISIBLE);
+//                }
+//                else{
+//                    String petoUniqueIdSplit = search_box_add_new.getText().toString().substring(0,4);
+//                    Log.d("petoUniqueIdSplit",""+petoUniqueIdSplit);
+//                    if(petoUniqueIdSplit.equals("PETO"))
+//                    {
+//                        if(petUniueId.contains(search_box_add_new.getText().toString())==true)
+//                        {
+//                            search_boxRL.setVisibility(View.VISIBLE);
+//                            staff_headline_TV.setVisibility(View.GONE);
+//                            InputMethodManager imm1 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                            imm1.hideSoftInputFromWindow(search_box_add_new.getWindowToken(), 0);
+//                            back_arrow_IV_new_entry.setVisibility(View.VISIBLE);
+//                            String value=petExistingSearch.get(search_box_add_new.getText().toString());
+//                            Log.d("kakakka",""+value);
+//                            StringTokenizer st = new StringTokenizer(value, ",");
+//                            String PetUniqueId = st.nextToken();
+//                            String PetName = st.nextToken();
+//                            String PetParentName = st.nextToken();
+//                            String PetSex = st.nextToken();
+//                            String petAge = st.nextToken();
+//                            String Id = st.nextToken();
+//                            String pet_DOB = st.nextToken();
+//                            String pet_encrypted_id = st.nextToken();
+//                            Log.d("ppppp",""+PetUniqueId+" "+PetName+" "+PetParentName+" "+PetSex+" "+petAge+" "+Id+" "+pet_DOB+" "+pet_encrypted_id);
+//                            Intent petDetailsIntent = new Intent(getActivity().getApplication(), SelectPetReportsActivity.class);
+//                            Bundle data = new Bundle();
+//                            data.putString("pet_id",Id);
+//                            data.putString("pet_name",PetName);
+//                            data.putString("pet_parent",PetParentName);
+//                            data.putString("pet_sex",PetSex);
+//                            data.putString("pet_age",petAge);
+//                            data.putString("pet_unique_id",PetUniqueId);
+//                            data.putString("pet_DOB",pet_DOB);
+//                            data.putString("pet_encrypted_id",pet_encrypted_id);
+//                            petDetailsIntent.putExtras(data);
+//                            startActivity(petDetailsIntent);
+//                        }
+//                        else
+//                        {
+//                            Log.d("Add Anotheer Veterian","vet");
+//                            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+//                            alertDialog.setTitle("Are you sure?");
+//                            alertDialog.setMessage("This pet is not registered with you. Do you want to add ?");
+//                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                                    new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            InPetRegisterRequest inPetRegisterRequest = new InPetRegisterRequest();
+//                                            InPetregisterParams inPetregisterParams = new InPetregisterParams();
+//                                            Log.d("kkakakka",""+search_box_add_new.getText().toString());
+//                                            inPetregisterParams.setUniqueId(search_box_add_new.getText().toString());
+//                                            inPetRegisterRequest.setData(inPetregisterParams);
+//                                            if (methods.isInternetOn()) {
+//                                                chkVetInregister(inPetRegisterRequest);
+//                                                clearSearch();
+//                                            } else {
+//                                                methods.DialogInternet();
+//                                            }
+//                                            dialog.dismiss();
+//                                        }
+//                                    });
+//                            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
+//                                    new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialogInterface, int i) {
+//                                            dialogInterface.dismiss();
+//                                        }
+//                                    });
+//                            alertDialog.show();
+//                        }
+//                    }
+//                    else{
+//                        search_box_add_new.requestFocus();
+//                        search_boxRL.setVisibility(View.VISIBLE);
+//                        staff_headline_TV.setVisibility(View.GONE);
+//                        InputMethodManager imm1 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                        imm1.showSoftInput(search_box_add_new, InputMethodManager.SHOW_IMPLICIT);
+//                        back_arrow_IV_new_entry.setVisibility(View.VISIBLE);
+//                    }
+//
+//                }
+
             case R.id.reports_CV:
 
                 ReportsFragment profileFragment = new ReportsFragment();

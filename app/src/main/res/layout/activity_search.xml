@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activty.SearchActivity">
+    <com.google.android.material.card.MaterialCardView
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cardElevation="15dp"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/whiteColor"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:visibility="visible"
+                android:id="@+id/back_arrow"
+                android:layout_marginRight="5dp"
+                android:padding="7dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/back_arrow" />
+            <RelativeLayout
+                android:visibility="visible"
+                android:layout_toRightOf="@id/back_arrow"
+                android:layout_marginBottom="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="7dp"
+                android:id="@+id/search_boxRL"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="wrap_content"
+                android:background="@drawable/searchbox"
+                android:layout_centerVertical="true">
+
+                <EditText
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"
+                    android:id="@+id/search_pet"
+                    android:paddingRight="8dp"
+                    android:paddingLeft="8dp"
+                    android:layout_centerVertical="true"
+                    android:textSize="11.09sp"
+                    android:hint="Search Pet by Pet ID, Name..(if already added)"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:inputType="textCapCharacters"
+                    />
+            </RelativeLayout>
+
+
+
+
+
+            <ImageView
+                android:id="@+id/new_pet_search"
+                android:layout_margin="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:src="@drawable/searchicon" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:padding="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/list_background"
+                android:id="@+id/register_pet_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/search_list"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

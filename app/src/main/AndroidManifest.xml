@@ -31,7 +31,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activty.AdoptionPetDetailsActivity"></activity>
+        <activity android:name=".activty.SearchActivity"></activity>
+        <activity android:name=".activty.AdoptionPetDetailsActivity" />
         <activity android:name=".activty.DoYouWantAdoptActivity" />
         <activity android:name=".activty.DoYouWantDonateActivity" />
         <activity android:name=".activty.DonationActivity" />
@@ -42,9 +43,9 @@
         <activity android:name=".activty.UpdateParentProfileActivity" />
         <activity android:name=".activty.ChangePasswordActivity" />
         <activity android:name=".activty.SettingActivity" />
-        <activity android:name=".activty.PetProfileActivity"/>
-        <activity android:name=".activty.GetPetDetailsActivity"/>
-        <activity android:name=".activty.AddPetRegister"/>
+        <activity android:name=".activty.PetProfileActivity" />
+        <activity android:name=".activty.GetPetDetailsActivity" />
+        <activity android:name=".activty.AddPetRegister" />
         <activity
             android:name=".activty.PetIdCardActivity"
             android:screenOrientation="landscape"

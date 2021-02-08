@@ -27,7 +27,7 @@
         android:padding="40dp"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:src="@drawable/login_resgister_logo"
+        android:src="@drawable/logo_parents"
         android:id="@+id/logoVet"
         tools:ignore="MissingConstraints" />
 

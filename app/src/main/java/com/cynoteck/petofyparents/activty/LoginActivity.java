@@ -172,7 +172,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 getDeviceId();
                 emailString = email_TIET.getText().toString().trim();
                 passwordString = password_TIET.getText().toString().trim();
-                Toast.makeText(this, ""+imeiNumber, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, ""+imeiNumber, Toast.LENGTH_LONG).show();
                 if (emailString.isEmpty()) {
                     email_TIET.setError("Email is empty");
                     password_TIET.setError(null);
