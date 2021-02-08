@@ -180,12 +180,13 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
             HomeFragment homeFragment = new HomeFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, homeFragment);
-            ft.commit();
+
             getSupportFragmentManager().popBackStack();
             icHome.setImageResource(R.drawable.home_green_icon);
             icProfile.setImageResource(R.drawable.profile_normal_icon);
             icPetRegister.setImageResource(R.drawable.pet_normal_icon);
             icAppointment.setImageResource(R.drawable.appointment_normal_icon);
+            ft.commit();
         }
     }
 }

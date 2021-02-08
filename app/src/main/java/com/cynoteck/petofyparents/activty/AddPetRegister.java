@@ -607,7 +607,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 //                    Toast.makeText(this, "Enter Pet Address", Toast.LENGTH_SHORT).show();
 //                    pet_name.setError(null);
 //                    pet_parent_name.setError(null);
-//                    pet_contact_number.setError(null);
+//    /                pet_contact_number.setError(null);
 //                    pet_description.setError(null);
 //                    pet_address.setError("Enter Pet Address");
 //                    calenderView.setError(null);
