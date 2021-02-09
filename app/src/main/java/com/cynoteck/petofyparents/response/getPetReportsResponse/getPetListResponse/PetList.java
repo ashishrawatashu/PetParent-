@@ -108,6 +108,15 @@ public class PetList {
     private String petProfileImageUrl;
 
     private User user;
+    private String lastVisitEncryptedId;
+
+    public String getLastVisitEncryptedId() {
+        return lastVisitEncryptedId;
+    }
+
+    public void setLastVisitEncryptedId(String lastVisitEncryptedId) {
+        this.lastVisitEncryptedId = lastVisitEncryptedId;
+    }
 
     public String getPetAge ()
     {
@@ -642,6 +651,6 @@ public class PetList {
     @Override
     public String toString()
     {
-        return "ClassPojo [petAge = "+petAge+", pageNumber = "+pageNumber+", secondServiceImageUrl = "+secondServiceImageUrl+", petClinicVisit = "+petClinicVisit+", petHospitalizationsSurgeries = "+petHospitalizationsSurgeries+", petAgeList = "+petAgeList+", otherBreedName = "+otherBreedName+", petAgeId = "+petAgeId+", petParentName = "+petParentName+", id = "+id+", petCategoryId = "+petCategoryId+", otherSizeName = "+otherSizeName+", petSizeList = "+petSizeList+", petSex = "+petSex+", petTypeList = "+petTypeList+", petBreedList = "+petBreedList+", petColor = "+petColor+", thirdServiceImageUrl = "+thirdServiceImageUrl+", fourthServiceImageUrl = "+fourthServiceImageUrl+", petBreed = "+petBreed+", barcodeUrl = "+barcodeUrl+", role = "+role+", petColorId = "+petColorId+", petSizeId = "+petSizeId+", description = "+description+", petSexId = "+petSexId+", petName = "+petName+", otherAgeName = "+otherAgeName+", numberOfRecords = "+numberOfRecords+", contactNumber = "+contactNumber+", petLabwork = "+petLabwork+", petCategory = "+petCategory+", fifthServiceImageUrl = "+fifthServiceImageUrl+", petBreedId = "+petBreedId+", petUniqueId = "+petUniqueId+", petTestsAndXrey = "+petTestsAndXrey+", petSize = "+petSize+", createDate = "+createDate+", petSexList = "+petSexList+", address = "+address+", stateList = "+stateList+", petType = "+petType+", dateOfBirth = "+dateOfBirth+", cityList = "+cityList+", userId = "+userId+", petDetailImageList = "+petDetailImageList+", firstServiceImageUrl = "+firstServiceImageUrl+", isAddedToRegister = "+isAddedToRegister+", encryptedId = "+encryptedId+", petColorList = "+petColorList+", otherColorName = "+otherColorName+", petProfileImageUrl = "+petProfileImageUrl+", user = "+user+"]";
+        return "ClassPojo [petAge = "+petAge+", pageNumber = "+pageNumber+", secondServiceImageUrl = "+secondServiceImageUrl+", petClinicVisit = "+petClinicVisit+", petHospitalizationsSurgeries = "+petHospitalizationsSurgeries+", petAgeList = "+petAgeList+", otherBreedName = "+otherBreedName+", petAgeId = "+petAgeId+", petParentName = "+petParentName+", id = "+id+", petCategoryId = "+petCategoryId+", otherSizeName = "+otherSizeName+", petSizeList = "+petSizeList+", petSex = "+petSex+", petTypeList = "+petTypeList+", petBreedList = "+petBreedList+", petColor = "+petColor+", thirdServiceImageUrl = "+thirdServiceImageUrl+", fourthServiceImageUrl = "+fourthServiceImageUrl+", petBreed = "+petBreed+", barcodeUrl = "+barcodeUrl+", role = "+role+", petColorId = "+petColorId+", petSizeId = "+petSizeId+", description = "+description+", petSexId = "+petSexId+", petName = "+petName+", otherAgeName = "+otherAgeName+", numberOfRecords = "+numberOfRecords+", contactNumber = "+contactNumber+", petLabwork = "+petLabwork+", petCategory = "+petCategory+", fifthServiceImageUrl = "+fifthServiceImageUrl+", petBreedId = "+petBreedId+", petUniqueId = "+petUniqueId+", petTestsAndXrey = "+petTestsAndXrey+", petSize = "+petSize+", createDate = "+createDate+", petSexList = "+petSexList+", address = "+address+", stateList = "+stateList+", petType = "+petType+", dateOfBirth = "+dateOfBirth+", cityList = "+cityList+", userId = "+userId+", petDetailImageList = "+petDetailImageList+", firstServiceImageUrl = "+firstServiceImageUrl+", isAddedToRegister = "+isAddedToRegister+", encryptedId = "+encryptedId+", petColorList = "+petColorList+", otherColorName = "+otherColorName+", petProfileImageUrl = "+petProfileImageUrl+", user = "+user+", lastVisitEncryptedId = "+lastVisitEncryptedId+"]";
     }
 }

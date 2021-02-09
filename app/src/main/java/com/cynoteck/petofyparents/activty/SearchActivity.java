@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
@@ -37,6 +39,7 @@ ImageView backarrowimageview;
     ArrayList<PetList> profileList = new ArrayList<>();
     RecyclerView register_pet_RV;
     SearchAdapter SearchAdapter;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ ImageView backarrowimageview;
         searchpet=(EditText)findViewById(R.id.search_pet);
         backarrowimageview=(ImageView)findViewById(R.id.back_arrow);
         register_pet_RV=(RecyclerView) findViewById(R.id.register_pet_RV);
+        progressBar=findViewById(R.id.progressBar);
+        searchpet.requestFocus();
         searchpet.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,8 +84,8 @@ ImageView backarrowimageview;
     public void afterTextChanged(Editable s) {
 
     }
-    private void petSearchDependsOnPrefix(String prefix)
-    {
+    private void petSearchDependsOnPrefix(String prefix) {
+        progressBar.setVisibility(View.VISIBLE);
         PetDataParams getPetDataParams = new PetDataParams();
         getPetDataParams.setPageNumber(0);//0
         getPetDataParams.setPageSize(10);//0
@@ -101,7 +106,7 @@ switch(key){
             GetPetListResponse getPetListResponse = (GetPetListResponse) arg0.body();
             Log.d("GetPetListBySearch", getPetListResponse.toString());
             int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
-
+            profileList.clear();
             if (responseCode== 109){
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this);
                 register_pet_RV.setLayoutManager(linearLayoutManager);
@@ -120,6 +125,7 @@ switch(key){
                         petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
                         petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
                         petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
+                        petList.setLastVisitEncryptedId(getPetListResponse.getData().getPetList().get(i).getLastVisitEncryptedId());
 
                         profileList.add(petList);
                     }
@@ -127,12 +133,14 @@ switch(key){
                     SearchAdapter = new SearchAdapter(SearchActivity.this,profileList,this);
                     register_pet_RV.setAdapter(SearchAdapter);
                     SearchAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.INVISIBLE);
+
 
                 }
                 else
                 {
-
-                    Toast.makeText(SearchActivity.this, "Data Not found", Toast.LENGTH_SHORT).show();
+                    Log.e("No_DATA","NO_DATA");
+//                    Toast.makeText(SearchActivity.this, "Data Not found", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -154,6 +162,21 @@ switch(key){
 
     @Override
     public void onViewDetailsClick(int position) {
+
+        Intent petDetailsIntent = new Intent(SearchActivity.this, PetDetailsActivity.class);
+        Bundle data = new Bundle();
+        data.putString("pet_id",profileList.get(position).getId());
+        data.putString("pet_name",profileList.get(position).getPetName());
+        data.putString("pet_parent",profileList.get(position).getPetParentName());
+        data.putString("pet_sex",profileList.get(position).getPetSex());
+        data.putString("pet_age",profileList.get(position).getPetAge());
+        data.putString("pet_unique_id",profileList.get(position).getPetUniqueId());
+        data.putString("pet_DOB",profileList.get(position).getDateOfBirth());
+        data.putString("pet_encrypted_id",profileList.get(position).getEncryptedId());
+        data.putString("pet_cat_id",profileList.get(position).getPetCategoryId());
+        data.putString("lastVisitEncryptedId",profileList.get(position).getLastVisitEncryptedId());
+        petDetailsIntent.putExtras(data);
+        startActivity(petDetailsIntent);
 
     }
 }

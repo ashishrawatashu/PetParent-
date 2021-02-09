@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:cardElevation="35dp"
+        app:cardElevation="15dp"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         android:id="@+id/card1"
         android:layout_width="0dp"
