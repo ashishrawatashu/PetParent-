@@ -29,7 +29,7 @@
     <string name="immunizationChartLabel">Immunization Chart</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">Cancel</string>
-    <string name="details">Details</string>
+    <string name="details">Your Details</string>
     <string name="Security">Security</string>
     <string name="update_profile">Veterinarian Account</string>
     <string name="address">Address</string>
@@ -44,7 +44,7 @@
     <string name="changePass">Change Password</string>
     <string name="petId">Pet Id</string>
     <string name="dateofbirth">Date Of Birth</string>
-    <string name="petGender">Pet Gender</string>
+    <string name="petGender">Pet Sex</string>
     <string name="petParent">Pet Parent</string>
     <string name="petname">Pet Name</string>
     <string name="petColor">Pet Color</string>

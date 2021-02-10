@@ -135,7 +135,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
 
     private void petType() {
         ApiService<PetTypeResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().petTypeApi(Config.token), "GetPetTypes");
+        service.get(this, ApiClient.getApiInterface().petTypeApi(), "GetPetTypes");
     }
 
     private void getPetBreed() {
@@ -149,7 +149,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
         breedParams.setData(breedRequest);
 
         ApiService<BreedCatRespose> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(Config.token,breedParams), "GetPetBreed");
+        service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(breedParams), "GetPetBreed");
         Log.d("Diolog_Breed","===>"+breedParams);
     }
     private void getPetAge() {
@@ -163,7 +163,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
         breedParams.setData(breedRequest);
 
         ApiService<PetAgeValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetAgeApi(Config.token,breedParams), "GetPetAge");
+        service.get(this, ApiClient.getApiInterface().getGetPetAgeApi(breedParams), "GetPetAge");
     }
 
     private void getPetColor() {
@@ -177,7 +177,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
         breedParams.setData(breedRequest);
 
         ApiService<PetColorValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetColorApi(Config.token,breedParams), "GetPetColor");
+        service.get(this, ApiClient.getApiInterface().getGetPetColorApi(breedParams), "GetPetColor");
     }
 
     private void getPetSize() {
@@ -191,7 +191,7 @@ public class DoYouWantAdoptActivity extends AppCompatActivity implements View.On
         breedParams.setData(breedRequest);
 
         ApiService<PetSizeValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetSizeApi(Config.token,breedParams), "GetPetSize");
+        service.get(this, ApiClient.getApiInterface().getGetPetSizeApi(breedParams), "GetPetSize");
     }
 
     private void getState()

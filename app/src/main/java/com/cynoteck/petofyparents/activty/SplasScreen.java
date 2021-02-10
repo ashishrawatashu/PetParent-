@@ -124,7 +124,7 @@ public class SplasScreen extends AppCompatActivity {
                 if (loggedIn.equals("loggedIn")){
                     intent = new Intent(SplasScreen.this,DashBoardActivity.class);
                 }else {
-                    intent = new Intent(SplasScreen.this, LoginActivity.class);
+                    intent = new Intent(SplasScreen.this, SendPhoneNumber.class);
                 }
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

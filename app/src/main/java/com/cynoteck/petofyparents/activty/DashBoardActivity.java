@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import retrofit2.Response;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,7 +31,7 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
     boolean doubleBackToExitPressedOnce = false;
     boolean exit = false;
     Methods methods;
-    String IsVeterinarian="";
+    String IsVeterinarian="",petId="",from="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,10 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
 
         initialize();
         methods = new Methods(this);
+        Intent  intent = getIntent();
+        from = intent.getStringExtra("from");
+
+
         SharedPreferences sharedPreferences = getSharedPreferences("userdetails", 0);
         Config.token = sharedPreferences.getString("token", "");
         Log.e("token",Config.token);
@@ -60,6 +65,14 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
             ft.add(R.id.content_frame, homeFragment);
             ft.commit();
             icHome.setImageResource(R.drawable.home_green_icon);
+        }
+
+
+        if (from.equals("WITH_QR")){
+            petId = intent.getStringExtra("petId");
+            Intent petProfileActivity = new Intent(this,PetProfileActivity.class);
+            petProfileActivity.putExtra("pet_id",petId);
+            startActivity(petProfileActivity);
         }
 
     }

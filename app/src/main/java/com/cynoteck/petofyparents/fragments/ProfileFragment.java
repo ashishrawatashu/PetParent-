@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activty.ChangePasswordActivity;
 import com.cynoteck.petofyparents.activty.LoginActivity;
+import com.cynoteck.petofyparents.activty.SendPhoneNumber;
 import com.cynoteck.petofyparents.activty.SettingActivity;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.utils.Config;
@@ -99,7 +100,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+                startActivity(new Intent(getActivity(), SendPhoneNumber.class));
                 getActivity().finish();
                 break;
 

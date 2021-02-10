@@ -1,5 +1,9 @@
 package com.cynoteck.petofyparents.response.loginResponse;
 
+import com.cynoteck.petofyparents.response.loginRegisterResponse.UserPermissionMasterList;
+
+import java.util.ArrayList;
+
 public class LoginRegisterResponseData {
     private String vetRegistrationNumber;
 
@@ -83,7 +87,7 @@ public class LoginRegisterResponseData {
 
     private String rememberMe;
 
-    private String[] userPermissionMasterList;
+    private ArrayList<UserPermissionMasterList> userPermissionMasterList;
 
     private String userRole;
 
@@ -501,12 +505,12 @@ public class LoginRegisterResponseData {
         this.rememberMe = rememberMe;
     }
 
-    public String[] getUserPermissionMasterList ()
+    public ArrayList<UserPermissionMasterList> getUserPermissionMasterList ()
     {
         return userPermissionMasterList;
     }
 
-    public void setUserPermissionMasterList (String[] userPermissionMasterList)
+    public void setUserPermissionMasterList (ArrayList<UserPermissionMasterList> userPermissionMasterList)
     {
         this.userPermissionMasterList = userPermissionMasterList;
     }

@@ -24,6 +24,7 @@ import com.cynoteck.petofyparents.parameter.petReportsRequest.PetClinicVisitDeta
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.VisitTypeRequest;
 import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
+import com.cynoteck.petofyparents.parameter.registrationWithQrCodeRequest.RegistrationWithQrCodeRequest;
 import com.cynoteck.petofyparents.parameter.searchPetParentRequest.SearchPetParentRequestData;
 import com.cynoteck.petofyparents.parameter.updateDonation.UpdateDonationRequest;
 import com.cynoteck.petofyparents.parameter.updateRequest.updateParamRequest.UpdatePetRequest;
@@ -45,6 +46,8 @@ import com.cynoteck.petofyparents.response.dateOfBirthResponse.DateOfBirthRespon
 import com.cynoteck.petofyparents.response.getPetAgeResponse.GetPetAgeresponseData;
 import com.cynoteck.petofyparents.response.getPetParrentnameReponse.GetPetParentResponseData;
 import com.cynoteck.petofyparents.response.petAgeUnitResponse.PetAgeUnitResponseData;
+import com.cynoteck.petofyparents.response.registerParentWithQRResponse.RegisterParentWithQRResponse;
+import com.cynoteck.petofyparents.response.resendOTPResposne.ResendOTPResponse;
 import com.cynoteck.petofyparents.response.stateResponse.StateResponse;
 import com.cynoteck.petofyparents.response.donationResponse.DonationResponseList;
 import com.cynoteck.petofyparents.response.forgetAndChangePassResponse.PasswordResponse;
@@ -68,6 +71,7 @@ import com.cynoteck.petofyparents.response.otpResponse.OtpResponse;
 import com.cynoteck.petofyparents.response.paymentStatusResponse.PaymentStatusResponse;
 import com.cynoteck.petofyparents.response.twofactAuthResponse.TwoFactAuthResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
+import com.cynoteck.petofyparents.response.validationOtpResponse.ValidationOtpResponse;
 import com.google.gson.JsonObject;
 
 import okhttp3.MultipartBody;
@@ -129,7 +133,7 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("common/GetPetTypes")
-    Call<PetTypeResponse> petTypeApi(@Header("Authorization") String auth);
+    Call<PetTypeResponse> petTypeApi();
 
     //TODO=========Get Pet Unique ID===========================
 
@@ -141,25 +145,25 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/GetPetBreed")
-    Call<BreedCatRespose> getGetPetBreedApi(@Header("Authorization") String auth, @Body BreedParams breedParams);
+    Call<BreedCatRespose> getGetPetBreedApi(@Body BreedParams breedParams);
 
     //TODO=========Get Pet Age API=============================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/GetPetAge")
-    Call<PetAgeValueResponse> getGetPetAgeApi(@Header("Authorization") String auth, @Body BreedParams breedParams);
+    Call<PetAgeValueResponse> getGetPetAgeApi(@Body BreedParams breedParams);
 
     //TODO=========Get Pet Color API===========================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/GetPetColor")
-    Call<PetColorValueResponse> getGetPetColorApi(@Header("Authorization") String auth, @Body BreedParams breedParams);
+    Call<PetColorValueResponse> getGetPetColorApi(@Body BreedParams breedParams);
 
     //TODO========Get Pet Size API=============================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/GetPetSize")
-    Call<PetSizeValueResponse> getGetPetSizeApi(@Header("Authorization") String auth, @Body BreedParams breedParams);
+    Call<PetSizeValueResponse> getGetPetSizeApi(@Body BreedParams breedParams);
 
     //TODO=======Upload Images API=============================
 
@@ -377,25 +381,39 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @GET("pet/GetPetDateOfBirth/{data}")
-    Call<DateOfBirthResponse> GetPetDateOfBirth(@Header("Authorization") String auth, @Path("data") String data);
+    Call<DateOfBirthResponse> GetPetDateOfBirth(@Path("data") String data);
 
     //GET PET AGE STRING......................................
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/GetPetAgeString")
-    Call<GetPetAgeresponseData> getPetAgeString(@Header("Authorization") String auth, @Body GetPetAgeRequestData getPetAgeRequestData);
+    Call<GetPetAgeresponseData> getPetAgeString(@Body GetPetAgeRequestData getPetAgeRequestData);
 
     //GET PET AGE UNIT LIST..................................
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/GetPetAgeUnit")
-    Call<PetAgeUnitResponseData> getPetAgeUnit(@Header("Authorization") String auth);
+    Call<PetAgeUnitResponseData> getPetAgeUnit();
 
     //SEARCH PET PARENT.......................................
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/SearchPetParent")
     Call<GetPetParentResponseData> searchPetParent(@Header("Authorization") String auth, @Body SearchPetParentRequestData getPetAgeRequestData);
+
+
+    @POST("User/PetParentRegistrationUsingQRCode")
+    Call<RegisterParentWithQRResponse> petParentRegistrationUsingQRCode(@Body RegistrationWithQrCodeRequest registrationWithQrCodeRequest);
+
+    @POST("user/SendRegistrationOtp")
+    Call<JsonObject> sendRegistrationOtp(@Body JsonObject sendRegistrationOtp);
+
+
+    @POST("user/ValidatepetParentOtp")
+    Call<LoginRegisterResponse> validatepetParentOtp(@Body JsonObject sendRegistrationOtp);
+
+    @POST("user/SendRegistrationOtp")
+    Call<ResendOTPResponse> resendOTP(@Body JsonObject resendotp);
 
 }
 

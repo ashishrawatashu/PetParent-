@@ -56,7 +56,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             super(itemView);
             search_text = itemView.findViewById(R.id.search_text);
 
-
+            search_text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onProductItemClickListner!=null){
+                        onProductItemClickListner.onViewDetailsClick(getAdapterPosition());
+                    }
+                }
+            });
 
 
         }

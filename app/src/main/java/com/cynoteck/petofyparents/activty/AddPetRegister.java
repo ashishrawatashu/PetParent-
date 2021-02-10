@@ -183,15 +183,16 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
     private void getPetAgeUnit() {
         ApiService<PetAgeUnitResponseData> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().getPetAgeUnit(Config.token), "GetPetAgeUnit");
+        service.get( this, ApiClient.getApiInterface().getPetAgeUnit(), "GetPetAgeUnit");
     }
 
     private void getPetDateofBirthDependsOnDays(String day)
     {
         ApiService<DateOfBirthResponse> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().GetPetDateOfBirth(Config.token,day), "getDateOfYear");
+        service.get( this, ApiClient.getApiInterface().GetPetDateOfBirth(day), "getDateOfYear");
     }
 
     private void getPetAgeString(String DOB)
@@ -201,7 +202,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         GetPetAgeRequestData getPetAgeRequestData=new GetPetAgeRequestData();
         getPetAgeRequestData.setData(getPetAgeParameter);
         ApiService<GetPetAgeresponseData> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().getPetAgeString(Config.token,getPetAgeRequestData), "GetPetAgeString");
+        service.get( this, ApiClient.getApiInterface().getPetAgeString(getPetAgeRequestData), "GetPetAgeString");
         Log.e("DAILOG","getPetAgeString==>"+getPetAgeRequestData);
     }
 
@@ -291,7 +292,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     private void petType() {
         methods.showCustomProgressBarDialog(this);
         ApiService<PetTypeResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().petTypeApi(Config.token), "GetPetTypes");
+        service.get(this, ApiClient.getApiInterface().petTypeApi(), "GetPetTypes");
     }
 
     private void genaretePetUniqueKey() {
@@ -310,7 +311,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         breedParams.setData(breedRequest);
 
         ApiService<BreedCatRespose> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(Config.token,breedParams), "GetPetBreed");
+        service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(breedParams), "GetPetBreed");
         Log.d("Diolog_Breed","===>"+breedParams);
     }
 
@@ -325,7 +326,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         breedParams.setData(breedRequest);
 
         ApiService<PetAgeValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetAgeApi(Config.token,breedParams), "GetPetAge");
+        service.get(this, ApiClient.getApiInterface().getGetPetAgeApi(breedParams), "GetPetAge");
     }
 
     private void getPetColor() {
@@ -339,7 +340,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         breedParams.setData(breedRequest);
 
         ApiService<PetColorValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetColorApi(Config.token,breedParams), "GetPetColor");
+        service.get(this, ApiClient.getApiInterface().getGetPetColorApi(breedParams), "GetPetColor");
     }
 
     private void getPetSize() {
@@ -353,7 +354,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         breedParams.setData(breedRequest);
 
         ApiService<PetSizeValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetSizeApi(Config.token,breedParams), "GetPetSize");
+        service.get(this, ApiClient.getApiInterface().getGetPetSizeApi(breedParams), "GetPetSize");
     }
 
 

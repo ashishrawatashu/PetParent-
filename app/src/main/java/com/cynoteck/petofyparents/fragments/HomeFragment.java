@@ -95,8 +95,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.new_pet_search:
-           intent = new Intent(getContext(), SearchActivity.class);
-           startActivity(intent);
+                    intent = new Intent(getContext(), SearchActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+
                 break;
 
 //                if(search_box_add_new.getText().toString().isEmpty()){
