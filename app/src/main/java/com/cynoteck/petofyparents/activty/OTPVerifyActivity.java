@@ -324,6 +324,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                         Log.e("TOKEN",loginRegisterResponse.getResponseLogin().getToken());
                         login_editor.commit();
                         Intent intent = new Intent(this, DashBoardActivity.class);
+                        intent.putExtra("from","OTP_ACTIVITY");
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
                     }else {

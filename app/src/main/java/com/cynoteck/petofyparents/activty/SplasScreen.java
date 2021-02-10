@@ -123,6 +123,7 @@ public class SplasScreen extends AppCompatActivity {
                 String loggedIn = sharedPreferences.getString("loggedIn", "");
                 if (loggedIn.equals("loggedIn")){
                     intent = new Intent(SplasScreen.this,DashBoardActivity.class);
+                    intent.putExtra("from","SPLASH");
                 }else {
                     intent = new Intent(SplasScreen.this, SendPhoneNumber.class);
                 }

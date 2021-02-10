@@ -368,6 +368,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         login_editor.commit();
 
         Intent intent = new Intent(this, DashBoardActivity.class);
+        intent.putExtra("from","LOGIN");
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         Toast.makeText(LoginActivity.this, responseLogin.getResponseLogin().getResponseMessage(), Toast.LENGTH_SHORT).show();
