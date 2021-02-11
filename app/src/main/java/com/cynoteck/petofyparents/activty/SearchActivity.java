@@ -163,20 +163,23 @@ switch(key){
     @Override
     public void onViewDetailsClick(int position) {
 
-        Intent petDetailsIntent = new Intent(SearchActivity.this, PetDetailsActivity.class);
+        profileList.get(position).getPetUniqueId();
+        Intent selectReportsIntent = new Intent(this, SelectPetReportsActivity.class);
         Bundle data = new Bundle();
         data.putString("pet_id",profileList.get(position).getId());
         data.putString("pet_name",profileList.get(position).getPetName());
-        data.putString("pet_parent",profileList.get(position).getPetParentName());
-        data.putString("pet_sex",profileList.get(position).getPetSex());
-        data.putString("pet_age",profileList.get(position).getPetAge());
         data.putString("pet_unique_id",profileList.get(position).getPetUniqueId());
+        data.putString("pet_sex",profileList.get(position).getPetSex());
+        data.putString("pet_owner_name",profileList.get(position).getPetParentName());
+        data.putString("pet_owner_contact",profileList.get(position).getContactNumber());
+        data.putString("pet_encryt_id",profileList.get(position).getEncryptedId());
+        data.putString("pet_age",profileList.get(position).getPetAge());
         data.putString("pet_DOB",profileList.get(position).getDateOfBirth());
         data.putString("pet_encrypted_id",profileList.get(position).getEncryptedId());
-        data.putString("pet_cat_id",profileList.get(position).getPetCategoryId());
-        data.putString("lastVisitEncryptedId",profileList.get(position).getLastVisitEncryptedId());
-        petDetailsIntent.putExtras(data);
-        startActivity(petDetailsIntent);
+
+        selectReportsIntent.putExtras(data);
+        startActivity(selectReportsIntent);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
 
     }
 }

@@ -1,16 +1,10 @@
 package com.cynoteck.petofyparents.activty;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -120,7 +114,6 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
                         remarks_textView.setText(getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getTreatmentRemarks());
 
 
-                        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch(Exception e) {
@@ -136,7 +129,6 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
                     if (responseCode== 109){
                         Config.type = "list";
                         onBackPressed();
-                        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
 
                     }
                 }

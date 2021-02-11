@@ -210,7 +210,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                     int responseCode = Integer.parseInt(petServiceResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
                         if (petServiceResponse.getData().getPetClinicVisitList().isEmpty()){
-                            Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
                             empty_IV.setVisibility(View.VISIBLE);
                             routine_report_RV.setVisibility(View.GONE);
                         }
@@ -244,7 +244,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                     GetPetTestAndXRayResponse getPetTestAndXRayResponse = (GetPetTestAndXRayResponse) response.body();
                     int responseCode = Integer.parseInt(getPetTestAndXRayResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
-                        Toast.makeText(getContext(), "GetPetTestAndXRay", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "GetPetTestAndXRay", Toast.LENGTH_SHORT).show();
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                         petTestsAndXrayLists = getPetTestAndXRayResponse.getData().getPetTestsAndXrayList();
                         routine_report_RV.setLayoutManager(linearLayoutManager);
@@ -259,7 +259,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                             testAndXRayAdpater.notifyDataSetChanged();
                         }else if (button_type.equals("update")){
                             routine_report_RV.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), "update", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
                             updateXRayAdpater = new UpdateXRayAdpater(getContext(), getPetTestAndXRayResponse.getData().getPetTestsAndXrayList(), this);
                             routine_report_RV.setAdapter(updateXRayAdpater);
                             updateXRayAdpater.notifyDataSetChanged();
@@ -278,7 +278,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                     PetLabWorkResponse petLabWorkResponse = (PetLabWorkResponse) response.body();
                     int responseCode = Integer.parseInt(petLabWorkResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
-                        Toast.makeText(getContext(), "GetLabTest", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "GetLabTest", Toast.LENGTH_SHORT).show();
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                         petLabWorkLists = petLabWorkResponse.getData().getPetLabWorkList();
                         routine_report_RV.setLayoutManager(linearLayoutManager);
@@ -295,7 +295,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                         }else if (button_type.equals("update")){
                             empty_IV.setVisibility(View.GONE);
                             routine_report_RV.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), "update", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Update", Toast.LENGTH_SHORT).show();
                             updateLabTestAdpater = new UpdateLabTestAdpater(getContext(), petLabWorkResponse.getData().getPetLabWorkList(), this);
                             routine_report_RV.setAdapter(updateLabTestAdpater);
                             updateLabTestAdpater.notifyDataSetChanged();
@@ -315,7 +315,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                     GetPetHospitalizationResponse getPetHospitalizationResponse = (GetPetHospitalizationResponse) response.body();
                     int responseCode = Integer.parseInt(getPetHospitalizationResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
-                        Toast.makeText(getContext(), "GetHospitalization", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "GetHospitalization", Toast.LENGTH_SHORT).show();
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                         petHospitalizationsLists = getPetHospitalizationResponse.getData().getPetHospitalizationsList();
                         routine_report_RV.setLayoutManager(linearLayoutManager);
@@ -333,7 +333,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                         }else if (button_type.equals("update")){
                             empty_IV.setVisibility(View.GONE);
                             routine_report_RV.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), "update", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Update", Toast.LENGTH_SHORT).show();
                             updateHospitalizationAdapter = new UpdateHospitalizationAdapter(getContext(), getPetHospitalizationResponse.getData().getPetHospitalizationsList(), this);
                             routine_report_RV.setAdapter(updateHospitalizationAdapter);
                             updateHospitalizationAdapter.notifyDataSetChanged();
@@ -360,7 +360,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
     @Override
     public void onViewXrayClick(int position) {
-        Toast.makeText(getContext(), ""+petTestsAndXrayLists.get(position).getId(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), ""+petTestsAndXrayLists.get(position).getId(), Toast.LENGTH_SHORT).show();
         Intent labIntent = new Intent(getContext(), XRayReportDeatilsActivity.class);
         labIntent.putExtra("pet_id",pet_id);
         labIntent.putExtra("pet_name",pet_name);
@@ -501,7 +501,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
     @Override
     public void onViewClick(int position) {
-        Toast.makeText(getContext(), ""+petClinicVisitListArrayList.get(position).getId(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), ""+petClinicVisitListArrayList.get(position).getId(), Toast.LENGTH_SHORT).show();
         Intent viewReportsDeatilsActivityIntent = new Intent(getActivity().getApplication(), ViewReportsDeatilsActivity.class);
         viewReportsDeatilsActivityIntent.putExtra("clinic_id",petClinicVisitListArrayList.get(position).getId());
         viewReportsDeatilsActivityIntent.putExtra("pet_id",pet_id);

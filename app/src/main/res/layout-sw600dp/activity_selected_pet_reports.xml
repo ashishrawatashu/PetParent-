@@ -295,6 +295,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/lab_test_layout"
                     android:background="@drawable/reports_field"
                     android:layout_width="match_parent"
