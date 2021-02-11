@@ -455,6 +455,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
             case "ParentRegistrationUsingQRCode":
 
                 try {
+                    methods.customProgressDismiss();
                     RegisterParentWithQRResponse registerParentWithQRResponse = (RegisterParentWithQRResponse) arg0.body();
                     Log.e("RegistrationQR",registerParentWithQRResponse.toString());
 
