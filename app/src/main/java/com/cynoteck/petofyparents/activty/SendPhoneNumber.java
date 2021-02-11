@@ -1,7 +1,9 @@
 package com.cynoteck.petofyparents.activty;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 
 import com.cynoteck.petofyparents.R;
@@ -21,6 +25,8 @@ import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.google.gson.JsonObject;
+
+import java.io.IOException;
 
 import retrofit2.Response;
 
@@ -31,6 +37,8 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
     String phoneNumber,vetID="";
     ImageView qrCodeScanner_IV;
     Methods methods;
+    private static final int REQUEST_CAMERA_PERMISSION = 201;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +51,32 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
         request_code_BT.setOnClickListener(this);
         Intent intent = getIntent();
         vetID = intent.getStringExtra("vetID");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+        } else {
+            ActivityCompat.requestPermissions(this, new
+                    String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+        }
 
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length>0){
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                Toast.makeText(this, "Allow Permission for QR Scanner.", Toast.LENGTH_SHORT).show();
+                finish();
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    ActivityCompat.requestPermissions(this, new
+                            String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                }
+            }
+            else{
+                Log.e("NOPERMISION", "no");
+            }
+        }else
+            finish();
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -86,6 +117,7 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
             if (resultCode==RESULT_OK){
                 qrCodeScanner_IV.setVisibility(View.INVISIBLE);
                 enter_phone_ET.requestFocus();
+                vetID = data.getStringExtra("vetID");
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 Toast.makeText(this, "Enter Your Phone Number", Toast.LENGTH_SHORT).show();

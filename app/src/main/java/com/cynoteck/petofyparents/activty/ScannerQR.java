@@ -108,6 +108,7 @@ public class ScannerQR extends AppCompatActivity {
             } else {
                 ActivityCompat.requestPermissions(this, new
                         String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                onResume();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -175,12 +176,21 @@ public class ScannerQR extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length>0){
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED)
-                finish();
-            else
-                openCamera();
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                Toast.makeText(this, "Allow Permission for QR Scanner.", Toast.LENGTH_SHORT).show();
+                onBackPressed();
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    ActivityCompat.requestPermissions(this, new
+                            String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                }
+            }
+            else{
+                Log.e("NOPERMISION", "no");
+            }
         }else
             finish();
     }
