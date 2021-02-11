@@ -142,9 +142,10 @@ public class ScannerQR extends AppCompatActivity {
                     String key = qrCOdeResponse.getKey();
                     String vetUserId = qrCOdeResponse.getVeterinarianUserId();
                     Log.e("intentData",key+""+vetUserId);
-                    Intent intent = new Intent(ScannerQR.this,SendPhoneNumber.class);
+                    Intent intent = new Intent();
                     intent.putExtra("vetID",vetUserId);
-                    startActivity(intent);
+                    setResult(RESULT_OK,intent);
+                    finish();
                 } else {
                     Toast.makeText(ScannerQR.this, "INVALID QR Code!", Toast.LENGTH_SHORT).show();
                 }

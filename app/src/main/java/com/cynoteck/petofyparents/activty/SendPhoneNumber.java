@@ -1,14 +1,17 @@
 package com.cynoteck.petofyparents.activty;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -67,12 +70,26 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.qrCodeScanner_IV:
-
-                startActivity(new Intent(this,ScannerQR.class));
-
+                
+                Intent qrIntent = new Intent(this,ScannerQR.class);
+                startActivityForResult(qrIntent,1);
                 break;
 
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1){
+            if (resultCode==RESULT_OK){
+                qrCodeScanner_IV.setVisibility(View.INVISIBLE);
+                enter_phone_ET.requestFocus();
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                Toast.makeText(this, "Enter Your Phone Number", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -88,6 +105,8 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
                     int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));
                     if (responseCode==109){
                         enter_phone_ET.getText().clear();
+                        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                         JsonObject data = sendRegistrationOtp.getAsJsonObject("data");
                         String otp = String.valueOf(data.get("otp"));
                         Intent otpVerifyIntent = new Intent(this,OTPVerifyActivity.class);
