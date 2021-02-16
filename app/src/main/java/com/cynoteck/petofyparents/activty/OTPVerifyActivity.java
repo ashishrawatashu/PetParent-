@@ -1,5 +1,6 @@
 package com.cynoteck.petofyparents.activty;
 
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -41,7 +42,7 @@ import retrofit2.Response;
 
 public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener, ApiResponse {
 
-    EditText editText_one, editText_two, editText_three, editText_four,editText_five, editText_six;
+    EditText editText_one, editText_two, editText_three, editText_four ;
     private static final int REQ_USER_CONSENT = 200;
     SmsBroadcastReceiver smsBroadcastReceiver;
     Button verify_BT;
@@ -55,14 +56,13 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_o_t_p_verify);
+
         methods = new Methods(this);
         back_arrow_IV = findViewById(R.id.back_arrow_IV);
         editText_one = findViewById(R.id.editTextone);
         editText_two = findViewById(R.id.editTexttwo);
         editText_three = findViewById(R.id.editTextthree);
         editText_four = findViewById(R.id.editTextfour);
-        editText_five = findViewById(R.id.editTextfive);
-        editText_six = findViewById(R.id.editTextsix);
         verify_BT = findViewById(R.id.verify_BT);
         headine3TV=findViewById(R.id.headine3TV);
         resend_code_TV=findViewById(R.id.resend_code_TV);
@@ -74,8 +74,6 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
         editText_two.addTextChangedListener(this);
         editText_three.addTextChangedListener(this);
         editText_four.addTextChangedListener(this);
-        editText_five.addTextChangedListener(this);
-        editText_six.addTextChangedListener(this);
         startSmsUserConsent();
 
         Intent intent = getIntent();
@@ -128,20 +126,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
             if (editText_three.length() == 1) {
                 editText_four.requestFocus();
             }
-            if (editText_four.length() == 1) {
-                editText_five.requestFocus();
-            }
-            if (editText_five.length() == 1) {
-                editText_six.requestFocus();
-            }
         } else if (editable.length() == 0) {
-            if (editText_six.length() == 0) {
-                editText_five.requestFocus();
-            }
-            if (editText_five.length() == 0) {
-                editText_four.requestFocus();
-            }
-
             if (editText_four.length() == 0) {
                 editText_three.requestFocus();
             }
@@ -187,18 +172,16 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
     }
     private void getOtpFromMessage(String message) {
         // This will match any 6 digit number in the message
-        Pattern pattern = Pattern.compile("(|^)\\d{6}");
+        Pattern pattern = Pattern.compile("(|^)\\d{4}");
         Matcher matcher = pattern.matcher(message);
         if (matcher.find()) {
 //            Toast.makeText(this, ""+matcher.group(0), Toast.LENGTH_SHORT).show();
             String otp = matcher.group(0);
-            editText_one.setText(otp.substring(0,otp.length()-5));
-            editText_two.setText(otp.substring(1,otp.length()-4));
-            editText_three.setText(otp.substring(2,otp.length()-3));
-            editText_four.setText(otp.substring(3,otp.length()-2));
-            editText_five.setText(otp.substring(4,otp.length()-1));
-            editText_six.setText(otp.substring(5,otp.length()-0));
-            editText_six.clearFocus();
+            editText_one.setText(otp.substring(0,otp.length()-3));
+            editText_two.setText(otp.substring(1,otp.length()-2));
+            editText_three.setText(otp.substring(2,otp.length()-1));
+            editText_four.setText(otp.substring(3,otp.length()-0));
+            editText_four.clearFocus();
 
         }
     }
@@ -243,13 +226,11 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                 otp2=editText_two.getText().toString();
                 otp3=editText_three.getText().toString();
                 otp4=editText_four.getText().toString();
-                otp5=editText_five.getText().toString();
-                otp6=editText_six.getText().toString();
 
-                otp = otp1+""+otp2+""+otp3+""+otp4+""+otp5+""+otp6;
+                otp = otp1+""+otp2+""+otp3+""+otp4;
 //                Toast.makeText(this, otp, Toast.LENGTH_SHORT).show();
 
-                if (otp1.isEmpty()&&otp2.isEmpty()&&otp3.isEmpty()&&otp4.isEmpty()&&otp5.isEmpty()&&otp6.isEmpty()){
+                if (otp1.isEmpty()&&otp2.isEmpty()&&otp3.isEmpty()&&otp4.isEmpty()){
                     Log.e("OTP1","OTP"+otp+"==>"+otpString);
 
                     Toast.makeText(this, "Invalid OTP!", Toast.LENGTH_SHORT).show();
@@ -350,8 +331,6 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                         editText_two.getText().clear();
                         editText_three.getText().clear();
                         editText_four.getText().clear();
-                        editText_five.getText().clear();
-                        editText_six.getText().clear();
                         editText_one.requestFocus();
                         otpString = String.valueOf(resendOTPResponse.getData().getOtp());
                         registerBroadcastReceiver();

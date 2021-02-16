@@ -45,6 +45,7 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_send_phone_number);
         methods = new Methods(this);
         enter_phone_ET=findViewById(R.id.enter_phone_ET);
+
         request_code_BT=findViewById(R.id.request_code_BT);
         qrCodeScanner_IV=findViewById(R.id.qrCodeScanner_IV);
         qrCodeScanner_IV.setOnClickListener(this);
