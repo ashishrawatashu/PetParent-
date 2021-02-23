@@ -229,7 +229,7 @@ public class Methods {
                 "</html>";
         return str;
     }
-    public String immunizationPdfGenarator(String petName, String petAge, String petSex, String petParent , String regisNumber, JSONArray immunizationDate, JSONArray vaccineClass, JSONArray nextDueDate ) {
+    public String immunizationPdfGenarator(String petName, String petAge, String petSex, String petParent , String regisNumber, JSONArray immunizationDate, JSONArray vaccineClass, JSONArray nextDueDate, JSONArray immunizationDatePending, JSONArray vaccineClassPending, JSONArray nextDueDatePending ) {
 
         String care="Vet Care";
         String str = "<!DOCTYPE html>\n" +
@@ -263,7 +263,6 @@ public class Methods {
                 "      size: A4;\n" +
                 "      margin: 15px;\n" +
                 "    }\n" +
-
                 "  table {\n" +
                 "      width: 100%;\n" +
                 "   }\n" +
@@ -275,7 +274,6 @@ public class Methods {
                 "     border: 1px #000000 solid;\n" +
                 "    border-radius: 1px;\n" +
                 "  }\n" +
-
                 "  td {\n" +
                 "     width: 25%;\n" +
                 "     padding: 10px;\n" +
@@ -337,9 +335,20 @@ public class Methods {
                 "                <div class=\"col-xs-12\" style=\"font-size: 20px; margin-bottom: 25px;\">\n" +
                 "                    <b>Pet Parant Name:" + petParent + "</b>\n" +
                 "                </div>\n" +
-                "<div id=\"output\">\n"+
+                "\n" +
+                "\n" +
+                "                <div class=\"col-xs-12\" style=\"font-size: 20px; margin-bottom: 25px;\">\n" +
+                "                    <b><h1>Pet Added Vaccination<h1></b>\n" +
+                "                </div>\n" +
+                "<div id=\"output1\">\n"+
                 "</div>\n"+
-
+                "\n" +
+                "\n" +
+                "                <div class=\"col-xs-12\" style=\"font-size: 20px; margin-bottom: 25px;\">\n" +
+                "                    <b><h1>Pending Vaccination<h1></b>\n" +
+                "                </div>\n" +
+                "<div id=\"output2\">\n"+
+                "</div>\n"+
                 "            </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>\n" +
                 "            <div class=\"col-md-12\" style=\"border: 1px solid black;\"></div>\n" +
                 "            <div class=\"col-md-12\" style=\"font-size: 25px; text-align: center;\">Address: " + Config.user_Veterian_address + ", Registration Number: " + regisNumber + "</div>\n" +
@@ -356,24 +365,34 @@ public class Methods {
                 "        window.close();\n" +
                 "    });\n" +
                 "</script>\n" +
-
                 "<script>\n"+
                 // Initializing arrays
                 "var immuDate = "+immunizationDate+";\n"+
                 "var vaccineName = "+vaccineClass+";\n"+
                 "var nextDate = "+nextDueDate+";\n"+
+
+                "var immuDatePending = "+immunizationDatePending+";\n"+
+                "var vaccineNamePending = "+vaccineClassPending+";\n"+
+                "var nextDatePending = "+nextDueDatePending+";\n"+
                 // Getting output element
-                "var output = document.getElementById('output');\n"+
+                "var output = document.getElementById('output1');\n"+
+                "var outputNext = document.getElementById('output2');\n"+
                 // Creating table tags
-                "var table = \"<table><thead><tr><th>Immunization Date</th><th>Vaccine Class</th><th>Next Due Date</th></tr></thead><tbody>\";\n"+
+                "var table = \"<table><thead><tr><th>Vaccine Class</th><th>Vaccine Type</th><th>Next Due Date</th></tr></thead><tbody>\";\n"+
                 "  for (var i = 0; i < immuDate.length; i++) {\n"+
-                "table += \"<tr><td>\" + immuDate[i] + \"</td><td>\" + vaccineName[i] + \"</td><td>\" + nextDate[i] + \"</td></tr>\";\n"+
+                "table += \"<tr><td>\" + vaccineName[i] + \"</td><td>\" + immuDate[i]  + \"</td><td>\" + nextDate[i] + \"</td></tr>\";\n"+
                 " }\n"+
                 "  table += \"</tbody></table>\";\n"+
+
+                "var table1 = \"<table><thead><tr><th>Vaccine Class</th><th>Vaccine Type</th><th>Next Due Date</th></tr></thead><tbody>\";\n"+
+                "  for (var i = 0; i < immuDatePending.length; i++) {\n"+
+                "table1 += \"<tr><td>\" + vaccineNamePending[i] + \"</td><td>\" + immuDatePending[i]  + \"</td><td>\" + nextDatePending[i] + \"</td></tr>\";\n"+
+                " }\n"+
+                "  table += \"</tbody></table1>\";\n"+
                 // Binding output element with table var
                 " output.innerHTML = table;\n"+
+                " outputNext.innerHTML = table1;\n"+
                 "</script>\n"+
-
                 "</body>\n" +
                 "</html>";
         return str;

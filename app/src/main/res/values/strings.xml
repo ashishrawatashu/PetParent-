@@ -29,7 +29,7 @@
     <string name="immunizationChartLabel">Immunization Chart</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cancel">Cancel</string>
-    <string name="details">Your Details</string>
+    <string name="details">Enter your details</string>
     <string name="Security">Security</string>
     <string name="update_profile">Veterinarian Account</string>
     <string name="address">Address</string>
@@ -199,5 +199,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="ContinuewithPhoneNumber">Continue with Phone Number</string>
 
 </resources>

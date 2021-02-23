@@ -181,7 +181,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/green_background_bg"
                     android:text="@string/viewDetails"
                     android:textColor="@color/whiteColor" />
 

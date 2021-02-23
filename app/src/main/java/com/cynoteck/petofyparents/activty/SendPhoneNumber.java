@@ -4,7 +4,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -30,13 +33,14 @@ import java.io.IOException;
 
 import retrofit2.Response;
 
-public class SendPhoneNumber extends AppCompatActivity implements View.OnClickListener, ApiResponse {
+public class SendPhoneNumber extends AppCompatActivity implements View.OnClickListener, ApiResponse, TextWatcher {
 
     EditText enter_phone_ET;
-    Button request_code_BT;
+    Button next_BT;
     String phoneNumber,vetID="";
-    ImageView qrCodeScanner_IV;
+    ImageView qrCodeScanner_IV,cross_IV,back_arrow_IV;
     Methods methods;
+    Drawable drawableRight;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
 
     @Override
@@ -46,17 +50,38 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
         methods = new Methods(this);
         enter_phone_ET=findViewById(R.id.enter_phone_ET);
 
-        request_code_BT=findViewById(R.id.request_code_BT);
-        qrCodeScanner_IV=findViewById(R.id.qrCodeScanner_IV);
-        qrCodeScanner_IV.setOnClickListener(this);
-        request_code_BT.setOnClickListener(this);
+        next_BT=findViewById(R.id.next_BT);
+        cross_IV=findViewById(R.id.cross_IV);
+        back_arrow_IV=findViewById(R.id.back_arrow_IV);
+        back_arrow_IV.setOnClickListener(this);
+        enter_phone_ET.addTextChangedListener(this);
+//        qrCodeScanner_IV.setOnClickListener(this);
+
+
+        next_BT.setOnClickListener(this);
+        cross_IV.setOnClickListener(this);
         Intent intent = getIntent();
+        next_BT.setEnabled(false);
         vetID = intent.getStringExtra("vetID");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
         } else {
             ActivityCompat.requestPermissions(this, new
                     String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         }
+
+//        enter_phone_ET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                cross_IV.setVisibility(View.VISIBLE);
+//                if (enter_phone_ET.getText().toString().length()==10){
+//                    next_BT.setEnabled(true);
+//                    next_BT.setBackgroundResource(R.drawable.next_button_green_bg);
+//                }else {
+//                    next_BT.setEnabled(false);
+//                    next_BT.setBackgroundResource(R.drawable.next_button_grey_bg);
+//                }
+//            }
+//        });
 
     }
     @Override
@@ -81,7 +106,7 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.request_code_BT:
+            case R.id.next_BT:
                 phoneNumber=enter_phone_ET.getText().toString().trim();
                 if (phoneNumber.isEmpty()){
                     Toast.makeText(this, "Enter Phone number !", Toast.LENGTH_SHORT).show();
@@ -101,12 +126,18 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
 
-            case R.id.qrCodeScanner_IV:
-                
-                Intent qrIntent = new Intent(this,ScannerQR.class);
-                startActivityForResult(qrIntent,1);
-                break;
+            case R.id.cross_IV:
+                enter_phone_ET.getText().clear();
 
+                break;
+            case R.id.back_arrow_IV:
+                onBackPressed();
+                break;
+//            case R.id.qrCodeScanner_IV:
+//
+//                Intent qrIntent = new Intent(this,ScannerQR.class);
+//                startActivityForResult(qrIntent,1);
+//                break;
 
         }
     }
@@ -162,6 +193,34 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onError(Throwable t, String key) {
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if (s.toString().length()>0){
+            cross_IV.setVisibility(View.VISIBLE);
+        }else if (s.toString().length()==0){
+            cross_IV.setVisibility(View.INVISIBLE);
+
+        }
+
+        if (s.toString().length()==10){
+            next_BT.setEnabled(true);
+            next_BT.setBackgroundResource(R.drawable.next_button_green_bg);
+        }else if (s.toString().length()<10){
+            next_BT.setEnabled(false);
+            next_BT.setBackgroundResource(R.drawable.next_button_grey_bg);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
 
     }
 }

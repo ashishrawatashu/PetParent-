@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ import com.google.android.material.textfield.TextInputLayout;
 public class RegisterActivity extends FragmentActivity implements ApiResponse, View.OnClickListener {
 
     Methods methods;
-
+    ImageView back_arrow_IV;
     private TextInputLayout firstname_TIL, lastName_TIL, email_TIL, phoneNumber_TIL, password_TIL, confirmPassword_TIL;
     private TextInputEditText firstname_TIET, lastName_TIET, email_TIET, phoneNumber_TIET, password_TIET, confirmPassword_TIET;
     private Button signUp_BT;
@@ -55,6 +56,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         phoneNumber_TIL = findViewById(R.id.number_TIL);
         password_TIL = findViewById(R.id.password_TIL);
         confirmPassword_TIL = findViewById(R.id.cPassword_TIL);
+        back_arrow_IV=findViewById(R.id.back_arrow_IV);
 
 
         firstname_TIET = findViewById(R.id.firstName_TIET);
@@ -69,6 +71,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         signUp_BT=findViewById(R.id.signUp_BT);
 
         signUp_BT.setOnClickListener(this);
+        back_arrow_IV.setOnClickListener(this);
 //        signIN_TV.setOnClickListener(this);
 
 
@@ -141,6 +144,10 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
     public void onClick(View v) {
 
         switch (v.getId()){
+
+            case R.id.back_arrow_IV:
+                onBackPressed();
+                break;
 
             case R.id.signUp_BT:
                 firstName = firstname_TIET.getText().toString().trim();

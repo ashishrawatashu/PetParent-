@@ -98,7 +98,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="fitXY"
-                            android:src="@drawable/dog" />
+                            android:padding="15dp"
+                            android:src="@drawable/dog_dummy_image" />
 
 
                     </androidx.cardview.widget.CardView>

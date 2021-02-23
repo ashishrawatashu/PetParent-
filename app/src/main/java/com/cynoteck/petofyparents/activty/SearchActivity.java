@@ -33,9 +33,9 @@ import java.util.ArrayList;
 
 import retrofit2.Response;
 
-public class SearchActivity extends AppCompatActivity implements TextWatcher, ApiResponse, SearchInterface {
-EditText searchpet;
-ImageView backarrowimageview;
+public class SearchActivity extends AppCompatActivity implements TextWatcher, ApiResponse, SearchInterface ,View.OnClickListener{
+    EditText searchpet;
+    ImageView back_arrow;
     ArrayList<PetList> profileList = new ArrayList<>();
     RecyclerView register_pet_RV;
     SearchAdapter SearchAdapter;
@@ -46,10 +46,11 @@ ImageView backarrowimageview;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchpet=(EditText)findViewById(R.id.search_pet);
-        backarrowimageview=(ImageView)findViewById(R.id.back_arrow);
-        register_pet_RV=(RecyclerView) findViewById(R.id.register_pet_RV);
-        progressBar=findViewById(R.id.progressBar);
+        searchpet = (EditText) findViewById(R.id.search_pet);
+        back_arrow = (ImageView) findViewById(R.id.back_arrow);
+        register_pet_RV = (RecyclerView) findViewById(R.id.register_pet_RV);
+        back_arrow.setOnClickListener(this);
+        progressBar = findViewById(R.id.progressBar);
         searchpet.requestFocus();
         searchpet.addTextChangedListener(new TextWatcher() {
             @Override
@@ -64,7 +65,7 @@ ImageView backarrowimageview;
 
             @Override
             public void afterTextChanged(Editable s) {
-                String value=s.toString();
+                String value = s.toString();
                 petSearchDependsOnPrefix(value);
             }
         });
@@ -84,6 +85,7 @@ ImageView backarrowimageview;
     public void afterTextChanged(Editable s) {
 
     }
+
     private void petSearchDependsOnPrefix(String prefix) {
         progressBar.setVisibility(View.VISIBLE);
         PetDataParams getPetDataParams = new PetDataParams();
@@ -94,65 +96,60 @@ ImageView backarrowimageview;
         getPetDataRequest.setData(getPetDataParams);
 
         ApiService<GetPetListResponse> service = new ApiService<>();
-        service.get( SearchActivity.this, ApiClient.getApiInterface().getPetList(Config.token,getPetDataRequest), "GetPetListBySearch");
-        Log.e("DATALOG","check1=> "+getPetDataRequest);
+        service.get(SearchActivity.this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetListBySearch");
+        Log.e("DATALOG", "check1=> " + getPetDataRequest);
     }
 
     @Override
     public void onResponse(Response arg0, String key) {
-switch(key){
-    case "GetPetListBySearch":
-        try {
-            GetPetListResponse getPetListResponse = (GetPetListResponse) arg0.body();
-            Log.d("GetPetListBySearch", getPetListResponse.toString());
-            int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
-            profileList.clear();
-            if (responseCode== 109){
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this);
-                register_pet_RV.setLayoutManager(linearLayoutManager);
-                if(getPetListResponse.getData().getPetList().size()>0)
-                {
+        switch (key) {
+            case "GetPetListBySearch":
+                try {
+                    GetPetListResponse getPetListResponse = (GetPetListResponse) arg0.body();
+                    Log.d("GetPetListBySearch", getPetListResponse.toString());
+                    int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
+                    profileList.clear();
+                    if (responseCode == 109) {
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this);
+                        register_pet_RV.setLayoutManager(linearLayoutManager);
+                        if (getPetListResponse.getData().getPetList().size() > 0) {
 
-                    for(int i=0; i<getPetListResponse.getData().getPetList().size();i++)
-                    {
-                        PetList petList=new PetList();
-                        petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
-                        petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
-                        petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
-                        petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
-                        petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
-                        petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
-                        petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
-                        petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
-                        petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
-                        petList.setLastVisitEncryptedId(getPetListResponse.getData().getPetList().get(i).getLastVisitEncryptedId());
+                            for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
+                                PetList petList = new PetList();
+                                petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
+                                petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
+                                petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
+                                petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
+                                petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
+                                petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
+                                petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
+                                petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
+                                petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
+                                petList.setLastVisitEncryptedId(getPetListResponse.getData().getPetList().get(i).getLastVisitEncryptedId());
 
-                        profileList.add(petList);
+                                profileList.add(petList);
+                            }
+
+                            SearchAdapter = new SearchAdapter(SearchActivity.this, profileList, this);
+                            register_pet_RV.setAdapter(SearchAdapter);
+                            SearchAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.INVISIBLE);
+
+
+                        } else {
+                            Log.e("No_DATA", "NO_DATA");
+//                    Toast.makeText(SearchActivity.this, "Data Not found", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
 
-                    SearchAdapter = new SearchAdapter(SearchActivity.this,profileList,this);
-                    register_pet_RV.setAdapter(SearchAdapter);
-                    SearchAdapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.INVISIBLE);
-
-
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                else
-                {
-                    Log.e("No_DATA","NO_DATA");
-//                    Toast.makeText(SearchActivity.this, "Data Not found", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
+                break;
 
         }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        break;
-
-}
     }
 
     @Override
@@ -166,20 +163,29 @@ switch(key){
         profileList.get(position).getPetUniqueId();
         Intent selectReportsIntent = new Intent(this, SelectPetReportsActivity.class);
         Bundle data = new Bundle();
-        data.putString("pet_id",profileList.get(position).getId());
-        data.putString("pet_name",profileList.get(position).getPetName());
-        data.putString("pet_unique_id",profileList.get(position).getPetUniqueId());
-        data.putString("pet_sex",profileList.get(position).getPetSex());
-        data.putString("pet_owner_name",profileList.get(position).getPetParentName());
-        data.putString("pet_owner_contact",profileList.get(position).getContactNumber());
-        data.putString("pet_encryt_id",profileList.get(position).getEncryptedId());
-        data.putString("pet_age",profileList.get(position).getPetAge());
-        data.putString("pet_DOB",profileList.get(position).getDateOfBirth());
-        data.putString("pet_encrypted_id",profileList.get(position).getEncryptedId());
+        data.putString("pet_id", profileList.get(position).getId());
+        data.putString("pet_name", profileList.get(position).getPetName());
+        data.putString("pet_unique_id", profileList.get(position).getPetUniqueId());
+        data.putString("pet_sex", profileList.get(position).getPetSex());
+        data.putString("pet_owner_name", profileList.get(position).getPetParentName());
+        data.putString("pet_owner_contact", profileList.get(position).getContactNumber());
+        data.putString("pet_encryt_id", profileList.get(position).getEncryptedId());
+        data.putString("pet_age", profileList.get(position).getPetAge());
+        data.putString("pet_DOB", profileList.get(position).getDateOfBirth());
+        data.putString("pet_encrypted_id", profileList.get(position).getEncryptedId());
 
         selectReportsIntent.putExtras(data);
         startActivity(selectReportsIntent);
-        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.back_arrow:
+                onBackPressed();
+                break;
+        }
     }
 }

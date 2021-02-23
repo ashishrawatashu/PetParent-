@@ -98,20 +98,20 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         switch (v.getId()){
             case R.id.edit_image:
 
-                        Intent intent=new Intent(this, GetPetDetailsActivity.class);
-                        intent.putExtra("pet_id",petId);
-                        intent.putExtra("pet_category",getPetResponse.getData().getPetCategory());
-                        intent.putExtra("pet_name",getPetResponse.getData().getPetName());
-                        intent.putExtra("pet_sex",getPetResponse.getData().getPetSex());
-                        intent.putExtra("pet_DOB",getPetResponse.getData().getDateOfBirth());
-                        intent.putExtra("pet_age",getPetResponse.getData().getPetAge());
-                        intent.putExtra("pet_size",getPetResponse.getData().getPetSize());
-                        intent.putExtra("pet_breed",getPetResponse.getData().getPetBreed());
-                        intent.putExtra("pet_color",getPetResponse.getData().getPetColor());
-                        intent.putExtra("pet_parent",getPetResponse.getData().getPetParentName());
-                        intent.putExtra("pet_parent_contact",getPetResponse.getData().getContactNumber());
-                        intent.putExtra("image_url",getPetResponse.getData().getPetProfileImageUrl());
-                        startActivity(intent);
+                Intent intent=new Intent(this, GetPetDetailsActivity.class);
+                intent.putExtra("pet_id",petId);
+                intent.putExtra("pet_category",getPetResponse.getData().getPetCategory());
+                intent.putExtra("pet_name",getPetResponse.getData().getPetName());
+                intent.putExtra("pet_sex",getPetResponse.getData().getPetSex());
+                intent.putExtra("pet_DOB",getPetResponse.getData().getDateOfBirth());
+                intent.putExtra("pet_age",getPetResponse.getData().getPetAge());
+                intent.putExtra("pet_size",getPetResponse.getData().getPetSize());
+                intent.putExtra("pet_breed",getPetResponse.getData().getPetBreed());
+                intent.putExtra("pet_color",getPetResponse.getData().getPetColor());
+                intent.putExtra("pet_parent",getPetResponse.getData().getPetParentName());
+                intent.putExtra("pet_parent_contact",getPetResponse.getData().getContactNumber());
+                intent.putExtra("image_url",getPetResponse.getData().getPetProfileImageUrl());
+                startActivityForResult(intent,1);
 
                 break;
             case R.id.back_arrow_pp:

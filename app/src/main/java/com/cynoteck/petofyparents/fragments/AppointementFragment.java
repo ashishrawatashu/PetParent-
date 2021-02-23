@@ -59,7 +59,7 @@ import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AppointementFragment extends Fragment implements ApiResponse,View.OnClickListener, RegisterRecyclerViewClickListener {
+public class AppointementFragment extends Fragment implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener {
     FloatingActionButton create_appointment_FBT;
     GetAppointmentResponse getAppointmentResponse;
     View view;
@@ -71,7 +71,7 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
     String mettingId = "", status = "", pet_id = "", pet_owner_name = "", pet_sex = "", pet_age = "", pet_unique_id = "";
     private static final int REQUEST_LOCATION = 1;
     LocationManager locationManager;
-    String latitude="30.3647", longitude="78.0888";
+    String latitude = "30.3647", longitude = "78.0888";
     private ShimmerFrameLayout mShimmerViewContainer;
     AppointmentsClickListner appointmentsClickListner;
     Dialog vetDilog;
@@ -101,7 +101,8 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
             getAppointment();
         } else {
             methods.DialogInternet();
-        }locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        }
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             OnGPS();
         } else {
@@ -118,7 +119,6 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
         service.get(this, ApiClient.getApiInterface().getAppointment(Config.token), "GetAppointment");
 
     }
-
 
 
     @Override
@@ -180,7 +180,7 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
                 longitude = String.valueOf(longi);
                 Log.e("location", latitude + " " + longitude);
             } else {
-                Toast.makeText(getActivity(), "Unable to find location.", Toast.LENGTH_SHORT).show();
+                Log.e("Loaction Error", "Unable to find location.");
             }
         }
     }
@@ -212,21 +212,12 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
                     Log.d("GetAppointment", getAppointmentResponse.toString());
                     int responseCode = Integer.parseInt(getAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-//                        approveAndReject("19","false");
-
                         mShimmerViewContainer.setVisibility(View.GONE);
                         create_appointment_FBT.setVisibility(View.VISIBLE);
                         mShimmerViewContainer.stopShimmer();
                         dateListAdapter = new DateListAdapter(getAppointmentResponse.getData(), getContext(), new AppointmentsClickListner() {
                             @Override
                             public void onItemClick(int position, ArrayList<AppointmentList> appointmentLists) {
-//                                Intent intent = new Intent(getContext(),AddUpdateAppointmentActivity.class);
-//                                intent.putExtra("type","update");
-//                                intent.putExtra("id",appointmentLists.get(position).getId());
-//                                intent.putExtra("pet_id",appointmentLists.get(position).getPetId());
-//                                intent.putExtra("petParent",appointmentLists.get(position).getPetUniqueId());
-//
-//                                startActivity(intent);
 
                             }
 
@@ -249,9 +240,9 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
                                     intent.putExtra("startDate", appointmentLists.get(position).getStartDateString());
                                     intent.putExtra("endDate", appointmentLists.get(position).getEndDateString());
                                     intent.putExtra("mettingId", appointmentLists.get(position).getId());
-                                    Log.e("PaymentOrder",intent.toString());
+                                    Log.e("PaymentOrder", intent.toString());
 
-                                    startActivityForResult(intent,1);
+                                    startActivityForResult(intent, 1);
                                 } else {
                                     methods.DialogInternet();
                                 }
@@ -262,7 +253,7 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
                             public void onCancelClick(int position, ArrayList<AppointmentList> appointmentLists, Button button) {
                                 {
                                     mettingId = appointmentLists.get(position).getId();
-                                    Log.d("Add Anotheer Veterian","vet");
+                                    Log.d("Add Anotheer Veterian", "vet");
                                     AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                                     alertDialog.setTitle("");
                                     alertDialog.setMessage("Do you want to cancel this appointment?");
@@ -322,64 +313,63 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
                 }
                 break;
             case "GetVetList":
-                    try {
-                        getVetListResponse = (GetVetListResponse) arg0.body();
-                        Log.d("DATALOG", getVetListResponse.toString());
-                        int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
-                        if (responseCode == 109) {
-                            if (getVetListResponse.getData().getProviderList().isEmpty()) {
-                                mShimmerViewContainer.setVisibility(View.GONE);
-                                mShimmerViewContainer.stopShimmer();
-                                Toast.makeText(getContext(), "No Data Found!", Toast.LENGTH_SHORT).show();
-                            } else {
+                try {
+                    getVetListResponse = (GetVetListResponse) arg0.body();
+                    Log.d("DATALOG", getVetListResponse.toString());
+                    int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
+                    if (responseCode == 109) {
+                        if (getVetListResponse.getData().getProviderList().isEmpty()) {
+                            mShimmerViewContainer.setVisibility(View.GONE);
+                            mShimmerViewContainer.stopShimmer();
+                            Toast.makeText(getContext(), "No Data Found!", Toast.LENGTH_SHORT).show();
+                        } else {
 //                            search_IV.setVisibility(View.VISIBLE);
-                                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                                vetList_RV.setLayoutManager(linearLayoutManager);
-                                vetListAdapter = new VetListAdapter(getContext(), getVetListResponse.getData().getProviderList(), this);
-                                providerLists = getVetListResponse.getData().getProviderList();
-                                vetList_RV.setAdapter(vetListAdapter);
-                                vetListAdapter.notifyDataSetChanged();
-                                mShimmerViewContainer.setVisibility(View.GONE);
-                                mShimmerViewContainer.stopShimmer();
-                            }
-
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                            vetList_RV.setLayoutManager(linearLayoutManager);
+                            vetListAdapter = new VetListAdapter(getContext(), getVetListResponse.getData().getProviderList(), this);
+                            providerLists = getVetListResponse.getData().getProviderList();
+                            vetList_RV.setAdapter(vetListAdapter);
+                            vetListAdapter.notifyDataSetChanged();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+                            mShimmerViewContainer.stopShimmer();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    break;
+                break;
 
 
-
-            }
         }
+    }
 
     private void cancelAppointment(String id) {
         AppointmentStatusParams appointmentStatusParams = new AppointmentStatusParams();
         appointmentStatusParams.setId(id);
         AppointmentsStatusRequest appointmentsStatusRequest = new AppointmentsStatusRequest();
         appointmentsStatusRequest.setData(appointmentStatusParams);
-        Log.d("Statusrequest",appointmentsStatusRequest.toString());
+        Log.d("Statusrequest", appointmentsStatusRequest.toString());
 
         ApiService<AppointmentStatusResponse> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().cancelAppointment(Config.token,appointmentsStatusRequest), "Status");
+        service.get(this, ApiClient.getApiInterface().cancelAppointment(Config.token, appointmentsStatusRequest), "Status");
 
     }
 
     @Override
-        public void onError (Throwable t, String key){
+    public void onError(Throwable t, String key) {
 
-        }
+    }
 
     @Override
     public void onProductClick(int position) {
-        Intent  intent = new Intent(getActivity(), AddUpdateAppointmentActivity.class);
-        intent.putExtra("type","add");
-        intent.putExtra("id","");
-        intent.putExtra("pet_id","");
-        intent.putExtra("vetUserId",getVetListResponse.getData().getProviderList().get(position).getId());
-        startActivityForResult(intent,1);
+        Intent intent = new Intent(getActivity(), AddUpdateAppointmentActivity.class);
+        intent.putExtra("type", "add");
+        intent.putExtra("id", "");
+        intent.putExtra("pet_id", "");
+        intent.putExtra("vetUserId", getVetListResponse.getData().getProviderList().get(position).getId());
+        startActivityForResult(intent, 1);
         vetDilog.dismiss();
 
     }
@@ -389,10 +379,10 @@ public class AppointementFragment extends Fragment implements ApiResponse,View.O
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                mShimmerViewContainer.setVisibility(View.VISIBLE);
-                mShimmerViewContainer.startShimmer();
-                date_day_RV.setVisibility(View.GONE);
+            if (resultCode == RESULT_OK) {
+//                date_day_RV.setVisibility(View.GONE);
+//                mShimmerViewContainer.setVisibility(View.VISIBLE);
+//                mShimmerViewContainer.startShimmer();
                 getAppointment();
             }
         }

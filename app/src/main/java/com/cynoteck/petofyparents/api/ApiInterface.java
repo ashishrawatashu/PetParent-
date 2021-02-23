@@ -1,6 +1,7 @@
 package com.cynoteck.petofyparents.api;
 
 import com.cynoteck.petofyparents.parameter.addParamRequest.AddPetRequset;
+import com.cynoteck.petofyparents.parameter.addPetToVetRegisterUsingQRCodeRequest.AddPetToVetRegisterUsingQRRequest;
 import com.cynoteck.petofyparents.parameter.adoptionListRequest.AdoptionListRequestModel;
 import com.cynoteck.petofyparents.parameter.adoptionRequest.AdoptionRequest;
 import com.cynoteck.petofyparents.parameter.appointmentParams.AppointmentsStatusRequest;
@@ -402,8 +403,12 @@ public interface ApiInterface {
     Call<GetPetParentResponseData> searchPetParent(@Header("Authorization") String auth, @Body SearchPetParentRequestData getPetAgeRequestData);
 
 
-    @POST("User/PetParentRegistrationUsingQRCode")
-    Call<RegisterParentWithQRResponse> petParentRegistrationUsingQRCode(@Body RegistrationWithQrCodeRequest registrationWithQrCodeRequest);
+    @POST("pet/PetRegistrationUsingQRCode")
+    Call<RegisterParentWithQRResponse> petParentRegistrationUsingQRCode(@Header("Authorization") String auth,@Body RegistrationWithQrCodeRequest registrationWithQrCodeRequest);
+
+
+    @POST("pet/AddPetToVetRegisterUsingQRCode")
+    Call<RegisterParentWithQRResponse> addPetToVetRegisterUsingQRCode(@Header("Authorization") String auth,@Body AddPetToVetRegisterUsingQRRequest addPetToVetRegisterUsingQRRequest);
 
     @POST("user/SendRegistrationOtp")
     Call<JsonObject> sendRegistrationOtp(@Body JsonObject sendRegistrationOtp);
