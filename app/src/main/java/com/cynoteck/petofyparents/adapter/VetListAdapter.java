@@ -46,7 +46,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
 
         Glide.with(context)
                 .load(providerLists.get(position).getProfileImageURL())
-                .placeholder(R.drawable.pet_image)
+                .placeholder(R.drawable.doctor_dummy_image)
                 .into(holder.vet_profile_IV);
 
     }

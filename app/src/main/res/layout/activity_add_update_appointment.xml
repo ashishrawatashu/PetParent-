@@ -119,7 +119,7 @@
                         android:imeOptions="actionSearch"
                         android:singleLine="true"
                         android:id="@+id/pet_parent_ACTV"
-                        android:hint=""
+                        android:hint="Search your pet..."
                         android:background="@null"
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"

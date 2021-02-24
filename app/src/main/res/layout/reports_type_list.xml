@@ -130,6 +130,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/reson_of_visit_LL"
                     android:padding="8dp"
                     android:weightSum="3"
                     android:orientation="horizontal"
@@ -171,6 +172,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/follow_date_LL"
                     android:padding="8dp"
                     android:weightSum="3"
                     android:orientation="horizontal"

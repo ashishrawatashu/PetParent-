@@ -62,47 +62,6 @@ public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.
         return profileList.size();
     }
 
-//    @Override
-//    public Filter getFilter() {
-//        return filterList;
-//    }
-//
-//    private Filter filterList = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence constraint) {
-//
-//            List<PetList> filteredList = new ArrayList<>();
-//            if (constraint == null || constraint.length()==0){
-//                filteredList.addAll(filterProfileList);
-//            }else {
-//                String filterPattern = constraint.toString().toLowerCase().trim();
-//                for (PetList item : filterProfileList){
-//                    if (item.getPetUniqueId().toLowerCase().contains(filterPattern)){
-//                        filteredList.add(item);
-//                    }else if (item.getContactNumber().toLowerCase().contains(filterPattern)){
-//                        filteredList.add(item);
-//                    }else if (item.getPetName().toLowerCase().contains(filterPattern)){
-//                        filteredList.add(item);
-//                    }else if (item.getPetParentName().toLowerCase().contains(filterPattern)){
-//                        filteredList.add(item);
-//                    }
-//                }
-//            }
-//            FilterResults filterResults = new FilterResults();
-//            filterResults.values = filteredList;
-//
-//            return filterResults;
-//        }
-//
-//        @Override
-//        protected void publishResults(CharSequence constraint, FilterResults results) {
-//            profileList.clear();
-//            profileList.addAll((List<PetList>)results.values);
-//            notifyDataSetChanged();
-//
-//        }
-//    };
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView petRegImage_IV;
         TextView pet_reg__id_TV,pet_reg_date_of_birth_TV,pet_reg_name_TV,pet_reg_gender_TV;

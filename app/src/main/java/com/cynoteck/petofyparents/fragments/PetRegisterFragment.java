@@ -209,9 +209,9 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register_add_TV:
-
-                startActivityForResult(new Intent(getActivity(), AddPetRegister.class), 1);
-
+                Intent adNewIntent = new Intent(getActivity(), AddPetRegister.class);
+                adNewIntent.putExtra("appointment", "add");
+                startActivityForResult(adNewIntent, 1);
                 break;
             case R.id.search_register_pet:
 
@@ -250,7 +250,6 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onResponse(Response response, String key) {
-//        methods.customProgressDismiss();
         switch (key) {
             case "GetPetList":
                 try {
@@ -288,7 +287,6 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                         } else {
                             progressBar.setVisibility(View.GONE);
                             mShimmerViewContainer.setVisibility(View.GONE);
-//                            Toast.makeText(context, "Data Not found", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -333,7 +331,6 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                             mShimmerViewContainer.setVisibility(View.GONE);
                         } else {
                             progressBar.setVisibility(View.GONE);
-//                            Toast.makeText(context, "Data Not found", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -349,66 +346,32 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onError(Throwable t, String key) {
-        //methods.customProgressDismiss();
-
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        mShimmerViewContainer.startShimmer();
-        if (Config.backCall.equals("Added")) {
-            Config.backCall = "";
-            profileList.clear();
-            mShimmerViewContainer.setVisibility(View.VISIBLE);
-            mShimmerViewContainer.startShimmer();
-
-            getPetList(page, pagelimit);
-        }
-        if (Config.backCall.equals("hit")) {
-            Config.backCall = "";
-            profileList.clear();
-            mShimmerViewContainer.setVisibility(View.VISIBLE);
-            mShimmerViewContainer.startShimmer();
-
-            getPetList(page, pagelimit);
-        }
     }
 
     @Override
     public void onPause() {
-        /*mShimmerViewContainer.stopShimmerAnimation();*/
         super.onPause();
     }
 
     @Override
     public void onViewDetailsClick(int position) {
-        Log.d("positionssss", "" + position);
-        Log.d("pet_id", "" + profileList.get(position).getId());
-
-        StringTokenizer tokens = new StringTokenizer(profileList.get(position).getId(), ".");
+               StringTokenizer tokens = new StringTokenizer(profileList.get(position).getId(), ".");
         String first = tokens.nextToken();
 
         Intent intent = new Intent(getActivity(), PetProfileActivity.class);
         intent.putExtra("pet_id", first);
-//        intent.putExtra("pet_category",profileList.get(position).getPetCategory());
-//        intent.putExtra("pet_name",profileList.get(position).getPetName());
-//        intent.putExtra("pet_sex",profileList.get(position).getPetSex());
-//        intent.putExtra("pet_DOB",profileList.get(position).getPetTestsAndXrey());
-//        intent.putExtra("pet_age",profileList.get(position).getPetAge());
-//        intent.putExtra("pet_size",profileList.get(position).getPetSize());
-//        intent.putExtra("pet_breed",profileList.get(position).getPetBreed());
-//        intent.putExtra("pet_color",profileList.get(position).getPetColor());
-//        intent.putExtra("pet_parent",profileList.get(position).getPetParentName());
-//        intent.putExtra("pet_parent_contact",profileList.get(position).getContactNumber());
         startActivity(intent);
 
     }
 
     @Override
     public void onIdCardClick(int position) {
-        Log.d("positionssss", "" + position);
         Intent intent = new Intent(getContext(), PetIdCardActivity.class);
         Bundle idBundle = new Bundle();
         idBundle.putString("id", profileList.get(position).getId());
@@ -418,11 +381,6 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onIdAddClinicClick(int position) {
-        Log.e("ID", profileList.get(position).getId());
-        Log.e("E_ID", profileList.get(position).getEncryptedId());
-        Log.e("PET_NAME", profileList.get(position).getPetName());
-        Log.e("PET_PARENT", profileList.get(position).getPetParentName());
-
         Intent petDetailsIntent = new Intent(getActivity().getApplication(), PetDetailsActivity.class);
         Bundle data = new Bundle();
         data.putString("pet_id", profileList.get(position).getId());
@@ -455,7 +413,6 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        // registerPetAdapter.getFilter().filter(charSequence.toString());
     }
 
     @Override

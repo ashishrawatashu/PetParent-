@@ -125,6 +125,7 @@
             <androidx.appcompat.widget.AppCompatSpinner
                 android:layout_below="@id/pet_category_TV"
                 android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/add_details_pet_type"
@@ -177,6 +178,7 @@
                 android:layout_below="@id/pet_gender_TV"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
+                android:paddingLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/add_details_pet_sex"
                 android:background="@drawable/spinner_background"
@@ -274,6 +276,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="20dp"
+                android:paddingLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/add_details_pet_breed"
                 android:background="@drawable/spinner_background"
@@ -297,6 +300,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:paddingLeft="20dp"
                 android:id="@+id/add_detils_pet_color"
                 android:background="@drawable/spinner_background"
                 android:layout_width="match_parent"
@@ -304,6 +308,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/add_detils_pet_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -316,6 +321,7 @@
 
 
             <EditText
+                android:visibility="gone"
                 android:layout_below="@id/pet_patent_TV"
                 android:inputType="text"
                 android:maxLines="1"
@@ -333,6 +339,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/pet_details_parent_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -345,6 +352,7 @@
 
 
             <EditText
+                android:visibility="gone"
                 android:layout_below="@id/pet_contact_TV"
                 android:inputType="number"
                 android:maxLines="1"
@@ -392,6 +400,7 @@
 
 
             <TextView
+                android:visibility="gone"
                 android:layout_below="@id/pet_deatils_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -404,6 +413,7 @@
 
 
             <EditText
+                android:visibility="gone"
                 android:layout_below="@id/pet_address_TV"
                 android:inputType="text"
                 android:maxLines="1"

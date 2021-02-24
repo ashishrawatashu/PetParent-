@@ -63,6 +63,7 @@
     <string name="petownwer">Pet Parent</string>
     <string name="double_Dot">:</string>
     <string name="xrayReport">Test/X-Ray Report</string>
+    <string name="xrayReport_toolbr">X-RAY REPORT</string>
     <string name="labTestReport">Lab Test Report</string>
     <string name="Hospitalization"><![CDATA[Hospitalization]]></string>
     <string name="clinicVisits">Clinic Visit Report</string>
@@ -150,7 +151,7 @@
     <string name="custom_page_screenshot">Custom Page Screenshot</string>
     <string name="profile">Profile</string>
     <string name="operating_hrs">OPERATING HOURS</string>
-    <string name="OnlineAppointment">Online Appointment</string>
+    <string name="OnlineAppointment">Appointments</string>
     <string name="fullProfile">Veterinarian Full Profile</string>
     <string name="Settings">Settings</string>
     <string name="hours">Operating Hours</string>

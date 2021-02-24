@@ -195,10 +195,7 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
                     methods.customProgressDismiss();
                     int responseCode = Integer.parseInt(immunizationRecordResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        if (immunizationRecordResponse.getData().getPetImmunizationDetailModels().isEmpty()) {
-                            // methods.customProgressDismiss();
-                            Toast.makeText(this, "No Record Found !", Toast.LENGTH_SHORT).show();
-                        } else {
+
                             ArrayList<String> immunizationDate = new ArrayList<>();
                             ArrayList<String> vaccineClass = new ArrayList<>();
                             ArrayList<String> nextDueDate = new ArrayList<>();
@@ -262,9 +259,7 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
                                 }
                             }, 3000);
 
-                        }
-
-                    } else if (responseCode == 614) {
+                        } else if (responseCode == 614) {
                         Toast.makeText(this, immunizationRecordResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();

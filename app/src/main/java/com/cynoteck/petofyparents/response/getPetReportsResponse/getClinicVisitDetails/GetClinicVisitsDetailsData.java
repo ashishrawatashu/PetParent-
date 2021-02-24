@@ -9,49 +9,40 @@ public class GetClinicVisitsDetailsData {
 
     private PetParentDetails petParentDetails;
 
-    public String getIsBack ()
-    {
+    public String getIsBack() {
         return isBack;
     }
 
-    public void setIsBack (String isBack)
-    {
+    public void setIsBack(String isBack) {
         this.isBack = isBack;
     }
 
-    public VeterinarianDetails getVeterinarianDetails ()
-    {
+    public VeterinarianDetails getVeterinarianDetails() {
         return veterinarianDetails;
     }
 
-    public void setVeterinarianDetails (VeterinarianDetails veterinarianDetails)
-    {
+    public void setVeterinarianDetails(VeterinarianDetails veterinarianDetails) {
         this.veterinarianDetails = veterinarianDetails;
     }
 
-    public PetClinicVisitDetails getPetClinicVisitDetails ()
-    {
+    public PetClinicVisitDetails getPetClinicVisitDetails() {
         return petClinicVisitDetails;
     }
 
-    public void setPetClinicVisitDetails (PetClinicVisitDetails petClinicVisitDetails)
-    {
+    public void setPetClinicVisitDetails(PetClinicVisitDetails petClinicVisitDetails) {
         this.petClinicVisitDetails = petClinicVisitDetails;
     }
 
-    public PetParentDetails getPetParentDetails ()
-    {
+    public PetParentDetails getPetParentDetails() {
         return petParentDetails;
     }
 
-    public void setPetParentDetails (PetParentDetails petParentDetails)
-    {
+    public void setPetParentDetails(PetParentDetails petParentDetails) {
         this.petParentDetails = petParentDetails;
     }
 
     @Override
-    public String toString()
-    {
-        return "ClassPojo [isBack = "+isBack+", veterinarianDetails = "+veterinarianDetails+", petClinicVisitDetails = "+petClinicVisitDetails+", petParentDetails = "+petParentDetails+"]";
+    public String toString() {
+        return "ClassPojo [isBack = " + isBack + ", veterinarianDetails = " + veterinarianDetails + ", petClinicVisitDetails = " + petClinicVisitDetails + ", petParentDetails = " + petParentDetails + "]";
     }
 }

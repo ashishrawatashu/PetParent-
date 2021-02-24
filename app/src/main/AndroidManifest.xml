@@ -31,7 +31,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activty.WelcomeScreenActivity"></activity>
+        <activity android:name=".activty.HospitalizationDetailsActivity"></activity>
+        <activity android:name=".activty.WelcomeScreenActivity" />
         <activity android:name=".activty.AddPetWithQRCodeActivity" />
         <activity android:name=".activty.SearchActivity" />
         <activity android:name=".activty.AdoptionPetDetailsActivity" />
@@ -51,6 +52,7 @@
         <activity android:name=".activty.SendPhoneNumber" />
         <activity android:name=".activty.ScannerQR" />
         <activity android:name=".activty.PetDetailsActivity" />
+        <activity android:name=".activty.XRayReportDeatilsActivity" />
         <activity android:name=".activty.OTPVerifyActivity" />
         <activity
             android:name=".activty.PetIdCardActivity"
