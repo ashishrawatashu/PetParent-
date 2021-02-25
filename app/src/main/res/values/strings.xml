@@ -106,8 +106,8 @@
     <string name="doctorPrescription">Doctor\'s Prescription</string>
     <string name="visit_date">Visit Date</string>
     <string name="natureofvisit">Nature Of Visit</string>
-    <string name="weight">Weight (Kg)</string>
-    <string name="temprature">Temperature(F)</string>
+    <string name="weight">Weight</string>
+    <string name="temprature">Temperature</string>
     <string name="vaccine">Vaccine</string>
     <string name="description">Symptoms</string>
     <string name="description1">Description</string>

@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
+
             android:text="@string/doctorPrescription"
             android:textColor="@color/black_color"
             android:textSize="25sp"
@@ -37,15 +37,15 @@
         android:id="@+id/petInfo_CV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" />
+         />
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
         android:padding="5dp">
 
         <LinearLayout
@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:text="@string/petname"
                 android:textColor="@color/black_color"
                 android:textSize="15sp"
@@ -66,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:text="@string/petId"
                 android:textColor="@color/black_color"
                 android:textSize="15sp"
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:text="@string/petownwer"
                 android:textColor="@color/black_color"
                 android:textSize="15sp"
@@ -96,7 +96,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:text="@string/double_Dot"
                 android:textColor="@color/black_color"
                 android:textSize="15sp"
@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:text="@string/double_Dot"
                 android:textColor="@color/black_color"
                 android:textSize="15sp"
@@ -114,7 +114,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:text="@string/double_Dot"
                 android:textColor="@color/black_color"
                 android:textSize="15sp"
@@ -139,7 +139,7 @@
                     android:id="@+id/pet_name_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+
                     android:text="Rustam"
                     android:textColor="@color/grayColorCode"
                     android:textSize="15sp" />
@@ -149,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="5dp"
+
                     android:layout_toRightOf="@id/pet_name_TV"
                     android:text="(Male)"
                     android:textColor="@color/grayColorCode"
@@ -162,7 +162,7 @@
                 android:id="@+id/pet_id_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+
                 android:text="PETO1883"
                 android:textColor="@color/grayColorCode"
                 android:textSize="15sp" />
@@ -175,7 +175,7 @@
                     android:id="@+id/pet_owner_name_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+
                     android:text="Ashish Rawat"
                     android:textColor="@color/grayColorCode"
                     android:textSize="15sp" />
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="5dp"
+
                     android:layout_toRightOf="@id/pet_owner_name_TV"
                     android:text="(735-104-040-97)"
                     android:textColor="@color/grayColorCode"
@@ -209,7 +209,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+
         android:layout_marginRight="10dp"
         android:background="@color/whiteColor"
         android:visibility="visible" />
@@ -219,31 +219,30 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+
 
         />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-
-        >
+        android:orientation="vertical">
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="10dp"
             android:orientation="vertical"
             android:visibility="gone">
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+
                 android:orientation="horizontal">
 
 
@@ -279,17 +278,17 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/visit_date_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:text="@string/visit_date"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -300,7 +299,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -312,7 +310,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />
@@ -321,17 +319,17 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/nature_ofVist_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:text="@string/natureofvisit"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -341,7 +339,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -352,7 +349,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />
@@ -361,17 +357,17 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_weight_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:text="@string/weight"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -382,7 +378,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -393,7 +388,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />
@@ -401,17 +395,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_temp_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:text="@string/temprature"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -422,7 +415,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -432,7 +424,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />
@@ -440,60 +432,20 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/pet_vaccine_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/vaccine"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/dot_pet_vaccine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/vaccine_textView"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
+
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_desc_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+
                     android:text="@string/description"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -504,7 +456,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -515,7 +467,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />
@@ -524,18 +476,16 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_diagosis_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-
                     android:text="@string/diagosis"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -546,7 +496,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -557,7 +507,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />
@@ -566,18 +516,17 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
+
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_remarks_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
                     android:text="@string/remarks"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -588,7 +537,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -599,7 +548,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:gravity="end"
                     android:text=""
                     android:textColor="@color/black_color"
@@ -608,18 +557,17 @@
 
             <LinearLayout
                 android:id="@+id/layout_dewarming_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_dewarmername_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
                     android:text="Dewormer Name"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -630,7 +578,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -641,7 +589,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />
@@ -649,18 +597,16 @@
 
             <LinearLayout
                 android:id="@+id/layout_dose"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_dose_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
                     android:text="Dewormer Dose"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -671,7 +617,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -682,7 +628,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:gravity="end"
                     android:text=""
                     android:textColor="@color/black_color"
@@ -691,18 +637,16 @@
 
             <LinearLayout
                 android:id="@+id/layout_next_dewarmer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_next_dewarmer_TV"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
                     android:text="Next Dewormer"
                     android:textColor="@color/black_color"
                     android:textStyle="bold" />
@@ -713,7 +657,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=":"
                     android:textColor="@color/black_color"
                     android:textSize="15sp"
@@ -724,7 +668,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="15dp"
+
                     android:text=""
                     android:textColor="@color/black_color"
                     android:textSize="15sp" />

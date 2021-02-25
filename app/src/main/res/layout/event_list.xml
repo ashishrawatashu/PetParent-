@@ -35,13 +35,13 @@
                 android:text="Join"
                 android:textColor="@color/colorPrimary"
                 android:id="@+id/join_BT"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="35dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <Button
-                android:visibility="visible"
+                android:visibility="gone"
                 android:padding="10dp"
                 style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/approve"
@@ -50,13 +50,13 @@
                 android:text="Proceed Payment"
                 android:textColor="#3c8dbc"
                 android:id="@+id/payment_BT"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="35dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <Button
-                android:visibility="gone"
+                android:visibility="visible"
                 style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/deactivate_status"
                 android:layout_marginTop="8dp"
@@ -64,7 +64,7 @@
                 android:text="Cancel"
                 android:textColor="@color/deactivate_red"
                 android:id="@+id/cancel_BT"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="35dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -73,13 +73,14 @@
                 android:id="@+id/appoint_subject_TV"
                 android:textColor="@color/black_color"
                 android:textSize="18sp"
+                android:maxLines="1"
                 android:layout_margin="15dp"
-                android:text="Mobile-Daily standup metting "
-                android:layout_width="0dp"
+                android:text="Mobile-Daily standup metting sdfsd asdfasdf asdfa sdf "
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/green_view"
                 app:layout_constraintEnd_toStartOf="@+id/procced_appointment_BT"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="230dp" />
 
             <TextView
                 android:id="@+id/timing_TV"

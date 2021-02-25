@@ -2,6 +2,7 @@ package com.cynoteck.petofyparents.activty;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -143,12 +144,13 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                         pet_sex_TV.setText(getPetResponse.getData().getPetSex());
                         pet_id_TV.setText(getPetResponse.getData().getPetUniqueId());
                         pet_deatils_TV.setText(getPetResponse.getData().getDescription());
-                        if (getPetResponse.getData().getAddress().equals("")){
+                        if (getPetResponse.getData().getAddress()==null){
                             address_line_one_TV.setVisibility(View.GONE);
                             address_head.setVisibility(View.GONE);
                         }else {
                             address_line_one_TV.setText(getPetResponse.getData().getAddress());
                         }
+
                         setImages();
 
                     } else if (responseCode == 614) {

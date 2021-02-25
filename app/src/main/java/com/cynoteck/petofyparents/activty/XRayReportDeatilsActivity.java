@@ -57,7 +57,6 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
         pet_owner_phone_no_TV.setText(pet_owner_contact);
         recommended_follow_up_date_textView.setText(follow_up_date);
         recommended_follow_up_textView.setText(follow_up);
-
         nature_of_visit_textView.setText(nature);
         test_date_textView.setText(date_of_test);
         Result_textView.setText(result);

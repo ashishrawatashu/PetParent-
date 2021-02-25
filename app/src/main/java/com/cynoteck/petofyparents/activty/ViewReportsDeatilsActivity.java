@@ -97,7 +97,6 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
         nature_ofVist_textView = findViewById(R.id.nature_ofVist_textView);
         weight_textView = findViewById(R.id.weight_textView);
         temperature_textView = findViewById(R.id.temperature_textView);
-        vaccine_textView = findViewById(R.id.vaccine_textView);
         symptoms_textView = findViewById(R.id.symptoms_textView);
         diagnosis_textView = findViewById(R.id.diagnosis_textView);
         remarks_textView = findViewById(R.id.remarks_textView);
@@ -150,7 +149,7 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
                             pet_weight_TV.setVisibility(View.GONE);
                             dot_pet_weight.setVisibility(View.GONE);
                         } else {
-                            weight_textView.setText(getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getWeightLbs());
+                            weight_textView.setText(getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getWeightLbs()+" (Kg)");
 
                         }
                         if (getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getTemperature().equals("")) {
@@ -158,9 +157,8 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
                             pet_temp_TV.setVisibility(View.GONE);
                             dot_pet_temp.setVisibility(View.GONE);
                         } else {
-                            temperature_textView.setText(getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getTemperature());
+                            temperature_textView.setText(getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getTemperature()+" (F)");
                         }
-                        vaccine_textView.setText(getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getVaccine());
                         if (getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getDescription().equals("")) {
                             symptoms_textView.setVisibility(View.GONE);
                             pet_desc_TV.setVisibility(View.GONE);

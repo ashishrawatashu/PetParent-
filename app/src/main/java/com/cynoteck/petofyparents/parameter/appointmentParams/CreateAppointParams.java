@@ -16,6 +16,15 @@ public class CreateAppointParams {
     private String eventStartDate;
 
     private String vetId;
+    private String isVideoCall;
+
+    public String getIsVideoCall() {
+        return isVideoCall;
+    }
+
+    public void setIsVideoCall(String isVideoCall) {
+        this.isVideoCall = isVideoCall;
+    }
 
     public String getDuration ()
     {

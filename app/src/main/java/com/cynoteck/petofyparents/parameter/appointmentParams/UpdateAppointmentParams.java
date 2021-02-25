@@ -16,7 +16,15 @@ public class UpdateAppointmentParams {
     private String eventStartDate;
 
     private String petId;
+    private String isVideoCall;
 
+    public String getIsVideoCall() {
+        return isVideoCall;
+    }
+
+    public void setIsVideoCall(String isVideoCall) {
+        this.isVideoCall = isVideoCall;
+    }
     public String getDuration ()
     {
         return duration;
