@@ -172,6 +172,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
                     app:cardElevation="5dp"
+                    android:visibility="gone"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
@@ -209,6 +210,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
                     app:cardElevation="5dp"
+                    android:visibility="gone"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"

@@ -125,7 +125,7 @@ public class SplasScreen extends AppCompatActivity {
                     intent = new Intent(SplasScreen.this,DashBoardActivity.class);
                     intent.putExtra("from","SPLASH");
                 }else {
-                    intent = new Intent(SplasScreen.this, SendPhoneNumber.class);
+                    intent = new Intent(SplasScreen.this, WelcomeScreenActivity.class);
                 }
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

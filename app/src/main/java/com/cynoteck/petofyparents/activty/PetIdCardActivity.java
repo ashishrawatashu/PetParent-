@@ -178,9 +178,7 @@ public class PetIdCardActivity extends AppCompatActivity implements ApiResponse 
         intent.setAction(Intent.ACTION_SEND);
         intent.setType("image/*");
         intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "");
-        intent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.sharing_text));
         intent.putExtra(Intent.EXTRA_STREAM, uri);//pass uri here
-        startActivity(Intent.createChooser(intent, getString(R.string.share_title)));
     }
 
     @Override

@@ -161,11 +161,11 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
             Log.d("jjsjsjjs",""+image_url);
 
             if(image_url!=null)
-           {
-               Glide.with(this)
-                       .load(image_url)
-                       .into(pet_Details_profile_image);
-           }
+            {
+                Glide.with(this)
+                        .load(image_url)
+                        .into(pet_Details_profile_image);
+            }
 
 
             pet_details_name.setText(strPetName);
@@ -225,7 +225,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         service_details_cat_img_four.setOnClickListener(this);
         service_detils_cat_img_five.setOnClickListener(this);
         peto_details_reg_number.setOnClickListener(this);
-       // id_card.setOnClickListener(this);
+        // id_card.setOnClickListener(this);
 
     }
 
@@ -410,7 +410,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     data.setPetCategoryId(getStrSpnerItemPetNmId);
                     data.setPetSexId(strSpnrSexId);
                     data.setPetAgeId("1.0");
-                    data.setPetSizeId(strSpneSizeId);
+                    data.setPetSizeId("0");
                     data.setPetColorId(strSpnrColorId);
                     data.setPetBreedId(strSpnrBreedId);
                     data.setPetName(strPetName);
@@ -669,6 +669,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 break;
             case "UploadDocument":
                 try {
+                    methods.customProgressDismiss();
                     Log.d("UploadDocument",arg0.body().toString());
                     ImageResponse imageResponse = (ImageResponse) arg0.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
@@ -717,7 +718,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onError(Throwable t, String key) {
         methods.customProgressDismiss();
-
+        Toast.makeText(this, "Please try again!", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -918,14 +919,14 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
 
 
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         startActivityForResult(galleryIntent, GALLERY);
     }
 
     private void takePhotoFromCamera() {
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA);
 
     }
@@ -1190,6 +1191,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     }
 
     private void UploadImages(File absolutePath) {
+        methods.showCustomProgressBarDialog(this);
         MultipartBody.Part userDpFilePart = null;
         if (absolutePath != null) {
             RequestBody userDpFile = RequestBody.create(MediaType.parse("image/*"), absolutePath);
@@ -1205,8 +1207,8 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     private void requestMultiplePermissions() {
         Dexter.withActivity(this)
                 .withPermissions(
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        android.Manifest.permission.CAMERA,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
@@ -1244,7 +1246,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         methods.showCustomProgressBarDialog(this);
         ApiService<AddPetValueResponse> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().updatePetDetails(Config.token,addPetRequset), "UpdatePetDetails");
-        Log.e("DATALOG","check1=> "+addPetRequset);
+        Log.e("DATALOG","check1=> "+methods.getRequestJson(addPetRequset));
 
     }
 

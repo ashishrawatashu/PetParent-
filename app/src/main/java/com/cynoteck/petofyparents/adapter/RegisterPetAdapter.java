@@ -21,7 +21,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.MyViewHolder> /*implements Filterable*/ {
+public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.MyViewHolder>  {
 
     Context context;
     ArrayList<PetList> profileList;

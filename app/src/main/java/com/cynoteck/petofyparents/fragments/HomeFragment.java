@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,12 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activty.LoginActivity;
+import com.cynoteck.petofyparents.activty.ScannerQR;
 import com.cynoteck.petofyparents.activty.SearchActivity;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -36,17 +40,21 @@ import com.cynoteck.petofyparents.utils.Methods;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.app.Activity.RESULT_OK;
+
 public class HomeFragment extends Fragment implements View.OnClickListener, ApiResponse {
+
+    private static final int QR_CODE_SCANNER = 100;
 
     Context context;
     View view;
-    ImageView reports_IV,new_pet_search,back_arrow_IV_new_entry;
+    ImageView reports_IV,new_pet_search,back_arrow_IV_new_entry,bar_code_scanner_IV;
     RelativeLayout mainHome,search_boxRL;
     Methods methods;
     HashMap<String,String> petExistingSearch;
     TextView staff_headline_TV;
-    AutoCompleteTextView search_box_add_new;
-    CardView reports_CV, all_staff_CV, allPets_CV,appoint_CV;
+    TextView search_box_add_new;
+    CardView medical_history_CV, adoption_donation_CV, my_pets_CV,appoint_CV;
     ArrayList<String> petUniueId=null;
     Intent intent;
 
@@ -70,9 +78,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
 
     private void init() {
         methods = new Methods(context);
-        reports_CV=view.findViewById(R.id.reports_CV);
-        all_staff_CV = view.findViewById(R.id.staff_CV);
-        allPets_CV=view.findViewById(R.id.allPets_CV);
+        medical_history_CV=view.findViewById(R.id.medical_history_CV);
+        adoption_donation_CV = view.findViewById(R.id.adoption_donation_CV);
+        my_pets_CV=view.findViewById(R.id.my_pets_CV);
         appoint_CV=view.findViewById(R.id.appointment_CV);
         search_boxRL = view.findViewById(R.id.search_boxRL);
 
@@ -81,20 +89,53 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
         new_pet_search = view.findViewById(R.id.new_pet_search);
         search_box_add_new = view.findViewById(R.id.search_box_add_new);
         staff_headline_TV = view.findViewById(R.id.staff_headline_TV);
-
-        allPets_CV.setOnClickListener(this);
-        reports_CV.setOnClickListener(this);
-        all_staff_CV.setOnClickListener(this);
+        bar_code_scanner_IV = view.findViewById(R.id.bar_code_scanner_IV);
+        my_pets_CV.setOnClickListener(this);
+        medical_history_CV.setOnClickListener(this);
+        adoption_donation_CV.setOnClickListener(this);
         appoint_CV.setOnClickListener(this);
-//        logout.setOnClickListener(this);
-        new_pet_search.setOnClickListener(this);
+        bar_code_scanner_IV.setOnClickListener(this);
+        search_boxRL.setOnClickListener(this);
+        search_box_add_new.setOnClickListener(this);
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==QR_CODE_SCANNER){
+            if (resultCode==RESULT_OK){
+                String veterinarianUserId = data.getStringExtra("veterinarianUserId");
+                String veterinarianName = data.getStringExtra("veterinarianName");
+                String clinicName = data.getStringExtra("clinicName");
+                String Rating = data.getStringExtra("Rating");
+                String profileImageUrl = data.getStringExtra("profileImageUrl");
+                Log.e("veterinarianUserId",veterinarianUserId);
+                AfterScanScreenFragment afterScanScreenFragment = new AfterScanScreenFragment();
+                Bundle qrCodeDataBudle = new Bundle();
+                qrCodeDataBudle.putString("veterinarianUserId",veterinarianUserId);
+                qrCodeDataBudle.putString("veterinarianName",veterinarianName);
+                qrCodeDataBudle.putString("clinicName",clinicName);
+                qrCodeDataBudle.putString("Rating",Rating);
+                qrCodeDataBudle.putString("profileImageUrl",profileImageUrl);
+                afterScanScreenFragment.setArguments(qrCodeDataBudle);
+                replaceFragment(afterScanScreenFragment);
+
+            }
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.new_pet_search:
+
+            case R.id.bar_code_scanner_IV:
+                Intent qr_code_intent = new Intent(getContext(), ScannerQR.class);
+                startActivityForResult(qr_code_intent,QR_CODE_SCANNER);
+                break;
+
+            case R.id.search_box_add_new:
                     intent = new Intent(getContext(), SearchActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
@@ -102,21 +143,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
                 break;
 
 
-            case R.id.reports_CV:
+            case R.id.medical_history_CV:
 
                 ReportsFragment profileFragment = new ReportsFragment();
                 replaceFragment(profileFragment);
 
                 break;
 
-            case R.id.staff_CV:
+            case R.id.adoption_donation_CV:
 
-                AllStaffFragment allStaffFragment = new AllStaffFragment();
-                replaceFragment(allStaffFragment);
+//                AllStaffFragment allStaffFragment = new AllStaffFragment();
+//                replaceFragment(allStaffFragment);
+                Toast.makeText(context, "Coming Soon !", Toast.LENGTH_SHORT).show();
 
                 break;
 
-            case R.id.allPets_CV:
+            case R.id.my_pets_CV:
                 PetRegisterFragment petRegisterFragment = new PetRegisterFragment();
                 replaceFragment(petRegisterFragment);
 
@@ -125,26 +167,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
             case R.id.appointment_CV:
                 AppointementFragment appointementFragment = new AppointementFragment();
                 replaceFragment(appointementFragment);
-
-                break;
-
-            case R.id.logout:
-                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-                alertDialog.setTitle("Alert");
-                alertDialog.setMessage("Alert message to be shown");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences preferences =getContext().getSharedPreferences("userdetails",0);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.clear();
-                                editor.apply();
-                                dialog.dismiss();
-                                startActivity(new Intent(getActivity(), LoginActivity.class));
-                                getActivity().finish();
-                            }
-                        });
-                alertDialog.show();
 
                 break;
         }
@@ -163,14 +185,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
         service.get( this, ApiClient.getApiInterface().checkPetInVetRegister(Config.token,inPetRegisterRequest), "CheckPetInVetRegister");
         Log.e("DATALOG","check1=> "+inPetRegisterRequest);
     }
-    private void clearSearch() {
-        search_box_add_new.getText().clear();
-        search_boxRL.setVisibility(View.GONE);
-        back_arrow_IV_new_entry.setVisibility(View.GONE);
-        staff_headline_TV.setVisibility(View.VISIBLE);
-        InputMethodManager imm1 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm1.hideSoftInputFromWindow(search_box_add_new.getWindowToken(), 0);
-    }
+//    private void clearSearch() {
+//        search_box_add_new.getText().clear();
+//        search_boxRL.setVisibility(View.GONE);
+//        back_arrow_IV_new_entry.setVisibility(View.GONE);
+//        staff_headline_TV.setVisibility(View.VISIBLE);
+//        InputMethodManager imm1 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm1.hideSoftInputFromWindow(search_box_add_new.getWindowToken(), 0);
+//    }
 
     @Override
     public void onResponse(Response arg0, String key) {

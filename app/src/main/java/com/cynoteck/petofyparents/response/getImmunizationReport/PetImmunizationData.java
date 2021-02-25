@@ -1,6 +1,7 @@
 package com.cynoteck.petofyparents.response.getImmunizationReport;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PetImmunizationData {
     private String isBack;
@@ -14,6 +15,10 @@ public class PetImmunizationData {
     private String visitDate;
 
     private String petParentDetails;
+
+    private List<Object> petCompletedVaccinations = null;
+
+    private List<PetPendingVaccination> petPendingVaccinations = null;
 
     public String getIsBack ()
     {
@@ -75,9 +80,33 @@ public class PetImmunizationData {
         this.petParentDetails = petParentDetails;
     }
 
+    public List<Object> getPetCompletedVaccinations() {
+        return petCompletedVaccinations;
+    }
+
+    public void setPetCompletedVaccinations(List<Object> petCompletedVaccinations) {
+        this.petCompletedVaccinations = petCompletedVaccinations;
+    }
+
+    public List<PetPendingVaccination> getPetPendingVaccinations() {
+        return petPendingVaccinations;
+    }
+
+    public void setPetPendingVaccinations(List<PetPendingVaccination> petPendingVaccinations) {
+        this.petPendingVaccinations = petPendingVaccinations;
+    }
+
     @Override
-    public String toString()
-    {
-        return "ClassPojo [isBack = "+isBack+", petImmunizationDetailModels = "+petImmunizationDetailModels+", petDetails = "+petDetails+", veterinarianDetails = "+veterinarianDetails+", visitDate = "+visitDate+", petParentDetails = "+petParentDetails+"]";
+    public String toString() {
+        return "ClassPojo[" +
+                "isBack=" + isBack +
+                ", petImmunizationDetailModels=" + petImmunizationDetailModels +
+                ", petDetails=" + petDetails +
+                ", veterinarianDetails=" + veterinarianDetails +
+                ", visitDate=" + visitDate +
+                ", petParentDetails=" + petParentDetails +
+                ", petCompletedVaccinations=" + petCompletedVaccinations +
+                ", petPendingVaccinations=" + petPendingVaccinations +
+                "]";
     }
 }

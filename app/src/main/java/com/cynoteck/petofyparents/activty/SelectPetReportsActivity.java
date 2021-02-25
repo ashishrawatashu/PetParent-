@@ -190,37 +190,67 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
 
             case "GetImmunization":
                 try {
-                    methods.customProgressDismiss();
-                    Log.d("GetImmunization",response.body().toString());
+                    Log.d("GetImmunization", response.body().toString());
                     PetImmunizationRecordResponse immunizationRecordResponse = (PetImmunizationRecordResponse) response.body();
+                    methods.customProgressDismiss();
                     int responseCode = Integer.parseInt(immunizationRecordResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
-                        if (immunizationRecordResponse.getData().getPetImmunizationDetailModels().isEmpty()){
+                    if (responseCode == 109) {
+                        if (immunizationRecordResponse.getData().getPetImmunizationDetailModels().isEmpty()) {
+                            // methods.customProgressDismiss();
                             Toast.makeText(this, "No Record Found !", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             ArrayList<String> immunizationDate = new ArrayList<>();
                             ArrayList<String> vaccineClass = new ArrayList<>();
                             ArrayList<String> nextDueDate = new ArrayList<>();
+                            ArrayList<String> vaccineType = new ArrayList<>();
 
-                            for (int i = 0; i < immunizationRecordResponse.getData().getPetImmunizationDetailModels().size(); i++) {
-                                immunizationDate.add(immunizationRecordResponse.getData().getPetImmunizationDetailModels().get(i).getImmunizationDate().substring(0, immunizationRecordResponse.getData().getPetImmunizationDetailModels().get(i).getImmunizationDate().length() - 11));
-                                vaccineClass.add(immunizationRecordResponse.getData().getPetImmunizationDetailModels().get(i).getVaccine());
-                                nextDueDate.add(immunizationRecordResponse.getData().getPetImmunizationDetailModels().get(i).getNextDueDate());
+                            ArrayList<String> immunizationDatePending = new ArrayList<>();
+                            ArrayList<String> vaccineClassPending = new ArrayList<>();
+                            ArrayList<String> nextDueDatePending = new ArrayList<>();
+                            ArrayList<String> vaccineTypePending = new ArrayList<>();
+
+                            for (int i = 0; i < immunizationRecordResponse.getData().getPetPendingVaccinations().size(); i++) {
+                                if (immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getIsVaccinated().equals("true")) {
+                                    immunizationDate.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getVaccinationDate());
+                                    vaccineClass.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getVaccineName());
+                                    nextDueDate.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getNextVaccinationDate().substring(0, immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getNextVaccinationDate().length() - 9));
+                                    vaccineType.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getVaccineType());
+
+                                } else {
+                                    immunizationDatePending.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getVaccinationDate());
+                                    vaccineClassPending.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getVaccineName());
+                                    nextDueDatePending.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getNextVaccinationDate().substring(0, immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getNextVaccinationDate().length() - 9));
+                                    vaccineTypePending.add(immunizationRecordResponse.getData().getPetPendingVaccinations().get(i).getVaccineType());
+
+                                }
                             }
-                            JSONArray date = new JSONArray(immunizationDate);
-                            JSONArray vaccine = new JSONArray(vaccineClass);
-                            JSONArray nextDate = new JSONArray(nextDueDate);
+                            final JSONArray date = new JSONArray(immunizationDate);
+                            final JSONArray vaccine = new JSONArray(vaccineClass);
+                            final JSONArray nextDate = new JSONArray(nextDueDate);
+                            final JSONArray vType = new JSONArray(vaccineType);
+
+                            Log.d("jsjsjjsjs", "" + date.length());
+
+                            final JSONArray datePending = new JSONArray(immunizationDatePending);
+                            final JSONArray vaccinePending = new JSONArray(vaccineClassPending);
+                            final JSONArray nextDatePending = new JSONArray(nextDueDatePending);
+                            final JSONArray vTypePending = new JSONArray(vaccineTypePending);
+
+                            Log.d("jsjsjjsjs", "" + datePending.length());
+
                             Log.e("aaaaaa", vaccineClass.toString());
                             Log.e("aaaaaa", vaccine.toString());
-                            String immunizationSet = methods.immunizationPdfGenarator(pet_name, pet_age, pet_sex, pet_owner_name, "4564564644465", date, vaccine, nextDate);
-
+                            methods.customProgressDismiss();
+                            String immunizationSet = methods.immunizationPdfGenarator(pet_name, pet_age, pet_sex, pet_owner_name,"", vType, vaccine, nextDate, vTypePending, vaccinePending, nextDatePending);
+                            WebSettings webSettings = webview.getSettings();
+                            webSettings.setJavaScriptEnabled(true);
                             webview.loadDataWithBaseURL(null, immunizationSet, "text/html", "utf-8", null);
                             new Handler().postDelayed(new Runnable() {
                                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                 @Override
                                 public void run() {
                                     Context context = SelectPetReportsActivity.this;
-                                    PrintManager printManager = (PrintManager) getSystemService(context.PRINT_SERVICE);
+                                    PrintManager printManager = (PrintManager) SelectPetReportsActivity.this.getSystemService(context.PRINT_SERVICE);
                                     PrintDocumentAdapter adapter = null;
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                                         adapter = webview.createPrintDocumentAdapter();
@@ -234,13 +264,12 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
 
                         }
 
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, immunizationRecordResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;

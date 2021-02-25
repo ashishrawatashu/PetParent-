@@ -39,6 +39,7 @@ public class ScannerQR extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     String intentData = "";
     ImageView back_arrow_IV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class ScannerQR extends AppCompatActivity {
     }
 
     private void initComponents() {
-        back_arrow_IV=findViewById(R.id.back_arrow_IV);
+        back_arrow_IV = findViewById(R.id.back_arrow_IV);
         textViewBarCodeValue = findViewById(R.id.txtBarcodeValue);
         surfaceView = findViewById(R.id.surfaceView);
         back_arrow_IV.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +77,11 @@ public class ScannerQR extends AppCompatActivity {
             public void surfaceCreated(SurfaceHolder holder) {
                 openCamera();
             }
+
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             }
+
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
                 cameraSource.stop();
@@ -101,7 +104,7 @@ public class ScannerQR extends AppCompatActivity {
         });
     }
 
-    private void openCamera(){
+    private void openCamera() {
         try {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 cameraSource.start(surfaceView.getHolder());
@@ -114,21 +117,24 @@ public class ScannerQR extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     public static final class JSONUtils {
         private static final Gson gson = new Gson();
 
-        private JSONUtils(){}
+        private JSONUtils() {
+        }
 
         public static boolean isJSONValid(String jsonInString) {
             try {
                 gson.fromJson(jsonInString, Object.class);
                 return true;
-            } catch(com.google.gson.JsonSyntaxException ex) {
+            } catch (com.google.gson.JsonSyntaxException ex) {
                 return false;
             }
         }
     }
-    private void setBarCode(final SparseArray<Barcode> barCode){
+
+    private void setBarCode(final SparseArray<Barcode> barCode) {
         textViewBarCodeValue.post(new Runnable() {
             @Override
             public void run() {
@@ -136,21 +142,31 @@ public class ScannerQR extends AppCompatActivity {
                 Barcode code = barCode.valueAt(0);
                 boolean isJsonOrNot = JSONUtils.isJSONValid(intentData); //true
                 Log.e("VALID", String.valueOf(isJsonOrNot));
-                Log.e("intentData",intentData);
-                if (isJsonOrNot==true){
+                Log.e("intentData", intentData);
+                if (isJsonOrNot == true) {
                     Gson g = new Gson();
                     QrCOdeResponse qrCOdeResponse = g.fromJson(intentData, QrCOdeResponse.class);
+                    String veterinarianUserId = qrCOdeResponse.getVeterinarianUserId();
+                    String veterinarianName = qrCOdeResponse.getVeterinarianName();
+                    String clinicName = qrCOdeResponse.getClinicName();
+                    String profileImageUrl = qrCOdeResponse.getProfileImageUrl();
+                    String Rating = String.valueOf(qrCOdeResponse.getRating());
                     String key = qrCOdeResponse.getKey();
-                    String vetUserId = qrCOdeResponse.getVeterinarianUserId();
-                    Log.e("intentData",key+""+vetUserId);
+
+                    Log.e("intentData", key + "" + veterinarianUserId);
                     Intent intent = new Intent();
-                    intent.putExtra("vetID",vetUserId);
-                    setResult(RESULT_OK,intent);
+                    intent.putExtra("veterinarianUserId", veterinarianUserId);
+                    intent.putExtra("veterinarianName", veterinarianName);
+                    intent.putExtra("clinicName", clinicName);
+                    intent.putExtra("Rating", Rating);
+                    intent.putExtra("profileImageUrl", profileImageUrl);
+
+
+                    setResult(RESULT_OK, intent);
                     finish();
                 } else {
                     Toast.makeText(ScannerQR.this, "INVALID QR Code!", Toast.LENGTH_SHORT).show();
                 }
-                copyToClipBoard(intentData);
             }
         });
     }
@@ -168,7 +184,7 @@ public class ScannerQR extends AppCompatActivity {
         initialiseDetectorsAndSources();
     }
 
-    private void copyToClipBoard(String text){
+    private void copyToClipBoard(String text) {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("QR code ScannerQR", text);
         clipboard.setPrimaryClip(clip);
@@ -178,7 +194,7 @@ public class ScannerQR extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length>0){
+        if (requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length > 0) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 Toast.makeText(this, "Allow Permission for QR Scanner.", Toast.LENGTH_SHORT).show();
                 onBackPressed();
@@ -187,11 +203,10 @@ public class ScannerQR extends AppCompatActivity {
                     ActivityCompat.requestPermissions(this, new
                             String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                 }
-            }
-            else{
+            } else {
                 Log.e("NOPERMISION", "no");
             }
-        }else
+        } else
             finish();
     }
 }

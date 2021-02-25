@@ -47,7 +47,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
     SmsBroadcastReceiver smsBroadcastReceiver;
     Button verify_BT;
     String otpString,phoneNumber="",vetID="";
-    TextView headine3TV,resend_code_TV;
+    TextView headine1TV,resend_code_TV;
     ImageView back_arrow_IV;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor login_editor;
@@ -64,8 +64,8 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
         editText_three = findViewById(R.id.editTextthree);
         editText_four = findViewById(R.id.editTextfour);
         verify_BT = findViewById(R.id.verify_BT);
-        headine3TV=findViewById(R.id.headine3TV);
         resend_code_TV=findViewById(R.id.resend_code_TV);
+        headine1TV=findViewById(R.id.headine1TV);
         resend_code_TV.setOnClickListener(this);
         verify_BT.setOnClickListener(this);
         back_arrow_IV.setOnClickListener(this);
@@ -81,7 +81,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
         phoneNumber = intent.getStringExtra("phoneNumber");
         otpString = intent.getStringExtra("OTP");
 
-        headine3TV.setText(phoneNumber.substring(0,phoneNumber.length()-6)+"XXXXXX");
+        headine1TV.setText("Please wait we will auto verify the OTP sent to"+" +91"+phoneNumber);
 
 
     }
