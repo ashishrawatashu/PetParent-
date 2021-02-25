@@ -77,8 +77,6 @@ public class AcceptAdoptionFragments extends Fragment implements ApiResponse, Do
 
     }
 
-
-
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key)
