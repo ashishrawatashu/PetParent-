@@ -326,9 +326,9 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                     pincode_ET.setError(null);
                     address_ET.setError(null);
                 } else if (strSpnerItemPetNm.isEmpty() || (strSpnerItemPetNm.equals("Select Pet Type"))) {
-                    Toast.makeText(this, "Select Type!!", Toast.LENGTH_SHORT).show();
-                } else if (strSpnrSex.isEmpty() || (strSpnrSex.equals("Select Pet Sex"))) {
-                    Toast.makeText(this, "Select Pet Sex!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Select Type !", Toast.LENGTH_SHORT).show();
+                } else if (strSpnrSex.isEmpty() || (strSpnrSex.equals("Pet Sex"))) {
+                    Toast.makeText(this, "Select Pet Sex !", Toast.LENGTH_SHORT).show();
                 } else if (strPetBirthDay.isEmpty()) {
                     Toast.makeText(this, "Pet DOB", Toast.LENGTH_SHORT).show();
                     pet_name_ET.setError(null);
@@ -338,9 +338,9 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                     pincode_ET.setError(null);
                     calenderView.setError("Pet DOB");
                 } else if (strSpnrBreed.isEmpty() || (strSpnrBreed.equals("Pet Breed"))) {
-                    Toast.makeText(this, "Select Breed!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Select Breed !", Toast.LENGTH_SHORT).show();
                 } else if ((strSpnrColor.isEmpty()) || (strSpnrColor.equals("Pet Color"))) {
-                    Toast.makeText(this, "Select Pet Color!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Select Pet Color !", Toast.LENGTH_SHORT).show();
                 } else if (strPetParentPincode.isEmpty()) {
                     pet_parent_email_ET.setError(null);
                     firstName_ET.setError(null);
@@ -348,12 +348,12 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                     pet_name_ET.setError(null);
                     pincode_ET.setError("Enter Pincode!");
                     address_ET.setError(null);
-                } else if (strPetParentPincode.length() > 6) {
+                } else if (strPetParentPincode.length() < 6) {
                     pet_parent_email_ET.setError(null);
                     firstName_ET.setError(null);
                     lastName_ET.setError(null);
                     pet_name_ET.setError(null);
-                    pincode_ET.setError("Invalid Pincode!");
+                    pincode_ET.setError("Invalid Pincode !");
                     address_ET.setError(null);
                 } else if (strPetParentAddress.isEmpty()) {
                     pet_parent_email_ET.setError(null);
@@ -414,7 +414,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
                     if (registerParentWithQRResponse.getResponse().getResponseCode().equals("109")) {
 
-                        onBackPressed();
+                        setResult(RESULT_OK);
                         Toast.makeText(this, registerParentWithQRResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

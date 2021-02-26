@@ -117,7 +117,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
     @Override
     public void onPaymentSuccess(String s, PaymentData paymentData) {
-        Toast.makeText(PaymentScreenActivity.this, "Transaction Successful: " + paymentData.getOrderId(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(PaymentScreenActivity.this, "Transaction Successful: " + paymentData.getOrderId(), Toast.LENGTH_LONG).show();
 
         Log.e("mettingId",mettingID);
         Log.e("orderId",paymentData.getOrderId());

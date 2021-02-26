@@ -54,7 +54,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         Glide.with(this)
                 .load(Config.user_url).placeholder(R.drawable.doctor_dummy_image)
                 .into(parent_profile_pic);
-        parent_name_TV.setText(Config.user_name);
+        parent_name_TV.setText(Config.user_name.substring(0, 1).toUpperCase() + Config.user_name.substring(1));
         parent_email_TV.setText(Config.user_emial);
         parent_address_TV.setText(Config.user_address);
         parent_phone_TV.setText(Config.user_phone);

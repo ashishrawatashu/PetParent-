@@ -2,6 +2,7 @@ package com.cynoteck.petofyparents.activty;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +37,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     Methods methods;
     String petId="",imagerl="";
     ImageView pet_profile_image_IV, image_one,image_two,image_three,image_four,image_five,edit_image, back_arrow_pp;;
-    TextView pet_name_TV, pet_sex_TV,pet_parent_TV,pet_id_TV,pet_deatils_TV,phone_one,pet_email_id_TV,phone_two,address_line_one_TV,address_line_two_TV;
+    TextView pet_name_TV, address_head,pet_sex_TV,pet_parent_TV,pet_id_TV,pet_deatils_TV,phone_one,pet_email_id_TV,phone_two,address_line_one_TV,address_line_two_TV;
     GetPetResponse getPetResponse;
     boolean reloadData=false;
     SharedPreferences sharedPreferences;
@@ -52,6 +53,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
 
         pet_name_TV=findViewById(R.id.pet_name_TV);
         pet_sex_TV=findViewById(R.id.pet_sex_TV);
+        address_head=findViewById(R.id.address_head);
         pet_parent_TV=findViewById(R.id.pet_parent_TV);
         pet_id_TV=findViewById(R.id.pet_id_TV);
         pet_deatils_TV=findViewById(R.id.pet_deatils_TV);
@@ -136,12 +138,19 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                     if (responseCode == 109) {
                        // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
                         pet_name_TV.setText(getPetResponse.getData().getPetName());
-                        pet_parent_TV.setText(getPetResponse.getData().getPetParentName());
-                        phone_one.setText(getPetResponse.getData().getContactNumber());
+                        pet_parent_TV.setText(Config.user_name);
+                        phone_one.setText(Config.user_phone);
+                        pet_email_id_TV.setText(Config.user_emial);
                         pet_sex_TV.setText(getPetResponse.getData().getPetSex());
                         pet_id_TV.setText(getPetResponse.getData().getPetUniqueId());
                         pet_deatils_TV.setText(getPetResponse.getData().getDescription());
-                        address_line_one_TV.setText(getPetResponse.getData().getAddress());
+                        if (getPetResponse.getData().getAddress()==null){
+                            address_line_one_TV.setVisibility(View.GONE);
+                            address_head.setVisibility(View.GONE);
+                        }else {
+                            address_line_one_TV.setText(getPetResponse.getData().getAddress());
+                        }
+
                         setImages();
 
                     } else if (responseCode == 614) {

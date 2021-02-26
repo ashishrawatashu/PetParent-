@@ -169,8 +169,8 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
 
 
             pet_details_name.setText(strPetName);
-            pet_details_parent_name.setText(strPetParentName);
-            pet_deatils_contact_number.setText(strPetContactNumber);
+            pet_details_parent_name.setText(Config.user_name);
+            pet_deatils_contact_number.setText(Config.user_phone);
         }
         GetPetListParams getPetListParams = new GetPetListParams();
         getPetListParams.setId(pet_id);

@@ -45,7 +45,10 @@ import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentRes
 import com.cynoteck.petofyparents.response.cityResponse.CityResponseModel;
 import com.cynoteck.petofyparents.response.dateOfBirthResponse.DateOfBirthResponse;
 import com.cynoteck.petofyparents.response.getPetAgeResponse.GetPetAgeresponseData;
+import com.cynoteck.petofyparents.response.getPetHospitalizationResponse.getHospitalizationDeatilsResponse.GetHospitalizationDeatilsResponse;
 import com.cynoteck.petofyparents.response.getPetParrentnameReponse.GetPetParentResponseData;
+import com.cynoteck.petofyparents.response.getPetReportsResponse.AddUpdateDeleteClinicVisitResponse;
+import com.cynoteck.petofyparents.response.getXRayReports.getXRayReportDetailsResponse.GetXRayReportDeatilsResponse;
 import com.cynoteck.petofyparents.response.petAgeUnitResponse.PetAgeUnitResponseData;
 import com.cynoteck.petofyparents.response.registerParentWithQRResponse.RegisterParentWithQRResponse;
 import com.cynoteck.petofyparents.response.resendOTPResposne.ResendOTPResponse;
@@ -419,6 +422,23 @@ public interface ApiInterface {
 
     @POST("user/SendRegistrationOtp")
     Call<ResendOTPResponse> resendOTP(@Body JsonObject resendotp);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/GetTestXRay")
+    Call<GetXRayReportDeatilsResponse> getTestXRayDetails(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/DeleteTestXRay")
+    Call<AddUpdateDeleteClinicVisitResponse> deleteTestXRay(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/GetPetHospitalization")
+    Call<GetHospitalizationDeatilsResponse> getPetHospitalizationDetails(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/DeletePetHospitalization")
+    Call<AddUpdateDeleteClinicVisitResponse> deletePetHospitalization(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
 
 }
 

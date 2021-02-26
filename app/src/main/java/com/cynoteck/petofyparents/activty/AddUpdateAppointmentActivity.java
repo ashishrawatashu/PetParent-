@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +32,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,14 +78,14 @@ import retrofit2.Response;
 public class AddUpdateAppointmentActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener, TextWatcher {
     Button create_appointment_BT;
     ImageView appointment_headline_back, new_pet_search;
-    TextView appointment_headline, calenderTextViewAppointDt, time_TV, parent_TV, cancelOtpDialog, add_new_pet;
+    TextView visit_type_TV,appointment_headline, calenderTextViewAppointDt, time_TV, parent_TV, cancelOtpDialog, add_new_pet;
     EditText title_ET, duration_TV, description_ET;
     AutoCompleteTextView pet_parent_TV;
     LinearLayout pet_search_layout;
     Methods methods;
     ArrayList<GetPetParentListData> petParent = new ArrayList<>();
     Dialog petParentDilog;
-    String vetUserId = "", currentTime = "", strResponseOtp = "", petParentContactNumber = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
+    String isVedioCall="", strSpnrPurpose="", vetUserId = "", currentTime = "", strResponseOtp = "", petParentContactNumber = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
     DatePickerDialog picker;
     TimePicker timePicker;
     ArrayList<String> petUniueId = null;
@@ -91,6 +94,10 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
     TextInputLayout mobile_numberTL, otp_TL;
     TextInputEditText pet_parent_mobile_number, pet_parent_otp;
     Button submit_parent_otp;
+    AppCompatSpinner purpose_spinner;
+    ArrayList<String> purpose;
+    SwitchCompat visit_type_SC;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +111,17 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         petParentString = intent.getStringExtra("petParent");
         vetUserId = intent.getStringExtra("vetUserId");
         init();
+        purpose = new ArrayList<>();
+        purpose.add("Select Appointment Purpose");
+        purpose.add("Vaccination");
+        purpose.add("Deworming");
+        purpose.add("Routine health check up");
+        purpose.add("Skin, coat & hair related problems");
+        purpose.add("Diarrhea, Vomitting, other stomach realted problems");
+        purpose.add("Eye check up");
+        purpose.add("Dental check up");
+        purpose.add("Other");
+        setSpinnerPurpose();
         if (type.equals("add")) {
             appointment_headline.setText("ADD APPOINTMENT");
             create_appointment_BT.setText("CREATE APPOINTMENT");
@@ -149,6 +167,34 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
     }
 
+    private void setSpinnerPurpose() {
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, purpose);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        purpose_spinner.setAdapter(aa);
+        purpose_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                // Showing selected spinner item
+                strSpnrPurpose = item;
+                Log.d("spnerType", "" + strSpnrPurpose);
+                if (strSpnrPurpose.equals("Other")) {
+                    title_ET.setVisibility(View.VISIBLE);
+                    title_ET.setText("");
+                } else if (strSpnrPurpose.equals("Select Appointment Purpose")) {
+                    title_ET.setText("");
+                    title_ET.setVisibility(View.GONE);
+                } else {
+                    title_ET.setText(strSpnrPurpose);
+                    title_ET.setVisibility(View.GONE);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
 
     private void getPetList() {
         PetDataParams getPetDataParams = new PetDataParams();
@@ -167,6 +213,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
 
     private void init() {
+        purpose_spinner=findViewById(R.id.purpose_spinner);
         appointment_headline_back = findViewById(R.id.appointment_headline_back);
         appointment_headline = findViewById(R.id.appointment_headline);
         calenderTextViewAppointDt = findViewById(R.id.calenderTextViewAppointDt);
@@ -179,6 +226,8 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         parent_TV = findViewById(R.id.parent_TV);
         add_new_pet = findViewById(R.id.add_new_pet);
         pet_search_layout = findViewById(R.id.pet_search_layout);
+        visit_type_SC = findViewById(R.id.visit_type_SC);
+        visit_type_TV = findViewById(R.id.visit_type_TV);
 
         add_new_pet.setOnClickListener(this);
         appointment_headline_back.setOnClickListener(this);
@@ -208,7 +257,19 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 }
             }
         });
+        visit_type_SC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    isVedioCall = "true";
+                    visit_type_TV.setText("Online Appointment");
+                } else {
+                    isVedioCall = "false";
+                    visit_type_TV.setText("Clinic Visit");
 
+                }
+            }
+        });
 
     }
 
@@ -257,14 +318,15 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 String currentTimeDate = new SimpleDateFormat("dd/MM/yyyy hh:mm a").format(new Date());
                 String userGiveTimeDate = dateString + " " + timeString;
 
-                if (titleString.isEmpty()) {
-                    title_ET.setError("Enter Title !");
-                    description_ET.setError(null);
-
-                }/*else if (userID.isEmpty()){
+                if (userID.isEmpty()) {
                     Toast.makeText(this, "Please Select Pet ", Toast.LENGTH_SHORT).show();
 
-                }*/ else if (dateString.isEmpty()) {
+                } else if (titleString.isEmpty()) {
+                    title_ET.setError("Enter Purpose !");
+                    Toast.makeText(this, "Enter Purpose !", Toast.LENGTH_SHORT).show();
+                    description_ET.setError(null);
+                }
+                else if (dateString.isEmpty()) {
                     Toast.makeText(this, "Please Select Date", Toast.LENGTH_SHORT).show();
 
                 } else if (timeString.isEmpty()) {
@@ -297,6 +359,8 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                         createAppointParams.setTitle(titleString);
                         createAppointParams.setPetid(petId.substring(0, petId.length() - 2));
                         createAppointParams.setVetId(vetUserId);
+                        createAppointParams.setIsVideoCall(isVedioCall);
+
                         CreateAppointRequest createAppointRequest = new CreateAppointRequest();
                         createAppointRequest.setData(createAppointParams);
                         if (methods.isInternetOn()) {
@@ -315,6 +379,8 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                         updateAppointmentParams.setTitle(titleString);
                         updateAppointmentParams.setId(id);
                         updateAppointmentParams.setPetId(petId);
+                        updateAppointmentParams.setIsVideoCall(isVedioCall);
+
                         UpdateAppointmentRequest updateAppointmentRequest = new UpdateAppointmentRequest();
                         updateAppointmentRequest.setData(updateAppointmentParams);
                         if (methods.isInternetOn()) {
@@ -602,7 +668,15 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                         calenderTextViewAppointDt.setText(Config.changeDateFormat(appointmentDetailsResponse.getData().getEventStartDate().substring(0, 10)));
                         description_ET.setText(appointmentDetailsResponse.getData().getDescription());
                         duration_TV.setText(appointmentDetailsResponse.getData().getDuration());
+                        isVedioCall = appointmentDetailsResponse.getData().getIsVideoCall();
+                        if (isVedioCall.equals("true")) {
+                            visit_type_TV.setText("Online Appointment");
+                            visit_type_SC.setChecked(true);
+                        } else {
+                            visit_type_TV.setText("Clinic Visit");
+                            visit_type_SC.setChecked(false);
 
+                        }
                         timeString = appointmentDetailsResponse.getData().getEventStartDate().substring(appointmentDetailsResponse.getData().getEventStartDate().length() - 8, appointmentDetailsResponse.getData().getEventStartDate().length());
                         Log.d("datee", timeString);
                         Log.d("datee", Config.changeTimeFormat(timeString));

@@ -63,7 +63,7 @@
                 android:background="@color/grayColor"/>
 
             <ImageView
-                android:scaleType="fitXY"
+                android:scaleType="centerInside"
                 android:layout_marginTop="20dp"
                 android:id="@+id/pet_image"
                 android:layout_width="180dp"

@@ -173,6 +173,7 @@ public class PetIdCardActivity extends AppCompatActivity implements ApiResponse 
     }
 
     private void shareScreenshot(File file) {
+        Toast.makeText(this, "Pet ID Card Save Successfully ", Toast.LENGTH_SHORT).show();
         Uri uri = Uri.fromFile(file);
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SEND);

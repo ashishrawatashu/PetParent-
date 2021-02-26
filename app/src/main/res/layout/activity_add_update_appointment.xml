@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activty.AddUpdateAppointmentActivity">
+    android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
@@ -88,26 +87,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/pet_parent_TV"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:text="Pet Details"
-                    android:textColor="@color/grey_add_pet"/>
-
                 <LinearLayout
                     android:id="@+id/pet_search_layout"
                     android:layout_width="match_parent"
+                    android:weightSum="2"
                     android:layout_height="50dp"
-                    app:layout_constraintEnd_toEndOf="@id/pet_parent_TV"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pet_parent_TV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:orientation="horizontal"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -118,23 +105,61 @@
                         android:gravity="center_vertical"
                         android:imeOptions="actionSearch"
                         android:singleLine="true"
+                        android:paddingLeft="10dp"
                         android:id="@+id/pet_parent_ACTV"
-                        android:hint=""
+                        android:hint="Search Pet by Pet ID,Name..(if already added)"
                         android:background="@null"
                         android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:layout_marginLeft="15dp"/>
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="14sp"
+                        android:layout_weight="1.7" />
 
-
+                    <ImageView
+                        android:gravity="center_vertical"
+                        android:visibility="visible"
+                        android:id="@+id/new_pet_search"
+                        android:layout_width="0dp"
+                        android:layout_weight=".3"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:src="@drawable/searchicon" />
 
                 </LinearLayout>
 
                 <TextView
                     android:visibility="gone"
-                    android:gravity="center_vertical"
                     app:layout_constraintEnd_toEndOf="@id/pet_search_layout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pet_search_layout"
+                    android:id="@+id/pet_parent_TV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="Pet Details"
+                    android:textColor="@color/grey_add_pet"/>
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/pet_details_TV"
+                    app:layout_constraintEnd_toEndOf="@id/pet_parent_TV"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pet_parent_TV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="25dp"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:visibility="gone"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="@id/pet_parent_TV"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pet_details_TV"
                     android:imeOptions="actionSearch"
                     android:singleLine="true"
                     android:id="@+id/parent_TV"
@@ -159,7 +184,28 @@
                     android:text="@string/title"
                     android:textColor="@color/grey_add_pet"/>
 
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/purpose_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edit_text_background"
+                    android:gravity="center_vertical"
+                    android:hint="@string/title"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/grey_add_pet"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title_TV"
+                    />
+
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/title_ET"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -171,11 +217,11 @@
                     android:hint="@string/title"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:paddingLeft="25dp"
+                    android:paddingLeft="20dp"
                     android:textColor="@color/grey_add_pet"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_TV"
+                    app:layout_constraintTop_toBottomOf="@id/purpose_spinner"
                     />
 
 
@@ -204,7 +250,7 @@
                     android:gravity="center_vertical"
                     android:hint="dd/mm/yyyy"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="25dp"
+                    android:paddingLeft="15dp"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_marginLeft="20dp"
@@ -310,6 +356,30 @@
                     app:layout_constraintTop_toBottomOf="@id/description_TV"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/time_LL"
+                    android:id="@+id/visit_type_TV"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black_color"
+                    android:text="Clinic Visit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.appcompat.widget.SwitchCompat
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/time_LL"
+                    app:layout_constraintStart_toEndOf="@id/visit_type_TV"
+                    android:id="@+id/visit_type_SC"
+                    app:track="@drawable/track"
+                    android:thumb="@drawable/thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

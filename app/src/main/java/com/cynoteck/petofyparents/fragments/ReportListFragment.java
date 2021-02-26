@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
+import com.cynoteck.petofyparents.activty.HospitalizationDetailsActivity;
 import com.cynoteck.petofyparents.activty.ViewReportsDeatilsActivity;
 import com.cynoteck.petofyparents.activty.XRayReportDeatilsActivity;
 import com.cynoteck.petofyparents.adapter.HospitalizationReportsAdapter;
@@ -359,7 +360,6 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
     @Override
     public void onViewXrayClick(int position) {
-//        Toast.makeText(getContext(), ""+petTestsAndXrayLists.get(position).getId(), Toast.LENGTH_SHORT).show();
         Intent labIntent = new Intent(getContext(), XRayReportDeatilsActivity.class);
         labIntent.putExtra("pet_id", pet_id);
         labIntent.putExtra("pet_name", pet_name);
@@ -422,7 +422,6 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
     @Override
     public void onViewHospitalizationClick(int position) {
-        /*Toast.makeText(getContext(), ""+petHospitalizationsLists.get(position).getId(), Toast.LENGTH_SHORT).show();
         Intent labIntent = new Intent(getContext(), HospitalizationDetailsActivity.class);
         labIntent.putExtra("pet_id",pet_id);
         labIntent.putExtra("pet_name",pet_name);
@@ -433,7 +432,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         labIntent.putExtra("report_id",petHospitalizationsLists.get(position).getId());
         labIntent.putExtras(labIntent);
         startActivity(labIntent);
-        getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);*/
+        getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
     }
 
 

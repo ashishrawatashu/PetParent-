@@ -24,7 +24,7 @@
 
 
             <TextView
-                android:text="PETOFY"
+                android:text="Add Pet"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -133,6 +133,7 @@
                    android:textColor="@color/grey_add_pet"/>
 
                <androidx.appcompat.widget.AppCompatSpinner
+                   android:paddingLeft="20dp"
                    android:layout_below="@id/pet_category_TV"
                    android:layout_marginTop="10dp"
                    android:layout_marginLeft="20dp"
@@ -158,6 +159,7 @@
                <androidx.appcompat.widget.AppCompatSpinner
                    android:layout_below="@id/pet_gender_TV"
                    android:layout_marginTop="10dp"
+                   android:paddingLeft="20dp"
                    android:layout_marginLeft="20dp"
                    android:layout_marginRight="20dp"
                    android:id="@+id/add_pet_sex_dialog"
@@ -322,6 +324,7 @@
                    android:textColor="@color/grey_add_pet"/>
 
                <androidx.appcompat.widget.AppCompatSpinner
+                   android:paddingLeft="20dp"
                    android:layout_below="@id/pet_breed_TV"
                    android:layout_marginTop="10dp"
                    app:layout_constraintEnd_toEndOf="parent"
@@ -345,6 +348,7 @@
                    android:textColor="@color/grey_add_pet"/>
 
                <androidx.appcompat.widget.AppCompatSpinner
+                   android:paddingLeft="20dp"
                    android:layout_below="@id/pet_color_TV"
                    android:layout_marginTop="10dp"
                    android:layout_marginLeft="20dp"
@@ -372,6 +376,7 @@
                    android:layout_below="@id/pincode_TV"
                    android:inputType="number"
                    android:maxLines="1"
+                   android:maxLength="6"
                    android:paddingLeft="25dp"
                    android:layout_width="match_parent"
                    android:layout_height="50dp"

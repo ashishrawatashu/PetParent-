@@ -41,7 +41,7 @@
                         android:id="@+id/petImage_IV"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerInside"
                         android:src="@drawable/pet_image" />
 
                 </LinearLayout>
@@ -69,6 +69,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:maxLines="1"
                             android:id="@+id/pet_id_TV"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

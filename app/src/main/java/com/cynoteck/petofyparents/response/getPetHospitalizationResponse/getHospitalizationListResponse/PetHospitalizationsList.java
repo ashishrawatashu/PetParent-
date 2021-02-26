@@ -74,9 +74,9 @@ public class PetHospitalizationsList
     private String diagnosisTreatmentProcedure;
 
     public String getZipCode ()
-{
-    return zipCode;
-}
+    {
+        return zipCode;
+    }
 
     public void setZipCode (String zipCode)
     {
@@ -84,9 +84,9 @@ public class PetHospitalizationsList
     }
 
     public String getCountry ()
-{
-    return country;
-}
+    {
+        return country;
+    }
 
     public void setCountry (String country)
     {
@@ -94,9 +94,9 @@ public class PetHospitalizationsList
     }
 
     public String getPetId ()
-{
-    return petId;
-}
+    {
+        return petId;
+    }
 
     public void setPetId (String petId)
     {
@@ -104,9 +104,9 @@ public class PetHospitalizationsList
     }
 
     public String getHospitalTypeList ()
-{
-    return hospitalTypeList;
-}
+    {
+        return hospitalTypeList;
+    }
 
     public void setHospitalTypeList (String hospitalTypeList)
     {
@@ -114,9 +114,9 @@ public class PetHospitalizationsList
     }
 
     public String getDocuments ()
-{
-    return documents;
-}
+    {
+        return documents;
+    }
 
     public void setDocuments (String documents)
     {
@@ -124,9 +124,9 @@ public class PetHospitalizationsList
     }
 
     public String getCreatedByUser ()
-{
-    return createdByUser;
-}
+    {
+        return createdByUser;
+    }
 
     public void setCreatedByUser (String createdByUser)
     {
@@ -134,9 +134,9 @@ public class PetHospitalizationsList
     }
 
     public String getCityId ()
-{
-    return cityId;
-}
+    {
+        return cityId;
+    }
 
     public void setCityId (String cityId)
     {
@@ -154,9 +154,9 @@ public class PetHospitalizationsList
     }
 
     public String getCreatedOn ()
-{
-    return createdOn;
-}
+    {
+        return createdOn;
+    }
 
     public void setCreatedOn (String createdOn)
     {
@@ -164,9 +164,9 @@ public class PetHospitalizationsList
     }
 
     public String getCountryId ()
-{
-    return countryId;
-}
+    {
+        return countryId;
+    }
 
     public void setCountryId (String countryId)
     {
@@ -174,9 +174,9 @@ public class PetHospitalizationsList
     }
 
     public String getPetName ()
-{
-    return petName;
-}
+    {
+        return petName;
+    }
 
     public void setPetName (String petName)
     {
@@ -224,9 +224,9 @@ public class PetHospitalizationsList
     }
 
     public String getState ()
-{
-    return state;
-}
+    {
+        return state;
+    }
 
     public void setState (String state)
     {
@@ -234,9 +234,9 @@ public class PetHospitalizationsList
     }
 
     public String getPet ()
-{
-    return pet;
-}
+    {
+        return pet;
+    }
 
     public void setPet (String pet)
     {
@@ -244,9 +244,9 @@ public class PetHospitalizationsList
     }
 
     public String getUpdatedByUser ()
-{
-    return updatedByUser;
-}
+    {
+        return updatedByUser;
+    }
 
     public void setUpdatedByUser (String updatedByUser)
     {
@@ -274,9 +274,9 @@ public class PetHospitalizationsList
     }
 
     public String getAddress ()
-{
-    return address;
-}
+    {
+        return address;
+    }
 
     public void setAddress (String address)
     {
@@ -284,9 +284,9 @@ public class PetHospitalizationsList
     }
 
     public String getUpdatedBy ()
-{
-    return updatedBy;
-}
+    {
+        return updatedBy;
+    }
 
     public void setUpdatedBy (String updatedBy)
     {
@@ -294,9 +294,9 @@ public class PetHospitalizationsList
     }
 
     public String getCountryNavigation ()
-{
-    return countryNavigation;
-}
+    {
+        return countryNavigation;
+    }
 
     public void setCountryNavigation (String countryNavigation)
     {
@@ -304,9 +304,9 @@ public class PetHospitalizationsList
     }
 
     public String getStateId ()
-{
-    return stateId;
-}
+    {
+        return stateId;
+    }
 
     public void setStateId (String stateId)
     {
@@ -314,9 +314,9 @@ public class PetHospitalizationsList
     }
 
     public String getStateList ()
-{
-    return stateList;
-}
+    {
+        return stateList;
+    }
 
     public void setStateList (String stateList)
     {
@@ -334,9 +334,9 @@ public class PetHospitalizationsList
     }
 
     public String getUpdatedOn ()
-{
-    return updatedOn;
-}
+    {
+        return updatedOn;
+    }
 
     public void setUpdatedOn (String updatedOn)
     {
@@ -344,9 +344,9 @@ public class PetHospitalizationsList
     }
 
     public String getCityList ()
-{
-    return cityList;
-}
+    {
+        return cityList;
+    }
 
     public void setCityList (String cityList)
     {
@@ -354,9 +354,9 @@ public class PetHospitalizationsList
     }
 
     public String getCountryList ()
-{
-    return countryList;
-}
+    {
+        return countryList;
+    }
 
     public void setCountryList (String countryList)
     {
@@ -364,9 +364,9 @@ public class PetHospitalizationsList
     }
 
     public String getHospitalizationTypeId ()
-{
-    return hospitalizationTypeId;
-}
+    {
+        return hospitalizationTypeId;
+    }
 
     public void setHospitalizationTypeId (String hospitalizationTypeId)
     {
@@ -374,9 +374,9 @@ public class PetHospitalizationsList
     }
 
     public String getCreatedBy ()
-{
-    return createdBy;
-}
+    {
+        return createdBy;
+    }
 
     public void setCreatedBy (String createdBy)
     {

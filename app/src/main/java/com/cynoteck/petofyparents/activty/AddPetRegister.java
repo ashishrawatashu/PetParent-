@@ -137,7 +137,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     File fileImg4 = null;
     File fileImg5 = null;
     Bitmap bitmap, thumbnail;
-    String intentFrom = "";
+    String intentFrom = "Add";
 
     private Button upload;
     private String baseUrl;
@@ -493,13 +493,11 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.pet_submit:
                 strPetName = pet_name.getText().toString().trim();
-//                strPetParentName = pet_parent_name.getText().toString().trim();
-//                strPetContactNumber = pet_contact_number.getText().toString().trim();
                 strPetDescription = pet_description.getText().toString().trim();
-//                strPetAdress = pet_address.getText().toString().trim();
                 strPetBirthDay = calenderView.getText().toString().trim();
-
-                if (strPetName.isEmpty()) {
+                if (strSpnerItemPetNm.isEmpty() || (strSpnerItemPetNm.equals("Select Pet Type"))) {
+                    Toast.makeText(this, "Select Type!!", Toast.LENGTH_SHORT).show();
+                } else if (strPetName.isEmpty()) {
                     Toast.makeText(this, "Enter Pet Name", Toast.LENGTH_SHORT).show();
                     pet_name.setError("Enter Pet Name");
                     pet_parent_name.setError(null);
@@ -507,6 +505,8 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     pet_description.setError(null);
                     pet_address.setError(null);
                     calenderView.setError(null);
+                } else if (strSpnrSex.isEmpty() || (strSpnrSex.equals("Pet Sex"))) {
+                    Toast.makeText(this, "Select Pet Sex !", Toast.LENGTH_SHORT).show();
                 } else if (strPetBirthDay.isEmpty()) {
                     Toast.makeText(this, "Pet YOB", Toast.LENGTH_SHORT).show();
                     pet_name.setError(null);
@@ -515,8 +515,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     pet_description.setError(null);
                     pet_address.setError(null);
                     calenderView.setError("Pet YOB");
-                } else if (strSpnerItemPetNm.isEmpty() || (strSpnerItemPetNm.equals("Select Pet Type"))) {
-                    Toast.makeText(this, "Select Type!!", Toast.LENGTH_SHORT).show();
                 } else if (strSpnrBreed.isEmpty() || (strSpnrBreed.equals("Pet Breed"))) {
                     Toast.makeText(this, "Select Breed!!", Toast.LENGTH_SHORT).show();
                 } else if ((strSpnrColor.isEmpty()) || (strSpnrColor.equals("Pet Color"))) {

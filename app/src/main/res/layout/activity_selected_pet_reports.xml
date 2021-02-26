@@ -284,7 +284,7 @@
                     <ImageView
                         android:layout_alignParentEnd="true"
                         android:layout_toRightOf="@+id/report_xrayReport_TV"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:id="@+id/view_xrayReport_arrow"
                         android:layout_centerInParent="true"
                         android:src="@drawable/forward_arrow"
@@ -328,7 +328,7 @@
                     <ImageView
                         android:layout_alignParentEnd="true"
                         android:layout_toRightOf="@+id/report_labTestReport_TV"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
                         android:id="@+id/view_labTestReport_arrow"
                         android:layout_centerInParent="true"
                         android:src="@drawable/forward_arrow"
@@ -371,9 +371,9 @@
                     <ImageView
                         android:layout_alignParentEnd="true"
                         android:layout_toRightOf="@+id/report_Hospitalization_TV"
-                        android:layout_marginLeft="20dp"
                         android:id="@+id/view_Hospitalization_arrow"
                         android:layout_centerInParent="true"
+                        android:layout_marginRight="20dp"
                         android:src="@drawable/forward_arrow"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"/>
