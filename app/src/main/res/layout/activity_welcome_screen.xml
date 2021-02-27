@@ -34,6 +34,7 @@
 
 
     <Button
+        android:textAllCaps="false"
         android:id="@+id/continue_BT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

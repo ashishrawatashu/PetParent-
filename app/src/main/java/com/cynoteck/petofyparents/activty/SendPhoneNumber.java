@@ -69,19 +69,6 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
                     String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         }
 
-//        enter_phone_ET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                cross_IV.setVisibility(View.VISIBLE);
-//                if (enter_phone_ET.getText().toString().length()==10){
-//                    next_BT.setEnabled(true);
-//                    next_BT.setBackgroundResource(R.drawable.next_button_green_bg);
-//                }else {
-//                    next_BT.setEnabled(false);
-//                    next_BT.setBackgroundResource(R.drawable.next_button_grey_bg);
-//                }
-//            }
-//        });
 
     }
     @Override
@@ -131,7 +118,7 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.back_arrow_IV:
-                onBackPressed();
+               onBackPressed();
                 break;
 //            case R.id.qrCodeScanner_IV:
 //
