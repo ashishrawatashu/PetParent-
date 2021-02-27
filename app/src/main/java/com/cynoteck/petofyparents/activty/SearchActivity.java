@@ -105,40 +105,44 @@ public class SearchActivity extends AppCompatActivity implements TextWatcher, Ap
         switch (key) {
             case "GetPetListBySearch":
                 try {
+                    progressBar.setVisibility(View.INVISIBLE);
                     GetPetListResponse getPetListResponse = (GetPetListResponse) arg0.body();
                     Log.d("GetPetListBySearch", getPetListResponse.toString());
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
                     profileList.clear();
                     if (responseCode == 109) {
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this);
-                        register_pet_RV.setLayoutManager(linearLayoutManager);
-                        if (getPetListResponse.getData().getPetList().size() > 0) {
 
-                            for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
-                                PetList petList = new PetList();
-                                petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
-                                petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
-                                petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
-                                petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
-                                petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
-                                petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
-                                petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
-                                petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
-                                petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
-                                petList.setLastVisitEncryptedId(getPetListResponse.getData().getPetList().get(i).getLastVisitEncryptedId());
+                        if (getPetListResponse.getData().getPetList().isEmpty()){
+                            Toast.makeText(this, "Pet Not Exist !", Toast.LENGTH_SHORT).show();
+                        }else {
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this);
+                            register_pet_RV.setLayoutManager(linearLayoutManager);
+                            if (getPetListResponse.getData().getPetList().size() > 0) {
 
-                                profileList.add(petList);
+                                for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
+                                    PetList petList = new PetList();
+                                    petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
+                                    petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
+                                    petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
+                                    petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
+                                    petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
+                                    petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
+                                    petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
+                                    petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
+                                    petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
+                                    petList.setLastVisitEncryptedId(getPetListResponse.getData().getPetList().get(i).getLastVisitEncryptedId());
+
+                                    profileList.add(petList);
+                                }
+
+                                SearchAdapter = new SearchAdapter(SearchActivity.this, profileList, this);
+                                register_pet_RV.setAdapter(SearchAdapter);
+                                SearchAdapter.notifyDataSetChanged();
+
+
+                            } else {
+                                Log.e("No_DATA", "NO_DATA");
                             }
-
-                            SearchAdapter = new SearchAdapter(SearchActivity.this, profileList, this);
-                            register_pet_RV.setAdapter(SearchAdapter);
-                            SearchAdapter.notifyDataSetChanged();
-                            progressBar.setVisibility(View.INVISIBLE);
-
-
-                        } else {
-                            Log.e("No_DATA", "NO_DATA");
-//                    Toast.makeText(SearchActivity.this, "Data Not found", Toast.LENGTH_SHORT).show();
                         }
 
 

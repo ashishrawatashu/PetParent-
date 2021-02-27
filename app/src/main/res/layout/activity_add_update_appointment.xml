@@ -107,7 +107,7 @@
                         android:singleLine="true"
                         android:paddingLeft="10dp"
                         android:id="@+id/pet_parent_ACTV"
-                        android:hint="Search Pet by Pet ID,Name..(if already added)"
+                        android:hint="Search Pet..(if already exist)"
                         android:background="@null"
                         android:layout_height="match_parent"
                         android:layout_width="0dp"
@@ -142,22 +142,21 @@
                     android:textColor="@color/grey_add_pet"/>
 
                 <TextView
+                    android:text="Pet Details"
                     android:visibility="gone"
                     android:id="@+id/pet_details_TV"
                     app:layout_constraintEnd_toEndOf="@id/pet_parent_TV"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_TV"
                     app:layout_constraintTop_toBottomOf="@id/pet_parent_TV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="25dp"
                     android:gravity="center_vertical"/>
 
                 <TextView
                     android:visibility="gone"
                     android:gravity="center_vertical"
-                    app:layout_constraintEnd_toEndOf="@id/pet_parent_TV"
+                    app:layout_constraintEnd_toEndOf="@id/purpose_spinner"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/pet_details_TV"
                     android:imeOptions="actionSearch"

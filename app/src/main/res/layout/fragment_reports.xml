@@ -46,7 +46,7 @@
                 android:background="@drawable/searchbox"
                 android:layout_centerVertical="true">
 
-                <EditText
+                <AutoCompleteTextView
                     android:imeOptions="actionSearch"
                     android:singleLine="true"
                     android:id="@+id/search_box"
@@ -125,12 +125,52 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/petList_RV"
-        android:background="@color/list_background"
+    <androidx.core.widget.NestedScrollView
+        android:visibility="visible"
+        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/list_background"
+                android:id="@+id/register_pet_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/reports_list"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/empty_IV"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingBottom="10dp"
+        android:src="@drawable/empty"
+        android:visibility="invisible"
+        android:elevation="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/select_pet_headline_LL" />
 
 
 </RelativeLayout>

@@ -61,7 +61,7 @@ public class AfterScanScreenFragment extends Fragment implements TextWatcher, Vi
     ScanPetListAdapter scanPetListAdapter;
     ArrayList<PetList> profileList;
     LinearLayout add_pet_LL;
-    ImageView vet_profile_pic;
+    ImageView empty_IV, vet_profile_pic;
     EditText search_box_add_new;
     TextView clinic_name_TV, vet_name_TV;
     ImageView star_one, star_two, star_three, star_four, star_five;
@@ -88,6 +88,7 @@ public class AfterScanScreenFragment extends Fragment implements TextWatcher, Vi
         ClipboardManager mCbm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         mCbm.clearPrimaryClip();
         init();
+        empty_IV.setVisibility(View.GONE);
         Bundle extras = this.getArguments();
         veterinarianUserId = extras.getString("veterinarianUserId");
         veterinarianName = extras.getString("veterinarianName");
@@ -118,12 +119,26 @@ public class AfterScanScreenFragment extends Fragment implements TextWatcher, Vi
                 if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
                     page++;
                     progressBar.setVisibility(View.VISIBLE);
-                    getPetList(page, pagelimit);
+                    getFromScroll(page, pagelimit);
                 }
             }
         });
 
         return view;
+    }
+
+    private void getFromScroll(int page, int pagelimit) {
+        PetDataParams getPetDataParams = new PetDataParams();
+        getPetDataParams.setPageNumber(page);//0
+        getPetDataParams.setPageSize(pagelimit);//0
+        getPetDataParams.setSearch_Data("");
+        PetDataRequest getPetDataRequest = new PetDataRequest();
+        getPetDataRequest.setData(getPetDataParams);
+
+        ApiService<GetPetListResponse> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetFromScroll");
+        Log.e("DATALOG", "check1=> " + getPetDataRequest);
+
     }
 
     private void getPetList(int page, int pagelimit) {
@@ -185,6 +200,8 @@ public class AfterScanScreenFragment extends Fragment implements TextWatcher, Vi
     }
 
     private void init() {
+        search_boxRL=view.findViewById(R.id.search_boxRL);
+        empty_IV =view.findViewById(R.id.empty_IV);
         nestedScrollView=view.findViewById(R.id.nested_scroll_view);
         vet_profile_pic = view.findViewById(R.id.vet_profile_pic);
         clinic_name_TV = view.findViewById(R.id.clinic_name_TV);
@@ -244,6 +261,7 @@ public class AfterScanScreenFragment extends Fragment implements TextWatcher, Vi
         if (requestCode==ADD_PET_WITH_QR_CODE){
             if (resultCode==RESULT_OK){
                 profileList.clear();
+                empty_IV.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 if (methods.isInternetOn()) {
                     getPetList(page, pagelimit);
@@ -274,6 +292,55 @@ public class AfterScanScreenFragment extends Fragment implements TextWatcher, Vi
     public void onResponse(Response response, String key) {
         switch (key) {
             case "GetPetList":
+                try {
+                    progressBar.setVisibility(View.GONE);
+                    GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
+                    Log.d("GetPetList", getPetListResponse.toString());
+                    int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
+                    if (responseCode == 109) {
+
+                        if (getPetListResponse.getData().getPetList().isEmpty()){
+                            empty_IV.setVisibility(View.VISIBLE);
+                            search_boxRL.setVisibility(View.GONE);
+                        }else {
+                            empty_IV.setVisibility(View.GONE);
+                            search_boxRL.setVisibility(View.VISIBLE);
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                            register_pet_RV.setLayoutManager(linearLayoutManager);
+                            if (getPetListResponse.getData().getPetList().size() > 0) {
+                                Log.d("DATALOG", String.valueOf(getPetListResponse.getData().getPetList().get(0).getPetUniqueId()));
+                                for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
+                                    PetList petList = new PetList();
+                                    petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
+                                    petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
+                                    petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
+                                    petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
+                                    petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
+                                    petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
+                                    petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
+                                    petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
+                                    petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
+                                    profileList.add(petList);
+                                }
+                                progressBar.setVisibility(View.GONE);
+                                scanPetListAdapter = new ScanPetListAdapter(getContext(), profileList, this);
+                                register_pet_RV.setAdapter(scanPetListAdapter);
+                                scanPetListAdapter.notifyDataSetChanged();
+                                register_pet_RV.setVisibility(View.VISIBLE);
+
+                            }
+                        }
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+
+            case "GetFromScroll":
                 try {
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
                     Log.d("GetPetList", getPetListResponse.toString());

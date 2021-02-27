@@ -78,14 +78,14 @@ import retrofit2.Response;
 public class AddUpdateAppointmentActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener, TextWatcher {
     Button create_appointment_BT;
     ImageView appointment_headline_back, new_pet_search;
-    TextView visit_type_TV,appointment_headline, calenderTextViewAppointDt, time_TV, parent_TV, cancelOtpDialog, add_new_pet;
+    TextView pet_details_TV, visit_type_TV,appointment_headline, calenderTextViewAppointDt, time_TV, parent_TV, cancelOtpDialog, add_new_pet;
     EditText title_ET, duration_TV, description_ET;
     AutoCompleteTextView pet_parent_TV;
     LinearLayout pet_search_layout;
     Methods methods;
     ArrayList<GetPetParentListData> petParent = new ArrayList<>();
     Dialog petParentDilog;
-    String isVedioCall="", strSpnrPurpose="", vetUserId = "", currentTime = "", strResponseOtp = "", petParentContactNumber = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
+    String isVedioCall="false", strSpnrPurpose="", vetUserId = "", currentTime = "", strResponseOtp = "", petParentContactNumber = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
     DatePickerDialog picker;
     TimePicker timePicker;
     ArrayList<String> petUniueId = null;
@@ -228,7 +228,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         pet_search_layout = findViewById(R.id.pet_search_layout);
         visit_type_SC = findViewById(R.id.visit_type_SC);
         visit_type_TV = findViewById(R.id.visit_type_TV);
-
+        pet_details_TV=findViewById(R.id.pet_details_TV);
         add_new_pet.setOnClickListener(this);
         appointment_headline_back.setOnClickListener(this);
         create_appointment_BT.setOnClickListener(this);
@@ -512,6 +512,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 pet_search_layout.setVisibility(View.GONE);
+                pet_details_TV.setVisibility(View.VISIBLE);
                 parent_TV.setVisibility(View.VISIBLE);
                 petId = data.getStringExtra("petId");
                 userID = data.getStringExtra("userId");
@@ -648,6 +649,8 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                     }
 
                 } catch (Exception e) {
+                    methods.customProgressDismiss();
+                    Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
                 break;
