@@ -193,7 +193,7 @@ public class ReportsCommonActivity extends AppCompatActivity {
                 }else if (button_type.equals("view")){
                     data.putString("button_type","view");
                 }
-                reports_headline_TV.setText("Hospitalization & Surgeries");
+                reports_headline_TV.setText("Hospitalization");
                 data.putString("reports_id","9");
                 data.putString("type","Hospitalization");
                 ReportListFragment fragment8 = new ReportListFragment();

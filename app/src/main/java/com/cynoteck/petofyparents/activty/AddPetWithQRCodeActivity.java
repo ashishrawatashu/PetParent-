@@ -415,7 +415,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                     if (registerParentWithQRResponse.getResponse().getResponseCode().equals("109")) {
 
                         setResult(RESULT_OK);
-                        Toast.makeText(this, registerParentWithQRResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Pet Added", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         Toast.makeText(this, "Please Try again !", Toast.LENGTH_SHORT).show();

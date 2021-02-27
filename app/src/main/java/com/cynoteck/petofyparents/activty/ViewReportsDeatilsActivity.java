@@ -182,7 +182,7 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
                         } else {
                             remarks_textView.setText(getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getTreatmentRemarks());
                         }
-                        if (getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getDewormerName().equals("")) {
+                        if (getClinicVisitsDetailsResponse.getData().getPetClinicVisitDetails().getDewormerName()==null) {
                             layout_dewarming_name.setVisibility(View.GONE);
 
                         } else {

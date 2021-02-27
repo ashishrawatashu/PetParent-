@@ -78,14 +78,14 @@ import retrofit2.Response;
 public class GetPetDetailsActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse {
     Methods methods;
     TextView peto_details_reg_number;
-    AppCompatSpinner add_details_pet_type,add_details_pet_age,add_details_pet_sex,add_details_pet_breed,add_detils_pet_color,
+    AppCompatSpinner add_details_pet_type, add_details_pet_age, add_details_pet_sex, add_details_pet_breed, add_detils_pet_color,
             add_details_pet_size;
-    EditText pet_details_name,pet_details_parent_name,pet_deatils_contact_number,pet_deatils_description,
+    EditText pet_details_name, pet_details_parent_name, pet_deatils_contact_number, pet_deatils_description,
             pet_details_address;
     TextView calenderTextViewDetails;
     CircleImageView pet_Details_profile_image;
-    ImageView service_details_cat_img_one,service_details_cat_img_two,service_details_cat_img_three,
-            service_details_cat_img_four,service_detils_cat_img_five,id_card,back_arrow_IV;
+    ImageView service_details_cat_img_one, service_details_cat_img_two, service_details_cat_img_three,
+            service_details_cat_img_four, service_detils_cat_img_five, id_card, back_arrow_IV;
     Button pet_update;
     DatePickerDialog picker;
 
@@ -96,12 +96,12 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     ArrayList<String> petSize;
     ArrayList<String> petSex;
 
-    HashMap<String,String> petTypeHashMap=new HashMap<>();
-    HashMap<String,String> petBreedHashMap=new HashMap<>();
-    HashMap<String,String> petAgeHashMap=new HashMap<>();
-    HashMap<String,String> petColorHashMap=new HashMap<>();
-    HashMap<String,String> petSizeHashMap=new HashMap<>();
-    HashMap<String,String> petSexHashMap=new HashMap<>();
+    HashMap<String, String> petTypeHashMap = new HashMap<>();
+    HashMap<String, String> petBreedHashMap = new HashMap<>();
+    HashMap<String, String> petAgeHashMap = new HashMap<>();
+    HashMap<String, String> petColorHashMap = new HashMap<>();
+    HashMap<String, String> petSizeHashMap = new HashMap<>();
+    HashMap<String, String> petSexHashMap = new HashMap<>();
 
     private static final String IMAGE_DIRECTORY = "/Picture";
     private int GALLERY = 1, CAMERA = 2;
@@ -114,15 +114,14 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     Bitmap bitmap, thumbnail;
     String capImage;
 
-    String pet_id = "",currentDateandTime="",strPetCategory="",strPetName="",strPetParentName="",image_url="",
-            strPetContactNumber="",strPetDescription="",strPetAdress="",strPetBirthDay="",
-            strSpnerItemPetNm="",getStrSpnerItemPetNmId="",strSpnrBreed="",strSpnrBreedId="",petUniqueId="",
-            strSpnrAge="",strSpnrAgeId="",strSpnrColor="",strSpnrColorId="",strSpnrSize="",strSpneSizeId="",
-            strSpnrSex="",strSpnrSexId="",selctProflImage="0",selctImgOne="0",selctImgtwo="0",
-            slctImgThree="0",slctImgFour="0",slctImgFive="0",strProfileImgUrl="",strFirstImgUrl="",strSecondImgUrl="",
-            strThirdImgUrl="",strFourthImUrl="",strFifthImgUrl="",strDateofBirthObject="";
+    String pet_id = "", currentDateandTime = "", strPetCategory = "", strPetName = "", strPetParentName = "", image_url = "",
+            strPetContactNumber = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
+            strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "",
+            strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
+            strSpnrSex = "", strSpnrSexId = "", selctProflImage = "0", selctImgOne = "0", selctImgtwo = "0",
+            slctImgThree = "0", slctImgFour = "0", slctImgFive = "0", strProfileImgUrl = "", strFirstImgUrl = "", strSecondImgUrl = "",
+            strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "", strDateofBirthObject = "";
     Dialog dialog;
-
 
 
     @Override
@@ -134,15 +133,14 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         Bundle extras = getIntent().getExtras();
         init();
         requestMultiplePermissions();
-        petSex=new ArrayList<>();
+        petSex = new ArrayList<>();
         petSex.add("Pet Sex");
         petSex.add("Male");
         petSex.add("Female");
 
-        petSexHashMap.put("Pet Sex","0");
-        petSexHashMap.put("Male","1");
-        petSexHashMap.put("Female","2");
-
+        petSexHashMap.put("Pet Sex", "0");
+        petSexHashMap.put("Male", "1");
+        petSexHashMap.put("Female", "2");
 
 
         if (extras != null) {
@@ -158,15 +156,14 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
             strPetParentName = extras.getString("pet_parent");
             strPetContactNumber = extras.getString("pet_parent_contact");
             image_url = extras.getString("image_url");
-            Log.d("jjsjsjjs",""+image_url);
+            Log.d("jjsjsjjs", "" + image_url);
 
-            if(image_url!=null)
-            {
+            if (image_url != null) {
                 Glide.with(this)
                         .load(image_url)
+                        .placeholder(R.drawable.profile_img_icon)
                         .into(pet_Details_profile_image);
             }
-
 
             pet_details_name.setText(strPetName);
             pet_details_parent_name.setText(Config.user_name);
@@ -176,42 +173,39 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         getPetListParams.setId(pet_id);
         GetPetListRequest getPetListRequest = new GetPetListRequest();
         getPetListRequest.setData(getPetListParams);
-        if(methods.isInternetOn())
-        {
+        if (methods.isInternetOn()) {
             getPetlistData(getPetListRequest);
             petTypee();
             genaretePetUniqueKey();
             setSpinnerPetSex();
-        }
-        else
-        {
+        } else {
             methods.DialogInternet();
         }
     }
 
     private void init() {
 
-        peto_details_reg_number=findViewById(R.id.peto_details_reg_number);
-        add_details_pet_type=findViewById(R.id.add_details_pet_type);
-        add_details_pet_age=findViewById(R.id.add_details_pet_age);
-        add_details_pet_sex=findViewById(R.id.add_details_pet_sex);
-        add_details_pet_breed=findViewById(R.id.add_details_pet_breed);
-        add_detils_pet_color=findViewById(R.id.add_detils_pet_color);
-        add_details_pet_size=findViewById(R.id.add_details_pet_size);
-        pet_details_name=findViewById(R.id.pet_details_name);
-        pet_details_parent_name=findViewById(R.id.pet_details_parent_name);
-        pet_deatils_contact_number=findViewById(R.id.pet_deatils_contact_number);
-        pet_deatils_description=findViewById(R.id.pet_deatils_description);
-        pet_details_address=findViewById(R.id.pet_details_address);
-        calenderTextViewDetails=findViewById(R.id.calenderTextViewDetails);
-        pet_Details_profile_image=findViewById(R.id.pet_Details_profile_image);
-        service_details_cat_img_one=findViewById(R.id.service_details_cat_img_one);
-        service_details_cat_img_two=findViewById(R.id.service_details_cat_img_two);
-        service_details_cat_img_three=findViewById(R.id.service_details_cat_img_three);
-        service_details_cat_img_four=findViewById(R.id.service_details_cat_img_four);
-        service_detils_cat_img_five=findViewById(R.id.service_detils_cat_img_five);
-        back_arrow_IV=findViewById(R.id.back_arrow_IV);
-        pet_update=findViewById(R.id.pet_submit);
+        peto_details_reg_number = findViewById(R.id.peto_details_reg_number);
+        add_details_pet_type = findViewById(R.id.add_details_pet_type);
+        add_details_pet_age = findViewById(R.id.add_details_pet_age);
+        add_details_pet_sex = findViewById(R.id.add_details_pet_sex);
+        add_details_pet_breed = findViewById(R.id.add_details_pet_breed);
+        add_detils_pet_color = findViewById(R.id.add_detils_pet_color);
+        add_details_pet_size = findViewById(R.id.add_details_pet_size);
+        pet_details_name = findViewById(R.id.pet_details_name);
+        pet_details_parent_name = findViewById(R.id.pet_details_parent_name);
+        pet_deatils_contact_number = findViewById(R.id.pet_deatils_contact_number);
+        pet_deatils_description = findViewById(R.id.pet_deatils_description);
+        pet_details_address = findViewById(R.id.pet_details_address);
+        calenderTextViewDetails = findViewById(R.id.calenderTextViewDetails);
+        pet_Details_profile_image = findViewById(R.id.pet_Details_profile_image);
+        service_details_cat_img_one = findViewById(R.id.service_details_cat_img_one);
+        service_details_cat_img_two = findViewById(R.id.service_details_cat_img_two);
+        service_details_cat_img_three = findViewById(R.id.service_details_cat_img_three);
+        service_details_cat_img_four = findViewById(R.id.service_details_cat_img_four);
+        service_detils_cat_img_five = findViewById(R.id.service_detils_cat_img_five);
+        back_arrow_IV = findViewById(R.id.back_arrow_IV);
+        pet_update = findViewById(R.id.pet_submit);
         //id_card=findViewById(R.id.id_card);
 
         back_arrow_IV.setOnClickListener(this);
@@ -232,15 +226,15 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     private void getPetlistData(GetPetListRequest getPetListRequest) {
         methods.showCustomProgressBarDialog(this);
         ApiService<GetPetResponse> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().getPetDetails(Config.token,getPetListRequest), "GetPetDetail");
-        Log.e("DATALOG","check1=> "+getPetListRequest);
+        service.get(this, ApiClient.getApiInterface().getPetDetails(Config.token, getPetListRequest), "GetPetDetail");
+        Log.e("DATALOG", "check1=> " + getPetListRequest);
     }
 
 
     private void currentDateAndTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy h:mm:ss a", Locale.getDefault());
         currentDateandTime = sdf.format(new Date());
-        Log.d("currentDateandTime",""+currentDateandTime);
+        Log.d("currentDateandTime", "" + currentDateandTime);
     }
 
 
@@ -257,7 +251,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     private void getPetBreed() {
         BreedRequest breedRequest = new BreedRequest();
         breedRequest.setGetAll("false");
-        if(!getStrSpnerItemPetNmId.equals("0"))
+        if (!getStrSpnerItemPetNmId.equals("0"))
             breedRequest.setPetCategoryId(getStrSpnerItemPetNmId);
         else
             breedRequest.setPetCategoryId("1");
@@ -266,13 +260,13 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
 
         ApiService<BreedCatRespose> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(breedParams), "GetPetBreed");
-        Log.d("Diolog_Breed","===>"+breedParams);
+        Log.d("Diolog_Breed", "===>" + breedParams);
     }
 
     private void getPetAge() {
         BreedRequest breedRequest = new BreedRequest();
         breedRequest.setGetAll("false");
-        if(!getStrSpnerItemPetNmId.equals("0"))
+        if (!getStrSpnerItemPetNmId.equals("0"))
             breedRequest.setPetCategoryId(getStrSpnerItemPetNmId);
         else
             breedRequest.setPetCategoryId("1");
@@ -286,7 +280,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     private void getPetColor() {
         BreedRequest breedRequest = new BreedRequest();
         breedRequest.setGetAll("false");
-        if(!getStrSpnerItemPetNmId.equals("0"))
+        if (!getStrSpnerItemPetNmId.equals("0"))
             breedRequest.setPetCategoryId(getStrSpnerItemPetNmId);
         else
             breedRequest.setPetCategoryId("1");
@@ -300,7 +294,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     private void getPetSize() {
         BreedRequest breedRequest = new BreedRequest();
         breedRequest.setGetAll("false");
-        if(!getStrSpnerItemPetNmId.equals("0"))
+        if (!getStrSpnerItemPetNmId.equals("0"))
             breedRequest.setPetCategoryId(getStrSpnerItemPetNmId);
         else
             breedRequest.setPetCategoryId("1");
@@ -314,35 +308,30 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.pet_submit:
-                strPetName= pet_details_name.getText().toString().trim();
+                strPetName = pet_details_name.getText().toString().trim();
                 strPetParentName = pet_details_parent_name.getText().toString().trim();
                 strPetContactNumber = pet_deatils_contact_number.getText().toString().trim();
                 strPetDescription = pet_deatils_description.getText().toString().trim();
                 strPetAdress = pet_details_address.getText().toString().trim();
                 strPetBirthDay = calenderTextViewDetails.getText().toString().trim();
 
-                if(strPetName.isEmpty())
-                {
+                if (strPetName.isEmpty()) {
                     pet_details_name.setError("Enter Pet Name");
                     pet_details_parent_name.setError(null);
                     pet_deatils_contact_number.setError(null);
                     pet_deatils_description.setError(null);
                     pet_details_address.setError(null);
                     calenderTextViewDetails.setError(null);
-                }
-                else if(strPetParentName.isEmpty())
-                {
+                } else if (strPetParentName.isEmpty()) {
                     pet_details_name.setError(null);
                     pet_details_parent_name.setError("Enter Parent Name");
                     pet_deatils_contact_number.setError(null);
                     pet_deatils_description.setError(null);
                     pet_details_address.setError(null);
                     calenderTextViewDetails.setError(null);
-                }
-                else if(strPetContactNumber.isEmpty())
-                {
+                } else if (strPetContactNumber.isEmpty()) {
                     pet_details_name.setError(null);
                     pet_details_parent_name.setError(null);
                     pet_deatils_contact_number.setError("Enter Contact Number");
@@ -368,8 +357,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
 //                    pet_details_address.setError("Enter Pet Address");
 //                    calenderTextViewDetails.setError(null);
 //                }
-                else if(strPetBirthDay.isEmpty())
-                {
+                else if (strPetBirthDay.isEmpty()) {
                     pet_details_name.setError(null);
                     pet_details_parent_name.setError(null);
                     pet_deatils_contact_number.setError(null);
@@ -378,32 +366,26 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     calenderTextViewDetails.setError("Pet YOB");
                 }
                 //pet size and color.
-                else if(strSpnerItemPetNm.isEmpty()||(strSpnerItemPetNm.equals("Select Pet Type")))
-                {
+                else if (strSpnerItemPetNm.isEmpty() || (strSpnerItemPetNm.equals("Select Pet Type"))) {
                     Toast.makeText(this, "Select Type!!", Toast.LENGTH_SHORT).show();
-                }
-                else if(strSpnrBreed.isEmpty()||(strSpnrBreed.equals("Pet Breed")))
-                {
+                } else if (strSpnrBreed.isEmpty() || (strSpnrBreed.equals("Pet Breed"))) {
                     Toast.makeText(this, "Select Breed!!", Toast.LENGTH_SHORT).show();
                 }
 //                else if(strSpnrAge.isEmpty()||(strSpnrAge.equals("Select Pet Age")))
 //                {
 //                    Toast.makeText(this, "Select Pet Age!!", Toast.LENGTH_SHORT).show();
 //                }
-                else if(strSpnrSex.isEmpty()||(strSpnrSex.equals("Pet Sex")))
-                {
+                else if (strSpnrSex.isEmpty() || (strSpnrSex.equals("Pet Sex"))) {
                     Toast.makeText(this, "Select Pet Sex!!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     pet_details_name.setError(null);
                     pet_details_parent_name.setError(null);
                     pet_deatils_contact_number.setError(null);
                     pet_deatils_description.setError(null);
                     pet_details_address.setError(null);
                     calenderTextViewDetails.setError(null);
-                    Log.d("hahahah",""+getStrSpnerItemPetNmId+" "+strSpnrSexId+" "+strSpnrAgeId+" "+strSpneSizeId+
-                            " "+strSpnrColorId+" "+strSpnrBreedId+" "+strPetName+" "+strPetBirthDay+" "+strPetDescription+" "+currentDateandTime);
+                    Log.d("hahahah", "" + getStrSpnerItemPetNmId + " " + strSpnrSexId + " " + strSpnrAgeId + " " + strSpneSizeId +
+                            " " + strSpnrColorId + " " + strSpnrBreedId + " " + strPetName + " " + strPetBirthDay + " " + strPetDescription + " " + currentDateandTime);
                     UpdatePetRequest updatePetRequest = new UpdatePetRequest();
                     UpdatePetParam data = new UpdatePetParam();
                     data.setId(pet_id);
@@ -428,12 +410,9 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     data.setFourthServiceImageUrl(strFourthImUrl);
                     data.setFifthServiceImageUrl(strFifthImgUrl);
                     updatePetRequest.setAddPetParams(data);
-                    if(methods.isInternetOn())
-                    {
+                    if (methods.isInternetOn()) {
                         updatePetDetails(updatePetRequest);
-                    }
-                    else
-                    {
+                    } else {
                         methods.DialogInternet();
                     }
                 }
@@ -455,27 +434,27 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 picker.show();
                 break;
             case R.id.pet_Details_profile_image:
-                selctProflImage="1";
+                selctProflImage = "1";
                 showPictureDialog();
                 break;
             case R.id.service_details_cat_img_one:
-                selctImgOne="1";
+                selctImgOne = "1";
                 showPictureDialog();
                 break;
             case R.id.service_details_cat_img_two:
-                selctImgtwo="1";
+                selctImgtwo = "1";
                 showPictureDialog();
                 break;
             case R.id.service_details_cat_img_three:
-                slctImgThree="1";
+                slctImgThree = "1";
                 showPictureDialog();
                 break;
             case R.id.service_details_cat_img_four:
-                slctImgFour="1";
+                slctImgFour = "1";
                 showPictureDialog();
                 break;
             case R.id.service_detils_cat_img_five:
-                slctImgFive="1";
+                slctImgFive = "1";
                 showPictureDialog();
                 break;
 
@@ -515,198 +494,190 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case "GetPetTypes":
                 try {
-                    Log.d("GetPetTypes",arg0.body().toString());
+                    Log.d("GetPetTypes", arg0.body().toString());
                     PetTypeResponse petTypeResponse = (PetTypeResponse) arg0.body();
                     int responseCode = Integer.parseInt(petTypeResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
-                        petType=new ArrayList<>();
+                    if (responseCode == 109) {
+                        petType = new ArrayList<>();
                         petType.add("Select Pet Type");
-                        petTypeHashMap.put("Select Pet Type","0");
-                        Log.d("lalal",""+petTypeResponse.getData().size());
-                        for(int i=0; i<petTypeResponse.getData().size(); i++){
-                            Log.d("petttt",""+petTypeResponse.getData().get(i).getPetType1());
+                        petTypeHashMap.put("Select Pet Type", "0");
+                        Log.d("lalal", "" + petTypeResponse.getData().size());
+                        for (int i = 0; i < petTypeResponse.getData().size(); i++) {
+                            Log.d("petttt", "" + petTypeResponse.getData().get(i).getPetType1());
                             petType.add(petTypeResponse.getData().get(i).getPetType1());
-                            petTypeHashMap.put(petTypeResponse.getData().get(i).getPetType1(),petTypeResponse.getData().get(i).getId());
+                            petTypeHashMap.put(petTypeResponse.getData().get(i).getPetType1(), petTypeResponse.getData().get(i).getId());
                         }
                         setPetTypeSpinner();
 
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, petTypeResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             case "GetPetBreed":
                 try {
-                    Log.d("GetPetBreed",arg0.body().toString());
+                    Log.d("GetPetBreed", arg0.body().toString());
                     BreedCatRespose breedCatRespose = (BreedCatRespose) arg0.body();
                     int responseCode = Integer.parseInt(breedCatRespose.getResponse().getResponseCode());
-                    if (responseCode== 109){
-                        petBreed=new ArrayList<>();
+                    if (responseCode == 109) {
+                        petBreed = new ArrayList<>();
                         petBreed.add("Pet Breed");
-                        Log.d("lalal",""+breedCatRespose.getData().size());
-                        for(int i=0; i<breedCatRespose.getData().size(); i++){
-                            Log.d("petttt",""+breedCatRespose.getData().get(i).getBreed());
+                        Log.d("lalal", "" + breedCatRespose.getData().size());
+                        for (int i = 0; i < breedCatRespose.getData().size(); i++) {
+                            Log.d("petttt", "" + breedCatRespose.getData().get(i).getBreed());
                             petBreed.add(breedCatRespose.getData().get(i).getBreed());
-                            petBreedHashMap.put(breedCatRespose.getData().get(i).getBreed(),breedCatRespose.getData().get(i).getId());
+                            petBreedHashMap.put(breedCatRespose.getData().get(i).getBreed(), breedCatRespose.getData().get(i).getId());
                         }
                         setPetBreeSpinner();
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, breedCatRespose.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case "GetPetAge":
                 try {
-                    Log.d("GetPetAge",arg0.body().toString());
+                    Log.d("GetPetAge", arg0.body().toString());
                     PetAgeValueResponse petAgeValueResponse = (PetAgeValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petAgeValueResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
-                        petAge=new ArrayList<>();
+                    if (responseCode == 109) {
+                        petAge = new ArrayList<>();
                         petAge.add("Select Pet Age");
-                        Log.d("lalal",""+petAgeValueResponse.getData().size());
-                        for(int i=0; i<petAgeValueResponse.getData().size(); i++){
-                            Log.d("petttt",""+petAgeValueResponse.getData().get(i).getAge());
+                        Log.d("lalal", "" + petAgeValueResponse.getData().size());
+                        for (int i = 0; i < petAgeValueResponse.getData().size(); i++) {
+                            Log.d("petttt", "" + petAgeValueResponse.getData().get(i).getAge());
                             petAge.add(petAgeValueResponse.getData().get(i).getAge());
-                            petAgeHashMap.put(petAgeValueResponse.getData().get(i).getAge(),petAgeValueResponse.getData().get(i).getId());
+                            petAgeHashMap.put(petAgeValueResponse.getData().get(i).getAge(), petAgeValueResponse.getData().get(i).getId());
                         }
                         setPetAgeSpinner();
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, petAgeValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
 
             case "GetPetColor":
                 try {
-                    Log.d("GetPetColor",arg0.body().toString());
+                    Log.d("GetPetColor", arg0.body().toString());
                     PetColorValueResponse petColorValueResponse = (PetColorValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petColorValueResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
-                        petColor=new ArrayList<>();
+                    if (responseCode == 109) {
+                        petColor = new ArrayList<>();
                         petColor.add("Pet Color");
-                        Log.d("lalal",""+petColorValueResponse.getData().size());
-                        for(int i=0; i<petColorValueResponse.getData().size(); i++){
-                            Log.d("petttt",""+petColorValueResponse.getData().get(i).getColor());
+                        Log.d("lalal", "" + petColorValueResponse.getData().size());
+                        for (int i = 0; i < petColorValueResponse.getData().size(); i++) {
+                            Log.d("petttt", "" + petColorValueResponse.getData().get(i).getColor());
                             petColor.add(petColorValueResponse.getData().get(i).getColor());
-                            petColorHashMap.put(petColorValueResponse.getData().get(i).getColor(),petColorValueResponse.getData().get(i).getId());
+                            petColorHashMap.put(petColorValueResponse.getData().get(i).getColor(), petColorValueResponse.getData().get(i).getId());
                         }
                         setPetColorSpinner();
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, petColorValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case "GetPetSize":
                 try {
-                    Log.d("GetPetSize",arg0.body().toString());
+                    Log.d("GetPetSize", arg0.body().toString());
                     PetSizeValueResponse petSizeValueResponse = (PetSizeValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petSizeValueResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
-                        petSize=new ArrayList<>();
+                    if (responseCode == 109) {
+                        petSize = new ArrayList<>();
                         petSize.add("Pet Size");
-                        Log.d("lalal",""+petSizeValueResponse.getData().size());
-                        for(int i=0; i<petSizeValueResponse.getData().size(); i++){
-                            Log.d("petttt",""+petSizeValueResponse.getData().get(i).getSize());
+                        Log.d("lalal", "" + petSizeValueResponse.getData().size());
+                        for (int i = 0; i < petSizeValueResponse.getData().size(); i++) {
+                            Log.d("petttt", "" + petSizeValueResponse.getData().get(i).getSize());
                             petSize.add(petSizeValueResponse.getData().get(i).getSize());
-                            petSizeHashMap.put(petSizeValueResponse.getData().get(i).getSize(),petSizeValueResponse.getData().get(i).getId());
+                            petSizeHashMap.put(petSizeValueResponse.getData().get(i).getSize(), petSizeValueResponse.getData().get(i).getId());
                         }
                         setPetSizeSpinner();
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, petSizeValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
 
             case "UpdatePetDetails":
                 try {
-                    Log.d("UpdatePetDetails",arg0.body().toString());
+                    Log.d("UpdatePetDetails", arg0.body().toString());
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
+                    if (responseCode == 109) {
                         Config.backCall = "hit";
                         onBackPressed();
                         Toast.makeText(this, "Update Succesfully ", Toast.LENGTH_SHORT).show();
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, addPetValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
             case "UploadDocument":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("UploadDocument",arg0.body().toString());
+                    Log.d("UploadDocument", arg0.body().toString());
                     ImageResponse imageResponse = (ImageResponse) arg0.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
+                    if (responseCode == 109) {
                         //Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-                        if(selctProflImage.equals("1")){
-                            strProfileImgUrl=imageResponse.getData().getDocumentUrl();
-                            selctProflImage="0";
+                        if (selctProflImage.equals("1")) {
+                            strProfileImgUrl = imageResponse.getData().getDocumentUrl();
+                            selctProflImage = "0";
                         }
-                        if(selctImgOne.equals("1")){
-                            strFirstImgUrl=imageResponse.getData().getDocumentUrl();
-                            selctImgOne="0";
+                        if (selctImgOne.equals("1")) {
+                            strFirstImgUrl = imageResponse.getData().getDocumentUrl();
+                            selctImgOne = "0";
                         }
-                        if(selctImgtwo.equals("1")){
-                            strSecondImgUrl=imageResponse.getData().getDocumentUrl();
-                            selctImgtwo="0";
+                        if (selctImgtwo.equals("1")) {
+                            strSecondImgUrl = imageResponse.getData().getDocumentUrl();
+                            selctImgtwo = "0";
                         }
-                        if(slctImgThree.equals("1")){
-                            strThirdImgUrl=imageResponse.getData().getDocumentUrl();
-                            slctImgThree="0";
+                        if (slctImgThree.equals("1")) {
+                            strThirdImgUrl = imageResponse.getData().getDocumentUrl();
+                            slctImgThree = "0";
                         }
-                        if(slctImgFour.equals("1")){
-                            strFourthImUrl=imageResponse.getData().getDocumentUrl();
-                            slctImgFour="0";
+                        if (slctImgFour.equals("1")) {
+                            strFourthImUrl = imageResponse.getData().getDocumentUrl();
+                            slctImgFour = "0";
                         }
-                        if(slctImgFive.equals("1")){
-                            strFifthImgUrl=imageResponse.getData().getDocumentUrl();
-                            slctImgFive="0";
+                        if (slctImgFive.equals("1")) {
+                            strFifthImgUrl = imageResponse.getData().getDocumentUrl();
+                            slctImgFive = "0";
                         }
 
-                    }else if (responseCode==614){
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, imageResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
@@ -723,7 +694,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     }
 
     private void setPetTypeSpinner() {
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,petType);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petType);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_details_pet_type.setAdapter(aa);
@@ -734,24 +705,24 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         add_details_pet_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                strSpnerItemPetNm=item;
-                Log.d("spnerType",""+strSpnerItemPetNm);
-                getStrSpnerItemPetNmId=petTypeHashMap.get(strSpnerItemPetNm);
-                if(!getStrSpnerItemPetNmId.equals("0"))
-                {
+                strSpnerItemPetNm = item;
+                Log.d("spnerType", "" + strSpnerItemPetNm);
+                getStrSpnerItemPetNmId = petTypeHashMap.get(strSpnerItemPetNm);
+                if (!getStrSpnerItemPetNmId.equals("0")) {
                     getPetBreed();
                     getPetAge();
                     getPetColor();
                     getPetSize();
                 }
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
     private void setPetBreeSpinner() {
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,petBreed);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petBreed);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_details_pet_breed.setAdapter(aa);
@@ -763,17 +734,18 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
-                strSpnrBreed=item;
-                Log.d("spnerType",""+strSpnrBreed);
-                strSpnrBreedId=petBreedHashMap.get(strSpnrBreed);
+                strSpnrBreed = item;
+                Log.d("spnerType", "" + strSpnrBreed);
+                strSpnrBreedId = petBreedHashMap.get(strSpnrBreed);
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
     private void setPetAgeSpinner() {
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,petAge);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petAge);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_details_pet_age.setAdapter(aa);
@@ -785,10 +757,11 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
-                strSpnrAge=item;
-                Log.d("spnerType",""+strSpnrAge);
-                strSpnrAgeId=petAgeHashMap.get(strSpnrAge);
+                strSpnrAge = item;
+                Log.d("spnerType", "" + strSpnrAge);
+                strSpnrAgeId = petAgeHashMap.get(strSpnrAge);
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
@@ -796,7 +769,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
 
 
     private void setPetColorSpinner() {
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,petColor);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petColor);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_detils_pet_color.setAdapter(aa);
@@ -808,17 +781,18 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
-                strSpnrColor=item;
-                Log.d("spnerType",""+strSpnrColor);
-                strSpnrColorId=petColorHashMap.get(strSpnrColor);
+                strSpnrColor = item;
+                Log.d("spnerType", "" + strSpnrColor);
+                strSpnrColorId = petColorHashMap.get(strSpnrColor);
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
     private void setPetSizeSpinner() {
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,petSize);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petSize);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_details_pet_size.setAdapter(aa);
@@ -831,17 +805,18 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 //strSpnrSize=item;
-                strSpnrSize=item;
-                Log.d("spnerType",""+strSpnrSize);
-                strSpneSizeId=petSizeHashMap.get(strSpnrSize);
+                strSpnrSize = item;
+                Log.d("spnerType", "" + strSpnrSize);
+                strSpneSizeId = petSizeHashMap.get(strSpnrSize);
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
     private void setSpinnerPetSex() {
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,petSex);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petSex);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_details_pet_sex.setAdapter(aa);
@@ -854,10 +829,11 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 //strSpnrSex=item;
-                strSpnrSex=item;
-                Log.d("spnerType",""+strSpnrSex);
-                strSpnrSexId=petSexHashMap.get(strSpnrSex);
+                strSpnrSex = item;
+                Log.d("spnerType", "" + strSpnrSex);
+                strSpnrSexId = petSexHashMap.get(strSpnrSex);
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
@@ -890,23 +866,23 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         cancel_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selctProflImage.equals("1")){
-                    selctProflImage="0";
+                if (selctProflImage.equals("1")) {
+                    selctProflImage = "0";
                 }
-                if(selctImgOne.equals("1")){
-                    selctImgOne="0";
+                if (selctImgOne.equals("1")) {
+                    selctImgOne = "0";
                 }
-                if(selctImgtwo.equals("1")){
-                    selctImgtwo="0";
+                if (selctImgtwo.equals("1")) {
+                    selctImgtwo = "0";
                 }
-                if(slctImgThree.equals("1")){
-                    slctImgThree="0";
+                if (slctImgThree.equals("1")) {
+                    slctImgThree = "0";
                 }
-                if(slctImgFour.equals("1")){
-                    slctImgFour="0";
+                if (slctImgFour.equals("1")) {
+                    slctImgFour = "0";
                 }
-                if(slctImgFive.equals("1")){
-                    slctImgFive="0";
+                if (slctImgFive.equals("1")) {
+                    slctImgFive = "0";
                 }
                 dialog.dismiss();
             }
@@ -946,136 +922,132 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
 
-                    if(selctProflImage.equals("1")){
+                    if (selctProflImage.equals("1")) {
                         pet_Details_profile_image.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(selctImgOne.equals("1")){
+                    if (selctImgOne.equals("1")) {
                         service_details_cat_img_one.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(selctImgtwo.equals("1")){
+                    if (selctImgtwo.equals("1")) {
                         service_details_cat_img_two.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(slctImgThree.equals("1")){
+                    if (slctImgThree.equals("1")) {
                         service_details_cat_img_three.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(slctImgFour.equals("1")){
+                    if (slctImgFour.equals("1")) {
                         service_details_cat_img_four.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(slctImgFive.equals("1")){
+                    if (slctImgFive.equals("1")) {
                         service_detils_cat_img_five.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    if(selctProflImage.equals("1")){
-                        selctProflImage="0";
+                    if (selctProflImage.equals("1")) {
+                        selctProflImage = "0";
                     }
-                    if(selctImgOne.equals("1")){
-                        selctImgOne="0";
+                    if (selctImgOne.equals("1")) {
+                        selctImgOne = "0";
                     }
-                    if(selctImgtwo.equals("1")){
-                        selctImgtwo="0";
+                    if (selctImgtwo.equals("1")) {
+                        selctImgtwo = "0";
                     }
-                    if(slctImgThree.equals("1")){
-                        slctImgThree="0";
+                    if (slctImgThree.equals("1")) {
+                        slctImgThree = "0";
                     }
-                    if(slctImgFour.equals("1")){
-                        slctImgFour="0";
+                    if (slctImgFour.equals("1")) {
+                        slctImgFour = "0";
                     }
-                    if(slctImgFive.equals("1")){
-                        slctImgFive="0";
+                    if (slctImgFive.equals("1")) {
+                        slctImgFive = "0";
                     }
                     Toast.makeText(GetPetDetailsActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
 
-        }
-        else if (requestCode == CAMERA) {
+        } else if (requestCode == CAMERA) {
 
-            if (data.getData() == null)
-            {
+            if (data.getData() == null) {
                 thumbnail = (Bitmap) data.getExtras().get("data");
-                Log.e("jghl",""+thumbnail);
-                if(selctProflImage.equals("1")){
+                Log.e("jghl", "" + thumbnail);
+                if (selctProflImage.equals("1")) {
                     pet_Details_profile_image.setImageBitmap(thumbnail);
                     saveImage(thumbnail);
                 }
-                if(selctImgOne.equals("1")){
+                if (selctImgOne.equals("1")) {
                     service_details_cat_img_one.setImageBitmap(thumbnail);
                     saveImage(thumbnail);
                 }
-                if(selctImgtwo.equals("1")){
+                if (selctImgtwo.equals("1")) {
                     service_details_cat_img_two.setImageBitmap(thumbnail);
                     saveImage(thumbnail);
                 }
-                if(slctImgThree.equals("1")){
+                if (slctImgThree.equals("1")) {
                     service_details_cat_img_three.setImageBitmap(thumbnail);
                     saveImage(thumbnail);
                 }
-                if(slctImgFour.equals("1")){
+                if (slctImgFour.equals("1")) {
                     service_details_cat_img_four.setImageBitmap(thumbnail);
                     saveImage(thumbnail);
                 }
-                if(slctImgFive.equals("1")){
+                if (slctImgFive.equals("1")) {
                     service_detils_cat_img_five.setImageBitmap(thumbnail);
                     saveImage(thumbnail);
                 }
                 Toast.makeText(GetPetDetailsActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-            }
-
-            else{
+            } else {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(GetPetDetailsActivity.this.getContentResolver(), data.getData());
-                    if(selctProflImage.equals("1")){
+                    if (selctProflImage.equals("1")) {
                         pet_Details_profile_image.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(selctImgOne.equals("1")){
+                    if (selctImgOne.equals("1")) {
                         service_details_cat_img_one.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(selctImgtwo.equals("1")){
+                    if (selctImgtwo.equals("1")) {
                         service_details_cat_img_two.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(slctImgThree.equals("1")){
+                    if (slctImgThree.equals("1")) {
                         service_details_cat_img_three.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(slctImgFour.equals("1")){
+                    if (slctImgFour.equals("1")) {
                         service_details_cat_img_four.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if(slctImgFive.equals("1")){
+                    if (slctImgFive.equals("1")) {
                         service_detils_cat_img_five.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
                     Toast.makeText(GetPetDetailsActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    if(selctProflImage.equals("1")){
-                        selctProflImage="0";
+                    if (selctProflImage.equals("1")) {
+                        selctProflImage = "0";
                     }
-                    if(selctImgOne.equals("1")){
-                        selctImgOne="0";
+                    if (selctImgOne.equals("1")) {
+                        selctImgOne = "0";
                     }
-                    if(selctImgtwo.equals("1")){
-                        selctImgtwo="0";
+                    if (selctImgtwo.equals("1")) {
+                        selctImgtwo = "0";
                     }
-                    if(slctImgThree.equals("1")){
-                        slctImgThree="0";
+                    if (slctImgThree.equals("1")) {
+                        slctImgThree = "0";
                     }
-                    if(slctImgFour.equals("1")){
-                        slctImgFour="0";
+                    if (slctImgFour.equals("1")) {
+                        slctImgFour = "0";
                     }
-                    if(slctImgFive.equals("1")){
-                        slctImgFive="0";
+                    if (slctImgFive.equals("1")) {
+                        slctImgFive = "0";
                     }
                 }
             }
@@ -1097,7 +1069,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         }
 
         try {
-            if(selctProflImage.equals("1")){
+            if (selctProflImage.equals("1")) {
                 file = new File(wallpaperDirectory, Calendar.getInstance()
                         .getTimeInMillis() + ".png");
                 file.createNewFile();
@@ -1111,7 +1083,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 UploadImages(file);
                 return file.getAbsolutePath();
             }
-            if(selctImgOne.equals("1")){
+            if (selctImgOne.equals("1")) {
                 fileImg1 = new File(wallpaperDirectory, Calendar.getInstance()
                         .getTimeInMillis() + ".jpg");
                 fileImg1.createNewFile();
@@ -1126,7 +1098,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 return fileImg1.getAbsolutePath();
 
             }
-            if(selctImgtwo.equals("1")){
+            if (selctImgtwo.equals("1")) {
                 fileImg2 = new File(wallpaperDirectory, Calendar.getInstance()
                         .getTimeInMillis() + ".jpg");
                 fileImg2.createNewFile();
@@ -1141,7 +1113,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 return fileImg2.getAbsolutePath();
 
             }
-            if(slctImgThree.equals("1")){
+            if (slctImgThree.equals("1")) {
                 fileImg3 = new File(wallpaperDirectory, Calendar.getInstance()
                         .getTimeInMillis() + ".jpg");
                 fileImg3.createNewFile();
@@ -1155,7 +1127,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 UploadImages(fileImg3);
                 return fileImg2.getAbsolutePath();
             }
-            if(slctImgFour.equals("1")){
+            if (slctImgFour.equals("1")) {
                 fileImg4 = new File(wallpaperDirectory, Calendar.getInstance()
                         .getTimeInMillis() + ".jpg");
                 fileImg4.createNewFile();
@@ -1169,7 +1141,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 UploadImages(fileImg4);
                 return fileImg4.getAbsolutePath();
             }
-            if(slctImgFive.equals("1")){
+            if (slctImgFive.equals("1")) {
                 fileImg5 = new File(wallpaperDirectory, Calendar.getInstance()
                         .getTimeInMillis() + ".jpg");
                 fileImg5.createNewFile();
@@ -1199,8 +1171,8 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
         }
 
         ApiService<ImageResponse> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().uploadImages(Config.token,userDpFilePart), "UploadDocument");
-        Log.e("DATALOG","check1=> "+service);
+        service.get(this, ApiClient.getApiInterface().uploadImages(Config.token, userDpFilePart), "UploadDocument");
+        Log.e("DATALOG", "check1=> " + service);
 
     }
 
@@ -1215,7 +1187,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-                            Log.d("Debuging","All Permission Granted");
+                            Log.d("Debuging", "All Permission Granted");
                         }
 
                         // check for permanent denial of any permission
@@ -1235,7 +1207,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 withErrorListener(new PermissionRequestErrorListener() {
                     @Override
                     public void onError(DexterError error) {
-                        Log.d("Debuging","Some Error");
+                        Log.d("Debuging", "Some Error");
                     }
                 })
                 .onSameThread()
@@ -1245,8 +1217,8 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
     private void updatePetDetails(UpdatePetRequest addPetRequset) {
         methods.showCustomProgressBarDialog(this);
         ApiService<AddPetValueResponse> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().updatePetDetails(Config.token,addPetRequset), "UpdatePetDetails");
-        Log.e("DATALOG","check1=> "+methods.getRequestJson(addPetRequset));
+        service.get(this, ApiClient.getApiInterface().updatePetDetails(Config.token, addPetRequset), "UpdatePetDetails");
+        Log.e("DATALOG", "check1=> " + methods.getRequestJson(addPetRequset));
 
     }
 

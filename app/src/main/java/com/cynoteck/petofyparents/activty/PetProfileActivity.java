@@ -144,7 +144,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                         pet_sex_TV.setText(getPetResponse.getData().getPetSex());
                         pet_id_TV.setText(getPetResponse.getData().getPetUniqueId());
                         pet_deatils_TV.setText(getPetResponse.getData().getDescription());
-                        if (getPetResponse.getData().getAddress()==null){
+                        if (getPetResponse.getData().getAddress().equals("")){
                             address_line_one_TV.setVisibility(View.GONE);
                             address_head.setVisibility(View.GONE);
                         }else {

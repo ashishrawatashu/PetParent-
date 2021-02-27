@@ -60,7 +60,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     Methods methods;
     CardView materialCardView;
     RecyclerView register_pet_RV;
-    ImageView search_register_pet, back_arrow_IV;
+    ImageView search_register_pet, back_arrow_IV, empty_IV;
     RegisterPetAdapter registerPetAdapter;
     private ShimmerFrameLayout mShimmerViewContainer;
     RelativeLayout search_boxRL;
@@ -109,7 +109,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
                     page++;
                     progressBar.setVisibility(View.VISIBLE);
-                    getPetList(page, pagelimit);
+                    getFromScroll(page, pagelimit);
                 }
             }
         });
@@ -120,7 +120,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     private void init() {
         methods = new Methods(context);
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
-
+        empty_IV = view.findViewById(R.id.empty_IV);
         materialCardView = view.findViewById(R.id.toolbar);
         register_pet_RV = view.findViewById(R.id.register_pet_RV);
         register_add_TV = view.findViewById(R.id.register_add_TV);
@@ -198,10 +198,23 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 profileList.clear();
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmer();
-
                 getPetList(page, pagelimit);
             }
         }
+    }
+
+    private void getFromScroll(int page, int pageLimit) {
+        PetDataParams getPetDataParams = new PetDataParams();
+        getPetDataParams.setPageNumber(page);//0
+        getPetDataParams.setPageSize(pageLimit);//0
+        getPetDataParams.setSearch_Data("");
+        PetDataRequest getPetDataRequest = new PetDataRequest();
+        getPetDataRequest.setData(getPetDataParams);
+
+        ApiService<GetPetListResponse> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetFromScroll");
+        Log.e("DATALOG", "check1=> " + getPetDataRequest);
+
     }
 
 
@@ -253,40 +266,39 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
         switch (key) {
             case "GetPetList":
                 try {
+                    mShimmerViewContainer.setVisibility(View.GONE);
+                    mShimmerViewContainer.stopShimmer();
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
-                    Log.d("GetPetList", getPetListResponse.toString());
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
-
                     if (responseCode == 109) {
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                        register_pet_RV.setLayoutManager(linearLayoutManager);
-                        if (getPetListResponse.getData().getPetList().size() > 0) {
-                            Log.d("DATALOG", String.valueOf(getPetListResponse.getData().getPetList().get(0).getPetUniqueId()));
-
-                            for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
-                                PetList petList = new PetList();
-                                petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
-                                petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
-                                petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
-                                petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
-                                petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
-                                petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
-                                petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
-                                petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
-                                petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
-                                profileList.add(petList);
-                            }
-                            progressBar.setVisibility(View.GONE);
-                            registerPetAdapter = new RegisterPetAdapter(getContext(), profileList, this);
-                            register_pet_RV.setAdapter(registerPetAdapter);
-                            registerPetAdapter.notifyDataSetChanged();
-
-                            mShimmerViewContainer.stopShimmer();
-                            search_register_pet.setVisibility(View.VISIBLE);
-                            mShimmerViewContainer.setVisibility(View.GONE);
+                        if (getPetListResponse.getData().getPetList().isEmpty()) {
+                            empty_IV.setVisibility(View.VISIBLE);
+                            search_register_pet.setVisibility(View.INVISIBLE);
                         } else {
-                            progressBar.setVisibility(View.GONE);
-                            mShimmerViewContainer.setVisibility(View.GONE);
+                            search_register_pet.setVisibility(View.VISIBLE);
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                            register_pet_RV.setLayoutManager(linearLayoutManager);
+                            if (getPetListResponse.getData().getPetList().size() > 0) {
+                                for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
+                                    PetList petList = new PetList();
+                                    petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
+                                    petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
+                                    petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
+                                    petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
+                                    petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
+                                    petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
+                                    petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
+                                    petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
+                                    petList.setPetColor(getPetListResponse.getData().getPetList().get(i).getPetColor());
+                                    petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
+                                    profileList.add(petList);
+                                }
+                                registerPetAdapter = new RegisterPetAdapter(getContext(), profileList, this);
+                                register_pet_RV.setAdapter(registerPetAdapter);
+                                registerPetAdapter.notifyDataSetChanged();
+                                search_register_pet.setVisibility(View.VISIBLE);
+                            }
+
                         }
 
 
@@ -297,12 +309,48 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 }
 
                 break;
+
+
+            case "GetFromScroll":
+                try {
+                    progressBar.setVisibility(View.GONE);
+                    GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
+                    int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
+                    if (responseCode == 109) {
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+                        register_pet_RV.setLayoutManager(linearLayoutManager);
+                        if (getPetListResponse.getData().getPetList().size() > 0) {
+                            for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
+                                PetList petList = new PetList();
+                                petList.setPetUniqueId(getPetListResponse.getData().getPetList().get(i).getPetUniqueId());
+                                petList.setDateOfBirth(getPetListResponse.getData().getPetList().get(i).getDateOfBirth());
+                                petList.setPetName(getPetListResponse.getData().getPetList().get(i).getPetName());
+                                petList.setPetSex(getPetListResponse.getData().getPetList().get(i).getPetSex());
+                                petList.setPetParentName(getPetListResponse.getData().getPetList().get(i).getPetParentName());
+                                petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
+                                petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
+                                petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
+                                petList.setPetColor(getPetListResponse.getData().getPetList().get(i).getPetColor());
+                                petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
+                                profileList.add(petList);
+                            }
+                            registerPetAdapter = new RegisterPetAdapter(getContext(), profileList, this);
+                            register_pet_RV.setAdapter(registerPetAdapter);
+                            registerPetAdapter.notifyDataSetChanged();
+                            search_register_pet.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
             case "GetPetListBySearch":
                 try {
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
-                    Log.d("GetPetListBySearch", getPetListResponse.toString());
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
-
                     if (responseCode == 109) {
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                         register_pet_RV.setLayoutManager(linearLayoutManager);
@@ -318,19 +366,15 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                                 petList.setPetProfileImageUrl(getPetListResponse.getData().getPetList().get(i).getPetProfileImageUrl());
                                 petList.setEncryptedId(getPetListResponse.getData().getPetList().get(i).getEncryptedId());
                                 petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
+                                petList.setPetColor(getPetListResponse.getData().getPetList().get(i).getPetColor());
                                 petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
-
                                 profileList.add(petList);
                             }
                             progressBar.setVisibility(View.GONE);
                             registerPetAdapter = new RegisterPetAdapter(getContext(), profileList, this);
                             register_pet_RV.setAdapter(registerPetAdapter);
                             registerPetAdapter.notifyDataSetChanged();
-                            mShimmerViewContainer.stopShimmer();
                             search_register_pet.setVisibility(View.GONE);
-                            mShimmerViewContainer.setVisibility(View.GONE);
-                        } else {
-                            progressBar.setVisibility(View.GONE);
                         }
 
 
@@ -361,7 +405,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onViewDetailsClick(int position) {
-               StringTokenizer tokens = new StringTokenizer(profileList.get(position).getId(), ".");
+        StringTokenizer tokens = new StringTokenizer(profileList.get(position).getId(), ".");
         String first = tokens.nextToken();
 
         Intent intent = new Intent(getActivity(), PetProfileActivity.class);
