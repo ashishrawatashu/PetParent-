@@ -2,6 +2,7 @@ package com.cynoteck.petofyparents.activty;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+
 import retrofit2.Response;
 
 import android.content.Intent;
@@ -33,11 +34,12 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
     private TextInputLayout firstname_TIL, lastName_TIL, email_TIL, phoneNumber_TIL, password_TIL, confirmPassword_TIL;
     private TextInputEditText firstname_TIET, lastName_TIET, email_TIET, phoneNumber_TIET, password_TIET, confirmPassword_TIET;
     private Button signUp_BT;
-    private String firstName="", lastName="", email="", phoneNumber="",password="",confirmPassword="";
+    private String firstName = "", lastName = "", email = "", phoneNumber = "", password = "", confirmPassword = "";
     private TextView signIN_TV;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor login_editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         phoneNumber_TIL = findViewById(R.id.number_TIL);
         password_TIL = findViewById(R.id.password_TIL);
         confirmPassword_TIL = findViewById(R.id.cPassword_TIL);
-        back_arrow_IV=findViewById(R.id.back_arrow_IV);
+        back_arrow_IV = findViewById(R.id.back_arrow_IV);
 
 
         firstname_TIET = findViewById(R.id.firstName_TIET);
@@ -67,8 +69,8 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         confirmPassword_TIET = findViewById(R.id.cPassword_TIET);
 
 //        signIN_TV = findViewById(R.id.signIn_TV);
-//
-        signUp_BT=findViewById(R.id.signUp_BT);
+
+        signUp_BT = findViewById(R.id.signUp_BT);
 
         signUp_BT.setOnClickListener(this);
         back_arrow_IV.setOnClickListener(this);
@@ -80,8 +82,8 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
     private void registerUser(Registerparams registerparams) {
         methods.showCustomProgressBarDialog(this);
         ApiService<LoginRegisterResponse> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().registerApi(registerparams), "Register");
-        Log.d("DATALOG","check1=> "+methods.getRequestJson(registerparams));
+        service.get(this, ApiClient.getApiInterface().registerApi(registerparams), "Register");
+        Log.d("DATALOG", "check1=> " + methods.getRequestJson(registerparams));
     }
 
     @Override
@@ -90,10 +92,10 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         switch (key) {
             case "Register":
                 try {
-                    Log.d("DATALOG",""+response.body().toString());
+                    Log.d("DATALOG", "" + response.body().toString());
                     LoginRegisterResponse loginRegisterResponse = (LoginRegisterResponse) response.body();
                     int responseCode = Integer.parseInt(loginRegisterResponse.getResponseLogin().getResponseCode());
-                    if (responseCode==109){
+                    if (responseCode == 109) {
 
                         sharedPreferences = this.getSharedPreferences("userdetails", 0);
                         login_editor = sharedPreferences.edit();
@@ -111,23 +113,22 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                         login_editor.putString("twoFactAuth", loginRegisterResponse.getData().getEnableTwoStepVerification());
                         Config.token = loginRegisterResponse.getResponseLogin().getToken();
                         login_editor.putString("loggedIn", "loggedIn");
-                        Log.e("TOKEN",loginRegisterResponse.getResponseLogin().getToken());
+                        Log.e("TOKEN", loginRegisterResponse.getResponseLogin().getToken());
                         login_editor.commit();
                         Intent intent = new Intent(this, DashBoardActivity.class);
-                        intent.putExtra("from","REGISTER");
+                        intent.putExtra("from", "REGISTER");
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
                         Toast.makeText(this, "Welcome to Petofy", Toast.LENGTH_SHORT).show();
-                    }else if(responseCode==615) {
+                    } else if (responseCode == 615) {
                         Toast.makeText(this, loginRegisterResponse.getResponseLogin().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
 
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("eeeeeee",e.getLocalizedMessage());
+                    Log.e("eeeeeee", e.getLocalizedMessage());
                 }
                 break;
         }
@@ -136,14 +137,14 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
     @Override
     public void onError(Throwable t, String key) {
         methods.customProgressDismiss();
-        Log.e("ERROR",t.getLocalizedMessage());
+        Log.e("ERROR", t.getLocalizedMessage());
 
     }
 
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.back_arrow_IV:
                 onBackPressed();
@@ -157,35 +158,29 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                 confirmPassword = confirmPassword_TIET.getText().toString().trim();
 //                phoneNumber = phoneNumber_TIET.getText().toString().trim();
 
-                if (firstName.isEmpty()){
+                if (firstName.isEmpty()) {
                     firstname_TIL.setError("Name is empty");
                     lastName_TIL.setError(null);
                     email_TIL.setError(null);
                     phoneNumber_TIL.setError(null);
                     password_TIL.setError(null);
                     confirmPassword_TIL.setError(null);
-                }else if (lastName.isEmpty()){
+                } else if (lastName.isEmpty()) {
                     lastName_TIL.setError("Last Name is empty");
                     firstname_TIL.setError(null);
                     email_TIL.setError(null);
                     phoneNumber_TIL.setError(null);
                     password_TIL.setError(null);
                     confirmPassword_TIL.setError(null);
-                }else if (!email.matches(emailPattern)) {
+                } else if (!email.isEmpty() && !email.matches(emailPattern)) {
                     email_TIL.setError("Invalid Email");
                     firstname_TIL.setError(null);
                     lastName_TIL.setError(null);
                     phoneNumber_TIL.setError(null);
                     password_TIL.setError(null);
                     confirmPassword_TIL.setError(null);
-                }/*else if (email.isEmpty()){
-                    email_TIL.setError("Email is empty");
-                    firstname_TIL.setError(null);
-                    lastName_TIL.setError(null);
-                    phoneNumber_TIL.setError(null);
-                    password_TIL.setError(null);
-                    confirmPassword_TIL.setError(null);
-                }else if (phoneNumber.isEmpty()){
+
+                }/*else if (phoneNumber.isEmpty()){
                     phoneNumber_TIL.setError("Phone Number is empty");
                     firstname_TIL.setError(null);
                     lastName_TIL.setError(null);
@@ -213,7 +208,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                     email_TIL.setError(null);
                     phoneNumber_TIL.setError(null);
                     password_TIL.setError(null);
-                }*/else {
+                }*/ else {
                     firstname_TIL.setError(null);
                     lastName_TIL.setError(null);
                     email_TIL.setError(null);
@@ -222,7 +217,9 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                     confirmPassword_TIL.setError(null);
                     Registerparams registerparams = new Registerparams();
                     RegisterRequest data = new RegisterRequest();
-                    data.setEmail(email);
+                    if (!email.isEmpty()) {
+                        data.setEmail(email);
+                    }
                     data.setPassword(password);
                     data.setConfirmPassword(confirmPassword);
                     data.setFirstName(firstName);
@@ -230,12 +227,9 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                     data.setPhoneNumber(phoneNumber);
                     data.setRoleName("Customer");
                     registerparams.setData(data);
-                    if(methods.isInternetOn())
-                    {
+                    if (methods.isInternetOn()) {
                         registerUser(registerparams);
-                    }
-                    else
-                    {
+                    } else {
                         methods.DialogInternet();
                     }
 
@@ -243,7 +237,6 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                 }
 
                 break;
-
 
 
         }
