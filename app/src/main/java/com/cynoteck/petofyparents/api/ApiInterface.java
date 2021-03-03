@@ -74,6 +74,7 @@ import com.cynoteck.petofyparents.response.newPetResponse.NewPetRegisterResponse
 import com.cynoteck.petofyparents.response.otpResponse.OtpResponse;
 import com.cynoteck.petofyparents.response.paymentStatusResponse.PaymentStatusResponse;
 import com.cynoteck.petofyparents.response.twofactAuthResponse.TwoFactAuthResponse;
+import com.cynoteck.petofyparents.response.updateProfileResponse.CityResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.response.validationOtpResponse.ValidationOtpResponse;
 import com.google.gson.JsonObject;
@@ -89,6 +90,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface ApiInterface {
 
@@ -207,6 +209,9 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("report/GetPetLabWork")
     Call<PetLabWorkResponse> getPetLabWorkResponse(@Header("Authorization") String auth, @Body VisitTypeRequest visitTypeRequest);
+
+    @GET
+    Call<CityResponse> getCityApi(@Url String url);
 
     //TODO=======Get Clinic Visit List API=======================
 

@@ -43,6 +43,7 @@ import com.cynoteck.petofyparents.response.addPet.petColorResponse.PetColorValue
 import com.cynoteck.petofyparents.response.addPet.petSizeResponse.PetSizeValueResponse;
 import com.cynoteck.petofyparents.response.cityResponse.CityResponseModel;
 import com.cynoteck.petofyparents.response.stateResponse.StateResponse;
+import com.cynoteck.petofyparents.response.updateProfileResponse.CityResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
@@ -79,7 +80,9 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
 
     Methods methods;
     ArrayList<String> petType,petBreed,petAge,petColor,petSize,petSex,state,city;
-    HashMap<String,String> petTypeHashMap,petBreedHashMap,petAgeHashMap,petColorHashMap,petSizeHashMap,petSexHashMap,stateHashMap,cityHasMap;
+    HashMap<String,String> petTypeHashMap,petBreedHashMap,petAgeHashMap,petColorHashMap,petSizeHashMap,petSexHashMap;
+    HashMap<String,String>cityHasmap=new HashMap<>();
+    HashMap<String,String>stateHasmap=new HashMap<>();
     String strSpnerItemPetNm="",getStrSpnerItemPetNmId="",strSpnrBreed="",strSpnrBreedId="",strSpnrAge="",
            strSpnrAgeId="",strSpnrColor="",strSpnrColorId="",strSpnrSize="",strSpneSizeId="",strSpnrSex="",
            strSpnrSexId="",strSpnrState="",strSpnrStateId="",strSpinnerCity="",strSpnrCityId="",strPetName="",
@@ -178,8 +181,8 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
             strSpnrSize=extras.getString("petSize");
             strSpnrColor=extras.getString("petColor");
             strSpnrBreed=extras.getString("petBreed");
-            strSpnrState=extras.getString("state");
-            strSpinnerCity=extras.getString("city");
+//            strSpnrState=extras.getString("state");
+//            strSpinnerCity=extras.getString("city");
             strPhoneNumber=extras.getString("phoneNumber");
             if(strType.equals("update"))
             pet_conatct_ET.setText(strPhoneNumber);
@@ -208,7 +211,7 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
                 petType();
                 setSpinnerPetSex();
                 getState();
-                getCity();
+
 
 
         }
@@ -286,10 +289,10 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
         service.get(this, ApiClient.getApiInterface().getState(), "getState");
     }
 
-    private void getCity()
+    private void getCity(String stateId)
     {
-        ApiService<CityResponseModel> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getCity(), "GetCity");
+        ApiService<CityResponse> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getCityApi(stateId), "GetCity");
     }
 
     @Override
@@ -1006,45 +1009,44 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
                     if (responseCode== 109){
                         state=new ArrayList<>();
                         state.add("Select State");
-                        stateHashMap=new HashMap<>();
-                        stateHashMap.put("0","Select State");
-                        Log.d("lalal",""+stateResponse.getData().size());
+                        stateHasmap.put("Select State","0.0");
                         for(int i=0; i<stateResponse.getData().size(); i++){
-                            Log.d("petttt",""+stateResponse.getData().get(i).getStateName());
+                            Log.d("kakakka",""+stateResponse.getData().get(i).getStateName());
                             state.add(stateResponse.getData().get(i).getStateName());
-                            stateHashMap.put(stateResponse.getData().get(i).getStateName(),stateResponse.getData().get(i).getId());
+                            stateHasmap.put(stateResponse.getData().get(i).getStateName(),stateResponse.getData().get(i).getId());
                         }
                         setStateSpinner();
+
                     }else if (responseCode==614){
-                        Toast.makeText(this, stateResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), stateResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch(Exception e) {
                     e.printStackTrace();
                 }
+                break;
             case "GetCity":
                 try {
                     Log.d("GetCity",arg0.body().toString());
-                    CityResponseModel cityResponseModel = (CityResponseModel) arg0.body();
-                    int responseCode = Integer.parseInt(cityResponseModel.getResponse().getResponseCode());
+                    CityResponse cityResponse = (CityResponse) arg0.body();
+                    int responseCode = Integer.parseInt(cityResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
                         city=new ArrayList<>();
                         city.add("Select City");
-                        cityHasMap=new HashMap<>();
-                        cityHasMap.put("0","Select City");
-                        Log.d("lalal",""+cityResponseModel.getData().size());
-                        for(int i=0; i<cityResponseModel.getData().size(); i++){
-                            Log.d("petttt",""+cityResponseModel.getData().get(i).getCity1());
-                            city.add(cityResponseModel.getData().get(i).getCity1());
-                            cityHasMap.put(cityResponseModel.getData().get(i).getCity1(),cityResponseModel.getData().get(i).getId());
+                        Log.d("lalal",""+cityResponse.getData().size());
+                        for(int i=0; i<cityResponse.getData().size(); i++){
+                            Log.d("kakakkajj",""+cityResponse.getData().get(i).getCity1());
+                            city.add(cityResponse.getData().get(i).getCity1());
+                            cityHasmap.put(cityResponse.getData().get(i).getCity1(),cityResponse.getData().get(i).getId());
                         }
                         setCitySpinner();
+
                     }else if (responseCode==614){
-                        Toast.makeText(this, cityResponseModel.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), cityResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch(Exception e) {
@@ -1284,7 +1286,7 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         state_spinner.setAdapter(aa);
-        if (strSpnrState != null) {
+        if (!strSpnrState.equals("")) {
             int spinnerPosition = aa.getPosition(strSpnrState);
             state_spinner.setSelection(spinnerPosition);
         }
@@ -1294,7 +1296,17 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
                 // Showing selected spinner item
                 strSpnrState=item;
                 Log.d("spnerTypeState",""+strSpnrState);
-                strSpnrStateId=stateHashMap.get(strSpnrState);
+                strSpnrStateId=stateHasmap.get(strSpnrState);
+                if (strSpnrStateId.equals(null)){
+
+                }else {
+                    Log.d("spnrState",""+strSpnrStateId+" ID=>>>"+strSpnrStateId);
+                    Log.d("spnrState",""+strSpnrStateId+  " ID=>>>"+strSpnrStateId.substring(0,strSpnrStateId.length()-1));
+                    String stateId= strSpnrStateId.substring(0,strSpnrStateId.length()-2);
+                    String url  = "common/GetCity/"+stateId;
+                    Log.e("URL",url);
+                    getCity(url);
+                }
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -1307,7 +1319,7 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         city_spinner.setAdapter(aa);
-        if (strSpinnerCity != null) {
+        if (!strSpinnerCity.equals("")) {
             int spinnerPosition = aa.getPosition(strSpinnerCity);
             city_spinner.setSelection(spinnerPosition);
         }
@@ -1317,7 +1329,7 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
                 // Showing selected spinner item
                 strSpinnerCity=item;
                 Log.d("spnerTypeCity",""+strSpinnerCity);
-                strSpnrCityId=cityHasMap.get(strSpinnerCity);
+                strSpnrCityId=cityHasmap.get(strSpinnerCity);
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
