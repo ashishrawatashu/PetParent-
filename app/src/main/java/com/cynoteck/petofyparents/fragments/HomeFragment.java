@@ -152,9 +152,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, ApiR
 
             case R.id.adoption_donation_CV:
 
-//                AllStaffFragment allStaffFragment = new AllStaffFragment();
-//                replaceFragment(allStaffFragment);
-                Toast.makeText(context, "Coming Soon !", Toast.LENGTH_SHORT).show();
+               AllStaffFragment allStaffFragment = new AllStaffFragment();
+               replaceFragment(allStaffFragment);
+//                Toast.makeText(context, "Coming Soon !", Toast.LENGTH_SHORT).show();
 
                 break;
 
