@@ -98,6 +98,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
+                editor.commit();
                 startActivity(new Intent(getActivity(), SendPhoneNumber.class));
                 getActivity().finish();
                 break;
