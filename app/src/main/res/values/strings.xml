@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Petofy Parents</string>
+    <string name="app_name">Petofy</string>
     <string name="email">example@xyz.com</string>
     <string name="password">* * * * * * *</string>
     <string name="Register_password">Password</string>

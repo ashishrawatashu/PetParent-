@@ -195,6 +195,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
+                empty_IV.setVisibility(View.GONE);
                 profileList.clear();
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.startShimmer();
