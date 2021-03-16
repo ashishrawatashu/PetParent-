@@ -590,7 +590,6 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 }
                 break;
         }
-
     }
 
     private void getPetAgeString(String DOB) {

@@ -88,8 +88,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

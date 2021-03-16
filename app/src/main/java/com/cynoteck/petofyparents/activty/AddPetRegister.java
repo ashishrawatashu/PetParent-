@@ -207,12 +207,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         pet_parent_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -1071,6 +1069,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     e.printStackTrace();
                 }
                 break;
+
             case "GetPetAgeUnit":
                 try {
                     Log.d("GetPetTypes", arg0.body().toString());
