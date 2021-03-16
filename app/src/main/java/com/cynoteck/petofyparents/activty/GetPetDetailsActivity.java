@@ -161,7 +161,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
             if (image_url != null) {
                 Glide.with(this)
                         .load(image_url)
-                        .placeholder(R.drawable.profile_img_icon)
+                        .placeholder(R.drawable.camera_icon)
                         .into(pet_Details_profile_image);
             }
 
@@ -627,7 +627,7 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        Config.backCall = "hit";
+                        Config.backCall = "Updated";
                         onBackPressed();
                         Toast.makeText(this, "Update Succesfully ", Toast.LENGTH_SHORT).show();
                     } else if (responseCode == 614) {
@@ -971,7 +971,8 @@ public class GetPetDetailsActivity extends AppCompatActivity implements View.OnC
                 }
             }
 
-        } else if (requestCode == CAMERA) {
+        }
+        else if (requestCode == CAMERA) {
 
             if (data.getData() == null) {
                 thumbnail = (Bitmap) data.getExtras().get("data");

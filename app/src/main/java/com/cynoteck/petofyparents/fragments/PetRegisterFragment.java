@@ -397,6 +397,15 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     @Override
     public void onResume() {
         super.onResume();
+        Log.e("jhkhkh","bhjgjghb");
+        if (Config.backCall.equals("Updated")){
+            profileList.clear();
+            mShimmerViewContainer.setVisibility(View.VISIBLE);
+            mShimmerViewContainer.startShimmer();
+            getPetList(1, 10);
+            Config.backCall="NoUpda";
+
+        }
     }
 
     @Override

@@ -288,6 +288,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                     }else if (responseCode==116){
                         sharedPreferences = OTPVerifyActivity.this.getSharedPreferences("userdetails", 0);
                         login_editor = sharedPreferences.edit();
+                        login_editor.putString("encryptedId", loginRegisterResponse.getData().getEncryptedId());
                         login_editor.putString("email", loginRegisterResponse.getData().getEmail());
                         login_editor.putString("userId", loginRegisterResponse.getData().getUserId());
                         login_editor.putString("firstName", loginRegisterResponse.getData().getFirstName());

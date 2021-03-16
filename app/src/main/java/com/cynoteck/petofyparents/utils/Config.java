@@ -10,6 +10,7 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class Config {
+    public static String parent_encryptedId="";
 
     public  static  int count =1;
     public static String token="";
@@ -28,6 +29,8 @@ public class Config {
     public static String user_Veterian_phone="";
     public static String user_Veterian_emial="";
     public static String user_Veterian_address="";
+    public static String first_name="";
+    public static String last_name="";
 
     public static String type="";
     public static String backCall="";

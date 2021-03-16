@@ -49,16 +49,18 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
         Log.e("token",Config.token);
         Config.user_id=sharedPreferences.getString("userId", "");
         Log.e("user_id",Config.user_id);
+
         Config.user_phone=sharedPreferences.getString("phoneNumber", "");
         Config.user_emial=sharedPreferences.getString("email", "");
         Config.user_name=sharedPreferences.getString("firstName", "")+" "+sharedPreferences.getString("lastName", "");
         Config.user_address=sharedPreferences.getString("address", "");
         Config.user_online=sharedPreferences.getString("onlineAppoint", "");
-        Config.user_id=sharedPreferences.getString("vetid", "");
         Config.user_study=sharedPreferences.getString("study", "");
         Config.user_url=sharedPreferences.getString("profilePic", "");
         Config.two_fact_auth_status=sharedPreferences.getString("twoFactAuth", "");
-
+        Config.parent_encryptedId=sharedPreferences.getString("encryptedId", "");
+        Config.first_name = sharedPreferences.getString("firstName", "");
+        Config.last_name = sharedPreferences.getString("lastName", "");
         if (savedInstanceState == null) {
             HomeFragment homeFragment = new HomeFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

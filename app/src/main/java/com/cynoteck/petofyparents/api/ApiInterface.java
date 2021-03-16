@@ -28,7 +28,10 @@ import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
 import com.cynoteck.petofyparents.parameter.registrationWithQrCodeRequest.RegistrationWithQrCodeRequest;
 import com.cynoteck.petofyparents.parameter.searchPetParentRequest.SearchPetParentRequestData;
 import com.cynoteck.petofyparents.parameter.updateDonation.UpdateDonationRequest;
+import com.cynoteck.petofyparents.parameter.updatePArentDeatils.UpdateParentDeatilsParams;
+import com.cynoteck.petofyparents.parameter.updatePArentDeatils.UpdateParentDetailsRequest;
 import com.cynoteck.petofyparents.parameter.updateRequest.updateParamRequest.UpdatePetRequest;
+import com.cynoteck.petofyparents.parameter.uploadVetProfileImageParams.UploadVetProfileImageData;
 import com.cynoteck.petofyparents.response.InPetVeterian.InPetVeterianResponse;
 import com.cynoteck.petofyparents.response.addPet.addPetResponse.AddPetValueResponse;
 import com.cynoteck.petofyparents.response.addPet.breedResponse.BreedCatRespose;
@@ -75,6 +78,7 @@ import com.cynoteck.petofyparents.response.otpResponse.OtpResponse;
 import com.cynoteck.petofyparents.response.paymentStatusResponse.PaymentStatusResponse;
 import com.cynoteck.petofyparents.response.twofactAuthResponse.TwoFactAuthResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
+import com.cynoteck.petofyparents.response.updatepetparentprofile.UpdatePetParentProfile;
 import com.cynoteck.petofyparents.response.validationOtpResponse.ValidationOtpResponse;
 import com.google.gson.JsonObject;
 
@@ -439,6 +443,16 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pethealthrecord/DeletePetHospitalization")
     Call<AddUpdateDeleteClinicVisitResponse> deletePetHospitalization(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("User/UpdatePetParentProfile")
+    Call<UpdatePetParentProfile> updatePetParent(@Header("Authorization") String auth, @Body UpdateParentDetailsRequest updateParentDeatilsParams);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/UpdateProfileImage")
+    Call<JsonObject> updateProfileImage(@Header("Authorization") String auth, @Body UploadVetProfileImageData uploadVetProfileImageData);
 
 }
 

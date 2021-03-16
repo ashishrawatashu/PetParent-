@@ -8,15 +8,15 @@ android {
         applicationId "com.cynoteck.petofyparents"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 4
-        versionName "0.0.4"
+        versionCode 8
+        versionName "0.0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

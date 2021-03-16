@@ -108,7 +108,6 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                         login_editor.putString("token", loginRegisterResponse.getResponseLogin().getToken());
                         login_editor.putString("profilePic", loginRegisterResponse.getData().getProfileImageUrl());
                         login_editor.putString("study", loginRegisterResponse.getData().getVetRQualification());
-                        login_editor.putString("vetid", loginRegisterResponse.getData().getVetRegistrationNumber());
                         login_editor.putString("onlineAppoint", loginRegisterResponse.getData().getOnlineAppointmentStatus());
                         login_editor.putString("twoFactAuth", loginRegisterResponse.getData().getEnableTwoStepVerification());
                         Config.token = loginRegisterResponse.getResponseLogin().getToken();

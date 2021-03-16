@@ -24,17 +24,18 @@
         android:smallScreens="true" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/pet_parent_logo_round"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/pet_parent_logo_round"
-        android:supportsRtl="true"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/pet_parent_logo_round"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activty.HospitalizationDetailsActivity"></activity>
+        <activity android:name=".activty.UpdateProfileActivity"></activity>
+        <activity android:name=".activty.HospitalizationDetailsActivity" />
         <activity android:name=".activty.WelcomeScreenActivity" />
         <activity android:name=".activty.AddPetWithQRCodeActivity" />
         <activity android:name=".activty.SearchActivity" />

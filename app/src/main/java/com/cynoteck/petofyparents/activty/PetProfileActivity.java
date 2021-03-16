@@ -170,6 +170,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         {
             Glide.with(this)
                     .load(getPetResponse.getData().getPetProfileImageUrl())
+                    .placeholder(R.drawable.pet_image)
                     .into(pet_profile_image_IV);
         }
 //        if (getPetResponse.getData().getFirstServiceImageUrl().isEmpty()){
