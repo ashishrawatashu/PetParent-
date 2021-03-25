@@ -147,6 +147,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pet_register);
         Intent intent = getIntent();
+
         intentFrom = intent.getStringExtra("appointment");
         init();
         requestMultiplePermissions();
@@ -353,6 +354,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
 
     private void init() {
+
         scrollView = findViewById(R.id.scrollView);
 
         //Spinner

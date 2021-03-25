@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
@@ -24,6 +27,7 @@ import com.cynoteck.petofyparents.response.loginRegisterResponse.UserPermissionM
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.utils.Methods;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,35 +41,53 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     Methods methods;
     String petId="",imagerl="";
     ImageView pet_profile_image_IV, image_one,image_two,image_three,image_four,image_five,edit_image, back_arrow_pp;;
-    TextView pet_name_TV, address_head,pet_sex_TV,pet_parent_TV,pet_id_TV,pet_deatils_TV,phone_one,pet_email_id_TV,phone_two,address_line_one_TV,address_line_two_TV;
+    TextView pet_name_TV,pet_dob_TV,pet_reg__id_TV,pet_breed_TV,pet_gender_TV,pet_parent_name_TV,parent_phone_TV,parent_address_TV;
     GetPetResponse getPetResponse;
     boolean reloadData=false;
+    Button Add_Clinic_BT;
+    ShimmerFrameLayout pet_profile_shimmer;
+    String permissionId="";
+    ConstraintLayout pet_profile_details_CL;
+
     SharedPreferences sharedPreferences;
+    RelativeLayout back_arrow_RL,edit_profile_RL,parent_name_RL,parent_phone_RL,parent_location_RL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pet_profile);
+        setContentView(R.layout.pet_profile_activity);
         methods = new Methods(this);
         Bundle extras = getIntent().getExtras();
         petId = extras.getString("pet_id");
 
         pet_profile_image_IV=findViewById(R.id.pet_profile_image_IV);
-
+        parent_name_RL=findViewById(R.id.parent_name_RL);
+        parent_phone_RL=findViewById(R.id.parent_phone_RL);
+        parent_location_RL=findViewById(R.id.parent_location_RL);
         pet_name_TV=findViewById(R.id.pet_name_TV);
-        pet_sex_TV=findViewById(R.id.pet_sex_TV);
-        address_head=findViewById(R.id.address_head);
-        pet_parent_TV=findViewById(R.id.pet_parent_TV);
-        pet_id_TV=findViewById(R.id.pet_id_TV);
-        pet_deatils_TV=findViewById(R.id.pet_deatils_TV);
-        phone_one=findViewById(R.id.phone_one);
-        pet_email_id_TV=findViewById(R.id.pet_email_id_TV);
-        phone_two=findViewById(R.id.phone_two);
-        address_line_one_TV=findViewById(R.id.address_line_one_TV);
-        address_line_two_TV=findViewById(R.id.address_line_two_TV);
-        edit_image=findViewById(R.id.edit_image);
-        back_arrow_pp=findViewById(R.id.back_arrow_pp);
-        edit_image.setOnClickListener(this);
-        back_arrow_pp.setOnClickListener(this);
+        pet_dob_TV=findViewById(R.id.pet_dob_TV);
+        pet_reg__id_TV=findViewById(R.id.pet_reg__id_TV);
+        pet_breed_TV=findViewById(R.id.pet_breed_TV);
+        pet_gender_TV=findViewById(R.id.pet_gender_TV);
+        pet_parent_name_TV=findViewById(R.id.pet_parent_name_TV);
+        parent_phone_TV=findViewById(R.id.parent_phone_TV);
+        parent_address_TV=findViewById(R.id.parent_address_TV);
+        Add_Clinic_BT=findViewById(R.id.Add_Clinic_BT);
+        pet_profile_details_CL=findViewById(R.id.pet_profile_details_CL);
+        pet_profile_shimmer=findViewById(R.id.pet_profile_shimmer);
+
+
+        edit_profile_RL=findViewById(R.id.edit_profile_RL);
+        back_arrow_RL=findViewById(R.id.back_arrow_RL);
+
+        edit_profile_RL.setOnClickListener(this);
+        back_arrow_RL.setOnClickListener(this);
+        Add_Clinic_BT.setOnClickListener(this);
+
+        edit_profile_RL.setOnClickListener(this);
+        back_arrow_RL.setOnClickListener(this);
+        Add_Clinic_BT.setOnClickListener(this);
+
 
         GetPetListParams getPetListParams = new GetPetListParams();
         getPetListParams.setId(petId);
@@ -116,9 +138,27 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 startActivityForResult(intent,1);
 
                 break;
-            case R.id.back_arrow_pp:
+            case R.id.back_arrow_RL:
                 onBackPressed();
                 break;
+
+            case R.id.edit_profile_RL:
+              intent=new Intent(this, GetPetDetailsActivity.class);
+                intent.putExtra("pet_id",petId);
+                intent.putExtra("pet_category",getPetResponse.getData().getPetCategory());
+                intent.putExtra("pet_name",getPetResponse.getData().getPetName());
+                intent.putExtra("pet_sex",getPetResponse.getData().getPetSex());
+                intent.putExtra("pet_DOB",getPetResponse.getData().getDateOfBirth());
+                intent.putExtra("pet_age",getPetResponse.getData().getPetAge());
+                intent.putExtra("pet_size",getPetResponse.getData().getPetSize());
+                intent.putExtra("pet_breed",getPetResponse.getData().getPetBreed());
+                intent.putExtra("pet_color",getPetResponse.getData().getPetColor());
+                intent.putExtra("pet_parent",getPetResponse.getData().getPetParentName());
+                intent.putExtra("pet_parent_contact",getPetResponse.getData().getContactNumber());
+                intent.putExtra("image_url",getPetResponse.getData().getPetProfileImageUrl());
+                startActivityForResult(intent,1);
+                break;
+
 
         }
 
@@ -138,17 +178,18 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                     if (responseCode == 109) {
                        // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
                         pet_name_TV.setText(getPetResponse.getData().getPetName());
-                        pet_parent_TV.setText(Config.user_name);
-                        phone_one.setText(Config.user_phone);
-                        pet_email_id_TV.setText(Config.user_emial);
-                        pet_sex_TV.setText(getPetResponse.getData().getPetSex());
-                        pet_id_TV.setText(getPetResponse.getData().getPetUniqueId());
-                        pet_deatils_TV.setText(getPetResponse.getData().getDescription());
-                        if (getPetResponse.getData().getAddress().equals("")){
-                            address_line_one_TV.setVisibility(View.GONE);
-                            address_head.setVisibility(View.GONE);
+                        pet_parent_name_TV.setText(getPetResponse.getData().getPetParentName());
+                        parent_phone_TV.setText(getPetResponse.getData().getContactNumber());
+                        pet_gender_TV.setText(getPetResponse.getData().getPetSex());
+                        pet_breed_TV.setText(getPetResponse.getData().getPetBreed());
+                        pet_reg__id_TV.setText(getPetResponse.getData().getPetUniqueId());
+                        pet_dob_TV.setText(getPetResponse.getData().getDateOfBirth());
+                        if (getPetResponse.getData().getAddress()==null){
+                            parent_location_RL.setVisibility(View.GONE);
+                            parent_address_TV.setVisibility(View.GONE);
                         }else {
-                            address_line_one_TV.setText(getPetResponse.getData().getAddress());
+//                            parent_address_TV.setText(getPetResponse.getData().getAddress());
+                            parent_address_TV.setText(getPetResponse.getData().getAddress());
                         }
 
                         setImages();
