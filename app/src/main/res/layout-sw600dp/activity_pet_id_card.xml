@@ -171,12 +171,24 @@
                 android:textColor="@color/black_color"
                 android:text="Parent Name :"/>
 
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/parentTV"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:src="@drawable/petofy"/>-->
             <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@+id/parentTV"
+                android:id="@+id/bar_code_IV"
+                android:scaleType="fitXY"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginBottom="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/petofy"/>
+                app:layout_constraintTop_toTopOf="@+id/parentTV"
+                app:layout_constraintBottom_toBottomOf="@id/line2"
+                app:layout_constraintStart_toEndOf="@+id/parentTV"
+                android:layout_marginRight="100dp"/>
 
 
             <TextView
@@ -226,16 +238,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/headLine"
                 android:background="@color/grayColor"/>
 
-            <ImageView
-                android:layout_marginTop="15dp"
-                android:id="@+id/bar_code_IV"
-                android:scaleType="fitXY"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line2"
-                app:layout_constraintStart_toStartOf="@id/contactTv"
-                android:layout_marginRight="100dp"/>
+<!--            <ImageView-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:id="@+id/bar_code_IV"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/line2"-->
+<!--                app:layout_constraintStart_toStartOf="@id/contactTv"-->
+<!--                android:layout_marginRight="100dp"/>-->
 
             <TextView
                 android:textSize="18sp"
@@ -246,6 +258,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/bar_code_IV"
                 app:layout_constraintEnd_toEndOf="@+id/bar_code_IV"
                 android:text="PETO_XYZ"
+                android:visibility="gone"
                 android:gravity="center"/>
 
 
