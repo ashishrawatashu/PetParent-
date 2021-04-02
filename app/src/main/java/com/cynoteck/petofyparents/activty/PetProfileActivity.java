@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
@@ -28,6 +30,7 @@ import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,13 +47,15 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     TextView pet_name_TV,pet_dob_TV,pet_reg__id_TV,pet_breed_TV,pet_gender_TV,pet_parent_name_TV,parent_phone_TV,parent_address_TV;
     GetPetResponse getPetResponse;
     boolean reloadData=false;
-    Button Add_Clinic_BT;
+    Button add_Clinic_BT;
     ShimmerFrameLayout pet_profile_shimmer;
     String permissionId="";
-    ConstraintLayout pet_profile_details_CL;
-
+//    ConstraintLayout pet_profile_details_CL;
+MaterialCardView back_arrow_CV,image_edit_CV;
     SharedPreferences sharedPreferences;
-    RelativeLayout back_arrow_RL,edit_profile_RL,parent_name_RL,parent_phone_RL,parent_location_RL;
+    RelativeLayout edit_profile_RL;
+    ScrollView pet_full_details_SV;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +64,13 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         methods = new Methods(this);
         Bundle extras = getIntent().getExtras();
         petId = extras.getString("pet_id");
+        pet_full_details_SV=findViewById(R.id.pet_full_details_SV);
+        back_arrow_CV = findViewById(R.id.back_arrow_CV);
 
         pet_profile_image_IV=findViewById(R.id.pet_profile_image_IV);
-        parent_name_RL=findViewById(R.id.parent_name_RL);
-        parent_phone_RL=findViewById(R.id.parent_phone_RL);
-        parent_location_RL=findViewById(R.id.parent_location_RL);
+        image_edit_CV=findViewById(R.id.image_edit_CV);
+
+
         pet_name_TV=findViewById(R.id.pet_name_TV);
         pet_dob_TV=findViewById(R.id.pet_dob_TV);
         pet_reg__id_TV=findViewById(R.id.pet_reg__id_TV);
@@ -72,21 +79,19 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         pet_parent_name_TV=findViewById(R.id.pet_parent_name_TV);
         parent_phone_TV=findViewById(R.id.parent_phone_TV);
         parent_address_TV=findViewById(R.id.parent_address_TV);
-        Add_Clinic_BT=findViewById(R.id.Add_Clinic_BT);
-        pet_profile_details_CL=findViewById(R.id.pet_profile_details_CL);
+        add_Clinic_BT=findViewById(R.id.add_Clinic_BT);
+//        pet_profile_details_CL=findViewById(R.id.pet_profile_details_CL);
         pet_profile_shimmer=findViewById(R.id.pet_profile_shimmer);
 
 
         edit_profile_RL=findViewById(R.id.edit_profile_RL);
-        back_arrow_RL=findViewById(R.id.back_arrow_RL);
 
         edit_profile_RL.setOnClickListener(this);
-        back_arrow_RL.setOnClickListener(this);
-        Add_Clinic_BT.setOnClickListener(this);
+        add_Clinic_BT.setOnClickListener(this);
 
         edit_profile_RL.setOnClickListener(this);
-        back_arrow_RL.setOnClickListener(this);
-        Add_Clinic_BT.setOnClickListener(this);
+        add_Clinic_BT.setOnClickListener(this);
+        back_arrow_CV.setOnClickListener(this);
 
 
         GetPetListParams getPetListParams = new GetPetListParams();
@@ -108,6 +113,12 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
 
     private void getPetlistData(GetPetListRequest getPetListRequest) {
         reloadData=true;
+        add_Clinic_BT.setEnabled(false);
+        pet_full_details_SV.setVisibility(View.GONE);
+        edit_profile_RL.setVisibility(View.INVISIBLE);
+        image_edit_CV.setVisibility(View.GONE);
+        pet_profile_shimmer.setVisibility(View.VISIBLE);
+        pet_profile_shimmer.startShimmer();
         methods.showCustomProgressBarDialog(this);
         ApiService<GetPetResponse> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().getPetDetails(Config.token,getPetListRequest), "GetPetDetail");
@@ -138,7 +149,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 startActivityForResult(intent,1);
 
                 break;
-            case R.id.back_arrow_RL:
+            case R.id.back_arrow_CV:
                 onBackPressed();
                 break;
 
@@ -158,7 +169,26 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 intent.putExtra("image_url",getPetResponse.getData().getPetProfileImageUrl());
                 startActivityForResult(intent,1);
                 break;
+            case R.id.add_Clinic_BT:
+                Intent petDetailsIntent = new Intent(this, PetDetailsActivity.class);
+                Bundle data = new Bundle();
+                data.putString("pet_id", getPetResponse.getData().getId());
+                data.putString("pet_name", getPetResponse.getData().getPetName());
+                data.putString("pet_parent", getPetResponse.getData().getPetParentName());
+                data.putString("pet_sex", getPetResponse.getData().getPetSex());
+                data.putString("pet_age", getPetResponse.getData().getPetAge());
+                data.putString("pet_unique_id", getPetResponse.getData().getPetUniqueId());
+                data.putString("pet_DOB", getPetResponse.getData().getDateOfBirth());
+                data.putString("pet_encrypted_id", getPetResponse.getData().getEncryptedId());
+                data.putString("pet_cat_id", getPetResponse.getData().getPetCategoryId());
+                data.putString("lastVisitEncryptedId","");
+                data.putString("pet_image_url", getPetResponse.getData().getPetProfileImageUrl());
 
+                petDetailsIntent.putExtras(data);
+                startActivity(petDetailsIntent);
+
+
+                break;
 
         }
 
@@ -171,6 +201,12 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         switch (key) {
             case "GetPetDetail":
                 try {
+                    add_Clinic_BT.setEnabled(true);
+                    pet_profile_shimmer.setVisibility(View.GONE);
+                    pet_full_details_SV.setVisibility(View.VISIBLE);
+                    pet_profile_shimmer.stopShimmer();
+                    edit_profile_RL.setVisibility(View.VISIBLE);
+                    image_edit_CV.setVisibility(View.VISIBLE);
                     methods.customProgressDismiss();
                     Log.d("GetPetDetail", arg0.body().toString());
                     getPetResponse = (GetPetResponse) arg0.body();
@@ -185,7 +221,6 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                         pet_reg__id_TV.setText(getPetResponse.getData().getPetUniqueId());
                         pet_dob_TV.setText(getPetResponse.getData().getDateOfBirth());
                         if (getPetResponse.getData().getAddress()==null){
-                            parent_location_RL.setVisibility(View.GONE);
                             parent_address_TV.setVisibility(View.GONE);
                         }else {
 //                            parent_address_TV.setText(getPetResponse.getData().getAddress());
