@@ -1,300 +1,507 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/list_background"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whiteColor"
     tools:context=".fragments.ProfileFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-        app:cardElevation="20dp"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/whiteColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <TextView
-            android:textColor="#000"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/profile_home"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-        app:cardElevation="10dp"
-        android:id="@+id/parent_info_CV"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_info_CL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/whiteColor">
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="17dp"
+        android:background="@drawable/radius_fourteen_grey_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/parent_image_CIV"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/user_profile"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/parent_image_progress_bar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="14dp"
+            android:padding="25dp"
+            android:src="@drawable/user_profile"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/camera_IV"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/camera_blue_icon"
+            app:layout_constraintBottom_toBottomOf="@id/parent_image_CIV"
+            app:layout_constraintEnd_toEndOf="@id/parent_image_CIV" />
+
+        <LinearLayout
+            android:id="@+id/vet_name_edit_LL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="18dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/edit_RL"
+            app:layout_constraintStart_toEndOf="@id/parent_image_CIV"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:textStyle="bold"
                 android:id="@+id/parent_name_TV"
-                android:layout_marginLeft="20dp"
-                android:textSize="20sp"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toTopOf="@id/image_CV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/image_CV"
-                app:layout_constraintStart_toEndOf="@id/image_CV"
-                android:text="Aviral Rana"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:visibility="visible"
-                android:id="@+id/edit_image"
-                android:padding="10dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:layout_constraintTop_toTopOf="@id/parent_name_TV"
-                app:layout_constraintBottom_toTopOf="@id/parent_email_TV"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/editicon"
-                android:layout_marginRight="5dp"/>
-            <TextView
-                android:id="@+id/parent_email_TV"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="20dp"
-                android:textSize="18sp"
-                android:textColor="@color/grayColorCode"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/parent_name_TV"
-                app:layout_constraintStart_toEndOf="@id/image_CV"
-                android:text="@string/email"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-
-            <TextView
-                android:layout_marginTop="20dp"
-                android:id="@+id/parent_phone_TV"
-                android:layout_marginLeft="20dp"
-                android:textSize="18sp"
-                android:textColor="@color/gray_code_dark"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/image_CV"
-                app:layout_constraintTop_toBottomOf="@id/parent_email_TV"
-                android:text="9696632521"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-
-            <TextView
-                android:id="@+id/parent_address_TV"
-                android:layout_marginRight="10dp"
-                android:textSize="18sp"
-                android:textColor="@color/gray_code_dark"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/parent_phone_TV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/parent_phone_TV"/>
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/gray_2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/parent_mail_TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:gravity="center_vertical"
+                android:textColor="@color/gray_3"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/vet_name_edit_LL"
+                app:layout_constraintTop_toBottomOf="@id/vet_name_edit_LL" />
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/image_CV"
-                app:cardCornerRadius="100dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="250dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintTop_toTopOf="@+id/parent_name_TV"
-                app:layout_constraintTop_toBottomOf="@id/parent_name_TV"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="120dp"
-                android:layout_height="120dp">
+            <TextView
+                android:id="@+id/parent_phone_no_TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/nunito"
+                android:gravity="bottom"
+                android:textColor="@color/gray_3"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/vet_name_edit_LL"
+                app:layout_constraintTop_toBottomOf="@id/vet_name_edit_LL" />
 
-                <ImageView
-                    android:id="@+id/parent_profile_pic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/user_profile" />
+        </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+        <RelativeLayout
+            android:id="@+id/edit_RL"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/reactangle_white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/parent_image_CIV">
 
             <ImageView
-                android:id="@+id/camera_IV"
-                android:elevation="5dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintBottom_toBottomOf="@id/image_CV"
-                android:src="@drawable/camera_icon"
-                app:layout_constraintEnd_toEndOf="@id/image_CV"/>
+                android:id="@+id/edit_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:padding="5dp"
+                android:src="@drawable/edit_icon"
+                android:text="@string/edit"
+                android:textColor="@color/gray_3"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/your_pets_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/parent_info_CL"
+        app:layout_constraintTop_toBottomOf="@id/parent_info_CL"
+        android:textSize="18sp"
+        android:text="Your pets "
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito"
+        android:textColor="@color/gray_2"/>
 
 
 
+    <ProgressBar
+        android:orientation="horizontal"
+        android:id="@+id/pet_list_progress_bar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:elevation="5dp"
+        android:visibility="visible"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/your_pets_TV" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pet_list_RV"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/parent_info_CL"
+        app:layout_constraintStart_toStartOf="@id/parent_info_CL"
+        app:layout_constraintTop_toBottomOf="@id/your_pets_TV"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/register_pet_list" />
+
+    <RelativeLayout
+        android:id="@+id/add_pet_RL"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@id/parent_info_CL"
+        app:layout_constraintStart_toStartOf="@id/parent_info_CL"
+        android:background="@drawable/search_bar_background_grey"
+        app:layout_constraintTop_toBottomOf="@id/pet_list_RV">
 
 
+        <ImageView
+            android:id="@+id/add_icon_IV"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/black_add_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@id/add_icon_IV"
+            android:fontFamily="@font/nunito"
+            android:text="Add new "
+            android:textColor="@color/gray_1"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/forward_arrow" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
         android:layout_marginTop="15dp"
-        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-        android:id="@+id/info_CV"
+        android:background="@color/background_grey"
+        app:layout_constraintEnd_toEndOf="@id/parent_info_CL"
+        app:layout_constraintStart_toStartOf="@id/parent_info_CL"
+        app:layout_constraintTop_toBottomOf="@id/add_pet_RL" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/parent_info_CV"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="@id/line"
+        app:layout_constraintStart_toStartOf="@id/line"
+        app:layout_constraintTop_toBottomOf="@id/line">
 
-        <ScrollView
-            android:background="@color/whiteColor"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:orientation="vertical"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/general_details_CL"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-                    app:cardElevation="5dp"
-                    android:visibility="gone"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp">
+                <RelativeLayout
+                    android:id="@+id/general_details_RL"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/radius_six_grey_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <RelativeLayout
-                        android:id="@+id/changePass_layout"
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textColor="@color/black_color"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_alignParentStart="true"
-                            android:gravity="center_vertical"
-                            android:text="Change Password"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-
-                        <ImageView
-                            android:layout_alignParentEnd="true"
-                            android:padding="10dp"
-                            android:src="@drawable/forward_arrow"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"/>
-
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:padding="6dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/setting_icon" />
 
 
+                </RelativeLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/general_deatils"
+                    android:textColor="@color/gray_1"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/general_details_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/general_details_RL"
+                    app:layout_constraintTop_toTopOf="@id/general_details_RL" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-                    app:cardElevation="5dp"
-                    android:visibility="gone"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"
+                    android:padding="1dp"
+                    android:src="@drawable/forward_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/general_details_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/general_details_RL" />
 
-                    <RelativeLayout
-                        android:id="@+id/setings_layout"
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/change_password_CL"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/change_password_RL"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/radius_six_grey_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textColor="@color/black_color"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_alignParentStart="true"
-                            android:gravity="center_vertical"
-                            android:text="@string/Settings"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-
-                        <ImageView
-                            android:layout_alignParentEnd="true"
-                            android:padding="10dp"
-                            android:src="@drawable/forward_arrow"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"/>
-
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/change_password_icon" />
 
 
+                </RelativeLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/changePass"
+                    android:textColor="@color/gray_1"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/change_password_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/change_password_RL"
+                    app:layout_constraintTop_toTopOf="@id/change_password_RL" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
-                    app:cardElevation="5dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="20dp"
-                    android:layout_height="65dp">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"
+                    android:padding="1dp"
+                    android:src="@drawable/forward_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/change_password_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/change_password_RL" />
 
-                    <RelativeLayout
-                        android:id="@+id/logout_layout"
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/plans_and_subscription_CL"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/plans_and_subscription_RL"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/radius_six_grey_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:textColor="@color/black_color"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_alignParentStart="true"
-                            android:gravity="center_vertical"
-                            android:text="Logout"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-
-                        <ImageView
-                            android:layout_alignParentEnd="true"
-                            android:padding="10dp"
-                            android:src="@drawable/forward_arrow"
-                            android:layout_width="50dp"
-                            android:layout_height="match_parent"/>
-
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/plans_icons" />
 
 
+                </RelativeLayout>
 
-                </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/plans_and_subscription"
+                    android:textColor="@color/gray_1"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/plans_and_subscription_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/plans_and_subscription_RL"
+                    app:layout_constraintTop_toTopOf="@id/plans_and_subscription_RL" />
 
-            </LinearLayout>
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"
+                    android:padding="1dp"
+                    android:src="@drawable/forward_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/plans_and_subscription_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/plans_and_subscription_RL" />
 
-        </ScrollView>
 
-    </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/privacy_CL"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/privacy_RL"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/radius_six_grey_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="7dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/privacy_icon" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/privacy"
+                    android:textColor="@color/gray_1"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/privacy_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/privacy_RL"
+                    app:layout_constraintTop_toTopOf="@id/privacy_RL" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"
+                    android:padding="1dp"
+                    android:src="@drawable/forward_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/privacy_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/privacy_RL" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logout_CL"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/logout_RL"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/radius_six_grey_bg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/logout_icon" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/logout"
+                    android:textColor="@color/gray_1"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/logout_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/logout_RL"
+                    app:layout_constraintTop_toTopOf="@id/logout_RL" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"
+                    android:padding="1dp"
+                    android:src="@drawable/forward_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/logout_RL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/logout_RL" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,234 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/whiteColor"
     android:layout_height="match_parent"
     tools:context=".activty.ReportsCommonActivity">
 
-
-    <androidx.cardview.widget.CardView
-        app:cardElevation="10dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/whiteColor"
-        tools:ignore="MissingConstraints">
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/reports_headline_TV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:textColor="@color/gray_2"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/back_arrow_CV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/back_arrow_CV" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            android:id="@+id/back_arrow_CV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/back_arrow_IV"
-                android:padding="8dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/back_arrow" />
-
-
-            <TextView
-                android:layout_marginRight="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/back_arrow_IV"
-                android:id="@+id/reports_headline_TV"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#000"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:src="@drawable/light_grey_bg"
+                android:visibility="visible" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/back_arrow"
+                android:visibility="visible" />
 
-    </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="5dp"
-        android:id="@+id/petInfo_CV"
-        android:layout_width="match_parent"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pet_details_CL"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar">
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pet_details_bg"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <RelativeLayout
+            android:id="@+id/appoint_image_RL"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_image_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/appointment_iamge_CV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="9dp"
+                app:cardCornerRadius="6dp">
+
+                <ImageView
+                    android:id="@+id/petRegImage_IV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/empty_pet_image" />
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/pet_reg_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/nunito_bold"
+            android:maxLines="1"
+            android:text="Boxer (Male)"
+            android:textColor="@color/gray_2"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/appoint_image_RL"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pet_reg_date_of_birth_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Age: 6 Months Old"
+            android:textColor="@color/gray_2"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/pet_reg_name_TV"
+            app:layout_constraintTop_toBottomOf="@id/pet_reg_name_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:text="Ajay Bisht"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/pet_id_RL"
+            app:layout_constraintStart_toStartOf="@id/pet_reg_date_of_birth_TV"
+            app:layout_constraintTop_toBottomOf="@id/pet_reg_date_of_birth_TV" />
 
 
         <RelativeLayout
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:id="@+id/pet_id_RL"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/pet_id_bgg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_reg_date_of_birth_TV">
 
-            <LinearLayout
-                android:id="@+id/pet_info_LL"
-                android:orientation="vertical"
+            <ImageView
+                android:id="@+id/pet_id_inner_IV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/pet_id"/>
+
+
+            <TextView
+                android:id="@+id/pet_reg__id_TV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_color"
-                    android:text="@string/petname"/>
-
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_color"
-                    android:text="@string/petId"/>
-
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_color"
-                    android:text="@string/petParent"/>
-
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/pet_id_inner_IV"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="PETO-789545"
+                android:textColor="@color/gray_1"
+                android:textSize="10sp" />
 
 
-            <LinearLayout
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/double_dot_LL"
-                android:layout_toRightOf="@id/pet_info_LL"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_color"
-                    android:text="@string/double_Dot"/>
-
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_color"
-                    android:text="@string/double_Dot"/>
-
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_color"
-                    android:text="@string/double_Dot"/>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_toRightOf="@id/double_dot_LL"
-                android:id="@+id/pet_all_info_ll"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/pet_name_TV"
-                        android:layout_marginTop="5dp"
-                        android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/grayColorCode"
-                        android:text="Rustam"/>
-
-                    <TextView
-                        android:layout_marginLeft="8dp"
-                        android:layout_toRightOf="@id/pet_name_TV"
-                        android:id="@+id/pet_sex_TV"
-                        android:layout_marginTop="5dp"
-                        android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/grayColorCode"
-                        android:text="(Male)"/>
-
-                </RelativeLayout>
-
-
-
-                <TextView
-                    android:id="@+id/pet_id_TV"
-                    android:layout_marginTop="5dp"
-                    android:textSize="15sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/grayColorCode"
-                    android:text="PETO1883"/>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/pet_owner_name_TV"
-                        android:layout_marginTop="5dp"
-                        android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/grayColorCode"
-                        android:text="Ashish Rawat"/>
-
-                    <TextView
-                        android:visibility="gone"
-                        android:layout_marginLeft="8dp"
-                        android:layout_toRightOf="@id/pet_owner_name_TV"
-                        android:id="@+id/pet_owner_phone_no_TV"
-                        android:layout_marginTop="5dp"
-                        android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/grayColorCode"
-                        android:text="(735-104-040-97)"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
         </RelativeLayout>
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/last_reports_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nunito"
+        android:text="Last Reports"
+        android:textColor="@color/gray_1"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/pet_details_CL" />
 
-    <View
-        android:id="@+id/view_green_line"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_below="@id/petInfo_CV"
-        android:background="@color/green_divider"/>
 
     <FrameLayout
-        android:background="@color/list_background"
         android:id="@+id/report_type_frame"
-        android:layout_below="@id/view_green_line"
+        app:layout_constraintTop_toBottomOf="@id/last_reports_TV"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"/>
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

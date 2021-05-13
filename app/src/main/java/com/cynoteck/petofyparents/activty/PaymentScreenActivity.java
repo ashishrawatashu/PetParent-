@@ -2,8 +2,10 @@
 package com.cynoteck.petofyparents.activty;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -27,21 +30,26 @@ import com.cynoteck.petofyparents.response.getOrderResponse.GetOrderResponse;
 import com.cynoteck.petofyparents.response.paymentStatusResponse.PaymentStatusResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
+import com.google.android.material.card.MaterialCardView;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultWithDataListener;
 
 import org.json.JSONObject;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Response;
 
 public class PaymentScreenActivity extends AppCompatActivity implements PaymentResultWithDataListener, ApiResponse, View.OnClickListener {
 
     Button procced_appointment_BT;
-    ImageView back_arrow_IV;
-    TextView vetName_TV,topic_TV,startTime_TV,endTime_TV,date_TV;
-    String vetUserId,vetName,startDate,endDate,topic,mettingID,order_ID,amount;
+    MaterialCardView back_arrow_CV;
+    TextView vetName_TV,topic_TV,appointment_time_TV,date_TV,pet_name_TV,consultation_fee_TV;
+    String vetUserId,vetName,appointment_time,topic,mettingID,order_ID,amount,vet_image_url;
     Methods methods;
+    ConstraintLayout payment_details_CL;
+    CircleImageView parent_profile_CIV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +58,11 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
         Intent intent = getIntent();
         vetUserId = intent.getStringExtra("vetId");
         vetName = intent.getStringExtra("vetName");
-        startDate = intent.getStringExtra("startDate");
-        endDate = intent.getStringExtra("endDate");
+        appointment_time = intent.getStringExtra("appointment_time");
         topic = intent.getStringExtra("topic");
         mettingID = intent.getStringExtra("mettingId");
+        vet_image_url = intent.getStringExtra("vet_image_url");
+        initization();
 
         if (methods.isInternetOn()) {
             getOrderDetails();
@@ -61,11 +70,10 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
             methods.DialogInternet();
         }
 
-        initization();
-
     }
 
     private void getOrderDetails() {
+        payment_details_CL.setVisibility(View.INVISIBLE);
         methods.showCustomProgressBarDialog(this);
         GetOrderParams getOrderParams = new GetOrderParams();
         getOrderParams.setVeterinarianId(vetUserId);
@@ -80,13 +88,15 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
     private void initization() {
         date_TV = findViewById(R.id.date_TV);
-        vetName_TV = findViewById(R.id.vetName_TV);
-        topic_TV = findViewById(R.id.topic_TV);
-        startTime_TV = findViewById(R.id.startTime_TV);
-        endTime_TV = findViewById(R.id.endTime_TV);
+        vetName_TV = findViewById(R.id.vet_name_TV);
+        appointment_time_TV = findViewById(R.id.appointment_time_TV);
         procced_appointment_BT = findViewById(R.id.procced_appointment_BT);
-        back_arrow_IV=findViewById(R.id.back_arrow_IV);
-        back_arrow_IV.setOnClickListener(this);
+        consultation_fee_TV=findViewById(R.id.consultation_fee_TV);
+        payment_details_CL=findViewById(R.id.payment_details_CL);
+        pet_name_TV=findViewById(R.id.pet_name_TV);
+        back_arrow_CV=findViewById(R.id.back_arrow_CV);
+        parent_profile_CIV= findViewById(R.id.parent_profile_CIV);
+        back_arrow_CV.setOnClickListener(this);
         procced_appointment_BT.setOnClickListener(this);
 
     }
@@ -94,7 +104,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
     private void startPayment() {
         Checkout checkout = new Checkout();
         checkout.setKeyID("rzp_test_f1R6dTWpxaiwgg");
-        checkout.setImage(R.drawable.petofy);
+        checkout.setImage(R.drawable.petofy_p_logo);
         final Activity activity = this;
         try {
             JSONObject options = new JSONObject();
@@ -104,7 +114,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
             options.put("currency", "INR");
             options.put("amount", amount);//pass amount in currency subunits
             options.put("order_id", order_ID);//from response of step 3.
-            options.put("theme.color", "#6fac00");
+            options.put("theme.color", "#3366FF");
             JSONObject preFill = new JSONObject();
             preFill.put("email", Config.user_emial);
             preFill.put("contact", Config.user_phone);
@@ -118,7 +128,10 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
     @Override
     public void onPaymentSuccess(String s, PaymentData paymentData) {
 //        Toast.makeText(PaymentScreenActivity.this, "Transaction Successful: " + paymentData.getOrderId(), Toast.LENGTH_LONG).show();
-
+        Intent intent = new Intent();
+        intent.putExtra("Amount",amount);
+        setResult(RESULT_OK, intent);
+        finish();
         Log.e("mettingId",mettingID);
         Log.e("orderId",paymentData.getOrderId());
         Log.e("PaymentId",paymentData.getPaymentId());
@@ -156,16 +169,19 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
                     Log.d("getOrderResponse",getOrderResponse.toString());
                     int responseCode = Integer.parseInt(getOrderResponse.getResponse().getResponseCode());
                     if (responseCode==109) {
+                        payment_details_CL.setVisibility(View.VISIBLE);
                         order_ID = getOrderResponse.getData().getAttributes().getId();
                         amount = getOrderResponse.getData().getAttributes().getAmount();
-
                         vetName_TV.setText(vetName);
-                        topic_TV.setText(topic);
-                        startTime_TV.setText(startDate);
-                        endTime_TV.setText(endDate);
-
+                        appointment_time_TV.setText(appointment_time);
+                        consultation_fee_TV.setText("₹ "+amount);
+                        Glide.with(this)
+                                .load(vet_image_url)
+                                .placeholder(R.drawable.doctor_dummy_image)
+                                .into(parent_profile_CIV);
                     }else {
                         onBackPressed();
+                        Toast.makeText(this, "Please try again !", Toast.LENGTH_SHORT).show();
                     }
 
                 }catch (Exception e){
@@ -175,15 +191,12 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
             case "PaymentHistory":
                 try {
-                    methods.customProgressDismiss();
                     Log.d("GetOrder",arg0.body().toString());
                     PaymentStatusResponse paymentStatusResponse = (PaymentStatusResponse) arg0.body();
                     Log.d("getOrderResponse",paymentStatusResponse.toString());
                     int responseCode = Integer.parseInt(paymentStatusResponse.getResponse().getResponseCode());
                     if (responseCode==109) {
-                        Intent intent = new Intent();
-                        setResult(RESULT_OK, intent);
-                        finish();
+
                     }else {
                         onBackPressed();
                     }
@@ -207,7 +220,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
                 startPayment();
                 break;
 
-            case R.id.back_arrow_IV:
+            case R.id.back_arrow_CV:
                 onBackPressed();
                 break;
         }

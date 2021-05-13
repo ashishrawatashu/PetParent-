@@ -1,690 +1,668 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/whiteColor"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.CollapsingToolbarLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/whiteColor">
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
-            android:id="@+id/doctorPrescription_headline_TV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            
+            android:id="@+id/create_headline_TV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
             android:text="@string/doctorPrescription"
-            android:textColor="@color/black_color"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textColor="@color/gray_2"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/back_arrow_CV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/back_arrow_CV" />
 
-        <ImageView
 
-            android:id="@+id/back_arrow_IV"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="8dp"
-            android:src="@drawable/back_arrow"
-            android:visibility="visible" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/back_arrow_CV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/light_grey_bg"
+                android:visibility="visible" />
 
-    <androidx.cardview.widget.CardView
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/back_arrow"
+                android:visibility="visible" />
 
-        android:id="@+id/petInfo_CV"
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pet_details_CL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-         />
+        android:layout_marginTop="10dp"
+        android:background="@drawable/pet_details_bg"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <RelativeLayout
+            android:id="@+id/appoint_image_RL"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/white_image_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/appointment_iamge_CV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="9dp"
+                app:cardCornerRadius="6dp">
+
+                <ImageView
+                    android:id="@+id/petRegImage_IV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/empty_pet_image" />
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        
-        android:layout_marginTop="15dp"
-        android:padding="5dp">
+            </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/pet_info_LL"
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/pet_reg_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/nunito_bold"
+            android:maxLines="1"
+            android:text="Boxer (Male)"
+            android:textColor="@color/gray_2"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/appoint_image_RL"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pet_reg_date_of_birth_TV"
             android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Age: 6 Months Old"
+            android:textColor="@color/gray_2"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/pet_reg_name_TV"
+            app:layout_constraintTop_toBottomOf="@id/pet_reg_name_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_name_TV"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/petname"
-                android:textColor="@color/black_color"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-
-                android:text="@string/petId"
-                android:textColor="@color/black_color"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                
-                android:text="@string/petownwer"
-                android:textColor="@color/black_color"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:paddingBottom="5dp"
+            android:text="Ajay Bisht"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/pet_id_RL"
+            app:layout_constraintStart_toStartOf="@id/pet_reg_date_of_birth_TV"
+            app:layout_constraintTop_toBottomOf="@id/pet_reg_date_of_birth_TV" />
 
 
-        <LinearLayout
-            android:id="@+id/double_dot_LL"
+        <RelativeLayout
+            android:id="@+id/pet_id_RL"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toRightOf="@id/pet_info_LL"
-            android:orientation="vertical">
+            android:layout_height="38dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/pet_id_bgg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_reg_date_of_birth_TV">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-
-                android:text="@string/double_Dot"
-                android:textColor="@color/black_color"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-
-                android:text="@string/double_Dot"
-                android:textColor="@color/black_color"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-
-                android:text="@string/double_Dot"
-                android:textColor="@color/black_color"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/pet_all_info_ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/double_dot_LL"
-            android:orientation="vertical">
-
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/pet_name_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Rustam"
-                    android:textColor="@color/grayColorCode"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/pet_sex_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:layout_toRightOf="@id/pet_name_TV"
-                    android:text="(Male)"
-                    android:textColor="@color/grayColorCode"
-                    android:textSize="15sp" />
-
-            </RelativeLayout>
+            <ImageView
+                android:id="@+id/pet_id_inner_IV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/pet_id" />
 
 
             <TextView
-                android:id="@+id/pet_id_TV"
+                android:id="@+id/pet_reg__id_TV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-
-                android:text="PETO1883"
-                android:textColor="@color/grayColorCode"
-                android:textSize="15sp" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/pet_owner_name_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-
-                    android:text="Ashish Rawat"
-                    android:textColor="@color/grayColorCode"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/pet_owner_phone_no_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="5dp"
-
-                    android:layout_toRightOf="@id/pet_owner_name_TV"
-                    android:text="(735-104-040-97)"
-                    android:textColor="@color/grayColorCode"
-                    android:textSize="15sp" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/pet_id_inner_IV"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="PETO-789545"
+                android:textColor="@color/gray_1"
+                android:textSize="10sp" />
 
 
-    <View
+        </RelativeLayout>
 
-        android:id="@+id/view_green_line"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/green_divider" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        
-        android:layout_marginRight="10dp"
-        android:background="@color/whiteColor"
-        android:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/pet_details_CL"
 
         />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pet_details_CL">
 
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:id="@+id/data"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/report_detail_CL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/background_grey"
+            android:padding="8dp"
             android:visibility="gone">
 
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/vet_name_tv"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                
-                android:orientation="horizontal">
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="Veterinarian"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
-                    android:id="@+id/vet_name_tv"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Veterinarian"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/dot_vet_nameTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-
-                    android:id="@+id/vet_name_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/dot_vet_nameTV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                
-                android:orientation="horizontal">
+                android:fontFamily="@font/nunito"
+                android:text=":"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/vet_name_tv"
+                app:layout_constraintTop_toTopOf="@id/vet_name_tv" />
 
-                <TextView
-                    android:id="@+id/visit_date_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/visit_date"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/dot_vist_date_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/visit_date_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/vet_name_textView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                
-                android:orientation="horizontal">
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/dot_vet_nameTV"
+                app:layout_constraintTop_toTopOf="@id/vet_name_tv" />
 
-                <TextView
-                    android:id="@+id/nature_ofVist_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/natureofvisit"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/dot_nature_ofVist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/nature_ofVist_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/visit_date_TV"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                
-                android:orientation="horizontal">
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/visit_date"
+                android:textColor="@color/gray_1"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/vet_name_tv"
+                app:layout_constraintStart_toStartOf="@id/vet_name_tv"
+                app:layout_constraintTop_toBottomOf="@id/vet_name_textView" />
 
-                <TextView
-                    android:id="@+id/pet_weight_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/weight"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/dot_pet_weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/weight_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/dot_vist_date_TV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:fontFamily="@font/nunito"
+                android:text=":"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/visit_date_TV"
+                app:layout_constraintTop_toTopOf="@id/visit_date_TV" />
 
-                <TextView
-                    android:id="@+id/pet_temp_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/temprature"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/dot_pet_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/temperature_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/visit_date_textView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/pet_desc_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-
-                    android:text="@string/description"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dot_vist_date_TV"
+                app:layout_constraintTop_toTopOf="@id/visit_date_TV" />
 
 
-                <TextView
-                    android:id="@+id/dot_pet_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/symptoms_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/nature_ofVist_TV"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/natureofvisit"
+                android:textColor="@color/gray_1"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/vet_name_tv"
+                app:layout_constraintStart_toStartOf="@id/vet_name_tv"
+                app:layout_constraintTop_toBottomOf="@id/visit_date_textView" />
 
-                <TextView
-                    android:id="@+id/pet_diagosis_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/diagosis"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/dot_pet_diagosis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/diagnosis_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/dot_nature_ofVist"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"
+                android:text=":"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/nature_ofVist_TV"
+                app:layout_constraintTop_toTopOf="@id/nature_ofVist_TV" />
 
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/pet_remarks_TV"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/remarks"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/dot_pet_remarks"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-
-                    android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/remarks_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-
-                    android:gravity="end"
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_dewarming_name"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/nature_ofVist_textView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/dot_nature_ofVist"
+                app:layout_constraintTop_toTopOf="@id/nature_ofVist_TV" />
 
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pet_weight_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/weight"
+                android:textColor="@color/gray_1"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/vet_name_tv"
+                app:layout_constraintStart_toStartOf="@id/vet_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/nature_ofVist_textView" />
+
+
+            <TextView
+                android:id="@+id/dot_pet_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:text=":"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/pet_weight_TV"
+                app:layout_constraintTop_toTopOf="@id/pet_weight_TV" />
+
+            <TextView
+                android:id="@+id/weight_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/dot_pet_weight"
+                app:layout_constraintTop_toTopOf="@+id/pet_weight_TV" />
+
+
+            <TextView
+                android:id="@+id/pet_temp_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/temprature"
+                android:textColor="@color/gray_1"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/vet_name_tv"
+                app:layout_constraintStart_toStartOf="@id/vet_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/weight_textView" />
+
+
+            <TextView
+                android:id="@+id/dot_pet_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:text=":"
+                android:textColor="@color/gray_1"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/pet_temp_TV"
+                app:layout_constraintTop_toTopOf="@+id/pet_temp_TV" />
+
+            <TextView
+                android:id="@+id/temperature_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/gray_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dot_pet_temp"
+                app:layout_constraintTop_toTopOf="@+id/pet_temp_TV" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/deworming_CL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/vet_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/temperature_textView">
 
                 <TextView
                     android:id="@+id/pet_dewarmername_TV"
-                    android:layout_width="100dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
                     android:text="Dewormer Name"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
+                    android:textColor="@color/gray_1"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
                     android:id="@+id/dewarmer_dot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-
+                    android:fontFamily="@font/nunito"
                     android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/pet_dewarmername_TV"
+                    app:layout_constraintTop_toTopOf="@id/pet_dewarmername_TV" />
 
                 <TextView
                     android:id="@+id/dewarmername_textView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dewarmer_dot"
+                    app:layout_constraintTop_toTopOf="@id/pet_dewarmername_TV" />
 
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_dose"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pet_dose_TV"
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nunito"
                     android:text="Dewormer Dose"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
+                    android:textColor="@color/gray_1"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/pet_dewarmername_TV"
+                    app:layout_constraintStart_toStartOf="@+id/pet_dewarmername_TV"
+                    app:layout_constraintTop_toBottomOf="@+id/dewarmername_textView" />
 
 
                 <TextView
                     android:id="@+id/dot_dose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-
+                    android:fontFamily="@font/nunito"
                     android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/pet_dose_TV"
+                    app:layout_constraintTop_toTopOf="@id/pet_dose_TV" />
 
                 <TextView
                     android:id="@+id/dose_textView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-
-                    android:gravity="end"
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_next_dewarmer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dot_dose"
+                    app:layout_constraintTop_toTopOf="@+id/pet_dose_TV" />
 
                 <TextView
                     android:id="@+id/pet_next_dewarmer_TV"
-                    android:layout_width="100dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nunito"
                     android:text="Next Dewormer"
-                    android:textColor="@color/black_color"
-                    android:textStyle="bold" />
+                    android:textColor="@color/gray_1"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/pet_dewarmername_TV"
+                    app:layout_constraintStart_toStartOf="@id/pet_dewarmername_TV"
+                    app:layout_constraintTop_toBottomOf="@+id/dose_textView" />
 
 
                 <TextView
                     android:id="@+id/dot_next_dewarmer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    
+                    android:fontFamily="@font/nunito"
                     android:text=":"
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/pet_next_dewarmer_TV"
+                    app:layout_constraintTop_toTopOf="@id/pet_next_dewarmer_TV" />
 
                 <TextView
                     android:id="@+id/next_dewarmer_textView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    
-                    android:text=""
-                    android:textColor="@color/black_color"
-                    android:textSize="15sp" />
-            </LinearLayout>
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dot_next_dewarmer"
+                    app:layout_constraintTop_toTopOf="@+id/dot_next_dewarmer" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/other_report_CL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/vet_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/deworming_CL">
+
+                <TextView
+                    android:id="@+id/pet_desc_TV"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/description"
+                    android:textColor="@color/gray_1"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/dot_pet_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:text=":"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/pet_desc_TV"
+                    app:layout_constraintTop_toTopOf="@+id/pet_desc_TV" />
+
+                <TextView
+                    android:id="@+id/symptoms_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/dot_pet_desc"
+                    app:layout_constraintTop_toTopOf="@id/pet_desc_TV" />
+
+
+                <TextView
+                    android:id="@+id/pet_diagosis_TV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/diagosis"
+                    android:textColor="@color/gray_1"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/pet_desc_TV"
+                    app:layout_constraintStart_toStartOf="@id/pet_desc_TV"
+                    app:layout_constraintTop_toBottomOf="@+id/symptoms_textView" />
+
+
+                <TextView
+                    android:id="@+id/dot_pet_diagosis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:text=":"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/pet_diagosis_TV"
+                    app:layout_constraintTop_toTopOf="@+id/pet_diagosis_TV" />
+
+                <TextView
+                    android:id="@+id/diagnosis_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/dot_pet_diagosis"
+                    app:layout_constraintTop_toTopOf="@+id/pet_diagosis_TV" />
+
+                <TextView
+                    android:id="@+id/pet_remarks_TV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/remarks"
+                    android:textColor="@color/gray_1"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/pet_desc_TV"
+                    app:layout_constraintStart_toStartOf="@id/pet_desc_TV"
+                    app:layout_constraintTop_toBottomOf="@+id/diagnosis_textView" />
+
+
+                <TextView
+                    android:id="@+id/dot_pet_remarks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:text=":"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/pet_desc_TV"
+                    app:layout_constraintTop_toTopOf="@id/pet_remarks_TV" />
+
+                <TextView
+                    android:id="@+id/remarks_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dot_pet_remarks"
+                    app:layout_constraintTop_toTopOf="@id/pet_remarks_TV" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
 
 
@@ -692,11 +670,17 @@
         android:id="@+id/deleteReport_BT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
         android:background="@color/deactivate_red"
         android:text="@string/DeleteReport"
         android:textAllCaps="false"
         android:textColor="@color/whiteColor"
         android:textSize="20sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

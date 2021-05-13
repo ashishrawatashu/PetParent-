@@ -72,8 +72,7 @@
             android:visibility="visible"
             android:layout_weight="0.5">
 
-            <TextView
-                android:gravity="center_vertical"
+            <EditText
                 android:id="@+id/search_box_add_new"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -154,7 +153,6 @@
 
 
                     <ImageView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -174,9 +172,6 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="end"
                         android:src="@drawable/forward_arrow" />
-
-
-
 
                 </LinearLayout>
 
@@ -203,7 +198,6 @@
 
 
                     <ImageView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -249,7 +243,6 @@
 
 
                     <ImageView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -297,7 +290,6 @@
 
 
                     <ImageView
-                        android:padding="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"

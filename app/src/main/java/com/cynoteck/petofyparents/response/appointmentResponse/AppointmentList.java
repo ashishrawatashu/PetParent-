@@ -22,15 +22,21 @@ public class AppointmentList
 
     private String title;
 
+    private String isActive;
+
     private String vetName;
 
     private String petParentName;
 
     private String ngoUserId;
 
+    private String encrptedId;
+
     private String id;
 
     private String startDateString;
+
+    private String appointmentPurposeId;
 
     private String isApproved;
 
@@ -58,7 +64,31 @@ public class AppointmentList
 
     private String location;
 
+    private String petDOB;
+
+    private String appointmentDate;
+
     private String endDateString;
+
+    private String vetProfileImage;
+
+    private String petName;
+
+    public String getVetProfileImage() {
+        return vetProfileImage;
+    }
+
+    public void setVetProfileImage(String vetProfileImage) {
+        this.vetProfileImage = vetProfileImage;
+    }
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
 
     public String getPetId ()
     {
@@ -141,9 +171,9 @@ public class AppointmentList
     }
 
     public String getMeetingId ()
-    {
-        return meetingId;
-    }
+{
+    return meetingId;
+}
 
     public void setMeetingId (String meetingId)
     {
@@ -158,6 +188,16 @@ public class AppointmentList
     public void setTitle (String title)
     {
         this.title = title;
+    }
+
+    public String getIsActive ()
+    {
+        return isActive;
+    }
+
+    public void setIsActive (String isActive)
+    {
+        this.isActive = isActive;
     }
 
     public String getVetName ()
@@ -190,6 +230,16 @@ public class AppointmentList
         this.ngoUserId = ngoUserId;
     }
 
+    public String getEncrptedId ()
+    {
+        return encrptedId;
+    }
+
+    public void setEncrptedId (String encrptedId)
+    {
+        this.encrptedId = encrptedId;
+    }
+
     public String getId ()
     {
         return id;
@@ -208,6 +258,16 @@ public class AppointmentList
     public void setStartDateString (String startDateString)
     {
         this.startDateString = startDateString;
+    }
+
+    public String getAppointmentPurposeId ()
+    {
+        return appointmentPurposeId;
+    }
+
+    public void setAppointmentPurposeId (String appointmentPurposeId)
+    {
+        this.appointmentPurposeId = appointmentPurposeId;
     }
 
     public String getIsApproved ()
@@ -340,6 +400,26 @@ public class AppointmentList
         this.location = location;
     }
 
+    public String getPetDOB ()
+    {
+        return petDOB;
+    }
+
+    public void setPetDOB (String petDOB)
+    {
+        this.petDOB = petDOB;
+    }
+
+    public String getAppointmentDate ()
+    {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate (String appointmentDate)
+    {
+        this.appointmentDate = appointmentDate;
+    }
+
     public String getEndDateString ()
     {
         return endDateString;
@@ -353,7 +433,7 @@ public class AppointmentList
     @Override
     public String toString()
     {
-        return "ClassPojo [petId = "+petId+", petAge = "+petAge+", statusColor = "+statusColor+", subject = "+subject+", companyName = "+companyName+", isVideoCall = "+isVideoCall+", description = "+description+", className = "+className+", meetingId = "+meetingId+", title = "+title+", vetName = "+vetName+", petParentName = "+petParentName+", ngoUserId = "+ngoUserId+", id = "+id+", startDateString = "+startDateString+", isApproved = "+isApproved+", petParentMeetingUrl = "+petParentMeetingUrl+", petUniqueId = "+petUniqueId+", paymentStatus = "+paymentStatus+", petSex = "+petSex+", veterinarianUserId = "+veterinarianUserId+", userId = "+userId+", meetingUrl = "+meetingUrl+", encryptionId = "+encryptionId+", someImportantKeyID = "+someImportantKeyID+", eventFirstImage = "+eventFirstImage+", statusString = "+statusString+", location = "+location+", endDateString = "+endDateString+"]";
+        return "ClassPojo [petId = "+petId+", petAge = "+petAge+", statusColor = "+statusColor+", subject = "+subject+", companyName = "+companyName+", isVideoCall = "+isVideoCall+", description = "+description+", className = "+className+", meetingId = "+meetingId+", title = "+title+", isActive = "+isActive+", vetName = "+vetName+", petParentName = "+petParentName+", ngoUserId = "+ngoUserId+", encrptedId = "+encrptedId+", id = "+id+", startDateString = "+startDateString+", appointmentPurposeId = "+appointmentPurposeId+", isApproved = "+isApproved+", petParentMeetingUrl = "+petParentMeetingUrl+", petUniqueId = "+petUniqueId+", paymentStatus = "+paymentStatus+", petSex = "+petSex+", veterinarianUserId = "+veterinarianUserId+", userId = "+userId+", meetingUrl = "+meetingUrl+", encryptionId = "+encryptionId+", someImportantKeyID = "+someImportantKeyID+", eventFirstImage = "+eventFirstImage+", statusString = "+statusString+", location = "+location+", petDOB = "+petDOB+", appointmentDate = "+appointmentDate+", endDateString = "+endDateString+"]";
     }
 }
 			

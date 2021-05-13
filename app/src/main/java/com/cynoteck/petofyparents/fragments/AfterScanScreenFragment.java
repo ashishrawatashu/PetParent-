@@ -461,7 +461,7 @@ public class AfterScanScreenFragment extends Fragment implements TextWatcher, Vi
     }
 
     @Override
-    public void onIdCardClick(int position) {
+    public void onViewReportsClick(int position) {
         methods.showCustomProgressBarDialog(getContext());
         AddPetToVetRegisterUsingQRCodeParams addPetToVetRegisterUsingQRCodeParams = new AddPetToVetRegisterUsingQRCodeParams();
         addPetToVetRegisterUsingQRCodeParams.setVeterinarianUserId(veterinarianUserId);

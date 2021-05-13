@@ -7,6 +7,16 @@ public class GetVetListParams {
 
     private String longitude;
 
+    private String CityId;
+
+    public String getCityId() {
+        return CityId;
+    }
+
+    public void setCityId(String cityId) {
+        CityId = cityId;
+    }
+
     public String getLattitude ()
     {
         return lattitude;
@@ -40,6 +50,6 @@ public class GetVetListParams {
     @Override
     public String toString()
     {
-        return "ClassPojo [lattitude = "+lattitude+", viewMore = "+viewMore+", longitude = "+longitude+"]";
+        return "ClassPojo [lattitude = "+lattitude+", viewMore = "+viewMore+", longitude = "+longitude+", CityId = "+CityId+"]";
     }
 }

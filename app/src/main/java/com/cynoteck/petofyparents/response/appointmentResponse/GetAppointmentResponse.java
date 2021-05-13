@@ -7,18 +7,18 @@ import com.cynoteck.petofyparents.response.Response;
 import java.util.ArrayList;
 
 public class GetAppointmentResponse {
-    private ArrayList<GetAppointmentDates> data;
+    private ArrayList<AppointmentList> data;
 
     private Response response;
 
     private Header header;
 
-    public ArrayList<GetAppointmentDates> getData ()
+    public ArrayList<AppointmentList> getData ()
     {
         return data;
     }
 
-    public void setData (ArrayList<GetAppointmentDates> data)
+    public void setData (ArrayList<AppointmentList> data)
     {
         this.data = data;
     }

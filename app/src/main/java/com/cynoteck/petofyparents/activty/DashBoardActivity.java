@@ -1,14 +1,33 @@
 package com.cynoteck.petofyparents.activty;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import retrofit2.Response;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,33 +35,70 @@ import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.api.ApiResponse;
-import com.cynoteck.petofyparents.fragments.AppointementFragment;
-import com.cynoteck.petofyparents.fragments.HomeFragment;
+import com.cynoteck.petofyparents.fragments.AppointmentListFragment;
+import com.cynoteck.petofyparents.fragments.ParentHomeFragment;
 import com.cynoteck.petofyparents.fragments.PetRegisterFragment;
 import com.cynoteck.petofyparents.fragments.ProfileFragment;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
+import com.cynoteck.petofyparents.utils.NetworkChangeReceiver;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class DashBoardActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
-
-
-    private RelativeLayout homeRL,profileRL,petregisterRL,appointmentRL;
-    public ImageView icHome, icProfile, icPetRegister, icAppointment;
-    boolean doubleBackToExitPressedOnce = false;
+public class DashBoardActivity extends AppCompatActivity{
+    public static final String channel_id="channel_id";
+    private static final String channel_name="channel_name";
+    private static final String channel_desc="channel_desc";
     boolean exit = false;
     Methods methods;
-    String IsVeterinarian="",petId="",from="";
+    String petId="",from="";
+    LocationManager locationManager;
+    private static final int REQUEST_LOCATION = 1;
+
+    final Fragment fragment1 = new ParentHomeFragment();
+    final Fragment fragment2 = new PetRegisterFragment();
+    final Fragment fragment3 = new AppointmentListFragment();
+    final Fragment fragment4 = new ProfileFragment();
+
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
+    BottomNavigationView navigation;
+
+    private BroadcastReceiver mNetworkReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 
-        initialize();
+        mNetworkReceiver = new NetworkChangeReceiver();
+        registerNetworkBroadcastForNougat();
+
+        navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setItemIconTintList(null);
+
+        fm.beginTransaction().add(R.id.content_frame, fragment4, "4").hide(fragment4).commit();
+        fm.beginTransaction().add(R.id.content_frame, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.content_frame, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.content_frame,fragment1, "1").commit();
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            OnGPS();
+        } else {
+            getCurrentLocation();
+        }
         methods = new Methods(this);
         Intent  intent = getIntent();
         from = intent.getStringExtra("from");
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel notificationChannel=new NotificationChannel(channel_id, channel_name, NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription(channel_desc);
+            NotificationManager notificationManager=getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(notificationChannel);
 
+        }
 
         SharedPreferences sharedPreferences = getSharedPreferences("userdetails", 0);
         Config.token = sharedPreferences.getString("token", "");
@@ -61,14 +117,6 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
         Config.parent_encryptedId=sharedPreferences.getString("encryptedId", "");
         Config.first_name = sharedPreferences.getString("firstName", "");
         Config.last_name = sharedPreferences.getString("lastName", "");
-        if (savedInstanceState == null) {
-            HomeFragment homeFragment = new HomeFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.content_frame, homeFragment);
-            ft.commit();
-            icHome.setImageResource(R.drawable.home_green_icon);
-        }
-
 
         if (from.equals("WITH_QR")){
             petId = intent.getStringExtra("petId");
@@ -79,106 +127,116 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
 
     }
 
-    public void initialize()
-    {
-        homeRL = findViewById(R.id.homeRL);
-        profileRL = findViewById(R.id.profileRL);
-        petregisterRL=findViewById(R.id.petRegisterRL);
-        appointmentRL=findViewById(R.id.appointmentRL);
-
-        icHome=findViewById(R.id.icHome);
-        icProfile = findViewById(R.id.icProfile);
-        icPetRegister=findViewById(R.id.icPetRegister);
-        icAppointment=findViewById(R.id.icAppointment);
-
-        homeRL.setOnClickListener(this);
-        profileRL.setOnClickListener(this);
-        petregisterRL.setOnClickListener(this);
-        appointmentRL.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-
-            case R.id.homeRL:
-                Config.count = 1;
-                icHome.setImageResource(R.drawable.home_green_icon);
-                icProfile.setImageResource(R.drawable.profile_normal_icon);
-                icPetRegister.setImageResource(R.drawable.pet_normal_icon);
-                icAppointment.setImageResource(R.drawable.appointment_normal_icon);
-                HomeFragment homeFragment = new HomeFragment();
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, homeFragment);
-                ft.commit();
-
-                break;
-
-            case R.id.profileRL:
-                Config.count = 0;
-                icHome.setImageResource(R.drawable.home_normal_icon);
-                icProfile.setImageResource(R.drawable.profile_green_icon);
-                icPetRegister.setImageResource(R.drawable.pet_normal_icon);
-                icAppointment.setImageResource(R.drawable.appointment_normal_icon);
-                ProfileFragment profileFragment = new ProfileFragment();
-                FragmentTransaction ftProfile = getSupportFragmentManager().beginTransaction();
-                ftProfile.replace(R.id.content_frame, profileFragment);
-                ftProfile.commit();
-                break;
-
-            case R.id.petRegisterRL:
-                Config.count = 0;
-                icHome.setImageResource(R.drawable.home_normal_icon);
-                icProfile.setImageResource(R.drawable.profile_normal_icon);
-                icPetRegister.setImageResource(R.drawable.pet_green_icon);
-                icAppointment.setImageResource(R.drawable.appointment_normal_icon);
-                PetRegisterFragment petRegisterFragment = new PetRegisterFragment();
-                FragmentTransaction ftPetRegister = getSupportFragmentManager().beginTransaction();
-                ftPetRegister.replace(R.id.content_frame, petRegisterFragment);
-                ftPetRegister.commit();
-                break;
-
-            case R.id.appointmentRL:
-                Config.count = 0;
-                icHome.setImageResource(R.drawable.home_normal_icon);
-                icProfile.setImageResource(R.drawable.profile_normal_icon);
-                icPetRegister.setImageResource(R.drawable.pet_normal_icon);
-                icAppointment.setImageResource(R.drawable.appointment_green_icon);
-                AppointementFragment appointementFragment = new AppointementFragment();
-                FragmentTransaction ftAppointment = getSupportFragmentManager().beginTransaction();
-                ftAppointment.replace(R.id.content_frame, appointementFragment);
-                ftAppointment.commit();
-                break;
-
+    private void registerNetworkBroadcastForNougat() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
-
-    }
-
-    @Override
-    public void onResponse(Response arg0, String key) {
-        switch (key)
-        {
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
     }
 
-    @Override
-    public void onError(Throwable t, String key) {
-        Log.e("error",t.getMessage());
-        Log.e("errrrr",t.getLocalizedMessage());
+    protected void unregisterNetworkChanges() {
+        try {
+            unregisterReceiver(mNetworkReceiver);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void dialog(boolean value) {
+
+        if(value){
+            Log.e("Connected","Yes");
+
+            Handler handler = new Handler();
+            Runnable delayrunnable = new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("Connected","Yes1");
+
+                }
+            };
+            handler.postDelayed(delayrunnable, 3000);
+        }else {
+            Log.e("Connected","NO");
+        }
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Config.count = 1;
+                    fm.beginTransaction().hide(active).show(fragment1).commit();
+                    active = fragment1;
+                    return true;
+
+                case R.id.navigation_mypets:
+                    Config.count = 0;
+                    fm.beginTransaction().hide(active).show(fragment2).commit();
+                    active = fragment2;
+                    return true;
+
+                case R.id.navigation_appointment:
+                    Config.count = 0;
+                    fm.beginTransaction().hide(active).show(fragment3).commit();
+                    active = fragment3;
+                    return true;
+
+                case R.id.navigation_profile:
+                    Config.count = 0;
+                    fm.beginTransaction().hide(active).show(fragment4).commit();
+                    active = fragment4;
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    private void OnGPS() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        } else {
+            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (locationGPS != null) {
+                double lat = locationGPS.getLatitude();
+                double longi = locationGPS.getLongitude();
+                Config.latitude = String.valueOf(lat);
+                Config.longitude = String.valueOf(longi);
+                Log.e("location", Config.longitude  + " " + Config.latitude );
+            } else {
+                Log.e("Loaction Error", "Unable to find location.");
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
-        Log.e("count", String.valueOf(Config.count));
-        Log.e("exit", String.valueOf(exit));
         if (Config.count == 1) {
             if (exit) {
                 super.onBackPressed();
                 finishAffinity();
-                System.exit(0);
                 return;
             } else {
                 Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
@@ -192,16 +250,17 @@ public class DashBoardActivity extends AppCompatActivity implements ApiResponse,
             }
         }else {
             Config.count=1;
-            HomeFragment homeFragment = new HomeFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, homeFragment);
-
-            getSupportFragmentManager().popBackStack();
-            icHome.setImageResource(R.drawable.home_green_icon);
-            icProfile.setImageResource(R.drawable.profile_normal_icon);
-            icPetRegister.setImageResource(R.drawable.pet_normal_icon);
-            icAppointment.setImageResource(R.drawable.appointment_normal_icon);
-            ft.commit();
+            fm.beginTransaction().hide(active).show(fragment1).commit();
+            active = fragment1;
+            MenuItem homeItem = navigation.getMenu().getItem(0);
+            navigation.setSelectedItemId(homeItem.getItemId());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterNetworkChanges();
+
     }
 }

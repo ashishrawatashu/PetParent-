@@ -164,7 +164,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 try {
                     methods.customProgressDismiss();
                     Log.d("DATALOG", "" + response.body());
-
                     UpdatePetParentProfile loginRegisterResponse = (UpdatePetParentProfile) response.body();
                     Log.d("DATALOG", "" + loginRegisterResponse.getResponse().getResponseCode());
                     int responseCode = Integer.parseInt(loginRegisterResponse.getResponse().getResponseCode());

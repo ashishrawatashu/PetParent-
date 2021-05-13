@@ -13,6 +13,7 @@ import com.cynoteck.petofyparents.parameter.donateParamRequest.DonatePetRequest;
 import com.cynoteck.petofyparents.parameter.forgetPassRequest.ForgetPassRequest;
 import com.cynoteck.petofyparents.parameter.getOrderDetailsParms.GetOrderRequest;
 import com.cynoteck.petofyparents.parameter.getPetListRequest.GetPetListRequest;
+import com.cynoteck.petofyparents.parameter.getPetParentAppointmentsParams.GetAppointmentRequest;
 import com.cynoteck.petofyparents.parameter.getVetListParams.GetVetListRequest;
 import com.cynoteck.petofyparents.parameter.getpetAgeRequest.GetPetAgeRequestData;
 import com.cynoteck.petofyparents.parameter.immunizationRequest.ImmunizationRequest;
@@ -26,9 +27,11 @@ import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.VisitTypeRequest;
 import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
 import com.cynoteck.petofyparents.parameter.registrationWithQrCodeRequest.RegistrationWithQrCodeRequest;
+import com.cynoteck.petofyparents.parameter.saveFeedbackRequest.SaveFeedbackRequest;
 import com.cynoteck.petofyparents.parameter.searchPetParentRequest.SearchPetParentRequestData;
+import com.cynoteck.petofyparents.parameter.searchProviderRequest.SearchProviderRequest;
+import com.cynoteck.petofyparents.parameter.serviceProviderDetailRequest.SearchProviderFullDetailRequest;
 import com.cynoteck.petofyparents.parameter.updateDonation.UpdateDonationRequest;
-import com.cynoteck.petofyparents.parameter.updatePArentDeatils.UpdateParentDeatilsParams;
 import com.cynoteck.petofyparents.parameter.updatePArentDeatils.UpdateParentDetailsRequest;
 import com.cynoteck.petofyparents.parameter.updateRequest.updateParamRequest.UpdatePetRequest;
 import com.cynoteck.petofyparents.parameter.uploadVetProfileImageParams.UploadVetProfileImageData;
@@ -47,11 +50,19 @@ import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointment
 import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
 import com.cynoteck.petofyparents.response.cityResponse.CityResponseModel;
 import com.cynoteck.petofyparents.response.dateOfBirthResponse.DateOfBirthResponse;
+import com.cynoteck.petofyparents.response.getAdoptionRequestListResponse.GetAdoptionRequestListResponse;
+import com.cynoteck.petofyparents.response.getCityListWithStateResponse.GetCityListWithStateResponse;
+import com.cynoteck.petofyparents.response.getDonationRequestResponse.GetDonationRequestResponse;
 import com.cynoteck.petofyparents.response.getPetAgeResponse.GetPetAgeresponseData;
 import com.cynoteck.petofyparents.response.getPetHospitalizationResponse.getHospitalizationDeatilsResponse.GetHospitalizationDeatilsResponse;
+import com.cynoteck.petofyparents.response.getPetNamesResponse.GetPetNamesResponse;
 import com.cynoteck.petofyparents.response.getPetParrentnameReponse.GetPetParentResponseData;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.AddUpdateDeleteClinicVisitResponse;
+import com.cynoteck.petofyparents.response.getProviderFeedbackResponse.GetProviderFeedbackResponse;
+import com.cynoteck.petofyparents.response.getSaveFeedbackResponse.GetSaveFeedbackResponse;
+import com.cynoteck.petofyparents.response.getServiceProviderFullDetailsResponse.SearchProviderFullDetailResponse;
 import com.cynoteck.petofyparents.response.getXRayReports.getXRayReportDetailsResponse.GetXRayReportDeatilsResponse;
+import com.cynoteck.petofyparents.response.getpetbreedsResponse.GetPetBreedsResponse;
 import com.cynoteck.petofyparents.response.petAgeUnitResponse.PetAgeUnitResponseData;
 import com.cynoteck.petofyparents.response.registerParentWithQRResponse.RegisterParentWithQRResponse;
 import com.cynoteck.petofyparents.response.resendOTPResposne.ResendOTPResponse;
@@ -80,7 +91,6 @@ import com.cynoteck.petofyparents.response.twofactAuthResponse.TwoFactAuthRespon
 import com.cynoteck.petofyparents.response.updateProfileResponse.CityResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.response.updatepetparentprofile.UpdatePetParentProfile;
-import com.cynoteck.petofyparents.response.validationOtpResponse.ValidationOtpResponse;
 import com.google.gson.JsonObject;
 
 import okhttp3.MultipartBody;
@@ -93,7 +103,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface ApiInterface {
@@ -187,6 +196,7 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/UpdatePetDetails")
     Call<AddPetValueResponse> updatePetDetails(@Header("Authorization") String auth,
+
                                                @Body UpdatePetRequest addPetRequset);
 
     //TODO=========Add New Pet API=============================
@@ -271,8 +281,8 @@ public interface ApiInterface {
     //TODO=======GET APPOINTMENTS================================
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("appointment/getappointment")
-    Call<GetAppointmentResponse> getAppointment(@Header("Authorization") String auth);
+    @POST("appointment/getpetparentappointments")
+    Call<GetAppointmentResponse> getAppointment(@Header("Authorization") String auth,@Body GetAppointmentRequest getAppointmentRequest);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("appointment/GetVeterinarianList")
@@ -446,6 +456,12 @@ public interface ApiInterface {
 
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("pethealthrecord/DeleteClinicVisit")
+    Call<AddUpdateDeleteClinicVisitResponse> deleteClinicVisit(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
+
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pethealthrecord/DeletePetHospitalization")
     Call<AddUpdateDeleteClinicVisitResponse> deletePetHospitalization(@Header("Authorization") String auth, @Body PetClinicVisitDetailsRequest petClinicVisitDetailsRequest);
 
@@ -458,6 +474,45 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("user/UpdateProfileImage")
     Call<JsonObject> updateProfileImage(@Header("Authorization") String auth, @Body UploadVetProfileImageData uploadVetProfileImageData);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @GET("search/GetCityListWithState")
+    Call<GetCityListWithStateResponse> getCityListWithState(@Header("Authorization") String auth);
+
+
+    @GET
+    Call<GetPetBreedsResponse> getPetBreedsList(@Url String url);
+
+    @GET
+    Call<GetPetNamesResponse> getNamesList(@Url String url);
+
+    @GET
+    Call<GetAdoptionRequestListResponse> getAdoptionRequest(@Header("Authorization") String auth, @Url String url);
+
+    @GET
+    Call<GetDonationRequestResponse> getDonationRequest(@Header("Authorization") String auth, @Url String url);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("search/GetSearchResults")
+    Call<GetVetListResponse> getSearchProviderResults(@Header("Authorization") String auth, @Body SearchProviderRequest searchProviderRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("search/GetServiceProviderDetails")
+    Call<SearchProviderFullDetailResponse> getProviderDetail(@Header("Authorization") String auth, @Body SearchProviderFullDetailRequest searchProviderFullDetailRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/provider-feedback")
+    Call<GetSaveFeedbackResponse> giveFeedbackToProvider(@Header("Authorization") String auth, @Body SaveFeedbackRequest saveFeedbackRequest);
+
+    @POST
+    Call<GetProviderFeedbackResponse> getProviderFeedback(@Header("Authorization") String auth, @Url String url);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/donate-a-pet-by-petId")
+    Call<JsonObject> donatePetById(@Header("Authorization") String auth, @Body JsonObject jsonObject);
+
 
 }
 

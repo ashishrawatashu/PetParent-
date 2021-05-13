@@ -31,30 +31,26 @@ public class ReportsTypeAdapter extends RecyclerView.Adapter<ReportsTypeAdapter.
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReportsTypeAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reports_type_list, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
+        ReportsTypeAdapter.MyViewHolder vh = new ReportsTypeAdapter.MyViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.vet_name_TV.setText(petClinicVisitLists.get(position).getVeterinarian());
-        holder.visit_date_TV.setText(petClinicVisitLists.get(position).getVisitDate());
-        if (petClinicVisitLists.get(position).getFollowUpDate().equals("")) {
-            holder.follow_date_LL.setVisibility(View.GONE);
-        } else {
-            holder.follow_date_LL.setVisibility(View.VISIBLE);
-            holder.followUp_date_TV.setText(petClinicVisitLists.get(position).getFollowUpDate());
-        }
+    public void onBindViewHolder(@NonNull ReportsTypeAdapter.MyViewHolder holder, int position) {
+        holder.vetName_TV.setText(petClinicVisitLists.get(position).getVeterinarian());
+        holder.vet_visit_date_TV.setText(petClinicVisitLists.get(position).getVisitDate());
         if (petClinicVisitLists.get(position).getDescription().equals("")) {
-            holder.reson_of_visit_LL.setVisibility(View.GONE);
+            holder.reason_of_visit_TV.setVisibility(View.INVISIBLE);
+            holder.reason_TV.setVisibility(View.INVISIBLE);
+            holder.reason_visit_dot_TV.setVisibility(View.INVISIBLE);
         } else {
-            holder.reson_of_visit_LL.setVisibility(View.VISIBLE);
-            holder.reson_of_visit_TV.setText(petClinicVisitLists.get(position).getDescription());
+            holder.reason_of_visit_TV.setVisibility(View.VISIBLE);
+            holder.reason_TV.setVisibility(View.VISIBLE);
+            holder.reason_visit_dot_TV.setVisibility(View.VISIBLE);
+            holder.reason_of_visit_TV.setText(petClinicVisitLists.get(position).getDescription());
         }
-
-
 
     }
 
@@ -64,20 +60,17 @@ public class ReportsTypeAdapter extends RecyclerView.Adapter<ReportsTypeAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView vet_name_TV, visit_date_TV, reson_of_visit_TV, followUp_date_TV, view_TV;
-        LinearLayout follow_date_LL, reson_of_visit_LL;
+        TextView vetName_TV, vet_visit_date_TV, view_TV,reason_visit_dot_TV,reason_TV;
+        TextView reason_of_visit_TV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            vet_name_TV = itemView.findViewById(R.id.vet_name_TV);
-            visit_date_TV = itemView.findViewById(R.id.visit_date_TV);
-            reson_of_visit_TV = itemView.findViewById(R.id.reson_of_visit_TV);
-            followUp_date_TV = itemView.findViewById(R.id.followUp_date_TV);
+            reason_visit_dot_TV = itemView.findViewById(R.id.reason_visit_dot_TV);
+            reason_TV = itemView.findViewById(R.id.reason_TV);
+            vetName_TV = itemView.findViewById(R.id.vetName_TV);
+            vet_visit_date_TV = itemView.findViewById(R.id.vet_visit_date_TV);
             view_TV = itemView.findViewById(R.id.view_TV);
-            follow_date_LL = itemView.findViewById(R.id.follow_date_LL);
-            reson_of_visit_LL = itemView.findViewById(R.id.reson_of_visit_LL);
-
+            reason_of_visit_TV = itemView.findViewById(R.id.reason_of_visit_TV);
             view_TV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

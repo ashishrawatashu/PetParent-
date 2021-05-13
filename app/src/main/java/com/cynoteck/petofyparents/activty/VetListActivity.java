@@ -48,6 +48,7 @@ public class VetListActivity extends AppCompatActivity implements ApiResponse, R
     ImageView search_IV, back_arrow_IV;
     RelativeLayout search_boxRL;
     GetVetListResponse getVetListResponse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +60,9 @@ public class VetListActivity extends AppCompatActivity implements ApiResponse, R
         back_arrow_IV.setOnClickListener(this);
 
 
-
-        if (methods.isInternetOn()){
+        if (methods.isInternetOn()) {
             getPetList();
-
-        }else {
-
+        } else {
             methods.DialogInternet();
         }
 
@@ -81,13 +79,14 @@ public class VetListActivity extends AppCompatActivity implements ApiResponse, R
         getVetListRequest.setData(getVetListParams);
 
         ApiService<GetVetListResponse> service = new ApiService<>();
-        service.get( this, ApiClient.getApiInterface().getVetList(Config.token,getVetListRequest), "GetVetList");
-        Log.e("DATALOG","check1=> "+getVetListRequest);
+        service.get(this, ApiClient.getApiInterface().getVetList(Config.token, getVetListRequest), "GetVetList");
+        Log.e("DATALOG", "check1=> " + getVetListRequest);
     }
+
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back_arrow_IV:
                 onBackPressed();
                 break;
@@ -97,20 +96,20 @@ public class VetListActivity extends AppCompatActivity implements ApiResponse, R
     @Override
     public void onResponse(Response response, String key) {
 
-        Log.e("DATALOG","=> "+response.body());
+        Log.e("DATALOG", "=> " + response.body());
 
-        switch (key){
+        switch (key) {
             case "GetVetList":
                 try {
                     getVetListResponse = (GetVetListResponse) response.body();
                     Log.d("DATALOG", getVetListResponse.toString());
                     int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
-                        if (getVetListResponse.getData().getProviderList().isEmpty()){
+                    if (responseCode == 109) {
+                        if (getVetListResponse.getData().getProviderList().isEmpty()) {
                             mShimmerViewContainer.setVisibility(View.GONE);
                             mShimmerViewContainer.stopShimmer();
                             Toast.makeText(this, "No Data Found!", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
 //                            search_IV.setVisibility(View.VISIBLE);
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                             vetList_RV.setLayoutManager(linearLayoutManager);
@@ -123,15 +122,13 @@ public class VetListActivity extends AppCompatActivity implements ApiResponse, R
                         }
 
                     }
-                }
-
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 break;
         }
-        
+
     }
 
     @Override
@@ -141,11 +138,11 @@ public class VetListActivity extends AppCompatActivity implements ApiResponse, R
 
     @Override
     public void onProductClick(int position) {
-        Intent  intent = new Intent(this,AddUpdateAppointmentActivity.class);
-        intent.putExtra("type","add");
-        intent.putExtra("id","");
-        intent.putExtra("pet_id","");
-        intent.putExtra("vetUserId",getVetListResponse.getData().getProviderList().get(position).getId());
+        Intent intent = new Intent(this, AddUpdateAppointmentActivity.class);
+        intent.putExtra("type", "add");
+        intent.putExtra("id", "");
+        intent.putExtra("pet_id", "");
+        intent.putExtra("vetUserId", getVetListResponse.getData().getProviderList().get(position).getId());
         startActivity(intent);
 
 

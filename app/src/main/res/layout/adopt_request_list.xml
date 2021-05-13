@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/search_bar_background_grey"
+        android:paddingBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profile_CV"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:id="@+id/pet_profile_IV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/empty_pet_image" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/pet_name_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Bengal"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/profile_CV"
+            app:layout_constraintTop_toTopOf="@id/profile_CV" />
+
+
+        <TextView
+            android:id="@+id/pet_breed_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/nunito"
+            android:text="4-8 Kg, 12-30 Cm"
+            android:textColor="@color/gray_1"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/profile_CV"
+            app:layout_constraintStart_toEndOf="@id/profile_CV" />
+
+
+        <LinearLayout
+            android:id="@+id/button_LL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/profile_CV"
+            app:layout_constraintTop_toBottomOf="@id/profile_CV">
+
+            <Button
+                android:id="@+id/cancel_request_BT"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/red_background_bg"
+                android:fontFamily="@font/nunito"
+                android:text="Cancel request"
+                android:textAllCaps="false"
+                android:textColor="@color/whiteColor"
+                android:textSize="14sp" />
+
+
+            <Button
+                android:id="@+id/pet_details_BT"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/blue_border_button"
+                android:fontFamily="@font/nunito"
+                android:text="View Pet Deatils"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/view_one"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:background="#E0E0E0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/profile_CV"
+            app:layout_constraintTop_toBottomOf="@+id/button_LL" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintTop_toBottomOf="@id/view_one">
+
+
+            <ImageView
+                android:id="@+id/send_request_demo_IV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/request_approve"
+                app:layout_constraintBottom_toBottomOf="@id/send_request_LL"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/send_request_LL" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/verify_request_demo_IV"
+                app:layout_constraintEnd_toEndOf="@id/send_request_demo_IV"
+                app:layout_constraintStart_toStartOf="@id/send_request_demo_IV"
+                app:layout_constraintTop_toBottomOf="@id/send_request_demo_IV">
+
+
+                <View
+                    android:id="@+id/first_step"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/colorPrimary" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/send_request_LL"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/blue_approve_request_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/send_request_demo_IV"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TextView
+                    android:id="@+id/send_request_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:text="SEND ADOPTION REQUEST"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/verify_request_demo_IV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/verify_by_user"
+                app:layout_constraintBottom_toBottomOf="@id/verify_request_LL"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/verify_request_LL" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/ngo_status_IV"
+                app:layout_constraintEnd_toEndOf="@id/verify_request_demo_IV"
+                app:layout_constraintStart_toStartOf="@id/verify_request_demo_IV"
+                app:layout_constraintTop_toBottomOf="@id/verify_request_demo_IV">
+
+
+                <View
+                    android:id="@+id/second_step"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/colorPrimary" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/approve_reject_IV"
+                app:layout_constraintEnd_toEndOf="@id/ngo_status_IV"
+                app:layout_constraintStart_toStartOf="@id/ngo_status_IV"
+                app:layout_constraintTop_toBottomOf="@id/ngo_status_IV">
+
+
+                <View
+                    android:id="@+id/third_step"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#E0E0E0" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/verify_request_LL"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/blue_approve_request_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/send_request_demo_IV"
+                app:layout_constraintTop_toBottomOf="@id/send_request_LL">
+
+
+                <TextView
+                    android:id="@+id/verify_request_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:text="VERIFY REQUEST AND USER"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/ngo_status_IV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/accepted_by_ngo_pending"
+                app:layout_constraintBottom_toBottomOf="@id/ngo_status_LL"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ngo_status_LL" />
+
+            <LinearLayout
+                android:id="@+id/ngo_status_LL"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/peding_adpotion_status_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/send_request_demo_IV"
+                app:layout_constraintTop_toBottomOf="@id/verify_request_LL">
+
+
+                <TextView
+                    android:id="@+id/ngo_status_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:text="REQUEST ACCEPT / DECLINE BY NGO"
+                    android:textColor="@color/gray_1"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/approve_reject_IV"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/request_approve_pending"
+                app:layout_constraintBottom_toBottomOf="@id/approve_reject_LL"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/approve_reject_LL" />
+
+
+            <LinearLayout
+                android:id="@+id/approve_reject_LL"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/peding_adpotion_status_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/send_request_demo_IV"
+                app:layout_constraintTop_toBottomOf="@id/ngo_status_LL">
+
+
+                <TextView
+                    android:id="@+id/approve_reject_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/nunito"
+                    android:gravity="center_vertical"
+                    android:text="APPROVE / REJECT"
+                    android:textColor="@color/gray_1"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

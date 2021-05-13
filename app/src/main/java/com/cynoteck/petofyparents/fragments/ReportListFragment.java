@@ -38,6 +38,7 @@ import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetClinicVis
 import com.cynoteck.petofyparents.response.getXRayReports.getPetTestAndXRayResponse.GetPetTestAndXRayResponse;
 import com.cynoteck.petofyparents.response.getXRayReports.getPetTestAndXRayResponse.PetTestsAndXrayList;
 import com.cynoteck.petofyparents.utils.Config;
+import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.utils.ViewAndUpdateClickListener;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ import retrofit2.Response;
 
 public class ReportListFragment extends Fragment implements ApiResponse, ViewAndUpdateClickListener {
 
-    String pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, type, button_type;
+    String pet_DOB,pet_image_url,pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, type, button_type;
 
     RecyclerView routine_report_RV;
     View view;
@@ -69,7 +70,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
     UpdateXRayAdpater updateXRayAdpater;
     UpdateLabTestAdpater updateLabTestAdpater;
     UpdateHospitalizationAdapter updateHospitalizationAdapter;
-
+    Methods methods;
 
     @Override
     public void onAttach(Context context) {
@@ -86,7 +87,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_reports_list, container, false);
-
+        methods = new Methods(getActivity());
         Bundle extras = this.getArguments();
         report_type_id = extras.getString("reports_id");
         pet_id = extras.getString("pet_id");
@@ -97,9 +98,12 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         pet_unique_id = extras.getString("pet_unique_id");
         type = extras.getString("type");
         button_type = extras.getString("button_type");
+        pet_image_url = extras.getString("pet_image_url");
+        pet_DOB = extras.getString("pet_DOB");
         routine_report_RV = view.findViewById(R.id.routine_report_RV);
         empty_IV = view.findViewById(R.id.empty_IV);
         progressBar = view.findViewById(R.id.progressBar);
+        Log.e("petid",pet_id);
 
 
         switch (type) {
@@ -131,10 +135,10 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         petDataParams.setSearch_Data("");
         VisitTypeData visitTypeData = new VisitTypeData();
         visitTypeData.setVisitType(report_type_id);
-        visitTypeData.setPetId(pet_id.substring(0, pet_id.length() - 2));
+        visitTypeData.setPetId(pet_id);
         visitTypeRequest.setHeader(petDataParams);
         visitTypeRequest.setData(visitTypeData);
-        Log.d("HospitalizationRequest", visitTypeRequest.toString());
+        Log.e("Hospital",methods.getRequestJson(visitTypeRequest));
 
 
         ApiService<GetPetHospitalizationResponse> service = new ApiService<GetPetHospitalizationResponse>();
@@ -152,7 +156,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         petDataParams.setSearch_Data("");
         VisitTypeData visitTypeData = new VisitTypeData();
         visitTypeData.setVisitType(report_type_id);
-        visitTypeData.setPetId(pet_id.substring(0, pet_id.length() - 2));
+        visitTypeData.setPetId(pet_id);
         visitTypeRequest.setHeader(petDataParams);
         visitTypeRequest.setData(visitTypeData);
         Log.d("LabTestRequest", visitTypeRequest.toString());
@@ -173,10 +177,10 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         petDataParams.setSearch_Data("");
         VisitTypeData visitTypeData = new VisitTypeData();
         visitTypeData.setVisitType(report_type_id);
-        visitTypeData.setPetId(pet_id.substring(0, pet_id.length() - 2));
+        visitTypeData.setPetId(pet_id);
         visitTypeRequest.setHeader(petDataParams);
         visitTypeRequest.setData(visitTypeData);
-        Log.d("visitTypeRequest", visitTypeRequest.toString());
+        Log.d("visitTypeRequest",methods.getRequestJson(visitTypeRequest));
 
 
         ApiService<GetPetClinicVisitListResponse> service = new ApiService<GetPetClinicVisitListResponse>();
@@ -192,14 +196,14 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         getPetDataParams.setPageSize(10);
         getPetDataParams.setSearch_Data("");
         VisitTypeData visitTypeData = new VisitTypeData();
-        visitTypeData.setPetId(pet_id.substring(0, pet_id.length() - 2));
+        visitTypeData.setPetId(pet_id);
         VisitTypeRequest visitTypeRequest = new VisitTypeRequest();
         visitTypeRequest.setHeader(getPetDataParams);
         visitTypeRequest.setData(visitTypeData);
 
         ApiService<GetPetTestAndXRayResponse> service = new ApiService<GetPetTestAndXRayResponse>();
         service.get(this, ApiClient.getApiInterface().getPetTestAndXRay(Config.token, visitTypeRequest), "GetPetTestAndXRay");
-        Log.e("DATALOG", "GetPetTestAndXRay_Request=> " + visitTypeRequest);
+        Log.e("GetPetTestAndXRay",methods.getRequestJson(visitTypeRequest));
 
 
     }
@@ -370,10 +374,13 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         labIntent.putExtra("nature", petTestsAndXrayLists.get(position).getTypeOfTest().getTestType());
         labIntent.putExtra("date_of_test", petTestsAndXrayLists.get(position).getDateTested());
         labIntent.putExtra("result", petTestsAndXrayLists.get(position).getResults());
-
         labIntent.putExtra("follow_up", petTestsAndXrayLists.get(position).getFollowUp().getFollowUpTitle());
         labIntent.putExtra("follow_up_date", petTestsAndXrayLists.get(position).getFollowUpDate());
         labIntent.putExtra("id", petTestsAndXrayLists.get(position).getId());
+        labIntent.putExtra("pet_image_url", pet_image_url);
+        labIntent.putExtra("pet_DOB", pet_DOB);
+
+
         labIntent.putExtras(labIntent);
         startActivity(labIntent);
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
@@ -430,6 +437,8 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         labIntent.putExtra("pet_owner_name",pet_owner_name);
         labIntent.putExtra("pet_owner_contact",pet_owner_contact);
         labIntent.putExtra("report_id",petHospitalizationsLists.get(position).getId());
+        labIntent.putExtra("pet_image_url", pet_image_url);
+        labIntent.putExtra("pet_DOB", pet_DOB);
         labIntent.putExtras(labIntent);
         startActivity(labIntent);
         getActivity().overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
@@ -508,6 +517,9 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         viewReportsDeatilsActivityIntent.putExtra("pet_sex", pet_sex);
         viewReportsDeatilsActivityIntent.putExtra("pet_owner_name", pet_owner_name);
         viewReportsDeatilsActivityIntent.putExtra("pet_owner_contact", pet_owner_contact);
+        viewReportsDeatilsActivityIntent.putExtra("pet_image_url", pet_image_url);
+        viewReportsDeatilsActivityIntent.putExtra("pet_DOB", pet_DOB);
+        viewReportsDeatilsActivityIntent.putExtra("id", petClinicVisitListArrayList.get(position).getNatureOfVisitId());
         viewReportsDeatilsActivityIntent.putExtras(viewReportsDeatilsActivityIntent);
         startActivity(viewReportsDeatilsActivityIntent);
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

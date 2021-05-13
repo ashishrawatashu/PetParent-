@@ -29,14 +29,14 @@ public class LabTestReportsAdapter extends RecyclerView.Adapter<LabTestReportsAd
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LabTestReportsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lab_test_reports_list, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
+        LabTestReportsAdapter.MyViewHolder vh = new LabTestReportsAdapter.MyViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LabTestReportsAdapter.MyViewHolder holder, int position) {
         holder.requesting_Vet_TV.setText(petLabWorkLists.get(position).getRequestingVeterinarian());
         holder.vet_phone_TV.setText(petLabWorkLists.get(position).getVeterinarianPhone());
         holder.visit_date_TV.setText(petLabWorkLists.get(position).getVisitDate());
@@ -76,6 +76,4 @@ public class LabTestReportsAdapter extends RecyclerView.Adapter<LabTestReportsAd
 
         }
     }
-
-
 }

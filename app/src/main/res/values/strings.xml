@@ -202,5 +202,29 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="ContinuewithPhoneNumber">Continue with Phone Number</string>
     <string name="updateParent">Update Your Profile</string>
+    <string name="registerPets">Registered Pets</string>
+    <string name="clinicVisitHeadline">Choose the type of visit</string>
+    <string name="seeAll"><u>See all</u></string>
+    <string name="location">LOCATION</string>
+    <string name="petbreeds">Pet Breeds</string>
+    <string name="title_activity_consultation_list">ConsultationListActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="Consultation">CONSULTATION</string>
+    <string name="PetInsurances">Pet Insurances</string>
+    <string name="yourPets">Your Pets</string>
+    <string name="adoptionDonation"><![CDATA[Adopt & Donate]]></string>
+    <string name="general_deatils">General details</string>
+    <string name="plans_and_subscription">Plans and subscription</string>
+    <string name="privacy">Privacy</string>
+    <string name="logout">Logout</string>
+    <string name="upload_image">Upload photo</string>
+    <string name="change"><u>Change</u></string>
+    <string name="home">Home</string>
+    <string name="somethingWrong">Something went wrong. Please try again later.</string>
+    <string name="VetProfile">Vet Profile</string>
 
 </resources>

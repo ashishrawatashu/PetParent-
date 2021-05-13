@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/whiteColor"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/cancel_CV"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/background_grey"
+        android:elevation="5dp"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="7dp"
+            android:src="@drawable/close_icon"
+            android:visibility="visible" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/location_TV"
+        android:layout_marginRight="15dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:text="@string/location"
+            android:textColor="@color/gray_2"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/cancel_CV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cancel_CV" />
+
+    <LinearLayout
+        android:id="@+id/search_bar_LL"
+        android:background="@drawable/search_bar_background_grey"
+        android:layout_width="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="@id/cancel_CV"
+        app:layout_constraintEnd_toEndOf="@id/location_TV"
+        app:layout_constraintTop_toBottomOf="@id/cancel_CV">
+
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/search_icon"/>
+
+        <EditText
+            android:id="@+id/search_location_ET"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:fontFamily="@font/lato"
+            android:textColorHint="@color/gray_3"
+            android:textSize="14sp"
+            android:hint="Search any city or location" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/current_location_LL"
+        android:layout_width="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="@id/cancel_CV"
+        app:layout_constraintEnd_toEndOf="@id/location_TV"
+        app:layout_constraintTop_toBottomOf="@id/search_bar_LL">
+
+        <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/location_round_blue_icon"/>
+
+        <TextView
+            android:id="@+id/current_location_TV"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:text="Use Current Location" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/city_list_RV"
+        android:layout_marginTop="15dp"
+        android:layout_width="0dp"
+        tools:listitem="@layout/city_list_layout"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_location_LL"
+        app:layout_constraintStart_toStartOf="@id/cancel_CV"
+        app:layout_constraintEnd_toEndOf="@id/location_TV"/>
+
+    <ProgressBar
+        android:visibility="visible"
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/current_location_LL"/>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

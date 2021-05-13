@@ -63,11 +63,11 @@ public class DateListAdapter extends RecyclerView.Adapter<com.cynoteck.petofypar
             holder.date_TV.setText(formats1.substring(0,6));
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(holder.event_list.getContext(), LinearLayoutManager.VERTICAL, false);
             linearLayoutManager.setInitialPrefetchItemCount(getAppointmentDates.size());
-            AppointmentListAdapter appointmentListAdapter = new AppointmentListAdapter(context,getAppointmentDates.get(position).getAppointmentList(),appointmentsClickListner);
+            UpcomingAppointmentListAdapter upcomingAppointmentListAdapter = new UpcomingAppointmentListAdapter(context,getAppointmentDates.get(position).getAppointmentList(),appointmentsClickListner);
             holder.event_list.setLayoutManager(linearLayoutManager);
-            holder.event_list.setAdapter(appointmentListAdapter);
+            holder.event_list.setAdapter(upcomingAppointmentListAdapter);
             holder.event_list.setRecycledViewPool(recycledViewPool);
-            appointmentListAdapter.notifyDataSetChanged();
+            upcomingAppointmentListAdapter.notifyDataSetChanged();
 
     }
 

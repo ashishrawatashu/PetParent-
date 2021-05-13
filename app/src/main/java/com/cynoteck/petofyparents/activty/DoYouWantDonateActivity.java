@@ -8,6 +8,7 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -23,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -514,12 +516,19 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
     private void showPictureDialog() {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_layout);
+        RelativeLayout select_camera = dialog.findViewById(R.id.select_camera);
+        RelativeLayout select_gallery = dialog.findViewById(R.id.select_gallery);
+        RelativeLayout cancel_dialog = dialog.findViewById(R.id.cancel_dialog);
 
-        TextView select_camera = (TextView) dialog.findViewById(R.id.select_camera);
-        TextView select_gallery = (TextView) dialog.findViewById(R.id.select_gallery);
-        TextView cancel_dialog = (TextView) dialog.findViewById(R.id.cancel_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        cancel_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
         select_camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -535,27 +544,6 @@ public class DoYouWantDonateActivity extends AppCompatActivity implements View.O
             }
         });
 
-        cancel_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(selctImgOne.equals("1")){
-                    selctImgOne="0";
-                }
-                if(selctImgtwo.equals("1")){
-                    selctImgtwo="0";
-                }
-                if(slctImgThree.equals("1")){
-                    slctImgThree="0";
-                }
-                if(slctImgFour.equals("1")){
-                    slctImgFour="0";
-                }
-                if(slctImgFive.equals("1")){
-                    slctImgFive="0";
-                }
-                dialog.dismiss();
-            }
-        });
 
         dialog.show();
     }

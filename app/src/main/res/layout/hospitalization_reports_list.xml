@@ -1,255 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
+    android:background="@color/whiteColor"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/card_view"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/background_grey"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:id="@+id/vet_name_head_TV"
+            android:text="Vet Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/admission_name_head_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/view_LL"
-            app:layout_constraintStart_toStartOf="@id/card_view"
-            app:layout_constraintEnd_toEndOf="@id/card_view"
+        <TextView
+            android:layout_width="wrap_content"
+            android:text=":"
+            android:id="@+id/vet_name_dot_TV"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/vet_name_head_TV"
+            app:layout_constraintTop_toTopOf="@id/vet_name_head_TV"
+            app:layout_constraintBottom_toBottomOf="@id/vet_name_head_TV"/>
+
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/requesting_Vet_TV"
+            android:text="Monika Rawsdf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vet_name_dot_TV"
+            app:layout_constraintTop_toTopOf="@id/vet_name_head_TV"/>
+
+
+        <TextView
+            android:id="@+id/hospital_name_head_TV"
+            android:text="@string/hospitalname"
+            android:layout_width="0dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/admission_name_head_TV"
+            app:layout_constraintStart_toStartOf="@+id/vet_name_head_TV"
+            app:layout_constraintTop_toBottomOf="@id/requesting_Vet_TV"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text=":"
+            android:id="@+id/visit_date_dot_TV"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:textStyle="bold"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintStart_toEndOf="@id/hospital_name_head_TV"
+            app:layout_constraintTop_toTopOf="@id/hospital_name_head_TV"
+            app:layout_constraintBottom_toBottomOf="@id/hospital_name_head_TV"/>
+
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/hospital_name_TV"
+            android:text="Monika Rawat"
+            android:layout_width="0dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/visit_date_dot_TV"
+            app:layout_constraintTop_toTopOf="@id/hospital_name_head_TV"/>
+
+        <TextView
+            android:id="@+id/admission_name_head_TV"
+            android:text="@string/admissiondate"
+            android:layout_width="0dp"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/vet_name_head_TV"
+            app:layout_constraintTop_toBottomOf="@id/hospital_name_TV"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text=":"
+            android:id="@+id/reason_visit_dot_TV"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/admission_name_head_TV"
+            app:layout_constraintTop_toTopOf="@id/admission_name_head_TV"
+            app:layout_constraintBottom_toBottomOf="@id/admission_name_head_TV"/>
+
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:id="@+id/admission_date_TV"
+            android:text="Monika Rawat"
+            android:layout_width="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/reason_visit_dot_TV"
+            app:layout_constraintTop_toTopOf="@id/admission_name_head_TV"/>
+
+
+        <View
+            android:id="@+id/grey_line_view"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/gray_5"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/admission_date_TV"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+        <LinearLayout
+            app:layout_constraintTop_toBottomOf="@+id/grey_line_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:gravity="end"
-            app:layout_constraintTop_toTopOf="@id/card_view"
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:id="@+id/view_report_LL"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
 
             <TextView
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:gravity="end"
                 android:id="@+id/view_TV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="View"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="View Report"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/colorPrimary"/>
 
-            <View
-                app:layout_constraintTop_toBottomOf="@id/view_TV"
-                app:layout_constraintStart_toStartOf="@id/view_TV"
-                app:layout_constraintEnd_toEndOf="@id/view_TV"
-                android:layout_below="@id/view_TV"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimary"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_gravity="center_vertical"
+                android:padding="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_height="16dp"
+                android:src="@drawable/blue_forward_arrow"/>
 
 
-        <TextView
-            android:layout_marginTop="8dp"
-            android:id="@+id/requesting_Vet"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_marginRight="200dp"
-            app:layout_constraintTop_toBottomOf="@id/view_LL"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/card_view"
-            android:textColor="@color/black_color"
-            android:text="@string/requestingVet"
-            android:textStyle="bold"/>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/top_point"
-            app:layout_constraintStart_toEndOf="@id/requesting_Vet"
-            app:layout_constraintTop_toTopOf="@id/requesting_Vet"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black_color"
-            android:text=":"
-            android:textStyle="bold"/>
-
-        <TextView
-            app:layout_constraintStart_toEndOf="@id/top_point"
-            app:layout_constraintTop_toTopOf="@id/requesting_Vet"
-            app:layout_constraintEnd_toEndOf="@id/card_view"
-            android:gravity="end"
-            android:id="@+id/requesting_Vet_TV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/grayColorCode"
-            android:text="Fecal Exam" />
-
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/vet_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/requesting_Vet_TV"
-            app:layout_constraintStart_toStartOf="@id/requesting_Vet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/vetPhone"
-            android:textStyle="bold"
-            android:textColor="@color/black_color"
-            android:layout_marginRight="200dp"/>
-
-
-        <TextView
-            android:id="@+id/top_point_two"
-            app:layout_constraintStart_toEndOf="@id/vet_phone"
-            app:layout_constraintTop_toTopOf="@id/vet_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black_color"
-            android:text=":"
-            android:textStyle="bold"/>
-
-
-        <TextView
-            app:layout_constraintStart_toEndOf="@id/top_point_two"
-            app:layout_constraintTop_toTopOf="@id/top_point_two"
-            app:layout_constraintEnd_toEndOf="@id/card_view"
-            android:gravity="end"
-            android:id="@+id/vet_phone_TV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/grayColorCode"
-            android:text="Fecal Exam" />
-
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/hospital_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/vet_phone_TV"
-            app:layout_constraintStart_toStartOf="@id/requesting_Vet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/hospitalType"
-            android:textStyle="bold"
-            android:textColor="@color/black_color"
-            android:layout_marginRight="200dp"/>
-
-
-        <TextView
-            android:id="@+id/top_point_three"
-            app:layout_constraintStart_toEndOf="@id/hospital_type"
-            app:layout_constraintTop_toTopOf="@id/hospital_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black_color"
-            android:text=":"
-            android:textStyle="bold"/>
-
-
-        <TextView
-            app:layout_constraintStart_toEndOf="@id/top_point_three"
-            app:layout_constraintTop_toTopOf="@id/top_point_three"
-            app:layout_constraintEnd_toEndOf="@id/card_view"
-            android:gravity="end"
-            android:id="@+id/hospital_type_TV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/grayColorCode"
-            android:text="Fecal Exam" />
-
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/hospital_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/hospital_type_TV"
-            app:layout_constraintStart_toStartOf="@id/hospital_type"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/hospitalname"
-            android:textStyle="bold"
-            android:textColor="@color/black_color"
-            android:layout_marginRight="200dp"/>
-
-
-        <TextView
-            android:id="@+id/top_point_four"
-            app:layout_constraintStart_toEndOf="@id/hospital_name"
-            app:layout_constraintTop_toTopOf="@id/hospital_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black_color"
-            android:text=":"
-            android:textStyle="bold"/>
-
-
-        <TextView
-            app:layout_constraintStart_toEndOf="@id/top_point_four"
-            app:layout_constraintTop_toTopOf="@id/top_point_four"
-            app:layout_constraintEnd_toEndOf="@id/card_view"
-            android:gravity="end"
-            android:id="@+id/hospital_name_TV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/grayColorCode"
-            android:text="Fecal Exam" />
-
-
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/admission_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/hospital_name_TV"
-            app:layout_constraintStart_toStartOf="@id/hospital_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/admissiondate"
-            android:textStyle="bold"
-            android:textColor="@color/black_color"
-            android:layout_marginRight="200dp"/>
-
-
-        <TextView
-            android:id="@+id/top_point_five"
-            app:layout_constraintStart_toEndOf="@id/admission_date"
-            app:layout_constraintTop_toTopOf="@id/admission_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black_color"
-            android:text=":"
-            android:textStyle="bold"/>
-
-
-        <TextView
-            app:layout_constraintStart_toEndOf="@id/top_point_five"
-            app:layout_constraintTop_toTopOf="@id/top_point_five"
-            app:layout_constraintEnd_toEndOf="@id/card_view"
-            android:gravity="end"
-            android:id="@+id/admission_date_TV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/grayColorCode"
-            android:text="Fecal Exam" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

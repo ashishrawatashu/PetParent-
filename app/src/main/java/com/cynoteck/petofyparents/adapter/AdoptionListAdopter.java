@@ -27,7 +27,7 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
     AdoptionListOnClick adoptionListOnClick;
     Context context;
 
-    public AdoptionListAdopter(Context context, List<PetDonationList> petDonationLists,  AdoptionListOnClick adoptionListOnClick) {
+    public AdoptionListAdopter(Context context, List<PetDonationList> petDonationLists, AdoptionListOnClick adoptionListOnClick) {
         this.petDonationLists = petDonationLists;
         this.adoptionListOnClick = adoptionListOnClick;
         this.context = context;
@@ -37,21 +37,20 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
     @NonNull
     @Override
     public AdoptionListAdopter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adoption_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.pet_breeds_list, parent, false);
         AdoptionListAdopter.MyViewHolder vh = new AdoptionListAdopter.MyViewHolder(v);
         return vh;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdoptionListAdopter.MyViewHolder holder, final int position)
-    {
+    public void onBindViewHolder(@NonNull AdoptionListAdopter.MyViewHolder holder, final int position) {
         Glide.with(context)
                 .load(petDonationLists.get(position).getPetImageList().get(0).getPetImageUrl())
                 .placeholder(R.drawable.pet_image)
-                .into(holder.image);
+                .into(holder.pet_breed_IV);
 
-        holder.image_name.setText(petDonationLists.get(position).getPetName());
+        holder.pet_breed_name_TV.setText(petDonationLists.get(position).getPetName());
 
     }
 
@@ -63,16 +62,16 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout main_LL;
-        TextView image_name;
-        ImageView image;
+        TextView pet_breed_name_TV;
+        ImageView pet_breed_IV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            image_name = itemView.findViewById(R.id.image_name);
-            image = itemView.findViewById(R.id.image);
+            pet_breed_name_TV = itemView.findViewById(R.id.pet_breed_name_TV);
+            pet_breed_IV = itemView.findViewById(R.id.pet_breed_IV);
             main_LL = itemView.findViewById(R.id.main_LL);
 
-            main_LL.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     adoptionListOnClick.onItemClick(getAdapterPosition());

@@ -1,8 +1,11 @@
 package com.cynoteck.petofyparents.utils;
 
+import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,58 +13,62 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 public class Config {
-    public static String parent_encryptedId="";
+    public static String parent_encryptedId = "";
 
-    public  static  int count =1;
-    public static String token="";
-    public static String user_id="";
-    public static String user_name="";
-    public static String user_phone="";
-    public static String user_emial="";
-    public static String user_address="";
-    public static String user_study="";
-    public static String user_Veterian_id="";
-    public static String user_online="";
-    public static String user_url="";
-    public static String user_details="";
-    public static String two_fact_auth_status="";
-    public static String user_Veterian_name="";
-    public static String user_Veterian_phone="";
-    public static String user_Veterian_emial="";
-    public static String user_Veterian_address="";
-    public static String first_name="";
-    public static String last_name="";
+    public static int count = 1;
+    public static String token = "";
+    public static String user_id = "";
+    public static String user_name = "";
+    public static String user_phone = "";
+    public static String user_emial = "";
+    public static String user_address = "";
+    public static String user_study = "";
+    public static String user_Veterian_id = "";
+    public static String user_online = "";
+    public static String user_url = "";
+    public static String user_details = "";
+    public static String two_fact_auth_status = "";
+    public static String user_Veterian_name = "";
+    public static String user_Veterian_phone = "";
+    public static String user_Veterian_emial = "";
+    public static String user_Veterian_address = "";
+    public static String first_name = "";
+    public static String last_name = "";
 
-    public static String type="";
-    public static String backCall="";
-    public static String IpAddress="";
+    public static String longitude = "";
+    public static String latitude = "";
+    public static String type = "";
+    public static String backCall = "";
+    public static String IpAddress = "";
+    public static ArrayList<PetList> profileListLoaded = new ArrayList<>();
 
+    public static Boolean isLoaded = false;
 
-    public static RequestBody toRequestBody (String value) {
+    public static RequestBody toRequestBody(String value) {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), value);
-        return body ;
+        return body;
     }
-   public static String currentDate()
-   {
-       String date = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-       return date;
-   }
 
-   public static String changeDateFormat(String currentDate){
-       SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
-       DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
-       Date date = null;
+    public static String currentDate() {
+        String date = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+        return date;
+    }
 
-       try {
-           date = formatter.parse(currentDate);
-       } catch (ParseException e) {
-       }
+    public static String changeDateFormat(String currentDate) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        Date date = null;
 
-       String newDate = df.format(date);
+        try {
+            date = formatter.parse(currentDate);
+        } catch (ParseException e) {
+        }
+
+        String newDate = df.format(date);
         return newDate;
-   }
+    }
 
-    public static String changeTimeFormat(String currentTime){
+    public static String changeTimeFormat(String currentTime) {
         try {
             SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm a");
             Date date = inFormat.parse(currentTime);
@@ -74,7 +81,7 @@ public class Config {
         }
     }
 
-    public static String changeTimePicker(String currentTime){
+    public static String changeTimePicker(String currentTime) {
         try {
             SimpleDateFormat inFormat = new SimpleDateFormat("HH:mm");
             Date date = inFormat.parse(currentTime);

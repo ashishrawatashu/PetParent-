@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.activty.LoginActivity;
+import com.cynoteck.petofyparents.activty.DashBoardActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import static com.cynoteck.petofyparents.activty.LoginActivity.channel_id;
+import static com.cynoteck.petofyparents.activty.DashBoardActivity.channel_id;
 
 public class MyService extends FirebaseMessagingService {
 
@@ -32,7 +32,7 @@ public class MyService extends FirebaseMessagingService {
 
 
         Log.d("show","running");
-        Intent intent=new Intent(context, LoginActivity.class);
+        Intent intent=new Intent(context, DashBoardActivity.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 

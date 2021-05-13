@@ -14,10 +14,12 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.adapter.VisitTypesAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
@@ -31,11 +33,13 @@ import com.cynoteck.petofyparents.response.getPetReportsResponse.GetReportsTypeR
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,71 +48,70 @@ import org.json.JSONArray;
 import retrofit2.Response;
 
 public class SelectPetReportsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener {
-
-    String pet_unique_id, pet_name,pet_sex, pet_owner_name,pet_owner_contact,pet_id,pet_encryt_id,pet_age,pet_DOB,pet_encrypted_id;
-    ImageView back_arrow_IV;
-    TextView pet_name_TV,pet_sex_TV,pet_id_TV,pet_owner_name_TV,pet_owner_phone_no_TV;
+    String pet_image_url, pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, pet_DOB, pet_encrypted_id, pet_age;
+    MaterialCardView back_arrow_CV;
+    TextView pet_reg_name_TV, pet_reg__id_TV, parent_name_TV, pet_reg_date_of_birth_TV;
     VisitTypesAdapter visitTypesAdapter;
     RecyclerView reports_types_RV;
     RelativeLayout reports_list_RL;
-    ImageView view_xrayReport_arrow ,view_labTestReport_arrow,view_Hospitalization_arrow;
     ArrayList<GetReportsTypeData> getReportsTypeData;
-    RelativeLayout xray_layout,lab_test_layout,hospitalization_layout;
+    ConstraintLayout xray_layout, hospitalization_layout;
     Methods methods;
     WebView webview;
+    ImageView petRegImage_IV;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_selected_pet_reports);
         methods = new Methods(this);
         init();
         setDeatils();
         getVisitTypes();
+
     }
 
     private void setDeatils() {
-
-        pet_name_TV.setText(pet_name);
-        pet_sex_TV.setText("("+pet_sex+")");
-        pet_owner_name_TV.setText(pet_owner_name);
-        pet_id_TV.setText(pet_unique_id);
-        pet_owner_phone_no_TV.setText("("+pet_owner_contact+")");
+        pet_reg_name_TV.setText(pet_name.substring(0, 1).toUpperCase() + pet_name.substring(1) + " (" + pet_sex + ")");
+        parent_name_TV.setText(pet_owner_name.substring(0, 1).toUpperCase() + pet_owner_name.substring(1));
+        pet_reg__id_TV.setText(pet_unique_id);
+        pet_reg_date_of_birth_TV.setText(pet_DOB);
+        Glide.with(this)
+                .load(pet_image_url)
+                .placeholder(R.drawable.empty_pet_image)
+                .into(petRegImage_IV);
 
     }
 
     private void init() {
-
         Bundle extras = getIntent().getExtras();
-        pet_id=extras.getString("pet_id");
+        pet_id = extras.getString("pet_id");
+        pet_image_url = extras.getString("pet_image_url");
         pet_unique_id = extras.getString("pet_unique_id");
-        pet_name =extras.getString("pet_name");
-        pet_sex =extras.getString("pet_sex");
-        pet_owner_name =extras.getString("pet_owner_name");
-        pet_encryt_id = extras.getString("pet_encryt_id");
+        pet_name = extras.getString("pet_name");
+        pet_sex = extras.getString("pet_sex");
+        pet_owner_name = extras.getString("pet_owner_name");
+        pet_DOB = extras.getString("pet_DOB");
+        pet_encrypted_id = extras.getString("pet_encrypted_id");
         pet_age = extras.getString("pet_age");
-        pet_DOB =extras.getString("pet_DOB");
-        pet_encrypted_id =extras.getString("pet_encrypted_id");
-        reports_types_RV=findViewById(R.id.reports_types_RV);
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        pet_name_TV = findViewById(R.id.pet_name_TV);
-        pet_sex_TV = findViewById(R.id.pet_sex_TV);
-        pet_id_TV = findViewById(R.id.pet_id_TV);
-        pet_owner_name_TV = findViewById(R.id.pet_owner_name_TV);
-        pet_owner_phone_no_TV = findViewById(R.id.pet_owner_phone_no_TV);
-        reports_list_RL=findViewById(R.id.reports_list_RL);
-        view_xrayReport_arrow=findViewById(R.id.view_xrayReport_arrow);
-        xray_layout=findViewById(R.id.xray_layout);
-        view_labTestReport_arrow=findViewById(R.id.view_labTestReport_arrow);
-        lab_test_layout=findViewById(R.id.lab_test_layout);
-        view_Hospitalization_arrow=findViewById(R.id.view_Hospitalization_arrow);
-        hospitalization_layout=findViewById(R.id.hospitalization_layout);
+        reports_types_RV = findViewById(R.id.reports_types_RV);
+        back_arrow_CV = findViewById(R.id.back_arrow_CV);
+        pet_reg_name_TV = findViewById(R.id.pet_reg_name_TV);
+        pet_reg__id_TV = findViewById(R.id.pet_reg__id_TV);
+        parent_name_TV = findViewById(R.id.parent_name_TV);
+        pet_reg_date_of_birth_TV = findViewById(R.id.pet_reg_date_of_birth_TV);
+        reports_list_RL = findViewById(R.id.reports_list_RL);
+        xray_layout = findViewById(R.id.xray_layout);
+        petRegImage_IV = findViewById(R.id.petRegImage_IV);
+        hospitalization_layout = findViewById(R.id.hospitalization_layout);
+        progressBar=findViewById(R.id.progressBar);
         webview = findViewById(R.id.webview);
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        back_arrow_IV.setOnClickListener(this);
+        back_arrow_CV.setOnClickListener(this);
         xray_layout.setOnClickListener(this);
-        lab_test_layout.setOnClickListener(this);
         hospitalization_layout.setOnClickListener(this);
 
     }
@@ -116,77 +119,72 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
     private void getVisitTypes() {
         ApiService<GetReportsTypeResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getReportsType(Config.token), "GetReportsType");
-//        methods.getRequestJson()
     }
 
     @Override
     public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.back_arrow_IV:
+        switch (v.getId()) {
+            case R.id.back_arrow_CV:
                 onBackPressed();
                 break;
 
             case R.id.xray_layout:
                 intentStaticReports("7.0");
-                break;
 
-            case R.id.lab_test_layout:
-                intentStaticReports("8.0");
                 break;
 
             case R.id.hospitalization_layout:
                 intentStaticReports("9.0");
+
                 break;
         }
-
     }
-
 
     private void intentStaticReports(String report_id) {
         Intent staticReportsIntent = new Intent(this, ReportsCommonActivity.class);
         Bundle staticReportsData = new Bundle();
-        staticReportsData.putString("pet_id",pet_id);
-        staticReportsData.putString("pet_name",pet_name);
-        staticReportsData.putString("pet_unique_id",pet_unique_id);
-        staticReportsData.putString("pet_sex",pet_sex);
-        staticReportsData.putString("pet_owner_name",pet_owner_name);
-        staticReportsData.putString("pet_owner_contact",pet_owner_contact);
-        staticReportsData.putString("reports_id",report_id);
-        staticReportsData.putString("button_type","view");
+        staticReportsData.putString("pet_id", pet_id);
+        staticReportsData.putString("pet_name", pet_name);
+        staticReportsData.putString("pet_unique_id", pet_unique_id);
+        staticReportsData.putString("pet_sex", pet_sex);
+        staticReportsData.putString("pet_owner_name", pet_owner_name);
+        staticReportsData.putString("pet_owner_contact", pet_owner_contact);
+        staticReportsData.putString("reports_id", report_id);
+        staticReportsData.putString("pet_DOB", pet_DOB);
+        staticReportsData.putString("pet_encrypted_id", pet_encrypted_id);
+        staticReportsData.putString("button_type", "view");
+        staticReportsData.putString("pet_image_url", pet_image_url);
 
         staticReportsIntent.putExtras(staticReportsData);
         startActivity(staticReportsIntent);
-        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
     }
 
     @Override
     public void onResponse(Response response, String key) {
-
-        switch (key){
+        switch (key) {
             case "GetReportsType":
                 try {
-                    Log.d("GetPetServiceTypes",response.body().toString());
+                    progressBar.setVisibility(View.GONE);
+                    Log.d("GetPetServiceTypes", response.body().toString());
                     GetReportsTypeResponse petServiceResponse = (GetReportsTypeResponse) response.body();
                     int responseCode = Integer.parseInt(petServiceResponse.getResponse().getResponseCode());
-                    if (responseCode== 109){
+                    if (responseCode == 109) {
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                         reports_types_RV.setLayoutManager(linearLayoutManager);
                         reports_types_RV.setNestedScrollingEnabled(false);
-                        visitTypesAdapter  = new VisitTypesAdapter(SelectPetReportsActivity.this,petServiceResponse.getData(),this);
+                        visitTypesAdapter = new VisitTypesAdapter(SelectPetReportsActivity.this, petServiceResponse.getData(), this);
                         getReportsTypeData = petServiceResponse.getData();
                         reports_types_RV.setAdapter(visitTypesAdapter);
                         visitTypesAdapter.notifyDataSetChanged();
                         reports_list_RL.setVisibility(View.VISIBLE);
                     }
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
-
 
             case "GetImmunization":
                 try {
@@ -195,7 +193,10 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
                     methods.customProgressDismiss();
                     int responseCode = Integer.parseInt(immunizationRecordResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-
+                        if (immunizationRecordResponse.getData().getPetImmunizationDetailModels().isEmpty()) {
+                            // methods.customProgressDismiss();
+                            Toast.makeText(this, "No Record Found !", Toast.LENGTH_SHORT).show();
+                        } else {
                             ArrayList<String> immunizationDate = new ArrayList<>();
                             ArrayList<String> vaccineClass = new ArrayList<>();
                             ArrayList<String> nextDueDate = new ArrayList<>();
@@ -238,7 +239,7 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
                             Log.e("aaaaaa", vaccineClass.toString());
                             Log.e("aaaaaa", vaccine.toString());
                             methods.customProgressDismiss();
-                            String immunizationSet = methods.immunizationPdfGenarator(pet_name, pet_age, pet_sex, pet_owner_name,"", vType, vaccine, nextDate, vTypePending, vaccinePending, nextDatePending);
+                            String immunizationSet = methods.immunizationPdfGenarator(pet_name, pet_age, pet_sex, pet_owner_name, "", vType, vaccine, nextDate, vTypePending, vaccinePending, nextDatePending);
                             WebSettings webSettings = webview.getSettings();
                             webSettings.setJavaScriptEnabled(true);
                             webview.loadDataWithBaseURL(null, immunizationSet, "text/html", "utf-8", null);
@@ -259,7 +260,9 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
                                 }
                             }, 3000);
 
-                        } else if (responseCode == 614) {
+                        }
+
+                    } else if (responseCode == 614) {
                         Toast.makeText(this, immunizationRecordResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
@@ -269,7 +272,6 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
                 }
                 break;
         }
-
     }
 
     @Override
@@ -279,56 +281,38 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
 
     @Override
     public void onProductClick(int position) {
-
-        if (getReportsTypeData.get(position).getId().equals("4.0")){
+        if (getReportsTypeData.get(position).getId().equals("4.0")) {
             methods.showCustomProgressBarDialog(this);
             ImmunizationParams immunizationParams = new ImmunizationParams();
-            immunizationParams.setEncryptedId(pet_encryt_id);
+            immunizationParams.setEncryptedId(pet_encrypted_id);
 //        immunizationParams.setEncryptedId(getPetListResponse.getData().getPetClinicVisitList().get(position).getEncryptedId());
             ImmunizationRequest immunizationRequest = new ImmunizationRequest();
             immunizationRequest.setData(immunizationParams);
 
             ApiService<PetImmunizationRecordResponse> service = new ApiService<>();
-            service.get(this, ApiClient.getApiInterface().viewPetVaccination(Config.token,immunizationRequest), "GetImmunization");
-            Log.d("GetImmunization",immunizationRequest.toString());
-        }
+            service.get(this, ApiClient.getApiInterface().viewPetVaccination(Config.token, immunizationRequest), "GetImmunization");
+            Log.d("GetImmunization", immunizationRequest.toString());
+        } else {
 
-        else {
-
+            getReportsTypeData.get(position).getId();
             Intent selectReportsIntent = new Intent(this, ReportsCommonActivity.class);
             Bundle data = new Bundle();
-            data.putString("pet_id",pet_id);
-            data.putString("pet_name",pet_name);
-            data.putString("pet_unique_id",pet_unique_id);
-            data.putString("pet_sex",pet_sex);
-            data.putString("pet_owner_name",pet_owner_name);
-            data.putString("pet_owner_contact",pet_owner_contact);
-            data.putString("reports_id",getReportsTypeData.get(position).getId());
-            data.putString("button_type","view");
-            data.putString("pet_DOB",pet_DOB);
-            data.putString("pet_encrypted_id",pet_encrypted_id);
+            data.putString("pet_id", pet_id);
+            data.putString("pet_name", pet_name);
+            data.putString("pet_unique_id", pet_unique_id);
+            data.putString("pet_sex", pet_sex);
+            data.putString("pet_owner_name", pet_owner_name);
+            data.putString("pet_owner_contact", pet_owner_contact);
+            data.putString("reports_id", getReportsTypeData.get(position).getId());
+            data.putString("button_type", "view");
+            data.putString("pet_DOB", pet_DOB);
+            data.putString("pet_encrypted_id", pet_encrypted_id);
+            data.putString("pet_image_url", pet_image_url);
             selectReportsIntent.putExtras(data);
             startActivity(selectReportsIntent);
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
-
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
         }
-
-        /*getReportsTypeData.get(position).getId();
-        Intent selectReportsIntent = new Intent(this, ReportsCommonActivity.class);
-        Bundle data = new Bundle();
-        data.putString("pet_id",pet_id);
-        data.putString("pet_name",pet_name);
-        data.putString("pet_unique_id",pet_unique_id);
-        data.putString("pet_sex",pet_sex);
-        data.putString("pet_owner_name",pet_owner_name);
-        data.putString("pet_owner_contact",pet_owner_contact);
-        data.putString("reports_id",getReportsTypeData.get(position).getId());
-        data.putString("button_type","view");
-        selectReportsIntent.putExtras(data);
-        startActivity(selectReportsIntent);
-        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);*/
     }
-    
 
 }

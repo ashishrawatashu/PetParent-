@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:elevation="5dp"
+        android:padding="2dp"
+        android:src="@drawable/long_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/back_arrow_CV"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/whiteColor"
+        android:elevation="5dp"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:visibility="visible"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:background="@drawable/background_grey"
+            android:scaleType="fitXY"
+            android:visibility="visible" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:src="@drawable/black_back_arrow"
+            android:visibility="visible" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:elevation="1dp"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/breed_profile_image_IV"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/empty_pet_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        style="@style/CustomCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="250dp"
+        android:background="@color/whiteColor"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        app:cardElevation="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/breed_heading_name_TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/nunito"
+                android:gravity="center_vertical"
+                android:text="Breed name"
+                android:textColor="@color/gray_3"
+                android:textSize="15sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/breed_name_TV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center_vertical"
+                android:text="Pet Name"
+                android:textColor="@color/gray_1"
+                android:textSize="24sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/breed_heading_name_TV" />
+
+            <ScrollView
+                android:id="@+id/breed_full_details_SV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/breed_name_TV"
+                app:layout_constraintTop_toBottomOf="@id/breed_name_TV">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/breed_size_CL"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/breed_size_IV"
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:src="@drawable/pet_size_icon"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/size"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:fontFamily="@font/nunito"
+                                android:gravity="top"
+                                android:text="Size
+"
+                                android:textColor="@color/gray_3"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toEndOf="@id/breed_size_IV"
+                                app:layout_constraintTop_toTopOf="@id/breed_size_IV" />
+
+                            <TextView
+                                android:id="@+id/breed_size_TV"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/nunito_bold"
+                                android:gravity="bottom"
+                                android:text="Medium/Large"
+                                android:textColor="@color/gray_1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@id/size"
+                                app:layout_constraintTop_toBottomOf="@id/size" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <View
+                            android:layout_width="3dp"
+                            android:layout_height="50dp"
+                            android:background="#F5F7FA" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/breed_life_CL"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/breed_life_IV"
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:src="@drawable/pet_life_icon"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/life"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:fontFamily="@font/nunito"
+                                android:gravity="top"
+                                android:text="Life Expectancy"
+                                android:textColor="@color/gray_3"
+                                android:textSize="15sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/breed_life_IV"
+                                app:layout_constraintTop_toTopOf="@id/breed_life_IV" />
+
+                            <TextView
+                                android:id="@+id/breed_life_TV"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/nunito_bold"
+                                android:gravity="bottom"
+                                android:text="10-15 Years"
+                                android:textColor="@color/gray_1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@id/life"
+                                app:layout_constraintTop_toBottomOf="@id/life" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/breed_weight_CL"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/breed_weight_RL"
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:src="@drawable/pet_weight_icon"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/weight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:fontFamily="@font/nunito"
+                                android:gravity="top"
+                                android:text="Weight
+"
+                                android:textColor="@color/gray_3"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toEndOf="@id/breed_weight_RL"
+                                app:layout_constraintTop_toTopOf="@id/breed_weight_RL" />
+
+                            <TextView
+                                android:id="@+id/breed_weight_TV"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/nunito_bold"
+                                android:gravity="bottom"
+                                android:text="4-8 Kg"
+                                android:textColor="@color/gray_1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@id/weight"
+                                app:layout_constraintTop_toBottomOf="@id/weight" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/second_row_divider"
+                            android:layout_width="2dp"
+                            android:layout_height="50dp"
+                            android:background="#F5F7FA"/>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/breed_height_CL"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp">
+
+                            <ImageView
+                                android:id="@+id/breed_height_IV"
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:src="@drawable/pet_height_icon"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/height"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:fontFamily="@font/nunito"
+                                android:gravity="top"
+                                android:text="Height"
+                                android:textColor="@color/gray_3"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toEndOf="@id/breed_height_IV"
+                                app:layout_constraintTop_toTopOf="@id/breed_height_IV" />
+
+                            <TextView
+                                android:id="@+id/breed_height_TV"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/nunito_bold"
+                                android:gravity="bottom"
+                                android:text="12-30 Cm"
+                                android:textColor="@color/gray_1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@id/height"
+                                app:layout_constraintTop_toBottomOf="@id/height" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/breed_color_CL"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/breed_color_RL"
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:src="@drawable/pet_color_icon"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/color"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:fontFamily="@font/nunito"
+                                android:gravity="top"
+                                android:text="Color"
+                                android:textColor="@color/gray_3"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toEndOf="@id/breed_color_RL"
+                                app:layout_constraintTop_toTopOf="@id/breed_color_RL" />
+
+                            <TextView
+                                android:id="@+id/breed_color_TV"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/nunito_bold"
+                                android:gravity="bottom"
+                                android:text="Black,White etc"
+                                android:textColor="@color/gray_1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@id/color"
+                                app:layout_constraintTop_toBottomOf="@id/color" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/third_row_divider"
+                            android:layout_width="3dp"
+                            android:layout_height="50dp"
+                            android:background="#F5F7FA"/>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/breed_origin_CL"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp">
+
+                            <ImageView
+                                android:id="@+id/breed_origin_IV"
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:src="@drawable/pet_origin_country_icon"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/origin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:fontFamily="@font/nunito"
+                                android:gravity="top"
+                                android:text="Origin"
+                                android:textColor="@color/gray_3"
+                                android:textSize="15sp"
+                                app:layout_constraintStart_toEndOf="@id/breed_origin_IV"
+                                app:layout_constraintTop_toTopOf="@id/breed_origin_IV" />
+
+                            <TextView
+                                android:id="@+id/breed_origin_TV"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/nunito_bold"
+                                android:gravity="bottom"
+                                android:text="Japan"
+                                android:textColor="@color/gray_1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@id/origin"
+                                app:layout_constraintTop_toBottomOf="@id/origin" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#F5F7FA" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nunito"
+                        android:gravity="center_vertical"
+                        android:text="About the breed"
+                        android:textColor="@color/gray_1"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/breed_desc_TV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="30dp"
+                        android:fontFamily="@font/nunito"
+                        android:gravity="center_vertical"
+                        android:text="Akitas Shed A Lot So So High Grooming Required. Weekly Brushing Helps Reduce The Amount Of Hair In Your Home, And It Keeps The Plush Coat Healthy."
+                        android:textColor="@color/gray_1"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

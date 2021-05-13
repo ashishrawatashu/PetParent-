@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,14 +41,20 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull VetListAdapter.MyViewHolder holder, int position) {
         holder.vet_name_TV.setText(providerLists.get(position).getName()+" "+"("+providerLists.get(position).getVetQualifications()+")");
-        holder.distance_TV.setText(providerLists.get(position).getDistance());
-        holder.address_TV.setText(providerLists.get(position).getAddress());
-        holder.vet_email_TV.setText(providerLists.get(position).getEmail());
+        holder.vet_qualification_TV.setText(providerLists.get(position).getVetQualifications());
+        holder.vet_location_TV.setText(providerLists.get(position).getAddress());
+        if (providerLists.get(position).getOnlineConsultationCharges().equals("0")){
+            holder.vet_charges_tv.setVisibility(View.GONE);
+
+        }else {
+            holder.vet_charges_tv.setVisibility(View.VISIBLE);
+            holder.vet_charges_tv.setText("₹ "+ providerLists.get(position).getOnlineConsultationCharges());
+        }
 
         Glide.with(context)
                 .load(providerLists.get(position).getProfileImageURL())
                 .placeholder(R.drawable.doctor_dummy_image)
-                .into(holder.vet_profile_IV);
+                .into(holder.vet_image_IV);
 
     }
 
@@ -57,20 +64,19 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView vet_profile_IV;
-        TextView vet_name_TV, distance_TV,address_TV,vet_officeName_TV,vet_email_TV;
-        Button book_appointment_BT;
+        ImageView vet_image_IV,star_one,star_two,star_three,star_fourstar_five;
+        TextView vet_name_TV, vet_qualification_TV,vet_charges_tv,vet_location_TV;
+        LinearLayout view_more_LL;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            vet_profile_IV = itemView.findViewById(R.id.vetImage_IV);
+            vet_image_IV = itemView.findViewById(R.id.vet_image_IV);
             vet_name_TV = itemView.findViewById(R.id.vet_name_TV);
-            distance_TV = itemView.findViewById(R.id.distance_TV);
-            address_TV = itemView.findViewById(R.id.address_TV);
-            vet_officeName_TV = itemView.findViewById(R.id.vet_officeName_TV);
-            vet_email_TV = itemView.findViewById(R.id.vet_email_TV);
-            book_appointment_BT = itemView.findViewById(R.id.book_appointment_BT);
+            vet_qualification_TV = itemView.findViewById(R.id.vet_qualification_TV);
+            vet_charges_tv = itemView.findViewById(R.id.vet_charges_tv);
+            vet_location_TV = itemView.findViewById(R.id.vet_location_TV);
+            view_more_LL = itemView.findViewById(R.id.view_more_LL);
 
-            book_appointment_BT.setOnClickListener(new View.OnClickListener() {
+            view_more_LL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onProductItemClickListner!=null){

@@ -43,7 +43,7 @@ public class ScanPetListAdapter extends RecyclerView.Adapter<ScanPetListAdapter.
         holder.pet_reg_name_TV.setText(profileList.get(position).getPetName().substring(0, 1).toUpperCase() + profileList.get(position).getPetName().substring(1));
         Glide.with(context)
                 .load(profileList.get(position).getPetProfileImageUrl())
-                .placeholder(R.drawable.dog_dummy_image)
+                .placeholder(R.drawable.empty_pet_image)
                 .into(holder.petRegImage_IV);
     }
 
@@ -77,7 +77,7 @@ public class ScanPetListAdapter extends RecyclerView.Adapter<ScanPetListAdapter.
                 @Override
                 public void onClick(View v) {
                     if (onProductItemClickListner != null) {
-                        onProductItemClickListner.onIdCardClick(getAdapterPosition());
+                        onProductItemClickListner.onViewReportsClick(getAdapterPosition());
                     }
                 }
             });

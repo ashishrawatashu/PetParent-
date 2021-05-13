@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    tools:context=".activty.PetInsuranceActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/back_arrow_CV"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/background_grey"
+        android:elevation="5dp"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@drawable/back_arrow"
+            android:visibility="visible" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/Pet_Insurances_TV"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:fontFamily="@font/nunito"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:text="@string/PetInsurances"
+        android:textColor="@color/gray_2"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/back_arrow_CV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back_arrow_CV" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/back_arrow_CV"
+        app:layout_constraintEnd_toEndOf="@id/Pet_Insurances_TV"
+        app:layout_constraintBottom_toTopOf="@+id/know_more_BT"
+        app:layout_constraintTop_toBottomOf="@id/Pet_Insurances_TV">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pet_insurances_CV"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="12dp"
+                android:layout_height="160dp"
+                android:layout_marginTop="25dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/pet_icurences_iamge"/>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/ket_benefits_TV"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Key Benefits"
+                android:textColor="@color/gray_1"
+                android:fontFamily="@font/nunito_bold"
+                android:textSize="18sp"/>
+
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/search_bar_background_grey"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/blue_bg_check"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lifetime cover:Covers your pet dog,between the ages of 3 months to 10 years, over their lifetime"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:layout_margin="15dp"
+                    android:textSize="14sp"/>
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/search_bar_background_grey"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/blue_bg_check"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Covers treatment costs of specified disease or injury as well as sugeries, hospitalization or death due to illness or accidents"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:layout_margin="15dp"
+                    android:textSize="14sp"/>
+
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/search_bar_background_grey"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/blue_bg_check"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provides protection against thirt party legal liability of pets owners including the legal costs for defending the claim"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:layout_margin="15dp"
+                    android:textSize="14sp"/>
+
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="match_parent"
+                android:background="@drawable/search_bar_background_grey"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/blue_bg_check"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Covers the theft/Loss or straying of the pet dog"
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/gray_1"
+                    android:layout_margin="15dp"
+                    android:textSize="14sp"/>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/know_more_BT"
+        android:layout_width="0dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="@id/back_arrow_CV"
+        app:layout_constraintEnd_toEndOf="@id/Pet_Insurances_TV"
+        android:background="@drawable/blue_background_bg"
+        android:text="Know more"
+        android:textAllCaps="false"
+        android:fontFamily="@font/nunito"
+        android:textColor="@color/whiteColor"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

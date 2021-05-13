@@ -20,67 +20,76 @@ import com.cynoteck.petofyparents.parameter.changePassRequest.ChangePassRequest;
 import com.cynoteck.petofyparents.response.forgetAndChangePassResponse.PasswordResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Response;
 
 public class ChangePasswordActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
-    EditText current_password_ET ,new_password_ET ,confirm_password_ET;
+    TextInputEditText current_password_TIET ,new_password_TIET ,confirm_password_TIET;
+    TextInputLayout current_password_TIL, new_password_TIL, confirm_password_TIL;
     Button change_password_BT;
     Methods methods;
     String current_password="", new_password="", confirm_password="";
-    ImageView back_arrow_IV;
+    MaterialCardView login_back_arrow_CV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         methods = new Methods(this);
+        login_back_arrow_CV=findViewById(R.id.login_back_arrow_CV);
 
-        current_password_ET = findViewById(R.id.current_password_ET);
-        new_password_ET = findViewById(R.id.new_password_ET);
-        back_arrow_IV=findViewById(R.id.back_arrow_IV);
-        confirm_password_ET = findViewById(R.id.confirm_password_ET);
+        current_password_TIET = findViewById(R.id.current_password_TIET);
+        new_password_TIET = findViewById(R.id.new_password_TIET);
+        confirm_password_TIET = findViewById(R.id.confirm_password_TIET);
+
+        current_password_TIL = findViewById(R.id.current_password_TIL);
+        new_password_TIL = findViewById(R.id.new_password_TIL);
+        confirm_password_TIL = findViewById(R.id.confirm_password_TIL);
+
         change_password_BT = findViewById(R.id.change_password_BT);
         change_password_BT.setOnClickListener(this);
-        back_arrow_IV.setOnClickListener(this);
+        login_back_arrow_CV.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.change_password_BT:
-                current_password = current_password_ET.getText().toString().trim();
-                new_password = new_password_ET.getText().toString().trim();
-                confirm_password = confirm_password_ET.getText().toString().trim();
+                current_password = current_password_TIET.getText().toString().trim();
+                new_password = new_password_TIET.getText().toString().trim();
+                confirm_password = confirm_password_TIET.getText().toString().trim();
 
                 if (current_password.isEmpty()){
-                    current_password_ET.setError("Empty");
-                    current_password_ET.setError(null);
-                    confirm_password_ET.setError(null);
+                    current_password_TIL.setError("Empty");
+                    new_password_TIL.setError(null);
+                    confirm_password_TIL.setError(null);
 
                 }else if (new_password.isEmpty()){
-                    current_password_ET.setError(null);
-                    new_password_ET.setError("Empty");
-                    confirm_password_ET.setError(null);
+                    current_password_TIL.setError(null);
+                    new_password_TIL.setError("Empty");
+                    confirm_password_TIL.setError(null);
 
                 }else if (new_password.length()<6){
-                    current_password_ET.setError(null);
-                    new_password_ET.setError("Password length to short!");
-                    confirm_password_ET.setError(null);
+                    current_password_TIL.setError(null);
+                    new_password_TIL.setError("Password length to short!");
+                    confirm_password_TIL.setError(null);
 
                 }else if (confirm_password.isEmpty()){
-                    current_password_ET.setError(null);
-                    current_password_ET.setError(null);
-                    confirm_password_ET.setError("Empty");
+                    current_password_TIL.setError(null);
+                    new_password_TIL.setError(null);
+                    confirm_password_TIL.setError("Empty");
 
-                }else if (!new_password_ET.getText().toString().equals(confirm_password_ET.getText().toString())){
-                    current_password_ET.setError(null);
-                    current_password_ET.setError(null);
-                    confirm_password_ET.setError("Password do not match!");
+                }else if (!new_password_TIET.getText().toString().equals(confirm_password_TIET.getText().toString())){
+                    current_password_TIL.setError(null);
+                    new_password_TIL.setError(null);
+                    confirm_password_TIL.setError("Password do not match!");
                 }else {
-                    current_password_ET.setError(null);
-                    current_password_ET.setError(null);
-                    confirm_password_ET.setError(null);
+                    current_password_TIL.setError(null);
+                    new_password_TIL.setError(null);
+                    confirm_password_TIL.setError(null);
 
                     ChangePassParams changePassParams = new ChangePassParams();
                     changePassParams.setOldPassword(current_password);
@@ -103,7 +112,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiResp
 
                 break;
 
-            case R.id.back_arrow_IV:
+            case R.id.login_back_arrow_CV:
                 onBackPressed();
                 break;
         }
@@ -123,18 +132,18 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiResp
         methods.customProgressDismiss();
         switch (key)
         {
-            case "ForgetPassword":
+            case "ChangePassword":
 
                 try {
                     Log.d("DATALOG",response.body().toString());
                     PasswordResponse passwordResponse = (PasswordResponse) response.body();
                     int responseCode = Integer.parseInt(passwordResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
-                        current_password_ET.getText().clear();
-                        confirm_password_ET.getText().clear();
-                        new_password_ET.getText().clear();
+                        current_password_TIET.getText().clear();
+                        new_password_TIET.getText().clear();
+                        confirm_password_TIET.getText().clear();
 
-                        Intent intent = new Intent(this,LoginActivity.class);
+                        Intent intent = new Intent(this,DashBoardActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
                     }else if (responseCode==614){

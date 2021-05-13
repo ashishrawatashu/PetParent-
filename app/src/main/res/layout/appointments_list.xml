@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whiteColor"
+    android:layout_height="wrap_content">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/search_bar_background_grey"
+        android:paddingBottom="12dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/parent_profile_CIV"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/doctor_dummy_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/vet_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/nunito_bold"
+            android:gravity="center_vertical"
+            android:text="Ashish Rawat"
+            android:textColor="@color/gray_1"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/parent_profile_CIV"
+            app:layout_constraintEnd_toStartOf="@id/time_count_down_LL"
+            app:layout_constraintStart_toEndOf="@id/parent_profile_CIV"
+            app:layout_constraintTop_toTopOf="@id/parent_profile_CIV" />
+
+
+        <LinearLayout
+            android:id="@+id/time_count_down_LL"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/white_round_bg"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/parent_profile_CIV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/parent_profile_CIV">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="00"
+                    android:textColor="@color/black_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Hours"
+                    android:textColor="@color/black_color"
+                    android:textSize="5dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/montserrat"
+                android:text=":"
+                android:textColor="@color/black_color"
+                android:textSize="14sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="00"
+                    android:textColor="@color/black_color"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Minutes"
+                    android:textColor="@color/black_color"
+                    android:textSize="5dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/montserrat"
+                android:text=":"
+                android:textColor="@color/black_color"
+                android:textSize="14sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="00"
+                    android:textColor="#DD234C"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Seconds"
+                    android:textColor="@color/black_color"
+                    android:textSize="5dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/white_line"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/whiteColor"
+            app:layout_constraintEnd_toEndOf="@id/time_count_down_LL"
+            app:layout_constraintStart_toStartOf="@id/parent_profile_CIV"
+            app:layout_constraintTop_toBottomOf="@id/vet_name_TV" />
+
+        <ImageView
+            android:id="@+id/appoint_time_IV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/appointment_time"
+            app:layout_constraintStart_toStartOf="@id/parent_profile_CIV"
+            app:layout_constraintTop_toBottomOf="@id/white_line" />
+
+        <TextView
+            android:id="@+id/date_time_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito"
+            android:text="Date / Time"
+            android:textColor="@color/gray_3"
+            app:layout_constraintBottom_toTopOf="@id/appointment_time_TV"
+            app:layout_constraintStart_toEndOf="@id/appoint_time_IV" />
+
+
+        <TextView
+            android:id="@+id/appointment_time_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="10 January / 7:00 -7:30 pm"
+            android:textColor="@color/gray_2"
+            app:layout_constraintBottom_toBottomOf="@id/appoint_time_IV"
+            app:layout_constraintStart_toEndOf="@id/appoint_time_IV" />
+
+
+        <ImageView
+            android:id="@+id/appointment_type_IV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/appointment_type"
+            app:layout_constraintStart_toStartOf="@id/parent_profile_CIV"
+            app:layout_constraintTop_toBottomOf="@id/appointment_time_TV" />
+
+        <TextView
+            android:id="@+id/appointment_type_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito"
+            android:text="Appointment type"
+            android:textColor="@color/gray_3"
+            app:layout_constraintBottom_toTopOf="@id/parent_appointment_type_TV"
+            app:layout_constraintStart_toEndOf="@id/appointment_type_IV" />
+
+
+        <TextView
+            android:id="@+id/parent_appointment_type_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Online consultation"
+            android:textColor="@color/gray_2"
+            app:layout_constraintBottom_toBottomOf="@id/appointment_type_IV"
+            app:layout_constraintStart_toEndOf="@id/appointment_type_IV" />
+
+
+        <ImageView
+            android:id="@+id/pet_name_IV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/appointment_pet_name"
+            app:layout_constraintStart_toStartOf="@id/parent_profile_CIV"
+            app:layout_constraintTop_toBottomOf="@id/parent_appointment_type_TV" />
+
+        <TextView
+            android:id="@+id/pet_name_heading_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito"
+            android:text="Pet"
+            android:textColor="@color/gray_3"
+            app:layout_constraintBottom_toTopOf="@id/pet_name_TV"
+            app:layout_constraintStart_toEndOf="@id/pet_name_IV" />
+
+
+        <TextView
+            android:id="@+id/pet_name_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Bruno"
+            android:textColor="@color/gray_2"
+            app:layout_constraintBottom_toBottomOf="@id/pet_name_IV"
+            app:layout_constraintStart_toEndOf="@id/pet_name_IV" />
+
+
+        <Button
+            android:id="@+id/join_appointment_BT"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/blue_background_bg"
+            android:fontFamily="@font/nunito"
+            android:text="Join"
+            android:textAllCaps="false"
+            android:textColor="@color/whiteColor"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/pet_name_IV"
+            app:layout_constraintEnd_toEndOf="@id/time_count_down_LL"
+            app:layout_constraintTop_toTopOf="@id/pet_name_IV" />
+
+
+        <Button
+            android:id="@+id/cancel_appointment_BT"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/red_background_bg"
+            android:fontFamily="@font/nunito"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/whiteColor"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/pet_name_IV"
+            app:layout_constraintEnd_toEndOf="@id/time_count_down_LL"
+            app:layout_constraintTop_toTopOf="@id/pet_name_IV" />
+
+
+        <Button
+            android:id="@+id/payment_BT"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/blue_background_bg"
+            android:fontFamily="@font/nunito"
+            android:text="Payment"
+            android:textAllCaps="false"
+            android:textColor="@color/whiteColor"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/payment_status_IV"
+            app:layout_constraintEnd_toEndOf="@id/time_count_down_LL"
+            app:layout_constraintTop_toTopOf="@id/payment_status_IV" />
+
+        <ImageView
+            android:id="@+id/location_IV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/appointment_location"
+            app:layout_constraintStart_toStartOf="@id/parent_profile_CIV"
+            app:layout_constraintTop_toBottomOf="@id/pet_name_TV" />
+
+        <TextView
+            android:id="@+id/address_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito"
+            android:text="Dr, address"
+            android:textColor="@color/gray_3"
+            app:layout_constraintBottom_toTopOf="@id/dr_address_TV"
+            app:layout_constraintStart_toEndOf="@id/location_IV" />
+
+
+        <TextView
+            android:id="@+id/dr_address_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Nehru colony,Dehradun"
+            android:textColor="@color/gray_2"
+            app:layout_constraintBottom_toBottomOf="@id/location_IV"
+            app:layout_constraintStart_toEndOf="@id/location_IV" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/payment_status_IV"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/payment_pending_icon"
+            app:layout_constraintStart_toStartOf="@id/parent_profile_CIV"
+            app:layout_constraintTop_toBottomOf="@id/pet_name_TV" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/payment_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito"
+            android:text="Payment Status"
+            android:textColor="@color/gray_3"
+            app:layout_constraintBottom_toTopOf="@id/payment_pending_TV"
+            app:layout_constraintStart_toEndOf="@id/payment_status_IV" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/payment_pending_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Payment in progress"
+            android:textColor="@color/deactivate_red"
+            app:layout_constraintBottom_toBottomOf="@id/payment_status_IV"
+            app:layout_constraintStart_toEndOf="@id/payment_status_IV" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

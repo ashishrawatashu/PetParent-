@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_marginRight="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whiteColor"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/grey_border_button_bg"
+        android:layout_width="match_parent"
+        android:layout_height="110dp">
+        
+        <androidx.cardview.widget.CardView
+            android:id="@+id/user_pic_CV"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="15dp"
+            app:cardCornerRadius="100dp"
+            android:backgroundTint="@color/deactivate_red"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="25dp"
+            android:layout_height="25dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/user_first_letter_TV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="P"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/nunito"
+                    android:textSize="12sp"
+                    android:textColor="@color/whiteColor"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/user_profile_IV"
+                    android:src="@drawable/doctor_dummy_image"/>
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/user_name_TV"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toStartOf="@+id/start_rate_LL"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="@id/user_pic_CV"
+            app:layout_constraintBottom_toBottomOf="@id/user_pic_CV"
+            app:layout_constraintStart_toEndOf="@id/user_pic_CV"
+            android:layout_marginLeft="15dp"
+            android:text="Shewta rana"
+            android:fontFamily="@font/nunito"
+            android:textSize="14sp"
+            android:textColor="@color/gray_3"/>
+
+        <LinearLayout
+            android:id="@+id/start_rate_LL"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="7dp"
+            app:layout_constraintTop_toTopOf="@id/user_pic_CV"
+            app:layout_constraintBottom_toBottomOf="@id/user_pic_CV"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_height="0dp">
+
+
+            <ImageView
+                android:id="@+id/star_one"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/star_icon"/>
+
+            <ImageView
+                android:id="@+id/star_two"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/star_icon"/>
+
+            <ImageView
+                android:id="@+id/star_three"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/empty_star_icon"/>
+
+            <ImageView
+                android:id="@+id/star_four"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/empty_star_icon"/>
+
+            <ImageView
+                android:id="@+id/star_five"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/empty_star_icon"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/comment_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/user_pic_CV"
+            app:layout_constraintStart_toStartOf="@id/user_pic_CV"
+            app:layout_constraintEnd_toEndOf="@id/start_rate_LL"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Happy with: Doctor friendliness    Explanation of the health    issueTreatment satisfaction
+Greetings.....!"
+            android:fontFamily="@font/nunito"
+            android:textSize="12sp"
+            android:textColor="@color/gray_2"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

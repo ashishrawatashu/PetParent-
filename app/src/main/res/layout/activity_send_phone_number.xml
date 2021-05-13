@@ -28,8 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:padding="15dp"
-            android:src="@drawable/logo_small_size" />
+            android:padding="10dp"
+            android:src="@drawable/petofy_main_logo" />
 
     </RelativeLayout>
 
@@ -86,7 +86,8 @@
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:padding="3dp"
-                        android:src="@drawable/phone_icon" />
+                        android:src="@drawable/phone_icon"
+                        app:tint="@color/colorPrimary" />
 
 
                     <ImageView

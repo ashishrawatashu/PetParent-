@@ -44,6 +44,8 @@ public class PetClinicVisitList
 
     private String petUniqueId;
 
+    private String contactNumber;
+
     private String pet;
 
     private String updatedByUser;
@@ -76,10 +78,14 @@ public class PetClinicVisitList
 
     private String veterinarian;
 
+    private String nextVaccineName;
+
+    private String nextVaccineType;
+
     public String getNatureOfVisitList ()
-{
-    return natureOfVisitList;
-}
+    {
+        return natureOfVisitList;
+    }
 
     public void setNatureOfVisitList (String natureOfVisitList)
     {
@@ -87,9 +93,9 @@ public class PetClinicVisitList
     }
 
     public String getPetId ()
-{
-    return petId;
-}
+    {
+        return petId;
+    }
 
     public void setPetId (String petId)
     {
@@ -97,9 +103,9 @@ public class PetClinicVisitList
     }
 
     public String getPetAge ()
-{
-    return petAge;
-}
+    {
+        return petAge;
+    }
 
     public void setPetAge (String petAge)
     {
@@ -107,9 +113,9 @@ public class PetClinicVisitList
     }
 
     public String getDocuments ()
-{
-    return documents;
-}
+    {
+        return documents;
+    }
 
     public void setDocuments (String documents)
     {
@@ -117,9 +123,9 @@ public class PetClinicVisitList
     }
 
     public String getCreatedByUser ()
-{
-    return createdByUser;
-}
+    {
+        return createdByUser;
+    }
 
     public void setCreatedByUser (String createdByUser)
     {
@@ -137,9 +143,9 @@ public class PetClinicVisitList
     }
 
     public String getWeightOz ()
-{
-    return weightOz;
-}
+    {
+        return weightOz;
+    }
 
     public void setWeightOz (String weightOz)
     {
@@ -147,9 +153,9 @@ public class PetClinicVisitList
     }
 
     public String getFollowUpId ()
-{
-    return followUpId;
-}
+    {
+        return followUpId;
+    }
 
     public void setFollowUpId (String followUpId)
     {
@@ -157,9 +163,9 @@ public class PetClinicVisitList
     }
 
     public String getCreatedOn ()
-{
-    return createdOn;
-}
+    {
+        return createdOn;
+    }
 
     public void setCreatedOn (String createdOn)
     {
@@ -167,9 +173,9 @@ public class PetClinicVisitList
     }
 
     public String getPetName ()
-{
-    return petName;
-}
+    {
+        return petName;
+    }
 
     public void setPetName (String petName)
     {
@@ -177,9 +183,9 @@ public class PetClinicVisitList
     }
 
     public FollowUp getFollowUp ()
-{
-    return followUp;
-}
+    {
+        return followUp;
+    }
 
     public void setFollowUp (FollowUp followUp)
     {
@@ -197,9 +203,9 @@ public class PetClinicVisitList
     }
 
     public String getPetParentName ()
-{
-    return petParentName;
-}
+    {
+        return petParentName;
+    }
 
     public void setPetParentName (String petParentName)
     {
@@ -257,19 +263,27 @@ public class PetClinicVisitList
     }
 
     public String getPetUniqueId ()
-{
-    return petUniqueId;
-}
+    {
+        return petUniqueId;
+    }
 
     public void setPetUniqueId (String petUniqueId)
     {
         this.petUniqueId = petUniqueId;
     }
 
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
     public String getPet ()
-{
-    return pet;
-}
+    {
+        return pet;
+    }
 
     public void setPet (String pet)
     {
@@ -277,9 +291,9 @@ public class PetClinicVisitList
     }
 
     public String getUpdatedByUser ()
-{
-    return updatedByUser;
-}
+    {
+        return updatedByUser;
+    }
 
     public void setUpdatedByUser (String updatedByUser)
     {
@@ -297,9 +311,9 @@ public class PetClinicVisitList
     }
 
     public String getPetSex ()
-{
-    return petSex;
-}
+    {
+        return petSex;
+    }
 
     public void setPetSex (String petSex)
     {
@@ -307,9 +321,9 @@ public class PetClinicVisitList
     }
 
     public String getUpdatedBy ()
-{
-    return updatedBy;
-}
+    {
+        return updatedBy;
+    }
 
     public void setUpdatedBy (String updatedBy)
     {
@@ -317,9 +331,9 @@ public class PetClinicVisitList
     }
 
     public String getFollowUpList ()
-{
-    return followUpList;
-}
+    {
+        return followUpList;
+    }
 
     public void setFollowUpList (String followUpList)
     {
@@ -327,9 +341,9 @@ public class PetClinicVisitList
     }
 
     public String getUpdatedOn ()
-{
-    return updatedOn;
-}
+    {
+        return updatedOn;
+    }
 
     public void setUpdatedOn (String updatedOn)
     {
@@ -337,9 +351,9 @@ public class PetClinicVisitList
     }
 
     public String getVeterinarianUserId ()
-{
-    return veterinarianUserId;
-}
+    {
+        return veterinarianUserId;
+    }
 
     public void setVeterinarianUserId (String veterinarianUserId)
     {
@@ -357,9 +371,9 @@ public class PetClinicVisitList
     }
 
     public String getDewormerName ()
-{
-    return dewormerName;
-}
+    {
+        return dewormerName;
+    }
 
     public void setDewormerName (String dewormerName)
     {
@@ -377,9 +391,9 @@ public class PetClinicVisitList
     }
 
     public String getVaccine ()
-{
-    return vaccine;
-}
+    {
+        return vaccine;
+    }
 
     public void setVaccine (String vaccine)
     {
@@ -387,9 +401,9 @@ public class PetClinicVisitList
     }
 
     public String getCreatedBy ()
-{
-    return createdBy;
-}
+    {
+        return createdBy;
+    }
 
     public void setCreatedBy (String createdBy)
     {
@@ -426,9 +440,25 @@ public class PetClinicVisitList
         this.veterinarian = veterinarian;
     }
 
+    public String getNextVaccineName() {
+        return nextVaccineName;
+    }
+
+    public void setNextVaccineName(String nextVaccineName) {
+        this.nextVaccineName = nextVaccineName;
+    }
+
+    public String getNextVaccineType() {
+        return nextVaccineType;
+    }
+
+    public void setNextVaccineType(String nextVaccineType) {
+        this.nextVaccineType = nextVaccineType;
+    }
+
     @Override
     public String toString()
     {
-        return "ClassPojo [natureOfVisitList = "+natureOfVisitList+", petId = "+petId+", petAge = "+petAge+", documents = "+documents+", createdByUser = "+createdByUser+", description = "+description+", weightOz = "+weightOz+", followUpId = "+followUpId+", createdOn = "+createdOn+", petName = "+petName+", followUp = "+followUp+", dateOfOnset = "+dateOfOnset+", petParentName = "+petParentName+", temperature = "+temperature+", treatmentRemarks = "+treatmentRemarks+", visitDate = "+visitDate+", natureOfVisitId = "+natureOfVisitId+", id = "+id+", petUniqueId = "+petUniqueId+", pet = "+pet+", updatedByUser = "+updatedByUser+", weightLbs = "+weightLbs+", petSex = "+petSex+", updatedBy = "+updatedBy+", followUpList = "+followUpList+", updatedOn = "+updatedOn+", veterinarianUserId = "+veterinarianUserId+", natureOfVisit = "+natureOfVisit+", dewormerName = "+dewormerName+", followUpDate = "+followUpDate+", vaccine = "+vaccine+", createdBy = "+createdBy+", diagnosisProcedure = "+diagnosisProcedure+", encryptedId = "+encryptedId+", veterinarian = "+veterinarian+"]";
+        return "ClassPojo [natureOfVisitList = "+natureOfVisitList+", petId = "+petId+", petAge = "+petAge+", documents = "+documents+", createdByUser = "+createdByUser+", description = "+description+", weightOz = "+weightOz+", followUpId = "+followUpId+", createdOn = "+createdOn+", petName = "+petName+", followUp = "+followUp+", dateOfOnset = "+dateOfOnset+", petParentName = "+petParentName+", temperature = "+temperature+", treatmentRemarks = "+treatmentRemarks+", visitDate = "+visitDate+", natureOfVisitId = "+natureOfVisitId+", id = "+id+", petUniqueId = "+petUniqueId+", contactNumber = "+contactNumber+", pet = "+pet+", updatedByUser = "+updatedByUser+", weightLbs = "+weightLbs+", petSex = "+petSex+", updatedBy = "+updatedBy+", followUpList = "+followUpList+", updatedOn = "+updatedOn+", veterinarianUserId = "+veterinarianUserId+", natureOfVisit = "+natureOfVisit+", dewormerName = "+dewormerName+", followUpDate = "+followUpDate+", vaccine = "+vaccine+", createdBy = "+createdBy+", diagnosisProcedure = "+diagnosisProcedure+", encryptedId = "+encryptedId+", veterinarian = "+veterinarian+", nextVaccineName= "+nextVaccineName+", nextVaccineType= "+nextVaccineType+"]";
     }
 }

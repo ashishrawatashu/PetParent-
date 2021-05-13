@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -27,6 +28,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +38,9 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -61,6 +67,7 @@ import com.cynoteck.petofyparents.response.petAgeUnitResponse.PetAgeUnitResponse
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
+import com.google.android.material.card.MaterialCardView;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -90,42 +97,36 @@ import retrofit2.Response;
 
 public class AddPetRegister extends AppCompatActivity implements View.OnClickListener, ApiResponse, TextWatcher {
 
-    CircleImageView pet_profile_image;
     ScrollView scrollView;
-    AppCompatSpinner age_wise, parent_address, add_pet_age, add_pet_type, add_pet_sex, add_pet_breed, add_pet_color, add_pet_size;
-    EditText pet_name, pet_description, pet_address, age_neumeric;
+    AppCompatSpinner age_wise, add_pet_age, add_pet_type, add_pet_breed, add_pet_color;
+    EditText pet_name, age_neumeric;
     TextView peto_reg_number, calenderView, ageViewTv;
-    ImageView back_arrow_IV, service_cat_img_one, service_cat_img_two, service_cat_img_three, service_cat_img_four,
-            service_cat_img_five;
+    MaterialCardView back_arrow_CV;
     Button pet_submit;
     CheckBox convert_yr_to_age;
-    AutoCompleteTextView pet_parent_name, pet_contact_number;
-    LinearLayout day_and_age_layout;
+    LinearLayout day_and_age_layout,upload_image_LL;
     String strPetName = "", strPetParentName = "", strPetContactNumber = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
             strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "", strAgeCount = "",
             strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
-            strSpnrSex = "", strSpnrSexId = "", currentDateandTime = "", selctProflImage = "0", selctImgOne = "0", selctImgtwo = "0",
-            slctImgThree = "0", slctImgFour = "0", slctImgFive = "0", strProfileImgUrl = "", strFirstImgUrl = "", strSecondImgUrl = "",
+            strSpnrSex = "", strSpnrSexId = "", currentDateandTime = "", selctProflImage = "0", strProfileImgUrl = "", strFirstImgUrl = "", strSecondImgUrl = "",
             strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "";
     Dialog dialog;
-
+    ImageView pet_image_IV;
+    ConstraintLayout uploaded_image_CL;
+    TextView upload_image_TV,image_path_TV,change_image_TV;
+    RelativeLayout remove_image_RL;
     Methods methods;
     DatePickerDialog picker;
     ArrayList<String> petType;
     ArrayList<String> petBreed;
     ArrayList<String> petAge;
     ArrayList<String> petColor;
-    ArrayList<String> petSize;
-    ArrayList<String> petSex;
     ArrayList<String> petAgeType;
-    ArrayList<String> parentAdress;
 
     HashMap<String, String> petTypeHashMap = new HashMap<>();
     HashMap<String, String> petBreedHashMap = new HashMap<>();
     HashMap<String, String> petAgeHashMap = new HashMap<>();
     HashMap<String, String> petColorHashMap = new HashMap<>();
-    HashMap<String, String> petSizeHashMap = new HashMap<>();
-    HashMap<String, String> petSexHashMap = new HashMap<>();
     HashMap<String, String> petAgeUnitHash = new HashMap<>();
 
     private static final String IMAGE_DIRECTORY = "/Picture";
@@ -142,45 +143,28 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     private Button upload;
     private String baseUrl;
 
+    RadioGroup genderRG;
+    RadioButton maleRB, femaleRB;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pet_register);
         Intent intent = getIntent();
 
-        intentFrom = intent.getStringExtra("appointment");
+        intentFrom = intent.getStringExtra("intent_from");
         init();
         requestMultiplePermissions();
         currentDateAndTime();
         methods = new Methods(this);
 
-        petSex = new ArrayList<>();
-        petSex.add("Pet Sex");
-        petSex.add("Male");
-        petSex.add("Female");
-
-
-        parentAdress = new ArrayList<>();
-        parentAdress.add("Mr.");
-        parentAdress.add("Mrs.");
-        parentAdress.add("Miss.");
-
-        petSexHashMap.put("Pet Sex", "0");
-        petSexHashMap.put("Male", "1");
-        petSexHashMap.put("Female", "2");
-
         if (methods.isInternetOn()) {
             petType();
-            genaretePetUniqueKey();
-            setSpinnerPetSex();
             getPetAgeUnit();
-            getPetParentname();
         } else {
             methods.DialogInternet();
         }
-
-        setPetParentAdress();
-
     }
 
 
@@ -204,79 +188,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         Log.e("DAILOG", "getPetAgeString==>" + getPetAgeRequestData);
     }
 
-    private void getPetParentname() {
-        pet_parent_name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                Log.d("dataChange", "afterTextChanged" + new String(editable.toString()));
-                String value = editable.toString();
-                SearchPetParentParameter searchPetParentParameter = new SearchPetParentParameter();
-                searchPetParentParameter.setPrefix(value);
-                SearchPetParentRequestData searchPetParentRequestData = new SearchPetParentRequestData();
-                searchPetParentRequestData.setData(searchPetParentParameter);
-                ApiService<GetPetParentResponseData> service = new ApiService<>();
-                service.get(com.cynoteck.petofyparents.activty.AddPetRegister.this, ApiClient.getApiInterface().searchPetParent(Config.token, searchPetParentRequestData), "SearchPetParent");
-                Log.e("DAILOG", "getPetaParentName==>" + searchPetParentRequestData);
-            }
-        });
-
-
-        pet_parent_name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String value = pet_parent_name.getText().toString();
-                String[] city_array = value.split("\\(");
-
-                pet_parent_name.setText(city_array[0]);
-                pet_contact_number.setText(city_array[1].substring(0, city_array[1].length() - 1).trim());
-            }
-        });
-
-        pet_contact_number.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String value = editable.toString();
-                SearchPetParentParameter searchPetParentParameter = new SearchPetParentParameter();
-                searchPetParentParameter.setPrefix(value);
-                SearchPetParentRequestData searchPetParentRequestData = new SearchPetParentRequestData();
-                searchPetParentRequestData.setData(searchPetParentParameter);
-                ApiService<GetPetParentResponseData> service = new ApiService<>();
-                service.get(com.cynoteck.petofyparents.activty.AddPetRegister.this, ApiClient.getApiInterface().searchPetParent(Config.token, searchPetParentRequestData), "SearchPetParent");
-                Log.e("DAILOG", "getPetaParentName==>" + searchPetParentRequestData);
-
-            }
-        });
-
-        pet_contact_number.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String value = pet_contact_number.getText().toString();
-                String[] city_array = value.split("\\(");
-                pet_parent_name.setText(city_array[0]);
-                pet_contact_number.setText(city_array[1].substring(0, city_array[1].length() - 1).trim());
-            }
-        });
-
-    }
-
     private void currentDateAndTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy h:mm:ss a", Locale.getDefault());
         currentDateandTime = sdf.format(new Date());
@@ -288,11 +199,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         methods.showCustomProgressBarDialog(this);
         ApiService<PetTypeResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().petTypeApi(), "GetPetTypes");
-    }
-
-    private void genaretePetUniqueKey() {
-        ApiService<UniqueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGeneratePetUniqueId(Config.token), "GeneratePetUniqueId");
     }
 
     private void getPetBreed() {
@@ -338,71 +244,51 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         service.get(this, ApiClient.getApiInterface().getGetPetColorApi(breedParams), "GetPetColor");
     }
 
-    private void getPetSize() {
-        BreedRequest breedRequest = new BreedRequest();
-        breedRequest.setGetAll("false");
-        if (!getStrSpnerItemPetNmId.equals("0"))
-            breedRequest.setPetCategoryId(getStrSpnerItemPetNmId);
-        else
-            breedRequest.setPetCategoryId("1");
-        BreedParams breedParams = new BreedParams();
-        breedParams.setData(breedRequest);
-
-        ApiService<PetSizeValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetSizeApi(breedParams), "GetPetSize");
-    }
-
-
     private void init() {
+        back_arrow_CV = findViewById(R.id.back_arrow_CV);
 
         scrollView = findViewById(R.id.scrollView);
+        maleRB = findViewById(R.id.maleRB);
+        genderRG = findViewById(R.id.genderRG);
+        femaleRB = findViewById(R.id.femaleRB);
+
 
         //Spinner
         add_pet_type = findViewById(R.id.add_pet_type);
-        add_pet_sex = findViewById(R.id.add_pet_sex_dialog);
         add_pet_breed = findViewById(R.id.add_pet_breed_dialog);
         add_pet_color = findViewById(R.id.add_pet_color_dialog);
-        add_pet_size = findViewById(R.id.add_pet_size_dialog);
         add_pet_age = findViewById(R.id.add_pet_age_dialog);
 
         //TextInputEditText
         pet_name = findViewById(R.id.pet_name_ET);
-        pet_parent_name = findViewById(R.id.pet_parent_name_ET);
-        pet_contact_number = findViewById(R.id.pet_contact_number);
-        pet_description = findViewById(R.id.pet_desc_ET);
-        pet_address = findViewById(R.id.pet_address_ET);
+
 
         //TextView
-        peto_reg_number = findViewById(R.id.peto_reg_number);
         calenderView = findViewById(R.id.calenderTextView_dialog);
         calenderView.setOnClickListener(this);
 
         //ImageView
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        pet_profile_image = findViewById(R.id.pet_profile_image);
-        service_cat_img_one = findViewById(R.id.service_cat_img_one);
-        service_cat_img_two = findViewById(R.id.service_cat_img_two);
-        service_cat_img_three = findViewById(R.id.service_cat_img_three);
-        service_cat_img_four = findViewById(R.id.service_cat_img_four);
-        service_cat_img_five = findViewById(R.id.service_cat_img_five);
+        pet_image_IV = findViewById(R.id.pet_image_IV);
+        upload_image_LL = findViewById(R.id.upload_image_LL);
+        image_path_TV = findViewById(R.id.image_path_TV);
+        upload_image_TV = findViewById(R.id.upload_image_TV);
+        remove_image_RL = findViewById(R.id.remove_image_RL);
+        change_image_TV=findViewById(R.id.change_image_TV);
 
+        change_image_TV.setOnClickListener(this);
+        remove_image_RL.setOnClickListener(this);
+        upload_image_LL.setOnClickListener(this);
+
+        uploaded_image_CL = findViewById(R.id.uploaded_image_CL);
         convert_yr_to_age = findViewById(R.id.convert_yr_to_age);
         age_wise = findViewById(R.id.age_wise);
         age_neumeric = findViewById(R.id.age_neumeric);
-        parent_address = findViewById(R.id.parent_address);
         day_and_age_layout = findViewById(R.id.day_and_age_layout);
         ageViewTv = findViewById(R.id.ageViewTv);
         ageViewTv.setText("Age:- 0 Days");
 
-        pet_profile_image.setOnClickListener(this);
-        service_cat_img_one.setOnClickListener(this);
-        service_cat_img_two.setOnClickListener(this);
-        service_cat_img_three.setOnClickListener(this);
-        service_cat_img_four.setOnClickListener(this);
-        service_cat_img_five.setOnClickListener(this);
-        back_arrow_IV.setOnClickListener(this);
+        back_arrow_CV.setOnClickListener(this);
         convert_yr_to_age.setOnClickListener(this);
-
         //Button
         pet_submit = findViewById(R.id.pet_submit);
         pet_submit.setOnClickListener(this);
@@ -461,7 +347,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.back_arrow_IV:
+            case R.id.back_arrow_CV:
                 onBackPressed();
                 break;
             case R.id.convert_yr_to_age:
@@ -495,38 +381,31 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.pet_submit:
                 strPetName = pet_name.getText().toString().trim();
-                strPetDescription = pet_description.getText().toString().trim();
+                strPetDescription = "";
                 strPetBirthDay = calenderView.getText().toString().trim();
+                if (maleRB.isChecked()) {
+                    strSpnrSexId = "1";
+                } else if (femaleRB.isChecked()) {
+                    strSpnrSexId = "2";
+                }
                 if (strSpnerItemPetNm.isEmpty() || (strSpnerItemPetNm.equals("Select Pet Type"))) {
                     Toast.makeText(this, "Select Type!!", Toast.LENGTH_SHORT).show();
+                }  else if (strSpnrSexId.equals("")) {
+                    Toast.makeText(this, "Select Gender !", Toast.LENGTH_SHORT).show();
+                }else if (strSpnrBreed.isEmpty() || (strSpnrBreed.equals("Pet Breed"))) {
+                    Toast.makeText(this, "Select Breed!!", Toast.LENGTH_SHORT).show();
                 } else if (strPetName.isEmpty()) {
                     Toast.makeText(this, "Enter Pet Name", Toast.LENGTH_SHORT).show();
                     pet_name.setError("Enter Pet Name");
-                    pet_parent_name.setError(null);
-                    pet_contact_number.setError(null);
-                    pet_description.setError(null);
-                    pet_address.setError(null);
                     calenderView.setError(null);
-                } else if (strSpnrSex.isEmpty() || (strSpnrSex.equals("Pet Sex"))) {
-                    Toast.makeText(this, "Select Pet Sex !", Toast.LENGTH_SHORT).show();
-                } else if (strPetBirthDay.isEmpty()) {
+                }else if (strPetBirthDay.isEmpty()) {
                     Toast.makeText(this, "Pet YOB", Toast.LENGTH_SHORT).show();
                     pet_name.setError(null);
-                    pet_parent_name.setError(null);
-                    pet_contact_number.setError(null);
-                    pet_description.setError(null);
-                    pet_address.setError(null);
                     calenderView.setError("Pet YOB");
-                } else if (strSpnrBreed.isEmpty() || (strSpnrBreed.equals("Pet Breed"))) {
-                    Toast.makeText(this, "Select Breed!!", Toast.LENGTH_SHORT).show();
-                } else if ((strSpnrColor.isEmpty()) || (strSpnrColor.equals("Pet Color"))) {
+                }  else if ((strSpnrColor.isEmpty()) || (strSpnrColor.equals("Pet Color"))) {
                     Toast.makeText(this, "Select Pet Color!!", Toast.LENGTH_SHORT).show();
                 } else {
                     pet_name.setError(null);
-                    pet_parent_name.setError(null);
-                    pet_contact_number.setError(null);
-                    pet_description.setError(null);
-                    pet_address.setError(null);
                     calenderView.setError(null);
                     Log.d("hahahah", "" + getStrSpnerItemPetNmId + " " + strSpnrSexId + " " + strSpnrAgeId + " " + strSpneSizeId +
                             " " + strSpnrColorId + " " + strSpnrBreedId + " " + strPetName + " " + strPetBirthDay + " " + strPetDescription + " " + currentDateandTime);
@@ -546,7 +425,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     data.setDescription(strPetDescription);
                     data.setCreateDate(currentDateandTime);
                     data.setDateOfBirth(strPetBirthDay);
-
                     data.setPetProfileImageUrl(strProfileImgUrl);
                     data.setFirstServiceImageUrl(strFirstImgUrl);
                     data.setSecondServiceImageUrl(strSecondImgUrl);
@@ -555,7 +433,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     data.setFifthServiceImageUrl(strFifthImgUrl);
                     addPetRequset.setAddPetParams(data);
                     if (methods.isInternetOn()) {
-
+                        pet_submit.setEnabled(false);
                         addPetData(addPetRequset);
                     } else {
                         methods.DialogInternet();
@@ -586,29 +464,19 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 picker.getDatePicker().setMaxDate(System.currentTimeMillis());
                 picker.show();
                 break;
-            case R.id.pet_profile_image:
+
+            case R.id.change_image_TV:
+
+            case R.id.upload_image_LL:
                 selctProflImage = "1";
                 showPictureDialog();
                 break;
-            case R.id.service_cat_img_one:
-                selctImgOne = "1";
-                showPictureDialog();
-                break;
-            case R.id.service_cat_img_two:
-                selctImgtwo = "1";
-                showPictureDialog();
-                break;
-            case R.id.service_cat_img_three:
-                slctImgThree = "1";
-                showPictureDialog();
-                break;
-            case R.id.service_cat_img_four:
-                slctImgFour = "1";
-                showPictureDialog();
-                break;
-            case R.id.service_cat_img_five:
-                slctImgFive = "1";
-                showPictureDialog();
+
+            case R.id.remove_image_RL:
+                upload_image_TV.setText("Upload photo ");
+                upload_image_LL.setVisibility(View.VISIBLE);
+                uploaded_image_CL.setVisibility(View.GONE);
+                strProfileImgUrl ="";
                 break;
 
         }
@@ -618,12 +486,20 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     private void showPictureDialog() {
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_layout);
+        RelativeLayout select_camera = dialog.findViewById(R.id.select_camera);
+        RelativeLayout select_gallery = dialog.findViewById(R.id.select_gallery);
+        RelativeLayout cancel_dialog = dialog.findViewById(R.id.cancel_dialog);
 
-        TextView select_camera = (TextView) dialog.findViewById(R.id.select_camera);
-        TextView select_gallery = (TextView) dialog.findViewById(R.id.select_gallery);
-        TextView cancel_dialog = (TextView) dialog.findViewById(R.id.cancel_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        cancel_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
 
         select_camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -639,30 +515,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        cancel_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selctProflImage.equals("1")) {
-                    selctProflImage = "0";
-                }
-                if (selctImgOne.equals("1")) {
-                    selctImgOne = "0";
-                }
-                if (selctImgtwo.equals("1")) {
-                    selctImgtwo = "0";
-                }
-                if (slctImgThree.equals("1")) {
-                    slctImgThree = "0";
-                }
-                if (slctImgFour.equals("1")) {
-                    slctImgFour = "0";
-                }
-                if (slctImgFive.equals("1")) {
-                    slctImgFive = "0";
-                }
-                dialog.dismiss();
-            }
-        });
 
         dialog.show();
     }
@@ -699,50 +551,14 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
 
                     if (selctProflImage.equals("1")) {
-                        pet_profile_image.setImageBitmap(bitmap);
+                        pet_image_IV.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
-                    if (selctImgOne.equals("1")) {
-                        service_cat_img_one.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (selctImgtwo.equals("1")) {
-                        service_cat_img_two.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (slctImgThree.equals("1")) {
-                        service_cat_img_three.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (slctImgFour.equals("1")) {
-                        service_cat_img_four.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (slctImgFive.equals("1")) {
-                        service_cat_img_five.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-
 
                 } catch (IOException e) {
                     e.printStackTrace();
                     if (selctProflImage.equals("1")) {
                         selctProflImage = "0";
-                    }
-                    if (selctImgOne.equals("1")) {
-                        selctImgOne = "0";
-                    }
-                    if (selctImgtwo.equals("1")) {
-                        selctImgtwo = "0";
-                    }
-                    if (slctImgThree.equals("1")) {
-                        slctImgThree = "0";
-                    }
-                    if (slctImgFour.equals("1")) {
-                        slctImgFour = "0";
-                    }
-                    if (slctImgFive.equals("1")) {
-                        slctImgFive = "0";
                     }
                     Toast.makeText(com.cynoteck.petofyparents.activty.AddPetRegister.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }
@@ -754,27 +570,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 thumbnail = (Bitmap) data.getExtras().get("data");
                 Log.e("jghl", "" + thumbnail);
                 if (selctProflImage.equals("1")) {
-                    pet_profile_image.setImageBitmap(thumbnail);
-                    saveImage(thumbnail);
-                }
-                if (selctImgOne.equals("1")) {
-                    service_cat_img_one.setImageBitmap(thumbnail);
-                    saveImage(thumbnail);
-                }
-                if (selctImgtwo.equals("1")) {
-                    service_cat_img_two.setImageBitmap(thumbnail);
-                    saveImage(thumbnail);
-                }
-                if (slctImgThree.equals("1")) {
-                    service_cat_img_three.setImageBitmap(thumbnail);
-                    saveImage(thumbnail);
-                }
-                if (slctImgFour.equals("1")) {
-                    service_cat_img_four.setImageBitmap(thumbnail);
-                    saveImage(thumbnail);
-                }
-                if (slctImgFive.equals("1")) {
-                    service_cat_img_five.setImageBitmap(thumbnail);
+                    pet_image_IV.setImageBitmap(thumbnail);
                     saveImage(thumbnail);
                 }
                 Toast.makeText(com.cynoteck.petofyparents.activty.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
@@ -782,27 +578,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(com.cynoteck.petofyparents.activty.AddPetRegister.this.getContentResolver(), data.getData());
                     if (selctProflImage.equals("1")) {
-                        pet_profile_image.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (selctImgOne.equals("1")) {
-                        service_cat_img_one.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (selctImgtwo.equals("1")) {
-                        service_cat_img_two.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (slctImgThree.equals("1")) {
-                        service_cat_img_three.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (slctImgFour.equals("1")) {
-                        service_cat_img_four.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    if (slctImgFive.equals("1")) {
-                        service_cat_img_five.setImageBitmap(bitmap);
+                        pet_image_IV.setImageBitmap(bitmap);
                         saveImage(bitmap);
                     }
                     Toast.makeText(com.cynoteck.petofyparents.activty.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
@@ -810,21 +586,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     e.printStackTrace();
                     if (selctProflImage.equals("1")) {
                         selctProflImage = "0";
-                    }
-                    if (selctImgOne.equals("1")) {
-                        selctImgOne = "0";
-                    }
-                    if (selctImgtwo.equals("1")) {
-                        selctImgtwo = "0";
-                    }
-                    if (slctImgThree.equals("1")) {
-                        slctImgThree = "0";
-                    }
-                    if (slctImgFour.equals("1")) {
-                        slctImgFour = "0";
-                    }
-                    if (slctImgFive.equals("1")) {
-                        slctImgFive = "0";
                     }
                 }
             }
@@ -857,81 +618,9 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                         new String[]{"image/png"}, null);
                 fo.close();
                 Log.d("TAG", "File Saved::---&gt;" + file.getAbsolutePath());
+                image_path_TV.setText(file.getAbsolutePath());
                 UploadImages(file);
                 return file.getAbsolutePath();
-            }
-            if (selctImgOne.equals("1")) {
-                fileImg1 = new File(wallpaperDirectory, Calendar.getInstance()
-                        .getTimeInMillis() + ".jpg");
-                fileImg1.createNewFile();
-                FileOutputStream fo = new FileOutputStream(fileImg1);
-                fo.write(bytes.toByteArray());
-                MediaScannerConnection.scanFile(this,
-                        new String[]{fileImg1.getPath()},
-                        new String[]{"image/jpeg"}, null);
-                fo.close();
-                Log.d("TAG", "File Saved::---&gt;" + fileImg1.getAbsolutePath());
-                UploadImages(fileImg1);
-                return fileImg1.getAbsolutePath();
-
-            }
-            if (selctImgtwo.equals("1")) {
-                fileImg2 = new File(wallpaperDirectory, Calendar.getInstance()
-                        .getTimeInMillis() + ".jpg");
-                fileImg2.createNewFile();
-                FileOutputStream fo = new FileOutputStream(fileImg2);
-                fo.write(bytes.toByteArray());
-                MediaScannerConnection.scanFile(this,
-                        new String[]{fileImg2.getPath()},
-                        new String[]{"image/jpeg"}, null);
-                fo.close();
-                Log.d("TAG", "File Saved::---&gt;" + fileImg2.getAbsolutePath());
-                UploadImages(fileImg2);
-                return fileImg2.getAbsolutePath();
-
-            }
-            if (slctImgThree.equals("1")) {
-                fileImg3 = new File(wallpaperDirectory, Calendar.getInstance()
-                        .getTimeInMillis() + ".jpg");
-                fileImg3.createNewFile();
-                FileOutputStream fo = new FileOutputStream(fileImg3);
-                fo.write(bytes.toByteArray());
-                MediaScannerConnection.scanFile(this,
-                        new String[]{fileImg3.getPath()},
-                        new String[]{"image/jpeg"}, null);
-                fo.close();
-                Log.d("TAG", "File Saved::---&gt;" + fileImg3.getAbsolutePath());
-                UploadImages(fileImg3);
-                return fileImg2.getAbsolutePath();
-            }
-            if (slctImgFour.equals("1")) {
-                fileImg4 = new File(wallpaperDirectory, Calendar.getInstance()
-                        .getTimeInMillis() + ".jpg");
-                fileImg4.createNewFile();
-                FileOutputStream fo = new FileOutputStream(fileImg4);
-                fo.write(bytes.toByteArray());
-                MediaScannerConnection.scanFile(this,
-                        new String[]{fileImg4.getPath()},
-                        new String[]{"image/jpeg"}, null);
-                fo.close();
-                Log.d("TAG", "File Saved::---&gt;" + fileImg4.getAbsolutePath());
-                UploadImages(fileImg4);
-                return fileImg4.getAbsolutePath();
-            }
-            if (slctImgFive.equals("1")) {
-                fileImg5 = new File(wallpaperDirectory, Calendar.getInstance()
-                        .getTimeInMillis() + ".jpg");
-                fileImg5.createNewFile();
-                FileOutputStream fo = new FileOutputStream(fileImg5);
-                fo.write(bytes.toByteArray());
-                MediaScannerConnection.scanFile(this,
-                        new String[]{fileImg5.getPath()},
-                        new String[]{"image/jpeg"}, null);
-                fo.close();
-                Log.d("TAG", "File Saved::---&gt;" + fileImg5.getAbsolutePath());
-                UploadImages(fileImg5);
-                return fileImg5.getAbsolutePath();
-
             }
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -1001,7 +690,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onResponse(Response arg0, String key) {
-        methods.customProgressDismiss();
+        pet_submit.setEnabled(true);
         switch (key) {
             case "SearchPetParent":
                 try {
@@ -1019,13 +708,11 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                         //for parent name
                         ArrayAdapter<String> randomArray = new ArrayAdapter<String>(this,
                                 android.R.layout.simple_list_item_1, remarksSearchList);
-                        pet_parent_name.setAdapter(randomArray);
                         randomArray.notifyDataSetChanged();
 
                         //for contact number
                         ArrayAdapter<String> randomArrayContactNumber = new ArrayAdapter<String>(this,
                                 android.R.layout.simple_list_item_1, remarksSearchList);
-                        pet_contact_number.setAdapter(randomArrayContactNumber);
                         randomArrayContactNumber.notifyDataSetChanged();
 
 
@@ -1074,6 +761,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
             case "GetPetAgeUnit":
                 try {
+                    methods.customProgressDismiss();
                     Log.d("GetPetTypes", arg0.body().toString());
                     PetAgeUnitResponseData petAgeUnitResponseData = (PetAgeUnitResponseData) arg0.body();
                     int responseCode = Integer.parseInt(petAgeUnitResponseData.getResponse().getResponseCode());
@@ -1122,22 +810,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     e.printStackTrace();
                 }
 
-            case "GeneratePetUniqueId":
-                try {
-                    Log.d("GeneratePetUniqueId", arg0.body().toString());
-                    UniqueResponse uniqueResponse = (UniqueResponse) arg0.body();
-                    int responseCode = Integer.parseInt(uniqueResponse.getResponse().getResponseCode());
-                    if (responseCode == 109) {
-                        petUniqueId = uniqueResponse.getData().getPetUniqueId();
-                        peto_reg_number.setText(petUniqueId);
-                    } else if (responseCode == 614) {
-                        Toast.makeText(this, uniqueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 break;
 
             case "GetPetBreed":
@@ -1214,57 +886,30 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     e.printStackTrace();
                 }
                 break;
-            case "GetPetSize":
-                try {
-                    Log.d("GetPetSize", arg0.body().toString());
-                    PetSizeValueResponse petSizeValueResponse = (PetSizeValueResponse) arg0.body();
-                    int responseCode = Integer.parseInt(petSizeValueResponse.getResponse().getResponseCode());
-                    if (responseCode == 109) {
-                        petSize = new ArrayList<>();
-                        petSize.add("Pet Size");
-                        Log.d("lalal", "" + petSizeValueResponse.getData().size());
-                        for (int i = 0; i < petSizeValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petSizeValueResponse.getData().get(i).getSize());
-                            petSize.add(petSizeValueResponse.getData().get(i).getSize());
-                            petSizeHashMap.put(petSizeValueResponse.getData().get(i).getSize(), petSizeValueResponse.getData().get(i).getId());
-                        }
-                        setPetSizeSpinner();
-                    } else if (responseCode == 614) {
-                        Toast.makeText(this, petSizeValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
 
             case "AddPet":
                 try {
+                    methods.customProgressDismiss();
                     Log.d("AddPet", arg0.body().toString());
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
                     Log.d("addPetValueResponse", "" + addPetValueResponse);
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-
-                        if (intentFrom.equals("appointment")) {
                             Toast.makeText(this, "Pet Added Successfully ", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent();
-                            intent.putExtra("petId", addPetValueResponse.getData().getId());
-                            intent.putExtra("userId", addPetValueResponse.getData().getUserId());
-                            intent.putExtra("uniqueId", addPetValueResponse.getData().getPetUniqueId());
-                            intent.putExtra("parent", addPetValueResponse.getData().getPetParentName());
-                            intent.putExtra("sex", addPetValueResponse.getData().getSex());
-                            intent.putExtra("age", addPetValueResponse.getData().getAge());
-                            intent.putExtra("petName", addPetValueResponse.getData().getPetName());
+                            intent.putExtra("pet_id", addPetValueResponse.getData().getId());
+                            intent.putExtra("pet_unique_id", addPetValueResponse.getData().getPetUniqueId());
+                            intent.putExtra("pet_image_url", addPetValueResponse.getData().getPetProfileImageUrl());
+                            intent.putExtra("pet_breed", addPetValueResponse.getData().getPetBreed());
+                            intent.putExtra("pet_age", addPetValueResponse.getData().getPetAge());
+                            intent.putExtra("pet_parent", addPetValueResponse.getData().getPetParentName());
+                            intent.putExtra("pet_sex", addPetValueResponse.getData().getPetSex());
+                            intent.putExtra("pet_name", addPetValueResponse.getData().getPetName());
+                            intent.putExtra("pet_category", addPetValueResponse.getData().getPetCategory());
+                            intent.putExtra("pet_date_of_birth", addPetValueResponse.getData().getDateOfBirth());
+                            intent.putExtra("pet_color", addPetValueResponse.getData().getPetColor());
                             setResult(RESULT_OK, intent);
                             finish();
-                        } else {
-                            Toast.makeText(this, "Pet Added Successfully ", Toast.LENGTH_SHORT).show();
-                            setResult(RESULT_OK);
-                            finish();
-
-                        }
                     } else if (responseCode == 614) {
                         Toast.makeText(this, addPetValueResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     } else {
@@ -1280,32 +925,17 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     ImageResponse imageResponse = (ImageResponse) arg0.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
                         if (selctProflImage.equals("1")) {
                             strProfileImgUrl = imageResponse.getData().getDocumentUrl();
                             selctProflImage = "0";
+                            upload_image_TV.setText("Photo Uploaded");
+                            upload_image_LL.setVisibility(View.GONE);
+                            Glide.with(this)
+                                    .load(strProfileImgUrl)
+                                    .placeholder(R.drawable.empty_pet_image)
+                                    .into(pet_image_IV);
+                            uploaded_image_CL.setVisibility(View.VISIBLE);
                         }
-                        if (selctImgOne.equals("1")) {
-                            strFirstImgUrl = imageResponse.getData().getDocumentUrl();
-                            selctImgOne = "0";
-                        }
-                        if (selctImgtwo.equals("1")) {
-                            strSecondImgUrl = imageResponse.getData().getDocumentUrl();
-                            selctImgtwo = "0";
-                        }
-                        if (slctImgThree.equals("1")) {
-                            strThirdImgUrl = imageResponse.getData().getDocumentUrl();
-                            slctImgThree = "0";
-                        }
-                        if (slctImgFour.equals("1")) {
-                            strFourthImUrl = imageResponse.getData().getDocumentUrl();
-                            slctImgFour = "0";
-                        }
-                        if (slctImgFive.equals("1")) {
-                            strFifthImgUrl = imageResponse.getData().getDocumentUrl();
-                            slctImgFive = "0";
-                        }
-
                     } else if (responseCode == 614) {
                         Toast.makeText(this, imageResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     } else {
@@ -1322,6 +952,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onError(Throwable t, String key) {
         Log.e("error", "" + t.getLocalizedMessage());
+        pet_submit.setEnabled(true);
         methods.customProgressDismiss();
     }
 
@@ -1342,7 +973,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     getPetBreed();
                     getPetAge();
                     getPetColor();
-                    getPetSize();
                 }
 
             }
@@ -1410,44 +1040,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    private void setPetSizeSpinner() {
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petSize);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        add_pet_size.setAdapter(aa);
-        add_pet_size.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                // Showing selected spinner item
-                strSpnrSize = item;
-                Log.d("spnerType", "" + strSpnrSize);
-                strSpneSizeId = petSizeHashMap.get(strSpnrSize);
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
-
-    private void setSpinnerPetSex() {
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petSex);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        add_pet_sex.setAdapter(aa);
-        add_pet_sex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                // Showing selected spinner item
-                strSpnrSex = item;
-                Log.d("spnerType", "" + strSpnrSex);
-                strSpnrSexId = petSexHashMap.get(strSpnrSex);
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
-
     private void setPetAgeType() {
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petAgeType);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1459,23 +1051,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 // Showing selected spinner item
                 strAgeCount = item;
                 Log.d("spnerType", "PetAge" + item);
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
-
-    private void setPetParentAdress() {
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, parentAdress);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        parent_address.setAdapter(aa);
-        parent_address.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                // Showing selected spinner item
-                Log.d("spnerType", "ParentAddress" + item);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {

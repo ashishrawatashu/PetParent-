@@ -29,17 +29,17 @@ public class HospitalizationReportsAdapter extends RecyclerView.Adapter<Hospital
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HospitalizationReportsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.hospitalization_reports_list, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
+        HospitalizationReportsAdapter.MyViewHolder vh = new HospitalizationReportsAdapter.MyViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HospitalizationReportsAdapter.MyViewHolder holder, int position) {
         holder.requesting_Vet_TV.setText(petHospitalizationsLists.get(position).getRequestingVeterinarian());
-        holder.vet_phone_TV.setText(petHospitalizationsLists.get(position).getVeterinarianPhone());
-        holder.hospital_type_TV.setText(petHospitalizationsLists.get(position).getHospitalizationType().getHospitalization());
+//        holder.vet_phone_TV.setText(petHospitalizationsLists.get(position).getVeterinarianPhone());
+//        holder.hospital_type_TV.setText(petHospitalizationsLists.get(position).getHospitalizationType().getHospitalization());
         holder.hospital_name_TV.setText(petHospitalizationsLists.get(position).getHospitalName());
         holder.admission_date_TV.setText(petHospitalizationsLists.get(position).getAdmissionDate());
 
@@ -56,8 +56,8 @@ public class HospitalizationReportsAdapter extends RecyclerView.Adapter<Hospital
             super(itemView);
 
             requesting_Vet_TV = itemView.findViewById(R.id.requesting_Vet_TV);
-            vet_phone_TV = itemView.findViewById(R.id.vet_phone_TV);
-            hospital_type_TV = itemView.findViewById(R.id.hospital_type_TV);
+//            vet_phone_TV = itemView.findViewById(R.id.vet_phone_TV);
+//            hospital_type_TV = itemView.findViewById(R.id.hospital_type_TV);
             hospital_name_TV = itemView.findViewById(R.id.hospital_name_TV);
             admission_date_TV = itemView.findViewById(R.id.admission_date_TV);
             view_TV=itemView.findViewById(R.id.view_TV);
@@ -76,6 +76,4 @@ public class HospitalizationReportsAdapter extends RecyclerView.Adapter<Hospital
 
         }
     }
-
-
 }

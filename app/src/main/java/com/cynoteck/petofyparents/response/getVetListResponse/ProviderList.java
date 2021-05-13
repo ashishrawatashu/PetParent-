@@ -35,6 +35,17 @@ public class ProviderList {
 
     private String longitude;
 
+    private String onlineConsultationCharges;
+
+    public String getOnlineConsultationCharges ()
+    {
+        return onlineConsultationCharges;
+    }
+
+    public void setOnlineConsultationCharges (String onlineConsultationCharges)
+    {
+        this.onlineConsultationCharges = onlineConsultationCharges;
+    }
     public String getAddress ()
     {
         return address;

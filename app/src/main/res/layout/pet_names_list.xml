@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:id="@+id/pet_name_CL"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/search_bar_background_grey">
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toStartOf="@id/forward_IV"
+            android:layout_height="match_parent"
+            android:text="Kaluuu"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            android:id="@+id/pet_name_TV"/>
+
+        <ImageView
+            android:id="@+id/forward_IV"
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/forward_grey_arrow"/>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

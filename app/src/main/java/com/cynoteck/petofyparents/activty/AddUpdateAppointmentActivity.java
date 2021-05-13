@@ -7,37 +7,38 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cynoteck.petofyparents.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
+import com.cynoteck.petofyparents.adapter.PetListHorizontalAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
@@ -47,21 +48,18 @@ import com.cynoteck.petofyparents.parameter.appointmentParams.UpdateAppointmentP
 import com.cynoteck.petofyparents.parameter.appointmentParams.UpdateAppointmentRequest;
 import com.cynoteck.petofyparents.parameter.getPetListRequest.GetPetListParams;
 import com.cynoteck.petofyparents.parameter.getPetListRequest.GetPetListRequest;
-import com.cynoteck.petofyparents.parameter.newPetEntryParams.NewPetParams;
-import com.cynoteck.petofyparents.parameter.newPetEntryParams.NewPetRequest;
-import com.cynoteck.petofyparents.parameter.otpRequest.SendOtpRequest;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataParams;
 import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentDetailsResponse;
 import com.cynoteck.petofyparents.response.appointmentResponse.CreateAppointmentResponse;
-import com.cynoteck.petofyparents.response.getPetParentResponse.GetPetParentListData;
-import com.cynoteck.petofyparents.response.getPetParentResponse.GetPetParentResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.GetPetListResponse;
-import com.cynoteck.petofyparents.response.newPetResponse.NewPetRegisterResponse;
-import com.cynoteck.petofyparents.response.otpResponse.OtpResponse;
+import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
+import com.cynoteck.petofyparents.utils.OnItemClickListener;
 import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -70,33 +68,37 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.StringTokenizer;
 
 import retrofit2.Response;
 
-public class AddUpdateAppointmentActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener, TextWatcher {
+import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.registerPetAdapter;
+import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.total_pets_TV;
+import static com.cynoteck.petofyparents.fragments.ProfileFragment.petListHorizontalAdapter;
+
+public class AddUpdateAppointmentActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener, TextWatcher, OnItemClickListener {
     Button create_appointment_BT;
-    ImageView appointment_headline_back, new_pet_search;
-    TextView pet_details_TV, visit_type_TV,appointment_headline, calenderTextViewAppointDt, time_TV, parent_TV, cancelOtpDialog, add_new_pet;
-    EditText title_ET, duration_TV, description_ET;
-    AutoCompleteTextView pet_parent_TV;
-    LinearLayout pet_search_layout;
+    TextView purpose_TV, rating_TV, vet_name_TV, vet_study_TV, vet_address_TV, consultation_fee_TV, pet_details_TV, visit_type_TV, appointment_headline, calenderTextView_dialog, select_time_TV, parent_TV, cancelOtpDialog;
+    EditText select_purpose_ET;
     Methods methods;
-    ArrayList<GetPetParentListData> petParent = new ArrayList<>();
-    Dialog petParentDilog;
-    String isVedioCall="false", strSpnrPurpose="", vetUserId = "", currentTime = "", strResponseOtp = "", petParentContactNumber = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
+    String vet_study = "", vet_rating = "", vet_address = "", vet_name = "", isVedioCall = "false", vetUserId = "", currentTime = "", strResponseOtp = "", vet_image_url = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
     DatePickerDialog picker;
-    TimePicker timePicker;
-    ArrayList<String> petUniueId = null;
-    HashMap<String, String> petExistingSearch;
     Dialog otpDialog;
-    TextInputLayout mobile_numberTL, otp_TL;
-    TextInputEditText pet_parent_mobile_number, pet_parent_otp;
+    TextInputLayout otp_TL;
+    TextInputEditText pet_parent_otp;
     Button submit_parent_otp;
-    AppCompatSpinner purpose_spinner;
     ArrayList<String> purpose;
     SwitchCompat visit_type_SC;
+    RelativeLayout add_pet_RL;
+    MaterialCardView back_arrow_CV;
+    RecyclerView pet_list_RV;
+    //    ArrayList<PetList> profileList = new ArrayList<>();
+    public static PetListHorizontalAdapter petListHorizontalAdapterForAppointment;
+    BottomSheetDialog selectPurposeDialog;
+    ProgressBar pet_list_progress_bar;
+    Dialog appointment_successfully_dialog;
+    ConstraintLayout select_purpose_RL;
+    int toatalProgress = 0;
+    private int ADD_PET = 1;
 
 
     @Override
@@ -109,10 +111,15 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         id = intent.getStringExtra("id");
         petId = intent.getStringExtra("pet_id");
         petParentString = intent.getStringExtra("petParent");
+        vet_study = intent.getStringExtra("vet_study");
+        vet_rating = intent.getStringExtra("vet_rating");
+        vet_address = intent.getStringExtra("vet_address");
+        vet_name = intent.getStringExtra("vet_name");
+        vet_image_url = intent.getStringExtra("vet_image_url");
         vetUserId = intent.getStringExtra("vetUserId");
+
         init();
         purpose = new ArrayList<>();
-        purpose.add("Select Appointment Purpose");
         purpose.add("Vaccination");
         purpose.add("Deworming");
         purpose.add("Routine health check up");
@@ -121,21 +128,20 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         purpose.add("Eye check up");
         purpose.add("Dental check up");
         purpose.add("Other");
-        setSpinnerPurpose();
         if (type.equals("add")) {
-            appointment_headline.setText("ADD APPOINTMENT");
-            create_appointment_BT.setText("CREATE APPOINTMENT");
             currentTime = new SimpleDateFormat("hh:mm a").format(new Date());
-            time_TV.setText(currentTime);
-            duration_TV.setText("15");
+            select_time_TV.setText(currentTime);
+            rating_TV.setText(vet_rating);
+            vet_name_TV.setText(vet_name);
+            vet_address_TV.setText(vet_address);
+            vet_study_TV.setText(vet_study);
+            pet_list_progress_bar.setVisibility(View.GONE);
+            LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            pet_list_RV.setLayoutManager(horizontalLayoutManager);
+            petListHorizontalAdapterForAppointment = new PetListHorizontalAdapter(this, "AppointmentScreen", PetParentSingleton.getInstance().getArrayList(), this);
+            pet_list_RV.setAdapter(petListHorizontalAdapterForAppointment);
+            petListHorizontalAdapterForAppointment.notifyDataSetChanged();
         } else if (type.equals("update")) {
-            pet_search_layout.setVisibility(View.INVISIBLE);
-            add_new_pet.setVisibility(View.INVISIBLE);
-            parent_TV.setVisibility(View.VISIBLE);
-            parent_TV.setText(petParentString);
-            duration_TV.setFocusable(false);
-            appointment_headline.setText("EDIT APPOINTMENT");
-            create_appointment_BT.setText("UPDATE APPOINTMENT");
             GetPetListParams getPetListParams = new GetPetListParams();
             getPetListParams.setId(id);
             GetPetListRequest getPetListRequest = new GetPetListRequest();
@@ -143,63 +149,13 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
             getAppointmentDeatils(getPetListRequest);
         }
 
-
-        pet_parent_TV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //... your stuff
-                Log.d("akkakaka", "" + petUniueId.get(position));
-                String value = petExistingSearch.get(pet_parent_TV.getText().toString());
-                Log.d("kakakka", "" + value);
-                StringTokenizer st = new StringTokenizer(value, ",");
-                String PetUniqueId = st.nextToken();
-                String PetName = st.nextToken();
-                String PetParentName = st.nextToken();
-                String PetSex = st.nextToken();
-                String PetAge = st.nextToken();
-                petId = st.nextToken();
-                String pet_DOB = st.nextToken();
-                userID = st.nextToken();
-                Log.d("ppppp", "" + PetUniqueId + " " + PetName + " " + PetParentName + " " + PetSex + " " + PetAge + " " + petId + " " + pet_DOB + " " + userID);
-
-            }
-        });
-
     }
-
-    private void setSpinnerPurpose() {
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, purpose);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        purpose_spinner.setAdapter(aa);
-        purpose_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-                // Showing selected spinner item
-                strSpnrPurpose = item;
-                Log.d("spnerType", "" + strSpnrPurpose);
-                if (strSpnrPurpose.equals("Other")) {
-                    title_ET.setVisibility(View.VISIBLE);
-                    title_ET.setText("");
-                } else if (strSpnrPurpose.equals("Select Appointment Purpose")) {
-                    title_ET.setText("");
-                    title_ET.setVisibility(View.GONE);
-                } else {
-                    title_ET.setText(strSpnrPurpose);
-                    title_ET.setVisibility(View.GONE);
-                }
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-    }
-
 
     private void getPetList() {
+        pet_list_progress_bar.setVisibility(View.VISIBLE);
         PetDataParams getPetDataParams = new PetDataParams();
         getPetDataParams.setPageNumber(1);
-        getPetDataParams.setPageSize(10);
+        getPetDataParams.setPageSize(100);
         getPetDataParams.setSearch_Data("");
         PetDataRequest getPetDataRequest = new PetDataRequest();
         getPetDataRequest.setData(getPetDataParams);
@@ -213,50 +169,31 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
 
     private void init() {
-        purpose_spinner=findViewById(R.id.purpose_spinner);
-        appointment_headline_back = findViewById(R.id.appointment_headline_back);
-        appointment_headline = findViewById(R.id.appointment_headline);
-        calenderTextViewAppointDt = findViewById(R.id.calenderTextViewAppointDt);
-        time_TV = findViewById(R.id.time_TV);
-        title_ET = findViewById(R.id.title_ET);
-        duration_TV = findViewById(R.id.duration_TV);
-        description_ET = findViewById(R.id.description_ET);
-        pet_parent_TV = findViewById(R.id.pet_parent_ACTV);
+        rating_TV = findViewById(R.id.rating_TV);
+        purpose_TV = findViewById(R.id.purpose_TV);
+        pet_list_progress_bar = findViewById(R.id.pet_list_progress_bar);
+        vet_name_TV = findViewById(R.id.vet_name_TV);
+        vet_study_TV = findViewById(R.id.vet_study_TV);
+        vet_address_TV = findViewById(R.id.vet_address_TV);
+        consultation_fee_TV = findViewById(R.id.consultation_fee_TV);
+        calenderTextView_dialog = findViewById(R.id.calenderTextView_dialog);
+        select_time_TV = findViewById(R.id.select_time_TV);
+        select_purpose_ET = findViewById(R.id.select_purpose_ET);
         create_appointment_BT = findViewById(R.id.create_appointment_BT);
         parent_TV = findViewById(R.id.parent_TV);
-        add_new_pet = findViewById(R.id.add_new_pet);
-        pet_search_layout = findViewById(R.id.pet_search_layout);
-        visit_type_SC = findViewById(R.id.visit_type_SC);
+        add_pet_RL = findViewById(R.id.add_pet_RL);
         visit_type_TV = findViewById(R.id.visit_type_TV);
-        pet_details_TV=findViewById(R.id.pet_details_TV);
-        add_new_pet.setOnClickListener(this);
-        appointment_headline_back.setOnClickListener(this);
+        visit_type_SC = findViewById(R.id.visit_type_SC);
+        back_arrow_CV = findViewById(R.id.back_arrow_CV);
+        pet_list_RV = findViewById(R.id.pet_list_RV);
+        select_purpose_RL = findViewById(R.id.select_purpose_RL);
+        select_purpose_RL.setOnClickListener(this);
+        add_pet_RL.setOnClickListener(this);
+        calenderTextView_dialog.setOnClickListener(this);
+        back_arrow_CV.setOnClickListener(this);
+        select_time_TV.setOnClickListener(this);
         create_appointment_BT.setOnClickListener(this);
-        calenderTextViewAppointDt.setOnClickListener(this);
-        time_TV.setOnClickListener(this);
-        pet_parent_TV.addTextChangedListener(this);
-        pet_parent_TV.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                Log.d("dataChange", "afterTextChanged" + new String(editable.toString()));
-                String value = editable.toString();
-                if (methods.isInternetOn()) {
-                    searchPet(value);
-                } else {
-                    methods.DialogInternet();
-                }
-            }
-        });
+        create_appointment_BT.setEnabled(false);
         visit_type_SC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -273,60 +210,41 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
     }
 
-    private void searchPet(String prefix) {
-        PetDataParams getPetDataParams = new PetDataParams();
-        getPetDataParams.setPageNumber(0);
-        getPetDataParams.setPageSize(10);
-        getPetDataParams.setSearch_Data(prefix);
-        PetDataRequest getPetDataRequest = new PetDataRequest();
-        getPetDataRequest.setData(getPetDataParams);
-
-        ApiService<GetPetListResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "SearchPet");
-        Log.e("DATALOG", "check1=> " + getPetDataRequest);
-
-
-    }
-
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
 
-            case R.id.add_new_pet:
+            case R.id.add_pet_RL:
                 Intent adNewIntent = new Intent(this, AddPetRegister.class);
-                adNewIntent.putExtra("appointment", "appointment");
-                startActivityForResult(adNewIntent, 1);
+                adNewIntent.putExtra("intent_from", "add");
+                startActivityForResult(adNewIntent, ADD_PET);
                 break;
-            case R.id.appointment_headline_back:
+
+            case R.id.back_arrow_CV:
                 onBackPressed();
                 break;
 
-            case R.id.pet_parent_ACTV:
-//                openParentDiloag();
+            case R.id.select_purpose_RL:
+                showPurposeDialog();
+
                 break;
 
             case R.id.create_appointment_BT:
                 Log.e("user_id", Config.user_id);
-                titleString = title_ET.getText().toString();
-//                petParentString =pet_parent_TV.getText().toString();
-                dateString = calenderTextViewAppointDt.getText().toString();
-                timeString = time_TV.getText().toString();
-                durationString = duration_TV.getText().toString();
-                descriptionString = description_ET.getText().toString();
-
+                titleString = select_purpose_ET.getText().toString();
+                dateString = calenderTextView_dialog.getText().toString();
+                timeString = select_time_TV.getText().toString();
+                durationString = "15";
                 String currentTimeDate = new SimpleDateFormat("dd/MM/yyyy hh:mm a").format(new Date());
                 String userGiveTimeDate = dateString + " " + timeString;
-
-                if (userID.isEmpty()) {
+                if (petId.isEmpty()) {
                     Toast.makeText(this, "Please Select Pet ", Toast.LENGTH_SHORT).show();
 
                 } else if (titleString.isEmpty()) {
-                    title_ET.setError("Enter Purpose !");
+                    select_purpose_ET.setError("Enter Purpose !");
                     Toast.makeText(this, "Enter Purpose !", Toast.LENGTH_SHORT).show();
-                    description_ET.setError(null);
-                }
-                else if (dateString.isEmpty()) {
+                } else if (dateString.isEmpty()) {
                     Toast.makeText(this, "Please Select Date", Toast.LENGTH_SHORT).show();
 
                 } else if (timeString.isEmpty()) {
@@ -351,7 +269,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
                     if (type.equals("add")) {
                         CreateAppointParams createAppointParams = new CreateAppointParams();
-                        createAppointParams.setUserId(userID);
+                        createAppointParams.setUserId(Config.user_id);
                         createAppointParams.setDescription(descriptionString);
                         createAppointParams.setDuration(durationString);
                         createAppointParams.setEventStartDate(dateString);
@@ -397,7 +315,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 break;
 
 
-            case R.id.calenderTextViewAppointDt:
+            case R.id.calenderTextView_dialog:
 
                 final Calendar cldr = Calendar.getInstance();
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
@@ -411,7 +329,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
 
                                 String displayValue = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                                calenderTextViewAppointDt.setText(Config.changeDateFormat(displayValue));
+                                calenderTextView_dialog.setText(Config.changeDateFormat(displayValue));
                             }
                         }, year, month, day);
                 picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -419,14 +337,14 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 break;
 
 
-            case R.id.time_TV:
+            case R.id.select_time_TV:
                 Calendar c = Calendar.getInstance();
 
                 if (type.equals("update")) {
                     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
                     Date date = null;
                     try {
-                        date = sdf.parse(time_TV.getText().toString());
+                        date = sdf.parse(select_time_TV.getText().toString());
                     } catch (ParseException e) {
                     }
                     c = Calendar.getInstance();
@@ -446,7 +364,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
                                 String displayValue = hourOfDay + ":" + minute;
-                                time_TV.setText(Config.changeTimePicker(displayValue));
+                                select_time_TV.setText(Config.changeTimePicker(displayValue));
                                 timeString = Config.changeTimePicker(displayValue);
                             }
                         }, mHour, mMinute, false);
@@ -459,24 +377,35 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
     }
 
-    private void clearSearch() {
-        pet_parent_TV.getText().clear();
-//        search_boxRL.setVisibility(View.GONE);
-//        back_arrow_IV_new_entry.setVisibility(View.GONE);
-//        staff_headline_TV.setVisibility(View.VISIBLE);
-        InputMethodManager imm1 = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm1.hideSoftInputFromWindow(pet_parent_TV.getWindowToken(), 0);
+    private void showPurposeDialog() {
+        selectPurposeDialog = new BottomSheetDialog(this);
+        selectPurposeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        selectPurposeDialog.setCancelable(true);
+        selectPurposeDialog.setContentView(R.layout.select_purpose_list);
+        ImageView cross_IV = selectPurposeDialog.findViewById(R.id.cross_IV);
+        RecyclerView select_purpose_RV = selectPurposeDialog.findViewById(R.id.select_purpose_RV);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        select_purpose_RV.setLayoutManager(linearLayoutManager);
+        SelectPurposeAdapter selectPurposeAdapter = new SelectPurposeAdapter(this, purpose);
+        select_purpose_RV.setAdapter(selectPurposeAdapter);
+        selectPurposeAdapter.notifyDataSetChanged();
+        selectPurposeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        cross_IV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPurposeDialog.dismiss();
+            }
+        });
+
+
+        selectPurposeDialog.show();
     }
 
     private void getAppointmentDeatils(GetPetListRequest id) {
         ApiService<AppointmentDetailsResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getAppointmentsDetails(Config.token, id), "GetAppointmentDetails");
 
-    }
-
-    private void getPetParent() {
-        ApiService<GetPetParentResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getPetParentList(Config.token), "GetPetParent");
     }
 
     private void updateAppointment(UpdateAppointmentRequest updateAppointmentRequest) {
@@ -492,38 +421,27 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         service.get(this, ApiClient.getApiInterface().createAppointment(Config.token, createAppointRequest), "CreateAppointment");
     }
 
-
-    private void sendotpUsingMobileNumber(SendOtpRequest sendOtpRequest) {
-        ApiService<OtpResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().senOtp(Config.token, sendOtpRequest), "SendOtp");
-        Log.e("DATALOG", "check1=> " + sendOtpRequest);
-    }
-
-    private void addNewRegisterPet(NewPetRequest newPetRequest) {
-        ApiService<NewPetRegisterResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().addPetToRegister(Config.token, newPetRequest), "AddPetToRegister");
-        Log.e("DATALOG", "check1=> " + newPetRequest);
-    }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == ADD_PET) {
             if (resultCode == RESULT_OK) {
-                pet_search_layout.setVisibility(View.GONE);
-                pet_details_TV.setVisibility(View.VISIBLE);
-                parent_TV.setVisibility(View.VISIBLE);
-                petId = data.getStringExtra("petId");
-                userID = data.getStringExtra("userId");
-                petUniqueID = data.getStringExtra("uniqueId");
-                petParentString = data.getStringExtra("parent");
-                petSex = data.getStringExtra("sex");
-                petAge = data.getStringExtra("age");
-                petName = data.getStringExtra("petName");
-                Log.d("userId", userID.toString());
-                parent_TV.setText(petUniqueID + ":-" + petName + "(" + petParentString + ")");
-
+                PetList petList = new PetList();
+                petList.setId(data.getStringExtra("pet_id"));
+                petList.setPetUniqueId(data.getStringExtra("pet_unique_id"));
+                petList.setPetProfileImageUrl(data.getStringExtra("pet_image_url"));
+                petList.setPetBreed(data.getStringExtra("pet_breed"));
+                petList.setPetAge(data.getStringExtra("pet_age"));
+                petList.setPetSex(data.getStringExtra("pet_sex"));
+                petList.setPetName(data.getStringExtra("pet_name"));
+                petList.setPetCategory(data.getStringExtra("pet_category"));
+                petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
+                petList.setPetColor(data.getStringExtra("pet_color"));
+                PetParentSingleton.getInstance().getArrayList().add(0, petList);
+                total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
+                registerPetAdapter.notifyDataSetChanged();
+                petListHorizontalAdapter.notifyDataSetChanged();
+                petListHorizontalAdapterForAppointment.notifyDataSetChanged();
             }
         }
     }
@@ -532,84 +450,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
     public void onResponse(Response arg0, String key) {
 
         switch (key) {
-            case "SearchPet":
-                try {
-                    GetPetListResponse getPetListResponse = (GetPetListResponse) arg0.body();
-                    Log.d("GetPetList", getPetListResponse.toString());
-                    int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
-
-                    if (responseCode == 109) {
-                        petUniueId = new ArrayList<>();
-                        petExistingSearch = new HashMap<>();
-                        for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
-                            petUniueId.add(getPetListResponse.getData().getPetList().get(i).getPetUniqueId() + ":- "
-                                    + getPetListResponse.getData().getPetList().get(i).getPetName() + "(" + getPetListResponse.getData().getPetList().get(i).getPetSex() + "," + getPetListResponse.getData().getPetList().get(i).getPetParentName() + ")");
-
-                            petExistingSearch.put(getPetListResponse.getData().getPetList().get(i).getPetUniqueId() + ":- "
-                                            + getPetListResponse.getData().getPetList().get(i).getPetName() + "(" + getPetListResponse.getData().getPetList().get(i).getPetSex() + "," + getPetListResponse.getData().getPetList().get(i).getPetParentName() + ")",
-                                    getPetListResponse.getData().getPetList().get(i).getPetUniqueId() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getPetName() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getPetParentName() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getPetSex() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getPetAge() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getId() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getDateOfBirth() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getUserId());
-                        }
-
-                        Log.d("jajajajjaja", "" + petUniueId.size() + " \n" + petUniueId.toString());
-                        Log.d("lllllllllll", "" + petExistingSearch.size() + " \n" + petExistingSearch);
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                                (this, android.R.layout.simple_list_item_1, petUniueId);
-                        pet_parent_TV.setThreshold(1);//will start working from first character
-                        pet_parent_TV.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-                        pet_parent_TV.setTextColor(Color.BLACK);
-                    } else {
-                        methods.customProgressDismiss();
-                        if (getPetListResponse.getResponse().getResponseMessage().equals("Invalid token.")) {
-                            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                            alertDialog.setTitle("Warning!!");
-                            alertDialog.setMessage("Your Session Expired. Please, Logout and Login Again.");
-                            alertDialog.setIcon(this.getDrawable(R.drawable.ic_baseline_warning));
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "LOGOUT",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            SharedPreferences preferences = getSharedPreferences("userdetails", 0);
-                                            SharedPreferences.Editor editor = preferences.edit();
-                                            editor.clear();
-                                            editor.apply();
-                                            startActivity(new Intent(AddUpdateAppointmentActivity.this, LoginActivity.class));
-                                            finish();
-                                        }
-                                    });
-                            alertDialog.setCancelable(false);
-                            alertDialog.setCanceledOnTouchOutside(false);
-                            alertDialog.show();
-                        }
-                    }
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "GetPetParent":
-                try {
-                    Log.d("GetPetParent", arg0.body().toString());
-                    GetPetParentResponse getPetParentResponse = (GetPetParentResponse) arg0.body();
-                    Log.d("GetPetParent", getPetParentResponse.toString());
-                    int responseCode = Integer.parseInt(getPetParentResponse.getResponse().getResponseCode());
-                    if (responseCode == 109) {
-                        petParent = getPetParentResponse.getData();
-//                        pet_parent_TV.setOnClickListener(this);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-
             case "UpdateAppointment":
                 try {
                     Log.d("updateAppoint", arg0.body().toString());
@@ -631,7 +471,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 }
                 break;
 
-
             case "CreateAppointment":
                 try {
                     Log.d("createAppoint", arg0.body().toString());
@@ -640,9 +479,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                     int responseCode = Integer.parseInt(createAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         methods.customProgressDismiss();
-                        Toast.makeText(this, "Appointment Created Successfully", Toast.LENGTH_SHORT).show();
-                        setResult(RESULT_OK);
-                        finish();
+                        showAppointmentSuccessfully();
                     } else {
                         methods.customProgressDismiss();
                         Toast.makeText(this, "Appointment not created", Toast.LENGTH_SHORT).show();
@@ -665,12 +502,11 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                     if (responseCode == 109) {
                         userID = appointmentDetailsResponse.getData().getUserId();
 //                        pet_parent_TV.setText(appointmentDetailsResponse.getData().getPetParent().getFullName());
-                        title_ET.setText(appointmentDetailsResponse.getData().getTitle());
+                        select_purpose_ET.setText(appointmentDetailsResponse.getData().getTitle());
                         dateString = appointmentDetailsResponse.getData().getEventStartDate().substring(0, 10);
                         Log.d("time", dateString);
-                        calenderTextViewAppointDt.setText(Config.changeDateFormat(appointmentDetailsResponse.getData().getEventStartDate().substring(0, 10)));
-                        description_ET.setText(appointmentDetailsResponse.getData().getDescription());
-                        duration_TV.setText(appointmentDetailsResponse.getData().getDuration());
+                        calenderTextView_dialog.setText(Config.changeDateFormat(appointmentDetailsResponse.getData().getEventStartDate().substring(0, 10)));
+                        durationString = (appointmentDetailsResponse.getData().getDuration());
                         isVedioCall = appointmentDetailsResponse.getData().getIsVideoCall();
                         if (isVedioCall.equals("true")) {
                             visit_type_TV.setText("Online Appointment");
@@ -683,7 +519,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                         timeString = appointmentDetailsResponse.getData().getEventStartDate().substring(appointmentDetailsResponse.getData().getEventStartDate().length() - 8, appointmentDetailsResponse.getData().getEventStartDate().length());
                         Log.d("datee", timeString);
                         Log.d("datee", Config.changeTimeFormat(timeString));
-                        time_TV.setText(Config.changeTimeFormat(timeString));
+                        select_time_TV.setText(Config.changeTimeFormat(timeString));
 
 
                     }
@@ -693,94 +529,35 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 }
                 break;
 
-            case "GetPetList":
-                try {
-                    GetPetListResponse getPetListResponse = (GetPetListResponse) arg0.body();
-                    Log.d("GetPetList", getPetListResponse.toString());
-                    int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
-
-                    if (responseCode == 109) {
-                        petUniueId = new ArrayList<>();
-                        petExistingSearch = new HashMap<>();
-                        for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
-                            petUniueId.add(getPetListResponse.getData().getPetList().get(i).getPetUniqueId() + ":- "
-                                    + getPetListResponse.getData().getPetList().get(i).getPetName() + "(" + getPetListResponse.getData().getPetList().get(i).getPetSex() + "," + getPetListResponse.getData().getPetList().get(i).getPetParentName() + ")");
-                            petExistingSearch.put(getPetListResponse.getData().getPetList().get(i).getPetUniqueId() + ":- "
-                                            + getPetListResponse.getData().getPetList().get(i).getPetName() + "(" + getPetListResponse.getData().getPetList().get(i).getPetSex() + "," + getPetListResponse.getData().getPetList().get(i).getPetParentName() + ")",
-                                    getPetListResponse.getData().getPetList().get(i).getPetUniqueId() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getPetName() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getPetParentName() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getId() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getPetAge() + ","
-                                            + getPetListResponse.getData().getPetList().get(i).getUserId());
-                        }
-
-                        Log.d("jajajajjaja", "" + petUniueId.size() + " \n" + petUniueId.toString());
-                        Log.d("lllllllllll", "" + petExistingSearch.size() + " \n" + petExistingSearch);
-
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                                (this, android.R.layout.simple_list_item_1, petUniueId);
-                        pet_parent_TV.setThreshold(1);//will start working from first character
-                        pet_parent_TV.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-                        pet_parent_TV.setTextColor(Color.BLACK);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                break;
-
-            case "SendOtp":
-                try {
-                    Log.d("SendOtp", arg0.body().toString());
-                    OtpResponse otpResponse = (OtpResponse) arg0.body();
-                    int responseCode = Integer.parseInt(otpResponse.getResponse().getResponseCode());
-                    if (responseCode == 109) {
-                        if (otpResponse.getData().getSuccess().equals("true")) {
-                            strResponseOtp = otpResponse.getData().getOtp();
-                            otpDialog();
-                        } else {
-                            Toast.makeText(this, "Invalid Mobile Number", Toast.LENGTH_SHORT).show();
-                        }
-                    } else if (responseCode == 614) {
-                        Toast.makeText(this, otpResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case "AddPetToRegister":
-                try {
-                    Log.d("SendOtp", arg0.body().toString());
-                    NewPetRegisterResponse newPetRegisterResponse = (NewPetRegisterResponse) arg0.body();
-                    int responseCode = Integer.parseInt(newPetRegisterResponse.getResponse().getResponseCode());
-                    if (responseCode == 109) {
-                        otpDialog.dismiss();
-                        //Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
-                        String sexName = "";
-                        if (newPetRegisterResponse.getData().getSexId().equals("2.0"))
-                            sexName = "Female";
-                        else
-                            sexName = "Male";
-                        getPetList();
-                        pet_parent_TV.setText(newPetRegisterResponse.getData().getPetUniqueId() + ":-" + newPetRegisterResponse.getData().getPetName() + "(" + sexName + "," + newPetRegisterResponse.getData().getPetParentName() + ")");
-                        userID = newPetRegisterResponse.getData().getUserId();
-                        petId = newPetRegisterResponse.getData().getId();
-
-                    } else if (responseCode == 614) {
-                        Toast.makeText(this, newPetRegisterResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
         }
+    }
+
+    private void showAppointmentSuccessfully() {
+        appointment_successfully_dialog = new Dialog(this);
+        appointment_successfully_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        appointment_successfully_dialog.setCancelable(false);
+        appointment_successfully_dialog.setContentView(R.layout.appointment_created_dialog);
+        appointment_successfully_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        TextView back_to_appointments_TV = appointment_successfully_dialog.findViewById(R.id.back_to_appointments_TV);
+        TextView information_TV = appointment_successfully_dialog.findViewById(R.id.information_TV);
+
+        information_TV.setText("Someone from our team will shortly confirm your appointment with Doctor " + vet_name + " .");
+        selectPurposeDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        back_to_appointments_TV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appointment_successfully_dialog.dismiss();
+                onBackPressed();
+            }
+        });
+
+        appointment_successfully_dialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = appointment_successfully_dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
     }
 
     @Override
@@ -805,10 +582,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
     @Override
     public void onProductClick(int position) {
-        petParentDilog.dismiss();
-        userID = petParent.get(position).getUserId();
-//        pet_parent_TV.setText(petParent.get(position).getFirstName()+" "+petParent.get(position).getLastName());
-
 
     }
 
@@ -836,4 +609,75 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         otpDialog.show();
 
     }
+
+    @Override
+    public void onViewDetailsClick(int position) {
+        petId = PetParentSingleton.getInstance().getArrayList().get(position).getId();
+        toatalProgress = toatalProgress + 50;
+        if (toatalProgress == 100) {
+            create_appointment_BT.setBackgroundResource(R.drawable.blue_background_bg);
+            create_appointment_BT.setEnabled(true);
+        }
+    }
+
+    public class SelectPurposeAdapter extends RecyclerView.Adapter<SelectPurposeAdapter.MyViewHolder> {
+        Context context;
+        ArrayList<String> purposeList;
+
+        public SelectPurposeAdapter(Context context, ArrayList<String> purposeList) {
+            this.context = context;
+            this.purposeList = purposeList;
+        }
+
+        @NonNull
+        @Override
+        public SelectPurposeAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+            SelectPurposeAdapter.MyViewHolder vh = new SelectPurposeAdapter.MyViewHolder(v);
+            return vh;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull SelectPurposeAdapter.MyViewHolder holder, int position) {
+            holder.item_name_TV.setText(purposeList.get(position));
+            holder.item_name_TV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toatalProgress = toatalProgress + 50;
+                    if (toatalProgress == 100) {
+                        create_appointment_BT.setBackgroundResource(R.drawable.blue_background_bg);
+                        create_appointment_BT.setEnabled(true);
+                    }
+                    selectPurposeDialog.dismiss();
+                    select_purpose_RL.setBackgroundResource(R.drawable.edit_text_active_state);
+                    if (purposeList.get(position).equals("Other")) {
+                        purpose_TV.setText(purposeList.get(position));
+                        select_purpose_ET.setVisibility(View.VISIBLE);
+                    } else {
+                        purpose_TV.setText(purposeList.get(position));
+                        select_purpose_ET.setText(purposeList.get(position));
+                        select_purpose_ET.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return purposeList.size();
+        }
+
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView item_name_TV;
+
+            public MyViewHolder(@NonNull View itemView) {
+                super(itemView);
+                item_name_TV = itemView.findViewById(R.id.item_name_TV);
+
+            }
+        }
+    }
+
 }
+
+

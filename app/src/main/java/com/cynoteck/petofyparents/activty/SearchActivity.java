@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.adapter.RegisterPetAdapter;
 import com.cynoteck.petofyparents.adapter.SearchAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -26,14 +25,13 @@ import com.cynoteck.petofyparents.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.GetPetListResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
 import com.cynoteck.petofyparents.utils.Config;
-import com.cynoteck.petofyparents.utils.SearchInterface;
-import com.cynoteck.petofyparents.utils.ViewDeatilsAndIdCardClick;
+import com.cynoteck.petofyparents.utils.OnItemClickListener;
 
 import java.util.ArrayList;
 
 import retrofit2.Response;
 
-public class SearchActivity extends AppCompatActivity implements TextWatcher, ApiResponse, SearchInterface ,View.OnClickListener{
+public class SearchActivity extends AppCompatActivity implements TextWatcher, ApiResponse, OnItemClickListener,View.OnClickListener{
     EditText searchpet;
     ImageView back_arrow;
     ArrayList<PetList> profileList = new ArrayList<>();
@@ -69,6 +67,7 @@ public class SearchActivity extends AppCompatActivity implements TextWatcher, Ap
                 petSearchDependsOnPrefix(value);
             }
         });
+
     }
 
     @Override
@@ -173,11 +172,10 @@ public class SearchActivity extends AppCompatActivity implements TextWatcher, Ap
         data.putString("pet_sex", profileList.get(position).getPetSex());
         data.putString("pet_owner_name", profileList.get(position).getPetParentName());
         data.putString("pet_owner_contact", profileList.get(position).getContactNumber());
-        data.putString("pet_encryt_id", profileList.get(position).getEncryptedId());
-        data.putString("pet_age", profileList.get(position).getPetAge());
         data.putString("pet_DOB", profileList.get(position).getDateOfBirth());
         data.putString("pet_encrypted_id", profileList.get(position).getEncryptedId());
-
+        data.putString("pet_age", profileList.get(position).getPetAge());
+        data.putString("pet_image_url", profileList.get(position).getPetProfileImageUrl());
         selectReportsIntent.putExtras(data);
         startActivity(selectReportsIntent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);

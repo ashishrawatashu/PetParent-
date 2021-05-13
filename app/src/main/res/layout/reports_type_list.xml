@@ -1,229 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/whiteColor">
 
-    <androidx.cardview.widget.CardView
-        android:layout_margin="12dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/reason_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="Reason of Visit "
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/reason_visit_dot_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nunito"
+            android:text=":"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/reason_TV"
+            app:layout_constraintStart_toEndOf="@id/reason_TV"
+            app:layout_constraintTop_toTopOf="@id/reason_TV" />
+
+
+        <TextView
+            android:id="@+id/reason_of_visit_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/reason_visit_dot_TV"
+            app:layout_constraintTop_toTopOf="@id/reason_TV" />
+
+
+        <TextView
+            android:id="@+id/vet_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/nunito"
+            android:text="Vet Name"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/reason_TV"
+            app:layout_constraintStart_toStartOf="@id/reason_TV"
+            app:layout_constraintTop_toBottomOf="@+id/reason_of_visit_TV" />
+
+
+        <TextView
+            android:id="@+id/vet_name_dot_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nunito"
+            android:text=":"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/vet_name_TV"
+            app:layout_constraintStart_toEndOf="@id/vet_name_TV"
+            app:layout_constraintTop_toTopOf="@id/vet_name_TV" />
+
+
+        <TextView
+            android:id="@+id/vetName_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="Monika Rasdkj"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vet_name_dot_TV"
+            app:layout_constraintTop_toTopOf="@id/vet_name_TV" />
+
+
+        <TextView
+            android:id="@+id/visit_date_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/nunito"
+            android:text="Visit Date"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/reason_TV"
+            app:layout_constraintStart_toStartOf="@+id/vet_name_TV"
+            app:layout_constraintTop_toBottomOf="@id/vetName_TV" />
+
+
+        <TextView
+            android:id="@+id/visit_date_dot_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:fontFamily="@font/nunito"
+            android:text=":"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/visit_date_TV"
+            app:layout_constraintStart_toEndOf="@id/visit_date_TV"
+            app:layout_constraintTop_toTopOf="@id/visit_date_TV" />
+
+
+        <TextView
+            android:id="@+id/vet_visit_date_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="Monika Rasdk"
+            android:textColor="@color/gray_1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/visit_date_dot_TV"
+            app:layout_constraintTop_toTopOf="@id/visit_date_TV" />
+
+
+        <View
+            android:id="@+id/grey_line_view"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="18sp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vet_visit_date_TV" />
+
+
+        <LinearLayout
+            android:id="@+id/view_report_LL"
             android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="end"
             android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grey_line_view">
 
-            <LinearLayout
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical"
+            <TextView
+                android:id="@+id/view_TV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:fontFamily="@font/nunito"
+                android:text="View Report"
+                android:textColor="@color/colorPrimary" />
 
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/view_TV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"/>
-
-                <View
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@id/view_TV"
-                    android:layout_width="35dp"
-                    android:layout_height="2dp"
-                    android:background="@color/colorPrimary"/>
-
-            </LinearLayout>
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:padding="2dp"
+                android:src="@drawable/blue_forward_arrow" />
 
 
-
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:padding="8dp"
-                    android:weightSum="3"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_weight="0.9"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/black_color"
-                        android:text="Vet Name"
-                        android:textStyle="bold"/>
+        </LinearLayout>
 
 
-                    <TextView
-                        android:layout_weight="1.4"
-                        android:gravity="start"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textColor="@color/black_color"
-                        android:text=":"
-                        android:textStyle="bold"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                    <TextView
-                        android:id="@+id/vet_name_TV"
-                        android:layout_weight="0.7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/grayColorCode"
-                        android:text="Ashish Rawat" />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:padding="8dp"
-                    android:weightSum="3"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_weight="0.9"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/black_color"
-                        android:text="Visit Date"
-                        android:textStyle="bold"/>
-
-
-                    <TextView
-                        android:layout_weight="1.4"
-                        android:gravity="start"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textColor="@color/black_color"
-                        android:text=":"
-                        android:textStyle="bold"/>
-
-
-                    <TextView
-                        android:id="@+id/visit_date_TV"
-                        android:layout_weight="0.7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/grayColorCode"
-                        android:text="09/05/2000"  />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/reson_of_visit_LL"
-                    android:padding="8dp"
-                    android:weightSum="3"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_weight="0.9"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/black_color"
-                        android:text="Reason of Visit"
-                        android:textStyle="bold"/>
-
-
-                    <TextView
-                        android:layout_weight="1.4"
-                        android:gravity="start"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textColor="@color/black_color"
-                        android:text=":"
-                        android:textStyle="bold"/>
-
-
-                    <TextView
-                        android:id="@+id/reson_of_visit_TV"
-                        android:layout_weight="0.7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/grayColorCode"
-                        android:text="Immunization vaccine: Rabies Canine, 3 yrs" />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/follow_date_LL"
-                    android:padding="8dp"
-                    android:weightSum="3"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_weight="0.9"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/black_color"
-                        android:text="Follow-up Date"
-                        android:textStyle="bold"/>
-
-
-                    <TextView
-                        android:layout_weight="1.4"
-                        android:gravity="start"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textColor="@color/black_color"
-                        android:text=":"
-                        android:textStyle="bold"/>
-
-
-                    <TextView
-                        android:id="@+id/followUp_date_TV"
-                        android:layout_weight="0.7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@color/grayColorCode"
-                        android:text="09/05/2020" />
-
-
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
-
-
-
-
-    </androidx.cardview.widget.CardView>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

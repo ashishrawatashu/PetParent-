@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,16 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
-import com.cynoteck.petofyparents.utils.SearchInterface;
-import com.cynoteck.petofyparents.utils.ViewDeatilsAndIdCardClick;
+import com.cynoteck.petofyparents.utils.OnItemClickListener;
 
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
     Context context;
     ArrayList<PetList> profileList;
-    private SearchInterface onProductItemClickListner;
-    public SearchAdapter(Context context, ArrayList<PetList> profileList, SearchInterface onProductItemClickListner) {
+    private OnItemClickListener onProductItemClickListner;
+    public SearchAdapter(Context context, ArrayList<PetList> profileList, OnItemClickListener onProductItemClickListner) {
         this.context = context;
         this.profileList = profileList;
         this.onProductItemClickListner=onProductItemClickListner;

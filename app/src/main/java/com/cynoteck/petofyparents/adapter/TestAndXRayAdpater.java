@@ -30,14 +30,14 @@ public class TestAndXRayAdpater extends RecyclerView.Adapter<TestAndXRayAdpater.
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TestAndXRayAdpater.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_and_x_ray_reports_list, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
+        TestAndXRayAdpater.MyViewHolder vh = new TestAndXRayAdpater.MyViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TestAndXRayAdpater.MyViewHolder holder, int position) {
         holder.test_type_TV.setText(petTestsAndXrayLists.get(position).getTypeOfTest().getTestType());
         holder.result_TV.setText(petTestsAndXrayLists.get(position).getResults());
         holder.test_date_TV.setText(petTestsAndXrayLists.get(position).getDateTested());

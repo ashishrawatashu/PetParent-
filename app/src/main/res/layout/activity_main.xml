@@ -5,14 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cynoteck.petofyparents.activty.SplasScreen"
+    tools:context="com.cynoteck.petofyparents.activty.SplashScreen"
     android:background="#FFFFFF">
 
     <ImageView
         android:id="@+id/splashlogo"
         android:layout_height="250dp"
         android:layout_width="250dp"
-        android:src="@drawable/logo_parents"
+        android:src="@drawable/petofy_main_logo"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         />
