@@ -80,7 +80,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
     TextView purpose_TV, rating_TV, vet_name_TV, vet_study_TV, vet_address_TV, consultation_fee_TV, pet_details_TV, visit_type_TV, appointment_headline, calenderTextView_dialog, select_time_TV, parent_TV, cancelOtpDialog;
     EditText select_purpose_ET;
     Methods methods;
-    String vet_study = "", vet_rating = "", vet_address = "", vet_name = "", isVedioCall = "false", vetUserId = "", currentTime = "", strResponseOtp = "", vet_image_url = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
+    String vet_fee, vet_study = "", vet_rating = "", vet_address = "", vet_name = "", isVedioCall = "false", vetUserId = "", currentTime = "", strResponseOtp = "", vet_image_url = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", durationString = "", petParentString = "", petUniqueID = "";
     DatePickerDialog picker;
     Dialog otpDialog;
     TextInputLayout otp_TL;
@@ -117,6 +117,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
         vet_name = intent.getStringExtra("vet_name");
         vet_image_url = intent.getStringExtra("vet_image_url");
         vetUserId = intent.getStringExtra("vetUserId");
+        vet_fee = intent.getStringExtra("vet_fee");
 
         init();
         purpose = new ArrayList<>();
@@ -135,6 +136,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
             vet_name_TV.setText(vet_name);
             vet_address_TV.setText(vet_address);
             vet_study_TV.setText(vet_study);
+            consultation_fee_TV.setText("₹ "+vet_fee);
             pet_list_progress_bar.setVisibility(View.GONE);
             LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             pet_list_RV.setLayoutManager(horizontalLayoutManager);

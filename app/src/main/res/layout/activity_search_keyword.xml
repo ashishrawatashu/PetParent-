@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    tools:context=".activty.SearchKeywordActivity">
+
+    <ImageView
+        android:id="@+id/back_arrow_IV"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:padding="2dp"
+        android:src="@drawable/long_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/search_keyword_ET"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@null"
+        android:paddingLeft="10dp"
+        android:inputType="text"
+        android:fontFamily="@font/nunito"
+        android:hint="Search"
+        app:layout_constraintBottom_toBottomOf="@id/back_arrow_IV"
+        app:layout_constraintEnd_toStartOf="@+id/cancel_IV"
+        app:layout_constraintStart_toEndOf="@id/back_arrow_IV"
+        app:layout_constraintTop_toTopOf="@id/back_arrow_IV" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/cancel_IV"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:src="@drawable/cancel_cross"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:id="@+id/line"
+        app:layout_constraintTop_toBottomOf="@id/back_arrow_IV"
+        android:background="@color/gray_3"/>
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_keyword_RV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        tools:listitem="@layout/search_keyword_list"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_keyword_result_RV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/vet_list"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

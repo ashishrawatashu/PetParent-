@@ -53,7 +53,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.MyViewHo
 
         Glide.with(context)
                 .load(profileList.get(position).getPetProfileImageUrl())
-                .placeholder(R.drawable.pet_image)
+                .placeholder(R.drawable.empty_pet_image)
                 .into(holder.pet_profile_IV);
 
     }

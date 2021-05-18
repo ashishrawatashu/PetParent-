@@ -40,7 +40,9 @@ public class Config {
     public static String type = "";
     public static String backCall = "";
     public static String IpAddress = "";
-    public static ArrayList<PetList> profileListLoaded = new ArrayList<>();
+    public static String cityId = "";
+    public static String cityName = "";
+    public static String cityFullName = "";
 
     public static Boolean isLoaded = false;
 

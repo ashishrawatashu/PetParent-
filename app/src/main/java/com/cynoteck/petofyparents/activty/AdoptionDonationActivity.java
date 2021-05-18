@@ -26,6 +26,7 @@ import retrofit2.Response;
 import static com.cynoteck.petofyparents.activty.AdoptPetActivity.total_adoption_RL;
 import static com.cynoteck.petofyparents.activty.AdoptPetActivity.total_adoption_request_TV;
 import static com.cynoteck.petofyparents.activty.DonationActivity.total_donation_RL;
+import static com.cynoteck.petofyparents.activty.DonationActivity.total_donation_request_TV;
 
 public class AdoptionDonationActivity extends AppCompatActivity implements View.OnClickListener , ApiResponse {
 
@@ -137,7 +138,7 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
 
                                 PetParentSingleton.getInstance().getGetDonationRequestListData().add(getDonationRequestData);
                             }
-                            total_adoption_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetDonationRequestListData().size()));
+                            total_donation_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetDonationRequestListData().size()));
                             total_donation_RL.setEnabled(true);
                         }
                     }

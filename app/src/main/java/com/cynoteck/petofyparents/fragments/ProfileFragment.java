@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -68,6 +69,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
@@ -81,7 +84,7 @@ import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.total_pet
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener, ApiResponse, OnItemClickListener {
-    TextView parent_name_TV, parent_mail_TV, parent_phone_no_TV;
+    TextView parent_name_TV, parent_mail_TV, parent_phone_no_TV,your_pets_TV;
     CircleImageView parent_image_CIV;
     View view;
     RelativeLayout edit_RL;
@@ -101,8 +104,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
     //    ArrayList<PetList> profileList = new ArrayList<>();
     public static PetListHorizontalAdapter petListHorizontalAdapter;
     RecyclerView pet_list_RV;
-    public static ProgressBar pet_list_progress_bar;
     RelativeLayout add_pet_RL;
+    public static LinearLayout pet_list_LL;
 
 
     public ProfileFragment() {
@@ -118,19 +121,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
         initization();
         getParentInfo();
-        pet_list_progress_bar.setVisibility(View.VISIBLE);
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        pet_list_RV.setLayoutManager(horizontalLayoutManager);
-        petListHorizontalAdapter = new PetListHorizontalAdapter(getContext(), "ProfileFragment", PetParentSingleton.getInstance().getArrayList(), this);
-        pet_list_RV.setAdapter(petListHorizontalAdapter);
-        petListHorizontalAdapter.notifyDataSetChanged();
+        Timer timer = new Timer ();
+        setPetListLayout();
 
         return view;
 
     }
 
+    private void setPetListLayout() {
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        pet_list_RV.setLayoutManager(horizontalLayoutManager);
+        petListHorizontalAdapter = new PetListHorizontalAdapter(getContext(), "ProfileFragment", PetParentSingleton.getInstance().getArrayList(), this);
+        pet_list_RV.setAdapter(petListHorizontalAdapter);
+        petListHorizontalAdapter.notifyDataSetChanged();
+    }
+
     private void getPetList() {
-        pet_list_progress_bar.setVisibility(View.VISIBLE);
         PetDataParams getPetDataParams = new PetDataParams();
         getPetDataParams.setPageNumber(1);
         getPetDataParams.setPageSize(100);
@@ -196,6 +202,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
     }
 
     private void initization() {
+        pet_list_LL = view.findViewById(R.id.pet_list_LL);
+        your_pets_TV = view.findViewById(R.id.your_pets_TV);
         parent_image_progress_bar = view.findViewById(R.id.parent_image_progress_bar);
         plans_and_subscription_CL = view.findViewById(R.id.plans_and_subscription_CL);
         general_details_CL = view.findViewById(R.id.general_details_CL);
@@ -211,7 +219,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         edit_RL = view.findViewById(R.id.edit_RL);
         add_pet_RL = view.findViewById(R.id.add_pet_RL);
         pet_list_RV = view.findViewById(R.id.pet_list_RV);
-        pet_list_progress_bar = view.findViewById(R.id.pet_list_progress_bar);
         edit_RL.setOnClickListener(this);
         general_details_CL.setOnClickListener(this);
         plans_and_subscription_CL.setOnClickListener(this);
@@ -261,7 +268,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 break;
 
             case R.id.logout_CL:
-                SharedPreferences preferences = getActivity().getSharedPreferences("userdetails", 0);
+                SharedPreferences preferences = getActivity().getSharedPreferences("userDetails", 0);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
@@ -482,7 +489,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                                 .placeholder(R.drawable.user_profile)
                                 .into(parent_image_CIV);
                         Config.user_url = imageResponse.getData().getDocumentUrl();
-                        sharedPreferences = getContext().getSharedPreferences("userdetails", 0);
+                        sharedPreferences = getContext().getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
                         login_editor.putString("profilePic", imageResponse.getData().getDocumentUrl());
                         login_editor.commit();
@@ -508,7 +515,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
             case "GetPetList":
                 try {
-                    pet_list_progress_bar.setVisibility(View.GONE);
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {

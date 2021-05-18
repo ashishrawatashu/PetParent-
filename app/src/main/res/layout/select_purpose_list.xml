@@ -6,13 +6,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_gravity="bottom"
-        style="@style/CustomCardViewStyle"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         android:layout_width="match_parent"
         android:background="@color/whiteColor"
         android:layout_height="500dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

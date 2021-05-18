@@ -97,7 +97,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                     int responseCode = Integer.parseInt(loginRegisterResponse.getResponseLogin().getResponseCode());
                     if (responseCode == 109) {
 
-                        sharedPreferences = this.getSharedPreferences("userdetails", 0);
+                        sharedPreferences = this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
                         login_editor.putString("email", loginRegisterResponse.getData().getEmail());
                         login_editor.putString("userId", loginRegisterResponse.getData().getUserId());

@@ -1,6 +1,7 @@
 
 package com.cynoteck.petofyparents.response.getServiceProviderFullDetailsResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
@@ -247,7 +248,7 @@ public class ServiceProviderDetailData {
     private List<Object> providerPetTypeList = null;
     @SerializedName("providerRatingList")
     @Expose
-    private List<ProviderRatingList> providerRatingList = null;
+    private ArrayList<ProviderRatingList> providerRatingList = null;
     @SerializedName("providerServiceTypeList")
     @Expose
     private List<Object> providerServiceTypeList = null;
@@ -899,11 +900,11 @@ public class ServiceProviderDetailData {
         this.providerPetTypeList = providerPetTypeList;
     }
 
-    public List<ProviderRatingList> getProviderRatingList() {
+    public ArrayList<ProviderRatingList> getProviderRatingList() {
         return providerRatingList;
     }
 
-    public void setProviderRatingList(List<ProviderRatingList> providerRatingList) {
+    public void setProviderRatingList(ArrayList<ProviderRatingList> providerRatingList) {
         this.providerRatingList = providerRatingList;
     }
 

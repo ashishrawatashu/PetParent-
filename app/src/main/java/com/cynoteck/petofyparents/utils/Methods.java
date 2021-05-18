@@ -1,11 +1,18 @@
 package com.cynoteck.petofyparents.utils;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -13,6 +20,7 @@ import com.cynoteck.petofyparents.R;
 import com.google.gson.Gson;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 import org.json.JSONArray;
 
@@ -27,6 +35,24 @@ public class Methods {
     /*public static SweetAlertDialog errorMsgDialog;
     private SweetAlertDialog informationDialog;*/
 
+
+    public void getCurrentLocation(Context context, LocationManager locationManager, SharedPreferences sharedPreferences, SharedPreferences.Editor login_editor) {
+            @SuppressLint("MissingPermission") Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (locationGPS != null) {
+                double lat = locationGPS.getLatitude();
+                double longi = locationGPS.getLongitude();
+                Config.latitude = String.valueOf(lat);
+                Config.longitude = String.valueOf(longi);
+                Log.e("location", Config.longitude + " " + Config.latitude);
+
+
+                login_editor.putString("userLatitude", String.valueOf(lat));
+                login_editor.putString("userLongitude", String.valueOf(longi));
+                login_editor.commit();
+            } else {
+                Log.e("Loaction Error", "Unable to find location.");
+            }
+    }
 
     public Methods(Context c) {
         this.c = c;

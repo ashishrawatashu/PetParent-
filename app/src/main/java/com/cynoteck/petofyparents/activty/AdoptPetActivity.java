@@ -93,13 +93,6 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
         total_adoption_request_TV = findViewById(R.id.total_adoption_request_TV);
 
 
-        if (!PetParentSingleton.getInstance().getGetAdoptionRequestListData().isEmpty()){
-            total_adoption_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetAdoptionRequestListData().size()));
-            total_adoption_RL.setEnabled(true);
-            total_adoption_RL.setEnabled(true);
-        }else {
-            total_adoption_RL.setEnabled(false);
-        }
         total_adoption_RL.setOnClickListener(this);
         cats_RB.setOnClickListener(this);
         dog_RB.setOnClickListener(this);
@@ -132,6 +125,18 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!PetParentSingleton.getInstance().getGetAdoptionRequestListData().isEmpty()){
+            total_adoption_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetAdoptionRequestListData().size()));
+            total_adoption_RL.setEnabled(true);
+            total_adoption_RL.setEnabled(true);
+        }else {
+            total_adoption_RL.setEnabled(false);
+        }
     }
 
     @Override
@@ -378,6 +383,8 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
         intent.putExtra("donar_phone", petDonationLists.get(position).getPhoneNumber());
         intent.putExtra("donar_mail", "");
         intent.putExtra("donar_address", petDonationLists.get(position).getAddress());
+        intent.putExtra("from", "AdoptPetActivity");
+
         startActivity(intent);
 
     }

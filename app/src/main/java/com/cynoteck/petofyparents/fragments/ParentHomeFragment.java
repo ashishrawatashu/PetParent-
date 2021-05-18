@@ -2,6 +2,7 @@ package com.cynoteck.petofyparents.fragments;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,9 +28,11 @@ import android.widget.TextView;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activty.AdoptionDonationActivity;
 import com.cynoteck.petofyparents.activty.ConsultationListActivity;
+import com.cynoteck.petofyparents.activty.OTPVerifyActivity;
 import com.cynoteck.petofyparents.activty.PetBreedsActivity;
 import com.cynoteck.petofyparents.activty.PetInsuranceActivity;
 import com.cynoteck.petofyparents.activty.PetNamesActivity;
+import com.cynoteck.petofyparents.activty.SearchKeywordActivity;
 import com.cynoteck.petofyparents.adapter.CityListAdapter;
 import com.cynoteck.petofyparents.adapter.SliderPagerAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
@@ -58,6 +61,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     LinearLayout location_LL,pet_names_LL,cosultation_LL,insurances_LL,adoption_donation_LL;
     Methods methods;
     TextView location_TV;
+    ImageView search_bar_IV;
 
     LinearLayout pet_breed_LL;
 
@@ -71,6 +75,9 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     RecyclerView city_list_RV;
     ProgressBar progressBar;
     EditText search_location_ET;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor login_editor;
     public ParentHomeFragment() {
         // Required empty public constructor
     }
@@ -83,6 +90,11 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         methods = new Methods(getContext());
 
         init();
+        if (Config.cityId.equals("")){
+            showLocationDialog();
+            ApiService<GetCityListWithStateResponse> service = new ApiService<>();
+            service.get(this, ApiClient.getApiInterface().getCityListWithState(Config.token), "GetCityListWithState");
+        }
 
         setupPagerIndidcatorDots();
         final Handler handler = new Handler();
@@ -108,6 +120,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     }
 
     private void init() {
+        search_bar_IV=view.findViewById(R.id.search_bar_IV);
         location_TV = view.findViewById(R.id.location_TV);
         location_LL = view.findViewById(R.id.location_LL);
         pet_names_LL = view.findViewById(R.id.pet_names_LL);
@@ -124,10 +137,13 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
 
         location_LL.setOnClickListener(this);
         pet_breed_LL.setOnClickListener(this);
+        search_bar_IV.setOnClickListener(this);
         pet_names_LL.setOnClickListener(this);
         cosultation_LL.setOnClickListener(this);
         insurances_LL.setOnClickListener(this);
         adoption_donation_LL.setOnClickListener(this);
+
+        location_TV.setText(Config.cityFullName);
         sliderPagerAdapter = new SliderPagerAdapter(getActivity(), slider_image_list);
         vp_slider.setAdapter(sliderPagerAdapter);
 
@@ -179,6 +195,10 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.search_bar_IV:
+                startActivity(new Intent(getContext(), SearchKeywordActivity.class));
+                break;
+
             case R.id.location_LL:
                 showLocationDialog();
                 ApiService<GetCityListWithStateResponse> service = new ApiService<>();
@@ -296,6 +316,17 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewDetailsClick(int position) {
         location_TV.setText(getCityListWithStateResponse.getData().get(position).getCityName());
+        sharedPreferences = getContext().getSharedPreferences("userDetails", 0);
+        login_editor = sharedPreferences.edit();
+        login_editor.putString("CityId", getCityListWithStateResponse.getData().get(position).getId());
+        login_editor.putString("cityName", getCityListWithStateResponse.getData().get(position).getCity1());
+        login_editor.putString("CityFullName", getCityListWithStateResponse.getData().get(position).getCityName());
+        login_editor.commit();
+        Config.latitude = sharedPreferences.getString("userLatitude", "");
+        Config.longitude = sharedPreferences.getString("userLongitude", "");
+        Config.cityId = sharedPreferences.getString("CityId", "");
+        Config.cityName = sharedPreferences.getString("cityName", "");
+        Config.cityFullName = sharedPreferences.getString("CityFullName", "");
         location_dialog.dismiss();
     }
 }

@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,21 +16,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
 import com.cynoteck.petofyparents.response.getVetListResponse.ProviderList;
 import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHolder> {
+public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHolder> implements Filterable {
     Context context;
     List<ProviderList> providerLists;
     RegisterRecyclerViewClickListener onProductItemClickListner;
+    List<ProviderList> getProviderListsFilter;
 
     public VetListAdapter(Context context, List<ProviderList> providerLists, RegisterRecyclerViewClickListener onProductItemClickListner) {
         this.context = context;
         this.providerLists = providerLists;
         this.onProductItemClickListner = onProductItemClickListner;
+        getProviderListsFilter = new ArrayList<>(providerLists);
+
     }
 
     @NonNull
@@ -56,6 +61,39 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
                 .placeholder(R.drawable.doctor_dummy_image)
                 .into(holder.vet_image_IV);
 
+        if (providerLists.get(position).getRating().equals("1")){
+            holder.star_one.setImageResource(R.drawable.star_with_rate);
+            holder.star_two.setImageResource(R.drawable.empty_star_icon);
+            holder.star_three.setImageResource(R.drawable.empty_star_icon);
+            holder.star_four.setImageResource(R.drawable.empty_star_icon);
+            holder.star_five.setImageResource(R.drawable.empty_star_icon);
+
+        }else if (providerLists.get(position).getRating().equals("2")){
+            holder.star_one.setImageResource(R.drawable.star_with_rate);
+            holder.star_two.setImageResource(R.drawable.star_with_rate);
+            holder.star_three.setImageResource(R.drawable.empty_star_icon);
+            holder.star_four.setImageResource(R.drawable.empty_star_icon);
+            holder.star_five.setImageResource(R.drawable.empty_star_icon);
+        }else if (providerLists.get(position).getRating().equals("3")){
+            holder.star_one.setImageResource(R.drawable.star_with_rate);
+            holder.star_two.setImageResource(R.drawable.star_with_rate);
+            holder.star_three.setImageResource(R.drawable.star_with_rate);
+            holder.star_four.setImageResource(R.drawable.empty_star_icon);
+            holder.star_five.setImageResource(R.drawable.empty_star_icon);
+        }else if (providerLists.get(position).getRating().equals("4")){
+            holder.star_one.setImageResource(R.drawable.star_with_rate);
+            holder.star_two.setImageResource(R.drawable.star_with_rate);
+            holder.star_three.setImageResource(R.drawable.star_with_rate);
+            holder.star_four.setImageResource(R.drawable.star_with_rate);
+            holder.star_five.setImageResource(R.drawable.empty_star_icon);
+        }else if (providerLists.get(position).getRating().equals("5")){
+            holder.star_one.setImageResource(R.drawable.star_with_rate);
+            holder.star_two.setImageResource(R.drawable.star_with_rate);
+            holder.star_three.setImageResource(R.drawable.star_with_rate);
+            holder.star_four.setImageResource(R.drawable.star_with_rate);
+            holder.star_five.setImageResource(R.drawable.star_with_rate);
+        }
+
     }
 
     @Override
@@ -63,8 +101,41 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
         return providerLists.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return filterList;
+    }
+
+    private Filter filterList = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<ProviderList> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(getProviderListsFilter);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (ProviderList item : getProviderListsFilter) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            providerLists.clear();
+            providerLists.addAll((List<ProviderList>) results.values);
+            notifyDataSetChanged();
+
+        }
+    };
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView vet_image_IV,star_one,star_two,star_three,star_fourstar_five;
+        ImageView vet_image_IV,star_one,star_two,star_three,star_four ,star_five;
         TextView vet_name_TV, vet_qualification_TV,vet_charges_tv,vet_location_TV;
         LinearLayout view_more_LL;
         public MyViewHolder(@NonNull View itemView) {
@@ -75,7 +146,11 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
             vet_charges_tv = itemView.findViewById(R.id.vet_charges_tv);
             vet_location_TV = itemView.findViewById(R.id.vet_location_TV);
             view_more_LL = itemView.findViewById(R.id.view_more_LL);
-
+            star_one = itemView.findViewById(R.id.star_one);
+            star_two = itemView.findViewById(R.id.star_two);
+            star_three = itemView.findViewById(R.id.star_three);
+            star_four = itemView.findViewById(R.id.star_four);
+            star_five = itemView.findViewById(R.id.star_five);
             view_more_LL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -10,6 +10,7 @@
         <item name="colorSecondary">@color/colorPrimary</item>
         <item name="android:statusBarColor">@color/whiteColor</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
     </style>
     <style name="MatButton" parent="Theme.MaterialComponents">
@@ -49,5 +50,16 @@
         parent="Widget.Design.BottomNavigationView">
         <item name="android:textSize">12sp</item>
         <item name="fontFamily">@font/nunito</item>
+    </style>
+
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
     </style>
 </resources>

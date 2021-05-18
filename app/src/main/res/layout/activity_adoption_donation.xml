@@ -231,7 +231,7 @@
                 android:id="@+id/approve_reject_request_demo_IV"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/request_approve_demo"
+                android:src="@drawable/accepted_by_ngo_demo"
                 app:layout_constraintBottom_toBottomOf="@id/approve_reject_request_LL"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/approve_reject_request_LL" />
@@ -254,7 +254,7 @@
                     android:layout_marginLeft="15dp"
                     android:fontFamily="@font/nunito"
                     android:gravity="center_vertical"
-                    android:text="APPROVE / REJECT"
+                    android:text="REQUEST ACCEPT / DECLINE BY NGO"
                     android:textColor="@color/gray_1"
                     android:textSize="14sp" />
 
@@ -289,8 +289,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:fontFamily="@font/nunito"
+                    android:text="APPROVE / REJECT"
                     android:gravity="center_vertical"
-                    android:text="REQUEST ACCEPT / DECLINE BY NGO"
                     android:textColor="@color/gray_1"
                     android:textSize="14sp" />
 

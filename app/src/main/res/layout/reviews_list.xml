@@ -4,7 +4,8 @@
     android:layout_marginRight="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/whiteColor"
-    android:layout_height="match_parent">
+    android:paddingBottom="10dp"
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="10dp"
@@ -43,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/user_profile_IV"
-                    android:src="@drawable/doctor_dummy_image"/>
+                    android:scaleType="fitXY"/>
 
 
 
@@ -92,7 +93,7 @@
                 android:id="@+id/star_two"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/star_icon"/>
+                android:src="@drawable/empty_star_icon"/>
 
             <ImageView
                 android:id="@+id/star_three"

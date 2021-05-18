@@ -286,7 +286,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                             startActivity(addUserWithPet);
                         }
                     }else if (responseCode==116){
-                        sharedPreferences = OTPVerifyActivity.this.getSharedPreferences("userdetails", 0);
+                        sharedPreferences = OTPVerifyActivity.this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
                         login_editor.putString("encryptedId", loginRegisterResponse.getData().getEncryptedId());
                         login_editor.putString("email", loginRegisterResponse.getData().getEmail());

@@ -232,7 +232,7 @@
                             android:id="@+id/vet_address_TV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Dehradun. India, 248001"
+                            android:maxLines="1"
                             android:textSize="12sp" />
 
 

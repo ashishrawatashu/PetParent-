@@ -28,6 +28,7 @@ import com.cynoteck.petofyparents.parameter.petReportsRequest.VisitTypeRequest;
 import com.cynoteck.petofyparents.parameter.registerRequest.Registerparams;
 import com.cynoteck.petofyparents.parameter.registrationWithQrCodeRequest.RegistrationWithQrCodeRequest;
 import com.cynoteck.petofyparents.parameter.saveFeedbackRequest.SaveFeedbackRequest;
+import com.cynoteck.petofyparents.parameter.searchKeywordParams.SearchKeywordRequest;
 import com.cynoteck.petofyparents.parameter.searchPetParentRequest.SearchPetParentRequestData;
 import com.cynoteck.petofyparents.parameter.searchProviderRequest.SearchProviderRequest;
 import com.cynoteck.petofyparents.parameter.serviceProviderDetailRequest.SearchProviderFullDetailRequest;
@@ -60,6 +61,7 @@ import com.cynoteck.petofyparents.response.getPetParrentnameReponse.GetPetParent
 import com.cynoteck.petofyparents.response.getPetReportsResponse.AddUpdateDeleteClinicVisitResponse;
 import com.cynoteck.petofyparents.response.getProviderFeedbackResponse.GetProviderFeedbackResponse;
 import com.cynoteck.petofyparents.response.getSaveFeedbackResponse.GetSaveFeedbackResponse;
+import com.cynoteck.petofyparents.response.getSearchKeywordResponse.SearchKeywordResponse;
 import com.cynoteck.petofyparents.response.getServiceProviderFullDetailsResponse.SearchProviderFullDetailResponse;
 import com.cynoteck.petofyparents.response.getXRayReports.getXRayReportDetailsResponse.GetXRayReportDeatilsResponse;
 import com.cynoteck.petofyparents.response.getpetbreedsResponse.GetPetBreedsResponse;
@@ -491,7 +493,21 @@ public interface ApiInterface {
     Call<GetAdoptionRequestListResponse> getAdoptionRequest(@Header("Authorization") String auth, @Url String url);
 
     @GET
+    Call<JsonObject> deleteAdoptionRequest(@Header("Authorization") String auth, @Url String url);
+
+
+    @GET
     Call<GetDonationRequestResponse> getDonationRequest(@Header("Authorization") String auth, @Url String url);
+
+
+    @GET
+    Call<JsonObject> deleteDonationRequest(@Header("Authorization") String auth, @Url String url);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("search/SearchKeyWords")
+    Call<SearchKeywordResponse> searchKeyWords(@Header("Authorization") String auth, @Body SearchKeywordRequest searchKeywordRequest);
+
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("search/GetSearchResults")

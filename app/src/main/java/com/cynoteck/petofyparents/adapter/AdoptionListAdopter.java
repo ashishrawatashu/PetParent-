@@ -47,7 +47,7 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
     public void onBindViewHolder(@NonNull AdoptionListAdopter.MyViewHolder holder, final int position) {
         Glide.with(context)
                 .load(petDonationLists.get(position).getPetImageList().get(0).getPetImageUrl())
-                .placeholder(R.drawable.pet_image)
+                .placeholder(R.drawable.empty_pet_image)
                 .into(holder.pet_breed_IV);
 
         holder.pet_breed_name_TV.setText(petDonationLists.get(position).getPetName());
@@ -61,7 +61,6 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout main_LL;
         TextView pet_breed_name_TV;
         ImageView pet_breed_IV;
 
@@ -69,7 +68,6 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
             super(itemView);
             pet_breed_name_TV = itemView.findViewById(R.id.pet_breed_name_TV);
             pet_breed_IV = itemView.findViewById(R.id.pet_breed_IV);
-            main_LL = itemView.findViewById(R.id.main_LL);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

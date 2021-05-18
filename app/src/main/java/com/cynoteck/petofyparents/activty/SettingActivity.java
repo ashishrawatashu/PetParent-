@@ -96,7 +96,7 @@ public class SettingActivity extends AppCompatActivity implements ApiResponse, V
                         if (status.equals("1")){
                             Toast.makeText(this, "Two Step Authentication Enable", Toast.LENGTH_SHORT).show();
                             two_fact_auth_TV.setText("Disable Two Step Authentication");
-                            SharedPreferences sharedPreferences = getSharedPreferences("userdetails", 0);
+                            SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
                             SharedPreferences.Editor login_editor;
                             login_editor = sharedPreferences.edit();
                             login_editor.putString("twoFactAuth", "true");
@@ -105,7 +105,7 @@ public class SettingActivity extends AppCompatActivity implements ApiResponse, V
                         }else {
                             Toast.makeText(this, "Two Step Authentication Disable", Toast.LENGTH_SHORT).show();
                             two_fact_auth_TV.setText("Enable Two Step Authentication");
-                            SharedPreferences sharedPreferences = getSharedPreferences("userdetails", 0);
+                            SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
                             SharedPreferences.Editor login_editor;
                             login_editor = sharedPreferences.edit();
                             login_editor.putString("twoFactAuth", "false");

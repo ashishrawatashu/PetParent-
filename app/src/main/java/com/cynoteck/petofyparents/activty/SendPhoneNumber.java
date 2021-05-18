@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
 import com.cynoteck.petofyparents.R;
@@ -32,6 +35,8 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 
 import retrofit2.Response;
+
+import static com.cynoteck.petofyparents.activty.DashBoardActivity.MY_PERMISSIONS_REQUEST_LOCATION;
 
 public class SendPhoneNumber extends AppCompatActivity implements View.OnClickListener, ApiResponse, TextWatcher {
 
@@ -57,38 +62,63 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
         enter_phone_ET.addTextChangedListener(this);
 //        qrCodeScanner_IV.setOnClickListener(this);
 
+        checkLocationPermission();
 
         next_BT.setOnClickListener(this);
         cross_IV.setOnClickListener(this);
         Intent intent = getIntent();
         next_BT.setEnabled(false);
         vetID = intent.getStringExtra("vetID");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-        } else {
-            ActivityCompat.requestPermissions(this, new
-                    String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-        }
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//        } else {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+//        }
 
 
     }
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length>0){
-            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                Toast.makeText(this, "Allow Permission for QR Scanner.", Toast.LENGTH_SHORT).show();
-                finish();
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    ActivityCompat.requestPermissions(this, new
-                            String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-                }
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
             }
-            else{
-                Log.e("NOPERMISION", "no");
+        }else if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                checkLocationPermission();
             }
-        }else
-            finish();
+        }
     }
     @Override
     public void onClick(View v) {

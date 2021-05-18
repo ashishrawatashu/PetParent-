@@ -82,6 +82,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/current_location_LL"
         android:layout_width="0dp"
         android:layout_marginTop="10dp"
@@ -120,7 +121,7 @@
         tools:listitem="@layout/city_list_layout"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/current_location_LL"
+        app:layout_constraintTop_toBottomOf="@id/search_bar_LL"
         app:layout_constraintStart_toStartOf="@id/cancel_CV"
         app:layout_constraintEnd_toEndOf="@id/location_TV"/>
 

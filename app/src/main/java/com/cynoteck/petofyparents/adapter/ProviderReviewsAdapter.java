@@ -39,9 +39,9 @@ public class ProviderReviewsAdapter extends RecyclerView.Adapter<ProviderReviews
     public void onBindViewHolder(@NonNull ProviderReviewsAdapter.MyViewHolder holder, int position){
         holder.comment_TV.setText(providerRatingLists.get(position).getFeedback());
         holder.user_name_TV.setText(providerRatingLists.get(position).getUserName());
+        holder.user_first_letter_TV.setText(providerRatingLists.get(position).getUserName().substring(0,1));
         Glide.with(context)
                 .load(providerRatingLists.get(position).getProfileImage())
-                .placeholder(R.drawable.user_profile)
                 .into(holder.user_profile_IV);
         if (providerRatingLists.get(position).getRating()==1){
             holder.star_one.setImageResource(R.drawable.star_with_rate);

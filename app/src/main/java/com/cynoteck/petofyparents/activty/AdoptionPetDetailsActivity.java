@@ -38,7 +38,7 @@ import retrofit2.Response;
 public class AdoptionPetDetailsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
     Methods methods;
-    String PetId = "", petName = "", petGender = "", petAge = "", petBreed = "", petColor = "", image = "", petSize = "", donarName = "", donarPhone = "", donarMail = "", donarAddress = "";
+    String from="", PetId = "", petName = "", petGender = "", petAge = "", petBreed = "", petColor = "", image = "", petSize = "", donarName = "", donarPhone = "", donarMail = "", donarAddress = "";
     ImageView pet_profile_image_IV;
     TextView pet_name_TV, pet_breed_TV, pet_Color_TV, pet_weight_TV, pet_parent_name_TV, parent_phone_TV, parent_email_TV, parent_address_TV;
     LinearLayout send_adoption_request_LL;
@@ -73,12 +73,18 @@ public class AdoptionPetDetailsActivity extends AppCompatActivity implements Api
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
+            from = extras.getString("from");
+            if (from.equals("AdoptionRequestActivity")){
+                send_adoption_request_LL.setVisibility(View.GONE);
+            }else {
+                send_adoption_request_LL.setVisibility(View.VISIBLE);
 
+            }
             image = extras.getString("image");
 
             Glide.with(this)
                     .load(image)
-                    .placeholder(R.drawable.pet_image)
+                    .placeholder(R.drawable.empty_pet_image)
                     .into(pet_profile_image_IV);
             PetId = extras.getString("pet_id");
             petName = extras.getString("pet_name");

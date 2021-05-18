@@ -19,8 +19,8 @@ import java.util.List;
 
 public class ProviderClinicTimingsAdapter extends RecyclerView.Adapter<ProviderClinicTimingsAdapter.MyViewHolder> {
     Context context;
-    ArrayList<ServiceProviderDetailOperatingHour> serviceProviderDetailOperatingHours;
-    public ProviderClinicTimingsAdapter(Context context, ArrayList<ServiceProviderDetailOperatingHour> serviceProviderDetailOperatingHours) {
+    List<ServiceProviderDetailOperatingHour> serviceProviderDetailOperatingHours;
+    public ProviderClinicTimingsAdapter(Context context, List<ServiceProviderDetailOperatingHour> serviceProviderDetailOperatingHours) {
         this.context = context;
         this.serviceProviderDetailOperatingHours = serviceProviderDetailOperatingHours;
     }

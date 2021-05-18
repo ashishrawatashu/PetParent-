@@ -110,7 +110,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
                 Intent intent;
-                SharedPreferences sharedPreferences = getSharedPreferences("userdetails", 0);
+                SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
                 String loggedIn = sharedPreferences.getString("loggedIn", "");
                 if (loggedIn.equals("loggedIn")) {
                     intent = new Intent(SplashScreen.this, DashBoardActivity.class);

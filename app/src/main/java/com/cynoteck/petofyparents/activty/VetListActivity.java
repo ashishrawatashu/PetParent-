@@ -138,12 +138,14 @@ public class VetListActivity extends AppCompatActivity implements ApiResponse, R
 
     @Override
     public void onProductClick(int position) {
-        Intent intent = new Intent(this, AddUpdateAppointmentActivity.class);
-        intent.putExtra("type", "add");
-        intent.putExtra("id", "");
-        intent.putExtra("pet_id", "");
-        intent.putExtra("vetUserId", getVetListResponse.getData().getProviderList().get(position).getId());
-        startActivity(intent);
+//        Intent intent = new Intent(this, AddUpdateAppointmentActivity.class);
+//        intent.putExtra("type", "add");
+//        intent.putExtra("id", "");
+//        intent.putExtra("pet_id", "");
+//        intent.putExtra("vetUserId", getVetListResponse.getData().getProviderList().get(position).getId());
+//        startActivity(intent);
+
+        startActivity(new Intent(this,VetFullProfileActivity.class));
 
 
     }

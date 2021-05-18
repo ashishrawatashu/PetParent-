@@ -103,7 +103,23 @@ public class AdoptionRequestAdapter  extends RecyclerView.Adapter<AdoptionReques
             approve_reject_TV = itemView.findViewById(R.id.approve_reject_TV);
             pet_name_TV = itemView.findViewById(R.id.pet_name_TV);
 
+            pet_details_BT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onAdaptionDonationListClickListener != null) {
+                        onAdaptionDonationListClickListener.onPetDetailsClickListener(getAdapterPosition());
+                    }
+                }
+            });
 
+            cancel_request_BT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onAdaptionDonationListClickListener != null) {
+                        onAdaptionDonationListClickListener.onCancelRequestClickListener(getAdapterPosition());
+                    }
+                }
+            });
         }
     }
 }

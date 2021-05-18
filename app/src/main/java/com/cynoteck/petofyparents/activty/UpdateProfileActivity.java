@@ -174,7 +174,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                         Config.user_address = loginRegisterResponse.getData().getAddress();
                         Config.user_emial = loginRegisterResponse.getData().getEmail();
                         Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
-                        sharedPreferences = this.getSharedPreferences("userdetails", 0);
+                        sharedPreferences = this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
                         login_editor.putString("email", loginRegisterResponse.getData().getEmail());
                         login_editor.putString("firstName", loginRegisterResponse.getData().getFirstName());

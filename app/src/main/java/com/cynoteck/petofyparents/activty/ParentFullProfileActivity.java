@@ -316,7 +316,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
                                 .placeholder(R.drawable.user_profile)
                                 .into(parent_image_IV);
                         Config.user_url = imageResponse.getData().getDocumentUrl();
-                        sharedPreferences = this.getSharedPreferences("userdetails", 0);
+                        sharedPreferences = this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
                         login_editor.putString("profilePic", imageResponse.getData().getDocumentUrl());
                         login_editor.commit();

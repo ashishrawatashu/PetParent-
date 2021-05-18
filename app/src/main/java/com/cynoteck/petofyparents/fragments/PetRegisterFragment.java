@@ -34,7 +34,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cynoteck.petofyparents.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activty.AddPetRegister;
-import com.cynoteck.petofyparents.activty.PetDetailsActivity;
 import com.cynoteck.petofyparents.activty.PetProfileActivity;
 import com.cynoteck.petofyparents.activty.SelectPetReportsActivity;
 import com.cynoteck.petofyparents.adapter.RegisterPetAdapter;
@@ -56,7 +55,8 @@ import java.util.TimerTask;
 import retrofit2.Response;
 import static android.app.Activity.RESULT_OK;
 import static com.cynoteck.petofyparents.fragments.ProfileFragment.petListHorizontalAdapter;
-import static com.cynoteck.petofyparents.fragments.ProfileFragment.pet_list_progress_bar;
+import static com.cynoteck.petofyparents.fragments.ProfileFragment.pet_list_LL;
+import static com.cynoteck.petofyparents.activty.DonationActivity.donatePetAdapter;
 
 @SuppressLint("StaticFieldLeak")
 public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDeatilsAndIdCardClick, View.OnClickListener, TextWatcher {
@@ -100,7 +100,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
         // Inflate the layout for this fragment
 
         view = inflater.inflate(R.layout.fragment_pet_register, container, false);
-        sharedPreferences = getActivity().getSharedPreferences("userdetails", 0);
+        sharedPreferences = getActivity().getSharedPreferences("userDetails", 0);
 
         mNetworkReceiver = new NetworkChangeReceiver();
         registerNetworkBroadcastForNougat();
@@ -346,7 +346,9 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                                 register_pet_RV.setAdapter(registerPetAdapter);
                                 registerPetAdapter.notifyDataSetChanged();
                                 petListHorizontalAdapter.notifyDataSetChanged();
-                                pet_list_progress_bar.setVisibility(View.GONE);
+                                pet_list_LL.setVisibility(View.VISIBLE);
+                                donatePetAdapter.notifyDataSetChanged();
+
                             }
                         }
 
@@ -506,18 +508,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onIdAddClinicClick(int position) {
-        Intent petDetailsIntent = new Intent(getActivity().getApplication(), PetDetailsActivity.class);
-        Bundle data = new Bundle();
-        data.putString("pet_id", PetParentSingleton.getInstance().getArrayList().get(position).getId());
-        data.putString("pet_name", PetParentSingleton.getInstance().getArrayList().get(position).getPetName());
-        data.putString("pet_parent", PetParentSingleton.getInstance().getArrayList().get(position).getPetParentName());
-        data.putString("pet_sex", PetParentSingleton.getInstance().getArrayList().get(position).getPetSex());
-        data.putString("pet_age", PetParentSingleton.getInstance().getArrayList().get(position).getPetAge());
-        data.putString("pet_unique_id", PetParentSingleton.getInstance().getArrayList().get(position).getPetUniqueId());
-        data.putString("pet_DOB", PetParentSingleton.getInstance().getArrayList().get(position).getDateOfBirth());
-        data.putString("pet_encrypted_id", PetParentSingleton.getInstance().getArrayList().get(position).getEncryptedId());
-        petDetailsIntent.putExtras(data);
-        startActivity(petDetailsIntent);
+
     }
 
     @Override

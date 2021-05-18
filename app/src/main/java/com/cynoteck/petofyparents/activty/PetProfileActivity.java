@@ -1,11 +1,14 @@
 package com.cynoteck.petofyparents.activty;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,6 +30,7 @@ import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListRespo
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.google.android.material.card.MaterialCardView;
+import com.google.gson.JsonObject;
 
 import retrofit2.Response;
 
@@ -35,7 +39,7 @@ import static com.cynoteck.petofyparents.fragments.ProfileFragment.petListHorizo
 
 public class PetProfileActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
     Methods methods;
-    String pet_list_position="",petId = "", pet_unique_id = "", pet_image_url = "", pet_breed = "", pet_age = "", pet_sex = "", pet_name = "",pet_category = "",pet_DOB = "",pet_color = "";
+    String petId = "", pet_unique_id = "", pet_image_url = "", pet_breed = "", pet_age = "", pet_sex = "", pet_name = "",pet_category = "",pet_DOB = "",pet_color = "";
     ImageView pet_profile_image_IV;
     TextView pet_name_TV, pet_dob_TV, pet_reg__id_TV, pet_breed_TV, pet_gender_TV;
     GetPetResponse getPetResponse;
@@ -46,6 +50,9 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     SharedPreferences sharedPreferences;
     RelativeLayout edit_profile_RL;
     ScrollView pet_full_details_SV;
+    int pet_list_position;
+
+    LinearLayout pet_reports_LL, consultation_LL, donate_pet_LL,hostels_LL,grooming_LL,pet_shops_LL;
 
 
     @Override
@@ -54,7 +61,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         setContentView(R.layout.pet_profile_activity);
         methods = new Methods(this);
         Intent extras = getIntent();
-        pet_list_position = extras.getStringExtra("pet_list_position");
+        pet_list_position = Integer.parseInt(extras.getStringExtra("pet_list_position"));
         petId = extras.getStringExtra("pet_id");
         pet_unique_id = extras.getStringExtra("pet_unique_id");
         pet_image_url = extras.getStringExtra("pet_image_url");
@@ -68,6 +75,21 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
 
         pet_full_details_SV = findViewById(R.id.pet_full_details_SV);
         back_arrow_CV = findViewById(R.id.back_arrow_CV);
+        consultation_LL = findViewById(R.id.consultation_LL);
+        donate_pet_LL = findViewById(R.id.donate_pet_LL);
+        grooming_LL = findViewById(R.id.grooming_LL);
+        hostels_LL = findViewById(R.id.hostels_LL);
+        pet_reports_LL = findViewById(R.id.pet_reports_LL);
+        pet_shops_LL = findViewById(R.id.pet_shops_LL);
+
+
+        consultation_LL.setOnClickListener(this);
+        donate_pet_LL.setOnClickListener(this);
+        grooming_LL.setOnClickListener(this);
+        hostels_LL.setOnClickListener(this);
+        pet_reports_LL.setOnClickListener(this);
+        pet_shops_LL.setOnClickListener(this);
+
 
         pet_profile_image_IV = findViewById(R.id.pet_profile_image_IV);
         image_edit_CV = findViewById(R.id.image_edit_CV);
@@ -92,7 +114,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         getPetListParams.setId(petId);
         GetPetListRequest getPetListRequest = new GetPetListRequest();
         getPetListRequest.setData(getPetListParams);
-        sharedPreferences = getSharedPreferences("userdetails", 0);
+        sharedPreferences = getSharedPreferences("userDetails", 0);
 
 //        if (methods.isInternetOn()) {
 //            getPetlistData(getPetListRequest);
@@ -151,9 +173,81 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 intent.putExtra("image_url", pet_image_url);
                 startActivityForResult(intent, 1);
                 break;
+                
+            case R.id.pet_reports_LL:
+                Intent selectReportsIntent = new Intent(this, SelectPetReportsActivity.class);
+                Bundle data = new Bundle();
+                data.putString("pet_id", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().length() - 2));
+                data.putString("pet_name", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getPetName());
+                data.putString("pet_unique_id", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getPetUniqueId());
+                data.putString("pet_sex", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getPetSex());
+                data.putString("pet_owner_name", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getPetParentName());
+                data.putString("pet_owner_contact", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getContactNumber());
+                data.putString("pet_DOB", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getDateOfBirth());
+                data.putString("pet_encrypted_id", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getEncryptedId());
+                data.putString("pet_age", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getPetAge());
+                data.putString("pet_image_url", PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getPetProfileImageUrl());
+                selectReportsIntent.putExtras(data);
+                startActivity(selectReportsIntent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+                
+                break;
+
+            case R.id.consultation_LL:
+                Intent consultationIntent = new Intent(this, ConsultationListActivity.class);
+                startActivity(consultationIntent);
+                break;
+
+            case R.id.donate_pet_LL:
+            {
+                String realId = PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().substring(0,PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().length()-2);
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("");
+                alertDialog.setMessage("Do you want to donate this pet?");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                donatePetById(realId);
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.dismiss();
+
+                            }
+
+                        });
+                alertDialog.show();
+
+
+
+
+
+            }
+                break;
+
+
 
         }
 
+    }
+
+    private void donatePetById(String realId) {
+        JsonObject jsonObjectParams = new JsonObject();
+        jsonObjectParams.addProperty("id", realId);
+
+        JsonObject jsonObjectRequest = new JsonObject();
+        jsonObjectRequest.add("data", jsonObjectParams);
+
+        ApiService<JsonObject> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().donatePetById(Config.token, jsonObjectRequest), "DonatePetById");
+        Log.e("DATALOG", "check1=> " + jsonObjectRequest);
     }
 
     @Override
@@ -186,6 +280,23 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                     e.printStackTrace();
                 }
                 break;
+
+            case "DonatePetById":
+                try {
+                    JsonObject jsonObject = (JsonObject) arg0.body();
+                    JsonObject response = jsonObject.getAsJsonObject("response");
+                    int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));
+                    if (responseCode == 109) {
+                        Toast.makeText(this, "Successfully Donate", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+
+
         }
     }
 
@@ -219,7 +330,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 petList.setPetCategory(data.getStringExtra("pet_category"));
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
-                PetParentSingleton.getInstance().getArrayList().set(Integer.parseInt(pet_list_position),petList);
+                PetParentSingleton.getInstance().getArrayList().set((pet_list_position),petList);
 
                 petId = data.getStringExtra("pet_id");
                 pet_unique_id = data.getStringExtra("pet_unique_id");

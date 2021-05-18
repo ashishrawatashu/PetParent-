@@ -25,9 +25,9 @@
             android:fontFamily="@font/nunito"
             android:gravity="center"
             android:text="@string/VetProfile"
+            android:textAllCaps="true"
             android:textColor="@color/gray_1"
             android:textSize="18sp"
-            android:textAllCaps="true"
             app:layout_constraintBottom_toBottomOf="@id/back_arrow_CV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
-        android:id="@+id/scrollView4"
+        android:visibility="gone"
+        android:id="@+id/scroll_view_vet_profile"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,8 +92,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
                     android:layout_marginLeft="7dp"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -140,7 +141,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="15dp"
                                 android:fontFamily="@font/nunito"
-                                android:text="4.7"
                                 android:textColor="@color/gray_1"
                                 android:textSize="12sp" />
 
@@ -168,7 +168,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito"
-                        android:text="Dr,Ashish Rawat"
                         android:textColor="@color/gray_2"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -178,8 +177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:gravity="center_vertical"
-                        android:text="(BVSc and AH)" />
+                        android:gravity="center_vertical"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -195,12 +193,11 @@
                             android:src="@drawable/location_grey_icon" />
 
                         <TextView
-                            android:fontFamily="@font/montserrat"
                             android:id="@+id/vet_address_TV"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat"
                             android:maxLines="1"
-                            android:text="Dehradun. India, 248001"
                             android:textSize="14sp" />
 
 
@@ -212,13 +209,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
-                app:layout_constraintTop_toBottomOf="@id/vet_info_CL"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/line_first"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/gray_5"/>
+                android:background="@color/gray_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vet_info_CL" />
 
             <TextView
                 android:id="@+id/clinic_details_TV"
@@ -233,14 +230,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/vet_info_CL" />
 
             <TextView
+                android:id="@+id/vet_chargers_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/clinic_details_TV"
-                android:text="₹400 (Clinic Fees)"
                 android:fontFamily="@font/montserrat"
+                android:text="₹400 (Clinic Fees)"
                 android:textColor="@color/gray_1"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/clinic_details_TV" />
 
             <TextView
                 android:id="@+id/clinic_name_TV"
@@ -257,12 +255,12 @@
 
             <LinearLayout
                 android:id="@+id/full_address_LL"
-                app:layout_constraintTop_toBottomOf="@+id/clinic_name_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/clinic_name_TV">
 
                 <ImageView
                     android:layout_width="10dp"
@@ -274,8 +272,8 @@
                     android:id="@+id/vet_full_address_TV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dehradun. India, 248001"
                     android:fontFamily="@font/montserrat"
+                    android:text="Dehradun. India, 248001"
                     android:textColor="@color/gray_1"
                     android:textSize="14sp" />
 
@@ -300,17 +298,19 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/pager"></LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/pager">
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/contact_clinic_BT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ll_dots"
-                android:text="Contact Clinic"
                 android:background="@drawable/grey_border_button_bg"
+                android:fontFamily="@font/montserrat"
+                android:text="Contact Clinic"
                 android:textColor="@color/gray_3"
-                android:fontFamily="@font/montserrat"/>
+                app:layout_constraintTop_toBottomOf="@id/ll_dots" />
 
             <TextView
                 android:id="@+id/clinic_timings_TV"
@@ -327,12 +327,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/clinic_timings_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/clinic_timings_TV"
                 tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/clinic_timing_list"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                tools:listitem="@layout/clinic_timing_list" />
 
             <TextView
                 android:id="@+id/reviews_TV"
@@ -346,16 +346,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clinic_timings_RV" />
 
+            <TextView
+                android:id="@+id/write_reviews_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/GiveFeedback"
+                android:textColor="@color/gray_1"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clinic_timings_RV" />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/reviews_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/reviews_TV"
                 tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/reviews_list"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                tools:listitem="@layout/reviews_list" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -363,6 +374,30 @@
 
     </ScrollView>
 
+    <Button
+        android:visibility="gone"
+        android:id="@+id/book_appointment_BT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/blue_background_bg"
+        android:fontFamily="@font/nunito"
+        android:text="Book Appointment"
+        android:textAllCaps="false"
+        android:textColor="@color/whiteColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

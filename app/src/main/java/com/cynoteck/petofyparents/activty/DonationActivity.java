@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +26,9 @@ import com.cynoteck.petofyparents.utils.OnItemClickListener;
 import com.google.android.material.card.MaterialCardView;
 import com.google.gson.JsonObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import retrofit2.Response;
 
 public class DonationActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnItemClickListener {
@@ -32,7 +37,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
     MaterialCardView back_arrow_CV;
     public static RelativeLayout total_donation_RL, add_pet_RL;
     public static TextView total_donation_request_TV;
-    DonatePetAdapter donatePetAdapter;
+    public static DonatePetAdapter donatePetAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +54,21 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         total_donation_RL.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
 
+        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+        pet_list_RV.setAdapter(donatePetAdapter);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         if (!PetParentSingleton.getInstance().getGetDonationRequestListData().isEmpty()) {
             total_donation_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetDonationRequestListData().size()));
             total_donation_RL.setEnabled(true);
         } else {
             total_donation_RL.setEnabled(false);
         }
-
-
-        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-        pet_list_RV.setAdapter(donatePetAdapter);
     }
 
     @Override
@@ -110,9 +119,40 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onViewDetailsClick(int position) {
+        String realId = PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0,PetParentSingleton.getInstance().getArrayList().get(position).getId().length()-2);
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("");
+        alertDialog.setMessage("Do you want to donate this pet?");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        donatePetById(realId);
+                        dialog.dismiss();
 
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        dialogInterface.dismiss();
+
+                    }
+
+                });
+        alertDialog.show();
+
+
+
+
+
+    }
+
+    private void donatePetById(String realId) {
         JsonObject jsonObjectParams = new JsonObject();
-        jsonObjectParams.addProperty("id", PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0,PetParentSingleton.getInstance().getArrayList().get(position).getId().length()-2));
+        jsonObjectParams.addProperty("id", realId);
 
         JsonObject jsonObjectRequest = new JsonObject();
         jsonObjectRequest.add("data", jsonObjectParams);
@@ -120,7 +160,5 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         ApiService<JsonObject> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().donatePetById(Config.token, jsonObjectRequest), "DonatePetById");
         Log.e("DATALOG", "check1=> " + jsonObjectRequest);
-
-
     }
 }
