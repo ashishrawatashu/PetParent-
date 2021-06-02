@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <supports-screens
         android:anyDensity="true"
@@ -34,14 +35,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activty.SearchProviderResultActivity"></activity>
-        <activity android:name=".activty.SearchKeywordActivity" />
-        <activity android:name=".activty.DonationRequestActivity" />
-        <activity android:name=".activty.VetFullProfileActivity" />
-        <activity android:name=".activty.ParentFullProfileActivity" />
-        <activity android:name=".activty.AdoptionRequestActivity" />
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.SearchProviderResultActivity" />
+        <activity android:name=".activity.SearchKeywordActivity" />
+        <activity android:name=".activity.DonationRequestActivity" />
+        <activity android:name=".activity.AfterScanScreenActivity" />
+        <activity android:name=".activity.VetFullProfileActivity" />
+        <activity android:name=".activity.ParentFullProfileActivity" />
+        <activity android:name=".activity.AdoptionRequestActivity" />
         <activity
-            android:name=".activty.SplashScreen"
+            android:name=".activity.SplashScreen"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -51,139 +54,139 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activty.AdoptionDonationActivity"
+            android:name=".activity.AdoptionDonationActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.PetInsuranceActivity"
+            android:name=".activity.PetInsuranceActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.ConsultationListActivity"
+            android:name=".activity.ConsultationListActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.PetNamesActivity"
+            android:name=".activity.PetNamesActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.PetBreedDetailsActivity"
+            android:name=".activity.PetBreedDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.PetBreedsActivity"
+            android:name=".activity.PetBreedsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.UpdateProfileActivity"
+            android:name=".activity.UpdateProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.HospitalizationDetailsActivity"
+            android:name=".activity.HospitalizationDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.WelcomeScreenActivity"
+            android:name=".activity.WelcomeScreenActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.AddPetWithQRCodeActivity"
+            android:name=".activity.AddPetWithQRCodeActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.SearchActivity"
+            android:name=".activity.SearchActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.AdoptionPetDetailsActivity"
+            android:name=".activity.AdoptionPetDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.AdoptPetActivity"
+            android:name=".activity.AdoptPetActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.DonationActivity"
+            android:name=".activity.DonationActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.PaymentScreenActivity"
+            android:name=".activity.PaymentScreenActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.AddUpdateAppointmentActivity"
+            android:name=".activity.AddUpdateAppointmentActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.VetListActivity"
+            android:name=".activity.VetListActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.UpdateParentProfileActivity"
+            android:name=".activity.UpdateParentProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.ChangePasswordActivity"
+            android:name=".activity.ChangePasswordActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.SettingActivity"
+            android:name=".activity.SettingActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.PetProfileActivity"
+            android:name=".activity.PetProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.UpdatePetProfileActivity"
+            android:name=".activity.UpdatePetProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.AddPetRegister"
+            android:name=".activity.AddPetRegister"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.SendPhoneNumber"
+            android:name=".activity.SendPhoneNumber"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.ScannerQR"
+            android:name=".activity.ScannerQR"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.XRayReportDeatilsActivity"
+            android:name=".activity.XRayReportDeatilsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.OTPVerifyActivity"
+            android:name=".activity.OTPVerifyActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.PetIdCardActivity"
+            android:name=".activity.PetIdCardActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.ForgetPasswordActivity"
+            android:name=".activity.ForgetPasswordActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.RegisterActivity"
+            android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.DashBoardActivity"
+            android:name=".activity.DashBoardActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.SelectPetReportsActivity"
+            android:name=".activity.SelectPetReportsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.ReportsCommonActivity"
+            android:name=".activity.ReportsCommonActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activty.ViewReportsDeatilsActivity"
+            android:name=".activity.ViewReportsDeatilsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 

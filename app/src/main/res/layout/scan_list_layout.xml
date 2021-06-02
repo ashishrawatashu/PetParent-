@@ -21,11 +21,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:padding="15dp"
             android:id="@+id/petRegImage_IV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside"
+            android:scaleType="fitXY"
             android:src="@drawable/empty_pet_image" />
 
     </androidx.cardview.widget.CardView>

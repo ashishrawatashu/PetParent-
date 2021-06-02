@@ -213,9 +213,9 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="Consultation">CONSULTATION</string>
+    <string name="Consultation">CONSULTATIONS</string>
     <string name="PetInsurances">Pet Insurances</string>
-    <string name="yourPets">Your Pets</string>
+    <string name="yourPets">Yours Pets</string>
     <string name="adoptionDonation"><![CDATA[Adopt & Donate]]></string>
     <string name="general_deatils">General details</string>
     <string name="plans_and_subscription">Plans and subscription</string>
@@ -230,5 +230,11 @@
     <string name="reviewHint">Tell us what went wrong..</string>
     <string name="cat">Cats</string>
     <string name="dogs">Dogs</string>
+    <string name="search">Search </string>
+    <string name="petnames">Pet Names</string>
+    <string name="grant">Grant</string>
+    <string name="loginUsingPhone">Login with phone number</string>
+    <string name="ok">OK</string>
+    <string name="scanAndAdd"><![CDATA[Scan & Add]]></string>
 
 </resources>

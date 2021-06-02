@@ -188,8 +188,7 @@ public class AddPetModel {
         return petClinicVisit;
     }
 
-    public void setPetClinicVisit (String[] petClinicVisit)
-    {
+    public void setPetClinicVisit (String[] petClinicVisit) {
         this.petClinicVisit = petClinicVisit;
     }
 
@@ -198,8 +197,7 @@ public class AddPetModel {
         return petHospitalizationsSurgeries;
     }
 
-    public void setPetHospitalizationsSurgeries (String[] petHospitalizationsSurgeries)
-    {
+    public void setPetHospitalizationsSurgeries (String[] petHospitalizationsSurgeries) {
         this.petHospitalizationsSurgeries = petHospitalizationsSurgeries;
     }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteColor"
-    tools:context=".activty.PetInsuranceActivity">
+    tools:context=".activity.PetInsuranceActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/back_arrow_CV"
@@ -168,7 +168,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Provides protection against thirt party legal liability of pets owners including the legal costs for defending the claim"
+                    android:text="Provides protection against third party legal liability of pets owners including the legal costs for defending the claim"
                     android:fontFamily="@font/nunito"
                     android:textColor="@color/gray_1"
                     android:layout_margin="15dp"

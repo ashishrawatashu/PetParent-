@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cynoteck.petofyparents.activty.SplashScreen"
+    tools:context="com.cynoteck.petofyparents.activity.SplashScreen"
     android:background="#FFFFFF">
 
     <ImageView

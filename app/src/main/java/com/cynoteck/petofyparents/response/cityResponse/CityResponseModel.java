@@ -37,10 +37,7 @@ public class CityResponseModel {
 
     @Override
     public String toString() {
-        return "ClassPojo[" +
-                "header=" + header +
-                ", data=" + data +
-                ", response=" + response +
-                "]";
+        return "ClassPojo[" + "header=" + header + ", data=" + data + ", response=" + response + "]";
     }
+
 }

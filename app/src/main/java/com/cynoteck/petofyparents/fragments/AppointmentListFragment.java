@@ -33,7 +33,7 @@ import android.widget.Toast;
 
 import com.cynoteck.petofyparents.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.activty.PaymentScreenActivity;
+import com.cynoteck.petofyparents.activity.PaymentScreenActivity;
 import com.cynoteck.petofyparents.adapter.PastAppointmentListAdapter;
 import com.cynoteck.petofyparents.adapter.UpcomingAppointmentListAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
@@ -66,9 +66,9 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
     Methods methods;
     MaterialCardView back_arrow_CV;
     LinearLayout upcoming_appointment_tab_LL, past_appointment_tab_LL;
-    TextView upcoming_appointment_TV,past_appointment_TV;
-    View upcoming_appointment_line,past_appointment_view;
-    static RecyclerView upcoming_appointment_RV,past_appointment_RV;
+    TextView upcoming_appointment_TV, past_appointment_TV;
+    View upcoming_appointment_line, past_appointment_view;
+    static RecyclerView upcoming_appointment_RV, past_appointment_RV;
     GetAppointmentResponse getUpcomingAppointmentResponse, pastAppointmentResponse;
     PastAppointmentListAdapter pastAppointmentListAdapter;
     String mettingId = "";
@@ -82,8 +82,12 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
     static LinearLayout something_wrong_LL;
     static Button retry_BT;
     static boolean isLoaded = false;
+    TextView no_upcoming_appointment_TV, no_past_appointment_TV;
+    static  boolean upcomingTabClick = true, pastAppointmentClick = false;
 
-    public AppointmentListFragment() { }
+    public AppointmentListFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,22 +101,22 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         getUpcomingAppointments();
         getPastAppointments();
         upcoming_appointment_RV.setLayoutManager(new LinearLayoutManager(getContext()));
-        upcomingAppointmentListAdapter = new UpcomingAppointmentListAdapter(getContext(), PetParentSingleton.getInstance().getUpComingAppointmentList(),this);
+        upcomingAppointmentListAdapter = new UpcomingAppointmentListAdapter(getContext(), PetParentSingleton.getInstance().getUpComingAppointmentList(), this);
         upcoming_appointment_RV.setAdapter(upcomingAppointmentListAdapter);
 
         past_appointment_RV.setLayoutManager(new LinearLayoutManager(getContext()));
         pastAppointmentListAdapter = new PastAppointmentListAdapter(getContext(), PetParentSingleton.getInstance().getPastAppointmentList());
         past_appointment_RV.setAdapter(pastAppointmentListAdapter);
 
-        Timer timer = new Timer ();
-        TimerTask hourlyTask = new TimerTask () {
+        Timer timer = new Timer();
+        TimerTask hourlyTask = new TimerTask() {
             @Override
-            public void run () {
+            public void run() {
                 getUpcomingAppointments();
             }
         };
 
-        timer.schedule (hourlyTask, 0l, 20000);
+        timer.schedule(hourlyTask, 0l, 10000);
         return view;
 
     }
@@ -124,7 +128,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         getAppointmentRequest.setData(getAppointmentsParams);
 
         ApiService<GetAppointmentResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getAppointment(Config.token,getAppointmentRequest), "GetPastAppointment");
+        service.get(this, ApiClient.getApiInterface().getAppointment(Config.token, getAppointmentRequest), "GetPastAppointment");
 
     }
 
@@ -134,11 +138,13 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         GetAppointmentRequest getAppointmentRequest = new GetAppointmentRequest();
         getAppointmentRequest.setData(getAppointmentsParams);
         ApiService<GetAppointmentResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getAppointment(Config.token,getAppointmentRequest), "GetUpcomingAppointment");
+        service.get(this, ApiClient.getApiInterface().getAppointment(Config.token, getAppointmentRequest), "GetUpcomingAppointment");
 
+        Log.e("appointment", methods.getRequestJson(getAppointmentRequest));
     }
 
     private void initization() {
+
         progressBar = view.findViewById(R.id.progressBar);
         back_arrow_CV = view.findViewById(R.id.back_arrow_CV);
         appoint_tabs_LL = view.findViewById(R.id.appoint_tabs_LL);
@@ -151,26 +157,40 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         upcoming_appointment_RV = view.findViewById(R.id.upcoming_appointment_RV);
         past_appointment_RV = view.findViewById(R.id.past_appointment_RV);
         something_wrong_LL = view.findViewById(R.id.something_wrong_LL);
-        retry_BT=  view.findViewById(R.id.retry_BT);
+        retry_BT = view.findViewById(R.id.retry_BT);
+        no_past_appointment_TV = view.findViewById(R.id.no_past_appointment_TV);
+        no_upcoming_appointment_TV = view.findViewById(R.id.no_upcoming_appointment_TV);
+
+
         retry_BT.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
         upcoming_appointment_tab_LL.setOnClickListener(this);
         past_appointment_tab_LL.setOnClickListener(this);
 
+
 //        upcoming_appointment_tab_LL.setEnabled(false);
 //        past_appointment_tab_LL.setEnabled(false);
+
 
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back_arrow_CV:
                 getActivity().onBackPressed();
                 break;
 
             case R.id.upcoming_appointment_tab_LL:
+                upcomingTabClick = true;
+                pastAppointmentClick = false;
+                if (PetParentSingleton.getInstance().getUpComingAppointmentList().isEmpty()) {
+                    no_upcoming_appointment_TV.setVisibility(View.VISIBLE);
+                } else {
+                    no_upcoming_appointment_TV.setVisibility(View.GONE);
+                }
+                no_past_appointment_TV.setVisibility(View.GONE);
                 upcoming_appointment_RV.setVisibility(View.VISIBLE);
                 upcoming_appointment_line.setBackgroundResource(R.color.colorPrimary);
                 upcoming_appointment_TV.setTextColor(this.getResources().getColor(R.color.colorPrimary));
@@ -183,6 +203,14 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
 
             case R.id.past_appointment_tab_LL:
+                upcomingTabClick = false;
+                pastAppointmentClick = true;
+                if (PetParentSingleton.getInstance().getPastAppointmentList().isEmpty()) {
+                    no_past_appointment_TV.setVisibility(View.VISIBLE);
+                } else {
+                    no_past_appointment_TV.setVisibility(View.GONE);
+                }
+                no_upcoming_appointment_TV.setVisibility(View.GONE);
                 past_appointment_RV.setVisibility(View.VISIBLE);
                 past_appointment_view.setBackgroundResource(R.color.colorPrimary);
                 past_appointment_TV.setTextColor(this.getResources().getColor(R.color.colorPrimary));
@@ -194,12 +222,12 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                 break;
 
             case R.id.retry_BT:
-                if (isOnline){
+                if (isOnline) {
                     something_wrong_LL.setVisibility(View.GONE);
                     progressBar.setVisibility(View.VISIBLE);
                     getUpcomingAppointments();
                     getPastAppointments();
-                }else {
+                } else {
                     somethingWrong();
                 }
 
@@ -209,8 +237,8 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onResponse(Response arg0, String key) {
-        switch (key){
-                
+        switch (key) {
+
             case "GetUpcomingAppointment":
                 try {
                     isLoaded = true;
@@ -218,62 +246,94 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                     progressBar.setVisibility(View.GONE);
                     appoint_tabs_LL.setVisibility(View.VISIBLE);
                     upcoming_appointment_tab_LL.setEnabled(true);
-                    upcoming_appointment_RV.setVisibility(View.VISIBLE);
                     getUpcomingAppointmentResponse = (GetAppointmentResponse) arg0.body();
+                    Log.e("upcoming", methods.getRequestJson(getUpcomingAppointmentResponse));
                     int responseCode = Integer.parseInt(getUpcomingAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        PetParentSingleton.getInstance().getUpComingAppointmentList().clear();
-                        for (int i = 0; i < getUpcomingAppointmentResponse.getData().size(); i++) {
-                            AppointmentList appointmentList = new AppointmentList();
-                            appointmentList.setVetName(getUpcomingAppointmentResponse.getData().get(i).getVetName());
-                            appointmentList.setPetName(getUpcomingAppointmentResponse.getData().get(i).getPetName());
-                            appointmentList.setVetProfileImage(getUpcomingAppointmentResponse.getData().get(i).getVetProfileImage());
-                            appointmentList.setMeetingUrl(getUpcomingAppointmentResponse.getData().get(i).getMeetingUrl());
-                            appointmentList.setIsApproved(getUpcomingAppointmentResponse.getData().get(i).getIsApproved());
-                            appointmentList.setAppointmentDate(getUpcomingAppointmentResponse.getData().get(i).getAppointmentDate());
-                            appointmentList.setStartDateString(getUpcomingAppointmentResponse.getData().get(i).getStartDateString());
-                            appointmentList.setEndDateString(getUpcomingAppointmentResponse.getData().get(i).getEndDateString());
-                            appointmentList.setPaymentStatus(getUpcomingAppointmentResponse.getData().get(i).getPaymentStatus());
-                            appointmentList.setId(getUpcomingAppointmentResponse.getData().get(i).getId());
-                            appointmentList.setVeterinarianUserId(getUpcomingAppointmentResponse.getData().get(i).getVeterinarianUserId());
-                            appointmentList.setTitle(getUpcomingAppointmentResponse.getData().get(i).getTitle());
+                        if (getUpcomingAppointmentResponse.getData().isEmpty()) {
+                            if (upcomingTabClick) {
+                                no_upcoming_appointment_TV.setVisibility(View.VISIBLE);
+                            } else {
+                                no_past_appointment_TV.setVisibility(View.GONE);
+                            }
+                        } else {
+                            PetParentSingleton.getInstance().getUpComingAppointmentList().clear();
+                            for (int i = 0; i < getUpcomingAppointmentResponse.getData().size(); i++) {
+                                AppointmentList appointmentList = new AppointmentList();
+                                appointmentList.setVetName(getUpcomingAppointmentResponse.getData().get(i).getVetName());
+                                appointmentList.setPetName(getUpcomingAppointmentResponse.getData().get(i).getPetName());
+                                appointmentList.setVetProfileImage(getUpcomingAppointmentResponse.getData().get(i).getVetProfileImage());
+                                appointmentList.setMeetingUrl(getUpcomingAppointmentResponse.getData().get(i).getMeetingUrl());
+                                appointmentList.setIsApproved(getUpcomingAppointmentResponse.getData().get(i).getIsApproved());
+                                appointmentList.setAppointmentDate(getUpcomingAppointmentResponse.getData().get(i).getAppointmentDate());
+                                appointmentList.setStartDateString(getUpcomingAppointmentResponse.getData().get(i).getStartDateString());
+                                appointmentList.setEndDateString(getUpcomingAppointmentResponse.getData().get(i).getEndDateString());
+                                appointmentList.setPaymentStatus(getUpcomingAppointmentResponse.getData().get(i).getPaymentStatus());
+                                appointmentList.setId(getUpcomingAppointmentResponse.getData().get(i).getId());
+                                appointmentList.setVeterinarianUserId(getUpcomingAppointmentResponse.getData().get(i).getVeterinarianUserId());
+                                appointmentList.setTitle(getUpcomingAppointmentResponse.getData().get(i).getTitle());
+                                PetParentSingleton.getInstance().getUpComingAppointmentList().add(appointmentList);
+                            }
+                            upcomingAppointmentListAdapter.notifyDataSetChanged();
 
+                            if (upcomingTabClick) {
+                                Log.e("error","ye rahi");
+                                upcoming_appointment_RV.setVisibility(View.VISIBLE);
+                            } else {
+                                no_upcoming_appointment_TV.setVisibility(View.GONE);
+                            }
 
-                            PetParentSingleton.getInstance().getUpComingAppointmentList().add(appointmentList);
                         }
-                        upcomingAppointmentListAdapter.notifyDataSetChanged();
+
+
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
                 break;
 
             case "GetPastAppointment":
                 try {
                     past_appointment_tab_LL.setEnabled(true);
                     pastAppointmentResponse = (GetAppointmentResponse) arg0.body();
+                    Log.e("past", methods.getRequestJson(pastAppointmentResponse));
                     int responseCode = Integer.parseInt(pastAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        PetParentSingleton.getInstance().getPastAppointmentList().clear();
-                        for (int i = 0; i < pastAppointmentResponse.getData().size(); i++) {
-                            AppointmentList appointmentList = new AppointmentList();
-                            appointmentList.setVetName(pastAppointmentResponse.getData().get(i).getVetName());
-                            appointmentList.setPetName(pastAppointmentResponse.getData().get(i).getPetName());
-                            appointmentList.setVetProfileImage(pastAppointmentResponse.getData().get(i).getVetProfileImage());
-                            appointmentList.setMeetingUrl(pastAppointmentResponse.getData().get(i).getMeetingUrl());
-                            appointmentList.setIsApproved(pastAppointmentResponse.getData().get(i).getIsApproved());
-                            appointmentList.setAppointmentDate(pastAppointmentResponse.getData().get(i).getAppointmentDate());
-                            appointmentList.setStartDateString(pastAppointmentResponse.getData().get(i).getStartDateString());
-                            appointmentList.setEndDateString(pastAppointmentResponse.getData().get(i).getEndDateString());
-                            appointmentList.setPaymentStatus(pastAppointmentResponse.getData().get(i).getPaymentStatus());
-                            appointmentList.setId(pastAppointmentResponse.getData().get(i).getId());
-                            appointmentList.setVeterinarianUserId(pastAppointmentResponse.getData().get(i).getVeterinarianUserId());
-                            appointmentList.setTitle(pastAppointmentResponse.getData().get(i).getTitle());
-                            PetParentSingleton.getInstance().getPastAppointmentList().add(appointmentList);
+                        if (pastAppointmentResponse.getData().isEmpty()) {
+                            if (pastAppointmentClick) {
+                                no_past_appointment_TV.setVisibility(View.VISIBLE);
+                                upcoming_appointment_RV.setVisibility(View.GONE);
+                            } else {
+                                no_upcoming_appointment_TV.setVisibility(View.GONE);
+                            }
+                        } else {
+                            PetParentSingleton.getInstance().getPastAppointmentList().clear();
+                            for (int i = 0; i < pastAppointmentResponse.getData().size(); i++) {
+                                AppointmentList appointmentList = new AppointmentList();
+                                appointmentList.setVetName(pastAppointmentResponse.getData().get(i).getVetName());
+                                appointmentList.setPetName(pastAppointmentResponse.getData().get(i).getPetName());
+                                appointmentList.setVetProfileImage(pastAppointmentResponse.getData().get(i).getVetProfileImage());
+                                appointmentList.setMeetingUrl(pastAppointmentResponse.getData().get(i).getMeetingUrl());
+                                appointmentList.setIsApproved(pastAppointmentResponse.getData().get(i).getIsApproved());
+                                appointmentList.setAppointmentDate(pastAppointmentResponse.getData().get(i).getAppointmentDate());
+                                appointmentList.setStartDateString(pastAppointmentResponse.getData().get(i).getStartDateString());
+                                appointmentList.setEndDateString(pastAppointmentResponse.getData().get(i).getEndDateString());
+                                appointmentList.setPaymentStatus(pastAppointmentResponse.getData().get(i).getPaymentStatus());
+                                appointmentList.setId(pastAppointmentResponse.getData().get(i).getId());
+                                appointmentList.setVeterinarianUserId(pastAppointmentResponse.getData().get(i).getVeterinarianUserId());
+                                appointmentList.setTitle(pastAppointmentResponse.getData().get(i).getTitle());
+                                PetParentSingleton.getInstance().getPastAppointmentList().add(appointmentList);
+                            }
+                            pastAppointmentListAdapter.notifyDataSetChanged();
+                            if (pastAppointmentClick) {
+                                no_past_appointment_TV.setVisibility(View.VISIBLE);
+                            } else {
+                                upcoming_appointment_RV.setVisibility(View.GONE);
+                            }
+
                         }
-                        pastAppointmentListAdapter.notifyDataSetChanged();
                     }
 
                 } catch (Exception e) {
@@ -289,7 +349,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                         Toast.makeText(getContext(), "Appointment canceled Successfully", Toast.LENGTH_SHORT).show();
                         PetParentSingleton.getInstance().getUpComingAppointmentList().remove(cancelPosition);
                         upcomingAppointmentListAdapter.notifyDataSetChanged();
-                    }else {
+                    } else {
                         Toast.makeText(getContext(), "Please try again !", Toast.LENGTH_SHORT).show();
                     }
 
@@ -299,6 +359,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                 break;
         }
     }
+
     private void cancelAppointment(String id) {
         AppointmentStatusParams appointmentStatusParams = new AppointmentStatusParams();
         appointmentStatusParams.setId(id);
@@ -309,6 +370,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         service.get(this, ApiClient.getApiInterface().cancelAppointment(Config.token, appointmentsStatusRequest), "Status");
 
     }
+
     @Override
     public void onError(Throwable t, String key) {
         somethingWrong();
@@ -333,7 +395,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
             intent.putExtra("vetId", appointmentLists.get(position).getVeterinarianUserId());
             intent.putExtra("vetName", appointmentLists.get(position).getVetName());
             intent.putExtra("topic", appointmentLists.get(position).getTitle());
-            intent.putExtra("appointment_time", appointmentLists.get(position).getAppointmentDate()+" "+appointmentLists.get(position).getStartDateString()+" "+appointmentLists.get(position).getEndDateString());
+            intent.putExtra("appointment_time", appointmentLists.get(position).getAppointmentDate() + " " + appointmentLists.get(position).getStartDateString() + " " + appointmentLists.get(position).getEndDateString());
             intent.putExtra("mettingId", appointmentLists.get(position).getId());
             intent.putExtra("vet_image_url", appointmentLists.get(position).getVetProfileImage());
 
@@ -397,7 +459,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         payment_successfully_dialog.setContentView(R.layout.payment_done_dialog);
         payment_successfully_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         TextView total_payment_TV = payment_successfully_dialog.findViewById(R.id.total_payment_TV);
-        TextView  back_to_appointments_TV = payment_successfully_dialog.findViewById(R.id.back_to_appointments_TV);
+        TextView back_to_appointments_TV = payment_successfully_dialog.findViewById(R.id.back_to_appointments_TV);
         total_payment_TV.setText(amount);
         payment_successfully_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         total_payment_TV.setOnClickListener(new View.OnClickListener() {
@@ -415,6 +477,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
     }
+
     private void registerNetworkBroadcastForNougat() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             getActivity().registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -426,8 +489,8 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
     public static void dialog(boolean value) {
 
-        if(value){
-            Log.e("Connected","Yes");
+        if (value) {
+            Log.e("Connected", "Yes");
             isOnline = true;
 
             Handler handler = new Handler();
@@ -438,21 +501,23 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                 }
             };
             handler.postDelayed(delayrunnable, 3000);
-        }else {
+        } else {
             isOnline = false;
-            Log.e("Connected","NO");
+            Log.e("Connected", "NO");
             somethingWrong();
 
         }
     }
 
     private static void somethingWrong() {
+        Log.e("Error","HI");
         progressBar.setVisibility(View.GONE);
-        if (isLoaded){
+        if (isLoaded) {
             something_wrong_LL.setVisibility(View.GONE);
-            upcoming_appointment_RV.setVisibility(View.VISIBLE);
-
-        }else {
+            if (upcomingTabClick) {
+                upcoming_appointment_RV.setVisibility(View.VISIBLE);
+            }
+        } else {
             something_wrong_LL.setVisibility(View.VISIBLE);
             upcoming_appointment_RV.setVisibility(View.GONE);
         }

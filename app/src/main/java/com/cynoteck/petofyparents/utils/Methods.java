@@ -1,26 +1,22 @@
 package com.cynoteck.petofyparents.utils;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.cynoteck.petofyparents.R;
 import com.google.gson.Gson;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 
 import org.json.JSONArray;
 
@@ -31,7 +27,7 @@ import java.util.Date;
 
 public class Methods {
     private Context c;
-    private Dialog progressBarDialog;
+    private Dialog progressBarDialog,internetDialog;
     /*public static SweetAlertDialog errorMsgDialog;
     private SweetAlertDialog informationDialog;*/
 
@@ -77,17 +73,40 @@ public class Methods {
 
     public void DialogInternet() {
 
-        AlertDialog.Builder ad = new AlertDialog.Builder(c);
-        ad.setMessage(R.string.CheckInternet);
-        ad.setCancelable(true);
-        ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//        AlertDialog.Builder ad = new AlertDialog.Builder(c);
+//        ad.setMessage(R.string.CheckInternet);
+//        ad.setCancelable(true);
+//        ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        ad.show();
+
+        internetDialog = new Dialog(c);
+        internetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        internetDialog.setCancelable(true);
+        internetDialog.setCanceledOnTouchOutside(true);
+        internetDialog.setContentView(R.layout.internet_permission_dialog);
+        internetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Button grant_permission_BT = internetDialog.findViewById(R.id.grant_permission_BT);
+        internetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+            public void onClick(View v) {
+                internetDialog.dismiss();
             }
         });
 
-        ad.show();
+        internetDialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = internetDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(lp);
     }
 
     public void showCustomProgressBarDialog(Context context) {
@@ -111,14 +130,6 @@ public class Methods {
     public void customProgressDismiss() {
         progressBarDialog.dismiss();
     }
-
-    public String removeLastElement(String str) {
-        if (str != null && str.length() > 0 && str.charAt(str.length() - 1) == ',') {
-            str = str.substring(0, str.length() - 1);
-        }
-        return str;
-    }
-
     public String pdfGenarator(String strForA,String strAge,String strSex,String pet_parent,String strTemparature,String Symptons, String strDiagnosis,String strRemark,String strNxtVisit,String regisNumber) {
         String care="Vet Care";
         String str = "<!DOCTYPE html>\n" +

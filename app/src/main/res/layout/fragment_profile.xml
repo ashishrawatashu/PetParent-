@@ -47,12 +47,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/camera_IV"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:scaleType="fitXY"
             android:src="@drawable/camera_blue_icon"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/parent_image_CIV"
             app:layout_constraintEnd_toEndOf="@id/parent_image_CIV" />
 
@@ -62,8 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="18dp"
+            android:layout_marginRight="15dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toStartOf="@id/edit_RL"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/parent_image_CIV"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -104,6 +105,7 @@
         </LinearLayout>
 
         <RelativeLayout
+
             android:id="@+id/edit_RL"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -113,7 +115,7 @@
             android:background="@drawable/reactangle_white"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/parent_image_CIV">
 
@@ -137,38 +139,37 @@
 
 
     <LinearLayout
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/parent_info_CL"
-        app:layout_constraintEnd_toEndOf="@id/parent_info_CL"
         android:id="@+id/pet_list_LL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@id/parent_info_CL"
+        app:layout_constraintStart_toStartOf="@id/parent_info_CL"
         app:layout_constraintTop_toBottomOf="@id/parent_info_CL">
 
         <TextView
-            android:visibility="visible"
             android:id="@+id/your_pets_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Your pets "
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nunito"
-            android:textColor="@color/gray_2"/>
+            android:text="Your pets "
+            android:textColor="@color/gray_2"
+            android:textSize="18sp"
+            android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:visibility="visible"
             android:id="@+id/pet_list_RV"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:visibility="visible"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/register_pet_list" />
 
     </LinearLayout>
-
 
 
     <RelativeLayout
@@ -176,9 +177,10 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/search_bar_background_grey"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@id/parent_info_CL"
         app:layout_constraintStart_toStartOf="@id/parent_info_CL"
-        android:background="@drawable/search_bar_background_grey"
         app:layout_constraintTop_toBottomOf="@id/pet_list_LL">
 
 
@@ -295,7 +297,8 @@
                 android:id="@+id/change_password_CL"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/change_password_RL"
@@ -346,7 +349,8 @@
                 android:id="@+id/plans_and_subscription_CL"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/plans_and_subscription_RL"
@@ -397,7 +401,8 @@
                 android:id="@+id/privacy_CL"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/privacy_RL"

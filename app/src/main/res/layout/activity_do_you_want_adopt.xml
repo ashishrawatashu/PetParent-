@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteColor"
-    tools:context=".activty.AdoptPetActivity">
+    tools:context=".activity.AdoptPetActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -71,11 +71,13 @@
             android:layout_height="40dp">
             
             <ImageView
+                android:id="@+id/cart_icon_IV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/cart_icon"/>
+                android:src="@drawable/cart_inactive"/>
             
             <RelativeLayout
+                android:id="@+id/total_RL"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="8dp"

@@ -37,44 +37,49 @@ public class ProviderReviewsAdapter extends RecyclerView.Adapter<ProviderReviews
 
     @Override
     public void onBindViewHolder(@NonNull ProviderReviewsAdapter.MyViewHolder holder, int position){
-        holder.comment_TV.setText(providerRatingLists.get(position).getFeedback());
-        holder.user_name_TV.setText(providerRatingLists.get(position).getUserName());
-        holder.user_first_letter_TV.setText(providerRatingLists.get(position).getUserName().substring(0,1));
-        Glide.with(context)
-                .load(providerRatingLists.get(position).getProfileImage())
-                .into(holder.user_profile_IV);
-        if (providerRatingLists.get(position).getRating()==1){
-            holder.star_one.setImageResource(R.drawable.star_with_rate);
-            holder.star_two.setImageResource(R.drawable.empty_star_icon);
-            holder.star_three.setImageResource(R.drawable.empty_star_icon);
-            holder.star_four.setImageResource(R.drawable.empty_star_icon);
-            holder.star_five.setImageResource(R.drawable.empty_star_icon);
+        if (providerRatingLists.get(position).getFeedback().equals("")){
 
-        }else if (providerRatingLists.get(position).getRating()==2){
-            holder.star_one.setImageResource(R.drawable.star_with_rate);
-            holder.star_two.setImageResource(R.drawable.star_with_rate);
-            holder.star_three.setImageResource(R.drawable.empty_star_icon);
-            holder.star_four.setImageResource(R.drawable.empty_star_icon);
-            holder.star_five.setImageResource(R.drawable.empty_star_icon);
-        }else if (providerRatingLists.get(position).getRating()==3){
-            holder.star_one.setImageResource(R.drawable.star_with_rate);
-            holder.star_two.setImageResource(R.drawable.star_with_rate);
-            holder.star_three.setImageResource(R.drawable.star_with_rate);
-            holder.star_four.setImageResource(R.drawable.empty_star_icon);
-            holder.star_five.setImageResource(R.drawable.empty_star_icon);
-        }else if (providerRatingLists.get(position).getRating()==4){
-            holder.star_one.setImageResource(R.drawable.star_with_rate);
-            holder.star_two.setImageResource(R.drawable.star_with_rate);
-            holder.star_three.setImageResource(R.drawable.star_with_rate);
-            holder.star_four.setImageResource(R.drawable.star_with_rate);
-            holder.star_five.setImageResource(R.drawable.empty_star_icon);
-        }else if (providerRatingLists.get(position).getRating()==5){
-            holder.star_one.setImageResource(R.drawable.star_with_rate);
-            holder.star_two.setImageResource(R.drawable.star_with_rate);
-            holder.star_three.setImageResource(R.drawable.star_with_rate);
-            holder.star_four.setImageResource(R.drawable.star_with_rate);
-            holder.star_five.setImageResource(R.drawable.star_with_rate);
+        }else {
+            holder.comment_TV.setText(providerRatingLists.get(position).getFeedback());
+            holder.user_name_TV.setText(providerRatingLists.get(position).getUserName());
+            holder.user_first_letter_TV.setText(providerRatingLists.get(position).getUserName().substring(0,1));
+            Glide.with(context)
+                    .load(providerRatingLists.get(position).getProfileImage())
+                    .into(holder.user_profile_IV);
+            if (providerRatingLists.get(position).getRating()==1){
+                holder.star_one.setImageResource(R.drawable.star_with_rate);
+                holder.star_two.setImageResource(R.drawable.empty_star_icon);
+                holder.star_three.setImageResource(R.drawable.empty_star_icon);
+                holder.star_four.setImageResource(R.drawable.empty_star_icon);
+                holder.star_five.setImageResource(R.drawable.empty_star_icon);
+
+            }else if (providerRatingLists.get(position).getRating()==2){
+                holder.star_one.setImageResource(R.drawable.star_with_rate);
+                holder.star_two.setImageResource(R.drawable.star_with_rate);
+                holder.star_three.setImageResource(R.drawable.empty_star_icon);
+                holder.star_four.setImageResource(R.drawable.empty_star_icon);
+                holder.star_five.setImageResource(R.drawable.empty_star_icon);
+            }else if (providerRatingLists.get(position).getRating()==3){
+                holder.star_one.setImageResource(R.drawable.star_with_rate);
+                holder.star_two.setImageResource(R.drawable.star_with_rate);
+                holder.star_three.setImageResource(R.drawable.star_with_rate);
+                holder.star_four.setImageResource(R.drawable.empty_star_icon);
+                holder.star_five.setImageResource(R.drawable.empty_star_icon);
+            }else if (providerRatingLists.get(position).getRating()==4){
+                holder.star_one.setImageResource(R.drawable.star_with_rate);
+                holder.star_two.setImageResource(R.drawable.star_with_rate);
+                holder.star_three.setImageResource(R.drawable.star_with_rate);
+                holder.star_four.setImageResource(R.drawable.star_with_rate);
+                holder.star_five.setImageResource(R.drawable.empty_star_icon);
+            }else if (providerRatingLists.get(position).getRating()==5){
+                holder.star_one.setImageResource(R.drawable.star_with_rate);
+                holder.star_two.setImageResource(R.drawable.star_with_rate);
+                holder.star_three.setImageResource(R.drawable.star_with_rate);
+                holder.star_four.setImageResource(R.drawable.star_with_rate);
+                holder.star_five.setImageResource(R.drawable.star_with_rate);
+            }
         }
+
 
     }
 

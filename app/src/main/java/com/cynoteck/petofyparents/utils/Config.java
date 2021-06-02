@@ -16,6 +16,8 @@ public class Config {
     public static String parent_encryptedId = "";
 
     public static int count = 1;
+    public static int fragmentNumber = 0;
+
     public static String token = "";
     public static String user_id = "";
     public static String user_name = "";
@@ -45,6 +47,8 @@ public class Config {
     public static String cityFullName = "";
 
     public static Boolean isLoaded = false;
+    public static boolean logoutFromAccount = false;
+    public static String locationPermission = "false";
 
     public static RequestBody toRequestBody(String value) {
         RequestBody body = RequestBody.create(MediaType.parse("text/plain"), value);

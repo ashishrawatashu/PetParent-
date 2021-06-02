@@ -204,6 +204,9 @@ public class ServiceProviderDetailData {
     @SerializedName("vetRegistrationNumber")
     @Expose
     private String vetRegistrationNumber;
+    @SerializedName("appointmentDuration")
+    @Expose
+    private String appointmentDuration;
     @SerializedName("referredById")
     @Expose
     private Object referredById;
@@ -956,4 +959,11 @@ public class ServiceProviderDetailData {
         this.subscription = subscription;
     }
 
+    public String getAppointmentDuration() {
+        return appointmentDuration;
+    }
+
+    public void setAppointmentDuration(String appointmentDuration) {
+        this.appointmentDuration = appointmentDuration;
+    }
 }

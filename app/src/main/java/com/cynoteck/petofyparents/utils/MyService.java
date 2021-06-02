@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.activty.DashBoardActivity;
+import com.cynoteck.petofyparents.activity.DashBoardActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import static com.cynoteck.petofyparents.activty.DashBoardActivity.channel_id;
+import static com.cynoteck.petofyparents.activity.DashBoardActivity.channel_id;
 
 public class MyService extends FirebaseMessagingService {
 

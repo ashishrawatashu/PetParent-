@@ -3,14 +3,11 @@ package com.cynoteck.petofyparents.utils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 
-import static com.cynoteck.petofyparents.activty.DashBoardActivity.dialog;
+import static com.cynoteck.petofyparents.activity.DashBoardActivity.dialog;
 
 public class NetworkChangeReceiver extends BroadcastReceiver {
     @Override

@@ -1,6 +1,7 @@
 package com.cynoteck.petofyparents.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,12 +35,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.activty.AddPetRegister;
-import com.cynoteck.petofyparents.activty.ChangePasswordActivity;
-import com.cynoteck.petofyparents.activty.ParentFullProfileActivity;
-import com.cynoteck.petofyparents.activty.PetProfileActivity;
-import com.cynoteck.petofyparents.activty.SendPhoneNumber;
-import com.cynoteck.petofyparents.activty.UpdateProfileActivity;
+import com.cynoteck.petofyparents.activity.AddPetRegister;
+import com.cynoteck.petofyparents.activity.ChangePasswordActivity;
+import com.cynoteck.petofyparents.activity.ParentFullProfileActivity;
+import com.cynoteck.petofyparents.activity.PetProfileActivity;
+import com.cynoteck.petofyparents.activity.SendPhoneNumber;
+import com.cynoteck.petofyparents.activity.UpdateProfileActivity;
 import com.cynoteck.petofyparents.adapter.PetListHorizontalAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -70,7 +71,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
@@ -82,9 +82,9 @@ import static android.app.Activity.RESULT_OK;
 import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.registerPetAdapter;
 import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.total_pets_TV;
 
-
+@SuppressLint("StaticFieldLeak")
 public class ProfileFragment extends Fragment implements View.OnClickListener, ApiResponse, OnItemClickListener {
-    TextView parent_name_TV, parent_mail_TV, parent_phone_no_TV,your_pets_TV;
+    TextView parent_name_TV, parent_mail_TV, parent_phone_no_TV, your_pets_TV;
     CircleImageView parent_image_CIV;
     View view;
     RelativeLayout edit_RL;
@@ -121,7 +121,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
         initization();
         getParentInfo();
-        Timer timer = new Timer ();
+        Timer timer = new Timer();
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        pet_list_RV.setLayoutManager(horizontalLayoutManager);
+        petListHorizontalAdapter = new PetListHorizontalAdapter(getContext(), "ProfileFragment", PetParentSingleton.getInstance().getArrayList(), this);
         setPetListLayout();
 
         return view;
@@ -129,11 +132,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
     }
 
     private void setPetListLayout() {
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        pet_list_RV.setLayoutManager(horizontalLayoutManager);
-        petListHorizontalAdapter = new PetListHorizontalAdapter(getContext(), "ProfileFragment", PetParentSingleton.getInstance().getArrayList(), this);
-        pet_list_RV.setAdapter(petListHorizontalAdapter);
-        petListHorizontalAdapter.notifyDataSetChanged();
+        if (!PetParentSingleton.getInstance().getArrayList().isEmpty()) {
+            pet_list_LL.setVisibility(View.VISIBLE);
+            total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
+            pet_list_RV.setAdapter(petListHorizontalAdapter);
+            registerPetAdapter.notifyDataSetChanged();
+            petListHorizontalAdapter.notifyDataSetChanged();
+        } else {
+            pet_list_LL.setVisibility(View.GONE);
+            pet_list_RV.setAdapter(petListHorizontalAdapter);
+            petListHorizontalAdapter.notifyDataSetChanged();
+        }
+
     }
 
     private void getPetList() {
@@ -153,11 +163,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
     private void requestMultiplePermissions() {
         Dexter.withActivity(getActivity())
-                .withPermissions(
-                        android.Manifest.permission.CAMERA,
-                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                .withListener(new MultiplePermissionsListener() {
+                .withPermissions(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
@@ -186,6 +192,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 })
                 .onSameThread()
                 .check();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getParentInfo();
+
     }
 
     private void getParentInfo() {
@@ -273,6 +286,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 editor.clear();
                 editor.apply();
                 editor.commit();
+                PetParentSingleton.getInstance().getArrayList().clear();
                 startActivity(new Intent(getActivity(), SendPhoneNumber.class));
                 getActivity().finish();
                 break;
@@ -342,6 +356,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 petList.setPetName(data.getStringExtra("pet_name"));
                 petList.setPetCategory(data.getStringExtra("pet_category"));
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
+                petList.setPetParentName(data.getStringExtra("pet_parent"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
 //                profileList.add(0, petList);
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
@@ -574,6 +589,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
     @Override
     public void onViewDetailsClick(int position) {
         Intent intent = new Intent(getActivity(), PetProfileActivity.class);
+        intent.putExtra("pet_list_position", String.valueOf(position));
         intent.putExtra("pet_id", PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2));
         intent.putExtra("pet_unique_id", PetParentSingleton.getInstance().getArrayList().get(position).getPetUniqueId());
         intent.putExtra("pet_image_url", PetParentSingleton.getInstance().getArrayList().get(position).getPetProfileImageUrl());

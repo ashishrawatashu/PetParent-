@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/whiteColor"
     android:layout_height="match_parent"
-    tools:context=".activty.RegisterActivity">
+    tools:context=".activity.RegisterActivity">
 
 
     <RelativeLayout
@@ -30,14 +30,16 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:padding="15dp"
-            android:src="@drawable/logo_small_size" />
+            android:src="@drawable/petofy_main_logo" />
 
     </RelativeLayout>
 
     <ScrollView
         app:layout_constraintTop_toBottomOf="@id/send_phone_number_RL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/signUp_BT">
 
         <RelativeLayout
             android:id="@+id/fields_RL"
@@ -101,7 +103,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:hint="@string/firstName"
-                            android:inputType="text"
+                            android:inputType="textCapSentences"
                             android:maxLines="1"
                             android:textSize="16sp" />
 
@@ -120,7 +122,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:maxLines="1"
-                            android:inputType="text"
+                            android:inputType="textCapSentences"
                             android:textSize="16sp"
                             android:hint="@string/lastname" />
 
@@ -175,7 +177,7 @@
                         android:layout_width="match_parent"
                         android:inputType="phone"
                         android:maxLines="1"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_height="50dp"
                         android:hint="@string/phoneNumber"
                         android:maxLength="10"
@@ -187,7 +189,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/security_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -220,7 +222,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
                 android:id="@+id/passwod_RL"
                 android:layout_below="@+id/security_header"
                 android:layout_width="match_parent"
@@ -230,6 +233,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
                     android:id="@+id/password_TIL">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -248,7 +252,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_below="@+id/passwod_RL"
                 android:id="@+id/confirmPass_RL"
                 android:layout_width="match_parent"
@@ -263,6 +267,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
                     android:id="@+id/cPassword_TIL">
 
                     <com.google.android.material.textfield.TextInputEditText

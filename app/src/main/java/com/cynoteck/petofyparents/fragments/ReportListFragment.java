@@ -12,9 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.activty.HospitalizationDetailsActivity;
-import com.cynoteck.petofyparents.activty.ViewReportsDeatilsActivity;
-import com.cynoteck.petofyparents.activty.XRayReportDeatilsActivity;
+import com.cynoteck.petofyparents.activity.HospitalizationDetailsActivity;
+import com.cynoteck.petofyparents.activity.ViewReportsDeatilsActivity;
+import com.cynoteck.petofyparents.activity.XRayReportDeatilsActivity;
 import com.cynoteck.petofyparents.adapter.HospitalizationReportsAdapter;
 import com.cynoteck.petofyparents.adapter.LabTestReportsAdapter;
 import com.cynoteck.petofyparents.adapter.ReportsTypeAdapter;

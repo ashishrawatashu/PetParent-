@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/whiteColor"
     android:layout_height="match_parent"
-    tools:context=".activty.ReportsCommonActivity">
+    tools:context=".activity.ReportsCommonActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"

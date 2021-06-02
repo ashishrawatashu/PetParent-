@@ -69,7 +69,7 @@ public class PetNamesAdapter extends RecyclerView.Adapter<PetNamesAdapter.MyView
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
                 for (GetPetNamesData item : GetPetNamesDataFilter) {
-                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                    if (item.getName().substring(0,1).toLowerCase().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }

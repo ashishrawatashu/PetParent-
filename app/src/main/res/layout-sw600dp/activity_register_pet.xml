@@ -5,7 +5,7 @@
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activty.RegisterPetActivity">
+    tools:context=".activity.RegisterPetActivity">
 
     <androidx.cardview.widget.CardView
         app:cardElevation="5dp"

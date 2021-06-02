@@ -65,6 +65,7 @@ import com.cynoteck.petofyparents.response.getSearchKeywordResponse.SearchKeywor
 import com.cynoteck.petofyparents.response.getServiceProviderFullDetailsResponse.SearchProviderFullDetailResponse;
 import com.cynoteck.petofyparents.response.getXRayReports.getXRayReportDetailsResponse.GetXRayReportDeatilsResponse;
 import com.cynoteck.petofyparents.response.getpetbreedsResponse.GetPetBreedsResponse;
+import com.cynoteck.petofyparents.response.loginRegisterResponse.LoginWithEmailRegisterResponse;
 import com.cynoteck.petofyparents.response.petAgeUnitResponse.PetAgeUnitResponseData;
 import com.cynoteck.petofyparents.response.registerParentWithQRResponse.RegisterParentWithQRResponse;
 import com.cynoteck.petofyparents.response.resendOTPResposne.ResendOTPResponse;
@@ -112,7 +113,7 @@ public interface ApiInterface {
     //TODO================LOGIN=============================
 
     @POST("User/Login")
-    Call<LoginRegisterResponse> loginApi(@Body Loginparams loginparams);
+    Call<LoginWithEmailRegisterResponse> loginApi(@Body Loginparams loginparams);
 
     //TODO=============SEND OTP TO USER======================
 

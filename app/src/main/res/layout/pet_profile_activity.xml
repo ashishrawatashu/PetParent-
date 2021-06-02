@@ -50,7 +50,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:visibility="gone"
         android:id="@+id/image_edit_CV"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -58,6 +57,7 @@
         android:background="@color/whiteColor"
         android:elevation="5dp"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+        android:visibility="gone"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -167,6 +167,7 @@
 
 
                 <LinearLayout
+                    android:layout_marginRight="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -591,12 +592,12 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="30dp"
                         android:orientation="horizontal"
+                        android:visibility="gone"
                         android:weightSum="2">
 
                         <LinearLayout
