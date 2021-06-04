@@ -469,9 +469,10 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                calenderTextViewDetails.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                calenderTextViewDetails.setText(Config.changeDateFormat(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year) );
                             }
                         }, year, month, day);
+                picker.getDatePicker().setMaxDate(System.currentTimeMillis());
                 picker.show();
                 break;
 

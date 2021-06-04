@@ -404,7 +404,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-
                                 String displayValue = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                                 calenderTextView_dialog.setText(Config.changeDateFormat(displayValue));
                             }

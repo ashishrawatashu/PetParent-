@@ -37,6 +37,7 @@ import com.cynoteck.petofyparents.parameter.uploadVetProfileImageParams.UploadPr
 import com.cynoteck.petofyparents.parameter.uploadVetProfileImageParams.UploadVetProfileImageData;
 import com.cynoteck.petofyparents.response.addPet.imageUpload.ImageResponse;
 import com.cynoteck.petofyparents.utils.Config;
+import com.cynoteck.petofyparents.utils.MediaUtils;
 import com.google.android.material.card.MaterialCardView;
 import com.google.gson.JsonObject;
 
@@ -53,7 +54,7 @@ import retrofit2.Response;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class ParentFullProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse {
+public class ParentFullProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse , MediaUtils.GetImg {
 
     MaterialCardView back_arrow_CV, image_edit_CV, parent_mail_RL, parent_address_RL;
     RelativeLayout edit_profile_RL;
@@ -71,10 +72,12 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
     private static final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
     Dialog storagePermissionDialog,cameraPermissionDialog;
     boolean cameraDialog= false, storageDialog= false;
+    MediaUtils mediaUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_full_profile);
+         mediaUtils = new MediaUtils(this);
         checkStorageAndCameraPermission();
         back_arrow_CV = findViewById(R.id.back_arrow_CV);
         edit_profile_RL = findViewById(R.id.edit_profile_RL);
@@ -232,7 +235,8 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                takePhotoFromCamera();
+//                takePhotoFromCamera();
+                mediaUtils.openCamera();
 
             }
         });
@@ -241,7 +245,9 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                choosePhotoFromGallary();
+//                choosePhotoFromGallary();
+                mediaUtils.openGallery();
+
             }
         });
 
@@ -272,43 +278,47 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
             if (resultCode == RESULT_OK) {
                 setParentData();
             }
-        } else if (requestCode == GALLERY) {
-            if (data != null) {
-                Uri contentURI = data.getData();
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
-
-                    parent_image_IV.setImageBitmap(bitmap);
-                    saveImage(bitmap);
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-
-                    Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        } else if (requestCode == CAMERA) {
-            if (data.getData() == null) {
-                thumbnail = (Bitmap) data.getExtras().get("data");
-                Log.e("jghl", "" + thumbnail);
-                parent_image_IV.setImageBitmap(thumbnail);
-
-                saveImage(thumbnail);
-            } else {
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                    Glide.with(this)
-                            .load(bitmap)
-                            .into(parent_image_IV);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            Toast.makeText(this, "Image Saved!", Toast.LENGTH_SHORT).show();
+        }else {
+            mediaUtils.onActivityResult(requestCode, resultCode, data);
         }
+
+//        else if (requestCode == GALLERY) {
+//            if (data != null) {
+//                Uri contentURI = data.getData();
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+//
+//                    parent_image_IV.setImageBitmap(bitmap);
+//                    saveImage(bitmap);
+//
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//
+//                    Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//        } else if (requestCode == CAMERA) {
+//            if (data.getData() == null) {
+//                thumbnail = (Bitmap) data.getExtras().get("data");
+//                Log.e("jghl", "" + thumbnail);
+//                parent_image_IV.setImageBitmap(thumbnail);
+//
+//                saveImage(thumbnail);
+//            } else {
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+//                    Glide.with(this)
+//                            .load(bitmap)
+//                            .into(parent_image_IV);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(this, "Failed!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            Toast.makeText(this, "Image Saved!", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 
@@ -317,8 +327,11 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
         parent_phone_TV.setText(Config.user_phone);
         if (Config.user_address.equals("")) {
             parent_address_RL.setVisibility(View.GONE);
+            parent_address_TV.setVisibility(View.GONE);
         } else {
+            parent_address_RL.setVisibility(View.VISIBLE);
             parent_address_TV.setText(Config.user_address);
+            parent_address_TV.setVisibility(View.VISIBLE);
 
         }
         if (Config.user_emial!=null) {
@@ -442,5 +455,14 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
     @Override
     public void onError(Throwable t, String key) {
 
+    }
+
+    @Override
+    public void imgdata(String imgPath) {
+        Log.d ("imgdata123" , imgPath.toString());
+        Uri selectedImageURI = null;
+        File imgFile = new File(imgPath);
+        Log.d ("imgdata: " , imgFile.toString());
+        UploadImages(imgFile);
     }
 }

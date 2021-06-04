@@ -437,11 +437,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 int month = cldr.get(Calendar.MONTH);
                 int year = cldr.get(Calendar.YEAR);
                 // date picker dialog
-                picker = new DatePickerDialog(com.cynoteck.petofyparents.activity.AddPetRegister.this,
-                        new DatePickerDialog.OnDateSetListener() {
+                picker = new DatePickerDialog(com.cynoteck.petofyparents.activity.AddPetRegister.this,new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                calenderView.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                calenderView.setText(Config.changeDateFormat(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year));
                                 String DoB = dayOfMonth + " " + (monthOfYear + 1) + " " + year;
                                 Log.d("jajajaajja", "" + methods.getDays(DoB, methods.getDate()));
                                 String age = String.valueOf(methods.getDays(DoB, methods.getDate()));
@@ -939,7 +938,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                     Log.d("addPetValueResponse", "" + addPetValueResponse);
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                            Toast.makeText(this, "Pet Added Successfully ", Toast.LENGTH_SHORT).show();
+                            if (!intentFrom.equals("AfterScanScreenActivity")){
+                                Toast.makeText(this, "Pet Added Successfully ", Toast.LENGTH_SHORT).show();
+                            }
+
                             Intent intent = new Intent();
                             intent.putExtra("pet_id", addPetValueResponse.getData().getId());
                             intent.putExtra("pet_unique_id", addPetValueResponse.getData().getPetUniqueId());

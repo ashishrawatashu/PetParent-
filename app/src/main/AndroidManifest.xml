@@ -34,7 +34,17 @@
         android:roundIcon="@mipmap/pet_parent_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:networkSecurityConfig="@xml/networkconfig"
         android:usesCleartextTraffic="true">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.cynoteck.petofyparents.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
         <activity android:name=".activity.LoginActivity"></activity>
         <activity android:name=".activity.SearchProviderResultActivity" />
         <activity android:name=".activity.SearchKeywordActivity" />

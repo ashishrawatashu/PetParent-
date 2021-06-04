@@ -259,7 +259,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
 //                add_pet_with_QR_intent.putExtra("veterinarianUserId", veterinarianUserId);
 //                startActivityForResult(add_pet_with_QR_intent, ADD_PET_WITH_QR_CODE);
                 Intent adNewIntent = new Intent(this, AddPetRegister.class);
-                adNewIntent.putExtra("intent_from", "add");
+                adNewIntent.putExtra("intent_from", "AfterScanScreenActivity");
                 startActivityForResult(adNewIntent, ADD_PET_WITH_QR_CODE);
                 break;
 

@@ -430,7 +430,6 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        cancelAppointment(mettingId);
                         dialogInterface.dismiss();
 
                     }
