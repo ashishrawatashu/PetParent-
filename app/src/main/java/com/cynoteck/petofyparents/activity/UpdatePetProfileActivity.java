@@ -815,6 +815,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
             public void onClick(View view) {
 //                takePhotoFromCamera();
                 mediaUtils.openCamera();
+                dialog.dismiss();
             }
         });
 
@@ -823,6 +824,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
             public void onClick(View view) {
 //                choosePhotoFromGallary();
                 mediaUtils.openGallery();
+                dialog.dismiss();
             }
         });
 
@@ -850,7 +852,6 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        dialog.dismiss();
         mediaUtils.onActivityResult(requestCode, resultCode, data);
 
 //        if (resultCode == RESULT_CANCELED) {
