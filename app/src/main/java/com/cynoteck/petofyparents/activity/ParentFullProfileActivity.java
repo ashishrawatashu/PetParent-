@@ -422,10 +422,12 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         //Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+                        Log.e("Glide","error");
                         Glide.with(this)
                                 .load(imageResponse.getData().getDocumentUrl())
                                 .placeholder(R.drawable.user_profile)
                                 .into(parent_image_IV);
+                        Log.e("Glide","error2");
                         Config.user_url = imageResponse.getData().getDocumentUrl();
                         sharedPreferences = this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
@@ -454,6 +456,18 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
 
     @Override
     public void onError(Throwable t, String key) {
+        switch (key){
+            case "UpdateProfileImage":
+                Log.e("UploadDocument", t.getLocalizedMessage().toString());
+                Log.e("UploadDocument", t.getLocalizedMessage().toString());
+                break;
+
+            case "UploadDocument":
+                Log.e("UploadDocument", t.getLocalizedMessage().toString());
+                Log.e("UploadDocument", t.getLocalizedMessage().toString());
+                break;
+        }
+
 
     }
 

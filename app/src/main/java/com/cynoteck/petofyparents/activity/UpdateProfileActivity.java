@@ -58,6 +58,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         back_arrow_IV.setOnClickListener(this);
         update_BT.setOnClickListener(this);
 
+        number_TIET.setEnabled(false);
+        email_TIET.setEnabled(false);
+
 
         firstName_TIET.setText(Config.first_name);
         lastName_TIET.setText(Config.last_name);

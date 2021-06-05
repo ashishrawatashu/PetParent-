@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+    //   id 'io.fabric'
 
 android {
     compileSdkVersion 29
@@ -80,5 +84,9 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     compileOnly 'com.google.android.wearable:wearable:2.6.0'
+
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
 
 }

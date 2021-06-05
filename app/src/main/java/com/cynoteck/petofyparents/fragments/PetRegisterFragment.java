@@ -307,6 +307,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                     progressBarFirst.setVisibility(View.GONE);
                     if (responseCode == 109) {
                         if (getPetListResponse.getData().getPetList().isEmpty()) {
+                            total_pets_TV.setText("No pet registered ! ");
                             empty_IV.setVisibility(View.VISIBLE);
                             search_register_pet.setVisibility(View.INVISIBLE);
                             pet_list_LL.setVisibility(View.GONE);

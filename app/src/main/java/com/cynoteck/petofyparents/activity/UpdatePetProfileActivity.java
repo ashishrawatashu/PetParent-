@@ -56,6 +56,7 @@ import com.cynoteck.petofyparents.response.addPet.uniqueIdResponse.UniqueRespons
 import com.cynoteck.petofyparents.response.getPetDetailsResponse.GetPetResponse;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.utils.Config;
+import com.cynoteck.petofyparents.utils.MediaUtils;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.google.android.material.card.MaterialCardView;
 
@@ -77,7 +78,7 @@ import retrofit2.Response;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class UpdatePetProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse {
+public class UpdatePetProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse ,MediaUtils.GetImg{
     Methods methods;
     AppCompatSpinner add_pet_type, add_pet_breed_dialog, add_pet_color_dialog;
     EditText pet_name_ET;
@@ -128,12 +129,13 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     private static final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
     Dialog storagePermissionDialog,cameraPermissionDialog;
     boolean cameraDialog= false, storageDialog= false;
-
+    MediaUtils mediaUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_pet_details);
         methods = new Methods(this);
+        mediaUtils=new MediaUtils(this);
         currentDateAndTime();
         Bundle extras = getIntent().getExtras();
         init();
@@ -644,13 +646,15 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
 
             case "UpdatePetDetails":
                 try {
+                    methods.customProgressDismiss();
                     Log.d("UpdatePetDetails", arg0.body().toString());
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         Config.isLoaded = true;
                         Intent intent = new Intent();
-                        intent.putExtra("pet_id", addPetValueResponse.getData().getId());
+                        Log.e("AGE",addPetValueResponse.getData().getDateOfBirth()+"AGE"+addPetValueResponse.getData().getPetAge());
+                        intent.putExtra("pet_id", addPetValueResponse.getData().getId().substring(0,addPetValueResponse.getData().getId().length()-2));
                         intent.putExtra("pet_unique_id", addPetValueResponse.getData().getPetUniqueId());
                         intent.putExtra("pet_image_url", addPetValueResponse.getData().getPetProfileImageUrl());
                         intent.putExtra("pet_breed", addPetValueResponse.getData().getPetBreed());
@@ -809,14 +813,16 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         select_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takePhotoFromCamera();
+//                takePhotoFromCamera();
+                mediaUtils.openCamera();
             }
         });
 
         select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choosePhotoFromGallary();
+//                choosePhotoFromGallary();
+                mediaUtils.openGallery();
             }
         });
 
@@ -845,59 +851,61 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         dialog.dismiss();
-        if (resultCode == RESULT_CANCELED) {
-            return;
-        }
-        if (requestCode == GALLERY) {
-            if (data != null) {
+        mediaUtils.onActivityResult(requestCode, resultCode, data);
 
-                Uri contentURI = data.getData();
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
-
-                    if (selctProflImage.equals("1")) {
-                        pet_image_IV.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    if (selctProflImage.equals("1")) {
-                        selctProflImage = "0";
-                    }
-                    Toast.makeText(UpdatePetProfileActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        } else if (requestCode == CAMERA) {
-
-            if (data.getData() == null) {
-                thumbnail = (Bitmap) data.getExtras().get("data");
-                Log.e("jghl", "" + thumbnail);
-                if (selctProflImage.equals("1")) {
-                    pet_image_IV.setImageBitmap(thumbnail);
-                    saveImage(thumbnail);
-                }
-                Toast.makeText(UpdatePetProfileActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(UpdatePetProfileActivity.this.getContentResolver(), data.getData());
-                    if (selctProflImage.equals("1")) {
-                        pet_image_IV.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    Toast.makeText(UpdatePetProfileActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    if (selctProflImage.equals("1")) {
-                        selctProflImage = "0";
-                    }
-                }
-            }
-
-        }
-
-        return;
+//        if (resultCode == RESULT_CANCELED) {
+//            return;
+//        }
+//        if (requestCode == GALLERY) {
+//            if (data != null) {
+//
+//                Uri contentURI = data.getData();
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
+//
+//                    if (selctProflImage.equals("1")) {
+//                        pet_image_IV.setImageBitmap(bitmap);
+//                        saveImage(bitmap);
+//                    }
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    if (selctProflImage.equals("1")) {
+//                        selctProflImage = "0";
+//                    }
+//                    Toast.makeText(UpdatePetProfileActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//        } else if (requestCode == CAMERA) {
+//
+//            if (data.getData() == null) {
+//                thumbnail = (Bitmap) data.getExtras().get("data");
+//                Log.e("jghl", "" + thumbnail);
+//                if (selctProflImage.equals("1")) {
+//                    pet_image_IV.setImageBitmap(thumbnail);
+//                    saveImage(thumbnail);
+//                }
+//                Toast.makeText(UpdatePetProfileActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+//            } else {
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(UpdatePetProfileActivity.this.getContentResolver(), data.getData());
+//                    if (selctProflImage.equals("1")) {
+//                        pet_image_IV.setImageBitmap(bitmap);
+//                        saveImage(bitmap);
+//                    }
+//                    Toast.makeText(UpdatePetProfileActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    if (selctProflImage.equals("1")) {
+//                        selctProflImage = "0";
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//        return;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
@@ -953,4 +961,12 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
 
     }
 
+    @Override
+    public void imgdata(String imgPath) {
+        Log.d ("imgdata123" , imgPath.toString());
+        Uri selectedImageURI = null;
+        File imgFile = new File(imgPath);
+        Log.d ("imgdata: " , imgFile.toString());
+        UploadImages(imgFile);
+    }
 }

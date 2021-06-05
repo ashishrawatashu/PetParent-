@@ -63,6 +63,7 @@ import com.cynoteck.petofyparents.response.getPetParrentnameReponse.GetPetParent
 import com.cynoteck.petofyparents.response.petAgeUnitResponse.PetAgeUnitResponseData;
 import com.cynoteck.petofyparents.response.updateProfileResponse.PetTypeResponse;
 import com.cynoteck.petofyparents.utils.Config;
+import com.cynoteck.petofyparents.utils.MediaUtils;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.google.android.material.card.MaterialCardView;
 
@@ -84,7 +85,7 @@ import retrofit2.Response;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class AddPetRegister extends AppCompatActivity implements View.OnClickListener, ApiResponse, TextWatcher {
+public class AddPetRegister extends AppCompatActivity implements View.OnClickListener, ApiResponse, TextWatcher,MediaUtils.GetImg {
     private final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
 
     ScrollView scrollView;
@@ -139,6 +140,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
     boolean cameraDialog= false, storageDialog= false;
 
+    MediaUtils mediaUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +153,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         currentDateAndTime();
         checkStorageAndCameraPermission();
         methods = new Methods(this);
+        mediaUtils =new MediaUtils(this);
         if (methods.isInternetOn()) {
             petType();
             getPetAgeUnit();
@@ -493,14 +496,17 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         select_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takePhotoFromCamera();
+//                takePhotoFromCamera();
+                mediaUtils.openCamera();
             }
         });
 
         select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                choosePhotoFromGallary();
+//                choosePhotoFromGallary();
+                mediaUtils.openGallery();
+
             }
         });
 
@@ -529,59 +535,57 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         dialog.dismiss();
-        if (resultCode == RESULT_CANCELED) {
-            return;
-        }
-        if (requestCode == GALLERY) {
-            if (data != null) {
+        mediaUtils.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_CANCELED) {
+//            return;
+//        }
+//        if (requestCode == GALLERY) {
+//            if (data != null) {
+//
+//                Uri contentURI = data.getData();
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
+//
+//                    if (selctProflImage.equals("1")) {
+//                        pet_image_IV.setImageBitmap(bitmap);
+//                        saveImage(bitmap);
+//                    }
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    if (selctProflImage.equals("1")) {
+//                        selctProflImage = "0";
+//                    }
+//                    Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Failed!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//        } else if (requestCode == CAMERA) {
 
-                Uri contentURI = data.getData();
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
+//            if (data.getData() == null) {
+//                thumbnail = (Bitmap) data.getExtras().get("data");
+//                Log.e("jghl", "" + thumbnail);
+//                if (selctProflImage.equals("1")) {
+//                    pet_image_IV.setImageBitmap(thumbnail);
+//                    saveImage(thumbnail);
+//                }
+//                Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+//            } else {
+//                try {
+//                    bitmap = MediaStore.Images.Media.getBitmap(com.cynoteck.petofyparents.activity.AddPetRegister.this.getContentResolver(), data.getData());
+//                    if (selctProflImage.equals("1")) {
+//                        pet_image_IV.setImageBitmap(bitmap);
+//                        saveImage(bitmap);
+//                    }
+//                    Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    if (selctProflImage.equals("1")) {
+//                        selctProflImage = "0";
+//                    }
+//                }
+//            }}
 
-                    if (selctProflImage.equals("1")) {
-                        pet_image_IV.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    if (selctProflImage.equals("1")) {
-                        selctProflImage = "0";
-                    }
-                    Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Failed!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        } else if (requestCode == CAMERA) {
-
-            if (data.getData() == null) {
-                thumbnail = (Bitmap) data.getExtras().get("data");
-                Log.e("jghl", "" + thumbnail);
-                if (selctProflImage.equals("1")) {
-                    pet_image_IV.setImageBitmap(thumbnail);
-                    saveImage(thumbnail);
-                }
-                Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-            } else {
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(com.cynoteck.petofyparents.activity.AddPetRegister.this.getContentResolver(), data.getData());
-                    if (selctProflImage.equals("1")) {
-                        pet_image_IV.setImageBitmap(bitmap);
-                        saveImage(bitmap);
-                    }
-                    Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    if (selctProflImage.equals("1")) {
-                        selctProflImage = "0";
-                    }
-                }
-            }
-
-        }
-
-        return;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
@@ -618,6 +622,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     }
 
     private void UploadImages(File absolutePath) {
+        methods.showCustomProgressBarDialog(this);
         MultipartBody.Part userDpFilePart = null;
         if (absolutePath != null) {
             RequestBody userDpFile = RequestBody.create(MediaType.parse("image/*"), absolutePath);
@@ -967,6 +972,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 break;
             case "UploadDocument":
                 try {
+                    methods.customProgressDismiss();
                     Log.d("UploadDocument", arg0.body().toString());
                     ImageResponse imageResponse = (ImageResponse) arg0.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
@@ -1118,5 +1124,14 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override
+    public void imgdata(String imgPath) {
+        Log.d ("imgdata123" , imgPath.toString());
+        Uri selectedImageURI = null;
+        File imgFile = new File(imgPath);
+        Log.d ("imgdata: " , imgFile.toString());
+        UploadImages(imgFile);
     }
 }

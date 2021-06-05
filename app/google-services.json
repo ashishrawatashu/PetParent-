@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "71378163606",
+    "project_id": "petofy-parent",
+    "storage_bucket": "petofy-parent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71378163606:android:bdc210c320f902c65f6fb7",
+        "android_client_info": {
+          "package_name": "com.cynoteck.petofyparents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71378163606-e5sug7q38aerv0q56qva0248t7kl16p7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD49n2yrm-_tmbPCFVj7kFEe9ffPqCbBYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71378163606-e5sug7q38aerv0q56qva0248t7kl16p7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

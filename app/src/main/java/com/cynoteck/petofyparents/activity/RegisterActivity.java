@@ -70,10 +70,11 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
 //        signIN_TV = findViewById(R.id.signIn_TV);
 
         signUp_BT = findViewById(R.id.signUp_BT);
-
+        phoneNumber_TIET.setEnabled(false);
         signUp_BT.setOnClickListener(this);
         back_arrow_IV.setOnClickListener(this);
 //        signIN_TV.setOnClickListener(this);
+        phoneNumber_TIET.setText(phoneNumber);
 
 
     }

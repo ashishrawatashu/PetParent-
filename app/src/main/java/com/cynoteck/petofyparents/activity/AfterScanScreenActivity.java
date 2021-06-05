@@ -1,5 +1,6 @@
 package com.cynoteck.petofyparents.activity;
 
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -82,8 +83,9 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
         setContentView(R.layout.fragment_after_scan_screen);
         // Inflate the layout for this fragment
         methods = new Methods(this);
-        ClipboardManager mCbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        mCbm.clearPrimaryClip();
+//        ClipboardManager mCbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+//        mCbm = ClipData.newPlainText("text", text);
+//        mCbm.clearPrimaryClip();
         init();
         empty_IV.setVisibility(View.GONE);
         Intent intent = getIntent();
@@ -283,6 +285,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
                     if (responseCode == 109) {
                         if (getPetListResponse.getData().getPetList().isEmpty()) {
                             empty_IV.setVisibility(View.VISIBLE);
+                            total_pets_TV.setText("No pet registered ! ");
                         } else {
                             PetParentSingleton.getInstance().getArrayList().clear();
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
