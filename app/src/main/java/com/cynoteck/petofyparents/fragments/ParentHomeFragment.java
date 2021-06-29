@@ -28,6 +28,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cynoteck.petofyparents.R;
+import com.cynoteck.petofyparents.activity.AddPetRegister;
 import com.cynoteck.petofyparents.activity.AdoptionDonationActivity;
 import com.cynoteck.petofyparents.activity.AfterScanScreenActivity;
 import com.cynoteck.petofyparents.activity.ConsultationListActivity;
@@ -42,9 +43,11 @@ import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
 import com.cynoteck.petofyparents.onClicks.OnSliderClickListener;
 import com.cynoteck.petofyparents.response.getCityListWithStateResponse.GetCityListWithStateResponse;
+import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
+import com.cynoteck.petofyparents.utils.PetParentSingleton;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -54,7 +57,9 @@ import java.util.TimerTask;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
-
+import static com.cynoteck.petofyparents.fragments.ProfileFragment.petListHorizontalAdapter;
+import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.registerPetAdapter;
+import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.total_pets_TV;
 public class ParentHomeFragment extends Fragment implements View.OnClickListener, ApiResponse, OnItemClickListener, OnSliderClickListener {
     View view;
     private ViewPager vp_slider;
@@ -81,6 +86,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     EditText search_location_ET;
     ImageView qr_code_IV;
     private static final int QR_CODE_SCANNER = 100;
+    private final int ADD_PET = 2;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor login_editor;
@@ -309,6 +315,27 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 startActivity(scanAfterIntent);
 
             }
+            else if (requestCode == ADD_PET) {
+                if (resultCode == RESULT_OK) {
+                    PetList petList = new PetList();
+                    petList.setId(data.getStringExtra("pet_id"));
+                    petList.setPetUniqueId(data.getStringExtra("pet_unique_id"));
+                    petList.setPetProfileImageUrl(data.getStringExtra("pet_image_url"));
+                    petList.setPetBreed(data.getStringExtra("pet_breed"));
+                    petList.setPetAge(data.getStringExtra("pet_age"));
+                    petList.setPetSex(data.getStringExtra("pet_sex"));
+                    petList.setPetName(data.getStringExtra("pet_name"));
+                    petList.setPetParentName(data.getStringExtra("pet_parent"));
+                    petList.setPetCategory(data.getStringExtra("pet_category"));
+                    petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
+                    petList.setPetColor(data.getStringExtra("pet_color"));
+                    PetParentSingleton.getInstance().getArrayList().add(0, petList);
+                    registerPetAdapter.notifyDataSetChanged();
+                    total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
+                    petListHorizontalAdapter.notifyDataSetChanged();
+                }
+            }
+
         }
     }
 
@@ -393,7 +420,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         login_editor.putString("CityId", getCityListWithStateResponse.getData().get(position).getId());
         login_editor.putString("cityName", getCityListWithStateResponse.getData().get(position).getCity1());
         login_editor.putString("CityFullName", getCityListWithStateResponse.getData().get(position).getCityName());
-        login_editor.commit();
+        login_editor.apply();
         Config.latitude = sharedPreferences.getString("userLatitude", "");
         Config.longitude = sharedPreferences.getString("userLongitude", "");
         Config.cityId = sharedPreferences.getString("CityId", "");
@@ -404,6 +431,15 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onSliderClickListener(int position) {
+        if (position==0){
+            Intent consultationIntent = new Intent(getContext(), ConsultationListActivity.class);
+            consultationIntent.putExtra("serviceTypeId","1");
+            startActivity(consultationIntent);
+        }else if (position==1){
+            Intent adNewIntent = new Intent(getActivity(), AddPetRegister.class);
+            adNewIntent.putExtra("intent_from", "add");
+            startActivityForResult(adNewIntent, ADD_PET);
+        }
 
     }
 }

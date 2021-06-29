@@ -475,5 +475,13 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     @Override
     public void onSliderClickListener(int position) {
 
+        if (position==0){
+
+        }else if (position==1){
+
+        }else if (position==2){
+
+        }
+
     }
 }
