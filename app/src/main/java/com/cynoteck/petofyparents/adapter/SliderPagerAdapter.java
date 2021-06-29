@@ -24,9 +24,9 @@ public class SliderPagerAdapter extends PagerAdapter {
     OnSliderClickListener onItemClickListener;
 
     public SliderPagerAdapter(Activity activity, ArrayList<Integer> image_arraylist,OnSliderClickListener onItemClickListener) {
-        this.activity = activity;
-        this.image_arraylist = image_arraylist;
-        this.onItemClickListener = onItemClickListener;
+        this.activity               = activity;
+        this.image_arraylist        = image_arraylist;
+        this.onItemClickListener    = onItemClickListener;
     }
 
     @Override
