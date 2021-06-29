@@ -32,7 +32,7 @@ import com.cynoteck.petofyparents.response.getPetReportsResponse.GetReportsTypeD
 import com.cynoteck.petofyparents.response.getPetReportsResponse.GetReportsTypeResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;

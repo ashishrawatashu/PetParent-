@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentList;
-import com.cynoteck.petofyparents.utils.AppointmentsClickListner;
+import com.cynoteck.petofyparents.onClicks.AppointmentsClickListner;
 
 import java.util.ArrayList;
 

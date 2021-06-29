@@ -39,7 +39,7 @@ import com.cynoteck.petofyparents.response.getXRayReports.getPetTestAndXRayRespo
 import com.cynoteck.petofyparents.response.getXRayReports.getPetTestAndXRayResponse.PetTestsAndXrayList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.ViewAndUpdateClickListener;
+import com.cynoteck.petofyparents.onClicks.ViewAndUpdateClickListener;
 
 import java.util.ArrayList;
 

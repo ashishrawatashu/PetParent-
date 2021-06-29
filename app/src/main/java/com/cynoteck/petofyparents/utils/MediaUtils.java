@@ -1,15 +1,9 @@
 package com.cynoteck.petofyparents.utils;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -19,9 +13,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -30,12 +22,10 @@ public class MediaUtils {
 
     Activity mActivity;
     Fragment mFragment;
-    private GetImg mGetImg;
+    private final GetImg mGetImg;
     private final int REQ_CAMERA = 101;
     private final int REQ_GALLERY = 102;
-    private final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 103;
     private Uri imageUri;
-    private final String TAG = MediaUtils.class.getSimpleName();
     private String imageFilePath="";
 
 

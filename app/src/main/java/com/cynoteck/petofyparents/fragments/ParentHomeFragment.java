@@ -1,5 +1,6 @@
 package com.cynoteck.petofyparents.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activity.AdoptionDonationActivity;
@@ -40,10 +40,11 @@ import com.cynoteck.petofyparents.adapter.SliderPagerAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
+import com.cynoteck.petofyparents.onClicks.OnSliderClickListener;
 import com.cynoteck.petofyparents.response.getCityListWithStateResponse.GetCityListWithStateResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ParentHomeFragment extends Fragment implements View.OnClickListener, ApiResponse, OnItemClickListener {
+public class ParentHomeFragment extends Fragment implements View.OnClickListener, ApiResponse, OnItemClickListener, OnSliderClickListener {
     View view;
     private ViewPager vp_slider;
     private LinearLayout ll_dots;
@@ -125,25 +126,28 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     }
 
     private void init() {
-        search_layout_LL=view.findViewById(R.id.search_layout_LL);
-        qr_code_IV = view.findViewById(R.id.qr_code_IV);
-        location_TV = view.findViewById(R.id.location_TV);
-        location_LL = view.findViewById(R.id.location_LL);
-        pet_names_LL = view.findViewById(R.id.pet_names_LL);
-        cosultation_LL=view.findViewById(R.id.cosultation_LL);
-        insurances_LL=view.findViewById(R.id.insurances_LL);
-        vp_slider = (ViewPager) view.findViewById(R.id.pager);
-        adoption_donation_LL=view.findViewById(R.id.adoption_donation_LL);
-        ll_dots = (LinearLayout) view.findViewById(R.id.ll_dots);
-        slider_image_list = new ArrayList<Integer>();
+        search_layout_LL        = view.findViewById(R.id.search_layout_LL);
+        qr_code_IV              = view.findViewById(R.id.qr_code_IV);
+        location_TV             = view.findViewById(R.id.location_TV);
+        location_LL             = view.findViewById(R.id.location_LL);
+        pet_names_LL            = view.findViewById(R.id.pet_names_LL);
+        cosultation_LL          = view.findViewById(R.id.cosultation_LL);
+        insurances_LL           = view.findViewById(R.id.insurances_LL);
+        vp_slider               = view.findViewById(R.id.pager);
+        adoption_donation_LL    = view.findViewById(R.id.adoption_donation_LL);
+        ll_dots                 = view.findViewById(R.id.ll_dots);
+        pet_breed_LL            = view.findViewById(R.id.pet_breed_LL);
+        pet_shops_LL            = view.findViewById(R.id.pet_shops_LL);
+        grooming_LL             = view.findViewById(R.id.grooming_LL);
+        hostels_LL              = view.findViewById(R.id.hostels_LL);
+        training_LL             = view.findViewById(R.id.training_LL);
+
+        slider_image_list       = new ArrayList<Integer>();
+
         slider_image_list.add(R.drawable.slider_one);
         slider_image_list.add(R.drawable.slider_two);
         slider_image_list.add(R.drawable.slider_three);
-        pet_breed_LL = view.findViewById(R.id.pet_breed_LL);
-        pet_shops_LL = view.findViewById(R.id.pet_shops_LL);
-        grooming_LL= view.findViewById(R.id.grooming_LL);
-        hostels_LL=view.findViewById(R.id.hostels_LL);
-        training_LL=view.findViewById(R.id.training_LL);
+
 
         hostels_LL.setOnClickListener(this);
         grooming_LL.setOnClickListener(this);
@@ -161,7 +165,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         search_layout_LL.setOnClickListener(this);
 
         location_TV.setText(Config.cityFullName);
-        sliderPagerAdapter = new SliderPagerAdapter(getActivity(), slider_image_list);
+        sliderPagerAdapter = new SliderPagerAdapter(getActivity(), slider_image_list,this);
         vp_slider.setAdapter(sliderPagerAdapter);
         vp_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -208,6 +212,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -244,10 +249,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 startActivity(namesActivityIntent);
                 break;
 
-            case R.id.cosultation_LL:
-                Intent consultationIntent = new Intent(getContext(), ConsultationListActivity.class);
-                startActivity(consultationIntent);
-                break;
+
 
             case R.id.adoption_donation_LL:
                 Intent adoptionDonationIntent = new Intent(getContext(), AdoptionDonationActivity.class);
@@ -257,15 +259,33 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
 //                Intent insurancesIntent = new Intent(getContext(), PetInsuranceActivity.class);
 //                startActivity(insurancesIntent);
 //                break;
+            case R.id.cosultation_LL:
+                Intent consultationIntent = new Intent(getContext(), ConsultationListActivity.class);
+                consultationIntent.putExtra("serviceTypeId","1");
+                startActivity(consultationIntent);
+                break;
 
             case R.id.hostels_LL:
+                Intent hostelsIntent = new Intent(getContext(), ConsultationListActivity.class);
+                hostelsIntent.putExtra("serviceTypeId","3");
+                startActivity(hostelsIntent);
+                break;
 
             case R.id.grooming_LL:
+                Intent groomingIntent = new Intent(getContext(), ConsultationListActivity.class);
+                groomingIntent.putExtra("serviceTypeId","2");
+                startActivity(groomingIntent);
+                break;
 
             case R.id.pet_shops_LL:
-
+                Intent pet_shopsIntent = new Intent(getContext(), ConsultationListActivity.class);
+                pet_shopsIntent.putExtra("serviceTypeId","11");
+                startActivity(pet_shopsIntent);
+                break;
             case R.id.training_LL:
-                Toast.makeText(getContext(), "Coming soon !", Toast.LENGTH_SHORT).show();
+                Intent trainingIntent = new Intent(getContext(), ConsultationListActivity.class);
+                trainingIntent.putExtra("serviceTypeId","6");
+                startActivity(trainingIntent);
                 break;
         }
     }
@@ -380,5 +400,10 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         Config.cityName = sharedPreferences.getString("cityName", "");
         Config.cityFullName = sharedPreferences.getString("CityFullName", "");
         location_dialog.dismiss();
+    }
+
+    @Override
+    public void onSliderClickListener(int position) {
+
     }
 }

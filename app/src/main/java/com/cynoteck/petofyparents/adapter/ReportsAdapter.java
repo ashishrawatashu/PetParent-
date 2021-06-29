@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
-import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.cynoteck.petofyparents;
+package com.cynoteck.petofyparents.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Service;

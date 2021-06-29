@@ -31,7 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cynoteck.petofyparents.PetParentSingleton;
+import com.cynoteck.petofyparents.utils.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activity.PaymentScreenActivity;
 import com.cynoteck.petofyparents.adapter.PastAppointmentListAdapter;
@@ -46,7 +46,7 @@ import com.cynoteck.petofyparents.parameter.getPetParentAppointmentsParams.GetAp
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentList;
 import com.cynoteck.petofyparents.response.appointmentResponse.GetAppointmentResponse;
 import com.cynoteck.petofyparents.response.getAppointmentsStatusResponse.AppointmentStatusResponse;
-import com.cynoteck.petofyparents.utils.AppointmentsClickListner;
+import com.cynoteck.petofyparents.onClicks.AppointmentsClickListner;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.utils.NetworkChangeReceiver;

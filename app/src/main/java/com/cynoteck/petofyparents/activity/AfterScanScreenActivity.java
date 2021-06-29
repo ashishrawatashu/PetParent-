@@ -1,13 +1,9 @@
 package com.cynoteck.petofyparents.activity;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
@@ -27,9 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.cynoteck.petofyparents.PetParentSingleton;
+import com.cynoteck.petofyparents.utils.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.adapter.RegisterPetAdapter;
 import com.cynoteck.petofyparents.adapter.ScanPetListAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
@@ -43,15 +38,13 @@ import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListRespo
 import com.cynoteck.petofyparents.response.registerParentWithQRResponse.RegisterParentWithQRResponse;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.ViewDeatilsAndIdCardClick;
+import com.cynoteck.petofyparents.onClicks.ViewDeatilsAndIdCardClick;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import retrofit2.Response;
 
-import static com.cynoteck.petofyparents.activity.DonationActivity.donatePetAdapter;
 import static com.cynoteck.petofyparents.fragments.ProfileFragment.petListHorizontalAdapter;
 import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.registerPetAdapter;
 import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.total_pets_TV;

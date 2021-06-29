@@ -31,13 +31,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cynoteck.petofyparents.PetParentSingleton;
+import com.cynoteck.petofyparents.utils.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activity.AddPetRegister;
 import com.cynoteck.petofyparents.activity.PetProfileActivity;
 import com.cynoteck.petofyparents.activity.SelectPetReportsActivity;
 import com.cynoteck.petofyparents.adapter.RegisterPetAdapter;
-import com.cynoteck.petofyparents.adapter.ScanPetListAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
@@ -48,7 +47,7 @@ import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListRespo
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.cynoteck.petofyparents.utils.NetworkChangeReceiver;
-import com.cynoteck.petofyparents.utils.ViewDeatilsAndIdCardClick;
+import com.cynoteck.petofyparents.onClicks.ViewDeatilsAndIdCardClick;
 
 import retrofit2.Response;
 

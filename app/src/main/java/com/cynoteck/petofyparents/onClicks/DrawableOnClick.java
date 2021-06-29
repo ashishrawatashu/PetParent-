@@ -1,4 +1,4 @@
-package com.cynoteck.petofyparents.utils;
+package com.cynoteck.petofyparents.onClicks;
 
 public interface DrawableOnClick {
     public static enum DrawablePosition { TOP, BOTTOM, LEFT, RIGHT };

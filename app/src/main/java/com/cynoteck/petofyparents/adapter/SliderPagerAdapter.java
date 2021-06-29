@@ -12,16 +12,21 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.OnSliderClickListener;
+
 import java.util.ArrayList;
 
 public class SliderPagerAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     Activity activity;
     ArrayList<Integer> image_arraylist;
+    OnSliderClickListener onItemClickListener;
 
-    public SliderPagerAdapter(Activity activity, ArrayList<Integer> image_arraylist) {
+    public SliderPagerAdapter(Activity activity, ArrayList<Integer> image_arraylist,OnSliderClickListener onItemClickListener) {
         this.activity = activity;
         this.image_arraylist = image_arraylist;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override

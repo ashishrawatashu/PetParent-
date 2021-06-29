@@ -1,9 +1,8 @@
-package com.cynoteck.petofyparents;
+package com.cynoteck.petofyparents.utils;
 
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentList;
 import com.cynoteck.petofyparents.response.getAdoptionRequestListResponse.GetAdoptionRequestListData;
 import com.cynoteck.petofyparents.response.getDonationRequestResponse.GetDonationRequestData;
-import com.cynoteck.petofyparents.response.getDonationRequestResponse.GetDonationRequestResponse;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
 
 import java.util.ArrayList;

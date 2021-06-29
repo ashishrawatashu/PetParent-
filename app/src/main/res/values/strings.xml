@@ -225,7 +225,7 @@
     <string name="change"><u>Change</u></string>
     <string name="home">Home</string>
     <string name="somethingWrong">Something went wrong. Please try again later.</string>
-    <string name="VetProfile">Vet Profile</string>
+    <string name="VetProfile">Profile</string>
     <string name="GiveFeedback"><u>Write a review</u></string>
     <string name="reviewHint">Tell us what went wrong..</string>
     <string name="cat">Cats</string>

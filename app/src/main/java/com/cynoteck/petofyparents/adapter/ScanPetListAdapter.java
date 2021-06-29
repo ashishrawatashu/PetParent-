@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
-import com.cynoteck.petofyparents.utils.ViewDeatilsAndIdCardClick;
+import com.cynoteck.petofyparents.onClicks.ViewDeatilsAndIdCardClick;
 
 import java.util.ArrayList;
 

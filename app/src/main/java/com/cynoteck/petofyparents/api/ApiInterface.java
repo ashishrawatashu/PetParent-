@@ -14,6 +14,7 @@ import com.cynoteck.petofyparents.parameter.forgetPassRequest.ForgetPassRequest;
 import com.cynoteck.petofyparents.parameter.getOrderDetailsParms.GetOrderRequest;
 import com.cynoteck.petofyparents.parameter.getPetListRequest.GetPetListRequest;
 import com.cynoteck.petofyparents.parameter.getPetParentAppointmentsParams.GetAppointmentRequest;
+import com.cynoteck.petofyparents.parameter.getServiceProvidersListRequest.GetServiceProviderListRequest;
 import com.cynoteck.petofyparents.parameter.getVetListParams.GetVetListRequest;
 import com.cynoteck.petofyparents.parameter.getpetAgeRequest.GetPetAgeRequestData;
 import com.cynoteck.petofyparents.parameter.immunizationRequest.ImmunizationRequest;
@@ -290,6 +291,10 @@ public interface ApiInterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("appointment/GetVeterinarianList")
     Call<GetVetListResponse> getVetList(@Header("Authorization") String auth, @Body GetVetListRequest getVetListRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("services/GetServiceProvidersListByServiceAndCity")
+    Call<GetVetListResponse> getServiceProvidersListByServiceAndCity(@Header("Authorization") String auth, @Body GetServiceProviderListRequest getServiceProviderListRequest);
 
     //TODO=======Get Veterinarian List============================
 

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getVaccinationResponse.GetVaccineResponseModel;
-import com.cynoteck.petofyparents.utils.ImmunizationOnclickListener;
+import com.cynoteck.petofyparents.onClicks.ImmunizationOnclickListener;
 
 import java.util.ArrayList;
 

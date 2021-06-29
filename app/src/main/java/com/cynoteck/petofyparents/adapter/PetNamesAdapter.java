@@ -6,18 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.response.getCityListWithStateResponse.GetCityListWithData;
 import com.cynoteck.petofyparents.response.getPetNamesResponse.GetPetNamesData;
-import com.cynoteck.petofyparents.utils.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

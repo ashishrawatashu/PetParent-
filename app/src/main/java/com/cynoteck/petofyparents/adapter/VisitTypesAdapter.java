@@ -5,12 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.GetReportsTypeData;
-import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;

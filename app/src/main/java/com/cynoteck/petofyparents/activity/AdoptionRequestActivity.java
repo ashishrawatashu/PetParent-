@@ -13,14 +13,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.cynoteck.petofyparents.PetParentSingleton;
+import com.cynoteck.petofyparents.utils.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.adapter.AdoptionRequestAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
 import com.cynoteck.petofyparents.utils.Config;
-import com.cynoteck.petofyparents.utils.OnAdaptionDonationListClickListener;
+import com.cynoteck.petofyparents.onClicks.OnAdaptionDonationListClickListener;
 import com.google.android.material.card.MaterialCardView;
 import com.google.gson.JsonObject;
 

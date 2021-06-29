@@ -1,5 +1,6 @@
 package com.cynoteck.petofyparents.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,8 @@ import com.cynoteck.petofyparents.adapter.VetListAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
+import com.cynoteck.petofyparents.parameter.getServiceProvidersListRequest.GetServiceProviderListParams;
+import com.cynoteck.petofyparents.parameter.getServiceProvidersListRequest.GetServiceProviderListRequest;
 import com.cynoteck.petofyparents.parameter.getVetListParams.GetVetListParams;
 import com.cynoteck.petofyparents.parameter.getVetListParams.GetVetListRequest;
 import com.cynoteck.petofyparents.response.getCityListWithStateResponse.GetCityListWithStateResponse;
@@ -33,8 +36,8 @@ import com.cynoteck.petofyparents.response.getVetListResponse.GetVetListResponse
 import com.cynoteck.petofyparents.response.getVetListResponse.ProviderList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.OnItemClickListener;
-import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -48,7 +51,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
     EditText search_vet_ET;
     RecyclerView vet_list_RV;
     Methods methods;
-    TextView location_TV;
+    TextView location_TV, consultation_TV,heading_one_TV,heading_two_TV;
     VetListAdapter vetListAdapter;
 
     //location Dialog.........
@@ -65,21 +68,31 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
     String seeMore = "true", cityId = "0";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor login_editor;
+    String serviceTypeId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultation_list);
         methods = new Methods(this);
+        Intent intent = getIntent();
+        serviceTypeId = intent.getStringExtra("serviceTypeId");
 
         init();
 
-        if (Config.cityId.equals("")){
+        if (Config.cityId.equals("")) {
             progressBar.setVisibility(View.GONE);
             showLocationDialog();
             ApiService<GetCityListWithStateResponse> service = new ApiService<>();
             service.get(this, ApiClient.getApiInterface().getCityListWithState(Config.token), "GetCityListWithState");
-        }else {
-            getVetList();
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+            if (serviceTypeId.equals("1")){
+                getVetList();
+
+            }else {
+                getServiceProviderList(serviceTypeId);
+            }
         }
 
         search_vet_ET.addTextChangedListener(new TextWatcher() {
@@ -101,28 +114,72 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
     }
 
+    private void getServiceProviderList(String serviceTypeId) {
+        GetServiceProviderListParams getServiceProviderListParams = new GetServiceProviderListParams();
+        getServiceProviderListParams.setCityId(Config.cityId);
+        getServiceProviderListParams.setLattitude(Config.latitude);
+        getServiceProviderListParams.setLongitude(Config.longitude);
+        getServiceProviderListParams.setServiceTypeId(serviceTypeId);
+
+        GetServiceProviderListRequest getServiceProviderListRequest = new GetServiceProviderListRequest();
+        getServiceProviderListRequest.setData(getServiceProviderListParams);
+
+        ApiService<GetVetListResponse> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getServiceProvidersListByServiceAndCity(Config.token, getServiceProviderListRequest), "GetVetList");
+        Log.e("DATALOG", "check1=> " + methods.getRequestJson(getServiceProviderListRequest));
+
+    }
+
+    @SuppressLint("SetTextI18n")
     private void init() {
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        location_LL = findViewById(R.id.location_LL);
-        search_vet_ET = findViewById(R.id.search_vet_ET);
-        vet_list_RV = findViewById(R.id.vet_list_RV);
-        location_TV = findViewById(R.id.location_TV);
-        progressBar = findViewById(R.id.progressBar);
+        back_arrow_CV   =   findViewById(R.id.back_arrow_CV);
+        location_LL     =   findViewById(R.id.location_LL);
+        search_vet_ET   =   findViewById(R.id.search_vet_ET);
+        vet_list_RV     =   findViewById(R.id.vet_list_RV);
+        location_TV     =   findViewById(R.id.location_TV);
+        progressBar     =   findViewById(R.id.progressBar);
+        consultation_TV =   findViewById(R.id.consultation_TV);
+        heading_one_TV  =   findViewById(R.id.heading_one_TV);
+        heading_two_TV  =   findViewById(R.id.heading_two_TV);
+
+
         search_vet_ET.setEnabled(false);
         back_arrow_CV.setOnClickListener(this);
         location_LL.setOnClickListener(this);
 
         location_TV.setText(Config.cityFullName);
+
+        if (serviceTypeId.equals("1")){
+            consultation_TV.setText("CONSULTATIONS");
+        }else if (serviceTypeId.equals("3")){
+            consultation_TV.setText("HOSTELS");
+            heading_one_TV.setText("Select Hostels Near you");
+            heading_two_TV.setText("Find the best hostel for your pet with Petofy");
+        }else if (serviceTypeId.equals("2")){
+            consultation_TV.setText("GROOMING");
+            heading_one_TV.setText("Select Your Desired Groomer");
+            heading_two_TV.setText("Find the best groomers for your pet with Petofy");
+
+        }else if (serviceTypeId.equals("11")){
+            consultation_TV.setText("PET SHOPS");
+            heading_one_TV.setText("Select Your Desired Pet Shop");
+            heading_two_TV.setText("Find the best shop for your pet with Petofy");
+
+        }else if (serviceTypeId.equals("6")){
+            consultation_TV.setText("TRAINING");
+            heading_one_TV.setText("Select Your Desired Trainer");
+            heading_two_TV.setText("Find the best trainers for your pet with Petofy");
+
+        }
+
+
     }
 
 
     private void getVetList() {
-        progressBar.setVisibility(View.VISIBLE);
         GetVetListParams getVetListParams = new GetVetListParams();
-//        getVetListParams.setLattitude(Config.latitude);
-//        getVetListParams.setLongitude(Config.longitude);
-        getVetListParams.setLattitude("18.5204");
-        getVetListParams.setLongitude("73.8567");
+        getVetListParams.setLattitude(Config.latitude);
+        getVetListParams.setLongitude(Config.longitude);
         getVetListParams.setViewMore(seeMore);
         getVetListParams.setCityId(Config.cityId);
 
@@ -290,13 +347,14 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
         Intent viewVetDetailsIntent = new Intent(this, VetFullProfileActivity.class);
         viewVetDetailsIntent.putExtra("EncryptId", getVetListResponse.getData().getProviderList().get(position).getEncryptedId());
-        viewVetDetailsIntent.putExtra("vetUserId",getVetListResponse.getData().getProviderList().get(position).getId());
-        viewVetDetailsIntent.putExtra("vet_fee",getVetListResponse.getData().getProviderList().get(position).getOnlineConsultationCharges());
-        viewVetDetailsIntent.putExtra("vet_image_url",getVetListResponse.getData().getProviderList().get(position).getProfileImageURL());
-        viewVetDetailsIntent.putExtra("vet_study",getVetListResponse.getData().getProviderList().get(position).getVetQualifications());
-        viewVetDetailsIntent.putExtra("vet_rating",getVetListResponse.getData().getProviderList().get(position).getRating());
-        viewVetDetailsIntent.putExtra("vet_address",getVetListResponse.getData().getProviderList().get(position).getAddress());
-        viewVetDetailsIntent.putExtra("vet_name",getVetListResponse.getData().getProviderList().get(position).getName());
+        viewVetDetailsIntent.putExtra("vetUserId", getVetListResponse.getData().getProviderList().get(position).getId());
+        viewVetDetailsIntent.putExtra("vet_fee", getVetListResponse.getData().getProviderList().get(position).getOnlineConsultationCharges());
+        viewVetDetailsIntent.putExtra("vet_image_url", getVetListResponse.getData().getProviderList().get(position).getProfileImageURL());
+        viewVetDetailsIntent.putExtra("vet_study", getVetListResponse.getData().getProviderList().get(position).getVetQualifications());
+        viewVetDetailsIntent.putExtra("vet_rating", getVetListResponse.getData().getProviderList().get(position).getRating());
+        viewVetDetailsIntent.putExtra("vet_address", getVetListResponse.getData().getProviderList().get(position).getAddress());
+        viewVetDetailsIntent.putExtra("vet_name", getVetListResponse.getData().getProviderList().get(position).getName());
+        viewVetDetailsIntent.putExtra("serviceTypeId", serviceTypeId);
         viewVetDetailsIntent.putExtra("type", "add");
         viewVetDetailsIntent.putExtra("id", "");
         viewVetDetailsIntent.putExtra("pet_id", "");

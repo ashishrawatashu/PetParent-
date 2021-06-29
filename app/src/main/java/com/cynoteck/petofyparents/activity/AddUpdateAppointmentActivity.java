@@ -38,7 +38,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cynoteck.petofyparents.PetParentSingleton;
+import com.cynoteck.petofyparents.utils.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.adapter.PetListHorizontalAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
@@ -58,8 +58,8 @@ import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListRespo
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.OnItemClickListener;
-import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -73,8 +73,6 @@ import java.util.Date;
 
 import retrofit2.Response;
 
-import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.page;
-import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.pagelimit;
 import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.registerPetAdapter;
 import static com.cynoteck.petofyparents.fragments.PetRegisterFragment.total_pets_TV;
 import static com.cynoteck.petofyparents.fragments.ProfileFragment.petListHorizontalAdapter;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getServiceProviderFullDetailsResponse.ServiceProviderDetailOperatingHour;
-import com.cynoteck.petofyparents.utils.OnAlphabetClickListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProviderClinicTimingsAdapter extends RecyclerView.Adapter<ProviderClinicTimingsAdapter.MyViewHolder> {

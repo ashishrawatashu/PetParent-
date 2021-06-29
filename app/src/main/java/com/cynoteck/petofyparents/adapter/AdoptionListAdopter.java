@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.adoptionListResponse.PetDonationList;
-import com.cynoteck.petofyparents.response.adoptionResponse.AdoptionData;
-import com.cynoteck.petofyparents.utils.AdoptionListOnClick;
-import com.cynoteck.petofyparents.utils.DonationClickListener;
+import com.cynoteck.petofyparents.onClicks.AdoptionListOnClick;
 
 import java.util.List;
 

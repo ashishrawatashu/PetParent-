@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cynoteck.petofyparents.PetParentSingleton;
+import com.cynoteck.petofyparents.utils.PetParentSingleton;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.adapter.AdoptionListAdopter;
 import com.cynoteck.petofyparents.api.ApiClient;
@@ -28,7 +28,7 @@ import com.cynoteck.petofyparents.parameter.adoptionListRequest.AdoptionListPara
 import com.cynoteck.petofyparents.parameter.adoptionListRequest.AdoptionListRequestModel;
 import com.cynoteck.petofyparents.response.adoptionListResponse.AdoptionListResponse;
 import com.cynoteck.petofyparents.response.adoptionListResponse.PetDonationList;
-import com.cynoteck.petofyparents.utils.AdoptionListOnClick;
+import com.cynoteck.petofyparents.onClicks.AdoptionListOnClick;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
 import com.google.android.material.card.MaterialCardView;

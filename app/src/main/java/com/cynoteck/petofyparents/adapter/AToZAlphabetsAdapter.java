@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.utils.OnAlphabetClickListener;
+import com.cynoteck.petofyparents.onClicks.OnAlphabetClickListener;
 
 import java.util.List;
 

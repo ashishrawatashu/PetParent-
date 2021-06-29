@@ -1,4 +1,4 @@
-package com.cynoteck.petofyparents.utils;
+package com.cynoteck.petofyparents.onClicks;
 
 public interface ViewAndUpdateClickListener {
     public void onViewClick(int position);

@@ -24,8 +24,8 @@ import com.cynoteck.petofyparents.api.ApiService;
 import com.cynoteck.petofyparents.response.getPetNamesResponse.GetPetNamesData;
 import com.cynoteck.petofyparents.response.getPetNamesResponse.GetPetNamesResponse;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.OnAlphabetClickListener;
-import com.cynoteck.petofyparents.utils.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.OnAlphabetClickListener;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

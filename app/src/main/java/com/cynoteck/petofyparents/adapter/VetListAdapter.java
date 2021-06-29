@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getVetListResponse.ProviderList;
-import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,19 +40,20 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
     public VetListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.vet_list, parent, false);
         VetListAdapter.MyViewHolder vh = new VetListAdapter.MyViewHolder(v);
-        return vh;    }
+        return vh;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull VetListAdapter.MyViewHolder holder, int position) {
-        holder.vet_name_TV.setText(providerLists.get(position).getName()+" "+"("+providerLists.get(position).getVetQualifications()+")");
+        holder.vet_name_TV.setText(providerLists.get(position).getName());
         holder.vet_qualification_TV.setText(providerLists.get(position).getVetQualifications());
         holder.vet_location_TV.setText(providerLists.get(position).getAddress());
-        if (providerLists.get(position).getOnlineConsultationCharges().equals("0")){
+        if (providerLists.get(position).getOnlineConsultationCharges().equals("0")) {
             holder.vet_charges_tv.setVisibility(View.GONE);
 
-        }else {
+        } else {
             holder.vet_charges_tv.setVisibility(View.VISIBLE);
-            holder.vet_charges_tv.setText("₹ "+ providerLists.get(position).getOnlineConsultationCharges());
+            holder.vet_charges_tv.setText("₹ " + providerLists.get(position).getOnlineConsultationCharges());
         }
 
         Glide.with(context)
@@ -61,32 +61,32 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
                 .placeholder(R.drawable.doctor_dummy_image)
                 .into(holder.vet_image_IV);
 
-        if (providerLists.get(position).getRating().equals("1")){
+        if (providerLists.get(position).getRating().equals("1")) {
             holder.star_one.setImageResource(R.drawable.star_with_rate);
             holder.star_two.setImageResource(R.drawable.empty_star_icon);
             holder.star_three.setImageResource(R.drawable.empty_star_icon);
             holder.star_four.setImageResource(R.drawable.empty_star_icon);
             holder.star_five.setImageResource(R.drawable.empty_star_icon);
 
-        }else if (providerLists.get(position).getRating().equals("2")){
+        } else if (providerLists.get(position).getRating().equals("2")) {
             holder.star_one.setImageResource(R.drawable.star_with_rate);
             holder.star_two.setImageResource(R.drawable.star_with_rate);
             holder.star_three.setImageResource(R.drawable.empty_star_icon);
             holder.star_four.setImageResource(R.drawable.empty_star_icon);
             holder.star_five.setImageResource(R.drawable.empty_star_icon);
-        }else if (providerLists.get(position).getRating().equals("3")){
+        } else if (providerLists.get(position).getRating().equals("3")) {
             holder.star_one.setImageResource(R.drawable.star_with_rate);
             holder.star_two.setImageResource(R.drawable.star_with_rate);
             holder.star_three.setImageResource(R.drawable.star_with_rate);
             holder.star_four.setImageResource(R.drawable.empty_star_icon);
             holder.star_five.setImageResource(R.drawable.empty_star_icon);
-        }else if (providerLists.get(position).getRating().equals("4")){
+        } else if (providerLists.get(position).getRating().equals("4")) {
             holder.star_one.setImageResource(R.drawable.star_with_rate);
             holder.star_two.setImageResource(R.drawable.star_with_rate);
             holder.star_three.setImageResource(R.drawable.star_with_rate);
             holder.star_four.setImageResource(R.drawable.star_with_rate);
             holder.star_five.setImageResource(R.drawable.empty_star_icon);
-        }else if (providerLists.get(position).getRating().equals("5")){
+        } else if (providerLists.get(position).getRating().equals("5")) {
             holder.star_one.setImageResource(R.drawable.star_with_rate);
             holder.star_two.setImageResource(R.drawable.star_with_rate);
             holder.star_three.setImageResource(R.drawable.star_with_rate);
@@ -134,10 +134,12 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
 
         }
     };
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView vet_image_IV,star_one,star_two,star_three,star_four ,star_five;
-        TextView vet_name_TV, vet_qualification_TV,vet_charges_tv,vet_location_TV;
+        ImageView vet_image_IV, star_one, star_two, star_three, star_four, star_five;
+        TextView vet_name_TV, vet_qualification_TV, vet_charges_tv, vet_location_TV;
         LinearLayout view_more_LL;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             vet_image_IV = itemView.findViewById(R.id.vet_image_IV);
@@ -154,7 +156,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
             view_more_LL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onProductItemClickListner!=null){
+                    if (onProductItemClickListner != null) {
                         onProductItemClickListner.onProductClick(getAdapterPosition());
                     }
                 }

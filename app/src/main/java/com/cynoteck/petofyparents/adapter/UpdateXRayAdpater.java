@@ -8,7 +8,7 @@ package com.cynoteck.petofyparents.adapter;
 
  import com.cynoteck.petofyparents.R;
  import com.cynoteck.petofyparents.response.getXRayReports.getPetTestAndXRayResponse.PetTestsAndXrayList;
- import com.cynoteck.petofyparents.utils.ViewAndUpdateClickListener;
+ import com.cynoteck.petofyparents.onClicks.ViewAndUpdateClickListener;
 
  import androidx.annotation.NonNull;
         import androidx.recyclerview.widget.RecyclerView;

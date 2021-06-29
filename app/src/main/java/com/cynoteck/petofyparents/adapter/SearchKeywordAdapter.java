@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getSearchKeywordResponse.SearchKeywordData;
-import com.cynoteck.petofyparents.utils.OnAlphabetClickListener;
-import com.cynoteck.petofyparents.utils.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
 
 import java.util.List;
 

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +34,8 @@ import com.cynoteck.petofyparents.adapter.SliderPagerAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.OnSliderClickListener;
 import com.cynoteck.petofyparents.parameter.saveFeedbackRequest.SaveFeedbackParams;
 import com.cynoteck.petofyparents.parameter.saveFeedbackRequest.SaveFeedbackRequest;
 import com.cynoteck.petofyparents.parameter.serviceProviderDetailRequest.SearchProviderFullDetailData;
@@ -52,8 +55,8 @@ import java.util.TimerTask;
 
 import retrofit2.Response;
 
-public class VetFullProfileActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
-    String EncryptId, vet_fee, vet_study , vet_rating , vet_address ,appointment_duration, vet_name , vetUserId ,vet_image_url , petId , id , type ,petParentString ;
+public class VetFullProfileActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, OnSliderClickListener {
+    String serviceTypeId, EncryptId, vet_fee, vet_study , vet_rating , vet_address ,appointment_duration, vet_name , vetUserId ,vet_image_url , petId , id , type ,petParentString ;
     TextView rating_TV, vet_name_TV,vet_study_TV,vet_address_TV,vet_chargers_TV,clinic_name_TV,vet_full_address_TV,write_reviews_TV;
     int page_position = 0;
 
@@ -86,18 +89,19 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet_full_profile);
         Intent intent = getIntent();
-        EncryptId = intent.getStringExtra("EncryptId");
-        type = intent.getStringExtra("type");
-        id = intent.getStringExtra("id");
-        petId = intent.getStringExtra("pet_id");
+        EncryptId       = intent.getStringExtra("EncryptId");
+        type            = intent.getStringExtra("type");
+        id              = intent.getStringExtra("id");
+        petId           = intent.getStringExtra("pet_id");
         petParentString = intent.getStringExtra("petParent");
-        vet_study = intent.getStringExtra("vet_study");
-        vet_rating = intent.getStringExtra("vet_rating");
-        vet_address = intent.getStringExtra("vet_address");
-        vet_name = intent.getStringExtra("vet_name");
-        vet_image_url = intent.getStringExtra("vet_image_url");
-        vetUserId = intent.getStringExtra("vetUserId");
-        vet_fee = intent.getStringExtra("vet_fee");
+        vet_study       = intent.getStringExtra("vet_study");
+        vet_rating      = intent.getStringExtra("vet_rating");
+        vet_address     = intent.getStringExtra("vet_address");
+        vet_name        = intent.getStringExtra("vet_name");
+        vet_image_url   = intent.getStringExtra("vet_image_url");
+        vetUserId       = intent.getStringExtra("vetUserId");
+        vet_fee         = intent.getStringExtra("vet_fee");
+        serviceTypeId   = intent.getStringExtra("serviceTypeId");
 
 
         init();
@@ -119,35 +123,47 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     }
 
     private void init() {
-        progressBar = findViewById(R.id.progressBar);
+        progressBar             = findViewById(R.id.progressBar);
         scroll_view_vet_profile = findViewById(R.id.scroll_view_vet_profile);
-        clinic_name_TV = findViewById(R.id.clinic_name_TV);
-        rating_TV = findViewById(R.id.rating_TV);
-        vet_name_TV = findViewById(R.id.vet_name_TV);
-        vet_study_TV = findViewById(R.id.vet_study_TV);
-        vet_address_TV = findViewById(R.id.vet_address_TV);
-        vet_chargers_TV = findViewById(R.id.vet_chargers_TV);
-        vet_full_address_TV = findViewById(R.id.vet_full_address_TV);
-        pager = findViewById(R.id.pager);
-        write_reviews_TV = findViewById(R.id.write_reviews_TV);
-        ll_dots = findViewById(R.id.ll_dots);
-        clinic_timings_RV = findViewById(R.id.clinic_timings_RV);
-        reviews_RV = findViewById(R.id.reviews_RV);
-        contact_clinic_BT = findViewById(R.id.contact_clinic_BT);
-        vet_profile_pic = findViewById(R.id.vet_profile_pic);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        book_appointment_BT = findViewById(R.id.book_appointment_BT);
-        book_appointment_BT.setOnClickListener(this);
+        clinic_name_TV          = findViewById(R.id.clinic_name_TV);
+        rating_TV               = findViewById(R.id.rating_TV);
+        vet_name_TV             = findViewById(R.id.vet_name_TV);
+        vet_study_TV            = findViewById(R.id.vet_study_TV);
+        vet_address_TV          = findViewById(R.id.vet_address_TV);
+        vet_chargers_TV         = findViewById(R.id.vet_chargers_TV);
+        vet_full_address_TV     = findViewById(R.id.vet_full_address_TV);
+        pager                   = findViewById(R.id.pager);
+        write_reviews_TV        = findViewById(R.id.write_reviews_TV);
+        ll_dots                 = findViewById(R.id.ll_dots);
+        clinic_timings_RV       = findViewById(R.id.clinic_timings_RV);
+        reviews_RV              = findViewById(R.id.reviews_RV);
+        contact_clinic_BT       = findViewById(R.id.contact_clinic_BT);
+        vet_profile_pic         = findViewById(R.id.vet_profile_pic);
+        back_arrow_CV           = findViewById(R.id.back_arrow_CV);
+        book_appointment_BT     = findViewById(R.id.book_appointment_BT);
 
+
+        book_appointment_BT.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
         contact_clinic_BT.setOnClickListener(this);
         write_reviews_TV.setOnClickListener(this);
 
-        vet_chargers_TV.setText("₹"+vet_fee+ " (Clinic Fees)");
+        if (vet_fee.equals("0")){
+            vet_chargers_TV.setText("");
+        }else {
+            vet_chargers_TV.setText("₹"+vet_fee+ " (Clinic Fees)");
+        }
 
+        if (serviceTypeId.equals("1")||serviceTypeId.equals("2")){
+            book_appointment_BT.setEnabled(true);
+        }else {
+            book_appointment_BT.setEnabled(false);
+            book_appointment_BT.setBackgroundResource(R.drawable.next_button_grey_bg);
+        }
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -367,7 +383,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
     private void SetViewPager() {
 
-        sliderPagerAdapter = new SliderPagerAdapter(this, slider_image_list);
+        sliderPagerAdapter = new SliderPagerAdapter(this, slider_image_list,this);
         pager.setAdapter(sliderPagerAdapter);
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -456,5 +472,8 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
     }
 
+    @Override
+    public void onSliderClickListener(int position) {
 
+    }
 }

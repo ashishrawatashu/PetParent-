@@ -12,11 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.response.getAdoptionRequestListResponse.GetAdoptionRequestListData;
 import com.cynoteck.petofyparents.response.getDonationRequestResponse.GetDonationRequestData;
-import com.cynoteck.petofyparents.utils.OnAdaptionDonationListClickListener;
+import com.cynoteck.petofyparents.onClicks.OnAdaptionDonationListClickListener;
 
 import java.util.ArrayList;
 

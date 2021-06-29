@@ -1,4 +1,4 @@
-package com.cynoteck.petofyparents.utils;
+package com.cynoteck.petofyparents.onClicks;
 
 import com.cynoteck.petofyparents.response.appointmentResponse.AppointmentList;
 

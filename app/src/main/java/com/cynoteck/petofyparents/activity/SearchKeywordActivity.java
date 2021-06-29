@@ -30,8 +30,8 @@ import com.cynoteck.petofyparents.response.getVetListResponse.GetVetListResponse
 import com.cynoteck.petofyparents.response.getVetListResponse.ProviderList;
 import com.cynoteck.petofyparents.utils.Config;
 import com.cynoteck.petofyparents.utils.Methods;
-import com.cynoteck.petofyparents.utils.OnItemClickListener;
-import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
+import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.Timer;

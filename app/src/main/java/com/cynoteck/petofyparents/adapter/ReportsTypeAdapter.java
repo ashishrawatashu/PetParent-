@@ -4,12 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetClinicVisitsListsResponse.PetClinicVisitList;
-import com.cynoteck.petofyparents.utils.ViewAndUpdateClickListener;
+import com.cynoteck.petofyparents.onClicks.ViewAndUpdateClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

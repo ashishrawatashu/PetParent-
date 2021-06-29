@@ -46,10 +46,10 @@
 //import com.cynoteck.petofyparents.response.getAppointmentsStatusResponse.AppointmentStatusResponse;
 //import com.cynoteck.petofyparents.response.getVetListResponse.GetVetListResponse;
 //import com.cynoteck.petofyparents.response.getVetListResponse.ProviderList;
-//import com.cynoteck.petofyparents.utils.AppointmentsClickListner;
+//import com.cynoteck.petofyparents.onClicks.AppointmentsClickListner;
 //import com.cynoteck.petofyparents.utils.Config;
 //import com.cynoteck.petofyparents.utils.Methods;
-//import com.cynoteck.petofyparents.utils.RegisterRecyclerViewClickListener;
+//import com.cynoteck.petofyparents.onClicks.RegisterRecyclerViewClickListener;
 //import com.facebook.shimmer.ShimmerFrameLayout;
 //import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //

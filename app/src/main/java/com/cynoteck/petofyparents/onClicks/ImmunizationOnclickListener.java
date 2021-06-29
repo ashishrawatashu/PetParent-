@@ -1,4 +1,4 @@
-package com.cynoteck.petofyparents.utils;
+package com.cynoteck.petofyparents.onClicks;
 
 public interface ImmunizationOnclickListener {
     public void onItemClick(int position);
