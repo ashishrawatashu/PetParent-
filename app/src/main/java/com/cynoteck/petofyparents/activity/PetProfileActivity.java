@@ -336,6 +336,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 petList.setPetCategory(data.getStringExtra("pet_category"));
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
+                petList.setPetParentName(data.getStringExtra("pet_parent"));
                 PetParentSingleton.getInstance().getArrayList().set((pet_list_position),petList);
 
                 petId = data.getStringExtra("pet_id");

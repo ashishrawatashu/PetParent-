@@ -813,7 +813,6 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         select_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                takePhotoFromCamera();
                 mediaUtils.openCamera();
                 dialog.dismiss();
             }
@@ -822,7 +821,6 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                choosePhotoFromGallary();
                 mediaUtils.openGallery();
                 dialog.dismiss();
             }
@@ -832,81 +830,11 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         dialog.show();
     }
 
-    private void choosePhotoFromGallary() {
-
-
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        startActivityForResult(galleryIntent, GALLERY);
-    }
-
-    private void takePhotoFromCamera() {
-
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA);
-
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mediaUtils.onActivityResult(requestCode, resultCode, data);
-
-//        if (resultCode == RESULT_CANCELED) {
-//            return;
-//        }
-//        if (requestCode == GALLERY) {
-//            if (data != null) {
-//
-//                Uri contentURI = data.getData();
-//                try {
-//                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
-//
-//                    if (selctProflImage.equals("1")) {
-//                        pet_image_IV.setImageBitmap(bitmap);
-//                        saveImage(bitmap);
-//                    }
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    if (selctProflImage.equals("1")) {
-//                        selctProflImage = "0";
-//                    }
-//                    Toast.makeText(UpdatePetProfileActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//        } else if (requestCode == CAMERA) {
-//
-//            if (data.getData() == null) {
-//                thumbnail = (Bitmap) data.getExtras().get("data");
-//                Log.e("jghl", "" + thumbnail);
-//                if (selctProflImage.equals("1")) {
-//                    pet_image_IV.setImageBitmap(thumbnail);
-//                    saveImage(thumbnail);
-//                }
-//                Toast.makeText(UpdatePetProfileActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-//            } else {
-//                try {
-//                    bitmap = MediaStore.Images.Media.getBitmap(UpdatePetProfileActivity.this.getContentResolver(), data.getData());
-//                    if (selctProflImage.equals("1")) {
-//                        pet_image_IV.setImageBitmap(bitmap);
-//                        saveImage(bitmap);
-//                    }
-//                    Toast.makeText(UpdatePetProfileActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    if (selctProflImage.equals("1")) {
-//                        selctProflImage = "0";
-//                    }
-//                }
-//            }
-//
-//        }
-//
-//        return;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.FROYO)

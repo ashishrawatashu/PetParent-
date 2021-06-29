@@ -536,56 +536,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         dialog.dismiss();
         mediaUtils.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_CANCELED) {
-//            return;
-//        }
-//        if (requestCode == GALLERY) {
-//            if (data != null) {
-//
-//                Uri contentURI = data.getData();
-//                try {
-//                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), contentURI);
-//
-//                    if (selctProflImage.equals("1")) {
-//                        pet_image_IV.setImageBitmap(bitmap);
-//                        saveImage(bitmap);
-//                    }
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    if (selctProflImage.equals("1")) {
-//                        selctProflImage = "0";
-//                    }
-//                    Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Failed!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//        } else if (requestCode == CAMERA) {
-
-//            if (data.getData() == null) {
-//                thumbnail = (Bitmap) data.getExtras().get("data");
-//                Log.e("jghl", "" + thumbnail);
-//                if (selctProflImage.equals("1")) {
-//                    pet_image_IV.setImageBitmap(thumbnail);
-//                    saveImage(thumbnail);
-//                }
-//                Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-//            } else {
-//                try {
-//                    bitmap = MediaStore.Images.Media.getBitmap(com.cynoteck.petofyparents.activity.AddPetRegister.this.getContentResolver(), data.getData());
-//                    if (selctProflImage.equals("1")) {
-//                        pet_image_IV.setImageBitmap(bitmap);
-//                        saveImage(bitmap);
-//                    }
-//                    Toast.makeText(com.cynoteck.petofyparents.activity.AddPetRegister.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    if (selctProflImage.equals("1")) {
-//                        selctProflImage = "0";
-//                    }
-//                }
-//            }}
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.FROYO)

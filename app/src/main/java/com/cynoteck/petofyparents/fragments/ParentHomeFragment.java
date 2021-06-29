@@ -299,23 +299,23 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==QR_CODE_SCANNER){
-            if (resultCode==RESULT_OK){
+            if (resultCode==RESULT_OK) {
                 String veterinarianUserId = data.getStringExtra("veterinarianUserId");
                 String veterinarianName = data.getStringExtra("veterinarianName");
                 String clinicName = data.getStringExtra("clinicName");
                 String Rating = data.getStringExtra("Rating");
                 String profileImageUrl = data.getStringExtra("profileImageUrl");
-                Log.e("veterinarianUserId",veterinarianUserId);
+                Log.e("veterinarianUserId", veterinarianUserId);
                 Intent scanAfterIntent = new Intent(getContext(), AfterScanScreenActivity.class);
-                scanAfterIntent.putExtra("veterinarianUserId",veterinarianUserId);
-                scanAfterIntent.putExtra("veterinarianName",veterinarianName);
-                scanAfterIntent.putExtra("clinicName",clinicName);
-                scanAfterIntent.putExtra("Rating",Rating);
-                scanAfterIntent.putExtra("profileImageUrl",profileImageUrl);
+                scanAfterIntent.putExtra("veterinarianUserId", veterinarianUserId);
+                scanAfterIntent.putExtra("veterinarianName", veterinarianName);
+                scanAfterIntent.putExtra("clinicName", clinicName);
+                scanAfterIntent.putExtra("Rating", Rating);
+                scanAfterIntent.putExtra("profileImageUrl", profileImageUrl);
                 startActivity(scanAfterIntent);
-
             }
-            else if (requestCode == ADD_PET) {
+
+        }else if (requestCode == ADD_PET) {
                 if (resultCode == RESULT_OK) {
                     PetList petList = new PetList();
                     petList.setId(data.getStringExtra("pet_id"));
@@ -336,7 +336,6 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 }
             }
 
-        }
     }
 
     private void showLocationDialog() {
