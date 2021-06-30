@@ -1,5 +1,6 @@
 package com.cynoteck.petofyparents.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -145,6 +146,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -190,13 +192,9 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 
                 break;
 
-            case R.id.consultation_LL:
-                Intent consultationIntent = new Intent(this, ConsultationListActivity.class);
-                startActivity(consultationIntent);
-                break;
+
 
             case R.id.donate_pet_LL:
-            {
                 String realId = PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().substring(0,PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().length()-2);
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
                 alertDialog.setTitle("");
@@ -222,22 +220,36 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                         });
                 alertDialog.show();
 
+                break;
 
+            case R.id.cosultation_LL:
+                Intent consultationIntent = new Intent(this, ConsultationListActivity.class);
+                consultationIntent.putExtra("serviceTypeId","1");
+                startActivity(consultationIntent);
+                break;
 
+            case R.id.hostels_LL:
+                Intent hostelsIntent = new Intent(this, ConsultationListActivity.class);
+                hostelsIntent.putExtra("serviceTypeId","3");
+                startActivity(hostelsIntent);
+                break;
 
-
-            }
+            case R.id.grooming_LL:
+                Intent groomingIntent = new Intent(this, ConsultationListActivity.class);
+                groomingIntent.putExtra("serviceTypeId","2");
+                startActivity(groomingIntent);
                 break;
 
             case R.id.pet_shops_LL:
-
-            case R.id.grooming_LL:
-
-            case R.id.hostels_LL:
-
-                Toast.makeText(this, "Coming soon !", Toast.LENGTH_SHORT).show();
+                Intent pet_shopsIntent = new Intent(this, ConsultationListActivity.class);
+                pet_shopsIntent.putExtra("serviceTypeId","11");
+                startActivity(pet_shopsIntent);
                 break;
-
+            case R.id.training_LL:
+                Intent trainingIntent = new Intent(this, ConsultationListActivity.class);
+                trainingIntent.putExtra("serviceTypeId","6");
+                startActivity(trainingIntent);
+                break;
 
 
         }

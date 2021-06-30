@@ -16,13 +16,8 @@ import com.cynoteck.petofyparents.activity.HospitalizationDetailsActivity;
 import com.cynoteck.petofyparents.activity.ViewReportsDeatilsActivity;
 import com.cynoteck.petofyparents.activity.XRayReportDeatilsActivity;
 import com.cynoteck.petofyparents.adapter.HospitalizationReportsAdapter;
-import com.cynoteck.petofyparents.adapter.LabTestReportsAdapter;
 import com.cynoteck.petofyparents.adapter.ReportsTypeAdapter;
 import com.cynoteck.petofyparents.adapter.TestAndXRayAdpater;
-import com.cynoteck.petofyparents.adapter.UpdateClinicVisitAdapter;
-import com.cynoteck.petofyparents.adapter.UpdateHospitalizationAdapter;
-import com.cynoteck.petofyparents.adapter.UpdateLabTestAdpater;
-import com.cynoteck.petofyparents.adapter.UpdateXRayAdpater;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
@@ -64,12 +59,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
     ProgressBar progressBar;
     ReportsTypeAdapter reportsTypeAdapter;
     TestAndXRayAdpater testAndXRayAdpater;
-    LabTestReportsAdapter labTestReportsAdapter;
     HospitalizationReportsAdapter hospitalizationReportsAdapter;
-    UpdateClinicVisitAdapter updateClinicVisitAdapter;
-    UpdateXRayAdpater updateXRayAdpater;
-    UpdateLabTestAdpater updateLabTestAdpater;
-    UpdateHospitalizationAdapter updateHospitalizationAdapter;
     Methods methods;
 
     @Override
@@ -233,13 +223,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                             reportsTypeAdapter = new ReportsTypeAdapter(getContext(), petServiceResponse.getData().getPetClinicVisitList(), this);
                             routine_report_RV.setAdapter(reportsTypeAdapter);
                             reportsTypeAdapter.notifyDataSetChanged();
-                        } else if (button_type.equals("update")) {
-                            routine_report_RV.setVisibility(View.VISIBLE);
-                            updateClinicVisitAdapter = new UpdateClinicVisitAdapter(getContext(), petServiceResponse.getData().getPetClinicVisitList(), this);
-                            routine_report_RV.setAdapter(updateClinicVisitAdapter);
-                            updateClinicVisitAdapter.notifyDataSetChanged();
                         }
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -265,12 +249,6 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                             testAndXRayAdpater = new TestAndXRayAdpater(getContext(), getPetTestAndXRayResponse.getData().getPetTestsAndXrayList(), this);
                             routine_report_RV.setAdapter(testAndXRayAdpater);
                             testAndXRayAdpater.notifyDataSetChanged();
-                        } else if (button_type.equals("update")) {
-                            routine_report_RV.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
-                            updateXRayAdpater = new UpdateXRayAdpater(getContext(), getPetTestAndXRayResponse.getData().getPetTestsAndXrayList(), this);
-                            routine_report_RV.setAdapter(updateXRayAdpater);
-                            updateXRayAdpater.notifyDataSetChanged();
                         }
 
                     }
@@ -296,16 +274,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                         } else if (button_type.equals("view")) {
                             empty_IV.setVisibility(View.GONE);
                             routine_report_RV.setVisibility(View.VISIBLE);
-                            labTestReportsAdapter = new LabTestReportsAdapter(getContext(), petLabWorkResponse.getData().getPetLabWorkList(), this);
-                            routine_report_RV.setAdapter(labTestReportsAdapter);
-                            labTestReportsAdapter.notifyDataSetChanged();
-                        } else if (button_type.equals("update")) {
-                            empty_IV.setVisibility(View.GONE);
-                            routine_report_RV.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), "Update", Toast.LENGTH_SHORT).show();
-                            updateLabTestAdpater = new UpdateLabTestAdpater(getContext(), petLabWorkResponse.getData().getPetLabWorkList(), this);
-                            routine_report_RV.setAdapter(updateLabTestAdpater);
-                            updateLabTestAdpater.notifyDataSetChanged();
+
                         }
 
                     }
@@ -335,14 +304,6 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
                             hospitalizationReportsAdapter = new HospitalizationReportsAdapter(getContext(), getPetHospitalizationResponse.getData().getPetHospitalizationsList(), this);
                             routine_report_RV.setAdapter(hospitalizationReportsAdapter);
                             hospitalizationReportsAdapter.notifyDataSetChanged();
-
-                        } else if (button_type.equals("update")) {
-                            empty_IV.setVisibility(View.GONE);
-                            routine_report_RV.setVisibility(View.VISIBLE);
-                            Toast.makeText(getContext(), "Update", Toast.LENGTH_SHORT).show();
-                            updateHospitalizationAdapter = new UpdateHospitalizationAdapter(getContext(), getPetHospitalizationResponse.getData().getPetHospitalizationsList(), this);
-                            routine_report_RV.setAdapter(updateHospitalizationAdapter);
-                            updateHospitalizationAdapter.notifyDataSetChanged();
 
                         }
 

@@ -94,7 +94,6 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
         report_type_id=extras.getExtras().getString("id");
         pet_image_url=extras.getExtras().getString("pet_image_url");
         pet_DOB = extras.getExtras().getString("pet_DOB");
-        linearLayout=findViewById(R.id.data);
         report_detail_CL = findViewById(R.id.report_detail_CL);
         progressBar = findViewById(R.id.progressBar);
         deleteReport_BT=findViewById(R.id.deleteReport_BT);
@@ -103,7 +102,6 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
         nature_ofVist_textView=findViewById(R.id.nature_ofVist_textView);
         weight_textView=findViewById(R.id.weight_textView);
         temperature_textView=findViewById(R.id.temperature_textView);
-        vaccine_textView=findViewById(R.id.vaccine_textView);
         symptoms_textView=findViewById(R.id.symptoms_textView);
         diagnosis_textView=findViewById(R.id.diagnosis_textView);
         remarks_textView=findViewById(R.id.remarks_textView);
@@ -115,9 +113,6 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
         deworming_CL=findViewById(R.id.deworming_CL);
         other_report_CL=findViewById(R.id.other_report_CL);
 
-        layout_next_dewarmer=findViewById(R.id.layout_next_dewarmer);
-        layout_dose=findViewById(R.id.layout_dose);
-        layout_dewarming_name=findViewById(R.id.layout_dewarming_name);
         dot_pet_weight=findViewById(R.id.dot_pet_weight);
         pet_weight_TV=findViewById(R.id.pet_weight_TV);
         pet_reg_name_TV = findViewById(R.id.pet_reg_name_TV);

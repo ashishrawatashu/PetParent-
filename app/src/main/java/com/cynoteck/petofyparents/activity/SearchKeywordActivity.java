@@ -299,6 +299,7 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
         viewVetDetailsIntent.putExtra("vet_rating",getVetListResponse.getData().getProviderList().get(position).getRating());
         viewVetDetailsIntent.putExtra("vet_address",getVetListResponse.getData().getProviderList().get(position).getAddress());
         viewVetDetailsIntent.putExtra("vet_name",getVetListResponse.getData().getProviderList().get(position).getName());
+        viewVetDetailsIntent.putExtra("serviceTypeId", "0");
         viewVetDetailsIntent.putExtra("type", "add");
         viewVetDetailsIntent.putExtra("id", "");
         viewVetDetailsIntent.putExtra("pet_id", "");

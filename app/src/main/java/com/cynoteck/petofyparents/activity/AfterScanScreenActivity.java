@@ -188,7 +188,6 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
         vet_profile_pic = findViewById(R.id.vet_profile_pic);
         clinic_name_TV = findViewById(R.id.clinic_name_TV);
         vet_name_TV = findViewById(R.id.vet_name_TV);
-        search_box_add_new = findViewById(R.id.search_box_add_new);
         vet_profile_pic = findViewById(R.id.vet_profile_pic);
         star_one = findViewById(R.id.star_one);
         star_two = findViewById(R.id.star_two);

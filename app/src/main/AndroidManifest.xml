@@ -128,10 +128,6 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".activity.VetListActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".activity.UpdateParentProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

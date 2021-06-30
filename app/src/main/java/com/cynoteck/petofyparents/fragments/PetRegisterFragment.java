@@ -124,7 +124,6 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
         add_pet_RL = view.findViewById(R.id.add_pet_RL);
         total_pets_TV = view.findViewById(R.id.total_pets_TV);
         search_boxRL = view.findViewById(R.id.search_boxRL);
-        regiter_pet_headline_TV = view.findViewById(R.id.regiter_pet_headline_TV);
         nestedScrollView = view.findViewById(R.id.nested_scroll_view);
         progressBar = view.findViewById(R.id.progressBar);
         progressBarFirst = view.findViewById(R.id.progressBarFirst);

@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cynoteck.petofyparents.R;
 import com.cynoteck.petofyparents.activity.AddPetRegister;
@@ -255,16 +256,15 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 startActivity(namesActivityIntent);
                 break;
 
-
-
             case R.id.adoption_donation_LL:
                 Intent adoptionDonationIntent = new Intent(getContext(), AdoptionDonationActivity.class);
                 startActivity(adoptionDonationIntent);
                 break;
+
             case R.id.insurances_LL:
-//                Intent insurancesIntent = new Intent(getContext(), PetInsuranceActivity.class);
-//                startActivity(insurancesIntent);
-//                break;
+                Toast.makeText(getContext(), "Coming soon !", Toast.LENGTH_SHORT).show();
+                break;
+
             case R.id.cosultation_LL:
                 Intent consultationIntent = new Intent(getContext(), ConsultationListActivity.class);
                 consultationIntent.putExtra("serviceTypeId","1");
@@ -288,11 +288,13 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 pet_shopsIntent.putExtra("serviceTypeId","11");
                 startActivity(pet_shopsIntent);
                 break;
+
             case R.id.training_LL:
                 Intent trainingIntent = new Intent(getContext(), ConsultationListActivity.class);
                 trainingIntent.putExtra("serviceTypeId","6");
                 startActivity(trainingIntent);
                 break;
+
         }
     }
     @Override
