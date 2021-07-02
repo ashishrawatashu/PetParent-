@@ -1,5 +1,6 @@
 package com.cynoteck.petofyparents.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -205,6 +206,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
     }
 
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -245,6 +247,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -301,11 +304,13 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
                                     petList.setPetColor(getPetListResponse.getData().getPetList().get(i).getPetColor());
                                     PetParentSingleton.getInstance().getArrayList().add(petList);
                                 }
-
+                                nested_scroll_view.setVisibility(View.VISIBLE);
+                                progressBarFirst.setVisibility(View.GONE);
                                 scan_layout_total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
+                                register_pet_RV.setAdapter(scanPetListAdapter);
+                                scanPetListAdapter.notifyDataSetChanged();
 
                                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
-                                scanPetListAdapter.notifyDataSetChanged();
                                 register_pet_RV.setVisibility(View.VISIBLE);
                                 registerPetAdapter.notifyDataSetChanged();
                                 petListHorizontalAdapter.notifyDataSetChanged();
@@ -344,6 +349,12 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
     @Override
     public void onError(Throwable t, String key) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        scanPetListAdapter.notifyDataSetChanged();
     }
 
     @Override

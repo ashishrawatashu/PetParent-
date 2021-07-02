@@ -320,7 +320,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         methods.showCustomProgressBarDialog(this);
         ApiService<GetPetResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetDetails(Config.token, getPetListRequest), "GetPetDetail");
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(getPetListRequest));
+        Log.e("DATALOG", "check1=> PET_DETAILS " + methods.getRequestJson(getPetListRequest));
     }
 
     private void currentDateAndTime() {
@@ -343,10 +343,12 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     private void getPetBreed() {
         BreedRequest breedRequest = new BreedRequest();
         breedRequest.setGetAll("false");
-        if (!getStrSpnerItemPetNmId.equals("0"))
+        if (!getStrSpnerItemPetNmId.equals("0")) {
             breedRequest.setPetCategoryId(getStrSpnerItemPetNmId);
-        else
+        }
+        else {
             breedRequest.setPetCategoryId("1");
+        }
         BreedParams breedParams = new BreedParams();
         breedParams.setData(breedRequest);
 
@@ -566,6 +568,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                     } else if (responseCode == 614) {
                         Toast.makeText(this, breedCatRespose.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     } else {
+                        Log.e("error","PETBREED");
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {

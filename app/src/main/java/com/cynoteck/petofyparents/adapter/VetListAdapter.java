@@ -46,7 +46,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull VetListAdapter.MyViewHolder holder, int position) {
         holder.vet_name_TV.setText(providerLists.get(position).getName());
-        holder.vet_qualification_TV.setText(providerLists.get(position).getVetQualifications());
+        holder.vet_qualification_TV.setText(providerLists.get(position).getDistance()+" Km away");
         holder.vet_location_TV.setText(providerLists.get(position).getAddress());
         if (providerLists.get(position).getOnlineConsultationCharges().equals("0")) {
             holder.vet_charges_tv.setVisibility(View.GONE);

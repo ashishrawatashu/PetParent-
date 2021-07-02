@@ -1,5 +1,6 @@
 package com.cynoteck.petofyparents.response.getPetDetailsResponse;
 
+import com.cynoteck.petofyparents.response.getPetReportsResponse.getPetListResponse.PetDetailImageList;
 import com.cynoteck.petofyparents.response.getPetIdCardResponse.User;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -70,7 +71,7 @@ public class GetPetData {
     private String barcodeUrl;
     @SerializedName("petDetailImageList")
     @Expose
-    private List<String> petDetailImageList = null;
+    private List<PetDetailImageList> petDetailImageList = null;
     @SerializedName("petTestsAndXrey")
     @Expose
     private List<String> petTestsAndXrey = null;
@@ -468,11 +469,11 @@ public class GetPetData {
         this.barcodeUrl = barcodeUrl;
     }
 
-    public List<String> getPetDetailImageList() {
+    public List<PetDetailImageList> getPetDetailImageList() {
         return petDetailImageList;
     }
 
-    public void setPetDetailImageList(List<String> petDetailImageList) {
+    public void setPetDetailImageList(List<PetDetailImageList> petDetailImageList) {
         this.petDetailImageList = petDetailImageList;
     }
 

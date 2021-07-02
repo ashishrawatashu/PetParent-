@@ -96,10 +96,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     Button pet_submit;
     CheckBox convert_yr_to_age;
     LinearLayout day_and_age_layout,upload_image_LL;
-    String veterinarianUserId, strPetName = "", strPetParentName = "", strPetContactNumber = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
+    String strPetName = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
             strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "", strAgeCount = "",
-            strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
-            strSpnrSex = "", strSpnrSexId = "", currentDateandTime = "", selctProflImage = "0", strProfileImgUrl = null, strFirstImgUrl = "", strSecondImgUrl = "",
+            strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpneSizeId = "",
+             strSpnrSexId = "", currentDateandTime = "", selctProflImage = "0", strProfileImgUrl = null, strFirstImgUrl = "", strSecondImgUrl = "",
             strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "";
     Dialog dialog;
     ImageView pet_image_IV;
@@ -123,16 +123,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     private static final String IMAGE_DIRECTORY = "/Picture";
     private int GALLERY = 1, CAMERA = 2;
     File file = null;
-    File fileImg1 = null;
-    File fileImg2 = null;
-    File fileImg3 = null;
-    File fileImg4 = null;
-    File fileImg5 = null;
-    Bitmap bitmap, thumbnail;
     String intentFrom = "Add";
-
-    private Button upload;
-    private String baseUrl;
 
     RadioGroup genderRG;
     RadioButton maleRB, femaleRB;
