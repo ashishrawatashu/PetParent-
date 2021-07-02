@@ -60,7 +60,7 @@ import retrofit2.Response;
 
 public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, TextWatcher {
 
-    AppCompatSpinner age_wise, parent_address, add_pet_age, add_pet_type, add_pet_sex_dialog, add_pet_breed_dialog, add_pet_color_dialog, add_pet_size;
+    AppCompatSpinner age_wise,add_pet_type, add_pet_sex_dialog, add_pet_breed_dialog, add_pet_color_dialog, add_pet_size;
     ImageView back_arrow_IV;
     EditText firstName_ET, lastName_ET, pet_parent_email_ET, pincode_ET, address_ET, pet_name_ET, age_neumeric;
     TextView calenderView, ageViewTv;
@@ -68,16 +68,13 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
     ArrayList<String> petType;
     ArrayList<String> petBreed;
-    ArrayList<String> petAge;
     ArrayList<String> petColor;
     ArrayList<String> petSize;
     ArrayList<String> petSex;
     ArrayList<String> petAgeType;
-    ArrayList<String> parentAdress;
     LinearLayout day_and_age_layout;
     HashMap<String, String> petTypeHashMap = new HashMap<>();
     HashMap<String, String> petBreedHashMap = new HashMap<>();
-    HashMap<String, String> petAgeHashMap = new HashMap<>();
     HashMap<String, String> petColorHashMap = new HashMap<>();
     HashMap<String, String> petSizeHashMap = new HashMap<>();
     HashMap<String, String> petSexHashMap = new HashMap<>();
@@ -85,16 +82,11 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
     CheckBox convert_yr_to_age;
     Button signUP_BT;
     DatePickerDialog picker;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
     ScrollView scrollView;
     String strPetName = "", strPetParentFirstName = "", strPetParentLastName = "", strPetParentEmail = "", strPetParentPincode = "", strPetParentAddress = "", strPetContactNumber = "", strPetBirthDay = "",
-            strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "", strAgeCount = "",
-            strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
-            strSpnrSex = "", strSpnrSexId = "", currentDateandTime = "", selctProflImage = "0", selctImgOne = "0", selctImgtwo = "0",
-            slctImgThree = "0", slctImgFour = "0", slctImgFive = "0", strProfileImgUrl = "", strFirstImgUrl = "", strSecondImgUrl = "",
-            strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "", veterinarianUserId = "";
+            strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", strAgeCount = "",
+            strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
+            strSpnrSex = "", strSpnrSexId = "", currentDateandTime = "", veterinarianUserId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
