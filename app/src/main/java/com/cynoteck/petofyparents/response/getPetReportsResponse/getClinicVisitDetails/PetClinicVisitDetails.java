@@ -1,7 +1,6 @@
 package com.cynoteck.petofyparents.response.getPetReportsResponse.getClinicVisitDetails;
 
 import com.cynoteck.petofyparents.response.CreatedByUser;
-import com.cynoteck.petofyparents.response.FollowUp;
 import com.cynoteck.petofyparents.response.UpdatedByUser;
 import com.cynoteck.petofyparents.response.getPetReportsResponse.NatureOfVisit;
 

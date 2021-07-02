@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.response.getProviderFeedbackResponse.GetProviderFeedbackData;
 import com.cynoteck.petofyparents.response.getServiceProviderFullDetailsResponse.ProviderRatingList;
-import com.cynoteck.petofyparents.response.getServiceProviderFullDetailsResponse.ServiceProviderDetailOperatingHour;
 
 import java.util.ArrayList;
 

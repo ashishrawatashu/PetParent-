@@ -1,7 +1,5 @@
 package com.cynoteck.petofyparents.response.getPetNamesResponse;
 
-import java.util.ArrayList;
-
 public class PetNameLikeModelList {
     private String petNameModel;
 

@@ -34,7 +34,6 @@ import com.cynoteck.petofyparents.adapter.SliderPagerAdapter;
 import com.cynoteck.petofyparents.api.ApiClient;
 import com.cynoteck.petofyparents.api.ApiResponse;
 import com.cynoteck.petofyparents.api.ApiService;
-import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
 import com.cynoteck.petofyparents.onClicks.OnSliderClickListener;
 import com.cynoteck.petofyparents.parameter.saveFeedbackRequest.SaveFeedbackParams;
 import com.cynoteck.petofyparents.parameter.saveFeedbackRequest.SaveFeedbackRequest;

@@ -12,7 +12,6 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofyparents.R;
-import com.cynoteck.petofyparents.onClicks.OnItemClickListener;
 import com.cynoteck.petofyparents.onClicks.OnSliderClickListener;
 
 import java.util.ArrayList;

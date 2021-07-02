@@ -143,7 +143,7 @@ public class ScannerQR extends AppCompatActivity {
                 boolean isJsonOrNot = JSONUtils.isJSONValid(intentData); //true
                 Log.e("VALID", String.valueOf(isJsonOrNot));
                 Log.e("intentData", intentData);
-                if (isJsonOrNot == true) {
+                if (isJsonOrNot) {
                     Gson g = new Gson();
                     QrCOdeResponse qrCOdeResponse = g.fromJson(intentData, QrCOdeResponse.class);
                     String veterinarianUserId = qrCOdeResponse.getVeterinarianUserId();
@@ -164,6 +164,7 @@ public class ScannerQR extends AppCompatActivity {
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {
+                    finish();
                     Toast.makeText(ScannerQR.this, "INVALID QR Code!", Toast.LENGTH_SHORT).show();
                 }
             }

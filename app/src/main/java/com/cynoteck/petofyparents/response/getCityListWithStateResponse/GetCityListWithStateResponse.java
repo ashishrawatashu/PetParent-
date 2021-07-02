@@ -3,7 +3,6 @@ package com.cynoteck.petofyparents.response.getCityListWithStateResponse;
 import com.cynoteck.petofyparents.response.Header;
 import com.cynoteck.petofyparents.response.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetCityListWithStateResponse {

@@ -1,8 +1,5 @@
 package com.cynoteck.petofyparents.parameter.addParamRequest;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-
 public class AddPetRequset {
     private AddPetParams data;
 

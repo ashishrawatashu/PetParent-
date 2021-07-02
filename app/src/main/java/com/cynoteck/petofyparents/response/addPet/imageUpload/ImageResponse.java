@@ -3,9 +3,6 @@ package com.cynoteck.petofyparents.response.addPet.imageUpload;
 
 import com.cynoteck.petofyparents.response.Header;
 import com.cynoteck.petofyparents.response.Response;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 public class ImageResponse {
     private Header header;

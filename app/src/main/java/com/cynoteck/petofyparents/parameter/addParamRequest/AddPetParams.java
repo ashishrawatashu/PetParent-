@@ -1,8 +1,5 @@
 package com.cynoteck.petofyparents.parameter.addParamRequest;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-
 public class AddPetParams {
 
     private String petCategoryId;
