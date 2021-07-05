@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cynoteck.petofyparents">
+    package="com.cynoteck.petofy">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -38,23 +38,39 @@
         android:usesCleartextTraffic="true">
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.cynoteck.petofyparents.fileprovider"
+            android:authorities="com.cynoteck.petofy.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
-        <activity android:name="com.cynoteck.petofyparents.activity.LoginActivity"></activity>
-        <activity android:name="com.cynoteck.petofyparents.activity.SearchProviderResultActivity" />
-        <activity android:name="com.cynoteck.petofyparents.activity.SearchKeywordActivity" />
-        <activity android:name="com.cynoteck.petofyparents.activity.DonationRequestActivity" />
-        <activity android:name="com.cynoteck.petofyparents.activity.AfterScanScreenActivity" />
-        <activity android:name="com.cynoteck.petofyparents.activity.VetFullProfileActivity" />
-        <activity android:name="com.cynoteck.petofyparents.activity.ParentFullProfileActivity" />
-        <activity android:name="com.cynoteck.petofyparents.activity.AdoptionRequestActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.SearchProviderResultActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.SearchKeywordActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.DonationRequestActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.AfterScanScreenActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.VetFullProfileActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.ParentFullProfileActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name="com.cynoteck.petofy.activity.AdoptionRequestActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.SplashScreen"
+            android:name="com.cynoteck.petofy.activity.SplashScreen"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -64,135 +80,135 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.cynoteck.petofyparents.activity.AdoptionDonationActivity"
+            android:name="com.cynoteck.petofy.activity.AdoptionDonationActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.PetInsuranceActivity"
+            android:name="com.cynoteck.petofy.activity.PetInsuranceActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.ConsultationListActivity"
+            android:name="com.cynoteck.petofy.activity.ConsultationListActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.PetNamesActivity"
+            android:name="com.cynoteck.petofy.activity.PetNamesActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.PetBreedDetailsActivity"
+            android:name="com.cynoteck.petofy.activity.PetBreedDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.PetBreedsActivity"
+            android:name="com.cynoteck.petofy.activity.PetBreedsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.UpdateProfileActivity"
+            android:name="com.cynoteck.petofy.activity.UpdateProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.HospitalizationDetailsActivity"
+            android:name="com.cynoteck.petofy.activity.HospitalizationDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.WelcomeScreenActivity"
+            android:name="com.cynoteck.petofy.activity.WelcomeScreenActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.AddPetWithQRCodeActivity"
+            android:name="com.cynoteck.petofy.activity.AddPetWithQRCodeActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.SearchActivity"
+            android:name="com.cynoteck.petofy.activity.SearchActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.AdoptionPetDetailsActivity"
+            android:name="com.cynoteck.petofy.activity.AdoptionPetDetailsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.AdoptPetActivity"
+            android:name="com.cynoteck.petofy.activity.AdoptPetActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.DonationActivity"
+            android:name="com.cynoteck.petofy.activity.DonationActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.PaymentScreenActivity"
+            android:name="com.cynoteck.petofy.activity.PaymentScreenActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.AddUpdateAppointmentActivity"
+            android:name="com.cynoteck.petofy.activity.AddUpdateAppointmentActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.UpdateParentProfileActivity"
+            android:name="com.cynoteck.petofy.activity.UpdateParentProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.ChangePasswordActivity"
+            android:name="com.cynoteck.petofy.activity.ChangePasswordActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.SettingActivity"
+            android:name="com.cynoteck.petofy.activity.SettingActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.PetProfileActivity"
+            android:name="com.cynoteck.petofy.activity.PetProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.UpdatePetProfileActivity"
+            android:name="com.cynoteck.petofy.activity.UpdatePetProfileActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.AddPetRegister"
+            android:name="com.cynoteck.petofy.activity.AddPetRegister"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.SendPhoneNumber"
+            android:name="com.cynoteck.petofy.activity.SendPhoneNumber"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.ScannerQR"
+            android:name="com.cynoteck.petofy.activity.ScannerQR"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.XRayReportDeatilsActivity"
+            android:name="com.cynoteck.petofy.activity.XRayReportDeatilsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.OTPVerifyActivity"
+            android:name="com.cynoteck.petofy.activity.OTPVerifyActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.PetIdCardActivity"
+            android:name="com.cynoteck.petofy.activity.PetIdCardActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.ForgetPasswordActivity"
+            android:name="com.cynoteck.petofy.activity.ForgetPasswordActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.RegisterActivity"
+            android:name="com.cynoteck.petofy.activity.RegisterActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.DashBoardActivity"
+            android:name="com.cynoteck.petofy.activity.DashBoardActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.SelectPetReportsActivity"
+            android:name="com.cynoteck.petofy.activity.SelectPetReportsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.ReportsCommonActivity"
+            android:name="com.cynoteck.petofy.activity.ReportsCommonActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.cynoteck.petofyparents.activity.ViewReportsDeatilsActivity"
+            android:name="com.cynoteck.petofy.activity.ViewReportsDeatilsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
