@@ -152,14 +152,23 @@ public class ScannerQR extends AppCompatActivity {
                     String profileImageUrl = qrCOdeResponse.getProfileImageUrl();
                     String Rating = String.valueOf(qrCOdeResponse.getRating());
                     String key = qrCOdeResponse.getKey();
-
-                    Log.e("intentData", key + "" + veterinarianUserId);
+                    Boolean IsInsurance = qrCOdeResponse.getInsurance();
                     Intent intent = new Intent();
-                    intent.putExtra("veterinarianUserId", veterinarianUserId);
-                    intent.putExtra("veterinarianName", veterinarianName);
-                    intent.putExtra("clinicName", clinicName);
-                    intent.putExtra("Rating", Rating);
-                    intent.putExtra("profileImageUrl", profileImageUrl);
+                    if (IsInsurance){
+                        String InsuranceUrl = qrCOdeResponse.getInsuranceUrl();
+                        intent.putExtra("IsInsurance", "true");
+                        intent.putExtra("InsuranceUrl", InsuranceUrl);
+
+                    }else {
+                        Log.e("intentData", key + "" + veterinarianUserId);
+                        intent.putExtra("veterinarianUserId", veterinarianUserId);
+                        intent.putExtra("veterinarianName", veterinarianName);
+                        intent.putExtra("clinicName", clinicName);
+                        intent.putExtra("Rating", Rating);
+                        intent.putExtra("profileImageUrl", profileImageUrl);
+                    }
+
+
 
                     setResult(RESULT_OK, intent);
                     finish();

@@ -11,8 +11,29 @@ public class QrCOdeResponse {
 
     private String Key;
 
+    private Boolean IsInsurance;
+
+    private String InsuranceUrl;
+
+
     private int Rating;
 
+
+    public Boolean getInsurance() {
+        return IsInsurance;
+    }
+
+    public void setInsurance(Boolean insurance) {
+        IsInsurance = insurance;
+    }
+
+    public String getInsuranceUrl() {
+        return InsuranceUrl;
+    }
+
+    public void setInsuranceUrl(String insuranceUrl) {
+        InsuranceUrl = insuranceUrl;
+    }
 
     public String getVeterinarianName() {
         return VeterinarianName;

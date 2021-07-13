@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -305,19 +306,27 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==QR_CODE_SCANNER){
             if (resultCode==RESULT_OK) {
-                String veterinarianUserId = data.getStringExtra("veterinarianUserId");
-                String veterinarianName = data.getStringExtra("veterinarianName");
-                String clinicName = data.getStringExtra("clinicName");
-                String Rating = data.getStringExtra("Rating");
-                String profileImageUrl = data.getStringExtra("profileImageUrl");
-                Log.e("veterinarianUserId", veterinarianUserId);
-                Intent scanAfterIntent = new Intent(getContext(), AfterScanScreenActivity.class);
-                scanAfterIntent.putExtra("veterinarianUserId", veterinarianUserId);
-                scanAfterIntent.putExtra("veterinarianName", veterinarianName);
-                scanAfterIntent.putExtra("clinicName", clinicName);
-                scanAfterIntent.putExtra("Rating", Rating);
-                scanAfterIntent.putExtra("profileImageUrl", profileImageUrl);
-                startActivity(scanAfterIntent);
+                String IsInsurance = data.getStringExtra("IsInsurance");
+                if (IsInsurance.equals("true")){
+                    String InsuranceUrl = data.getStringExtra("InsuranceUrl");
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
+                    startActivity(browserIntent);
+                }else {
+                    String veterinarianUserId = data.getStringExtra("veterinarianUserId");
+                    String veterinarianName = data.getStringExtra("veterinarianName");
+                    String clinicName = data.getStringExtra("clinicName");
+                    String Rating = data.getStringExtra("Rating");
+                    String profileImageUrl = data.getStringExtra("profileImageUrl");
+                    Log.e("veterinarianUserId", veterinarianUserId);
+                    Intent scanAfterIntent = new Intent(getContext(), AfterScanScreenActivity.class);
+                    scanAfterIntent.putExtra("veterinarianUserId", veterinarianUserId);
+                    scanAfterIntent.putExtra("veterinarianName", veterinarianName);
+                    scanAfterIntent.putExtra("clinicName", clinicName);
+                    scanAfterIntent.putExtra("Rating", Rating);
+                    scanAfterIntent.putExtra("profileImageUrl", profileImageUrl);
+                    startActivity(scanAfterIntent);
+                }
+
             }
 
         }else if (requestCode == ADD_PET) {
