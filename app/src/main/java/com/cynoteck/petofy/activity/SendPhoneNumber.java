@@ -174,7 +174,7 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case R.id.back_arrow_IV:
-               onBackPressed();
+                finishAffinity();
                 break;
 //            case R.id.qrCodeScanner_IV:
 //

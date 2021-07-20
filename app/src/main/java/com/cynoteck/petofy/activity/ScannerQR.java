@@ -63,9 +63,7 @@ public class ScannerQR extends AppCompatActivity {
 
     private void initialiseDetectorsAndSources() {
 //        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
-        barcodeDetector = new BarcodeDetector.Builder(this)
-                .setBarcodeFormats(Barcode.ALL_FORMATS)
-                .build();
+        barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build();
 
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setRequestedPreviewSize(1920, 1080)
@@ -152,20 +150,19 @@ public class ScannerQR extends AppCompatActivity {
                     String profileImageUrl = qrCOdeResponse.getProfileImageUrl();
                     String Rating = String.valueOf(qrCOdeResponse.getRating());
                     String key = qrCOdeResponse.getKey();
-                    Boolean IsInsurance = qrCOdeResponse.getInsurance();
+                    String IsInsurance = qrCOdeResponse.getInsurance();
                     Intent intent = new Intent();
-                    if (IsInsurance){
-                        String InsuranceUrl = qrCOdeResponse.getInsuranceUrl();
-                        intent.putExtra("IsInsurance", "true");
-                        intent.putExtra("InsuranceUrl", InsuranceUrl);
-
-                    }else {
+                    if (IsInsurance==null){
                         Log.e("intentData", key + "" + veterinarianUserId);
                         intent.putExtra("veterinarianUserId", veterinarianUserId);
                         intent.putExtra("veterinarianName", veterinarianName);
                         intent.putExtra("clinicName", clinicName);
                         intent.putExtra("Rating", Rating);
                         intent.putExtra("profileImageUrl", profileImageUrl);
+                    }else if (IsInsurance.equals("true")){
+                        String InsuranceUrl = qrCOdeResponse.getInsuranceUrl();
+                        intent.putExtra("IsInsurance", "true");
+                        intent.putExtra("InsuranceUrl", InsuranceUrl);
                     }
 
 
@@ -179,7 +176,6 @@ public class ScannerQR extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onPause() {
@@ -201,7 +197,6 @@ public class ScannerQR extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length > 0) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
@@ -209,8 +204,7 @@ public class ScannerQR extends AppCompatActivity {
                 onBackPressed();
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 } else {
-                    ActivityCompat.requestPermissions(this, new
-                            String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                 }
             } else {
                 Log.e("NOPERMISION", "no");

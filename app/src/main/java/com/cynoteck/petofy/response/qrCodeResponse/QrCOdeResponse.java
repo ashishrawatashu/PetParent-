@@ -11,7 +11,7 @@ public class QrCOdeResponse {
 
     private String Key;
 
-    private Boolean IsInsurance;
+    private String IsInsurance;
 
     private String InsuranceUrl;
 
@@ -19,11 +19,11 @@ public class QrCOdeResponse {
     private int Rating;
 
 
-    public Boolean getInsurance() {
+    public String getInsurance() {
         return IsInsurance;
     }
 
-    public void setInsurance(Boolean insurance) {
+    public void setInsurance(String insurance) {
         IsInsurance = insurance;
     }
 

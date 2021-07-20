@@ -22,7 +22,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:padding="12dp"
-            android:src="@drawable/back_arrow_welcome" />
+            android:src="@drawable/long_left" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                         android:layout_marginRight="20dp"
                         android:background="@null"
                         android:fontFamily="@font/montserrat"
-                        android:inputType="phone"
+                        android:inputType="number"
                         android:maxLength="10"
                         android:paddingLeft="20dp" />
 

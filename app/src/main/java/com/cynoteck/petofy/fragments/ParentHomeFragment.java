@@ -307,11 +307,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         if (requestCode==QR_CODE_SCANNER){
             if (resultCode==RESULT_OK) {
                 String IsInsurance = data.getStringExtra("IsInsurance");
-                if (IsInsurance.equals("true")){
-                    String InsuranceUrl = data.getStringExtra("InsuranceUrl");
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
-                    startActivity(browserIntent);
-                }else {
+                if (IsInsurance==null){
                     String veterinarianUserId = data.getStringExtra("veterinarianUserId");
                     String veterinarianName = data.getStringExtra("veterinarianName");
                     String clinicName = data.getStringExtra("clinicName");
@@ -325,6 +321,10 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                     scanAfterIntent.putExtra("Rating", Rating);
                     scanAfterIntent.putExtra("profileImageUrl", profileImageUrl);
                     startActivity(scanAfterIntent);
+                } else if (IsInsurance.equals("true")){
+                    String InsuranceUrl = data.getStringExtra("InsuranceUrl");
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
+                    startActivity(browserIntent);
                 }
 
             }
