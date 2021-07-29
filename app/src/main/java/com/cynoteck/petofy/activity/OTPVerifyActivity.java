@@ -40,30 +40,48 @@ import retrofit2.Response;
 
 public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener, ApiResponse {
 
-    EditText editText_one, editText_two, editText_three, editText_four ;
-    private static final int REQ_USER_CONSENT = 200;
-    SmsBroadcastReceiver smsBroadcastReceiver;
-    Button verify_BT;
-    String otpString,phoneNumber="",vetID="";
-    TextView headine1TV,resend_code_TV;
-    ImageView back_arrow_IV;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-    Methods methods;
+    EditText                    editText_one, editText_two, editText_three, editText_four ;
+    private static final int    REQ_USER_CONSENT = 200;
+    SmsBroadcastReceiver        smsBroadcastReceiver;
+    Button                      verify_BT;
+    String                      otpString,phoneNumber="",vetID="";
+    TextView                    headine1TV,resend_code_TV;
+    ImageView                   back_arrow_IV;
+    SharedPreferences           sharedPreferences;
+    SharedPreferences.Editor    login_editor;
+    Methods                     methods;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_o_t_p_verify);
 
-        methods = new Methods(this);
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        editText_one = findViewById(R.id.editTextone);
-        editText_two = findViewById(R.id.editTexttwo);
-        editText_three = findViewById(R.id.editTextthree);
-        editText_four = findViewById(R.id.editTextfour);
-        verify_BT = findViewById(R.id.verify_BT);
-        resend_code_TV=findViewById(R.id.resend_code_TV);
-        headine1TV=findViewById(R.id.headine1TV);
+        initView();
+        startSmsUserConsent();
+        intentData();
+
+    }
+
+    private void intentData() {
+        Intent intent = getIntent();
+        vetID           = intent.getStringExtra("vetID");
+        phoneNumber     = intent.getStringExtra("phoneNumber");
+        otpString       = intent.getStringExtra("OTP");
+
+        headine1TV.setText("Please wait we will auto verify the OTP sent to"+" +91"+phoneNumber);
+
+    }
+
+    private void initView() {
+        methods         = new Methods(this);
+        back_arrow_IV   = findViewById(R.id.back_arrow_IV);
+        editText_one    = findViewById(R.id.editTextone);
+        editText_two    = findViewById(R.id.editTexttwo);
+        editText_three  = findViewById(R.id.editTextthree);
+        editText_four   = findViewById(R.id.editTextfour);
+        verify_BT       = findViewById(R.id.verify_BT);
+        resend_code_TV  = findViewById(R.id.resend_code_TV);
+        headine1TV      = findViewById(R.id.headine1TV);
+
         resend_code_TV.setOnClickListener(this);
         verify_BT.setOnClickListener(this);
         back_arrow_IV.setOnClickListener(this);
@@ -72,16 +90,6 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
         editText_two.addTextChangedListener(this);
         editText_three.addTextChangedListener(this);
         editText_four.addTextChangedListener(this);
-        startSmsUserConsent();
-
-        Intent intent = getIntent();
-        vetID = intent.getStringExtra("vetID");
-        phoneNumber = intent.getStringExtra("phoneNumber");
-        otpString = intent.getStringExtra("OTP");
-
-        headine1TV.setText("Please wait we will auto verify the OTP sent to"+" +91"+phoneNumber);
-
-
     }
 
     private void startSmsUserConsent() {
@@ -231,28 +239,21 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                 otp4=editText_four.getText().toString();
 
                 otp = otp1+""+otp2+""+otp3+""+otp4;
-//                Toast.makeText(this, otp, Toast.LENGTH_SHORT).show();
-
                 if (otp1.isEmpty()&&otp2.isEmpty()&&otp3.isEmpty()&&otp4.isEmpty()){
                     Log.e("OTP1","OTP"+otp+"==>"+otpString);
 
                     Toast.makeText(this, "Invalid OTP!", Toast.LENGTH_SHORT).show();
 
                 }else if (otpString.replace("\"", "").equals(otp)){
-//                    Log.e("OTP","OTP1"+otp+"==>"+otpString);
-//                    Toast.makeText(this, "Invalid OTP!", Toast.LENGTH_SHORT).show();
-
                     JsonObject sendParentPhone = new JsonObject();
                     sendParentPhone.addProperty("phoneNumber",phoneNumber);
                     JsonObject saveRequest = new JsonObject();
                     saveRequest.add("data",sendParentPhone);
-
                     if (methods.isInternetOn()){
                         methods.showCustomProgressBarDialog(this);
                         ApiService<LoginRegisterResponse> service = new ApiService<>();
                         service.get(OTPVerifyActivity.this, ApiClient.getApiInterface().validatepetParentOtp(saveRequest), "ValidatePetParentOtp");
                         Log.e("ValidatePetParentOtp",""+saveRequest);
-
                     }else {
                         methods.DialogInternet();
                     }
@@ -261,7 +262,6 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                 }else {
                     Log.e("OTP","OTP1==>"+otpString);
                     Log.e("OTP","OTP2==>"+otp);
-
                     Toast.makeText(this, "Invalid OTP!", Toast.LENGTH_SHORT).show();
 
                 }
@@ -312,7 +312,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                         Config.token = loginRegisterResponse.getResponseLogin().getToken();
                         login_editor.putString("loggedIn", "loggedIn");
                         Log.e("TOKEN",loginRegisterResponse.getResponseLogin().getToken());
-                        login_editor.commit();
+                        login_editor.apply();
                         Intent intent = new Intent(this, DashBoardActivity.class);
                         intent.putExtra("from","OTP_ACTIVITY");
                         startActivity(intent);

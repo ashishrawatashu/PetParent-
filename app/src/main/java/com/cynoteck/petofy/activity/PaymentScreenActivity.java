@@ -4,6 +4,7 @@ package com.cynoteck.petofy.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,26 +39,21 @@ import retrofit2.Response;
 
 public class PaymentScreenActivity extends AppCompatActivity implements PaymentResultWithDataListener, ApiResponse, View.OnClickListener {
 
-    Button procced_appointment_BT;
-    MaterialCardView back_arrow_CV;
-    TextView vetName_TV,topic_TV,appointment_time_TV,date_TV,pet_name_TV,consultation_fee_TV;
-    String vetUserId,vetName,appointment_time,topic,mettingID,order_ID,amount,vet_image_url;
-    Methods methods;
-    ConstraintLayout payment_details_CL;
-    CircleImageView parent_profile_CIV;
+    Button              procced_appointment_BT;
+    MaterialCardView    back_arrow_CV;
+    TextView            vetName_TV,topic_TV,appointment_time_TV,date_TV,pet_name_TV,consultation_fee_TV;
+    String              vetUserId,vetName,appointment_time,topic,mettingID,order_ID,amount,vet_image_url;
+    Methods             methods;
+    ConstraintLayout    payment_details_CL;
+    CircleImageView     parent_profile_CIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_screen);
         methods = new Methods(this);
-        Intent intent = getIntent();
-        vetUserId = intent.getStringExtra("vetId");
-        vetName = intent.getStringExtra("vetName");
-        appointment_time = intent.getStringExtra("appointment_time");
-        topic = intent.getStringExtra("topic");
-        mettingID = intent.getStringExtra("mettingId");
-        vet_image_url = intent.getStringExtra("vet_image_url");
+        intentData();
+
         initization();
 
         if (methods.isInternetOn()) {
@@ -66,6 +62,16 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
             methods.DialogInternet();
         }
 
+    }
+
+    private void intentData() {
+        Intent intent       = getIntent();
+        vetUserId           = intent.getStringExtra("vetId");
+        vetName             = intent.getStringExtra("vetName");
+        appointment_time    = intent.getStringExtra("appointment_time");
+        topic               = intent.getStringExtra("topic");
+        mettingID           = intent.getStringExtra("mettingId");
+        vet_image_url       = intent.getStringExtra("vet_image_url");
     }
 
     private void getOrderDetails() {
@@ -83,15 +89,16 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
     }
 
     private void initization() {
-        date_TV = findViewById(R.id.date_TV);
-        vetName_TV = findViewById(R.id.vet_name_TV);
-        appointment_time_TV = findViewById(R.id.appointment_time_TV);
-        procced_appointment_BT = findViewById(R.id.procced_appointment_BT);
-        consultation_fee_TV=findViewById(R.id.consultation_fee_TV);
-        payment_details_CL=findViewById(R.id.payment_details_CL);
-        pet_name_TV=findViewById(R.id.pet_name_TV);
-        back_arrow_CV=findViewById(R.id.back_arrow_CV);
-        parent_profile_CIV= findViewById(R.id.parent_profile_CIV);
+        date_TV                     = findViewById(R.id.date_TV);
+        vetName_TV                  = findViewById(R.id.vet_name_TV);
+        appointment_time_TV         = findViewById(R.id.appointment_time_TV);
+        procced_appointment_BT      = findViewById(R.id.procced_appointment_BT);
+        consultation_fee_TV         = findViewById(R.id.consultation_fee_TV);
+        payment_details_CL          = findViewById(R.id.payment_details_CL);
+        pet_name_TV                 = findViewById(R.id.pet_name_TV);
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        parent_profile_CIV          = findViewById(R.id.parent_profile_CIV);
+
         back_arrow_CV.setOnClickListener(this);
         procced_appointment_BT.setOnClickListener(this);
 
@@ -209,6 +216,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){

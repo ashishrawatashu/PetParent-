@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHolder> implements Filterable {
-    Context context;
-    List<ProviderList> providerLists;
-    RegisterRecyclerViewClickListener onProductItemClickListner;
-    List<ProviderList> getProviderListsFilter;
+    Context                             context;
+    List<ProviderList>                  providerLists;
+    RegisterRecyclerViewClickListener   onProductItemClickListner;
+    List<ProviderList>                  getProviderListsFilter;
 
     public VetListAdapter(Context context, List<ProviderList> providerLists, RegisterRecyclerViewClickListener onProductItemClickListner) {
         this.context = context;
@@ -136,23 +136,23 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
     };
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView vet_image_IV, star_one, star_two, star_three, star_four, star_five;
-        TextView vet_name_TV, vet_qualification_TV, vet_charges_tv, vet_location_TV;
-        LinearLayout view_more_LL;
+        ImageView       vet_image_IV, star_one, star_two, star_three, star_four, star_five;
+        TextView        vet_name_TV, vet_qualification_TV, vet_charges_tv, vet_location_TV;
+        LinearLayout    view_more_LL;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            vet_image_IV = itemView.findViewById(R.id.vet_image_IV);
-            vet_name_TV = itemView.findViewById(R.id.vet_name_TV);
-            vet_qualification_TV = itemView.findViewById(R.id.vet_qualification_TV);
-            vet_charges_tv = itemView.findViewById(R.id.vet_charges_tv);
-            vet_location_TV = itemView.findViewById(R.id.vet_location_TV);
-            view_more_LL = itemView.findViewById(R.id.view_more_LL);
-            star_one = itemView.findViewById(R.id.star_one);
-            star_two = itemView.findViewById(R.id.star_two);
-            star_three = itemView.findViewById(R.id.star_three);
-            star_four = itemView.findViewById(R.id.star_four);
-            star_five = itemView.findViewById(R.id.star_five);
+            vet_image_IV            = itemView.findViewById(R.id.vet_image_IV);
+            vet_name_TV             = itemView.findViewById(R.id.vet_name_TV);
+            vet_qualification_TV    = itemView.findViewById(R.id.vet_qualification_TV);
+            vet_charges_tv          = itemView.findViewById(R.id.vet_charges_tv);
+            vet_location_TV         = itemView.findViewById(R.id.vet_location_TV);
+            view_more_LL            = itemView.findViewById(R.id.view_more_LL);
+            star_one                = itemView.findViewById(R.id.star_one);
+            star_two                = itemView.findViewById(R.id.star_two);
+            star_three              = itemView.findViewById(R.id.star_three);
+            star_four               = itemView.findViewById(R.id.star_four);
+            star_five               = itemView.findViewById(R.id.star_five);
             view_more_LL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

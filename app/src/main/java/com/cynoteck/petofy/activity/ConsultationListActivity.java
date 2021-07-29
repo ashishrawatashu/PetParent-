@@ -46,37 +46,37 @@ import retrofit2.Response;
 
 public class ConsultationListActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnItemClickListener, RegisterRecyclerViewClickListener {
 
-    MaterialCardView back_arrow_CV;
-    LinearLayout location_LL;
-    EditText search_vet_ET;
-    RecyclerView vet_list_RV;
-    Methods methods;
-    TextView location_TV, consultation_TV,heading_one_TV,heading_two_TV;
-    VetListAdapter vetListAdapter;
+    MaterialCardView                back_arrow_CV;
+    LinearLayout                    location_LL;
+    EditText                        search_vet_ET;
+    RecyclerView                    vet_list_RV;
+    Methods                         methods;
+    TextView                        location_TV, consultation_TV,heading_one_TV,heading_two_TV;
+    VetListAdapter                  vetListAdapter;
 
     //location Dialog.........
-    Dialog location_dialog;
-    MaterialCardView cancel_CV;
-    LinearLayout current_location_LL;
-    GetCityListWithStateResponse getCityListWithStateResponse;
-    CityListAdapter cityListAdapter;
-    RecyclerView city_list_RV;
-    ProgressBar dialog_progressBar, progressBar;
-    EditText search_location_ET;
-    GetVetListResponse getVetListResponse;
+    Dialog                          location_dialog;
+    MaterialCardView                cancel_CV;
+    LinearLayout                    current_location_LL;
+    GetCityListWithStateResponse    getCityListWithStateResponse;
+    CityListAdapter                 cityListAdapter;
+    RecyclerView                    city_list_RV;
+    ProgressBar                     dialog_progressBar, progressBar;
+    EditText                        search_location_ET;
+    GetVetListResponse              getVetListResponse;
     private ArrayList<ProviderList> providerLists;
-    String seeMore = "true", cityId = "0";
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-    String serviceTypeId;
+    String                          seeMore = "true", cityId = "0";
+    SharedPreferences               sharedPreferences;
+    SharedPreferences.Editor        login_editor;
+    String                          serviceTypeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultation_list);
-        methods = new Methods(this);
-        Intent intent = getIntent();
-        serviceTypeId = intent.getStringExtra("serviceTypeId");
+        methods         = new Methods(this);
+        Intent intent   = getIntent();
+        serviceTypeId   = intent.getStringExtra("serviceTypeId");
 
         init();
 
@@ -271,13 +271,14 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
     }
 
     private void showLocationDialog() {
-        location_dialog = new Dialog(this);
+        location_dialog         = new Dialog(this);
         location_dialog.setContentView(R.layout.location_dialog);
-        cancel_CV = location_dialog.findViewById(R.id.cancel_CV);
-        city_list_RV = location_dialog.findViewById(R.id.city_list_RV);
-        search_location_ET = location_dialog.findViewById(R.id.search_location_ET);
-        current_location_LL = location_dialog.findViewById(R.id.current_location_LL);
-        dialog_progressBar = location_dialog.findViewById(R.id.progressBar);
+        cancel_CV               = location_dialog.findViewById(R.id.cancel_CV);
+        city_list_RV            = location_dialog.findViewById(R.id.city_list_RV);
+        search_location_ET      = location_dialog.findViewById(R.id.search_location_ET);
+        current_location_LL     = location_dialog.findViewById(R.id.current_location_LL);
+        dialog_progressBar      = location_dialog.findViewById(R.id.progressBar);
+
         current_location_LL.setOnClickListener(this);
         cancel_CV.setOnClickListener(this);
         search_location_ET.setEnabled(false);
@@ -299,11 +300,11 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
             }
         });
 
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = location_dialog.getWindow();
+        WindowManager.LayoutParams lp   = new WindowManager.LayoutParams();
+        Window window                   = location_dialog.getWindow();
         lp.copyFrom(window.getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.width                        = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height                       = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(lp);
         location_dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         location_dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -318,11 +319,11 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
         login_editor.putString("CityId", getCityListWithStateResponse.getData().get(position).getId());
         login_editor.putString("cityName", getCityListWithStateResponse.getData().get(position).getCity1());
         login_editor.putString("CityFullName", getCityListWithStateResponse.getData().get(position).getCityName());
-        login_editor.commit();
-        Config.latitude = sharedPreferences.getString("userLatitude", "");
-        Config.longitude = sharedPreferences.getString("userLongitude", "");
-        Config.cityId = sharedPreferences.getString("CityId", "");
-        Config.cityName = sharedPreferences.getString("cityName", "");
+        login_editor.apply();
+        Config.latitude     = sharedPreferences.getString("userLatitude", "");
+        Config.longitude    = sharedPreferences.getString("userLongitude", "");
+        Config.cityId       = sharedPreferences.getString("CityId", "");
+        Config.cityName     = sharedPreferences.getString("cityName", "");
         Config.cityFullName = sharedPreferences.getString("CityFullName", "");
         location_dialog.dismiss();
         getVetList();
@@ -330,20 +331,6 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
     @Override
     public void onProductClick(int position) {
-
-//        Intent createAppointmentIntent = new Intent(this,AddUpdateAppointmentActivity.class);
-//        createAppointmentIntent.putExtra("vetUserId",getVetListResponse.getData().getProviderList().get(position).getId());
-//        createAppointmentIntent.putExtra("vet_fee","No");
-//        createAppointmentIntent.putExtra("vet_image_url",getVetListResponse.getData().getProviderList().get(position).getProfileImageURL());
-//        createAppointmentIntent.putExtra("vet_study",getVetListResponse.getData().getProviderList().get(position).getVetQualifications());
-//        createAppointmentIntent.putExtra("vet_rating",getVetListResponse.getData().getProviderList().get(position).getRating());
-//        createAppointmentIntent.putExtra("vet_address",getVetListResponse.getData().getProviderList().get(position).getAddress());
-//        createAppointmentIntent.putExtra("vet_name",getVetListResponse.getData().getProviderList().get(position).getName());
-//        createAppointmentIntent.putExtra("type", "add");
-//        createAppointmentIntent.putExtra("id", "");
-//        createAppointmentIntent.putExtra("pet_id", "");
-//        startActivity(createAppointmentIntent);
-
 
         Intent viewVetDetailsIntent = new Intent(this, VetFullProfileActivity.class);
         viewVetDetailsIntent.putExtra("EncryptId", getVetListResponse.getData().getProviderList().get(position).getEncryptedId());

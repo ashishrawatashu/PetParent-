@@ -21,15 +21,15 @@ import java.util.List;
 
 public class DateListAdapter extends RecyclerView.Adapter<com.cynoteck.petofy.adapter.DateListAdapter.MyViewHolder>   {
 
-    RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
-    List<GetAppointmentDates> getAppointmentDates;
-    AppointmentsClickListner appointmentsClickListner;
+    RecyclerView.RecycledViewPool   recycledViewPool = new RecyclerView.RecycledViewPool();
+    List<GetAppointmentDates>       getAppointmentDates;
+    AppointmentsClickListner        appointmentsClickListner;
     Context context;
 
     public DateListAdapter(List<GetAppointmentDates> getAppointmentDates, Context context, AppointmentsClickListner appointmentsClickListner) {
-        this.getAppointmentDates = getAppointmentDates;
-        this.context = context;
-        this.appointmentsClickListner = appointmentsClickListner;
+        this.getAppointmentDates        = getAppointmentDates;
+        this.context                    = context;
+        this.appointmentsClickListner   = appointmentsClickListner;
 
     }
 
@@ -78,15 +78,15 @@ public class DateListAdapter extends RecyclerView.Adapter<com.cynoteck.petofy.ad
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView date_TV,day_TV;
-        RecyclerView event_list;
-        CardView empty_CV;
+        TextView        date_TV,day_TV;
+        RecyclerView    event_list;
+        CardView        empty_CV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            day_TV = itemView.findViewById(R.id.day_TV);
-            date_TV = itemView.findViewById(R.id.date_TV);
-            event_list = itemView.findViewById(R.id.event_list);
-            empty_CV = itemView.findViewById(R.id.empty_CV);
+            day_TV      = itemView.findViewById(R.id.day_TV);
+            date_TV     = itemView.findViewById(R.id.date_TV);
+            event_list  = itemView.findViewById(R.id.event_list);
+            empty_CV    = itemView.findViewById(R.id.empty_CV);
 
         }
     }

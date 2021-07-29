@@ -34,6 +34,7 @@ import com.cynoteck.petofy.activity.AddPetRegister;
 import com.cynoteck.petofy.activity.AdoptionDonationActivity;
 import com.cynoteck.petofy.activity.AfterScanScreenActivity;
 import com.cynoteck.petofy.activity.ConsultationListActivity;
+import com.cynoteck.petofy.activity.InsuranceActivity;
 import com.cynoteck.petofy.activity.PetBreedsActivity;
 import com.cynoteck.petofy.activity.PetNamesActivity;
 import com.cynoteck.petofy.activity.ScannerQR;
@@ -63,36 +64,35 @@ import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAda
 import static com.cynoteck.petofy.fragments.PetRegisterFragment.registerPetAdapter;
 import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
 public class ParentHomeFragment extends Fragment implements View.OnClickListener, ApiResponse, OnItemClickListener, OnSliderClickListener {
-    View view;
-    private ViewPager vp_slider;
-    private LinearLayout ll_dots;
-    SliderPagerAdapter sliderPagerAdapter;
-    ArrayList<Integer> slider_image_list;
-    private ImageView[] dots;
-    int page_position = 0;
-    LinearLayout location_LL,search_layout_LL;
-    Methods methods;
-    TextView location_TV;
-
-    LinearLayout pet_breed_LL, pet_names_LL,cosultation_LL,insurances_LL,adoption_donation_LL,pet_shops_LL,grooming_LL,hostels_LL,training_LL;
+    View                                view;
+    private ViewPager                   vp_slider;
+    private LinearLayout                ll_dots;
+    SliderPagerAdapter                  sliderPagerAdapter;
+    ArrayList<Integer>                  slider_image_list;
+    private ImageView[]                 dots;
+    int                                 page_position = 0;
+    LinearLayout                        location_LL,search_layout_LL;
+    Methods                             methods;
+    TextView                            location_TV;
+    LinearLayout                        pet_breed_LL, pet_names_LL,cosultation_LL,insurances_LL,adoption_donation_LL,pet_shops_LL,grooming_LL,hostels_LL,training_LL;
 
 
     //location Dialog.........
-    Dialog location_dialog;
-    MaterialCardView cancel_CV;
-    LinearLayout current_location_LL;
-    GetCityListWithStateResponse getCityListWithStateResponse;
-    CityListAdapter cityListAdapter;
-    RecyclerView city_list_RV;
-    ProgressBar progressBar;
-    EditText search_location_ET;
-    ImageView qr_code_IV;
-    private static final int QR_CODE_SCANNER = 100;
-    private final int ADD_PET = 2;
+    Dialog                              location_dialog;
+    MaterialCardView                    cancel_CV;
+    LinearLayout                        current_location_LL;
+    GetCityListWithStateResponse        getCityListWithStateResponse;
+    CityListAdapter                     cityListAdapter;
+    RecyclerView                        city_list_RV;
+    ProgressBar                         progressBar;
+    EditText                            search_location_ET;
+    ImageView                           qr_code_IV;
+    private static final int            QR_CODE_SCANNER = 100;
+    private final int                   ADD_PET = 2;
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-    boolean showCrossButton = false;
+    SharedPreferences                   sharedPreferences;
+    SharedPreferences.Editor            login_editor;
+    boolean                             showCrossButton = false;
     public ParentHomeFragment() {
         // Required empty public constructor
     }
@@ -101,8 +101,8 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_parent_home, container, false);
-        methods = new Methods(getContext());
+        view    =   inflater.inflate(R.layout.fragment_parent_home, container, false);
+        methods =   new Methods(getContext());
 
         init();
         if (Config.cityId.equals("")){
@@ -207,13 +207,6 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
             params.setMargins(5, 0, 5, 0);
             dots[i].setLayoutParams(params);
             dots[i].setImageResource(R.drawable.inactive_dot);
-            //ivArrayDotsPager[i].setAlpha(0.4f);
-//            dots[i].setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    view.setAlpha(1);
-//                }
-//            });
             ll_dots.addView(dots[i]);
             ll_dots.bringToFront();
             dots[0].setImageResource(R.drawable.active_dot);
@@ -266,7 +259,8 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.insurances_LL:
-                Toast.makeText(getContext(), "Coming soon !", Toast.LENGTH_SHORT).show();
+                Intent insurancesIntent = new Intent(getContext(), InsuranceActivity.class);
+                startActivity(insurancesIntent);
                 break;
 
             case R.id.cosultation_LL:

@@ -18,8 +18,8 @@ import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.Provid
 import java.util.ArrayList;
 
 public class ProviderReviewsAdapter extends RecyclerView.Adapter<ProviderReviewsAdapter.MyViewHolder> {
-    Context context;
-    ArrayList<ProviderRatingList> providerRatingLists;
+    Context                         context;
+    ArrayList<ProviderRatingList>   providerRatingLists;
     public ProviderReviewsAdapter(Context context, ArrayList<ProviderRatingList> providerRatingLists) {
         this.context = context;
         this.providerRatingLists = providerRatingLists;
@@ -87,22 +87,22 @@ public class ProviderReviewsAdapter extends RecyclerView.Adapter<ProviderReviews
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        CardView user_pic_CV;
-        ImageView user_profile_IV,star_one,star_two,star_three,star_four,star_five;
-        TextView user_name_TV, comment_TV,user_first_letter_TV;
+        CardView    user_pic_CV;
+        ImageView   user_profile_IV,star_one,star_two,star_three,star_four,star_five;
+        TextView    user_name_TV, comment_TV,user_first_letter_TV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            user_pic_CV = itemView.findViewById(R.id.user_pic_CV);
-            user_profile_IV = itemView.findViewById(R.id.user_profile_IV);
-            star_one = itemView.findViewById(R.id.star_one);
-            star_two = itemView.findViewById(R.id.star_two);
-            star_three = itemView.findViewById(R.id.star_three);
-            star_four = itemView.findViewById(R.id.star_four);
-            star_five = itemView.findViewById(R.id.star_five);
-            user_name_TV = itemView.findViewById(R.id.user_name_TV);
-            comment_TV = itemView.findViewById(R.id.comment_TV);
-            user_first_letter_TV = itemView.findViewById(R.id.user_first_letter_TV);
+            user_pic_CV             = itemView.findViewById(R.id.user_pic_CV);
+            user_profile_IV         = itemView.findViewById(R.id.user_profile_IV);
+            star_one                = itemView.findViewById(R.id.star_one);
+            star_two                = itemView.findViewById(R.id.star_two);
+            star_three              = itemView.findViewById(R.id.star_three);
+            star_four               = itemView.findViewById(R.id.star_four);
+            star_five               = itemView.findViewById(R.id.star_five);
+            user_name_TV            = itemView.findViewById(R.id.user_name_TV);
+            comment_TV              = itemView.findViewById(R.id.comment_TV);
+            user_first_letter_TV    = itemView.findViewById(R.id.user_first_letter_TV);
 
 
         }

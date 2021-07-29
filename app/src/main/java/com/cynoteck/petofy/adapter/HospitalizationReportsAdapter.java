@@ -17,14 +17,14 @@ import java.util.List;
 
 public class HospitalizationReportsAdapter extends RecyclerView.Adapter<HospitalizationReportsAdapter.MyViewHolder> {
 
-    Context context;
-    List<PetHospitalizationsList> petHospitalizationsLists;
-    ViewAndUpdateClickListener onProductItemClickListner;
+    Context                         context;
+    List<PetHospitalizationsList>   petHospitalizationsLists;
+    ViewAndUpdateClickListener  onProductItemClickListner;
 
     public HospitalizationReportsAdapter(Context context, List<PetHospitalizationsList> petClinicVisitLists, ViewAndUpdateClickListener onProductItemClickListner) {
-        this.context = context;
-        this.petHospitalizationsLists = petClinicVisitLists;
-        this.onProductItemClickListner = onProductItemClickListner;
+        this.context                    = context;
+        this.petHospitalizationsLists   = petClinicVisitLists;
+        this.onProductItemClickListner  = onProductItemClickListner;
     }
 
     @NonNull
@@ -38,8 +38,6 @@ public class HospitalizationReportsAdapter extends RecyclerView.Adapter<Hospital
     @Override
     public void onBindViewHolder(@NonNull HospitalizationReportsAdapter.MyViewHolder holder, int position) {
         holder.requesting_Vet_TV.setText(petHospitalizationsLists.get(position).getRequestingVeterinarian());
-//        holder.vet_phone_TV.setText(petHospitalizationsLists.get(position).getVeterinarianPhone());
-//        holder.hospital_type_TV.setText(petHospitalizationsLists.get(position).getHospitalizationType().getHospitalization());
         holder.hospital_name_TV.setText(petHospitalizationsLists.get(position).getHospitalName());
         holder.admission_date_TV.setText(petHospitalizationsLists.get(position).getAdmissionDate());
 
@@ -51,16 +49,14 @@ public class HospitalizationReportsAdapter extends RecyclerView.Adapter<Hospital
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView requesting_Vet_TV,vet_phone_TV,hospital_type_TV,hospital_name_TV,admission_date_TV,view_TV;
+        TextView    requesting_Vet_TV,vet_phone_TV,hospital_type_TV,hospital_name_TV,admission_date_TV,view_TV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            requesting_Vet_TV = itemView.findViewById(R.id.requesting_Vet_TV);
-//            vet_phone_TV = itemView.findViewById(R.id.vet_phone_TV);
-//            hospital_type_TV = itemView.findViewById(R.id.hospital_type_TV);
-            hospital_name_TV = itemView.findViewById(R.id.hospital_name_TV);
-            admission_date_TV = itemView.findViewById(R.id.admission_date_TV);
-            view_TV=itemView.findViewById(R.id.view_TV);
+            requesting_Vet_TV   = itemView.findViewById(R.id.requesting_Vet_TV);
+            hospital_name_TV    = itemView.findViewById(R.id.hospital_name_TV);
+            admission_date_TV   = itemView.findViewById(R.id.admission_date_TV);
+            view_TV             = itemView.findViewById(R.id.view_TV);
 
             view_TV.setOnClickListener(new View.OnClickListener() {
                 @Override

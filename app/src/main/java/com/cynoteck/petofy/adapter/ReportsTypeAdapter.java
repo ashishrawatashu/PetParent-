@@ -18,9 +18,9 @@ import java.util.List;
 
 public class ReportsTypeAdapter extends RecyclerView.Adapter<ReportsTypeAdapter.MyViewHolder> {
 
-    Context context;
-    List<PetClinicVisitList> petClinicVisitLists;
-    ViewAndUpdateClickListener onProductItemClickListner;
+    Context                     context;
+    List<PetClinicVisitList>    petClinicVisitLists;
+    ViewAndUpdateClickListener  onProductItemClickListner;
 
     public ReportsTypeAdapter(Context context, List<PetClinicVisitList> petClinicVisitLists, ViewAndUpdateClickListener onProductItemClickListner) {
         this.context = context;
@@ -59,17 +59,17 @@ public class ReportsTypeAdapter extends RecyclerView.Adapter<ReportsTypeAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView vetName_TV, vet_visit_date_TV, view_TV,reason_visit_dot_TV,reason_TV;
-        TextView reason_of_visit_TV;
+        TextView    vetName_TV, vet_visit_date_TV, view_TV,reason_visit_dot_TV,reason_TV;
+        TextView    reason_of_visit_TV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            reason_visit_dot_TV = itemView.findViewById(R.id.reason_visit_dot_TV);
-            reason_TV = itemView.findViewById(R.id.reason_TV);
-            vetName_TV = itemView.findViewById(R.id.vetName_TV);
-            vet_visit_date_TV = itemView.findViewById(R.id.vet_visit_date_TV);
-            view_TV = itemView.findViewById(R.id.view_TV);
-            reason_of_visit_TV = itemView.findViewById(R.id.reason_of_visit_TV);
+            reason_visit_dot_TV     = itemView.findViewById(R.id.reason_visit_dot_TV);
+            reason_TV               = itemView.findViewById(R.id.reason_TV);
+            vetName_TV              = itemView.findViewById(R.id.vetName_TV);
+            vet_visit_date_TV       = itemView.findViewById(R.id.vet_visit_date_TV);
+            view_TV                 = itemView.findViewById(R.id.view_TV);
+            reason_of_visit_TV      = itemView.findViewById(R.id.reason_of_visit_TV);
             view_TV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

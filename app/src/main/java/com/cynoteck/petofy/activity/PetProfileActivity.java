@@ -39,21 +39,20 @@ import static com.cynoteck.petofy.fragments.PetRegisterFragment.registerPetAdapt
 import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
 
 public class PetProfileActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
-    Methods methods;
-    String petId = "", pet_unique_id = "", pet_image_url = "", pet_breed = "", pet_age = "", pet_sex = "", pet_name = "",pet_category = "",pet_DOB = "",pet_color = "";
-    ImageView pet_profile_image_IV;
-    TextView pet_name_TV, pet_dob_TV, pet_reg__id_TV, pet_breed_TV, pet_gender_TV;
-    GetPetResponse getPetResponse;
-    boolean reloadData = false;
-    String permissionId = "";
+    Methods                     methods;
+    String                      petId = "", pet_unique_id = "", pet_image_url = "", pet_breed = "", pet_age = "", pet_sex = "", pet_name = "",pet_category = "",pet_DOB = "",pet_color = "";
+    ImageView                   pet_profile_image_IV;
+    TextView                    pet_name_TV, pet_dob_TV, pet_reg__id_TV, pet_breed_TV, pet_gender_TV;
+    GetPetResponse              getPetResponse;
+    boolean                     reloadData = false;
+    String                      permissionId = "";
+    MaterialCardView            back_arrow_CV, image_edit_CV;
+    SharedPreferences           sharedPreferences;
+    RelativeLayout              edit_profile_RL;
+    ScrollView                  pet_full_details_SV;
+    int                         pet_list_position;
+    LinearLayout                pet_reports_LL, consultation_LL, donate_pet_LL,hostels_LL,grooming_LL,pet_shops_LL;
     //    ConstraintLayout pet_profile_details_CL;
-    MaterialCardView back_arrow_CV, image_edit_CV;
-    SharedPreferences sharedPreferences;
-    RelativeLayout edit_profile_RL;
-    ScrollView pet_full_details_SV;
-    int pet_list_position;
-
-    LinearLayout pet_reports_LL, consultation_LL, donate_pet_LL,hostels_LL,grooming_LL,pet_shops_LL;
 
 
     @Override
@@ -61,53 +60,11 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pet_profile_activity);
         methods = new Methods(this);
-        Intent extras = getIntent();
-        pet_list_position = Integer.parseInt(extras.getStringExtra("pet_list_position"));
-        petId = extras.getStringExtra("pet_id");
-        pet_unique_id = extras.getStringExtra("pet_unique_id");
-        pet_image_url = extras.getStringExtra("pet_image_url");
-        pet_breed = extras.getStringExtra("pet_breed");
-        pet_age = extras.getStringExtra("pet_age");
-        pet_sex = extras.getStringExtra("pet_sex");
-        pet_name = extras.getStringExtra("pet_name");
-        pet_category = extras.getStringExtra("pet_category");
-        pet_DOB = extras.getStringExtra("pet_DOB");
-        pet_color = extras.getStringExtra("pet_color");
-
-        pet_full_details_SV = findViewById(R.id.pet_full_details_SV);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        consultation_LL = findViewById(R.id.consultation_LL);
-        donate_pet_LL = findViewById(R.id.donate_pet_LL);
-        grooming_LL = findViewById(R.id.grooming_LL);
-        hostels_LL = findViewById(R.id.hostels_LL);
-        pet_reports_LL = findViewById(R.id.pet_reports_LL);
-        pet_shops_LL = findViewById(R.id.pet_shops_LL);
+        intentData();
+        initView();
 
 
-        consultation_LL.setOnClickListener(this);
-        donate_pet_LL.setOnClickListener(this);
-        grooming_LL.setOnClickListener(this);
-        hostels_LL.setOnClickListener(this);
-        pet_reports_LL.setOnClickListener(this);
-        pet_shops_LL.setOnClickListener(this);
 
-
-        pet_profile_image_IV = findViewById(R.id.pet_profile_image_IV);
-        image_edit_CV = findViewById(R.id.image_edit_CV);
-
-
-        pet_name_TV = findViewById(R.id.pet_name_TV);
-        pet_dob_TV = findViewById(R.id.pet_age_TV);
-        pet_reg__id_TV = findViewById(R.id.pet_reg__id_TV);
-        pet_breed_TV = findViewById(R.id.pet_breed_TV);
-        pet_gender_TV = findViewById(R.id.pet_gender_TV);
-
-        edit_profile_RL = findViewById(R.id.edit_profile_RL);
-
-        edit_profile_RL.setOnClickListener(this);
-
-        edit_profile_RL.setOnClickListener(this);
-        back_arrow_CV.setOnClickListener(this);
 
         setViewDetails();
 
@@ -117,12 +74,55 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         getPetListRequest.setData(getPetListParams);
         sharedPreferences = getSharedPreferences("userDetails", 0);
 
-//        if (methods.isInternetOn()) {
-//            getPetlistData(getPetListRequest);
-//        } else {
-//            methods.DialogInternet();
-//        }
+    }
 
+    private void initView() {
+        pet_full_details_SV     = findViewById(R.id.pet_full_details_SV);
+        back_arrow_CV           = findViewById(R.id.back_arrow_CV);
+        consultation_LL         = findViewById(R.id.consultation_LL);
+        donate_pet_LL           = findViewById(R.id.donate_pet_LL);
+        grooming_LL             = findViewById(R.id.grooming_LL);
+        hostels_LL              = findViewById(R.id.hostels_LL);
+        pet_reports_LL          = findViewById(R.id.pet_reports_LL);
+        pet_shops_LL            = findViewById(R.id.pet_shops_LL);
+
+        pet_profile_image_IV    = findViewById(R.id.pet_profile_image_IV);
+        image_edit_CV           = findViewById(R.id.image_edit_CV);
+
+        pet_name_TV             = findViewById(R.id.pet_name_TV);
+        pet_dob_TV              = findViewById(R.id.pet_age_TV);
+        pet_reg__id_TV          = findViewById(R.id.pet_reg__id_TV);
+        pet_breed_TV            = findViewById(R.id.pet_breed_TV);
+        pet_gender_TV           = findViewById(R.id.pet_gender_TV);
+
+        edit_profile_RL         = findViewById(R.id.edit_profile_RL);
+
+        consultation_LL.setOnClickListener(this);
+        donate_pet_LL.setOnClickListener(this);
+        grooming_LL.setOnClickListener(this);
+        hostels_LL.setOnClickListener(this);
+        pet_reports_LL.setOnClickListener(this);
+        pet_shops_LL.setOnClickListener(this);
+
+        edit_profile_RL.setOnClickListener(this);
+
+        edit_profile_RL.setOnClickListener(this);
+        back_arrow_CV.setOnClickListener(this);
+    }
+
+    private void intentData() {
+        Intent extras       = getIntent();
+        pet_list_position   = Integer.parseInt(extras.getStringExtra("pet_list_position"));
+        petId               = extras.getStringExtra("pet_id");
+        pet_unique_id       = extras.getStringExtra("pet_unique_id");
+        pet_image_url       = extras.getStringExtra("pet_image_url");
+        pet_breed           = extras.getStringExtra("pet_breed");
+        pet_age             = extras.getStringExtra("pet_age");
+        pet_sex             = extras.getStringExtra("pet_sex");
+        pet_name            = extras.getStringExtra("pet_name");
+        pet_category        = extras.getStringExtra("pet_category");
+        pet_DOB             = extras.getStringExtra("pet_DOB");
+        pet_color           = extras.getStringExtra("pet_color");
     }
 
     private void setViewDetails() {

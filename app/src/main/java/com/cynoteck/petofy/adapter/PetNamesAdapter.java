@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetNamesAdapter extends RecyclerView.Adapter<PetNamesAdapter.MyViewHolder> implements Filterable {
-    Context context;
-    List<GetPetNamesData> GetPetNamesData;
-    List<GetPetNamesData> GetPetNamesDataFilter;
+    Context                     context;
+    List<GetPetNamesData>       GetPetNamesData;
+    List<GetPetNamesData>       GetPetNamesDataFilter;
 
     private OnItemClickListener onProductItemClickListner;
 
@@ -88,8 +88,8 @@ public class PetNamesAdapter extends RecyclerView.Adapter<PetNamesAdapter.MyView
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ConstraintLayout pet_name_CL;
-        TextView pet_name_TV;
+        ConstraintLayout    pet_name_CL;
+        TextView            pet_name_TV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

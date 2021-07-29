@@ -37,28 +37,28 @@ import static com.cynoteck.petofy.fragments.PetRegisterFragment.registerPetAdapt
 import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
 @SuppressLint("StaticFieldLeak")
 public class DonationActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnItemClickListener {
-    private int ADD_PET = 4;
-
-    RecyclerView pet_list_RV;
-    MaterialCardView back_arrow_CV;
+    private final int               ADD_PET = 4;
+    RecyclerView                    pet_list_RV;
+    MaterialCardView                back_arrow_CV;
     @SuppressLint("StaticFieldLeak")
-    public static RelativeLayout total_donation_RL, add_pet_RL,donation_RL;
-    public static TextView total_donation_request_TV;
-    public static DonatePetAdapter donatePetAdapter;
-    public static ImageView donation_cart_icon_IV;
+    public static RelativeLayout    total_donation_RL, add_pet_RL,donation_RL;
+    public static TextView          total_donation_request_TV;
+    public static DonatePetAdapter  donatePetAdapter;
+    public static ImageView         donation_cart_icon_IV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation);
 
-        pet_list_RV = findViewById(R.id.pet_list_RV);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        total_donation_RL = findViewById(R.id.total_donation_RL);
-        add_pet_RL = findViewById(R.id.add_pet_RL);
-        total_donation_request_TV = findViewById(R.id.total_donation_request_TV);
-        donation_cart_icon_IV = findViewById(R.id.donation_cart_icon_IV);
-        donation_RL= findViewById(R.id.donation_RL);
+        pet_list_RV                 = findViewById(R.id.pet_list_RV);
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        total_donation_RL           = findViewById(R.id.total_donation_RL);
+        add_pet_RL                  = findViewById(R.id.add_pet_RL);
+        total_donation_request_TV   = findViewById(R.id.total_donation_request_TV);
+        donation_cart_icon_IV       = findViewById(R.id.donation_cart_icon_IV);
+        donation_RL                 = findViewById(R.id.donation_RL);
+
         add_pet_RL.setOnClickListener(this);
         total_donation_RL.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
@@ -85,6 +85,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

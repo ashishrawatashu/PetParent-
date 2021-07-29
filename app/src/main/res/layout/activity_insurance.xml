@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    tools:context=".activity.InsuranceActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/create_headline_TV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:text="@string/PetInsurances"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/back_arrow_CV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/back_arrow_CV" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/back_arrow_CV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/light_grey_bg"
+                android:visibility="visible" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/back_arrow"
+                android:visibility="visible" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
+        android:id="@+id/scrollView7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/insurance_card_LL"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/insurance_card_bg"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="Your Pet is happy"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="and healthy,"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="But Is your Pet Protected ?"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_width="130dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/bajaj_icon"/>
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/by_now"/>
+
+
+            </LinearLayout>
+
+            <ImageView
+                app:layout_constraintTop_toTopOf="@id/insurance_card_LL"
+                android:id="@+id/insurance_dog_IV"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:paddingTop="80dp"
+                app:layout_constraintEnd_toEndOf="@id/insurance_card_LL"
+                android:src="@drawable/insurance_dog"/>
+
+
+            <TextView
+                android:id="@+id/our_policy_head_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/ourPolicyHead"
+                android:textColor="@color/black_color"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@id/insurance_dog_IV" />
+
+
+            <TextView
+                android:id="@+id/cover_A_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/cover_A"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@id/our_policy_head_TV" />
+
+            <LinearLayout
+                android:id="@+id/cover_A_LL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/cover_border"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintEnd_toEndOf="@id/insurance_card_LL"
+
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@id/cover_A_TV">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/surgery_cover"
+                    android:textColor="@color/black_color" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/surgery_cover_details"
+                    android:textColor="@color/black_color" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/hospitalization_cover"
+                    android:textColor="@color/black_color" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/hospitalization_cover_details"
+                    android:textColor="@color/black_color" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/see_all_cover_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="See all..."
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@id/cover_A_LL" />
+
+
+            <TextView
+                android:id="@+id/why_petofy_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/why_petofy"
+                android:textColor="@color/black_color"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@id/see_all_cover_TV" />
+
+            <TextView
+                android:id="@+id/why_petofy_des_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/surgery_cover_details"
+                android:textColor="@color/black_color"
+                app:layout_constraintEnd_toEndOf="@id/insurance_card_LL"
+
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@+id/why_petofy_TV" />
+
+
+            <TextView
+                android:id="@+id/see_all_about_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="See all..."
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@id/why_petofy_des_TV" />
+
+
+            <LinearLayout
+                android:id="@+id/policy_buttons_LL"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintEnd_toEndOf="@id/insurance_card_LL"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@+id/see_all_about_TV">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/download_grey"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:padding="10dp"
+                            android:layout_width="45dp"
+                            android:src="@drawable/insurance_download"
+                            android:layout_height="match_parent"
+                            android:background="@color/insurance_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/nunito"
+                            android:gravity="center"
+                            android:text="Policy Brochure"
+                            android:textColor="@color/gray_1" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/download_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:padding="10dp"
+                            android:src="@drawable/insurance_download"
+                            android:layout_width="45dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/insurance_green" />
+
+                        <TextView
+                            android:elevation="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:fontFamily="@font/nunito"
+                            android:gravity="center"
+                            android:text="Policy Brochure"
+                            android:textColor="@color/black_color" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/disclaimer_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/disclaimer"
+                android:textColor="@color/black_color"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@id/policy_buttons_LL" />
+
+
+            <TextView
+                android:id="@+id/disclaimer_full_TV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/nunito"
+                android:text="@string/disclaimer_details"
+                android:textColor="@color/black_color"
+                app:layout_constraintEnd_toEndOf="@id/insurance_card_LL"
+                app:layout_constraintStart_toStartOf="@id/insurance_card_LL"
+                app:layout_constraintTop_toBottomOf="@+id/disclaimer_TV" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

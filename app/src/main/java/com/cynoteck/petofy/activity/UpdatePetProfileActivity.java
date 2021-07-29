@@ -78,73 +78,61 @@ import retrofit2.Response;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class UpdatePetProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse ,MediaUtils.GetImg{
-    Methods methods;
-    AppCompatSpinner add_pet_type, add_pet_breed_dialog, add_pet_color_dialog;
-    EditText pet_name_ET;
-    TextView calenderTextViewDetails;
-    ImageView pet_image_IV;
-    MaterialCardView back_arrow_CV;
-    Button pet_update;
-    DatePickerDialog picker;
-    ArrayList<String> petType;
-    ArrayList<String> petBreed;
-    ArrayList<String> petAge;
-    ArrayList<String> petColor;
-    ArrayList<String> petSize;
-
-    HashMap<String, String> petTypeHashMap = new HashMap<>();
-    HashMap<String, String> petBreedHashMap = new HashMap<>();
-    HashMap<String, String> petAgeHashMap = new HashMap<>();
-    HashMap<String, String> petColorHashMap = new HashMap<>();
-    HashMap<String, String> petSizeHashMap = new HashMap<>();
-    HashMap<String, String> petSexHashMap = new HashMap<>();
-
+    Methods                     methods;
+    AppCompatSpinner            add_pet_type, add_pet_breed_dialog, add_pet_color_dialog;
+    EditText                    pet_name_ET;
+    TextView                    calenderTextViewDetails;
+    ImageView                   pet_image_IV;
+    MaterialCardView            back_arrow_CV;
+    Button                      pet_update;
+    DatePickerDialog            picker;
+    ArrayList<String>           petType;
+    ArrayList<String>           petBreed;
+    ArrayList<String>           petAge;
+    ArrayList<String>           petColor;
+    ArrayList<String>           petSize;
+    HashMap<String, String>     petTypeHashMap = new HashMap<>();
+    HashMap<String, String>     petBreedHashMap = new HashMap<>();
+    HashMap<String, String>     petAgeHashMap = new HashMap<>();
+    HashMap<String, String>     petColorHashMap = new HashMap<>();
+    HashMap<String, String>     petSizeHashMap = new HashMap<>();
+    HashMap<String, String>     petSexHashMap = new HashMap<>();
     private static final String IMAGE_DIRECTORY = "/Picture";
-    private int GALLERY = 1, CAMERA = 2;
-    File file = null;
-    File fileImg1 = null;
-    File fileImg2 = null;
-    File fileImg3 = null;
-    File fileImg4 = null;
-    File fileImg5 = null;
-    Bitmap bitmap, thumbnail;
-    String capImage;
-
-    String pet_id = "", currentDateandTime = "", strPetCategory = "", strPetName = "", strPetParentName = "", image_url = "",
-            strPetContactNumber = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
-            strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "",
-            strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
-            strSpnrSex = "", strSpnrSexId = "", selctProflImage = "0", strProfileImgUrl = null, strFirstImgUrl = "", strSecondImgUrl = "",
-            strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "", strDateofBirthObject = "";
-    Dialog dialog;
-
-    RadioGroup genderRG;
-    RadioButton maleRB, femaleRB;
-
-    LinearLayout upload_image_LL;
-    ConstraintLayout uploaded_image_CL;
-    RelativeLayout remove_image_RL;
-    TextView change_image_TV,upload_image_TV,image_path_TV;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
-    Dialog storagePermissionDialog,cameraPermissionDialog;
-    boolean cameraDialog= false, storageDialog= false;
-    MediaUtils mediaUtils;
+    File                        file = null;
+    String                      pet_id = "", currentDateandTime = "", strPetCategory = "", strPetName = "", strPetParentName = "", image_url = "",
+                                strPetContactNumber = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
+                                strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "",
+                                strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
+                                strSpnrSex = "", strSpnrSexId = "", selctProflImage = "0", strProfileImgUrl = null, strFirstImgUrl = "", strSecondImgUrl = "",
+                                strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "", strDateofBirthObject = "";
+    Dialog                      dialog;
+    RadioGroup                  genderRG;
+    RadioButton                 maleRB, femaleRB;
+    LinearLayout                upload_image_LL;
+    ConstraintLayout            uploaded_image_CL;
+    RelativeLayout              remove_image_RL;
+    TextView                    change_image_TV,upload_image_TV,image_path_TV;
+    private static final int    MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
+    Dialog                      storagePermissionDialog,cameraPermissionDialog;
+    boolean                     cameraDialog= false, storageDialog= false;
+    MediaUtils                  mediaUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_pet_details);
-        methods = new Methods(this);
-        mediaUtils=new MediaUtils(this);
+        methods     = new Methods(this);
+        mediaUtils  = new MediaUtils(this);
         currentDateAndTime();
         Bundle extras = getIntent().getExtras();
         init();
         checkStorageAndCameraPermission();
-        upload_image_LL = findViewById(R.id.upload_image_LL);
-        uploaded_image_CL = findViewById(R.id.uploaded_image_CL);
-        remove_image_RL = findViewById(R.id.remove_image_RL);
-        change_image_TV = findViewById(R.id.change_image_TV);
-        upload_image_TV = findViewById(R.id.upload_image_TV);
-        image_path_TV = findViewById(R.id.image_path_TV);
+
+        upload_image_LL     = findViewById(R.id.upload_image_LL);
+        uploaded_image_CL   = findViewById(R.id.uploaded_image_CL);
+        remove_image_RL     = findViewById(R.id.remove_image_RL);
+        change_image_TV     = findViewById(R.id.change_image_TV);
+        upload_image_TV     = findViewById(R.id.upload_image_TV);
+        image_path_TV       = findViewById(R.id.image_path_TV);
 
         upload_image_LL.setOnClickListener(this);
         remove_image_RL.setOnClickListener(this);
@@ -202,19 +190,19 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     }
 
     private void init() {
-        maleRB = findViewById(R.id.maleRB);
-        genderRG = findViewById(R.id.genderRG);
-        femaleRB = findViewById(R.id.femaleRB);
+        maleRB                  = findViewById(R.id.maleRB);
+        genderRG                = findViewById(R.id.genderRG);
+        femaleRB                = findViewById(R.id.femaleRB);
 
-        add_pet_type = findViewById(R.id.add_pet_type);
+        add_pet_type            = findViewById(R.id.add_pet_type);
       
-        add_pet_breed_dialog = findViewById(R.id.add_pet_breed_dialog);
-        add_pet_color_dialog = findViewById(R.id.add_pet_color_dialog);
-        pet_name_ET = findViewById(R.id.pet_name_ET);
+        add_pet_breed_dialog    = findViewById(R.id.add_pet_breed_dialog);
+        add_pet_color_dialog    = findViewById(R.id.add_pet_color_dialog);
+        pet_name_ET             = findViewById(R.id.pet_name_ET);
         calenderTextViewDetails = findViewById(R.id.calenderTextViewDetails);
-        pet_image_IV = findViewById(R.id.pet_image_IV);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        pet_update = findViewById(R.id.pet_submit);
+        pet_image_IV            = findViewById(R.id.pet_image_IV);
+        back_arrow_CV           = findViewById(R.id.back_arrow_CV);
+        pet_update              = findViewById(R.id.pet_submit);
 
         back_arrow_CV.setOnClickListener(this);
         pet_update.setOnClickListener(this);
@@ -403,12 +391,12 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.pet_submit:
-                strPetName = pet_name_ET.getText().toString().trim();
-                strPetParentName = Config.user_name;
+                strPetName          = pet_name_ET.getText().toString().trim();
+                strPetParentName    = Config.user_name;
                 strPetContactNumber = Config.user_phone;
-                strPetDescription = "";
-                strPetAdress = Config.user_address;
-                strPetBirthDay = calenderTextViewDetails.getText().toString().trim();
+                strPetDescription   = "";
+                strPetAdress        = Config.user_address;
+                strPetBirthDay      = calenderTextViewDetails.getText().toString().trim();
                 if (maleRB.isChecked()) {
                     strSpnrSexId = "1";
                 } else if (femaleRB.isChecked()) {
@@ -463,10 +451,10 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 break;
 
             case R.id.calenderTextViewDetails:
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+                final Calendar cldr     = Calendar.getInstance();
+                int day                 = cldr.get(Calendar.DAY_OF_MONTH);
+                int month               = cldr.get(Calendar.MONTH);
+                int year                = cldr.get(Calendar.YEAR);
                 // date picker dialog
                 picker = new DatePickerDialog(UpdatePetProfileActivity.this,
                         new DatePickerDialog.OnDateSetListener() {

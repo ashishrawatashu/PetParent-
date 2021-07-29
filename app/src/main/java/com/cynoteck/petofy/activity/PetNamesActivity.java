@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,29 +35,25 @@ import retrofit2.Response;
 
 public class PetNamesActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnAlphabetClickListener, OnItemClickListener {
 
-    ImageView back_arrow_IV;
-    EditText search_names_ET;
-    RelativeLayout all_pet_RL;
-    TextView all_TV;
-
-    RecyclerView a_to_z_RV;
-
-    LinearLayout dog_select_LL,cat_select_LL;
-
-    ImageView cat_check_IV,dog_check_IV;
-    TextView dog_TV,cat_TV;
-    LinearLayout male_select_LL,female_select_LL;
-    ImageView female_check_IV,male_check_IV;
-    TextView male_TV,female_TV;
-    RecyclerView pet_names_RV;
-
-    Methods methods;
-    List<String> aToZList = new ArrayList<>();
-    List<GetPetNamesData> getPetNamesDataList;
-    AToZAlphabetsAdapter aToZAlphabetsAdapter;
-    GetPetNamesResponse getPetNamesResponse;
-    PetNamesAdapter petNamesAdapter;
-    String petCategoryId ="1",selectedAlphabet="All",petGenderId="1";
+    ImageView                   back_arrow_IV;
+    EditText                    search_names_ET;
+    RelativeLayout              all_pet_RL;
+    TextView                    all_TV;
+    RecyclerView                a_to_z_RV;
+    LinearLayout                dog_select_LL,cat_select_LL;
+    ImageView                   cat_check_IV,dog_check_IV;
+    TextView                    dog_TV,cat_TV;
+    LinearLayout                male_select_LL,female_select_LL;
+    ImageView                   female_check_IV,male_check_IV;
+    TextView                    male_TV,female_TV;
+    RecyclerView                pet_names_RV;
+    Methods                     methods;
+    List<String>                aToZList = new ArrayList<>();
+    List<GetPetNamesData>       getPetNamesDataList;
+    AToZAlphabetsAdapter        aToZAlphabetsAdapter;
+    GetPetNamesResponse         getPetNamesResponse;
+    PetNamesAdapter             petNamesAdapter;
+    String                      petCategoryId ="1",selectedAlphabet="All",petGenderId="1";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,25 +111,25 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initialization() {
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        search_names_ET = findViewById(R.id.search_names_ET);
-        all_TV = findViewById(R.id.all_TV);
-        all_pet_RL = findViewById(R.id.all_pet_RL);
-        dog_select_LL = findViewById(R.id.dog_select_LL);
-        cat_select_LL = findViewById(R.id.cat_select_LL);
-        cat_check_IV = findViewById(R.id.cat_check_IV);
-        dog_check_IV = findViewById(R.id.dog_check_IV);
-        dog_TV = findViewById(R.id.dog_TV);
-        cat_TV = findViewById(R.id.cat_TV);
-        pet_names_RV = findViewById(R.id.pet_names_RV);
-        a_to_z_RV = findViewById(R.id.a_to_z_RV);
+        back_arrow_IV           = findViewById(R.id.back_arrow_IV);
+        search_names_ET         = findViewById(R.id.search_names_ET);
+        all_TV                  = findViewById(R.id.all_TV);
+        all_pet_RL              = findViewById(R.id.all_pet_RL);
+        dog_select_LL           = findViewById(R.id.dog_select_LL);
+        cat_select_LL           = findViewById(R.id.cat_select_LL);
+        cat_check_IV            = findViewById(R.id.cat_check_IV);
+        dog_check_IV            = findViewById(R.id.dog_check_IV);
+        dog_TV                  = findViewById(R.id.dog_TV);
+        cat_TV                  = findViewById(R.id.cat_TV);
+        pet_names_RV            = findViewById(R.id.pet_names_RV);
+        a_to_z_RV               = findViewById(R.id.a_to_z_RV);
 
-        male_select_LL = findViewById(R.id.male_select_LL);
-        female_select_LL = findViewById(R.id.female_select_LL);
-        male_TV = findViewById(R.id.male_TV);
-        female_TV = findViewById(R.id.female_TV);
-        male_check_IV = findViewById(R.id.male_check_IV);
-        female_check_IV = findViewById(R.id.female_check_IV);
+        male_select_LL          = findViewById(R.id.male_select_LL);
+        female_select_LL        = findViewById(R.id.female_select_LL);
+        male_TV                 = findViewById(R.id.male_TV);
+        female_TV               = findViewById(R.id.female_TV);
+        male_check_IV           = findViewById(R.id.male_check_IV);
+        female_check_IV         = findViewById(R.id.female_check_IV);
 
 
         back_arrow_IV.setOnClickListener(this);
@@ -146,6 +143,7 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){

@@ -21,9 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.MyViewHolder>  {
 
-    Context context;
-    ArrayList<PetList> profileList;
-    private ViewDeatilsAndIdCardClick onProductItemClickListner;
+    Context                             context;
+    ArrayList<PetList>                  profileList;
+    private ViewDeatilsAndIdCardClick   onProductItemClickListner;
 
     public RegisterPetAdapter(Context context, ArrayList<PetList> profileList, ViewDeatilsAndIdCardClick onProductItemClickListner) {
         this.context = context;
@@ -58,22 +58,21 @@ public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView petRegImage_IV;
-        TextView pet_reg__id_TV,pet_reg_date_of_birth_TV,pet_reg_name_TV,pet_reg_gender_TV,parent_name_TV;
-        Button view_reg_pet_details_BT,view_reports_BT;
-        LinearLayout view_details_LL;
+        ImageView       petRegImage_IV;
+        TextView        pet_reg__id_TV,pet_reg_date_of_birth_TV,pet_reg_name_TV,pet_reg_gender_TV,parent_name_TV;
+        Button          view_reg_pet_details_BT,view_reports_BT;
+        LinearLayout    view_details_LL;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            petRegImage_IV = itemView.findViewById(R.id.petRegImage_IV);
-
-            parent_name_TV = itemView.findViewById(R.id.parent_name_TV);
-            pet_reg__id_TV = itemView.findViewById(R.id.pet_reg__id_TV);
-            pet_reg_date_of_birth_TV = itemView.findViewById(R.id.pet_reg_date_of_birth_TV);
-            pet_reg_name_TV = itemView.findViewById(R.id.pet_reg_name_TV);
-            view_reg_pet_details_BT = itemView.findViewById(R.id.view_reg_pet_details_BT);
-            view_reports_BT=itemView.findViewById(R.id.view_reports_BT);
-            view_details_LL = itemView.findViewById(R.id.view_details_LL);
+            petRegImage_IV              = itemView.findViewById(R.id.petRegImage_IV);
+            parent_name_TV              = itemView.findViewById(R.id.parent_name_TV);
+            pet_reg__id_TV              = itemView.findViewById(R.id.pet_reg__id_TV);
+            pet_reg_date_of_birth_TV    = itemView.findViewById(R.id.pet_reg_date_of_birth_TV);
+            pet_reg_name_TV             = itemView.findViewById(R.id.pet_reg_name_TV);
+            view_reg_pet_details_BT     = itemView.findViewById(R.id.view_reg_pet_details_BT);
+            view_reports_BT             = itemView.findViewById(R.id.view_reports_BT);
+            view_details_LL             = itemView.findViewById(R.id.view_details_LL);
             view_details_LL.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

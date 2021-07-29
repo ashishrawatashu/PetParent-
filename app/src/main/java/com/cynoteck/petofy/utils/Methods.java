@@ -57,10 +57,10 @@ public class Methods {
     public final boolean isInternetOn() {
         boolean flag = false;
         ConnectivityManager connec = (ConnectivityManager) c.getSystemService(c.CONNECTIVITY_SERVICE);
-        if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
-                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
+        if (connec.getNetworkInfo(0).getState()         == android.net.NetworkInfo.State.CONNECTED ||
+                connec.getNetworkInfo(0).getState()     == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState()     == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState()     == android.net.NetworkInfo.State.CONNECTED) {
             flag = true;
 
 
@@ -72,18 +72,6 @@ public class Methods {
     }
 
     public void DialogInternet() {
-
-//        AlertDialog.Builder ad = new AlertDialog.Builder(c);
-//        ad.setMessage(R.string.CheckInternet);
-//        ad.setCancelable(true);
-//        ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        ad.show();
 
         internetDialog = new Dialog(c);
         internetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

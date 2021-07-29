@@ -48,18 +48,18 @@ import org.json.JSONArray;
 import retrofit2.Response;
 
 public class SelectPetReportsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener {
-    String pet_image_url, pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, pet_DOB, pet_encrypted_id, pet_age;
-    MaterialCardView back_arrow_CV;
-    TextView pet_reg_name_TV, pet_reg__id_TV, parent_name_TV, pet_reg_date_of_birth_TV;
-    VisitTypesAdapter visitTypesAdapter;
-    RecyclerView reports_types_RV;
-    RelativeLayout reports_list_RL;
-    ArrayList<GetReportsTypeData> getReportsTypeData;
-    ConstraintLayout xray_layout, hospitalization_layout;
-    Methods methods;
-    WebView webview;
-    ImageView petRegImage_IV;
-    ProgressBar progressBar;
+    String                          pet_image_url, pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, pet_DOB, pet_encrypted_id, pet_age;
+    MaterialCardView                back_arrow_CV;
+    TextView                        pet_reg_name_TV, pet_reg__id_TV, parent_name_TV, pet_reg_date_of_birth_TV;
+    VisitTypesAdapter               visitTypesAdapter;
+    RecyclerView                    reports_types_RV;
+    RelativeLayout                  reports_list_RL;
+    ArrayList<GetReportsTypeData>   getReportsTypeData;
+    ConstraintLayout                xray_layout, hospitalization_layout;
+    Methods                         methods;
+    WebView                         webview;
+    ImageView                       petRegImage_IV;
+    ProgressBar                     progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,28 +86,29 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
     }
 
     private void init() {
-        Bundle extras = getIntent().getExtras();
-        pet_id = extras.getString("pet_id");
-        pet_image_url = extras.getString("pet_image_url");
-        pet_unique_id = extras.getString("pet_unique_id");
-        pet_name = extras.getString("pet_name");
-        pet_sex = extras.getString("pet_sex");
-        pet_owner_name = extras.getString("pet_owner_name");
-        pet_DOB = extras.getString("pet_DOB");
-        pet_encrypted_id = extras.getString("pet_encrypted_id");
-        pet_age = extras.getString("pet_age");
-        reports_types_RV = findViewById(R.id.reports_types_RV);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        pet_reg_name_TV = findViewById(R.id.pet_reg_name_TV);
-        pet_reg__id_TV = findViewById(R.id.pet_reg__id_TV);
-        parent_name_TV = findViewById(R.id.parent_name_TV);
-        pet_reg_date_of_birth_TV = findViewById(R.id.pet_reg_date_of_birth_TV);
-        reports_list_RL = findViewById(R.id.reports_list_RL);
-        xray_layout = findViewById(R.id.xray_layout);
-        petRegImage_IV = findViewById(R.id.petRegImage_IV);
-        hospitalization_layout = findViewById(R.id.hospitalization_layout);
-        progressBar=findViewById(R.id.progressBar);
-        webview = findViewById(R.id.webview);
+        Bundle extras               = getIntent().getExtras();
+        pet_id                      = extras.getString("pet_id");
+        pet_image_url               = extras.getString("pet_image_url");
+        pet_unique_id               = extras.getString("pet_unique_id");
+        pet_name                    = extras.getString("pet_name");
+        pet_sex                     = extras.getString("pet_sex");
+        pet_owner_name              = extras.getString("pet_owner_name");
+        pet_DOB                     = extras.getString("pet_DOB");
+        pet_encrypted_id            = extras.getString("pet_encrypted_id");
+        pet_age                     = extras.getString("pet_age");
+        reports_types_RV            = findViewById(R.id.reports_types_RV);
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        pet_reg_name_TV             = findViewById(R.id.pet_reg_name_TV);
+        pet_reg__id_TV              = findViewById(R.id.pet_reg__id_TV);
+        parent_name_TV              = findViewById(R.id.parent_name_TV);
+        pet_reg_date_of_birth_TV    = findViewById(R.id.pet_reg_date_of_birth_TV);
+        reports_list_RL             = findViewById(R.id.reports_list_RL);
+        xray_layout                 = findViewById(R.id.xray_layout);
+        petRegImage_IV              = findViewById(R.id.petRegImage_IV);
+        hospitalization_layout      = findViewById(R.id.hospitalization_layout);
+        progressBar                 = findViewById(R.id.progressBar);
+        webview                     = findViewById(R.id.webview);
+
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
         back_arrow_CV.setOnClickListener(this);

@@ -26,22 +26,18 @@ import java.util.Enumeration;
 
 public class SplashScreen extends AppCompatActivity {
 
-    Animation animation;
-    ImageView splash_logo;
-    Methods methods;
+    Animation   animation;
+    ImageView   splash_logo;
+    Methods     methods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        splash_logo = (ImageView) findViewById(R.id.splashlogo);
-        methods = new Methods(this);
+        splash_logo     = findViewById(R.id.splashlogo);
+        methods         = new Methods(this);
 
-
-      /*  ActionBar actionBar=getSupportActionBar();
-        actionBar.hide();*/
-
-        animation = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.bounce);
+        animation       = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.bounce);
         splash_logo.setAnimation(animation);
         NetwordDetect();
         updateMethod();

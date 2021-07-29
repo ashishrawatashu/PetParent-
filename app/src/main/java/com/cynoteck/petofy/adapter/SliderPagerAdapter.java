@@ -17,10 +17,10 @@ import com.cynoteck.petofy.onClicks.OnSliderClickListener;
 import java.util.ArrayList;
 
 public class SliderPagerAdapter extends PagerAdapter {
-    private LayoutInflater layoutInflater;
-    Activity activity;
-    ArrayList<Integer> image_arraylist;
-    OnSliderClickListener onItemClickListener;
+    private LayoutInflater  layoutInflater;
+    Activity                activity;
+    ArrayList<Integer>      image_arraylist;
+    OnSliderClickListener       onItemClickListener;
 
     public SliderPagerAdapter(Activity activity, ArrayList<Integer> image_arraylist,OnSliderClickListener onItemClickListener) {
         this.activity               = activity;
@@ -30,9 +30,8 @@ public class SliderPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View view = layoutInflater.inflate(R.layout.layout_slider, container, false);
+        layoutInflater      = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view           = layoutInflater.inflate(R.layout.layout_slider, container, false);
         ImageView im_slider = view.findViewById(R.id.im_slider);
         Glide.with(activity.getApplicationContext()).load(image_arraylist.get(position)).into(im_slider);
         container.addView(view);

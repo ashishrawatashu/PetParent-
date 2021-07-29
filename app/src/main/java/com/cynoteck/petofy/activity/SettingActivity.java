@@ -24,17 +24,18 @@ import com.cynoteck.petofy.utils.Config;
 import retrofit2.Response;
 
 public class SettingActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
-    ImageView back_arrow_IV;
-    TextView two_fact_auth_TV;
-    SwitchCompat two_fact_auth_SC;
-    String status="";
+    ImageView           back_arrow_IV;
+    TextView            two_fact_auth_TV;
+    SwitchCompat        two_fact_auth_SC;
+    String              status="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        two_fact_auth_SC =findViewById(R.id.two_fact_auth_SC);
-        two_fact_auth_TV=findViewById(R.id.two_fact_auth_TV);
+        back_arrow_IV       = findViewById(R.id.back_arrow_IV);
+        two_fact_auth_SC    = findViewById(R.id.two_fact_auth_SC);
+        two_fact_auth_TV    = findViewById(R.id.two_fact_auth_TV);
+
         back_arrow_IV.setOnClickListener(this);
         setTwoFactData();
         switchOnline();  

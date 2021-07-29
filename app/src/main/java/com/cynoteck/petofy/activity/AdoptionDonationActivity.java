@@ -34,18 +34,18 @@ import static com.cynoteck.petofy.activity.DonationActivity.total_donation_reque
 
 public class AdoptionDonationActivity extends AppCompatActivity implements View.OnClickListener , ApiResponse {
 
-    MaterialCardView back_arrow_CV;
-    ImageView adopt_IV, donate_IV;
-    Methods methods;
+    MaterialCardView    back_arrow_CV;
+    ImageView           adopt_IV, donate_IV;
+    Methods             methods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adoption_donation);
-        methods = new Methods(this);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        adopt_IV = findViewById(R.id.adopt_IV);
-        donate_IV = findViewById(R.id.donate_IV);
+        methods         = new Methods(this);
+        back_arrow_CV   = findViewById(R.id.back_arrow_CV);
+        adopt_IV        = findViewById(R.id.adopt_IV);
+        donate_IV       = findViewById(R.id.donate_IV);
 
 
         back_arrow_CV.setOnClickListener(this);

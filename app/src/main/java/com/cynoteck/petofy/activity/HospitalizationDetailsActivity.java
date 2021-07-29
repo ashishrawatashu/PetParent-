@@ -33,16 +33,16 @@ import retrofit2.Response;
 
 public class HospitalizationDetailsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
-    TextView vet_name_textView,requesting_contact_textView,hospital_type_textView,hospital_name_textView,admission_date_textView,discharge_date_textView,hospital_phone_textView,reson_of_visit_textView,result_textView;
-    Button view_file_BT, deleteReport_BT;
-    ImageView petRegImage_IV;
-    MaterialCardView back_arrow_CV;
-    TextView pet_reg_name_TV,pet_reg_date_of_birth_TV,pet_reg__id_TV,parent_name_TV,pet_owner_phone_no_TV;
-    String pet_DOB, pet_image_url, pet_unique_id, pet_name,pet_sex, pet_owner_name,pet_owner_contact,pet_id ,report_type_id,type;
-    ProgressBar progressBar;
-    Methods methods;
-    RelativeLayout card_view;
-    Uri localUri;
+    TextView            vet_name_textView,requesting_contact_textView,hospital_type_textView,hospital_name_textView,admission_date_textView,discharge_date_textView,hospital_phone_textView,reson_of_visit_textView,result_textView;
+    Button              view_file_BT, deleteReport_BT;
+    ImageView           petRegImage_IV;
+    MaterialCardView    back_arrow_CV;
+    TextView            pet_reg_name_TV,pet_reg_date_of_birth_TV,pet_reg__id_TV,parent_name_TV,pet_owner_phone_no_TV;
+    String              pet_DOB, pet_image_url, pet_unique_id, pet_name,pet_sex, pet_owner_name,pet_owner_contact,pet_id ,report_type_id,type;
+    ProgressBar         progressBar;
+    Methods             methods;
+    RelativeLayout      card_view;
+    Uri                 localUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,27 +71,26 @@ public class HospitalizationDetailsActivity extends AppCompatActivity implements
     }
 
     private void init() {
-        view_file_BT=findViewById(R.id.view_file_BT);
-        card_view = findViewById(R.id.card_view);
-        progressBar = findViewById(R.id.progressBar);
-        vet_name_textView = findViewById(R.id.vet_name_textView);
-        requesting_contact_textView = findViewById(R.id.requesting_contact_textView);
-        hospital_type_textView = findViewById(R.id.hospital_type_textView);
-        hospital_name_textView = findViewById(R.id.hospital_name_textView);
-        admission_date_textView = findViewById(R.id.admission_date_textView);
-        discharge_date_textView = findViewById(R.id.discharge_date_textView);
-        hospital_phone_textView = findViewById(R.id.hospital_phone_textView);
-        reson_of_visit_textView = findViewById(R.id.reson_of_visit_textView);
-        result_textView = findViewById(R.id.result_textView);
-        petRegImage_IV=findViewById(R.id.petRegImage_IV);
+        view_file_BT                    = findViewById(R.id.view_file_BT);
+        card_view                       = findViewById(R.id.card_view);
+        progressBar                     = findViewById(R.id.progressBar);
+        vet_name_textView               = findViewById(R.id.vet_name_textView);
+        requesting_contact_textView     = findViewById(R.id.requesting_contact_textView);
+        hospital_type_textView          = findViewById(R.id.hospital_type_textView);
+        hospital_name_textView          = findViewById(R.id.hospital_name_textView);
+        admission_date_textView         = findViewById(R.id.admission_date_textView);
+        discharge_date_textView         = findViewById(R.id.discharge_date_textView);
+        hospital_phone_textView         = findViewById(R.id.hospital_phone_textView);
+        reson_of_visit_textView         = findViewById(R.id.reson_of_visit_textView);
+        result_textView                 = findViewById(R.id.result_textView);
+        petRegImage_IV                  = findViewById(R.id.petRegImage_IV);
 
-
-        pet_reg_name_TV = findViewById(R.id.pet_reg_name_TV);
-        pet_reg_date_of_birth_TV = findViewById(R.id.pet_reg_date_of_birth_TV);
-        pet_reg__id_TV = findViewById(R.id.pet_reg__id_TV);
-        parent_name_TV = findViewById(R.id.parent_name_TV);
-        deleteReport_BT = findViewById(R.id.deleteReport_BT);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
+        pet_reg_name_TV                 = findViewById(R.id.pet_reg_name_TV);
+        pet_reg_date_of_birth_TV        = findViewById(R.id.pet_reg_date_of_birth_TV);
+        pet_reg__id_TV                  = findViewById(R.id.pet_reg__id_TV);
+        parent_name_TV                  = findViewById(R.id.parent_name_TV);
+        deleteReport_BT                 = findViewById(R.id.deleteReport_BT);
+        back_arrow_CV                   = findViewById(R.id.back_arrow_CV);
 
         back_arrow_CV.setOnClickListener(this);
         view_file_BT.setOnClickListener(this);
@@ -99,17 +98,17 @@ public class HospitalizationDetailsActivity extends AppCompatActivity implements
     }
 
     private void getIntentData() {
-
         Intent extras = getIntent();
-        pet_id = extras.getExtras().getString("pet_id");
-        pet_owner_contact = extras.getExtras().getString("pet_owner_contact");
-        pet_owner_name = extras.getExtras().getString("pet_owner_name");
-        pet_sex = extras.getExtras().getString("pet_sex");
-        pet_name = extras.getExtras().getString("pet_name");
-        pet_unique_id = extras.getExtras().getString("pet_unique_id");
-        report_type_id=extras.getExtras().getString("report_id");
-        pet_image_url=extras.getExtras().getString("pet_image_url");
-        pet_DOB = extras.getExtras().getString("pet_DOB");
+
+        pet_id              = extras.getExtras().getString("pet_id");
+        pet_owner_contact   = extras.getExtras().getString("pet_owner_contact");
+        pet_owner_name      = extras.getExtras().getString("pet_owner_name");
+        pet_sex             = extras.getExtras().getString("pet_sex");
+        pet_name            = extras.getExtras().getString("pet_name");
+        pet_unique_id       = extras.getExtras().getString("pet_unique_id");
+        report_type_id      = extras.getExtras().getString("report_id");
+        pet_image_url       = extras.getExtras().getString("pet_image_url");
+        pet_DOB             = extras.getExtras().getString("pet_DOB");
 
 
     }

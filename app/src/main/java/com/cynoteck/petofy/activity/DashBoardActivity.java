@@ -42,45 +42,43 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class DashBoardActivity extends AppCompatActivity {
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
+    public static final int     MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private final int           MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
+    private GpsTracker          gpsTracker;
+    public static final         String channel_id = "channel_id";
+    private static final        String channel_name = "channel_name";
+    private static final        String channel_desc = "channel_desc";
+    boolean                     exit = false;
+    Methods                     methods;
+    String                      petId = "", from = "";
+    LocationManager             locationManager;
+    private static final int    REQUEST_LOCATION = 1;
+    private BroadcastReceiver   mNetworkReceiver;
+    SharedPreferences           sharedPreferences;
+    SharedPreferences.Editor    login_editor;
+    Dialog                      location_permission_dialog;
+    Dialog                      storagePermissionDialog,cameraPermissionDialog;
+    BottomNavigationView        navigation;
+    final Fragment              fragment1 = new ParentHomeFragment();
+    final Fragment              fragment2 = new PetRegisterFragment();
+    final Fragment              fragment3 = new AppointmentListFragment();
+    final Fragment              fragment4 = new ProfileFragment();
+    final FragmentManager       fm        = getSupportFragmentManager();
+    Fragment                    active    = fragment1;
+    boolean                     cameraDialog= false, storageDialog= false;
+    boolean                     locationPermission = false;
 
-    private GpsTracker gpsTracker;
-    public static final String channel_id = "channel_id";
-    private static final String channel_name = "channel_name";
-    private static final String channel_desc = "channel_desc";
-    boolean exit = false;
-    Methods methods;
-    String petId = "", from = "";
-    LocationManager locationManager;
-    private static final int REQUEST_LOCATION = 1;
-
-    final Fragment fragment1 = new ParentHomeFragment();
-    final Fragment fragment2 = new PetRegisterFragment();
-    final Fragment fragment3 = new AppointmentListFragment();
-    final Fragment fragment4 = new ProfileFragment();
-
-    final FragmentManager fm = getSupportFragmentManager();
-    Fragment active = fragment1;
-    BottomNavigationView navigation;
-
-    private BroadcastReceiver mNetworkReceiver;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-
-    Dialog location_permission_dialog;
-    Dialog storagePermissionDialog,cameraPermissionDialog;
-
-    boolean locationPermission = false;
-    boolean cameraDialog= false, storageDialog= false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
+
         methods = new Methods(this);
+
         notificationMethod();
         checkCameraPermission();
         registerNetworkBroadcastForNougat();
+
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -100,27 +98,26 @@ public class DashBoardActivity extends AppCompatActivity {
         }
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
-        Config.token = sharedPreferences.getString("token", "");
-        Config.user_id = sharedPreferences.getString("userId", "");
-        Config.user_phone = sharedPreferences.getString("phoneNumber", "");
-        Config.user_emial = sharedPreferences.getString("email", "");
-        Config.user_name = sharedPreferences.getString("firstName", "") + " " + sharedPreferences.getString("lastName", "");
-        Config.user_address = sharedPreferences.getString("address", "");
-        Config.user_online = sharedPreferences.getString("onlineAppoint", "");
-        Config.user_study = sharedPreferences.getString("study", "");
-        Config.user_url = sharedPreferences.getString("profilePic", "");
-        Config.two_fact_auth_status = sharedPreferences.getString("twoFactAuth", "");
-        Config.parent_encryptedId = sharedPreferences.getString("encryptedId", "");
-        Config.first_name = sharedPreferences.getString("firstName", "");
-        Config.last_name = sharedPreferences.getString("lastName", "");
-//        Config.latitude = sharedPreferences.getString("userLatitude", "");
-//        Config.longitude = sharedPreferences.getString("userLongitude", "");
-        Config.cityId = sharedPreferences.getString("CityId", "");
-        Config.cityName = sharedPreferences.getString("cityName", "");
-        Config.cityFullName = sharedPreferences.getString("CityFullName", "");
-        Config.locationPermission = sharedPreferences.getString("locationPermission", "");
-
+        SharedPreferences sharedPreferences     = getSharedPreferences("userDetails", 0);
+        Config.token                            = sharedPreferences.getString("token", "");
+        Config.user_id                          = sharedPreferences.getString("userId", "");
+        Config.user_phone                       = sharedPreferences.getString("phoneNumber", "");
+        Config.user_emial                       = sharedPreferences.getString("email", "");
+        Config.user_name                        = sharedPreferences.getString("firstName", "") + " " + sharedPreferences.getString("lastName", "");
+        Config.user_address                     = sharedPreferences.getString("address", "");
+        Config.user_online                      = sharedPreferences.getString("onlineAppoint", "");
+        Config.user_study                       = sharedPreferences.getString("study", "");
+        Config.user_url                         = sharedPreferences.getString("profilePic", "");
+        Config.two_fact_auth_status             = sharedPreferences.getString("twoFactAuth", "");
+        Config.parent_encryptedId               = sharedPreferences.getString("encryptedId", "");
+        Config.first_name                       = sharedPreferences.getString("firstName", "");
+        Config.last_name                        = sharedPreferences.getString("lastName", "");
+        Config.cityId                           = sharedPreferences.getString("CityId", "");
+        Config.cityName                         = sharedPreferences.getString("cityName", "");
+        Config.cityFullName                     = sharedPreferences.getString("CityFullName", "");
+        Config.locationPermission               = sharedPreferences.getString("locationPermission", "");
+//      Config.latitude                         = sharedPreferences.getString("userLatitude", "");
+//      Config.longitude                        = sharedPreferences.getString("userLongitude", "");
         if (Config.locationPermission.equals("false")){
             showLocationPermissionDialog();
         }else {
@@ -229,8 +226,8 @@ public class DashBoardActivity extends AppCompatActivity {
     }
 
     private void showCameraPermissionDialog() {
-        cameraDialog = true;
-        cameraPermissionDialog = new Dialog(this);
+        cameraDialog            = true;
+        cameraPermissionDialog  = new Dialog(this);
         cameraPermissionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         cameraPermissionDialog.setCancelable(false);
         cameraPermissionDialog.setContentView(R.layout.camera_permission_dialog);
@@ -312,7 +309,6 @@ public class DashBoardActivity extends AppCompatActivity {
                     fm.beginTransaction().hide(fragment2).commit();
                     fm.beginTransaction().hide(fragment3).commit();
                     fm.beginTransaction().hide(fragment4).commit();
-
                     active = fragment1;
                     return true;
 

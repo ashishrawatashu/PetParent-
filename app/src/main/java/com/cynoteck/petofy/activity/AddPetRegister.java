@@ -86,44 +86,31 @@ import retrofit2.Response;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class AddPetRegister extends AppCompatActivity implements View.OnClickListener, ApiResponse, TextWatcher,MediaUtils.GetImg {
-    private final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
-
-    ScrollView scrollView;
-    AppCompatSpinner age_wise, add_pet_age, add_pet_type, add_pet_breed, add_pet_color;
-    EditText pet_name, age_neumeric;
-    TextView peto_reg_number, calenderView, ageViewTv;
-    MaterialCardView back_arrow_CV;
-    Button pet_submit;
-    CheckBox convert_yr_to_age;
-    LinearLayout day_and_age_layout,upload_image_LL;
-    String strPetName = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
-            strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "", strAgeCount = "",
-            strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpneSizeId = "",
-             strSpnrSexId = "", currentDateandTime = "", selctProflImage = "0", strProfileImgUrl = null, strFirstImgUrl = "", strSecondImgUrl = "",
-            strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "";
-    Dialog dialog;
-    ImageView pet_image_IV;
-    ConstraintLayout uploaded_image_CL;
-    TextView upload_image_TV,image_path_TV,change_image_TV;
-    RelativeLayout remove_image_RL;
-    Methods methods;
-    DatePickerDialog picker;
-    ArrayList<String> petType;
-    ArrayList<String> petBreed;
-    ArrayList<String> petAge;
-    ArrayList<String> petColor;
-    ArrayList<String> petAgeType;
-
-    HashMap<String, String> petTypeHashMap = new HashMap<>();
-    HashMap<String, String> petBreedHashMap = new HashMap<>();
-    HashMap<String, String> petAgeHashMap = new HashMap<>();
-    HashMap<String, String> petColorHashMap = new HashMap<>();
-    HashMap<String, String> petAgeUnitHash = new HashMap<>();
-
-    private static final String IMAGE_DIRECTORY = "/Picture";
-    private int GALLERY = 1, CAMERA = 2;
-    File file = null;
-    String intentFrom = "Add";
+    ScrollView                      scrollView;
+    AppCompatSpinner                age_wise, add_pet_age, add_pet_type, add_pet_breed, add_pet_color;
+    EditText                        pet_name, age_neumeric;
+    TextView                        calenderView, ageViewTv;
+    MaterialCardView                back_arrow_CV;
+    Button                          pet_submit;
+    CheckBox                        convert_yr_to_age;
+    LinearLayout                    day_and_age_layout,upload_image_LL;
+    String                          strPetName = "", strPetDescription = "", strPetAdress = "", strPetBirthDay = "",
+                                    strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", petUniqueId = "", strAgeCount = "",
+                                    strSpnrAge = "", strSpnrAgeId = "", strSpnrColor = "", strSpnrColorId = "", strSpneSizeId = "",
+                                    strSpnrSexId = "", currentDateandTime = "", selctProflImage = "0", strProfileImgUrl = null, strFirstImgUrl = "", strSecondImgUrl = "",
+                                    strThirdImgUrl = "", strFourthImUrl = "", strFifthImgUrl = "";
+    Dialog                          dialog;
+    ImageView                       pet_image_IV;
+    ConstraintLayout                uploaded_image_CL;
+    TextView                        upload_image_TV,image_path_TV,change_image_TV;
+    RelativeLayout                  remove_image_RL;
+    Methods                         methods;
+    DatePickerDialog                picker;
+    private final int               MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
+    private static final String     IMAGE_DIRECTORY = "/Picture";
+    private final int               GALLERY = 1, CAMERA = 2;
+    File                            file = null;
+    String                          intentFrom = "Add";
 
     RadioGroup genderRG;
     RadioButton maleRB, femaleRB;
@@ -132,6 +119,19 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     boolean cameraDialog= false, storageDialog= false;
 
     MediaUtils mediaUtils;
+
+    ArrayList<String>               petType;
+    ArrayList<String>               petBreed;
+    ArrayList<String>               petAge;
+    ArrayList<String>               petColor;
+    ArrayList<String>               petAgeType;
+
+    HashMap<String, String> petTypeHashMap = new HashMap<>();
+    HashMap<String, String> petBreedHashMap = new HashMap<>();
+    HashMap<String, String> petAgeHashMap = new HashMap<>();
+    HashMap<String, String> petColorHashMap = new HashMap<>();
+    HashMap<String, String> petAgeUnitHash = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,50 +230,51 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     }
 
     private void init() {
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
+        back_arrow_CV   = findViewById(R.id.back_arrow_CV);
 
-        scrollView = findViewById(R.id.scrollView);
-        maleRB = findViewById(R.id.maleRB);
-        genderRG = findViewById(R.id.genderRG);
-        femaleRB = findViewById(R.id.femaleRB);
+        scrollView      = findViewById(R.id.scrollView);
+        maleRB          = findViewById(R.id.maleRB);
+        genderRG        = findViewById(R.id.genderRG);
+        femaleRB        = findViewById(R.id.femaleRB);
 
 
         //Spinner
-        add_pet_type = findViewById(R.id.add_pet_type);
-        add_pet_breed = findViewById(R.id.add_pet_breed_dialog);
-        add_pet_color = findViewById(R.id.add_pet_color_dialog);
-        add_pet_age = findViewById(R.id.add_pet_age_dialog);
+        add_pet_type    = findViewById(R.id.add_pet_type);
+        add_pet_breed   = findViewById(R.id.add_pet_breed_dialog);
+        add_pet_color   = findViewById(R.id.add_pet_color_dialog);
+        add_pet_age     = findViewById(R.id.add_pet_age_dialog);
 
         //TextInputEditText
-        pet_name = findViewById(R.id.pet_name_ET);
+        pet_name        = findViewById(R.id.pet_name_ET);
 
 
         //TextView
-        calenderView = findViewById(R.id.calenderTextView_dialog);
+        calenderView    = findViewById(R.id.calenderTextView_dialog);
         calenderView.setOnClickListener(this);
 
         //ImageView
-        pet_image_IV = findViewById(R.id.pet_image_IV);
-        upload_image_LL = findViewById(R.id.upload_image_LL);
-        image_path_TV = findViewById(R.id.image_path_TV);
-        upload_image_TV = findViewById(R.id.upload_image_TV);
-        remove_image_RL = findViewById(R.id.remove_image_RL);
-        change_image_TV=findViewById(R.id.change_image_TV);
+        pet_image_IV        = findViewById(R.id.pet_image_IV);
+        upload_image_LL     = findViewById(R.id.upload_image_LL);
+        image_path_TV       = findViewById(R.id.image_path_TV);
+        upload_image_TV     = findViewById(R.id.upload_image_TV);
+        remove_image_RL     = findViewById(R.id.remove_image_RL);
+        change_image_TV     =findViewById(R.id.change_image_TV);
 
         change_image_TV.setOnClickListener(this);
         remove_image_RL.setOnClickListener(this);
         upload_image_LL.setOnClickListener(this);
 
-        uploaded_image_CL = findViewById(R.id.uploaded_image_CL);
-        convert_yr_to_age = findViewById(R.id.convert_yr_to_age);
-        age_wise = findViewById(R.id.age_wise);
-        age_neumeric = findViewById(R.id.age_neumeric);
-        day_and_age_layout = findViewById(R.id.day_and_age_layout);
-        ageViewTv = findViewById(R.id.ageViewTv);
+        uploaded_image_CL   = findViewById(R.id.uploaded_image_CL);
+        convert_yr_to_age   = findViewById(R.id.convert_yr_to_age);
+        age_wise            = findViewById(R.id.age_wise);
+        age_neumeric        = findViewById(R.id.age_neumeric);
+        day_and_age_layout  = findViewById(R.id.day_and_age_layout);
+        ageViewTv           = findViewById(R.id.ageViewTv);
         ageViewTv.setText("Age:- 0 Days");
 
         back_arrow_CV.setOnClickListener(this);
         convert_yr_to_age.setOnClickListener(this);
+
         //Button
         pet_submit = findViewById(R.id.pet_submit);
         pet_submit.setOnClickListener(this);
@@ -365,9 +366,9 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             case R.id.pet_submit:
-                strPetName = pet_name.getText().toString().trim();
-                strPetDescription = "";
-                strPetBirthDay = calenderView.getText().toString().trim();
+                strPetName          = pet_name.getText().toString().trim();
+                strPetDescription   = "";
+                strPetBirthDay      = calenderView.getText().toString().trim();
                 if (maleRB.isChecked()) {
                     strSpnrSexId = "1";
                 } else if (femaleRB.isChecked()) {
@@ -427,19 +428,18 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
             case R.id.calenderTextView_dialog:
                 final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+                int day             = cldr.get(Calendar.DAY_OF_MONTH);
+                int month           = cldr.get(Calendar.MONTH);
+                int year            = cldr.get(Calendar.YEAR);
                 // date picker dialog
                 picker = new DatePickerDialog(com.cynoteck.petofy.activity.AddPetRegister.this,new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 calenderView.setText(Config.changeDateFormat(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year));
-                                String DoB = dayOfMonth + " " + (monthOfYear + 1) + " " + year;
-                                Log.d("jajajaajja", "" + methods.getDays(DoB, methods.getDate()));
-                                String age = String.valueOf(methods.getDays(DoB, methods.getDate()));
-                                String DoBforage = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                                age = age.substring(0, age.length() - 2);
+                                String DoB          = dayOfMonth + " " + (monthOfYear + 1) + " " + year;
+                                String age          = String.valueOf(methods.getDays(DoB, methods.getDate()));
+                                String DoBforage    = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                                age                 = age.substring(0, age.length() - 2);
                                 getPetAgeString(DoBforage);
                                 age_neumeric.setText(age);
                             }
@@ -471,9 +471,9 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_layout);
-        RelativeLayout select_camera = dialog.findViewById(R.id.select_camera);
-        RelativeLayout select_gallery = dialog.findViewById(R.id.select_gallery);
-        RelativeLayout cancel_dialog = dialog.findViewById(R.id.cancel_dialog);
+        RelativeLayout select_camera    = dialog.findViewById(R.id.select_camera);
+        RelativeLayout select_gallery   = dialog.findViewById(R.id.select_gallery);
+        RelativeLayout cancel_dialog    = dialog.findViewById(R.id.cancel_dialog);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         cancel_dialog.setOnClickListener(new View.OnClickListener() {
@@ -487,7 +487,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         select_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                takePhotoFromCamera();
                 mediaUtils.openCamera();
             }
         });
@@ -495,7 +494,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         select_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                choosePhotoFromGallary();
                 mediaUtils.openGallery();
 
             }
@@ -505,21 +503,8 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         dialog.show();
     }
 
-    private void choosePhotoFromGallary() {
 
 
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        startActivityForResult(galleryIntent, GALLERY);
-    }
-
-    private void takePhotoFromCamera() {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA);
-
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
     @Override
@@ -535,7 +520,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File wallpaperDirectory = new File(
                 Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-        // have the object build the directory structure, if needed.
         if (!wallpaperDirectory.exists()) {
             wallpaperDirectory.mkdirs();
         }

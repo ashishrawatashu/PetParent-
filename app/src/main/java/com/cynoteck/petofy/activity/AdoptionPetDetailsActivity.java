@@ -26,12 +26,12 @@ import retrofit2.Response;
 
 public class AdoptionPetDetailsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
-    Methods methods;
-    String from="", PetId = "", petName = "", petGender = "", petAge = "", petBreed = "", petColor = "", image = "", petSize = "", donarName = "", donarPhone = "", donarMail = "", donarAddress = "";
-    ImageView pet_profile_image_IV;
-    TextView pet_name_TV, pet_breed_TV, pet_Color_TV, pet_weight_TV, pet_parent_name_TV, parent_phone_TV, parent_email_TV, parent_address_TV;
-    LinearLayout send_adoption_request_LL;
-    MaterialCardView back_arrow_CV;
+    Methods             methods;
+    String              from="", PetId = "", petName = "", petGender = "", petAge = "", petBreed = "", petColor = "", image = "", petSize = "", donarName = "", donarPhone = "", donarMail = "", donarAddress = "";
+    ImageView           pet_profile_image_IV;
+    TextView            pet_name_TV, pet_breed_TV, pet_Color_TV, pet_weight_TV, pet_parent_name_TV, parent_phone_TV, parent_email_TV, parent_address_TV;
+    LinearLayout        send_adoption_request_LL;
+    MaterialCardView    back_arrow_CV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +43,17 @@ public class AdoptionPetDetailsActivity extends AppCompatActivity implements Api
 
     private void initialize() {
 
-        pet_name_TV = findViewById(R.id.pet_name_TV);
-        pet_breed_TV = findViewById(R.id.pet_breed_TV);
-        pet_Color_TV = findViewById(R.id.pet_Color_TV);
-        pet_weight_TV = findViewById(R.id.pet_weight_TV);
-        pet_parent_name_TV = findViewById(R.id.pet_parent_name_TV);
-        parent_phone_TV = findViewById(R.id.parent_phone_TV);
-        parent_address_TV = findViewById(R.id.parent_address_TV);
-        parent_email_TV = findViewById(R.id.parent_email_TV);
-        pet_profile_image_IV=findViewById(R.id.pet_profile_image_IV);
-        back_arrow_CV= findViewById(R.id.back_arrow_CV);
-
-
-        send_adoption_request_LL = findViewById(R.id.send_adoption_request_LL);
+        pet_name_TV                 = findViewById(R.id.pet_name_TV);
+        pet_breed_TV                = findViewById(R.id.pet_breed_TV);
+        pet_Color_TV                = findViewById(R.id.pet_Color_TV);
+        pet_weight_TV               = findViewById(R.id.pet_weight_TV);
+        pet_parent_name_TV          = findViewById(R.id.pet_parent_name_TV);
+        parent_phone_TV             = findViewById(R.id.parent_phone_TV);
+        parent_address_TV           = findViewById(R.id.parent_address_TV);
+        parent_email_TV             = findViewById(R.id.parent_email_TV);
+        pet_profile_image_IV        = findViewById(R.id.pet_profile_image_IV);
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        send_adoption_request_LL    = findViewById(R.id.send_adoption_request_LL);
 
         send_adoption_request_LL.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);

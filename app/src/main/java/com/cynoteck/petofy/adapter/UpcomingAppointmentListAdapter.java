@@ -22,9 +22,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UpcomingAppointmentListAdapter extends RecyclerView.Adapter<UpcomingAppointmentListAdapter.MyViewHolder> {
 
-    ArrayList<AppointmentList> appointmentList;
-    AppointmentsClickListner appointmentsClickListner;
-    Context context;
+    ArrayList<AppointmentList>  appointmentList;
+    AppointmentsClickListner    appointmentsClickListner;
+    Context                     context;
 
     public UpcomingAppointmentListAdapter(Context context, ArrayList<AppointmentList> appointmentList, AppointmentsClickListner appointmentsClickListner) {
         this.appointmentList = appointmentList;
@@ -148,38 +148,30 @@ public class UpcomingAppointmentListAdapter extends RecyclerView.Adapter<Upcomin
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView parent_profile_CIV;
-        TextView vet_name_TV,appointment_time_TV,parent_appointment_type_TV,pet_name_TV,dr_address_TV,appointment_type_TV,address_TV,payment_TV,payment_pending_TV;
-        Button join_appointment_BT,cancel_appointment_BT,payment_BT;
-        ImageView appointment_type_IV,location_IV,appoint_time_IV,payment_status_IV;
+        CircleImageView     parent_profile_CIV;
+        TextView            vet_name_TV,appointment_time_TV,parent_appointment_type_TV,pet_name_TV,dr_address_TV,appointment_type_TV,address_TV,payment_TV,payment_pending_TV;
+        Button              join_appointment_BT,cancel_appointment_BT,payment_BT;
+        ImageView           appointment_type_IV,location_IV,appoint_time_IV,payment_status_IV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            parent_profile_CIV = itemView.findViewById(R.id.parent_profile_CIV);
-            vet_name_TV = itemView.findViewById(R.id.vet_name_TV);
-            appointment_time_TV = itemView.findViewById(R.id.appointment_time_TV);
-            parent_appointment_type_TV = itemView.findViewById(R.id.parent_appointment_type_TV);
-            pet_name_TV = itemView.findViewById(R.id.pet_name_TV);
-            dr_address_TV = itemView.findViewById(R.id.dr_address_TV);
-            appointment_type_TV = itemView.findViewById(R.id.appointment_type_TV);
-            address_TV = itemView.findViewById(R.id.address_TV);
-            join_appointment_BT = itemView.findViewById(R.id.join_appointment_BT);
-            cancel_appointment_BT = itemView.findViewById(R.id.cancel_appointment_BT);
-            appointment_type_IV = itemView.findViewById(R.id.appointment_type_IV);
-            location_IV = itemView.findViewById(R.id.location_IV);
-            appoint_time_IV = itemView.findViewById(R.id.appoint_time_IV);
-            payment_BT = itemView.findViewById(R.id.payment_BT);
-            payment_pending_TV = itemView.findViewById(R.id.payment_pending_TV);
-            payment_status_IV = itemView.findViewById(R.id.payment_status_IV);
-            payment_TV = itemView.findViewById(R.id.payment_TV);
-//            appointment_CV.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (appointmentsClickListner!=null){
-//                        appointmentsClickListner.onItemClick(getAdapterPosition(),appointmentList);
-//                    }
-//                }
-//            });
+            parent_profile_CIV          = itemView.findViewById(R.id.parent_profile_CIV);
+            vet_name_TV                 = itemView.findViewById(R.id.vet_name_TV);
+            appointment_time_TV         = itemView.findViewById(R.id.appointment_time_TV);
+            parent_appointment_type_TV  = itemView.findViewById(R.id.parent_appointment_type_TV);
+            pet_name_TV                 = itemView.findViewById(R.id.pet_name_TV);
+            dr_address_TV               = itemView.findViewById(R.id.dr_address_TV);
+            appointment_type_TV         = itemView.findViewById(R.id.appointment_type_TV);
+            address_TV                  = itemView.findViewById(R.id.address_TV);
+            join_appointment_BT         = itemView.findViewById(R.id.join_appointment_BT);
+            cancel_appointment_BT       = itemView.findViewById(R.id.cancel_appointment_BT);
+            appointment_type_IV         = itemView.findViewById(R.id.appointment_type_IV);
+            location_IV                 = itemView.findViewById(R.id.location_IV);
+            appoint_time_IV             = itemView.findViewById(R.id.appoint_time_IV);
+            payment_BT                  = itemView.findViewById(R.id.payment_BT);
+            payment_pending_TV          = itemView.findViewById(R.id.payment_pending_TV);
+            payment_status_IV           = itemView.findViewById(R.id.payment_status_IV);
+            payment_TV                  = itemView.findViewById(R.id.payment_TV);
 
             join_appointment_BT.setOnClickListener(new View.OnClickListener() {
                 @Override

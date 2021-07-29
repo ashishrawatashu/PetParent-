@@ -25,29 +25,26 @@ import com.google.android.material.textfield.TextInputLayout;
 import retrofit2.Response;
 
 public class ChangePasswordActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
-    TextInputEditText current_password_TIET ,new_password_TIET ,confirm_password_TIET;
-    TextInputLayout current_password_TIL, new_password_TIL, confirm_password_TIL;
-    Button change_password_BT;
-    Methods methods;
-    String current_password="", new_password="", confirm_password="";
-    MaterialCardView login_back_arrow_CV;
+    TextInputEditText       current_password_TIET ,new_password_TIET ,confirm_password_TIET;
+    TextInputLayout         current_password_TIL, new_password_TIL, confirm_password_TIL;
+    Button                  change_password_BT;
+    Methods                 methods;
+    String                  current_password="", new_password="", confirm_password="";
+    MaterialCardView        login_back_arrow_CV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        methods = new Methods(this);
-        login_back_arrow_CV=findViewById(R.id.login_back_arrow_CV);
-
-        current_password_TIET = findViewById(R.id.current_password_TIET);
-        new_password_TIET = findViewById(R.id.new_password_TIET);
-        confirm_password_TIET = findViewById(R.id.confirm_password_TIET);
-
-        current_password_TIL = findViewById(R.id.current_password_TIL);
-        new_password_TIL = findViewById(R.id.new_password_TIL);
-        confirm_password_TIL = findViewById(R.id.confirm_password_TIL);
-
-        change_password_BT = findViewById(R.id.change_password_BT);
+        methods                 = new Methods(this);
+        login_back_arrow_CV     = findViewById(R.id.login_back_arrow_CV);
+        current_password_TIET   = findViewById(R.id.current_password_TIET);
+        new_password_TIET       = findViewById(R.id.new_password_TIET);
+        confirm_password_TIET   = findViewById(R.id.confirm_password_TIET);
+        current_password_TIL    = findViewById(R.id.current_password_TIL);
+        new_password_TIL        = findViewById(R.id.new_password_TIL);
+        confirm_password_TIL    = findViewById(R.id.confirm_password_TIL);
+        change_password_BT      = findViewById(R.id.change_password_BT);
         change_password_BT.setOnClickListener(this);
         login_back_arrow_CV.setOnClickListener(this);
     }
@@ -56,9 +53,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiResp
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.change_password_BT:
-                current_password = current_password_TIET.getText().toString().trim();
-                new_password = new_password_TIET.getText().toString().trim();
-                confirm_password = confirm_password_TIET.getText().toString().trim();
+                current_password    = current_password_TIET.getText().toString().trim();
+                new_password        = new_password_TIET.getText().toString().trim();
+                confirm_password    = confirm_password_TIET.getText().toString().trim();
 
                 if (current_password.isEmpty()){
                     current_password_TIL.setError("Empty");

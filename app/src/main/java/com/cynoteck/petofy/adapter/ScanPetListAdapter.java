@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class ScanPetListAdapter extends RecyclerView.Adapter<ScanPetListAdapter.MyViewHolder> {
 
-    Context context;
-    ArrayList<PetList> profileList;
-    private ViewDeatilsAndIdCardClick onProductItemClickListner;
+    Context                             context;
+    ArrayList<PetList>                  profileList;
+    private ViewDeatilsAndIdCardClick   onProductItemClickListner;
 
     public ScanPetListAdapter(Context context, ArrayList<PetList> profileList, ViewDeatilsAndIdCardClick onProductItemClickListner) {
         this.context = context;
@@ -53,16 +53,16 @@ public class ScanPetListAdapter extends RecyclerView.Adapter<ScanPetListAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView petRegImage_IV;
-        TextView pet_reg_name_TV;
-        Button view_profile_BT, add_clinic_visit_BT;
+        ImageView   petRegImage_IV;
+        TextView    pet_reg_name_TV;
+        Button      view_profile_BT, add_clinic_visit_BT;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            petRegImage_IV = itemView.findViewById(R.id.petRegImage_IV);
-            pet_reg_name_TV = itemView.findViewById(R.id.pet_reg_name_TV);
+            petRegImage_IV      = itemView.findViewById(R.id.petRegImage_IV);
+            pet_reg_name_TV     = itemView.findViewById(R.id.pet_reg_name_TV);
             add_clinic_visit_BT = itemView.findViewById(R.id.add_clinic_visit_BT);
-            view_profile_BT = itemView.findViewById(R.id.view_profile_BT);
+            view_profile_BT     = itemView.findViewById(R.id.view_profile_BT);
 
             view_profile_BT.setOnClickListener(new View.OnClickListener() {
                 @Override

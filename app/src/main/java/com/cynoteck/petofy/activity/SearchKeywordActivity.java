@@ -41,18 +41,18 @@ import retrofit2.Response;
 
 public class SearchKeywordActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, OnItemClickListener, RegisterRecyclerViewClickListener {
 
-    EditText search_keyword_ET;
-    ImageView back_arrow_IV, cancel_IV;
-    Methods methods;
-    ProgressBar progressBar;
-    RecyclerView search_keyword_RV,search_keyword_result_RV;
-    ArrayList<SearchKeywordData> searchKeywordDataArrayList = new ArrayList<>();
-    SearchKeywordAdapter searchKeywordAdapter;
-    boolean stopShowPetList = true;
-    VetListAdapter vetListAdapter;
-    GetVetListResponse getVetListResponse;
+    EditText                        search_keyword_ET;
+    ImageView                       back_arrow_IV, cancel_IV;
+    Methods                         methods;
+    ProgressBar                     progressBar;
+    RecyclerView                    search_keyword_RV,search_keyword_result_RV;
+    ArrayList<SearchKeywordData>    searchKeywordDataArrayList = new ArrayList<>();
+    SearchKeywordAdapter            searchKeywordAdapter;
+    boolean                         stopShowPetList = true;
+    VetListAdapter                  vetListAdapter;
+    GetVetListResponse              getVetListResponse;
     private ArrayList<ProviderList> providerLists = new ArrayList<>();
-    private Timer timer;
+    private Timer                   timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +60,13 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
         setContentView(R.layout.activity_search_keyword);
         methods = new Methods(this);
 
-        search_keyword_ET = findViewById(R.id.search_keyword_ET);
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        cancel_IV = findViewById(R.id.cancel_IV);
-        search_keyword_RV = findViewById(R.id.search_keyword_RV);
-        search_keyword_result_RV = findViewById(R.id.search_keyword_result_RV);
-        progressBar = findViewById(R.id.progressBar);
+        search_keyword_ET           = findViewById(R.id.search_keyword_ET);
+        back_arrow_IV               = findViewById(R.id.back_arrow_IV);
+        cancel_IV                   = findViewById(R.id.cancel_IV);
+        search_keyword_RV           = findViewById(R.id.search_keyword_RV);
+        search_keyword_result_RV    = findViewById(R.id.search_keyword_result_RV);
+        progressBar                 = findViewById(R.id.progressBar);
+
         back_arrow_IV.setOnClickListener(this);
         cancel_IV.setOnClickListener(this);
         search_keyword_ET.requestFocus();
@@ -76,55 +77,16 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
 
 
         search_keyword_ET.addTextChangedListener(new TextWatcher() {
-            long lastChange = 0;
-
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-//                if (charSequence.length() > 1) {
-//                    new Handler().postDelayed(new Runnable() {
-//                        public void run() {
-//                            if (System.currentTimeMillis() - lastChange >= 300) {
-//                                if (methods.isInternetOn()) {
-//                                    search_keyword_RV.setVisibility(View.GONE);
-//                                    if (!search_keyword_ET.getText().toString().equals("")) {
-//                                        searchKeywordDataArrayList.clear();
-//                                        searchKeywordAdapter.notifyDataSetChanged();
-//                                        search_keyword_result_RV.setVisibility(View.GONE);
-//                                        search_keyword_RV.setVisibility(View.GONE);
-//                                        SearchKeywordParams searchKeywordParams = new SearchKeywordParams();
-//                                        searchKeywordParams.setCityId(1);
-//                                        searchKeywordParams.setSearchkeyword(search_keyword_ET.getText().toString());
-//                                        SearchKeywordRequest searchKeywordRequest = new SearchKeywordRequest();
-//                                        searchKeywordRequest.setData(searchKeywordParams);
-//                                        getSearchData(searchKeywordRequest);
-//
-//                                    }
-//                                } else {
-//                                    methods.DialogInternet();
-//                                }
-//                            }
-//                        }
-//                    }, 300);
-//                    lastChange = System.currentTimeMillis();
-//
-//                }
-
-
-
-            }
-
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) { }
             @Override
             public void afterTextChanged(Editable s) {
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        // do your actual work here
                         SearchKeywordActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -151,10 +113,6 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
                                 getSearchData(searchKeywordRequest);
                             }
                         });
-
-                        // hide keyboard as well?
-                        // InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        // in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     }
                 }, 600);
             }
@@ -201,9 +159,7 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
                     Log.e("Response",searchKeywordResponse.getData().toString());
                     searchKeywordDataArrayList.clear();
                     if (responseCode == 109) {
-                        if (searchKeywordResponse.getData().isEmpty()) {
-//                            Toast.makeText(this, "Pet Not Exist !", Toast.LENGTH_SHORT).show();
-                        }
+                        if (searchKeywordResponse.getData().isEmpty()) { }
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                         search_keyword_RV.setLayoutManager(linearLayoutManager);
                         if (searchKeywordResponse.getData().size() > 0) {cancel_IV.setVisibility(View.VISIBLE);

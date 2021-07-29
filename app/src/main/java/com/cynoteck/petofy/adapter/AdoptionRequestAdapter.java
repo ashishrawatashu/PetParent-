@@ -20,13 +20,13 @@ import com.cynoteck.petofy.onClicks.OnAdaptionDonationListClickListener;
 import java.util.ArrayList;
 
 public class AdoptionRequestAdapter  extends RecyclerView.Adapter<AdoptionRequestAdapter.MyViewHolder> {
-    Context context;
-    ArrayList<GetAdoptionRequestListData> getAdoptionRequestListData;
+    Context                                     context;
+    ArrayList<GetAdoptionRequestListData>       getAdoptionRequestListData;
     private OnAdaptionDonationListClickListener onAdaptionDonationListClickListener;
     public AdoptionRequestAdapter(Context context, ArrayList<GetAdoptionRequestListData> getAdoptionRequestListData, OnAdaptionDonationListClickListener onAdaptionDonationListClickListener) {
-        this.context = context;
-        this.getAdoptionRequestListData = getAdoptionRequestListData;
-        this.onAdaptionDonationListClickListener = onAdaptionDonationListClickListener;
+        this.context                                = context;
+        this.getAdoptionRequestListData             = getAdoptionRequestListData;
+        this.onAdaptionDonationListClickListener    = onAdaptionDonationListClickListener;
     }
 
     @NonNull
@@ -71,37 +71,37 @@ public class AdoptionRequestAdapter  extends RecyclerView.Adapter<AdoptionReques
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView pet_profile_IV;
-        Button cancel_request_BT,pet_details_BT;
-        ImageView send_request_demo_IV,verify_request_demo_IV,ngo_status_IV,approve_reject_IV;
-        View first_step, second_step, third_step;
-        LinearLayout send_request_LL,verify_request_LL,ngo_status_LL,approve_reject_LL;
-        TextView send_request_TV,verify_request_TV,ngo_status_TV,approve_reject_TV;
-        TextView pet_name_TV,pet_breed_TV;
+        ImageView       pet_profile_IV;
+        Button          cancel_request_BT,pet_details_BT;
+        ImageView       send_request_demo_IV,verify_request_demo_IV,ngo_status_IV,approve_reject_IV;
+        View            first_step, second_step, third_step;
+        LinearLayout    send_request_LL,verify_request_LL,ngo_status_LL,approve_reject_LL;
+        TextView        send_request_TV,verify_request_TV,ngo_status_TV,approve_reject_TV;
+        TextView        pet_name_TV,pet_breed_TV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            pet_profile_IV = itemView.findViewById(R.id.pet_profile_IV);
-            cancel_request_BT = itemView.findViewById(R.id.cancel_request_BT);
-            pet_details_BT = itemView.findViewById(R.id.pet_details_BT);
-            send_request_demo_IV = itemView.findViewById(R.id.send_request_demo_IV);
-            verify_request_demo_IV = itemView.findViewById(R.id.verify_request_demo_IV);
-            ngo_status_IV = itemView.findViewById(R.id.ngo_status_IV);
-            approve_reject_IV = itemView.findViewById(R.id.approve_reject_IV);
-            first_step = itemView.findViewById(R.id.first_step);
-            second_step = itemView.findViewById(R.id.second_step);
-            third_step = itemView.findViewById(R.id.third_step);
-            send_request_LL = itemView.findViewById(R.id.send_request_LL);
-            verify_request_LL = itemView.findViewById(R.id.verify_request_LL);
-            approve_reject_LL = itemView.findViewById(R.id.approve_reject_LL);
-            send_request_TV = itemView.findViewById(R.id.send_request_TV);
-            verify_request_TV = itemView.findViewById(R.id.verify_request_TV);
-            ngo_status_TV = itemView.findViewById(R.id.ngo_status_TV);
-            ngo_status_LL = itemView.findViewById(R.id.ngo_status_LL);
-            pet_breed_TV = itemView.findViewById(R.id.pet_breed_TV);
-            approve_reject_TV = itemView.findViewById(R.id.approve_reject_TV);
-            pet_name_TV = itemView.findViewById(R.id.pet_name_TV);
+            pet_profile_IV              = itemView.findViewById(R.id.pet_profile_IV);
+            cancel_request_BT           = itemView.findViewById(R.id.cancel_request_BT);
+            pet_details_BT              = itemView.findViewById(R.id.pet_details_BT);
+            send_request_demo_IV        = itemView.findViewById(R.id.send_request_demo_IV);
+            verify_request_demo_IV      = itemView.findViewById(R.id.verify_request_demo_IV);
+            ngo_status_IV               = itemView.findViewById(R.id.ngo_status_IV);
+            approve_reject_IV           = itemView.findViewById(R.id.approve_reject_IV);
+            first_step                  = itemView.findViewById(R.id.first_step);
+            second_step                 = itemView.findViewById(R.id.second_step);
+            third_step                  = itemView.findViewById(R.id.third_step);
+            send_request_LL             = itemView.findViewById(R.id.send_request_LL);
+            verify_request_LL           = itemView.findViewById(R.id.verify_request_LL);
+            approve_reject_LL           = itemView.findViewById(R.id.approve_reject_LL);
+            send_request_TV             = itemView.findViewById(R.id.send_request_TV);
+            verify_request_TV           = itemView.findViewById(R.id.verify_request_TV);
+            ngo_status_TV               = itemView.findViewById(R.id.ngo_status_TV);
+            ngo_status_LL               = itemView.findViewById(R.id.ngo_status_LL);
+            pet_breed_TV                = itemView.findViewById(R.id.pet_breed_TV);
+            approve_reject_TV           = itemView.findViewById(R.id.approve_reject_TV);
+            pet_name_TV                 = itemView.findViewById(R.id.pet_name_TV);
 
             pet_details_BT.setOnClickListener(new View.OnClickListener() {
                 @Override

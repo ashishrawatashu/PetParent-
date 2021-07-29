@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,57 +57,61 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class ParentFullProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse , MediaUtils.GetImg {
 
-    MaterialCardView back_arrow_CV, image_edit_CV, parent_mail_RL, parent_address_RL;
-    RelativeLayout edit_profile_RL;
-    TextView parent_name_TV, parent_email_TV, parent_phone_TV, parent_address_TV;
-    ImageView parent_image_IV;
-    String selctProflImage = "";
-    Dialog dialog;
-    private int GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4;
-    Bitmap bitmap, thumbnail;
-    File catfile1 = null;
-    ProgressBar parent_image_progress_bar;
+    MaterialCardView            back_arrow_CV, image_edit_CV, parent_mail_RL, parent_address_RL;
+    RelativeLayout              edit_profile_RL;
+    TextView                    parent_name_TV, parent_email_TV, parent_phone_TV, parent_address_TV;
+    ImageView                   parent_image_IV;
+    String                      selctProflImage = "";
+    Dialog                      dialog;
+    private int                 GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4;
+    Bitmap                      bitmap, thumbnail;
+    File                        catfile1 = null;
+    ProgressBar                 parent_image_progress_bar;
     private static final String IMAGE_DIRECTORY = "/Picture";
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
-    Dialog storagePermissionDialog,cameraPermissionDialog;
-    boolean cameraDialog= false, storageDialog= false;
-    MediaUtils mediaUtils;
-    Methods methods;
+    SharedPreferences           sharedPreferences;
+    SharedPreferences.Editor    login_editor;
+    private static final int    MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
+    Dialog                      storagePermissionDialog,cameraPermissionDialog;
+    boolean                     cameraDialog= false, storageDialog= false;
+    MediaUtils                  mediaUtils;
+    Methods                     methods;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_full_profile);
-         mediaUtils = new MediaUtils(this);
-         methods = new Methods(this);
+         mediaUtils     = new MediaUtils(this);
+         methods        = new Methods(this);
         checkStorageAndCameraPermission();
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        edit_profile_RL = findViewById(R.id.edit_profile_RL);
-        image_edit_CV = findViewById(R.id.image_edit_CV);
-        parent_name_TV = findViewById(R.id.parent_name_TV);
-        parent_email_TV = findViewById(R.id.parent_email_TV);
-        parent_phone_TV = findViewById(R.id.parent_phone_TV);
-        parent_address_TV = findViewById(R.id.parent_address_TV);
-        parent_address_RL = findViewById(R.id.parent_address_RL);
-        parent_mail_RL = findViewById(R.id.parent_mail_RL);
-        parent_image_IV = findViewById(R.id.parent_image_IV);
-        parent_image_progress_bar = findViewById(R.id.parent_image_progress_bar);
+        initView();
+
+        setParentData();
+
+    }
+
+    private void initView() {
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        edit_profile_RL             = findViewById(R.id.edit_profile_RL);
+        image_edit_CV               = findViewById(R.id.image_edit_CV);
+        parent_name_TV              = findViewById(R.id.parent_name_TV);
+        parent_email_TV             = findViewById(R.id.parent_email_TV);
+        parent_phone_TV             = findViewById(R.id.parent_phone_TV);
+        parent_address_TV           = findViewById(R.id.parent_address_TV);
+        parent_address_RL           = findViewById(R.id.parent_address_RL);
+        parent_mail_RL              = findViewById(R.id.parent_mail_RL);
+        parent_image_IV             = findViewById(R.id.parent_image_IV);
+        parent_image_progress_bar   = findViewById(R.id.parent_image_progress_bar);
 
         back_arrow_CV.setOnClickListener(this);
         edit_profile_RL.setOnClickListener(this);
         image_edit_CV.setOnClickListener(this);
 
-        setParentData();
-
     }
+
     private void checkStorageAndCameraPermission() {
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_CAMERA);
-            return;
         }else if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_STORAGE);
-            return;
         }
     }
 
@@ -192,6 +197,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(lp);
     }
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -237,7 +243,6 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-//                takePhotoFromCamera();
                 mediaUtils.openCamera();
 
             }
@@ -247,7 +252,6 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-//                choosePhotoFromGallary();
                 mediaUtils.openGallery();
 
             }
@@ -256,23 +260,6 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
 
         dialog.show();
     }
-
-    private void choosePhotoFromGallary() {
-
-
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        startActivityForResult(galleryIntent, GALLERY);
-    }
-
-    private void takePhotoFromCamera() {
-
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA);
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -315,7 +302,6 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File wallpaperDirectory = new File(
                 Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-        // have the object build the directory structure, if needed.
         if (!wallpaperDirectory.exists()) {
             wallpaperDirectory.mkdirs();
         }
@@ -363,7 +349,6 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
                     jsonObject = (JsonObject) response.body();
                     int responseCode = Integer.parseInt(String.valueOf(jsonObject.getAsJsonObject("response").get("responseCode")));
                     if (responseCode == 109) {
-//                        getUserDetails();
                         Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
                     } else if (responseCode == 614) {
                         Toast.makeText(this, jsonObject.getAsJsonObject("response").get("responseMessage").toString(), Toast.LENGTH_SHORT).show();
@@ -384,7 +369,6 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
                     ImageResponse imageResponse = (ImageResponse) response.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        //Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
                         Log.e("Glide","error");
                         Glide.with(this)
                                 .load(imageResponse.getData().getDocumentUrl())
@@ -421,11 +405,9 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
     public void onError(Throwable t, String key) {
         switch (key){
             case "UpdateProfileImage":
-                Log.e("UploadDocument", t.getLocalizedMessage().toString());
-                Log.e("UploadDocument", t.getLocalizedMessage().toString());
-                break;
 
             case "UploadDocument":
+
                 Log.e("UploadDocument", t.getLocalizedMessage().toString());
                 Log.e("UploadDocument", t.getLocalizedMessage().toString());
                 break;

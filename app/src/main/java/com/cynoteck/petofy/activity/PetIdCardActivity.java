@@ -36,11 +36,11 @@ import java.util.Calendar;
 
 public class PetIdCardActivity extends AppCompatActivity implements ApiResponse {
 
-    TextView printID_TV,pet_name_TV,pet_sex_TV,dob_TV,breed_TV,parent_TV,contact_TV,pet_id_TV;
-    ImageView imageView,bar_code_IV,pet_image;
-    CardView card_view;
-    String id;
-    Methods methods;
+    TextView        printID_TV,pet_name_TV,pet_sex_TV,dob_TV,breed_TV,parent_TV,contact_TV,pet_id_TV;
+    ImageView       imageView,bar_code_IV,pet_image;
+    CardView        card_view;
+    String          id;
+    Methods         methods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,25 +49,15 @@ public class PetIdCardActivity extends AppCompatActivity implements ApiResponse 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pet_id_card);
 
-        methods=new Methods(this);
+        methods = new Methods(this);
         Bundle extras = getIntent().getExtras();
         id = extras.getString("id");
 
 
         getIdCardResposne(id);
+        initView();
 
-        printID_TV= findViewById(R.id.printID_TV);
-        imageView = findViewById(R.id.image_view);
-        card_view=findViewById(R.id.card_view);
-        pet_name_TV=findViewById(R.id.pet_name_TV);
-        pet_sex_TV=findViewById(R.id.pet_sex_TV);
-        dob_TV=findViewById(R.id.dob_TV);
-        breed_TV=findViewById(R.id.breed_TV);
-        parent_TV=findViewById(R.id.parent_TV);
-        contact_TV=findViewById(R.id.contact_TV);
-        pet_id_TV=findViewById(R.id.pet_id_TV);
-        bar_code_IV=findViewById(R.id.bar_code_IV);
-        pet_image=findViewById(R.id.pet_image);
+
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -80,6 +70,21 @@ public class PetIdCardActivity extends AppCompatActivity implements ApiResponse 
             }
         });
 
+    }
+
+    private void initView() {
+        printID_TV          = findViewById(R.id.printID_TV);
+        imageView           = findViewById(R.id.image_view);
+        card_view           = findViewById(R.id.card_view);
+        pet_name_TV         = findViewById(R.id.pet_name_TV);
+        pet_sex_TV          = findViewById(R.id.pet_sex_TV);
+        dob_TV              = findViewById(R.id.dob_TV);
+        breed_TV            = findViewById(R.id.breed_TV);
+        parent_TV           = findViewById(R.id.parent_TV);
+        contact_TV          = findViewById(R.id.contact_TV);
+        pet_id_TV           = findViewById(R.id.pet_id_TV);
+        bar_code_IV         = findViewById(R.id.bar_code_IV);
+        pet_image           = findViewById(R.id.pet_image);
     }
 
     private void getIdCardResposne(String id) {

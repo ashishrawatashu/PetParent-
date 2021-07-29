@@ -1,5 +1,6 @@
 package com.cynoteck.petofy.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,25 +38,27 @@ import retrofit2.Response;
 
 public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
-    TextView nature_of_visit_textView, test_date_textView, Result_textView, recommended_follow_up_textView, recommended_follow_up_date_textView;
-    Button deleteReport_BT,view_file_BT;
-    ImageView petRegImage_IV;
-    MaterialCardView back_arrow_CV;
-    TextView recommended_follow_up_date_TV,dot_recommended_follow_up_date_TV,dot_recommended_follow_up_TV,recommended_follow_up_TV, pet_reg_name_TV, pet_reg__id_TV, parent_name_TV, pet_reg_date_of_birth_TV;
-    String pet_DOB, pet_image_url,nature = "", date_of_test = "", follow_up = "", result = "", pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, type, follow_up_date;
-    Uri localUri;
-    RelativeLayout card_view;
-    ProgressBar progressBar;
-    Methods methods;
+    TextView            nature_of_visit_textView, test_date_textView, Result_textView, recommended_follow_up_textView, recommended_follow_up_date_textView;
+    Button              deleteReport_BT,view_file_BT;
+    ImageView           petRegImage_IV;
+    MaterialCardView    back_arrow_CV;
+    TextView            recommended_follow_up_date_TV,dot_recommended_follow_up_date_TV,dot_recommended_follow_up_TV,recommended_follow_up_TV, pet_reg_name_TV, pet_reg__id_TV, parent_name_TV, pet_reg_date_of_birth_TV;
+    String              pet_DOB, pet_image_url,nature = "", date_of_test = "", follow_up = "", result = "", pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, type, follow_up_date;
+    Uri                 localUri;
+    RelativeLayout      card_view;
+    ProgressBar         progressBar;
+    Methods             methods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_x_ray_report_deatils);
-        recommended_follow_up_TV=findViewById(R.id.recommended_follow_up_TV);
-        dot_recommended_follow_up_TV=findViewById(R.id.dot_recommended_follow_up_TV);
-        dot_recommended_follow_up_date_TV=findViewById(R.id.dot_recommended_follow_up_date_TV);
-        recommended_follow_up_date_TV=findViewById(R.id.recommended_follow_up_date_TV);
+
+        recommended_follow_up_TV            =findViewById(R.id.recommended_follow_up_TV);
+        dot_recommended_follow_up_TV        =findViewById(R.id.dot_recommended_follow_up_TV);
+        dot_recommended_follow_up_date_TV   =findViewById(R.id.dot_recommended_follow_up_date_TV);
+        recommended_follow_up_date_TV       =findViewById(R.id.recommended_follow_up_date_TV);
+
         methods = new Methods(this);
         getIntentData();
         init();
@@ -78,21 +81,21 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
     }
 
     private void init() {
-        card_view=findViewById(R.id.card_view);
-        view_file_BT=findViewById(R.id.view_file_BT);
-        nature_of_visit_textView = findViewById(R.id.nature_of_visit_textView);
-        test_date_textView = findViewById(R.id.test_date_textView);
-        Result_textView = findViewById(R.id.Result_textView);
-        recommended_follow_up_textView = findViewById(R.id.recommended_follow_up_textView);
-        recommended_follow_up_date_textView = findViewById(R.id.recommended_follow_up_date_textView);
-        progressBar=findViewById(R.id.progressBar);
-        pet_reg_name_TV = findViewById(R.id.pet_reg_name_TV);
-        pet_reg__id_TV = findViewById(R.id.pet_reg__id_TV);
-        parent_name_TV = findViewById(R.id.parent_name_TV);
-        pet_reg_date_of_birth_TV = findViewById(R.id.pet_reg_date_of_birth_TV);
-        deleteReport_BT = findViewById(R.id.deleteReport_BT);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        petRegImage_IV=findViewById(R.id.petRegImage_IV);
+        card_view                               = findViewById(R.id.card_view);
+        view_file_BT                            = findViewById(R.id.view_file_BT);
+        nature_of_visit_textView                = findViewById(R.id.nature_of_visit_textView);
+        test_date_textView                      = findViewById(R.id.test_date_textView);
+        Result_textView                         = findViewById(R.id.Result_textView);
+        recommended_follow_up_textView          = findViewById(R.id.recommended_follow_up_textView);
+        recommended_follow_up_date_textView     = findViewById(R.id.recommended_follow_up_date_textView);
+        progressBar                             = findViewById(R.id.progressBar);
+        pet_reg_name_TV                         = findViewById(R.id.pet_reg_name_TV);
+        pet_reg__id_TV                          = findViewById(R.id.pet_reg__id_TV);
+        parent_name_TV                          = findViewById(R.id.parent_name_TV);
+        pet_reg_date_of_birth_TV                = findViewById(R.id.pet_reg_date_of_birth_TV);
+        deleteReport_BT                         = findViewById(R.id.deleteReport_BT);
+        back_arrow_CV                           = findViewById(R.id.back_arrow_CV);
+        petRegImage_IV                          = findViewById(R.id.petRegImage_IV);
 
         view_file_BT.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
@@ -100,23 +103,24 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
     }
 
     private void getIntentData() {
-        Intent extras = getIntent();
-        pet_id = extras.getExtras().getString("pet_id");
-        pet_owner_contact = extras.getExtras().getString("pet_owner_contact");
-        pet_owner_name = extras.getExtras().getString("pet_owner_name");
-        pet_sex = extras.getExtras().getString("pet_sex");
-        pet_name = extras.getExtras().getString("pet_name");
-        pet_unique_id = extras.getExtras().getString("pet_unique_id");
-        report_type_id = extras.getExtras().getString("id");
-        follow_up_date = extras.getExtras().getString("follow_up_date");
-        follow_up = extras.getExtras().getString("follow_up");
-        nature = extras.getExtras().getString("nature");
-        date_of_test = extras.getExtras().getString("date_of_test");
-        result = extras.getExtras().getString("result");
-        pet_image_url=extras.getExtras().getString("pet_image_url");
-        pet_DOB = extras.getExtras().getString("pet_DOB");
+        Intent extras       = getIntent();
+        pet_id              = extras.getExtras().getString("pet_id");
+        pet_owner_contact   = extras.getExtras().getString("pet_owner_contact");
+        pet_owner_name      = extras.getExtras().getString("pet_owner_name");
+        pet_sex             = extras.getExtras().getString("pet_sex");
+        pet_name            = extras.getExtras().getString("pet_name");
+        pet_unique_id       = extras.getExtras().getString("pet_unique_id");
+        report_type_id      = extras.getExtras().getString("id");
+        follow_up_date      = extras.getExtras().getString("follow_up_date");
+        follow_up           = extras.getExtras().getString("follow_up");
+        nature              = extras.getExtras().getString("nature");
+        date_of_test        = extras.getExtras().getString("date_of_test");
+        result              = extras.getExtras().getString("result");
+        pet_image_url       = extras.getExtras().getString("pet_image_url");
+        pet_DOB             = extras.getExtras().getString("pet_DOB");
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
 

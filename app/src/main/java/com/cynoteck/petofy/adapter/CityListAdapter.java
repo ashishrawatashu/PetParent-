@@ -19,17 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.MyViewHolder> implements Filterable {
-    Context context;
-    List<GetCityListWithData> cityListWithData;
-    List<GetCityListWithData> cityListWithDataFilter;
-
+    Context                     context;
+    List<GetCityListWithData>   cityListWithData;
+    List<GetCityListWithData>   cityListWithDataFilter;
     private OnItemClickListener onProductItemClickListner;
 
     public CityListAdapter(Context context, List<GetCityListWithData> cityListWithData, OnItemClickListener onProductItemClickListner) {
-        this.context = context;
-        this.cityListWithData = cityListWithData;
-        this.onProductItemClickListner = onProductItemClickListner;
-        cityListWithDataFilter = new ArrayList<>(cityListWithData);
+        this.context                    = context;
+        this.cityListWithData           = cityListWithData;
+        this.onProductItemClickListner  = onProductItemClickListner;
+        cityListWithDataFilter          = new ArrayList<>(cityListWithData);
 
         //filterProfileList = new ArrayList<>(profileList);
     }

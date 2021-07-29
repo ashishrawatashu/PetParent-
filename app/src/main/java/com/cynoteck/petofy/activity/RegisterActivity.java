@@ -28,52 +28,47 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterActivity extends FragmentActivity implements ApiResponse, View.OnClickListener {
 
-    Methods methods;
-    ImageView back_arrow_IV;
-    private TextInputLayout firstname_TIL, lastName_TIL, email_TIL, phoneNumber_TIL, password_TIL, confirmPassword_TIL;
-    private TextInputEditText firstname_TIET, lastName_TIET, email_TIET, phoneNumber_TIET, password_TIET, confirmPassword_TIET;
-    private Button signUp_BT;
-    private String firstName = "", lastName = "", email = "", phoneNumber = "", password = "", confirmPassword = "";
-    private TextView signIN_TV;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
+    Methods                         methods;
+    ImageView                       back_arrow_IV;
+    private TextInputLayout         firstname_TIL, lastName_TIL, email_TIL, phoneNumber_TIL, password_TIL, confirmPassword_TIL;
+    private TextInputEditText       firstname_TIET, lastName_TIET, email_TIET, phoneNumber_TIET, password_TIET, confirmPassword_TIET;
+    private String                  phoneNumber = "";
+    String                          emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    SharedPreferences               sharedPreferences;
+    SharedPreferences.Editor        login_editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        methods = new Methods(this);
-        Intent intent = getIntent();
-        phoneNumber = intent.getStringExtra("phoneNumber");
-        init();
+        methods         = new Methods(this);
+        Intent intent   = getIntent();
+        phoneNumber     = intent.getStringExtra("phoneNumber");
+        initView();
 
     }
 
-    private void init() {
-        firstname_TIL = findViewById(R.id.firstName_TIL);
-        lastName_TIL = findViewById(R.id.lastName_TIL);
-        email_TIL = findViewById(R.id.email_TIL);
-        phoneNumber_TIL = findViewById(R.id.number_TIL);
-        password_TIL = findViewById(R.id.password_TIL);
-        confirmPassword_TIL = findViewById(R.id.cPassword_TIL);
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
+    private void initView() {
+        firstname_TIL           = findViewById(R.id.firstName_TIL);
+        lastName_TIL            = findViewById(R.id.lastName_TIL);
+        email_TIL               = findViewById(R.id.email_TIL);
+        phoneNumber_TIL         = findViewById(R.id.number_TIL);
+        password_TIL            = findViewById(R.id.password_TIL);
+        confirmPassword_TIL     = findViewById(R.id.cPassword_TIL);
+        back_arrow_IV           = findViewById(R.id.back_arrow_IV);
 
 
-        firstname_TIET = findViewById(R.id.firstName_TIET);
-        lastName_TIET = findViewById(R.id.lastName_TIET);
-        email_TIET = findViewById(R.id.email_TIET);
-        phoneNumber_TIET = findViewById(R.id.number_TIET);
-        password_TIET = findViewById(R.id.password_TIET);
-        confirmPassword_TIET = findViewById(R.id.cPassword_TIET);
+        firstname_TIET          = findViewById(R.id.firstName_TIET);
+        lastName_TIET           = findViewById(R.id.lastName_TIET);
+        email_TIET              = findViewById(R.id.email_TIET);
+        phoneNumber_TIET        = findViewById(R.id.number_TIET);
+        password_TIET           = findViewById(R.id.password_TIET);
+        confirmPassword_TIET    = findViewById(R.id.cPassword_TIET);
 
-//        signIN_TV = findViewById(R.id.signIn_TV);
-
-        signUp_BT = findViewById(R.id.signUp_BT);
+        Button signUp_BT = findViewById(R.id.signUp_BT);
         phoneNumber_TIET.setEnabled(false);
         signUp_BT.setOnClickListener(this);
         back_arrow_IV.setOnClickListener(this);
-//        signIN_TV.setOnClickListener(this);
         phoneNumber_TIET.setText(phoneNumber);
 
 
@@ -113,7 +108,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                         Config.token = loginRegisterResponse.getResponseLogin().getToken();
                         login_editor.putString("loggedIn", "loggedIn");
                         Log.e("TOKEN", loginRegisterResponse.getResponseLogin().getToken());
-                        login_editor.commit();
+                        login_editor.apply();
                         Intent intent = new Intent(this, DashBoardActivity.class);
                         intent.putExtra("from", "REGISTER");
                         startActivity(intent);
@@ -150,12 +145,12 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                 break;
 
             case R.id.signUp_BT:
-                firstName = firstname_TIET.getText().toString().trim();
-                lastName = lastName_TIET.getText().toString().trim();
-                email = email_TIET.getText().toString().trim();
-                password = password_TIET.getText().toString().trim();
-                confirmPassword = confirmPassword_TIET.getText().toString().trim();
-                phoneNumber = phoneNumber_TIET.getText().toString().trim();
+                String firstName        = firstname_TIET.getText().toString().trim();
+                String lastName         = lastName_TIET.getText().toString().trim();
+                String email            = email_TIET.getText().toString().trim();
+                String password         = password_TIET.getText().toString().trim();
+                String confirmPassword  = confirmPassword_TIET.getText().toString().trim();
+                phoneNumber             = phoneNumber_TIET.getText().toString().trim();
 
                 if (firstName.isEmpty()) {
                     firstname_TIL.setError("Name is empty");

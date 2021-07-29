@@ -43,24 +43,24 @@ import static com.cynoteck.petofy.activity.DashBoardActivity.MY_PERMISSIONS_REQU
 
 public class SendPhoneNumber extends AppCompatActivity implements View.OnClickListener, ApiResponse, TextWatcher {
 
-    EditText enter_phone_ET;
-    Button next_BT;
-    String phoneNumber,vetID="";
-    ImageView qrCodeScanner_IV,cross_IV,back_arrow_IV;
-    Methods methods;
-    Drawable drawableRight;
-    private static final int REQUEST_CAMERA_PERMISSION = 201, PERMISSION_REQUEST_CODE=400;
+    EditText                    enter_phone_ET;
+    Button                      next_BT;
+    String                      phoneNumber,vetID="";
+    ImageView                   qrCodeScanner_IV,cross_IV,back_arrow_IV;
+    Methods                     methods;
+    Drawable                    drawableRight;
+    private static final int    REQUEST_CAMERA_PERMISSION = 201, PERMISSION_REQUEST_CODE=400;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_phone_number);
         methods = new Methods(this);
-        enter_phone_ET=findViewById(R.id.enter_phone_ET);
+        enter_phone_ET      =   findViewById(R.id.enter_phone_ET);
+        next_BT             =   findViewById(R.id.next_BT);
+        cross_IV            =   findViewById(R.id.cross_IV);
+        back_arrow_IV       =   findViewById(R.id.back_arrow_IV);
 
-        next_BT=findViewById(R.id.next_BT);
-        cross_IV=findViewById(R.id.cross_IV);
-        back_arrow_IV=findViewById(R.id.back_arrow_IV);
         back_arrow_IV.setOnClickListener(this);
         enter_phone_ET.addTextChangedListener(this);
 //        qrCodeScanner_IV.setOnClickListener(this);
@@ -88,14 +88,14 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
     }
     private boolean checkPermission() {
 
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
-        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
-        int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_PHONE_STATE);
-        int result3 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
-        int result4 = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
-        int result5 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_WIFI_STATE);
-        int result6 = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_NETWORK_STATE);
-        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED &&  result2 == PackageManager.PERMISSION_GRANTED  && result3 == PackageManager.PERMISSION_GRANTED &&  result4 == PackageManager.PERMISSION_GRANTED && result5 == PackageManager.PERMISSION_GRANTED &&  result6 == PackageManager.PERMISSION_GRANTED;
+        int result      = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+        int result1     = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
+        int result2     = ContextCompat.checkSelfPermission(getApplicationContext(), READ_PHONE_STATE);
+        int result3     = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
+        int result4     = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
+        int result5     = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_WIFI_STATE);
+        int result6     = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_NETWORK_STATE);
+        return result   == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED &&  result2 == PackageManager.PERMISSION_GRANTED  && result3 == PackageManager.PERMISSION_GRANTED &&  result4 == PackageManager.PERMISSION_GRANTED && result5 == PackageManager.PERMISSION_GRANTED &&  result6 == PackageManager.PERMISSION_GRANTED;
 
     }
 

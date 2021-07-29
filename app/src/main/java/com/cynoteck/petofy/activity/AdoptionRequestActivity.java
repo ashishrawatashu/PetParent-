@@ -27,18 +27,18 @@ import com.google.gson.JsonObject;
 import retrofit2.Response;
 
 public class AdoptionRequestActivity extends AppCompatActivity implements View.OnClickListener, OnAdaptionDonationListClickListener, ApiResponse {
-    RecyclerView adoption_request_RV;
-    MaterialCardView back_arrow_CV;
-    AdoptionRequestAdapter adoptionRequestAdapter;
-    int adoptionListPosition;
+    RecyclerView            adoption_request_RV;
+    MaterialCardView        back_arrow_CV;
+    AdoptionRequestAdapter  adoptionRequestAdapter;
+    int                     adoptionListPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adoption_satus);
 
-        adoption_request_RV = findViewById(R.id.adoption_request_RV);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
+        adoption_request_RV     = findViewById(R.id.adoption_request_RV);
+        back_arrow_CV           = findViewById(R.id.back_arrow_CV);
 
         back_arrow_CV.setOnClickListener(this);
 

@@ -26,11 +26,11 @@ import com.google.gson.JsonObject;
 import retrofit2.Response;
 
 public class DonationRequestActivity extends AppCompatActivity implements OnAdaptionDonationListClickListener , View.OnClickListener, ApiResponse {
-    RecyclerView donation_request_RV;
-    MaterialCardView back_arrow_CV;
-    DonationRequestAdapter donationRequestAdapter;
-    String type;
-    int donationListPosition;
+    RecyclerView            donation_request_RV;
+    MaterialCardView        back_arrow_CV;
+    DonationRequestAdapter  donationRequestAdapter;
+    String                  type;
+    int                     donationListPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,8 @@ public class DonationRequestActivity extends AppCompatActivity implements OnAdap
         setContentView(R.layout.activity_donation_request);
 
 
-        donation_request_RV = findViewById(R.id.donation_request_RV);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
+        donation_request_RV     = findViewById(R.id.donation_request_RV);
+        back_arrow_CV           = findViewById(R.id.back_arrow_CV);
 
         back_arrow_CV.setOnClickListener(this);
         donation_request_RV.setLayoutManager(new LinearLayoutManager(this));

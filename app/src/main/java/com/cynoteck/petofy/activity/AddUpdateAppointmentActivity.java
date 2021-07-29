@@ -78,52 +78,43 @@ import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
 import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
 
 public class AddUpdateAppointmentActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, RegisterRecyclerViewClickListener, TextWatcher, OnItemClickListener {
-    Button create_appointment_BT;
-    TextView purpose_TV, rating_TV, vet_name_TV, vet_study_TV, vet_address_TV, consultation_fee_TV, pet_details_TV, visit_type_TV, appointment_headline, calenderTextView_dialog, select_time_TV, parent_TV, cancelOtpDialog;
-    EditText select_purpose_ET;
-    Methods methods;
-    String appointment_duration,vet_fee, vet_study = "", vet_rating = "", vet_address = "", vet_name = "", isVedioCall = "false", vetUserId = "", currentTime = "", strResponseOtp = "", vet_image_url = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", petParentString = "", petUniqueID = "";
-    DatePickerDialog picker;
-    Dialog otpDialog;
-    TextInputLayout otp_TL;
-    TextInputEditText pet_parent_otp;
-    Button submit_parent_otp;
-    ArrayList<String> purpose;
-    SwitchCompat visit_type_SC;
-    RelativeLayout add_pet_RL;
-    MaterialCardView back_arrow_CV;
-    RecyclerView pet_list_RV;
-    //    ArrayList<PetList> profileList = new ArrayList<>();
-    public static PetListHorizontalAdapter petListHorizontalAdapterForAppointment;
-    BottomSheetDialog selectPurposeDialog;
-    ProgressBar pet_list_progress_bar;
-    Dialog appointment_successfully_dialog;
-    ConstraintLayout select_purpose_RL;
-    int toatalProgress = 0;
-    private int ADD_PET = 1;
+    Button              create_appointment_BT;
+    TextView            purpose_TV, rating_TV, vet_name_TV, vet_study_TV, vet_address_TV, consultation_fee_TV, pet_details_TV, visit_type_TV, appointment_headline, calenderTextView_dialog, select_time_TV, parent_TV, cancelOtpDialog;
+    EditText            select_purpose_ET;
+    Methods             methods;
+    String              appointment_duration,vet_fee, vet_study = "", vet_rating = "", vet_address = "", vet_name = "", isVedioCall = "false", vetUserId = "", currentTime = "", strResponseOtp = "", vet_image_url = "", petName = "", petSex = "", petAge = "", petId = "", id = "", appointmentID = "", userID = "", type = "", titleString = "", descriptionString = "", dateString = "", timeString = "", petParentString = "", petUniqueID = "";
+    DatePickerDialog    picker;
+    Dialog              otpDialog;
+    TextInputLayout     otp_TL;
+    TextInputEditText   pet_parent_otp;
+    Button              submit_parent_otp;
+    ArrayList<String>   purpose;
+    SwitchCompat        visit_type_SC;
+    RelativeLayout      add_pet_RL;
+    MaterialCardView    back_arrow_CV;
+    RecyclerView        pet_list_RV;
+    Dialog              phonePermissionDialog;
+    boolean             phoneDialog= false;
+    BottomSheetDialog   selectPurposeDialog;
+    ProgressBar         pet_list_progress_bar;
+    Dialog              appointment_successfully_dialog;
+    ConstraintLayout    select_purpose_RL;
+    int                 toatalProgress = 0;
+    private final int   ADD_PET = 1;
 
     private static final int MY_PERMISSIONS_REQUEST_READ_PHONE = 200;
-    Dialog phonePermissionDialog;
-    boolean phoneDialog= false;
+    public static PetListHorizontalAdapter petListHorizontalAdapterForAppointment;
+    //    ArrayList<PetList> profileList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_update_appointment);
         cellphonePermission();
         methods = new Methods(this);
-        Intent intent = getIntent();
-        type = intent.getStringExtra("type");
-        id = intent.getStringExtra("id");
-        petId = intent.getStringExtra("pet_id");
-        petParentString = intent.getStringExtra("petParent");
-        vet_study = intent.getStringExtra("vet_study");
-        vet_rating = intent.getStringExtra("vet_rating");
-        vet_address = intent.getStringExtra("vet_address");
-        vet_name = intent.getStringExtra("vet_name");
-        vet_image_url = intent.getStringExtra("vet_image_url");
-        vetUserId = intent.getStringExtra("vetUserId");
-        vet_fee = intent.getStringExtra("vet_fee");
-        appointment_duration = intent.getStringExtra("appointment_duration");
+
+        getDataFromIntent();
+
         init();
         purpose = new ArrayList<>();
         purpose.add("Vaccination");
@@ -176,6 +167,22 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
             getAppointmentDeatils(getPetListRequest);
         }
 
+    }
+
+    private void getDataFromIntent() {
+        Intent intent           = getIntent();
+        type                    = intent.getStringExtra("type");
+        id                      = intent.getStringExtra("id");
+        petId                   = intent.getStringExtra("pet_id");
+        petParentString         = intent.getStringExtra("petParent");
+        vet_study               = intent.getStringExtra("vet_study");
+        vet_rating              = intent.getStringExtra("vet_rating");
+        vet_address             = intent.getStringExtra("vet_address");
+        vet_name                = intent.getStringExtra("vet_name");
+        vet_image_url           = intent.getStringExtra("vet_image_url");
+        vetUserId               = intent.getStringExtra("vetUserId");
+        vet_fee                 = intent.getStringExtra("vet_fee");
+        appointment_duration    = intent.getStringExtra("appointment_duration");
     }
 
     private void cellphonePermission() {
@@ -245,24 +252,26 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
 
     private void init() {
-        rating_TV = findViewById(R.id.rating_TV);
-        purpose_TV = findViewById(R.id.purpose_TV);
-        pet_list_progress_bar = findViewById(R.id.pet_list_progress_bar);
-        vet_name_TV = findViewById(R.id.vet_name_TV);
-        vet_study_TV = findViewById(R.id.vet_study_TV);
-        vet_address_TV = findViewById(R.id.vet_address_TV);
-        consultation_fee_TV = findViewById(R.id.consultation_fee_TV);
+        rating_TV               = findViewById(R.id.rating_TV);
+        purpose_TV              = findViewById(R.id.purpose_TV);
+        pet_list_progress_bar   = findViewById(R.id.pet_list_progress_bar);
+        vet_name_TV             = findViewById(R.id.vet_name_TV);
+        vet_study_TV            = findViewById(R.id.vet_study_TV);
+        vet_address_TV          = findViewById(R.id.vet_address_TV);
+        consultation_fee_TV     = findViewById(R.id.consultation_fee_TV);
         calenderTextView_dialog = findViewById(R.id.calenderTextView_dialog);
-        select_time_TV = findViewById(R.id.select_time_TV);
-        select_purpose_ET = findViewById(R.id.select_purpose_ET);
-        create_appointment_BT = findViewById(R.id.create_appointment_BT);
-        parent_TV = findViewById(R.id.parent_TV);
-        add_pet_RL = findViewById(R.id.add_pet_RL);
-        visit_type_TV = findViewById(R.id.visit_type_TV);
-        visit_type_SC = findViewById(R.id.visit_type_SC);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        pet_list_RV = findViewById(R.id.pet_list_RV);
-        select_purpose_RL = findViewById(R.id.select_purpose_RL);
+        select_time_TV          = findViewById(R.id.select_time_TV);
+        select_purpose_ET       = findViewById(R.id.select_purpose_ET);
+        create_appointment_BT   = findViewById(R.id.create_appointment_BT);
+        parent_TV               = findViewById(R.id.parent_TV);
+        add_pet_RL              = findViewById(R.id.add_pet_RL);
+        visit_type_TV           = findViewById(R.id.visit_type_TV);
+        visit_type_SC           = findViewById(R.id.visit_type_SC);
+        back_arrow_CV           = findViewById(R.id.back_arrow_CV);
+        pet_list_RV             = findViewById(R.id.pet_list_RV);
+        select_purpose_RL       = findViewById(R.id.select_purpose_RL);
+
+
         select_purpose_RL.setOnClickListener(this);
         add_pet_RL.setOnClickListener(this);
         calenderTextView_dialog.setOnClickListener(this);
@@ -308,9 +317,9 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
             case R.id.create_appointment_BT:
                 Log.e("user_id", Config.user_id);
-                titleString = select_purpose_ET.getText().toString();
-                dateString = calenderTextView_dialog.getText().toString();
-                timeString = select_time_TV.getText().toString();
+                titleString     = select_purpose_ET.getText().toString();
+                dateString      = calenderTextView_dialog.getText().toString();
+                timeString      = select_time_TV.getText().toString();
                 String currentTimeDate = new SimpleDateFormat("dd/MM/yyyy hh:mm a").format(new Date());
                 String userGiveTimeDate = dateString + " " + timeString;
                 if (petId.isEmpty()) {
@@ -392,10 +401,10 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
             case R.id.calenderTextView_dialog:
 
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+                final Calendar cldr     = Calendar.getInstance();
+                int day                 = cldr.get(Calendar.DAY_OF_MONTH);
+                int month               = cldr.get(Calendar.MONTH);
+                int year                = cldr.get(Calendar.YEAR);
                 // date picker dialog
                 picker = new DatePickerDialog(this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -534,7 +543,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
                     if (responseCode == 109) {
                         if (getPetListResponse.getData().getPetList().isEmpty()) {
-//                            empty_IV.setVisibility(View.VISIBLE);
                             Toast.makeText(this, "No pet in register !", Toast.LENGTH_SHORT).show();
                         } else {
                             PetParentSingleton.getInstance().getArrayList().clear();
@@ -626,7 +634,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                     int responseCode = Integer.parseInt(appointmentDetailsResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         userID = appointmentDetailsResponse.getData().getUserId();
-//                        pet_parent_TV.setText(appointmentDetailsResponse.getData().getPetParent().getFullName());
                         select_purpose_ET.setText(appointmentDetailsResponse.getData().getTitle());
                         dateString = appointmentDetailsResponse.getData().getEventStartDate().substring(0, 10);
                         Log.d("time", dateString);
@@ -672,7 +679,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
             @Override
             public void onClick(View v) {
                 appointment_successfully_dialog.dismiss();
-//                onBackPressed();
                 Config.fragmentNumber = 3;
 
                 Intent dashBoardTOAppointmentIntent = new Intent(AddUpdateAppointmentActivity.this,DashBoardActivity.class);

@@ -20,14 +20,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DonatePetAdapter extends RecyclerView.Adapter<DonatePetAdapter.MyViewHolder> {
 
-    ArrayList<PetList> petLists;
-    OnItemClickListener onClickListener;
-    Context context;
+    ArrayList<PetList>      petLists;
+    OnItemClickListener     onClickListener;
+    Context                 context;
 
     public DonatePetAdapter( Context context, ArrayList<PetList> petLists, OnItemClickListener onClickListener) {
-        this.petLists = petLists;
-        this.onClickListener = onClickListener;
-        this.context = context;
+        this.petLists           = petLists;
+        this.onClickListener    = onClickListener;
+        this.context            = context;
     }
 
     @NonNull
@@ -55,13 +55,13 @@ public class DonatePetAdapter extends RecyclerView.Adapter<DonatePetAdapter.MyVi
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView pet_image_CIV;
-        TextView pet_name_TV;
+        CircleImageView     pet_image_CIV;
+        TextView            pet_name_TV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            pet_image_CIV = itemView.findViewById(R.id.pet_image_CIV);
-            pet_name_TV = itemView.findViewById(R.id.pet_name_TV);
+            pet_image_CIV   = itemView.findViewById(R.id.pet_image_CIV);
+            pet_name_TV     = itemView.findViewById(R.id.pet_name_TV);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

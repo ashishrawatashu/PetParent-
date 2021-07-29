@@ -32,13 +32,12 @@ import java.io.IOException;
 
 public class ScannerQR extends AppCompatActivity {
 
-    SurfaceView surfaceView;
-    TextView textViewBarCodeValue;
-    private BarcodeDetector barcodeDetector;
-    private CameraSource cameraSource;
-    private static final int REQUEST_CAMERA_PERMISSION = 201;
-    String intentData = "";
-    MaterialCardView back_arrow_CV;
+    SurfaceView                 surfaceView;
+    TextView                    textViewBarCodeValue;
+    private CameraSource        cameraSource;
+    private static final int    REQUEST_CAMERA_PERMISSION = 201;
+    String                      intentData = "";
+    MaterialCardView            back_arrow_CV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +49,9 @@ public class ScannerQR extends AppCompatActivity {
     }
 
     private void initComponents() {
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        textViewBarCodeValue = findViewById(R.id.txtBarcodeValue);
-        surfaceView = findViewById(R.id.surfaceView);
+        back_arrow_CV           = findViewById(R.id.back_arrow_CV);
+        textViewBarCodeValue    = findViewById(R.id.txtBarcodeValue);
+        surfaceView             = findViewById(R.id.surfaceView);
         back_arrow_CV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,9 +61,7 @@ public class ScannerQR extends AppCompatActivity {
     }
 
     private void initialiseDetectorsAndSources() {
-//        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
-        barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build();
-
+        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build();
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setRequestedPreviewSize(1920, 1080)
                 .setAutoFocusEnabled(true) //you should add this feature
@@ -89,7 +86,6 @@ public class ScannerQR extends AppCompatActivity {
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
-                //Toast.makeText(getApplicationContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -136,21 +132,19 @@ public class ScannerQR extends AppCompatActivity {
         textViewBarCodeValue.post(new Runnable() {
             @Override
             public void run() {
-                intentData = barCode.valueAt(0).displayValue;
-                Barcode code = barCode.valueAt(0);
+                intentData          = barCode.valueAt(0).displayValue;
                 boolean isJsonOrNot = JSONUtils.isJSONValid(intentData); //true
-                Log.e("VALID", String.valueOf(isJsonOrNot));
-                Log.e("intentData", intentData);
                 if (isJsonOrNot) {
                     Gson g = new Gson();
-                    QrCOdeResponse qrCOdeResponse = g.fromJson(intentData, QrCOdeResponse.class);
-                    String veterinarianUserId = qrCOdeResponse.getVeterinarianUserId();
-                    String veterinarianName = qrCOdeResponse.getVeterinarianName();
-                    String clinicName = qrCOdeResponse.getClinicName();
-                    String profileImageUrl = qrCOdeResponse.getProfileImageUrl();
-                    String Rating = String.valueOf(qrCOdeResponse.getRating());
-                    String key = qrCOdeResponse.getKey();
-                    String IsInsurance = qrCOdeResponse.getInsurance();
+                    QrCOdeResponse qrCOdeResponse   = g.fromJson(intentData, QrCOdeResponse.class);
+                    String veterinarianUserId       = qrCOdeResponse.getVeterinarianUserId();
+                    String veterinarianName         = qrCOdeResponse.getVeterinarianName();
+                    String clinicName               = qrCOdeResponse.getClinicName();
+                    String profileImageUrl          = qrCOdeResponse.getProfileImageUrl();
+                    String Rating                   = String.valueOf(qrCOdeResponse.getRating());
+                    String key                      = qrCOdeResponse.getKey();
+                    String IsInsurance              = qrCOdeResponse.getInsurance();
+
                     Intent intent = new Intent();
                     if (IsInsurance==null){
                         Log.e("intentData", key + "" + veterinarianUserId);
@@ -164,9 +158,6 @@ public class ScannerQR extends AppCompatActivity {
                         intent.putExtra("IsInsurance", "true");
                         intent.putExtra("InsuranceUrl", InsuranceUrl);
                     }
-
-
-
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {
@@ -187,12 +178,6 @@ public class ScannerQR extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         initialiseDetectorsAndSources();
-    }
-
-    private void copyToClipBoard(String text) {
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("QR code ScannerQR", text);
-        clipboard.setPrimaryClip(clip);
     }
 
     @Override

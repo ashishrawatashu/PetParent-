@@ -18,9 +18,9 @@ import java.util.List;
 
 public class TestAndXRayAdpater extends RecyclerView.Adapter<TestAndXRayAdpater.MyViewHolder> {
 
-    Context context;
-    List<PetTestsAndXrayList> petTestsAndXrayLists;
-    ViewAndUpdateClickListener onProductItemClickListner;
+    Context                     context;
+    List<PetTestsAndXrayList>   petTestsAndXrayLists;
+    ViewAndUpdateClickListener  onProductItemClickListner;
 
     public TestAndXRayAdpater(Context context, List<PetTestsAndXrayList> petClinicVisitLists, ViewAndUpdateClickListener onProductItemClickListner) {
         this.context = context;
@@ -55,10 +55,10 @@ public class TestAndXRayAdpater extends RecyclerView.Adapter<TestAndXRayAdpater.
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            test_type_TV = itemView.findViewById(R.id.test_type_TV);
-            result_TV = itemView.findViewById(R.id.result_TV);
-            test_date_TV = itemView.findViewById(R.id.test_date_TV);
-            view_TV=itemView.findViewById(R.id.view_TV);
+            test_type_TV    = itemView.findViewById(R.id.test_type_TV);
+            result_TV       = itemView.findViewById(R.id.result_TV);
+            test_date_TV    = itemView.findViewById(R.id.test_date_TV);
+            view_TV         = itemView.findViewById(R.id.view_TV);
 
             view_TV.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -57,54 +57,39 @@ import java.util.TimerTask;
 import retrofit2.Response;
 
 public class VetFullProfileActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, OnSliderClickListener {
-    String serviceTypeId, EncryptId, vet_fee, vet_study , vet_rating , vet_address ,appointment_duration, vet_name , vetUserId ,vet_image_url , petId , id , type ,petParentString ;
-    TextView rating_TV, vet_name_TV,vet_study_TV,vet_address_TV,vet_chargers_TV,clinic_name_TV,vet_full_address_TV,write_reviews_TV;
-    int page_position = 0;
-
-    RecyclerView clinic_timings_RV,reviews_RV;
-    Button contact_clinic_BT,book_appointment_BT;
-    MaterialCardView back_arrow_CV;
-    ImageView vet_profile_pic;
-    ProviderReviewsAdapter providerReviewsAdapter;
-    ProviderClinicTimingsAdapter providerClinicTimingsAdapter;
-    SearchProviderFullDetailResponse searchProviderFullDetailResponse;
-    Methods methods;
-    ScrollView scroll_view_vet_profile;
-    ArrayList<ProviderRatingList> providerRatingLists = new ArrayList<>();
-    List<ServiceProviderDetailOperatingHour> serviceProviderDetailOperatingHours = new ArrayList<>();
-    ProgressBar progressBar;
-    ViewPager pager;
-    LinearLayout ll_dots;
-    private ImageView[] dots;
-    ArrayList<Integer> slider_image_list;
-    SliderPagerAdapter sliderPagerAdapter;
-    Dialog reviewDialog;
-    EditText dialog_give_reviews_ET;
-    Button dialog_submit_feedback_BT;
-    ImageView rate_one_IV, rate_two_IV,rate_three_IV,rate_four_IV,rate_five_IV;
-    int rate = 0,providerId;
-    String phone = "";
+    String                                      serviceTypeId, EncryptId, vet_fee, vet_study , vet_rating , vet_address ,appointment_duration, vet_name , vetUserId ,vet_image_url , petId , id , type ,petParentString ;
+    TextView                                    rating_TV, vet_name_TV,vet_study_TV,vet_address_TV,vet_chargers_TV,clinic_name_TV,vet_full_address_TV,write_reviews_TV;
+    RecyclerView                                clinic_timings_RV,reviews_RV;
+    Button                                      contact_clinic_BT,book_appointment_BT;
+    MaterialCardView                            back_arrow_CV;
+    ImageView                                   vet_profile_pic;
+    ProviderReviewsAdapter                      providerReviewsAdapter;
+    ProviderClinicTimingsAdapter                providerClinicTimingsAdapter;
+    SearchProviderFullDetailResponse            searchProviderFullDetailResponse;
+    Methods                                     methods;
+    ScrollView                                  scroll_view_vet_profile;
+    ArrayList<ProviderRatingList>               providerRatingLists = new ArrayList<>();
+    List<ServiceProviderDetailOperatingHour>    serviceProviderDetailOperatingHours = new ArrayList<>();
+    ProgressBar                                 progressBar;
+    ViewPager                                   pager;
+    LinearLayout                                ll_dots;
+    private ImageView[]                         dots;
+    ArrayList<Integer>                          slider_image_list;
+    SliderPagerAdapter                          sliderPagerAdapter;
+    Dialog                                      reviewDialog;
+    EditText                                    dialog_give_reviews_ET;
+    Button                                      dialog_submit_feedback_BT;
+    ImageView                                   rate_one_IV, rate_two_IV,rate_three_IV,rate_four_IV,rate_five_IV;
+    int                                         rate = 0,providerId;
+    int                                         page_position = 0;
+    String                                      phone = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet_full_profile);
-        Intent intent = getIntent();
-        EncryptId       = intent.getStringExtra("EncryptId");
-        type            = intent.getStringExtra("type");
-        id              = intent.getStringExtra("id");
-        petId           = intent.getStringExtra("pet_id");
-        petParentString = intent.getStringExtra("petParent");
-        vet_study       = intent.getStringExtra("vet_study");
-        vet_rating      = intent.getStringExtra("vet_rating");
-        vet_address     = intent.getStringExtra("vet_address");
-        vet_name        = intent.getStringExtra("vet_name");
-        vet_image_url   = intent.getStringExtra("vet_image_url");
-        vetUserId       = intent.getStringExtra("vetUserId");
-        vet_fee         = intent.getStringExtra("vet_fee");
-        serviceTypeId   = intent.getStringExtra("serviceTypeId");
 
-
+        intentData();
         init();
 
         methods = new Methods(this);
@@ -121,6 +106,23 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         Log.e("DATALOG", "check1=> " + methods.getRequestJson(searchProviderFullDetailRequest));
 
 
+    }
+
+    private void intentData() {
+        Intent intent = getIntent();
+        EncryptId       = intent.getStringExtra("EncryptId");
+        type            = intent.getStringExtra("type");
+        id              = intent.getStringExtra("id");
+        petId           = intent.getStringExtra("pet_id");
+        petParentString = intent.getStringExtra("petParent");
+        vet_study       = intent.getStringExtra("vet_study");
+        vet_rating      = intent.getStringExtra("vet_rating");
+        vet_address     = intent.getStringExtra("vet_address");
+        vet_name        = intent.getStringExtra("vet_name");
+        vet_image_url   = intent.getStringExtra("vet_image_url");
+        vetUserId       = intent.getStringExtra("vetUserId");
+        vet_fee         = intent.getStringExtra("vet_fee");
+        serviceTypeId   = intent.getStringExtra("serviceTypeId");
     }
 
     private void init() {

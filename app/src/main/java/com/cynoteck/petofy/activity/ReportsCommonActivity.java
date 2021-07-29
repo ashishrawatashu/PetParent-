@@ -14,38 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 public class ReportsCommonActivity extends AppCompatActivity {
-    ImageView petRegImage_IV;
-    MaterialCardView back_arrow_CV;
-    String pet_image_url, pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, button_type, pet_DOB, pet_encrypted_id;
-    Bundle data = new Bundle();
-    TextView pet_reg_name_TV, pet_reg__id_TV, parent_name_TV, pet_reg_date_of_birth_TV, reports_headline_TV;
+    ImageView               petRegImage_IV;
+    MaterialCardView        back_arrow_CV;
+    String                  pet_image_url, pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, button_type, pet_DOB, pet_encrypted_id;
+    Bundle                  data = new Bundle();
+    TextView                pet_reg_name_TV, pet_reg__id_TV, parent_name_TV, pet_reg_date_of_birth_TV, reports_headline_TV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports_common);
 
-        Bundle extras = getIntent().getExtras();
-        report_type_id = extras.getString("reports_id");
-        pet_id = extras.getString("pet_id");
-        pet_image_url = extras.getString("pet_image_url");
-        pet_owner_contact = extras.getString("pet_owner_contact");
-        pet_owner_name = extras.getString("pet_owner_name");
-        pet_sex = extras.getString("pet_sex");
-        pet_name = extras.getString("pet_name");
-        pet_unique_id = extras.getString("pet_unique_id");
-        button_type = extras.getString("button_type");
-        pet_DOB = extras.getString("pet_DOB");
-        pet_encrypted_id = extras.getString("pet_encrypted_id");
-
-
-        reports_headline_TV = findViewById(R.id.reports_headline_TV);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        pet_reg_name_TV = findViewById(R.id.pet_reg_name_TV);
-        pet_reg__id_TV = findViewById(R.id.pet_reg__id_TV);
-        parent_name_TV = findViewById(R.id.parent_name_TV);
-        petRegImage_IV = findViewById(R.id.petRegImage_IV);
-        pet_reg_date_of_birth_TV = findViewById(R.id.pet_reg_date_of_birth_TV);
+        intentData();
+        initView();
 
         pet_reg_name_TV.setText(pet_name.substring(0, 1).toUpperCase() + pet_name.substring(1) + " (" + pet_sex + ")");
         parent_name_TV.setText(pet_owner_name.substring(0, 1).toUpperCase() + pet_owner_name.substring(1));
@@ -265,5 +246,31 @@ public class ReportsCommonActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void initView() {
+        reports_headline_TV         = findViewById(R.id.reports_headline_TV);
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        pet_reg_name_TV             = findViewById(R.id.pet_reg_name_TV);
+        pet_reg__id_TV              = findViewById(R.id.pet_reg__id_TV);
+        parent_name_TV              = findViewById(R.id.parent_name_TV);
+        petRegImage_IV              = findViewById(R.id.petRegImage_IV);
+        pet_reg_date_of_birth_TV    = findViewById(R.id.pet_reg_date_of_birth_TV);
+
+    }
+
+    private void intentData() {
+        Bundle extras = getIntent().getExtras();
+        report_type_id      = extras.getString("reports_id");
+        pet_id              = extras.getString("pet_id");
+        pet_image_url       = extras.getString("pet_image_url");
+        pet_owner_contact   = extras.getString("pet_owner_contact");
+        pet_owner_name      = extras.getString("pet_owner_name");
+        pet_sex             = extras.getString("pet_sex");
+        pet_name            = extras.getString("pet_name");
+        pet_unique_id       = extras.getString("pet_unique_id");
+        button_type         = extras.getString("button_type");
+        pet_DOB             = extras.getString("pet_DOB");
+        pet_encrypted_id    = extras.getString("pet_encrypted_id");
     }
 }

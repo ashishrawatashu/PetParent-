@@ -18,6 +18,8 @@
     <color name="gray_code_dark">#4d4d4d</color>
     <!--    grey....................-->
     <color name="background_grey">#F5F7FA</color>
+    <color name="download_grey">#f5f5f5</color>
+    <color name="insurance_green">#04e762</color>
 
     <color name="grey_800">#424242</color>
     <color name="gray_1">#333333</color>
@@ -26,10 +28,11 @@
     <color name="gray_4">#E0E0E0</color>
     <color name="gray_5">#E0E0E0</color>
     <color name="gray_shimmer">#dddddd</color>
-
+    insurance_card_bg
     <color name="myColorTransparent" alpha="0.10">#ff853d</color>
 
 
+    <color name="insurance_card_bg">#0077bd </color>
 
 
 

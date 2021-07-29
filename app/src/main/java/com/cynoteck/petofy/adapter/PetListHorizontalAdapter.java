@@ -21,12 +21,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PetListHorizontalAdapter extends RecyclerView.Adapter<PetListHorizontalAdapter.MyViewHolder>  {
 
-    Context context;
-    ArrayList<PetList> profileList;
+    Context                     context;
+    ArrayList<PetList>          profileList;
     private OnItemClickListener onProductItemClickListner;
-    boolean isClicked = false;
-    private int selectedItem;
-    String from;
+    boolean                     isClicked = false;
+    private int                 selectedItem;
+    String                      from;
     public PetListHorizontalAdapter(Context context, String from,ArrayList<PetList> profileList, OnItemClickListener onProductItemClickListner) {
         this.context = context;
         this.from = from;
@@ -73,21 +73,21 @@ public class PetListHorizontalAdapter extends RecyclerView.Adapter<PetListHorizo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         CircleImageView pet_image_CIV;
-        TextView pet_name_TV;
-        RadioButton pet_select_RB;
+        TextView        pet_name_TV;
+        RadioButton     pet_select_RB;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            pet_image_CIV = itemView.findViewById(R.id.pet_image_CIV);
-            pet_name_TV = itemView.findViewById(R.id.pet_name_TV);
-            pet_select_RB = itemView.findViewById(R.id.pet_select_RB);
+            pet_image_CIV   = itemView.findViewById(R.id.pet_image_CIV);
+            pet_name_TV     = itemView.findViewById(R.id.pet_name_TV);
+            pet_select_RB   = itemView.findViewById(R.id.pet_select_RB);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    isClicked = true;
-                    int previousItem = selectedItem;
-                    selectedItem = getAdapterPosition();
+                    isClicked           = true;
+                    int previousItem    = selectedItem;
+                    selectedItem        = getAdapterPosition();
                     notifyItemChanged(previousItem);
                     notifyItemChanged(getAdapterPosition());
                     if (onProductItemClickListner != null) {
@@ -100,9 +100,9 @@ public class PetListHorizontalAdapter extends RecyclerView.Adapter<PetListHorizo
             pet_select_RB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    isClicked = true;
-                    int previousItem = selectedItem;
-                    selectedItem = getAdapterPosition();
+                    isClicked           = true;
+                    int previousItem    = selectedItem;
+                    selectedItem        = getAdapterPosition();
                     notifyItemChanged(previousItem);
                     notifyItemChanged(getAdapterPosition());
                     if (onProductItemClickListner != null) {

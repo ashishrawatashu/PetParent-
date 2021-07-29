@@ -60,68 +60,47 @@ import retrofit2.Response;
 
 public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, TextWatcher {
 
-    AppCompatSpinner age_wise,add_pet_type, add_pet_sex_dialog, add_pet_breed_dialog, add_pet_color_dialog, add_pet_size;
-    ImageView back_arrow_IV;
-    EditText firstName_ET, lastName_ET, pet_parent_email_ET, pincode_ET, address_ET, pet_name_ET, age_neumeric;
-    TextView calenderView, ageViewTv;
-    Methods methods;
-
-    ArrayList<String> petType;
-    ArrayList<String> petBreed;
-    ArrayList<String> petColor;
-    ArrayList<String> petSize;
-    ArrayList<String> petSex;
-    ArrayList<String> petAgeType;
-    LinearLayout day_and_age_layout;
+    AppCompatSpinner        age_wise,add_pet_type, add_pet_sex_dialog, add_pet_breed_dialog, add_pet_color_dialog, add_pet_size;
+    ImageView               back_arrow_IV;
+    EditText                firstName_ET, lastName_ET, pet_parent_email_ET, pincode_ET, address_ET, pet_name_ET, age_neumeric;
+    TextView                calenderView, ageViewTv;
+    Methods                 methods;
+    LinearLayout            day_and_age_layout;
+    CheckBox                convert_yr_to_age;
+    Button                  signUP_BT;
+    DatePickerDialog        picker;
+    ScrollView              scrollView;
+    String                  strPetName = "", strPetParentFirstName = "", strPetParentLastName = "", strPetParentEmail = "", strPetParentPincode = "", strPetParentAddress = "", strPetContactNumber = "", strPetBirthDay = "",
+                            strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", strAgeCount = "",
+                            strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
+                            strSpnrSex = "", strSpnrSexId = "", currentDateandTime = "", veterinarianUserId = "";
+    ArrayList<String>       petType;
+    ArrayList<String>       petBreed;
+    ArrayList<String>       petColor;
+    ArrayList<String>       petSize;
+    ArrayList<String>       petSex;
+    ArrayList<String>       petAgeType;
     HashMap<String, String> petTypeHashMap = new HashMap<>();
     HashMap<String, String> petBreedHashMap = new HashMap<>();
     HashMap<String, String> petColorHashMap = new HashMap<>();
     HashMap<String, String> petSizeHashMap = new HashMap<>();
     HashMap<String, String> petSexHashMap = new HashMap<>();
     HashMap<String, String> petAgeUnitHash = new HashMap<>();
-    CheckBox convert_yr_to_age;
-    Button signUP_BT;
-    DatePickerDialog picker;
-    ScrollView scrollView;
-    String strPetName = "", strPetParentFirstName = "", strPetParentLastName = "", strPetParentEmail = "", strPetParentPincode = "", strPetParentAddress = "", strPetContactNumber = "", strPetBirthDay = "",
-            strSpnerItemPetNm = "", getStrSpnerItemPetNmId = "", strSpnrBreed = "", strSpnrBreedId = "", strAgeCount = "",
-            strSpnrColor = "", strSpnrColorId = "", strSpnrSize = "", strSpneSizeId = "",
-            strSpnrSex = "", strSpnrSexId = "", currentDateandTime = "", veterinarianUserId = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_pet_with_q_r_code);
-        methods = new Methods(this);
-        Intent intent = getIntent();
-        strPetContactNumber = intent.getStringExtra("phoneNumber");
-        veterinarianUserId = intent.getStringExtra("veterinarianUserId");
+        methods                 = new Methods(this);
+        Intent intent           = getIntent();
+        strPetContactNumber     = intent.getStringExtra("phoneNumber");
+        veterinarianUserId      = intent.getStringExtra("veterinarianUserId");
 
         currentDateAndTime();
-        scrollView = findViewById(R.id.scrollView);
-        add_pet_type = findViewById(R.id.add_pet_type);
-        add_pet_sex_dialog = findViewById(R.id.add_pet_sex_dialog);
-        add_pet_breed_dialog = findViewById(R.id.add_pet_breed_dialog);
-        add_pet_color_dialog = findViewById(R.id.add_pet_color_dialog);
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        firstName_ET = findViewById(R.id.firstName_ET);
-        lastName_ET = findViewById(R.id.lastName_ET);
-        pet_parent_email_ET = findViewById(R.id.pet_parent_email_ET);
-        pincode_ET = findViewById(R.id.pincode_ET);
-        address_ET = findViewById(R.id.address_ET);
-        pet_name_ET = findViewById(R.id.pet_name_ET);
-        calenderView = findViewById(R.id.calenderTextView_dialog);
-        add_pet_size = findViewById(R.id.add_pet_size_dialog);
-        ageViewTv = findViewById(R.id.ageViewTv);
-        signUP_BT = findViewById(R.id.signUP_BT);
-        age_wise = findViewById(R.id.age_wise);
-        age_neumeric = findViewById(R.id.age_neumeric);
-        convert_yr_to_age = findViewById(R.id.convert_yr_to_age);
-        day_and_age_layout = findViewById(R.id.day_and_age_layout);
-        back_arrow_IV.setOnClickListener(this);
-        signUP_BT.setOnClickListener(this);
-        calenderView.setOnClickListener(this);
-        convert_yr_to_age.setOnClickListener(this);
+
+        initView();
+
 
         age_neumeric.addTextChangedListener(this);
         age_neumeric.addTextChangedListener(new TextWatcher() {
@@ -191,6 +170,35 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
         }
 
 
+    }
+
+    private void initView() {
+        scrollView              = findViewById(R.id.scrollView);
+        add_pet_type            = findViewById(R.id.add_pet_type);
+        add_pet_sex_dialog      = findViewById(R.id.add_pet_sex_dialog);
+        add_pet_breed_dialog    = findViewById(R.id.add_pet_breed_dialog);
+        add_pet_color_dialog    = findViewById(R.id.add_pet_color_dialog);
+        back_arrow_IV           = findViewById(R.id.back_arrow_IV);
+        firstName_ET            = findViewById(R.id.firstName_ET);
+        lastName_ET             = findViewById(R.id.lastName_ET);
+        pet_parent_email_ET     = findViewById(R.id.pet_parent_email_ET);
+        pincode_ET              = findViewById(R.id.pincode_ET);
+        address_ET              = findViewById(R.id.address_ET);
+        pet_name_ET             = findViewById(R.id.pet_name_ET);
+        calenderView            = findViewById(R.id.calenderTextView_dialog);
+        add_pet_size            = findViewById(R.id.add_pet_size_dialog);
+        ageViewTv               = findViewById(R.id.ageViewTv);
+        signUP_BT               = findViewById(R.id.signUP_BT);
+        age_wise                = findViewById(R.id.age_wise);
+        age_neumeric            = findViewById(R.id.age_neumeric);
+        convert_yr_to_age       = findViewById(R.id.convert_yr_to_age);
+        day_and_age_layout      = findViewById(R.id.day_and_age_layout);
+
+
+        back_arrow_IV.setOnClickListener(this);
+        signUP_BT.setOnClickListener(this);
+        calenderView.setOnClickListener(this);
+        convert_yr_to_age.setOnClickListener(this);
     }
 
     private void getPetDateofBirthDependsOnDays(String day) {
@@ -277,10 +285,10 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 break;
 
             case R.id.calenderTextView_dialog:
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+                final Calendar cldr     = Calendar.getInstance();
+                int day                 = cldr.get(Calendar.DAY_OF_MONTH);
+                int month               = cldr.get(Calendar.MONTH);
+                int year                = cldr.get(Calendar.YEAR);
                 // date picker dialog
                 picker = new DatePickerDialog(AddPetWithQRCodeActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -301,13 +309,13 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 break;
 
             case R.id.signUP_BT:
-                strPetParentFirstName = firstName_ET.getText().toString().trim();
-                strPetParentLastName = lastName_ET.getText().toString().trim();
-                strPetParentEmail = pet_parent_email_ET.getText().toString().trim();
-                strPetParentPincode = pincode_ET.getText().toString().trim();
-                strPetParentAddress = address_ET.getText().toString().trim();
-                strPetName = pet_name_ET.getText().toString().trim();
-                strPetBirthDay = calenderView.getText().toString().trim();
+                strPetParentFirstName   = firstName_ET.getText().toString().trim();
+                strPetParentLastName    = lastName_ET.getText().toString().trim();
+                strPetParentEmail       = pet_parent_email_ET.getText().toString().trim();
+                strPetParentPincode     = pincode_ET.getText().toString().trim();
+                strPetParentAddress     = address_ET.getText().toString().trim();
+                strPetName              = pet_name_ET.getText().toString().trim();
+                strPetBirthDay          = calenderView.getText().toString().trim();
 
                 if (strPetName.isEmpty()) {
                     pet_parent_email_ET.setError(null);
@@ -677,7 +685,6 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
         add_pet_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                // Showing selected spinner item
                 strSpnerItemPetNm = item;
                 Log.d("spnerType", "" + strSpnerItemPetNm);
                 getStrSpnerItemPetNmId = petTypeHashMap.get(strSpnerItemPetNm);
@@ -685,7 +692,6 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                     getPetBreed();
                     getPetAge();
                     getPetColor();
-//                    getPetSize();
                 }
 
             }
@@ -737,21 +743,6 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
         ApiService<PetColorValueResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getGetPetColorApi(breedParams), "GetPetColor");
     }
-
-    private void getPetSize() {
-        BreedRequest breedRequest = new BreedRequest();
-        breedRequest.setGetAll("false");
-        if (!getStrSpnerItemPetNmId.equals("0"))
-            breedRequest.setPetCategoryId(getStrSpnerItemPetNmId);
-        else
-            breedRequest.setPetCategoryId("1");
-        BreedParams breedParams = new BreedParams();
-        breedParams.setData(breedRequest);
-
-        ApiService<PetSizeValueResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getGetPetSizeApi(breedParams), "GetPetSize");
-    }
-
 
     @Override
     public void onError(Throwable t, String key) {

@@ -22,11 +22,11 @@ import com.cynoteck.petofy.utils.Methods;
 
 public class ForgetPasswordActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
-    EditText email_TIET;
-    Button submit_BT;
-    String mailString;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    Methods methods;
+    EditText        email_TIET;
+    Button          submit_BT;
+    String          mailString;
+    String          emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    Methods         methods;
 
 
     @Override
@@ -34,9 +34,9 @@ public class ForgetPasswordActivity extends AppCompatActivity implements ApiResp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
 
-        methods = new Methods(this);
-        email_TIET = findViewById(R.id.email_TIET);
-        submit_BT= findViewById(R.id.submitMailBT);
+        methods     = new Methods(this);
+        email_TIET  = findViewById(R.id.email_TIET);
+        submit_BT   = findViewById(R.id.submitMailBT);
         submit_BT.setOnClickListener(this);
     }
 

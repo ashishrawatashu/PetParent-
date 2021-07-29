@@ -26,34 +26,22 @@ import retrofit2.Response;
 
 public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse {
 
-    ImageView back_arrow_IV;
-    TextInputEditText address_TIET, firstName_TIET, lastName_TIET, email_TIET, number_TIET;
-    String firstNameStr = "", lastNameStr = "", emailStr = "", numberStr = "", addressStr = "";
-    Button update_BT;
-    private TextInputLayout firstname_TIL, lastName_TIL, email_TIL, phoneNumber_TIL, address_TIL;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    Methods methods;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
+    ImageView                   back_arrow_IV;
+    TextInputEditText           address_TIET, firstName_TIET, lastName_TIET, email_TIET, number_TIET;
+    String                      firstNameStr = "", lastNameStr = "", emailStr = "", numberStr = "", addressStr = "";
+    Button                      update_BT;
+    private TextInputLayout     firstname_TIL, lastName_TIL, email_TIL, phoneNumber_TIL, address_TIL;
+    String                      emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    Methods                     methods;
+    SharedPreferences           sharedPreferences;
+    SharedPreferences.Editor    login_editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
         methods = new Methods(this);
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        firstName_TIET = findViewById(R.id.firstName_TIET);
-        lastName_TIET = findViewById(R.id.lastName_TIET);
-        email_TIET = findViewById(R.id.email_TIET);
-        number_TIET = findViewById(R.id.number_TIET);
-        firstname_TIL = findViewById(R.id.firstName_TIL);
-        lastName_TIL = findViewById(R.id.lastName_TIL);
-        email_TIL = findViewById(R.id.email_TIL);
-        address_TIL = findViewById(R.id.address_TIL);
-        phoneNumber_TIL = findViewById(R.id.number_TIL);
-        address_TIET = findViewById(R.id.address_TIET);
-        update_BT = findViewById(R.id.update_BT);
-
+        initView();
 
         back_arrow_IV.setOnClickListener(this);
         update_BT.setOnClickListener(this);
@@ -67,6 +55,23 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         number_TIET.setText(Config.user_phone);
         email_TIET.setText(Config.user_emial);
         address_TIET.setText(Config.user_address);
+
+
+    }
+
+    private void initView() {
+        back_arrow_IV           = findViewById(R.id.back_arrow_IV);
+        firstName_TIET          = findViewById(R.id.firstName_TIET);
+        lastName_TIET           = findViewById(R.id.lastName_TIET);
+        email_TIET              = findViewById(R.id.email_TIET);
+        number_TIET             = findViewById(R.id.number_TIET);
+        firstname_TIL           = findViewById(R.id.firstName_TIL);
+        lastName_TIL            = findViewById(R.id.lastName_TIL);
+        email_TIL               = findViewById(R.id.email_TIL);
+        address_TIL             = findViewById(R.id.address_TIL);
+        phoneNumber_TIL         = findViewById(R.id.number_TIL);
+        address_TIET            = findViewById(R.id.address_TIET);
+        update_BT               = findViewById(R.id.update_BT);
 
 
     }

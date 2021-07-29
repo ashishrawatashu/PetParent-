@@ -33,19 +33,16 @@ import retrofit2.Response;
 
 public class ViewReportsDeatilsActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener {
 
-    String pet_DOB,pet_image_url,clinic_id, type;
-    TextView vet_name_textView,visit_date_textView,nature_ofVist_textView,weight_textView
-            ,temperature_textView,vaccine_textView,symptoms_textView,diagnosis_textView,
-            remarks_textView,pet_weight_TV,dot_pet_weight,dot_pet_temp,pet_temp_TV,pet_remarks_TV,dot_pet_remarks;
-    MaterialCardView back_arrow_CV;
-    ImageView petRegImage_IV;
-    Button deleteReport_BT;
-    String report_type, pet_unique_id, pet_name,pet_sex, pet_owner_name,pet_owner_contact,pet_id ,report_type_id;
-    TextView pet_reg_name_TV,pet_sex_TV,pet_reg__id_TV,parent_name_TV,pet_reg_date_of_birth_TV,dewarmername_textView,dose_textView,next_dewarmer_textView;
-    Methods methods;
-    ProgressBar progressBar;
-    LinearLayout linearLayout,layout_next_dewarmer,layout_dose,layout_dewarming_name;
-    ConstraintLayout deworming_CL, report_detail_CL,other_report_CL;
+    String                  pet_DOB,pet_image_url,clinic_id, type;
+    TextView                vet_name_textView,visit_date_textView,nature_ofVist_textView,weight_textView, temperature_textView,vaccine_textView,symptoms_textView,diagnosis_textView, remarks_textView,pet_weight_TV,dot_pet_weight,dot_pet_temp,pet_temp_TV,pet_remarks_TV,dot_pet_remarks;
+    MaterialCardView        back_arrow_CV;
+    ImageView               petRegImage_IV;
+    Button                  deleteReport_BT;
+    String                  pet_unique_id, pet_name,pet_sex, pet_owner_name,pet_owner_contact,pet_id ,report_type_id;
+    TextView                pet_reg_name_TV,pet_sex_TV,pet_reg__id_TV,parent_name_TV,pet_reg_date_of_birth_TV,dewarmername_textView,dose_textView,next_dewarmer_textView;
+    Methods                 methods;
+    ProgressBar             progressBar;
+    ConstraintLayout        deworming_CL, report_detail_CL,other_report_CL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,47 +81,49 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
     }
 
     private void init() {
-        Intent extras = getIntent();
-        clinic_id = extras.getExtras().getString("clinic_id");
-        pet_owner_contact = extras.getExtras().getString("pet_owner_contact");
-        pet_owner_name = extras.getExtras().getString("pet_owner_name");
-        pet_sex = extras.getExtras().getString("pet_sex");
-        pet_name = extras.getExtras().getString("pet_name");
-        pet_unique_id = extras.getExtras().getString("pet_unique_id");
-        report_type_id=extras.getExtras().getString("id");
-        pet_image_url=extras.getExtras().getString("pet_image_url");
-        pet_DOB = extras.getExtras().getString("pet_DOB");
-        report_detail_CL = findViewById(R.id.report_detail_CL);
-        progressBar = findViewById(R.id.progressBar);
-        deleteReport_BT=findViewById(R.id.deleteReport_BT);
-        vet_name_textView=findViewById(R.id.vet_name_textView);
-        visit_date_textView=findViewById(R.id.visit_date_textView);
-        nature_ofVist_textView=findViewById(R.id.nature_ofVist_textView);
-        weight_textView=findViewById(R.id.weight_textView);
-        temperature_textView=findViewById(R.id.temperature_textView);
-        symptoms_textView=findViewById(R.id.symptoms_textView);
-        diagnosis_textView=findViewById(R.id.diagnosis_textView);
-        remarks_textView=findViewById(R.id.remarks_textView);
-        back_arrow_CV=findViewById(R.id.back_arrow_CV);
-        petRegImage_IV=findViewById(R.id.petRegImage_IV);
-        dewarmername_textView=findViewById(R.id.dewarmername_textView);
-        dose_textView=findViewById(R.id.dose_textView);
-        next_dewarmer_textView=findViewById(R.id.next_dewarmer_textView);
-        deworming_CL=findViewById(R.id.deworming_CL);
-        other_report_CL=findViewById(R.id.other_report_CL);
+        Intent extras       = getIntent();
+        clinic_id           = extras.getExtras().getString("clinic_id");
+        pet_owner_contact   = extras.getExtras().getString("pet_owner_contact");
+        pet_owner_name      = extras.getExtras().getString("pet_owner_name");
+        pet_sex             = extras.getExtras().getString("pet_sex");
+        pet_name            = extras.getExtras().getString("pet_name");
+        pet_unique_id       = extras.getExtras().getString("pet_unique_id");
+        report_type_id      = extras.getExtras().getString("id");
+        pet_image_url       = extras.getExtras().getString("pet_image_url");
+        pet_DOB             = extras.getExtras().getString("pet_DOB");
 
-        dot_pet_weight=findViewById(R.id.dot_pet_weight);
-        pet_weight_TV=findViewById(R.id.pet_weight_TV);
-        pet_reg_name_TV = findViewById(R.id.pet_reg_name_TV);
-        pet_sex_TV = findViewById(R.id.pet_sex_TV);
-        pet_reg__id_TV = findViewById(R.id.pet_reg__id_TV);
-        parent_name_TV = findViewById(R.id.parent_name_TV);
-        pet_reg_date_of_birth_TV = findViewById(R.id.pet_reg_date_of_birth_TV);
-        dot_pet_temp=findViewById(R.id.dot_pet_temp);
-        pet_temp_TV=findViewById(R.id.pet_temp_TV);
-        dot_pet_temp=findViewById(R.id.dot_pet_temp);
-        pet_remarks_TV=findViewById(R.id.pet_remarks_TV);
-        dot_pet_remarks=findViewById(R.id.dot_pet_remarks);
+
+        report_detail_CL            = findViewById(R.id.report_detail_CL);
+        progressBar                 = findViewById(R.id.progressBar);
+        deleteReport_BT             = findViewById(R.id.deleteReport_BT);
+        vet_name_textView           = findViewById(R.id.vet_name_textView);
+        visit_date_textView         = findViewById(R.id.visit_date_textView);
+        nature_ofVist_textView      = findViewById(R.id.nature_ofVist_textView);
+        weight_textView             = findViewById(R.id.weight_textView);
+        temperature_textView        = findViewById(R.id.temperature_textView);
+        symptoms_textView           = findViewById(R.id.symptoms_textView);
+        diagnosis_textView          = findViewById(R.id.diagnosis_textView);
+        remarks_textView            = findViewById(R.id.remarks_textView);
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        petRegImage_IV              = findViewById(R.id.petRegImage_IV);
+        dewarmername_textView       = findViewById(R.id.dewarmername_textView);
+        dose_textView               = findViewById(R.id.dose_textView);
+        next_dewarmer_textView      = findViewById(R.id.next_dewarmer_textView);
+        deworming_CL                = findViewById(R.id.deworming_CL);
+        other_report_CL             = findViewById(R.id.other_report_CL);
+
+        dot_pet_weight              = findViewById(R.id.dot_pet_weight);
+        pet_weight_TV               = findViewById(R.id.pet_weight_TV);
+        pet_reg_name_TV             = findViewById(R.id.pet_reg_name_TV);
+        pet_sex_TV                  = findViewById(R.id.pet_sex_TV);
+        pet_reg__id_TV              = findViewById(R.id.pet_reg__id_TV);
+        parent_name_TV              = findViewById(R.id.parent_name_TV);
+        pet_reg_date_of_birth_TV    = findViewById(R.id.pet_reg_date_of_birth_TV);
+        dot_pet_temp                = findViewById(R.id.dot_pet_temp);
+        pet_temp_TV                 = findViewById(R.id.pet_temp_TV);
+        dot_pet_temp                = findViewById(R.id.dot_pet_temp);
+        pet_remarks_TV              = findViewById(R.id.pet_remarks_TV);
+        dot_pet_remarks             = findViewById(R.id.dot_pet_remarks);
         back_arrow_CV.setOnClickListener(this);
         deleteReport_BT.setOnClickListener(this);
 

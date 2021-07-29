@@ -16,9 +16,9 @@ import com.cynoteck.petofy.onClicks.OnItemClickListener;
 import java.util.List;
 
 public class SearchKeywordAdapter extends RecyclerView.Adapter<SearchKeywordAdapter.MyViewHolder> {
-    Context context;
+    Context                 context;
     List<SearchKeywordData> searchKeywordDataList;
-    OnItemClickListener onItemClickListener;
+    OnItemClickListener     onItemClickListener;
     public SearchKeywordAdapter(Context context, List<SearchKeywordData> searchKeywordDataList, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.searchKeywordDataList = searchKeywordDataList;

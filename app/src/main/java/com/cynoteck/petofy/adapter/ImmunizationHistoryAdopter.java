@@ -14,18 +14,18 @@ import com.cynoteck.petofy.R;
 import java.util.ArrayList;
 
 public class ImmunizationHistoryAdopter extends RecyclerView.Adapter<ImmunizationHistoryAdopter.MyViewHolder> {
-    Context context;
-    ArrayList<String> nextVisitDateList;
-    ArrayList<String> vaccineClassList;
-    ArrayList<String> vaccineList;
-    ArrayList<String> immunizationDateList;
+    Context             context;
+    ArrayList<String>   nextVisitDateList;
+    ArrayList<String>   vaccineClassList;
+    ArrayList<String>   vaccineList;
+    ArrayList<String>   immunizationDateList;
 
     public ImmunizationHistoryAdopter(Context context, ArrayList<String> nextVisitDateList, ArrayList<String> vaccineClassList, ArrayList<String> vaccineList, ArrayList<String> immunizationDateList ) {
-        this.context = context;
-        this.nextVisitDateList = nextVisitDateList;
-        this.vaccineClassList = vaccineClassList;
-        this.vaccineList = vaccineList;
-        this.immunizationDateList = immunizationDateList;
+        this.context                = context;
+        this.nextVisitDateList      = nextVisitDateList;
+        this.vaccineClassList       = vaccineClassList;
+        this.vaccineList            = vaccineList;
+        this.immunizationDateList   = immunizationDateList;
     }
 
     @NonNull
@@ -55,9 +55,9 @@ public class ImmunizationHistoryAdopter extends RecyclerView.Adapter<Immunizatio
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             immunization_dt =itemView.findViewById(R.id.immunization_dt);
-            vaccine_cls = itemView.findViewById(R.id.vaccine_cls);
-            vaccine = itemView.findViewById(R.id.vaccine);
-            nxt_due_dt = itemView.findViewById(R.id.nxt_due_dt);
+            vaccine_cls     = itemView.findViewById(R.id.vaccine_cls);
+            vaccine         = itemView.findViewById(R.id.vaccine);
+            nxt_due_dt      = itemView.findViewById(R.id.nxt_due_dt);
         }
     }
 }

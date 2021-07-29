@@ -214,7 +214,7 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="Consultation">CONSULTATIONS</string>
-    <string name="PetInsurances">Pet Insurances</string>
+    <string name="PetInsurances">Pet Insurance</string>
     <string name="yourPets">Yours Pets</string>
     <string name="adoptionDonation"><![CDATA[Adopt & Donate]]></string>
     <string name="general_deatils">General details</string>
@@ -236,5 +236,14 @@
     <string name="loginUsingPhone">Login with phone number</string>
     <string name="ok">OK</string>
     <string name="scanAndAdd"><![CDATA[Scan & Add]]></string>
+    <string name="ourPolicyHead">Our Policy</string>
+    <string name="cover_A">Cover A: Mandatory</string>
+    <string name="surgery_cover">1. Surgery Expenses Cover</string>
+    <string name="surgery_cover_details">This cover allows you to claim the surgery expenses for treatment of dog, carried out by a qualified vet, up to a maximum of INR 50000.</string>
+    <string name="hospitalization_cover_details">If your pet has to be hospitalized, this is the cover that will safeguard you financially for the expenses that will be incurred, subject to maximum of INR 2500 per day of hospitalization of Insured dog for a maximum of 4 days.</string>
+    <string name="hospitalization_cover">2. Hospitalization Cover</string>
+    <string name="why_petofy">Why Petofy</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="disclaimer_details">The premium of this insurance plan would depend upon the age, breed and gender of the dog. Pet dogs are classified into either Small, Medium, Large or Giant sizes based on the breed of the dog.*</string>
 
 </resources>

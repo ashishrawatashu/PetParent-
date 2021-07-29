@@ -32,21 +32,22 @@ import java.util.ArrayList;
 import retrofit2.Response;
 
 public class SearchActivity extends AppCompatActivity implements TextWatcher, ApiResponse, OnItemClickListener,View.OnClickListener{
-    EditText searchpet;
-    ImageView back_arrow;
-    ArrayList<PetList> profileList = new ArrayList<>();
-    RecyclerView register_pet_RV;
-    SearchAdapter SearchAdapter;
-    ProgressBar progressBar;
+    EditText                searchpet;
+    ImageView               back_arrow;
+    ArrayList<PetList>      profileList = new ArrayList<>();
+    RecyclerView            register_pet_RV;
+    SearchAdapter           SearchAdapter;
+    ProgressBar             progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchpet = (EditText) findViewById(R.id.search_pet);
-        back_arrow = (ImageView) findViewById(R.id.back_arrow);
-        register_pet_RV = (RecyclerView) findViewById(R.id.register_pet_RV);
+        searchpet       =  findViewById(R.id.search_pet);
+        back_arrow      =  findViewById(R.id.back_arrow);
+        register_pet_RV =  findViewById(R.id.register_pet_RV);
+
         back_arrow.setOnClickListener(this);
         progressBar = findViewById(R.id.progressBar);
         searchpet.requestFocus();
@@ -106,7 +107,6 @@ public class SearchActivity extends AppCompatActivity implements TextWatcher, Ap
                 try {
                     progressBar.setVisibility(View.INVISIBLE);
                     GetPetListResponse getPetListResponse = (GetPetListResponse) arg0.body();
-                    Log.d("GetPetListBySearch", getPetListResponse.toString());
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
                     profileList.clear();
                     if (responseCode == 109) {

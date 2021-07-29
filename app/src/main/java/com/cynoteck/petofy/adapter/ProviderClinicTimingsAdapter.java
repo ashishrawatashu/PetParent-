@@ -15,8 +15,8 @@ import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.Servic
 import java.util.List;
 
 public class ProviderClinicTimingsAdapter extends RecyclerView.Adapter<ProviderClinicTimingsAdapter.MyViewHolder> {
-    Context context;
-    List<ServiceProviderDetailOperatingHour> serviceProviderDetailOperatingHours;
+    Context                                         context;
+    List<ServiceProviderDetailOperatingHour>        serviceProviderDetailOperatingHours;
     public ProviderClinicTimingsAdapter(Context context, List<ServiceProviderDetailOperatingHour> serviceProviderDetailOperatingHours) {
         this.context = context;
         this.serviceProviderDetailOperatingHours = serviceProviderDetailOperatingHours;
@@ -46,8 +46,8 @@ public class ProviderClinicTimingsAdapter extends RecyclerView.Adapter<ProviderC
         TextView day_TV,timing_TV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            timing_TV = itemView.findViewById(R.id.timing_TV);
-            day_TV = itemView.findViewById(R.id.day_TV);
+            timing_TV   = itemView.findViewById(R.id.timing_TV);
+            day_TV      = itemView.findViewById(R.id.day_TV);
 
         }
     }

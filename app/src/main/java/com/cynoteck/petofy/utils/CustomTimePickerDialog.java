@@ -12,8 +12,8 @@ import java.util.List;
 
 public class CustomTimePickerDialog extends TimePickerDialog {
 
-    private final static int TIME_PICKER_INTERVAL = 30;
-    private TimePicker mTimePicker;
+    private final static int        TIME_PICKER_INTERVAL = 30;
+    private TimePicker              mTimePicker;
     private final OnTimeSetListener mTimeSetListener;
 
     public CustomTimePickerDialog(Context context, OnTimeSetListener listener,
@@ -48,8 +48,8 @@ public class CustomTimePickerDialog extends TimePickerDialog {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         try {
-            Class<?> classForid = Class.forName("com.android.internal.R$id");
-            Field timePickerField = classForid.getField("timePicker");
+            Class<?> classForid         = Class.forName("com.android.internal.R$id");
+            Field timePickerField       = classForid.getField("timePicker");
             mTimePicker = (TimePicker) findViewById(timePickerField.getInt(null));
             Field field = classForid.getField("minute");
 

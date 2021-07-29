@@ -16,8 +16,8 @@ import com.cynoteck.petofy.onClicks.OnItemClickListener;
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
-    Context context;
-    ArrayList<PetList> profileList;
+    Context                     context;
+    ArrayList<PetList>          profileList;
     private OnItemClickListener onProductItemClickListner;
     public SearchAdapter(Context context, ArrayList<PetList> profileList, OnItemClickListener onProductItemClickListner) {
         this.context = context;

@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetBreedsAdapter extends RecyclerView.Adapter<PetBreedsAdapter.MyViewHolder> implements Filterable {
-    Context context;
-    List<GetPetbreedsData> getPetbreedsData;
-    List<GetPetbreedsData> getPetbreedsDataFilter;
+    Context                     context;
+    List<GetPetbreedsData>      getPetbreedsData;
+    List<GetPetbreedsData>      getPetbreedsDataFilter;
 
     private OnItemClickListener onProductItemClickListner;
 
@@ -97,13 +97,13 @@ public class PetBreedsAdapter extends RecyclerView.Adapter<PetBreedsAdapter.MyVi
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView pet_breed_IV;
-        TextView pet_breed_name_TV;
+        ImageView   pet_breed_IV;
+        TextView    pet_breed_name_TV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            pet_breed_name_TV = itemView.findViewById(R.id.pet_breed_name_TV);
-            pet_breed_IV = itemView.findViewById(R.id.pet_breed_IV);
+            pet_breed_name_TV   = itemView.findViewById(R.id.pet_breed_name_TV);
+            pet_breed_IV        = itemView.findViewById(R.id.pet_breed_IV);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

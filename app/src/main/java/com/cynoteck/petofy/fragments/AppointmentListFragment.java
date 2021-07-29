@@ -63,28 +63,28 @@ import static android.app.Activity.RESULT_OK;
 
 @SuppressLint("StaticFieldLeak")
 public class AppointmentListFragment extends Fragment implements View.OnClickListener, ApiResponse, AppointmentsClickListner {
-    View view;
-    Methods methods;
-    MaterialCardView back_arrow_CV,appointment_CV;
-    LinearLayout upcoming_appointment_tab_LL, past_appointment_tab_LL;
-    TextView upcoming_appointment_TV, past_appointment_TV;
-    View upcoming_appointment_line, past_appointment_view;
-    static RecyclerView upcoming_appointment_RV, past_appointment_RV;
-    GetAppointmentResponse getUpcomingAppointmentResponse, pastAppointmentResponse;
-    PastAppointmentListAdapter pastAppointmentListAdapter;
-    String mettingId = "";
-    UpcomingAppointmentListAdapter upcomingAppointmentListAdapter;
-    int cancelPosition;
-    static ProgressBar progressBar;
-    Dialog payment_successfully_dialog;
-    static LinearLayout appoint_tabs_LL;
-    private BroadcastReceiver mNetworkReceiver;
-    static boolean isOnline = true;
-    static LinearLayout something_wrong_LL;
-    static Button retry_BT;
-    static boolean isLoaded = false;
-    TextView no_upcoming_appointment_TV, no_past_appointment_TV;
-    static  boolean upcomingTabClick = true, pastAppointmentClick = false;
+    View                            view;
+    Methods                         methods;
+    MaterialCardView                back_arrow_CV,appointment_CV;
+    LinearLayout                    upcoming_appointment_tab_LL, past_appointment_tab_LL;
+    TextView                        upcoming_appointment_TV, past_appointment_TV;
+    View                            upcoming_appointment_line, past_appointment_view;
+    static RecyclerView             upcoming_appointment_RV, past_appointment_RV;
+    GetAppointmentResponse          getUpcomingAppointmentResponse, pastAppointmentResponse;
+    PastAppointmentListAdapter      pastAppointmentListAdapter;
+    String                          mettingId = "";
+    UpcomingAppointmentListAdapter  upcomingAppointmentListAdapter;
+    static ProgressBar              progressBar;
+    Dialog                          payment_successfully_dialog;
+    static LinearLayout             appoint_tabs_LL;
+    private BroadcastReceiver       mNetworkReceiver;
+    static LinearLayout             something_wrong_LL;
+    static Button                   retry_BT;
+    static boolean                  isLoaded = false;
+    TextView                        no_upcoming_appointment_TV, no_past_appointment_TV;
+    static boolean                  isOnline = true;
+    static  boolean                 upcomingTabClick = true, pastAppointmentClick = false;
+    int                             cancelPosition;
 
     public AppointmentListFragment() {
 
@@ -92,10 +92,11 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_appointment_list, container, false);
-        mNetworkReceiver = new NetworkChangeReceiver();
+        view             =  inflater.inflate(R.layout.fragment_appointment_list, container, false);
+        mNetworkReceiver =  new NetworkChangeReceiver();
+        methods          =  new Methods(getActivity());
+
         registerNetworkBroadcastForNougat();
-        methods = new Methods(getActivity());
         initization();
         progressBar.setVisibility(View.VISIBLE);
 
@@ -146,22 +147,22 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
     private void initization() {
 
-        progressBar = view.findViewById(R.id.progressBar);
-        back_arrow_CV = view.findViewById(R.id.back_arrow_CV);
-        appointment_CV = view.findViewById(R.id.appointment_CV);
-        appoint_tabs_LL = view.findViewById(R.id.appoint_tabs_LL);
-        upcoming_appointment_tab_LL = view.findViewById(R.id.upcoming_appointment_tab_LL);
-        past_appointment_tab_LL = view.findViewById(R.id.past_appointment_tab_LL);
-        upcoming_appointment_TV = view.findViewById(R.id.upcoming_appointment_TV);
-        past_appointment_TV = view.findViewById(R.id.past_appointment_TV);
-        upcoming_appointment_line = view.findViewById(R.id.upcoming_appointment_line);
-        past_appointment_view = view.findViewById(R.id.past_appointment_view);
-        upcoming_appointment_RV = view.findViewById(R.id.upcoming_appointment_RV);
-        past_appointment_RV = view.findViewById(R.id.past_appointment_RV);
-        something_wrong_LL = view.findViewById(R.id.something_wrong_LL);
-        retry_BT = view.findViewById(R.id.retry_BT);
-        no_past_appointment_TV = view.findViewById(R.id.no_past_appointment_TV);
-        no_upcoming_appointment_TV = view.findViewById(R.id.no_upcoming_appointment_TV);
+        progressBar                 =   view.findViewById(R.id.progressBar);
+        back_arrow_CV               =   view.findViewById(R.id.back_arrow_CV);
+        appointment_CV              =   view.findViewById(R.id.appointment_CV);
+        appoint_tabs_LL             =   view.findViewById(R.id.appoint_tabs_LL);
+        upcoming_appointment_tab_LL =   view.findViewById(R.id.upcoming_appointment_tab_LL);
+        past_appointment_tab_LL     =   view.findViewById(R.id.past_appointment_tab_LL);
+        upcoming_appointment_TV     =   view.findViewById(R.id.upcoming_appointment_TV);
+        past_appointment_TV         =   view.findViewById(R.id.past_appointment_TV);
+        upcoming_appointment_line   =   view.findViewById(R.id.upcoming_appointment_line);
+        past_appointment_view       =   view.findViewById(R.id.past_appointment_view);
+        upcoming_appointment_RV     =   view.findViewById(R.id.upcoming_appointment_RV);
+        past_appointment_RV         =   view.findViewById(R.id.past_appointment_RV);
+        something_wrong_LL          =   view.findViewById(R.id.something_wrong_LL);
+        retry_BT                    =   view.findViewById(R.id.retry_BT);
+        no_past_appointment_TV      =   view.findViewById(R.id.no_past_appointment_TV);
+        no_upcoming_appointment_TV  =   view.findViewById(R.id.no_upcoming_appointment_TV);
 
 
         retry_BT.setOnClickListener(this);

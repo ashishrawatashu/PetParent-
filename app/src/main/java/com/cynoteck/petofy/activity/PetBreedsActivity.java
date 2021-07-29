@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -34,29 +35,22 @@ import java.util.List;
 import retrofit2.Response;
 
 public class PetBreedsActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnAlphabetClickListener, OnItemClickListener {
-    ImageView back_arrow_IV;
-    EditText search_breed_ET;
-    RelativeLayout all_pet_RL;
-    TextView all_TV;
-
-    RecyclerView a_to_z_RV;
-
-    LinearLayout dog_select_LL,cat_select_LL;
-    ImageView cat_check_IV,dog_check_IV;
-    TextView dog_TV,cat_TV;
-
-    RecyclerView pet_breeds_RV;
-
-    Methods methods;
-    List<String> aToZList = new ArrayList<>();
-    List<GetPetbreedsData> getPetbreedsDataList;
-
-    AToZAlphabetsAdapter aToZAlphabetsAdapter;
-    GetPetBreedsResponse getPetBreedsResponse;
-
-    PetBreedsAdapter petBreedsAdapter;
-
-    String petCategory ="1",selectedAlphabet="All";
+    ImageView                   back_arrow_IV;
+    EditText                    search_breed_ET;
+    RelativeLayout              all_pet_RL;
+    TextView                    all_TV;
+    RecyclerView                a_to_z_RV;
+    LinearLayout                dog_select_LL,cat_select_LL;
+    ImageView                   cat_check_IV,dog_check_IV;
+    TextView                    dog_TV,cat_TV;
+    RecyclerView                pet_breeds_RV;
+    Methods                     methods;
+    List<String>                aToZList = new ArrayList<>();
+    List<GetPetbreedsData>      getPetbreedsDataList;
+    AToZAlphabetsAdapter        aToZAlphabetsAdapter;
+    GetPetBreedsResponse        getPetBreedsResponse;
+    PetBreedsAdapter            petBreedsAdapter;
+    String                      petCategory ="1",selectedAlphabet="All";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,18 +103,18 @@ public class PetBreedsActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initialization() {
-        back_arrow_IV = findViewById(R.id.back_arrow_IV);
-        search_breed_ET = findViewById(R.id.search_breed_ET);
-        all_TV = findViewById(R.id.all_TV);
-        all_pet_RL = findViewById(R.id.all_pet_RL);
-        dog_select_LL = findViewById(R.id.dog_select_LL);
-        cat_select_LL = findViewById(R.id.cat_select_LL);
-        cat_check_IV = findViewById(R.id.cat_check_IV);
-        dog_check_IV = findViewById(R.id.dog_check_IV);
-        dog_TV = findViewById(R.id.dog_TV);
-        cat_TV = findViewById(R.id.cat_TV);
-        pet_breeds_RV = findViewById(R.id.pet_breeds_RV);
-        a_to_z_RV = findViewById(R.id.a_to_z_RV);
+        back_arrow_IV               = findViewById(R.id.back_arrow_IV);
+        search_breed_ET             = findViewById(R.id.search_breed_ET);
+        all_TV                      = findViewById(R.id.all_TV);
+        all_pet_RL                  = findViewById(R.id.all_pet_RL);
+        dog_select_LL               = findViewById(R.id.dog_select_LL);
+        cat_select_LL               = findViewById(R.id.cat_select_LL);
+        cat_check_IV                = findViewById(R.id.cat_check_IV);
+        dog_check_IV                = findViewById(R.id.dog_check_IV);
+        dog_TV                      = findViewById(R.id.dog_TV);
+        cat_TV                      = findViewById(R.id.cat_TV);
+        pet_breeds_RV               = findViewById(R.id.pet_breeds_RV);
+        a_to_z_RV                   = findViewById(R.id.a_to_z_RV);
 
         back_arrow_IV.setOnClickListener(this);
         cat_select_LL.setOnClickListener(this);
@@ -132,6 +126,7 @@ public class PetBreedsActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){

@@ -19,14 +19,14 @@ import java.util.List;
 
 public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopter.MyViewHolder> {
 
-    List<PetDonationList> petDonationLists;
-    AdoptionListOnClick adoptionListOnClick;
-    Context context;
+    List<PetDonationList>   petDonationLists;
+    AdoptionListOnClick     adoptionListOnClick;
+    Context                 context;
 
     public AdoptionListAdopter(Context context, List<PetDonationList> petDonationLists, AdoptionListOnClick adoptionListOnClick) {
-        this.petDonationLists = petDonationLists;
-        this.adoptionListOnClick = adoptionListOnClick;
-        this.context = context;
+        this.petDonationLists       = petDonationLists;
+        this.adoptionListOnClick    = adoptionListOnClick;
+        this.context                = context;
 
     }
 
@@ -62,8 +62,8 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            pet_breed_name_TV = itemView.findViewById(R.id.pet_breed_name_TV);
-            pet_breed_IV = itemView.findViewById(R.id.pet_breed_IV);
+            pet_breed_name_TV   = itemView.findViewById(R.id.pet_breed_name_TV);
+            pet_breed_IV        = itemView.findViewById(R.id.pet_breed_IV);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

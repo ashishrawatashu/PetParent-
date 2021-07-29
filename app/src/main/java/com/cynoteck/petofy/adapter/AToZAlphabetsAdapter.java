@@ -16,17 +16,17 @@ import com.cynoteck.petofy.onClicks.OnAlphabetClickListener;
 import java.util.List;
 
 public class AToZAlphabetsAdapter extends RecyclerView.Adapter<AToZAlphabetsAdapter.MyViewHolder> {
-    Context context;
-    List<String> aToZList;
+    Context                         context;
+    List<String>                    aToZList;
     private OnAlphabetClickListener onAlphabetClickListener;
-    private static int lastClickedPosition = -1;
-    boolean isClicked = false;
-    private int selectedItem;
+    private static int              lastClickedPosition = -1;
+    boolean                         isClicked = false;
+    private int                     selectedItem;
     public AToZAlphabetsAdapter(Context context, List<String> aToZList, OnAlphabetClickListener onAlphabetClickListener) {
-        this.context = context;
-        this.aToZList = aToZList;
-        this.onAlphabetClickListener = onAlphabetClickListener;
-        selectedItem = 0;
+        this.context                    = context;
+        this.aToZList                   = aToZList;
+        this.onAlphabetClickListener    = onAlphabetClickListener;
+        selectedItem                    = 0;
     }
 
     @NonNull
@@ -59,12 +59,12 @@ public class AToZAlphabetsAdapter extends RecyclerView.Adapter<AToZAlphabetsAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView alphabet_TV;
-        LinearLayout alphabet_LL;
+        TextView        alphabet_TV;
+        LinearLayout    alphabet_LL;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            alphabet_TV = itemView.findViewById(R.id.alphabet_TV);
-            alphabet_LL = itemView.findViewById(R.id.alphabet_LL);
+            alphabet_TV     = itemView.findViewById(R.id.alphabet_TV);
+            alphabet_LL     = itemView.findViewById(R.id.alphabet_LL);
 
             alphabet_TV.setOnClickListener(new View.OnClickListener() {
                 @Override

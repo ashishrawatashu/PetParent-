@@ -37,6 +37,8 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 import retrofit2.Response;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -48,25 +50,25 @@ import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class LoginActivity extends FragmentActivity implements View.OnClickListener, ApiResponse {
-    MaterialCardView login_back_arrow_CV;
-    private static final int PERMISSION_REQUEST_CODE = 200;
-    LoginWithEmailRegisterResponse responseLogin;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-    private TextInputLayout email_TIL, password_TIL;
-    private TextInputEditText email_TIET, password_TIET;
-    private Button login_BT;
-    private String emailString = "", passwordString = "";
-    private TextView signUp_TV, forgetPass_TV,login_with_phone_TV;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    Methods methods;
-    ImageView logoVet;
-    TelephonyManager telephonyManager;
-    String imeiNumber = "", token = "";
+    MaterialCardView                login_back_arrow_CV;
+    private static final int        PERMISSION_REQUEST_CODE = 200;
+    LoginWithEmailRegisterResponse  responseLogin;
+    SharedPreferences               sharedPreferences;
+    SharedPreferences.Editor        login_editor;
+    private TextInputLayout         email_TIL, password_TIL;
+    private TextInputEditText       email_TIET, password_TIET;
+    private Button                  login_BT;
+    private String                  emailString = "", passwordString = "";
+    private TextView                signUp_TV, forgetPass_TV,login_with_phone_TV;
+    String                          emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    Methods                         methods;
+    ImageView                       logoVet;
+    TelephonyManager                telephonyManager;
+    String                          imeiNumber = "", token = "";
 //    public static final String channel_id = "channel_id";
 //    private static final String channel_name = "channel_name";
 //    private static final String channel_desc = "channel_desc";
-    private static final String TAG = "LoginActivity";
+    private static final String     TAG = "LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,36 +84,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             }
         }
 
-//        FirebaseInstanceId.getInstance().getInstanceId()
-//                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-//                        if (!task.isSuccessful()) {
-////To do//
-//                            return;
-//                        }
-//
-//// Get the Instance ID token//
-//                        String token = task.getResult().getToken();
-//                        String msg = getString(R.string.fcm_token, token);
-//                        Log.d(TAG, msg);
-//
-//                    }
-//                });
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationChannel notificationChannel = new NotificationChannel(channel_id, channel_name, NotificationManager.IMPORTANCE_DEFAULT);
-//            notificationChannel.setDescription(channel_desc);
-//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-//            notificationManager.createNotificationChannel(notificationChannel);
-//
-//        }
-
-
     }
 
     private boolean checkPermission() {
 
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+        int result  = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
         int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CAMERA);
         int result2 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_PHONE_STATE);
         int result3 = ContextCompat.checkSelfPermission(getApplicationContext(), READ_EXTERNAL_STORAGE);
@@ -128,16 +105,16 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
 
     private void init() {
-        login_back_arrow_CV = findViewById(R.id.login_back_arrow_CV);
-        login_with_phone_TV = findViewById(R.id.login_with_phone_TV);
-        logoVet = findViewById(R.id.logoVet);
-        email_TIET = findViewById(R.id.email_TIET);
-        password_TIET = findViewById(R.id.password_TIET);
-        email_TIL = findViewById(R.id.email_TIL);
-        password_TIL = findViewById(R.id.password_TIL);
-        login_BT = findViewById(R.id.login_BT);
-        signUp_TV = findViewById(R.id.signUp_TV);
-        forgetPass_TV = findViewById(R.id.forgetPass_TV);
+        login_back_arrow_CV     = findViewById(R.id.login_back_arrow_CV);
+        login_with_phone_TV     = findViewById(R.id.login_with_phone_TV);
+        logoVet                 = findViewById(R.id.logoVet);
+        email_TIET              = findViewById(R.id.email_TIET);
+        password_TIET           = findViewById(R.id.password_TIET);
+        email_TIL               = findViewById(R.id.email_TIL);
+        password_TIL            = findViewById(R.id.password_TIL);
+        login_BT                = findViewById(R.id.login_BT);
+        signUp_TV               = findViewById(R.id.signUp_TV);
+        forgetPass_TV           = findViewById(R.id.forgetPass_TV);
 
         signUp_TV.setOnClickListener(this);
         forgetPass_TV.setOnClickListener(this);
@@ -171,7 +148,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 getDeviceId();
                 emailString = email_TIET.getText().toString().trim();
                 passwordString = password_TIET.getText().toString().trim();
-//                Toast.makeText(this, ""+imeiNumber, Toast.LENGTH_LONG).show();
                 if (emailString.isEmpty()) {
                     email_TIL.setError("Email is empty");
                     password_TIL.setError(null);
@@ -308,7 +284,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         Config.token = responseLogin.getResponseLogin().getToken();
         login_editor.putString("loggedIn", "loggedIn");
         Log.e("TOKEN",responseLogin.getResponseLogin().getToken());
-        login_editor.commit();
+        login_editor.apply();
         Intent intent = new Intent(this, DashBoardActivity.class);
         intent.putExtra("from","OTP_ACTIVITY");
         startActivity(intent);
@@ -319,8 +295,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     @Override
     public void onError(Throwable t, String key) {
         methods.customProgressDismiss();
-        Log.e("error", t.getMessage());
-        Log.e("errrrr", t.getLocalizedMessage());
+        Log.e("error", Objects.requireNonNull(t.getMessage()));
+        Log.e("errrrr", Objects.requireNonNull(t.getLocalizedMessage()));
     }
 
     @Override
@@ -328,7 +304,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         super.onResume();
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint({"MissingPermission", "HardwareIds"})
     private void getDeviceId() {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

@@ -84,29 +84,29 @@ import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
 
 @SuppressLint("StaticFieldLeak")
 public class ProfileFragment extends Fragment implements View.OnClickListener, ApiResponse, OnItemClickListener {
-    TextView parent_name_TV, parent_mail_TV, parent_phone_no_TV, your_pets_TV;
-    CircleImageView parent_image_CIV;
-    View view;
-    RelativeLayout edit_RL;
-    ImageView camera_IV;
-    ConstraintLayout general_details_CL, change_password_CL, plans_and_subscription_CL, privacy_CL, logout_CL;
-    String selctProflImage = "";
-    Dialog dialog;
-    private int GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4;
-    Bitmap bitmap, thumbnail;
-    File catfile1 = null;
-    private static final String IMAGE_DIRECTORY = "/Picture";
-    Methods methods;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-    ProgressBar parent_image_progress_bar;
+    TextView                                    parent_name_TV, parent_mail_TV, parent_phone_no_TV, your_pets_TV;
+    CircleImageView                             parent_image_CIV;
+    View                                        view;
+    RelativeLayout                              edit_RL;
+    ImageView                                   camera_IV;
+    ConstraintLayout                            general_details_CL, change_password_CL, plans_and_subscription_CL, privacy_CL, logout_CL;
+    String                                      selctProflImage = "";
+    Dialog                                      dialog;
+    Bitmap                                      bitmap, thumbnail;
+    File                                        catfile1 = null;
+    Methods                                     methods;
+    SharedPreferences                           sharedPreferences;
+    SharedPreferences.Editor                    login_editor;
+    ProgressBar                                 parent_image_progress_bar;
+
+    RecyclerView                                pet_list_RV;
+    RelativeLayout                              add_pet_RL;
+    private static final String                 IMAGE_DIRECTORY = "/Picture";
+    public static LinearLayout                  pet_list_LL;
+    public static PetListHorizontalAdapter      petListHorizontalAdapter;
+    private final int                           GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4;
 
     //    ArrayList<PetList> profileList = new ArrayList<>();
-    public static PetListHorizontalAdapter petListHorizontalAdapter;
-    RecyclerView pet_list_RV;
-    RelativeLayout add_pet_RL;
-    public static LinearLayout pet_list_LL;
-
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -115,13 +115,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_profile, container, false);
-        methods = new Methods(getActivity());
+        view        =   inflater.inflate(R.layout.fragment_profile, container, false);
+        methods     =   new Methods(getActivity());
         requestMultiplePermissions();
 
         initization();
         getParentInfo();
-        Timer timer = new Timer();
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         pet_list_RV.setLayoutManager(horizontalLayoutManager);
         petListHorizontalAdapter = new PetListHorizontalAdapter(getContext(), "ProfileFragment", PetParentSingleton.getInstance().getArrayList(), this);
@@ -143,21 +142,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
             pet_list_RV.setAdapter(petListHorizontalAdapter);
             petListHorizontalAdapter.notifyDataSetChanged();
         }
-
-    }
-
-    private void getPetList() {
-        PetDataParams getPetDataParams = new PetDataParams();
-        getPetDataParams.setPageNumber(1);
-        getPetDataParams.setPageSize(100);
-        getPetDataParams.setSearch_Data("");
-        PetDataRequest getPetDataRequest = new PetDataRequest();
-        getPetDataRequest.setData(getPetDataParams);
-
-        ApiService<GetPetListResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetList");
-        Log.e("DATALOG", "check1=> " + getPetDataRequest);
-
 
     }
 
@@ -209,29 +193,29 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
         parent_name_TV.setText(Config.user_name.substring(0, 1).toUpperCase() + Config.user_name.substring(1));
         parent_mail_TV.setText(Config.user_emial);
-//        parent_address_TV.setText(Config.user_address);
         parent_phone_no_TV.setText(Config.user_phone);
 
     }
 
     private void initization() {
-        pet_list_LL = view.findViewById(R.id.pet_list_LL);
-        your_pets_TV = view.findViewById(R.id.your_pets_TV);
-        parent_image_progress_bar = view.findViewById(R.id.parent_image_progress_bar);
-        plans_and_subscription_CL = view.findViewById(R.id.plans_and_subscription_CL);
-        general_details_CL = view.findViewById(R.id.general_details_CL);
-        privacy_CL = view.findViewById(R.id.privacy_CL);
-        logout_CL = view.findViewById(R.id.logout_CL);
-        change_password_CL = view.findViewById(R.id.change_password_CL);
-        parent_mail_TV = view.findViewById(R.id.parent_mail_TV);
-        parent_name_TV = view.findViewById(R.id.parent_name_TV);
-//        parent_address_TV = view.findViewById(R.id.parent_address_TV);
-        parent_phone_no_TV = view.findViewById(R.id.parent_phone_no_TV);
-        camera_IV = view.findViewById(R.id.camera_IV);
-        parent_image_CIV = view.findViewById(R.id.parent_image_CIV);
-        edit_RL = view.findViewById(R.id.edit_RL);
-        add_pet_RL = view.findViewById(R.id.add_pet_RL);
-        pet_list_RV = view.findViewById(R.id.pet_list_RV);
+        pet_list_LL                 =   view.findViewById(R.id.pet_list_LL);
+        your_pets_TV                =   view.findViewById(R.id.your_pets_TV);
+        parent_image_progress_bar   =   view.findViewById(R.id.parent_image_progress_bar);
+        plans_and_subscription_CL   =   view.findViewById(R.id.plans_and_subscription_CL);
+        general_details_CL          =   view.findViewById(R.id.general_details_CL);
+        privacy_CL                  =   view.findViewById(R.id.privacy_CL);
+        logout_CL                   =   view.findViewById(R.id.logout_CL);
+        change_password_CL          =   view.findViewById(R.id.change_password_CL);
+        parent_mail_TV              =   view.findViewById(R.id.parent_mail_TV);
+        parent_name_TV              =   view.findViewById(R.id.parent_name_TV);
+        parent_phone_no_TV          =   view.findViewById(R.id.parent_phone_no_TV);
+        camera_IV                   =   view.findViewById(R.id.camera_IV);
+        parent_image_CIV            =   view.findViewById(R.id.parent_image_CIV);
+        edit_RL                     =   view.findViewById(R.id.edit_RL);
+        add_pet_RL                  =   view.findViewById(R.id.add_pet_RL);
+        pet_list_RV                 =   view.findViewById(R.id.pet_list_RV);
+
+
         edit_RL.setOnClickListener(this);
         general_details_CL.setOnClickListener(this);
         plans_and_subscription_CL.setOnClickListener(this);
@@ -281,8 +265,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 break;
 
             case R.id.logout_CL:
-                SharedPreferences preferences = getActivity().getSharedPreferences("userDetails", 0);
-                SharedPreferences.Editor editor = preferences.edit();
+                SharedPreferences preferences   =   getActivity().getSharedPreferences("userDetails", 0);
+                SharedPreferences.Editor editor =   preferences.edit();
                 editor.clear();
                 editor.apply();
                 editor.commit();
@@ -299,9 +283,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_layout);
-        RelativeLayout select_camera = dialog.findViewById(R.id.select_camera);
-        RelativeLayout select_gallery = dialog.findViewById(R.id.select_gallery);
-        RelativeLayout cancel_dialog = dialog.findViewById(R.id.cancel_dialog);
+
+        RelativeLayout select_camera    =   dialog.findViewById(R.id.select_camera);
+        RelativeLayout select_gallery   =   dialog.findViewById(R.id.select_gallery);
+        RelativeLayout cancel_dialog    =   dialog.findViewById(R.id.cancel_dialog);
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         cancel_dialog.setOnClickListener(new View.OnClickListener() {

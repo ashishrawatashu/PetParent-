@@ -39,23 +39,19 @@ import retrofit2.Response;
 
 @SuppressLint("StaticFieldLeak")
 public class AdoptPetActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, AdoptionListOnClick {
-    RecyclerView adoption_RV;
-    MaterialCardView back_arrow_CV;
-
-    Methods methods;
-    AdoptionListAdopter adoptionListAdopter;
-    List<PetDonationList> petDonationLists;
-
-    NestedScrollView nestedSV;
-    ProgressBar progressBar;
-    RadioButton cats_RB,dog_RB;
-    public static RelativeLayout total_adoption_RL,total_RL;
-    public static TextView total_adoption_request_TV;
-    public static ImageView cart_icon_IV;
-
-    int pageNumber = 1, pageSize = 10;
-
-    String getStrSpnerItemPetNmId = "2";
+    RecyclerView                    adoption_RV;
+    MaterialCardView                back_arrow_CV;
+    Methods                         methods;
+    AdoptionListAdopter             adoptionListAdopter;
+    List<PetDonationList>           petDonationLists;
+    NestedScrollView                nestedSV;
+    ProgressBar                     progressBar;
+    RadioButton                     cats_RB,dog_RB;
+    public static RelativeLayout    total_adoption_RL,total_RL;
+    public static TextView          total_adoption_request_TV;
+    public static ImageView         cart_icon_IV;
+    int                             pageNumber = 1, pageSize = 10;
+    String                          getStrSpnerItemPetNmId = "2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,23 +61,25 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void init() {
-        methods = new Methods(this);
-        progressBar = findViewById(R.id.progressBar);
-        adoption_RV = findViewById(R.id.adoption_RV);
-        nestedSV = findViewById(R.id.nestedScrollView);
-        dog_RB = findViewById(R.id.dog_RB);
-        cats_RB = findViewById(R.id.cats_RB);
-        total_RL = findViewById(R.id.total_RL);
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        total_adoption_RL = findViewById(R.id.total_adoption_RL);
-        total_adoption_request_TV = findViewById(R.id.total_adoption_request_TV);
-        cart_icon_IV = findViewById(R.id.cart_icon_IV);
+        methods                     = new Methods(this);
+        progressBar                 = findViewById(R.id.progressBar);
+        adoption_RV                 = findViewById(R.id.adoption_RV);
+        nestedSV                    = findViewById(R.id.nestedScrollView);
+        dog_RB                      = findViewById(R.id.dog_RB);
+        cats_RB                     = findViewById(R.id.cats_RB);
+        total_RL                    = findViewById(R.id.total_RL);
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        total_adoption_RL           = findViewById(R.id.total_adoption_RL);
+        total_adoption_request_TV   = findViewById(R.id.total_adoption_request_TV);
+        cart_icon_IV                = findViewById(R.id.cart_icon_IV);
 
 
         total_adoption_RL.setOnClickListener(this);
         cats_RB.setOnClickListener(this);
         dog_RB.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
+
+
         if (methods.isInternetOn()) {
             getAdoptionList(getStrSpnerItemPetNmId);
         } else {

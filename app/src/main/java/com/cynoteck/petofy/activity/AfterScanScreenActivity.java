@@ -52,47 +52,34 @@ import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
 
 public class AfterScanScreenActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener, ApiResponse, ViewDeatilsAndIdCardClick {
 
-    RecyclerView register_pet_RV;
-    public ScanPetListAdapter scanPetListAdapter;
-    ArrayList<PetList> profileList;
-    ImageView empty_IV, vet_profile_pic;
-    EditText search_box_add_new;
-    TextView clinic_name_TV, vet_name_TV;
-    ImageView star_one, star_two, star_three, star_four, star_five;
-    RelativeLayout add_pet_RL;
-    String veterinarianUserId, veterinarianName, clinicName, Rating, profileImageUrl;
-    Methods methods;
-    int page = 1, pagelimit = 100;
-    ProgressBar progressBar;
-    private static final int ADD_PET_WITH_QR_CODE = 200;
-    NestedScrollView nested_scroll_view;
-    TextView scan_layout_total_pets_TV;
-    LinearLayout something_wrong_LL;
-    ProgressBar progressBarFirst;
-    MaterialCardView back_arrow_CV;
+    RecyclerView                register_pet_RV;
+    public ScanPetListAdapter   scanPetListAdapter;
+    ArrayList<PetList>          profileList;
+    ImageView                   empty_IV, vet_profile_pic;
+    EditText                    search_box_add_new;
+    TextView                    clinic_name_TV, vet_name_TV;
+    ImageView                   star_one, star_two, star_three, star_four, star_five;
+    RelativeLayout              add_pet_RL;
+    String                      veterinarianUserId, veterinarianName, clinicName, Rating, profileImageUrl;
+    Methods                     methods;
+    int                         page = 1, pagelimit = 100;
+    ProgressBar                 progressBar;
+    private static final int    ADD_PET_WITH_QR_CODE = 200;
+    NestedScrollView            nested_scroll_view;
+    TextView                    scan_layout_total_pets_TV;
+    LinearLayout                something_wrong_LL;
+    ProgressBar                 progressBarFirst;
+    MaterialCardView            back_arrow_CV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_after_scan_screen);
-        // Inflate the layout for this fragment
         methods = new Methods(this);
-//        ClipboardManager mCbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-//        mCbm = ClipData.newPlainText("text", text);
-//        mCbm.clearPrimaryClip();
         init();
+        getDataFromIntent();
         empty_IV.setVisibility(View.GONE);
-        Intent intent = getIntent();
-        veterinarianUserId = intent.getStringExtra("veterinarianUserId");
-        veterinarianName = intent.getStringExtra("veterinarianName");
-        clinicName = intent.getStringExtra("clinicName");
-        Rating = intent.getStringExtra("Rating");
 
-
-        profileImageUrl = intent.getStringExtra("profileImageUrl");
-        Glide.with(this).load(profileImageUrl).into(vet_profile_pic);
-        clinic_name_TV.setText(clinicName);
-        vet_name_TV.setText(veterinarianName);
 
         setRating();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -117,6 +104,20 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
 
 
 
+    }
+
+    private void getDataFromIntent() {
+        Intent       intent = getIntent();
+        veterinarianUserId  = intent.getStringExtra("veterinarianUserId");
+        veterinarianName    = intent.getStringExtra("veterinarianName");
+        clinicName          = intent.getStringExtra("clinicName");
+        Rating              = intent.getStringExtra("Rating");
+        profileImageUrl     = intent.getStringExtra("profileImageUrl");
+
+
+        Glide.with(this).load(profileImageUrl).into(vet_profile_pic);
+        clinic_name_TV.setText(clinicName);
+        vet_name_TV.setText(veterinarianName);
     }
 
     private void getPetList(int page, int pagelimit) {
@@ -179,25 +180,27 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
     }
 
     private void init() {
-        back_arrow_CV = findViewById(R.id.back_arrow_CV);
-        progressBarFirst = findViewById(R.id.progressBarFirst);
-        something_wrong_LL = findViewById(R.id.something_wrong_LL);
-        scan_layout_total_pets_TV = findViewById(R.id.total_pets_TV);
-        add_pet_RL = findViewById(R.id.add_pet_RL);
-        empty_IV = findViewById(R.id.empty_IV);
-        nested_scroll_view = findViewById(R.id.nested_scroll_view);
-        vet_profile_pic = findViewById(R.id.vet_profile_pic);
-        clinic_name_TV = findViewById(R.id.clinic_name_TV);
-        vet_name_TV = findViewById(R.id.vet_name_TV);
-        vet_profile_pic = findViewById(R.id.vet_profile_pic);
-        star_one = findViewById(R.id.star_one);
-        star_two = findViewById(R.id.star_two);
-        star_three = findViewById(R.id.star_three);
-        star_four = findViewById(R.id.star_four);
-        star_five = findViewById(R.id.star_five);
-        register_pet_RV = findViewById(R.id.register_pet_RV);
-        progressBar = findViewById(R.id.progressBar);
-        profileList = new ArrayList<>();
+        back_arrow_CV               = findViewById(R.id.back_arrow_CV);
+        progressBarFirst            = findViewById(R.id.progressBarFirst);
+        something_wrong_LL          = findViewById(R.id.something_wrong_LL);
+        scan_layout_total_pets_TV   = findViewById(R.id.total_pets_TV);
+        add_pet_RL                  = findViewById(R.id.add_pet_RL);
+        empty_IV                    = findViewById(R.id.empty_IV);
+        nested_scroll_view          = findViewById(R.id.nested_scroll_view);
+        vet_profile_pic             = findViewById(R.id.vet_profile_pic);
+        clinic_name_TV              = findViewById(R.id.clinic_name_TV);
+        vet_name_TV                 = findViewById(R.id.vet_name_TV);
+        vet_profile_pic             = findViewById(R.id.vet_profile_pic);
+        star_one                    = findViewById(R.id.star_one);
+        star_two                    = findViewById(R.id.star_two);
+        star_three                  = findViewById(R.id.star_three);
+        star_four                   = findViewById(R.id.star_four);
+        star_five                   = findViewById(R.id.star_five);
+        register_pet_RV             = findViewById(R.id.register_pet_RV);
+        progressBar                 = findViewById(R.id.progressBar);
+        profileList                 = new ArrayList<>();
+
+
         something_wrong_LL.setOnClickListener(this);
         add_pet_RL.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
@@ -252,9 +255,6 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_pet_RL:
-//                Intent add_pet_with_QR_intent = new Intent(this, AddPetWithQRCodeActivity.class);
-//                add_pet_with_QR_intent.putExtra("veterinarianUserId", veterinarianUserId);
-//                startActivityForResult(add_pet_with_QR_intent, ADD_PET_WITH_QR_CODE);
                 Intent adNewIntent = new Intent(this, AddPetRegister.class);
                 adNewIntent.putExtra("intent_from", "AfterScanScreenActivity");
                 startActivityForResult(adNewIntent, ADD_PET_WITH_QR_CODE);
