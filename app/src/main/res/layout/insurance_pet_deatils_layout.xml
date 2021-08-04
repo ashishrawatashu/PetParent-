@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/pet_category_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/pet_category"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/add_pet_type"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_background"
+            android:fontFamily="@font/nunito"
+            android:paddingLeft="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_category_TV" />
+
+        <TextView
+            android:id="@+id/pet_gender_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/petGender"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_pet_type" />
+
+
+        <LinearLayout
+            android:id="@+id/add_pet_gender_LL"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_gender_TV">
+
+            <RadioGroup
+                android:id="@+id/genderRG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <RadioButton
+                    android:id="@+id/maleRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:checked="false"
+                    android:fontFamily="@font/nunito"
+                    android:text="Male"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/femaleRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="22dp"
+                    android:checked="false"
+                    android:fontFamily="@font/nunito"
+                    android:text="Female"
+                    android:textSize="16sp" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/pet_breed_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/breed"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_pet_gender_LL" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/add_pet_breed_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_background"
+            android:fontFamily="@font/nunito"
+            android:paddingLeft="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_breed_TV" />
+
+
+        <TextView
+            android:id="@+id/pet_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/pet_name"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/add_pet_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_pet_breed_dialog" />
+
+
+        <EditText
+            android:id="@+id/pet_name_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/pet_name"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/pet_name_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_name_TV" />
+
+        <LinearLayout
+            android:id="@+id/date_of_birth_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_name_ET">
+
+            <TextView
+                android:id="@+id/pet_dob_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center_vertical"
+                android:text="@string/dateofbirth"
+                android:textColor="@color/gray_1"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/convert_yr_to_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/nunito"
+                android:text="days/month/year"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/day_and_age_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2"
+            app:layout_constraintTop_toBottomOf="@id/date_of_birth_layout">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/age_wise"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/spinner_background" />
+
+            <EditText
+                android:id="@+id/age_neumeric"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:gravity="center_vertical"
+                android:hint="Age"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingLeft="25dp"
+                android:textColor="@color/gray_1" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/pet_layout_calenderTextView_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/cal_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="12/05/2020"
+            android:paddingLeft="25dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/day_and_age_layout" />
+
+        <TextView
+            android:id="@+id/ageViewTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray_1"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/pet_layout_calenderTextView_dialog" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="20dp"
+            android:gravity="start"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ageViewTv" />
+
+
+        <TextView
+            android:id="@+id/pet_color_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/color"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ageViewTv" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/add_pet_color_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_background"
+            android:paddingLeft="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_color_TV" />
+
+
+        <TextView
+            android:id="@+id/pet_choosePlan_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/choosePlan"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_pet_color_dialog" />
+
+        <TextView
+            android:id="@+id/pet_choosePlan"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Choose plan"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_choosePlan_TV" />
+
+
+        <TextView
+            android:id="@+id/pet_declaration_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/Declaration"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_choosePlan" />
+
+
+        <TextView
+            android:id="@+id/pet_declaration"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="Select declaration"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_declaration_TV" />
+
+
+        <TextView
+            android:id="@+id/pet_features_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/Features"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/add_pet_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_declaration" />
+
+
+        <EditText
+            android:id="@+id/pet_features_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/Features"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/pet_features_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_features_TV" />
+
+        <CheckBox
+            android:id="@+id/castrated_neutered_CB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/castrated_neutered"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/add_pet_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_features_ET" />
+
+
+        <EditText
+            android:id="@+id/castrated_neutered_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/castrated_neutered"
+            android:inputType="textCapSentences"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/castrated_neutered_CB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/castrated_neutered_CB" />
+
+        <CheckBox
+            android:id="@+id/do_you_have_microchip_CB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/do_you_have_microchip"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/add_pet_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/castrated_neutered_ET" />
+
+
+        <EditText
+            android:id="@+id/pet_microchip_no_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/microchip"
+            android:inputType="textCapSentences"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/do_you_have_microchip_CB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/do_you_have_microchip_CB" />
+
+
+        <CheckBox
+            android:id="@+id/pedigree_lineage_CB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/pedigree_lineage"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/add_pet_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pet_microchip_no_ET" />
+
+
+        <CheckBox
+            android:id="@+id/kic_CB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/KIC"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/add_pet_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pedigree_lineage_CB" />
+
+
+        <CheckBox
+            android:id="@+id/is_vaccinated_CB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/isVaccinated"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/add_pet_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/kic_CB" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

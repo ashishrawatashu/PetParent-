@@ -245,5 +245,29 @@
     <string name="why_petofy">Why Petofy</string>
     <string name="disclaimer">Disclaimer</string>
     <string name="disclaimer_details">The premium of this insurance plan would depend upon the age, breed and gender of the dog. Pet dogs are classified into either Small, Medium, Large or Giant sizes based on the breed of the dog.*</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="back">Back</string>
+    <string name="pinCode">Pin Code</string>
+    <string name="ReferralCode">Referral Code</string>
+    <string name="choosePlan">Choose Plan*</string>
+    <string name="Declaration">Declaration</string>
+    <string name="Features">Features / Identification Mark</string>
+    <string name="do_you_have_microchip">Do you have Microchip Number?</string>
+    <string name="microchip">Microchip number</string>
+    <string name="pedigree_lineage">Whether Pet has a Pedigree Lineage</string>
+    <string name="KIC">Is Your Pet Registered with KCI ?</string>
+    <string name="isVaccinated">Is Your Pet Vaccinated* ?</string>
+    <string name="castrated_neutered">Castrated/Neutered ?</string>
+    <string name="front_image">Front Image</string>
+    <string name="rfid_image">Pet RFID Image</string>
+    <string name="purchase_proof">Purchase Proof</string>
+    <string name="pedigree_cert">Pedigree Certificate</string>
+    <string name="vaccine_card">Vaccination Card</string>
+    <string name="back_image">Back Image</string>
+    <string name="left_image">Left Image</string>
+    <string name="right_image">Right Image</string>
+    <string name="top_image">Top Image</string>
 
 </resources>

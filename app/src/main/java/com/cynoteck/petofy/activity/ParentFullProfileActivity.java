@@ -63,7 +63,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
     ImageView                   parent_image_IV;
     String                      selctProflImage = "";
     Dialog                      dialog;
-    private int                 GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4;
+    private int                 GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4,PICK_FILE=5;
     Bitmap                      bitmap, thumbnail;
     File                        catfile1 = null;
     ProgressBar                 parent_image_progress_bar;
@@ -208,15 +208,11 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
             case R.id.edit_profile_RL:
                 Intent updateProfileIntent = new Intent(this, UpdateProfileActivity.class);
                 startActivityForResult(updateProfileIntent, UPDATE);
-
                 break;
 
 
             case R.id.image_edit_CV:
-
-                selctProflImage = "1";
                 showPictureDialog();
-
                 break;
         }
     }
@@ -328,8 +324,14 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
     private void UploadImages(File absolutePath) {
         parent_image_progress_bar.setVisibility(View.VISIBLE);
         MultipartBody.Part userDpFilePart = null;
+        String[] mimeTypes = {"image/*",
+                "application/pdf",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                "text/plain"
+        };
         if (absolutePath != null) {
-            RequestBody userDpFile = RequestBody.create(MediaType.parse("image/*"), absolutePath);
+            RequestBody userDpFile = RequestBody.create(MediaType.parse("multipart/form-data"), absolutePath);
             userDpFilePart = MultipartBody.Part.createFormData("file", absolutePath.getName(), userDpFile);
         }
 
@@ -421,7 +423,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
         Log.d ("imgdata123" , imgPath.toString());
         Uri selectedImageURI = null;
         File imgFile = new File(imgPath);
-        Log.d ("imgdata: " , imgFile.toString());
+        Log.d ("PATHHH: " , imgFile.toString());
         UploadImages(imgFile);
     }
 }

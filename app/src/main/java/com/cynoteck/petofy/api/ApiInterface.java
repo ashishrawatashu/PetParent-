@@ -26,6 +26,9 @@ import com.cynoteck.petofy.parameter.petBreedRequest.BreedParams;
 import com.cynoteck.petofy.parameter.petReportsRequest.PetClinicVisitDetailsRequest;
 import com.cynoteck.petofy.parameter.petReportsRequest.PetDataRequest;
 import com.cynoteck.petofy.parameter.petReportsRequest.VisitTypeRequest;
+import com.cynoteck.petofy.parameter.punchingPolicyPetDocumentsRequest.PunchingPolicyPetDocumentsRequest;
+import com.cynoteck.petofy.parameter.punchingPolicyPetRequest.PunchingPolicyPetRequest;
+import com.cynoteck.petofy.parameter.punchingPolicyRequest.PunchingPolicyRequest;
 import com.cynoteck.petofy.parameter.registerRequest.Registerparams;
 import com.cynoteck.petofy.parameter.registrationWithQrCodeRequest.RegistrationWithQrCodeRequest;
 import com.cynoteck.petofy.parameter.saveFeedbackRequest.SaveFeedbackRequest;
@@ -55,6 +58,7 @@ import com.cynoteck.petofy.response.dateOfBirthResponse.DateOfBirthResponse;
 import com.cynoteck.petofy.response.getAdoptionRequestListResponse.GetAdoptionRequestListResponse;
 import com.cynoteck.petofy.response.getCityListWithStateResponse.GetCityListWithStateResponse;
 import com.cynoteck.petofy.response.getDonationRequestResponse.GetDonationRequestResponse;
+import com.cynoteck.petofy.response.getInsuranceMasterResponse.InsuranceMastersResponse;
 import com.cynoteck.petofy.response.getPetAgeResponse.GetPetAgeresponseData;
 import com.cynoteck.petofy.response.getPetHospitalizationResponse.getHospitalizationDeatilsResponse.GetHospitalizationDeatilsResponse;
 import com.cynoteck.petofy.response.getPetNamesResponse.GetPetNamesResponse;
@@ -494,19 +498,24 @@ public interface ApiInterface {
     @GET
     Call<GetPetNamesResponse> getNamesList(@Url String url);
 
+    // Adoption Donation API
     @GET
     Call<GetAdoptionRequestListResponse> getAdoptionRequest(@Header("Authorization") String auth, @Url String url);
 
     @GET
     Call<JsonObject> deleteAdoptionRequest(@Header("Authorization") String auth, @Url String url);
 
-
     @GET
     Call<GetDonationRequestResponse> getDonationRequest(@Header("Authorization") String auth, @Url String url);
 
-
     @GET
     Call<JsonObject> deleteDonationRequest(@Header("Authorization") String auth, @Url String url);
+
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("social-service/donate-a-pet-by-petId")
+    Call<JsonObject> donatePetById(@Header("Authorization") String auth, @Body JsonObject jsonObject);
 
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
@@ -530,9 +539,25 @@ public interface ApiInterface {
     Call<GetProviderFeedbackResponse> getProviderFeedback(@Header("Authorization") String auth, @Url String url);
 
 
+//  Insurance API
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("social-service/donate-a-pet-by-petId")
-    Call<JsonObject> donatePetById(@Header("Authorization") String auth, @Body JsonObject jsonObject);
+    @POST("insurance-masters")
+    Call<InsuranceMastersResponse> insuranceMasters();
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("punching-policy")
+    Call<JsonObject> punchingPolicy(@Header("Authorization") String auth,@Body PunchingPolicyRequest punchingPolicyRequest);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("punching-policy-pet")
+    Call<JsonObject> punchingPolicyPet(@Header("Authorization") String auth, @Body PunchingPolicyPetRequest punchingPolicyRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("punching-policy-pet-documents")
+    Call<JsonObject> punchingPolicyDocumentsUpload(@Header("Authorization") String auth, @Body PunchingPolicyPetDocumentsRequest punchingPolicyPetDocumentsRequest);
+
+
 
 
 }

@@ -63,27 +63,89 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/pet_insurances_CV"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                app:cardCornerRadius="12dp"
-                android:layout_height="160dp"
-                android:layout_marginTop="25dp">
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/insurance_card_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/insurance_card_bg"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="Your Pet is happy"
+                        android:textColor="@color/whiteColor"
+                        android:textSize="18sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="and healthy,"
+                        android:textColor="@color/whiteColor"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/nunito"
+                        android:text="But Is your Pet Protected ?"
+                        android:textColor="@color/whiteColor"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="130dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/bajaj_icon"/>
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/by_now"/>
+
+
+                </LinearLayout>
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/pet_icurences_iamge"/>
+                    app:layout_constraintTop_toTopOf="@id/insurance_card_LL"
+                    android:id="@+id/insurance_dog_IV"
+                    android:layout_width="120dp"
+                    android:layout_height="200dp"
+                    android:paddingTop="80dp"
+                    app:layout_constraintEnd_toEndOf="@id/insurance_card_LL"
+                    android:src="@drawable/insurance_dog"/>
 
 
-            </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 
             <TextView
                 android:id="@+id/ket_benefits_TV"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Key Benefits"

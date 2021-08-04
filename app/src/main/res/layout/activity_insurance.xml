@@ -72,6 +72,7 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buy_now_BT"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -131,7 +132,7 @@
                     android:scaleType="fitXY"
                     android:layout_marginTop="5dp"
                     android:layout_width="80dp"
-                    android:layout_height="25dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/by_now"/>
 
 
@@ -140,7 +141,7 @@
             <ImageView
                 app:layout_constraintTop_toTopOf="@id/insurance_card_LL"
                 android:id="@+id/insurance_dog_IV"
-                android:layout_width="150dp"
+                android:layout_width="120dp"
                 android:layout_height="200dp"
                 android:paddingTop="80dp"
                 app:layout_constraintEnd_toEndOf="@id/insurance_card_LL"
@@ -151,7 +152,6 @@
                 android:id="@+id/our_policy_head_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/nunito"
                 android:text="@string/ourPolicyHead"
                 android:textColor="@color/black_color"
@@ -396,6 +396,22 @@
 
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/buy_now_BT"
+        android:layout_width="0dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        android:background="@drawable/blue_background_bg"
+        android:text="@string/buy_now"
+        android:textAllCaps="false"
+        android:elevation="10dp"
+        android:fontFamily="@font/nunito"
+        android:textColor="@color/whiteColor"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

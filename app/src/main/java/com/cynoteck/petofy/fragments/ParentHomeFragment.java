@@ -36,6 +36,7 @@ import com.cynoteck.petofy.activity.AfterScanScreenActivity;
 import com.cynoteck.petofy.activity.ConsultationListActivity;
 import com.cynoteck.petofy.activity.InsuranceActivity;
 import com.cynoteck.petofy.activity.PetBreedsActivity;
+import com.cynoteck.petofy.activity.PetInsuranceActivity;
 import com.cynoteck.petofy.activity.PetNamesActivity;
 import com.cynoteck.petofy.activity.ScannerQR;
 import com.cynoteck.petofy.activity.SearchKeywordActivity;
@@ -259,7 +260,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.insurances_LL:
-                Intent insurancesIntent = new Intent(getContext(), InsuranceActivity.class);
+                Intent insurancesIntent = new Intent(getContext(), PetInsuranceActivity.class);
                 startActivity(insurancesIntent);
                 break;
 
@@ -453,6 +454,9 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
             Intent adNewIntent = new Intent(getActivity(), AddPetRegister.class);
             adNewIntent.putExtra("intent_from", "add");
             startActivityForResult(adNewIntent, ADD_PET);
+        }else {
+            Intent insurancesIntent = new Intent(getContext(), PetInsuranceActivity.class);
+            startActivity(insurancesIntent);
         }
 
     }

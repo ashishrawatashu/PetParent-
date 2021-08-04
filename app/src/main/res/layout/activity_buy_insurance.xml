@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/whiteColor"
+    android:layout_height="match_parent"
+    tools:context=".activity.BuyInsuranceActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/create_headline_TV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:text="@string/PetInsurances"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/back_arrow_CV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/back_arrow_CV" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/back_arrow_CV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/light_grey_bg"
+                android:visibility="visible" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/back_arrow"
+                android:visibility="visible" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/progress_LL"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+
+
+            <ProgressBar
+                android:id="@+id/circular_PB"
+                android:layout_width="80dp"
+                android:visibility="visible"
+                android:layout_height="80dp"
+                android:indeterminateOnly="false"
+                android:background="@drawable/progress_bar_bg"
+                android:progressDrawable="@drawable/total_progress_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:progress="10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/loading_PB"
+                android:visibility="gone"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/progress_bar_bg"
+                android:progressDrawable="@drawable/total_progress_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/step_count_TV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="1 of 3"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/gray_1"
+                android:textSize="15sp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:paddingRight="20dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/step_name_TV"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pet Parent Details"
+                android:fontFamily="@font/montserrat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray_1"/>
+
+            <TextView
+                android:id="@+id/next_step_TV"
+                android:gravity="end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Next: Image Section"
+                android:fontFamily="@font/montserrat"
+                android:textSize="15sp"
+                android:textColor="@color/gray_1"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/pet_parent_details_layout_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_LL"
+        app:layout_constraintBottom_toTopOf="@+id/button_LL">
+
+        <include layout="@layout/pet_parent_deatils_layout" />
+
+    </FrameLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/insurance_pet_details_layout_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_LL"
+        app:layout_constraintBottom_toTopOf="@+id/button_LL">
+
+        <include layout="@layout/insurance_pet_deatils_layout" />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/insurance_images_layout_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_LL"
+        app:layout_constraintBottom_toTopOf="@+id/button_LL">
+
+        <include layout="@layout/insurance_images_document_section_layout" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:id="@+id/button_LL"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/privious_BT"
+            android:layout_weight="1"
+            android:textColor="@color/whiteColor"
+            android:fontFamily="@font/nunito"
+            android:layout_width="match_parent"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/inactive_state_button_bg"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/next_BT"
+            android:text="@string/next"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/whiteColor"
+            android:textAllCaps="false"
+            android:background="@drawable/blue_background_bg"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whiteColor"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/upload_five_images_LL"
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upload all 5 color photos of dog"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/front_image_CIV"
+                    android:src="@drawable/empty_pet_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/front_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/front_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/front_image"/>
+
+                <ProgressBar
+                    android:id="@+id/front_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/front_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/front_image_TV" />
+
+                <ImageView
+                    android:id="@+id/front_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/front_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/front_image_CIV"
+                    android:background="@color/gray_4"/>
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/back_image_CIV"
+                    android:src="@drawable/empty_pet_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/back_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/back_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/back_image"/>
+
+                <ProgressBar
+                    android:id="@+id/back_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/back_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/back_image_TV" />
+
+                <ImageView
+                    android:id="@+id/back_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/back_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/back_image_CIV"
+                    android:background="@color/gray_4"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/left_image_CIV"
+                    android:src="@drawable/empty_pet_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/left_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/left_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/left_image"/>
+
+                <ProgressBar
+                    android:id="@+id/left_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/left_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/left_image_TV" />
+
+                <ImageView
+                    android:id="@+id/left_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/left_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/left_image_CIV"
+                    android:background="@color/gray_4"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/right_image_CIV"
+                    android:src="@drawable/empty_pet_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/right_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/right_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/right_image"/>
+
+                <ProgressBar
+                    android:id="@+id/right_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/right_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/right_image_TV" />
+
+                <ImageView
+                    android:id="@+id/right_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/right_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/right_image_CIV"
+                    android:background="@color/gray_4"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/top_image_CIV"
+                    android:src="@drawable/empty_pet_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/top_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/top_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/top_image"/>
+
+                <ProgressBar
+                    android:id="@+id/top_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/top_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/top_image_TV" />
+
+                <ImageView
+                    android:id="@+id/top_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/top_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/top_image_CIV"
+                    android:background="@color/gray_4"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pet_rfid_LL"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Images"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rfid_image_CIV"
+                    android:src="@drawable/empty_pet_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/rfid_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/rfid_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/rfid_image"/>
+
+                <ProgressBar
+                    android:id="@+id/rfid_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rfid_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/rfid_image_TV" />
+
+                <ImageView
+                    android:id="@+id/rfid_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/rfid_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/document_LL"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Document files"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/purchase_proof_image_CIV"
+                    android:src="@drawable/upload_doc_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/purchase_proof_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/purchase_proof_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/purchase_proof"/>
+
+                <ProgressBar
+                    android:id="@+id/purchase_proof_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/purchase_proof_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/purchase_proof_image_TV" />
+
+                <ImageView
+                    android:id="@+id/purchase_proof_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/purchase_proof_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/purchase_proof_image_CIV"
+                    android:background="@color/gray_4"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
+                android:id="@+id/pedigree_cert_image_CL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/pedigree_cert_image_CIV"
+                    android:src="@drawable/upload_doc_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/pedigree_cert_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/pedigree_cert_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/pedigree_cert"/>
+
+                <ProgressBar
+                    android:id="@+id/pedigree_cert_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/pedigree_cert_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/pedigree_cert_image_TV" />
+
+                <ImageView
+                    android:id="@+id/pedigree_cert_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/pedigree_cert_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pedigree_cert_image_CIV"
+                    android:background="@color/gray_4"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="60dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/vaccination_card_image_CIV"
+                    android:src="@drawable/upload_doc_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/vaccination_card_image_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintStart_toEndOf="@id/vaccination_card_image_CIV"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/vaccine_card"/>
+
+                <ProgressBar
+                    android:id="@+id/vaccination_card_image_progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="2"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/vaccination_card_image_CIV"
+                    android:progressBackgroundTint="@color/colorPrimaryDark"
+                    app:layout_constraintTop_toBottomOf="@id/vaccination_card_image_TV" />
+
+                <ImageView
+                    android:id="@+id/vaccination_card_image_upload_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/upload_icon"/>
+
+                <ImageView
+                    android:padding="5dp"
+                    android:id="@+id/vaccination_card_image_delete_IV"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/delete_icon"
+                    app:tint="@color/gray_3"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+</ScrollView>

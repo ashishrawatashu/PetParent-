@@ -61,7 +61,7 @@ public class MediaUtils {
                     // Error occurred while creating the File
                 }
                 if (photoFile != null) {
-                    Uri photoURI = FileProvider.getUriForFile(mActivity, "com.cynoteck.petofyparents.fileprovider", photoFile);
+                    Uri photoURI = FileProvider.getUriForFile(mActivity, "com.cynoteck.petofy.fileprovider", photoFile);
                     pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     if(mFragment == null) {
                         mActivity.startActivityForResult(pictureIntent, REQ_CAMERA);

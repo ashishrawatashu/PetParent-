@@ -77,7 +77,7 @@ import retrofit2.Response;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class UpdatePetProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse ,MediaUtils.GetImg{
+public class UpdatePetProfileActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse , MediaUtils.GetImg{
     Methods                     methods;
     AppCompatSpinner            add_pet_type, add_pet_breed_dialog, add_pet_color_dialog;
     EditText                    pet_name_ET;

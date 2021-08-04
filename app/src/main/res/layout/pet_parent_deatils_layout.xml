@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/parent_first_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/firstName"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/parent_first_name_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/firstName"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/parent_first_name_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_first_name_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_last_name_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/lastname"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parent_first_name_ET" />
+
+
+        <EditText
+            android:id="@+id/parent_last_name_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/lastname"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/parent_last_name_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_last_name_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_email_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/emailtext"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parent_last_name_ET" />
+
+
+        <EditText
+            android:id="@+id/parent_email_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/parent_email_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_email_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_phone_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/phoneNumber"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parent_email_ET" />
+
+
+        <EditText
+            android:id="@+id/parent_phone_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/phoneNumber"
+            android:inputType="number"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/parent_phone_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_phone_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_dob_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/dateofbirth"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parent_phone_ET" />
+
+
+        <TextView
+            android:id="@+id/calenderTextView_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/cal_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="12/05/2020"
+            android:paddingLeft="25dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/parent_dob_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_address_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/address"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calenderTextView_dialog" />
+
+
+        <EditText
+            android:id="@+id/parent_address_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/address"
+            android:inputType="textCapWords"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/parent_address_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_address_TV" />
+
+        <TextView
+            android:id="@+id/parent_state_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/state"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_address_ET" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/parent_state_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_background"
+            android:fontFamily="@font/nunito"
+            android:paddingLeft="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_state_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_city_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/city"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_state_spinner" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/parent_city_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/spinner_background"
+            android:fontFamily="@font/nunito"
+            android:paddingLeft="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_city_TV" />
+
+        <TextView
+            android:id="@+id/parent_pinCode_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/pinCode"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parent_city_spinner" />
+
+
+        <EditText
+            android:id="@+id/parent_pinCode_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/pinCode"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintEnd_toEndOf="@id/parent_pinCode_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_pinCode_TV" />
+
+
+        <TextView
+            android:id="@+id/parent_referralCode_TV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:text="@string/ReferralCode"
+            android:textColor="@color/gray_1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/parent_pinCode_ET" />
+
+
+        <EditText
+            android:id="@+id/parent_referralCode_ET"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_background"
+            android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
+            android:hint="@string/ReferralCode"
+            android:inputType="number"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:textColor="@color/gray_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/parent_referralCode_TV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/parent_referralCode_TV" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

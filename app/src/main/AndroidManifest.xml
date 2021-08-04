@@ -36,7 +36,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.InsuranceActivity"></activity>
+        <activity android:name=".activity.BuyInsuranceActivity"></activity>
+        <activity android:name=".activity.InsuranceActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
