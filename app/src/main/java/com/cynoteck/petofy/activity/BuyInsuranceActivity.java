@@ -809,23 +809,26 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     if (do_you_have_microchip_CB.isChecked()&&rfidImageUrl.equals("")){
                         Toast.makeText(this, "Please upload RFID image", Toast.LENGTH_SHORT).show();
                     }else {
-                        if (frontImageUrl.equals("")){
+                        if (!do_you_have_microchip_CB.isChecked()&&frontImageUrl.equals("")){
                             Toast.makeText(this, "Please upload pet front image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (backImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&backImageUrl.equals("")){
                             Toast.makeText(this, "Please upload pet back image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (leftImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&leftImageUrl.equals("")){
                             Toast.makeText(this, "Please upload pet left image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (rightImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&rightImageUrl.equals("")){
                             Toast.makeText(this, "Please upload pet right image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (topImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&topImageUrl.equals("")){
                             Toast.makeText(this, "Please upload pet top image", Toast.LENGTH_SHORT).show();
                             break;
                         }
-                    }if (pedigree_lineage_CB.isChecked()&&pedigreeDocumentUrl.equals("")){
+                    }
+
+
+                    if (pedigree_lineage_CB.isChecked()&&pedigreeDocumentUrl.equals("")){
                         Toast.makeText(this, "Please upload pet pedigree certificate", Toast.LENGTH_SHORT).show();
                         break;
                     }if (vaccinationCardUrl.equals("")){
