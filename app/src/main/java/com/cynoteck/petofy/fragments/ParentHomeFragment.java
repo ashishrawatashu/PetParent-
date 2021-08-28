@@ -141,12 +141,12 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         location_TV             = view.findViewById(R.id.location_TV);
         location_LL             = view.findViewById(R.id.location_LL);
         pet_names_LL            = view.findViewById(R.id.pet_names_LL);
-        cosultation_LL          = view.findViewById(R.id.cosultation_LL);
         insurances_LL           = view.findViewById(R.id.insurances_LL);
         vp_slider               = view.findViewById(R.id.pager);
         adoption_donation_LL    = view.findViewById(R.id.adoption_donation_LL);
         ll_dots                 = view.findViewById(R.id.ll_dots);
         pet_breed_LL            = view.findViewById(R.id.pet_breed_LL);
+        cosultation_LL          = view.findViewById(R.id.cosultation_LL);
         pet_shops_LL            = view.findViewById(R.id.pet_shops_LL);
         grooming_LL             = view.findViewById(R.id.grooming_LL);
         hostels_LL              = view.findViewById(R.id.hostels_LL);
@@ -163,8 +163,8 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         grooming_LL.setOnClickListener(this);
         training_LL.setOnClickListener(this);
         pet_shops_LL.setOnClickListener(this);
-        pet_breed_LL.setOnClickListener(this);
         cosultation_LL.setOnClickListener(this);
+        pet_breed_LL.setOnClickListener(this);
         insurances_LL.setOnClickListener(this);
         qr_code_IV.setOnClickListener(this);
         adoption_donation_LL.setOnClickListener(this);
@@ -308,7 +308,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                     String clinicName = data.getStringExtra("clinicName");
                     String Rating = data.getStringExtra("Rating");
                     String profileImageUrl = data.getStringExtra("profileImageUrl");
-                    Log.e("veterinarianUserId", veterinarianUserId);
+                    //Log.d"veterinarianUserId", veterinarianUserId);
                     Intent scanAfterIntent = new Intent(getContext(), AfterScanScreenActivity.class);
                     scanAfterIntent.putExtra("veterinarianUserId", veterinarianUserId);
                     scanAfterIntent.putExtra("veterinarianName", veterinarianName);
@@ -317,9 +317,11 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                     scanAfterIntent.putExtra("profileImageUrl", profileImageUrl);
                     startActivity(scanAfterIntent);
                 } else if (IsInsurance.equals("true")){
-                    String InsuranceUrl = data.getStringExtra("InsuranceUrl");
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
-                    startActivity(browserIntent);
+//                    String InsuranceUrl = data.getStringExtra("InsuranceUrl");
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
+//                    startActivity(browserIntent);
+                    Intent insurancesIntent = new Intent(getContext(), PetInsuranceActivity.class);
+                    startActivity(insurancesIntent);
                 }
 
             }
@@ -401,7 +403,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
             case "GetCityListWithState":
                 try {
                     progressBar.setVisibility(View.GONE);
-                    Log.e("rer", methods.getRequestJson(arg0.body()));
+                    //Log.d"rer", methods.getRequestJson(arg0.body()));
                     getCityListWithStateResponse = (GetCityListWithStateResponse) arg0.body();
                     if (getCityListWithStateResponse.getResponse().getResponseCode().equals("109")){
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

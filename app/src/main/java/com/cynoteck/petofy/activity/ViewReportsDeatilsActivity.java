@@ -74,7 +74,7 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
         petClinicVistsDetailsParams.setId(clinic_id.substring(0,clinic_id.length()-2));
         PetClinicVisitDetailsRequest petClinicVisitDetailsRequest = new PetClinicVisitDetailsRequest();
         petClinicVisitDetailsRequest.setData(petClinicVistsDetailsParams);
-        Log.e("petClinicVisitDetail",methods.getRequestJson(petClinicVisitDetailsRequest).toString());
+//        Log.d("petClinicVisitDetail",methods.getRequestJson(petClinicVisitDetailsRequest).toString());
         ApiService<GetClinicVisitsDetailsResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getClinicVisitDetails(Config.token,petClinicVisitDetailsRequest), "GetPetClinicVisitDetails");
 
@@ -134,7 +134,7 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
         switch (key){
             case "GetPetClinicVisitDetails":
                 try {
-                    Log.d("ResponseClinicVisit",response.body().toString());
+                    //Log.d"ResponseClinicVisit",response.body().toString());
                     GetClinicVisitsDetailsResponse getClinicVisitsDetailsResponse = (GetClinicVisitsDetailsResponse) response.body();
                     int responseCode = Integer.parseInt(getClinicVisitsDetailsResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
@@ -191,7 +191,7 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
 
             case "DeletePetClinicVisitDetails":
                 try {
-                    Log.d("DeleteClinicVisit",response.body().toString());
+                    //Log.d"DeleteClinicVisit",response.body().toString());
                     AddUpdateDeleteClinicVisitResponse addUpdateDeleteClinicVisitResponse = (AddUpdateDeleteClinicVisitResponse) response.body();
                     int responseCode = Integer.parseInt(addUpdateDeleteClinicVisitResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
@@ -222,7 +222,7 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
                 break;
 
             case R.id.deleteReport_BT:
-                Log.d("Add Anotheer Veterian","vet");
+                //Log.d"Add Anotheer Veterian","vet");
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
                 alertDialog.setTitle("Are you sure?");
                 alertDialog.setMessage("Do You Want to Delete This Report ?");
@@ -256,7 +256,7 @@ public class ViewReportsDeatilsActivity extends AppCompatActivity implements Api
         petClinicVistsDetailsParams.setId(clinic_id.substring(0,clinic_id.length()-2));
         PetClinicVisitDetailsRequest petClinicVisitDetailsRequest = new PetClinicVisitDetailsRequest();
         petClinicVisitDetailsRequest.setData(petClinicVistsDetailsParams);
-        Log.d("DeleteClinicVisit",petClinicVisitDetailsRequest.toString());
+        //Log.d"DeleteClinicVisit",petClinicVisitDetailsRequest.toString());
         ApiService<AddUpdateDeleteClinicVisitResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().deleteClinicVisit(Config.token,petClinicVisitDetailsRequest), "DeletePetClinicVisitDetails");
 

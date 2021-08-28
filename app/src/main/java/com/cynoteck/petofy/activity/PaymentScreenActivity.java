@@ -124,7 +124,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
             options.put("prefill", preFill);
             checkout.open(activity, options);
         } catch(Exception e) {
-            Log.e("TAG", "Error in starting Razorpay Checkout", e);
+            //Log.d"TAG", "Error in starting Razorpay Checkout", e);
         }
     }
 
@@ -135,10 +135,10 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
         intent.putExtra("Amount",amount);
         setResult(RESULT_OK, intent);
         finish();
-        Log.e("mettingId",mettingID);
-        Log.e("orderId",paymentData.getOrderId());
-        Log.e("PaymentId",paymentData.getPaymentId());
-        Log.e("amount",amount);
+        //Log.d"mettingId",mettingID);
+        //Log.d"orderId",paymentData.getOrderId());
+        //Log.d"PaymentId",paymentData.getPaymentId());
+        //Log.d"amount",amount);
 
         PaymentHistoryParms paymentHistoryParms = new PaymentHistoryParms();
         paymentHistoryParms.setAmount(amount);
@@ -152,7 +152,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
         ApiService<PaymentStatusResponse> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().getPaymentHistory(Config.token,paymentHistoryRequest), "PaymentHistory");
-        Log.e("paymentHistory",paymentHistoryRequest.toString());
+        //Log.d"paymentHistory",paymentHistoryRequest.toString());
     }
 
     @Override
@@ -167,9 +167,9 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
             case "GetOrder":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("GetOrder",arg0.body().toString());
+                    //Log.d"GetOrder",arg0.body().toString());
                     GetOrderResponse getOrderResponse = (GetOrderResponse) arg0.body();
-                    Log.d("getOrderResponse",getOrderResponse.toString());
+                    //Log.d"getOrderResponse",getOrderResponse.toString());
                     int responseCode = Integer.parseInt(getOrderResponse.getResponse().getResponseCode());
                     if (responseCode==109) {
                         payment_details_CL.setVisibility(View.VISIBLE);
@@ -194,9 +194,9 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
             case "PaymentHistory":
                 try {
-                    Log.d("GetOrder",arg0.body().toString());
+                    //Log.d"GetOrder",arg0.body().toString());
                     PaymentStatusResponse paymentStatusResponse = (PaymentStatusResponse) arg0.body();
-                    Log.d("getOrderResponse",paymentStatusResponse.toString());
+                    //Log.d"getOrderResponse",paymentStatusResponse.toString());
                     int responseCode = Integer.parseInt(paymentStatusResponse.getResponse().getResponseCode());
                     if (responseCode==109) {
 

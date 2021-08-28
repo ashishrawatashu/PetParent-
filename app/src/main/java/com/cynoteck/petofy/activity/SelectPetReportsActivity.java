@@ -168,7 +168,7 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
             case "GetReportsType":
                 try {
                     progressBar.setVisibility(View.GONE);
-                    Log.d("GetPetServiceTypes", response.body().toString());
+                    //Log.d"GetPetServiceTypes", response.body().toString());
                     GetReportsTypeResponse petServiceResponse = (GetReportsTypeResponse) response.body();
                     int responseCode = Integer.parseInt(petServiceResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -189,7 +189,7 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
 
             case "GetImmunization":
                 try {
-                    Log.d("GetImmunization", response.body().toString());
+                    //Log.d"GetImmunization", response.body().toString());
                     PetImmunizationRecordResponse immunizationRecordResponse = (PetImmunizationRecordResponse) response.body();
                     methods.customProgressDismiss();
                     int responseCode = Integer.parseInt(immunizationRecordResponse.getResponse().getResponseCode());
@@ -228,17 +228,10 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
                             final JSONArray nextDate = new JSONArray(nextDueDate);
                             final JSONArray vType = new JSONArray(vaccineType);
 
-                            Log.d("jsjsjjsjs", "" + date.length());
-
                             final JSONArray datePending = new JSONArray(immunizationDatePending);
                             final JSONArray vaccinePending = new JSONArray(vaccineClassPending);
                             final JSONArray nextDatePending = new JSONArray(nextDueDatePending);
                             final JSONArray vTypePending = new JSONArray(vaccineTypePending);
-
-                            Log.d("jsjsjjsjs", "" + datePending.length());
-
-                            Log.e("aaaaaa", vaccineClass.toString());
-                            Log.e("aaaaaa", vaccine.toString());
                             methods.customProgressDismiss();
                             String immunizationSet = methods.immunizationPdfGenarator(pet_name, pet_age, pet_sex, pet_owner_name, "", vType, vaccine, nextDate, vTypePending, vaccinePending, nextDatePending);
                             WebSettings webSettings = webview.getSettings();
@@ -292,7 +285,7 @@ public class SelectPetReportsActivity extends AppCompatActivity implements ApiRe
 
             ApiService<PetImmunizationRecordResponse> service = new ApiService<>();
             service.get(this, ApiClient.getApiInterface().viewPetVaccination(Config.token, immunizationRequest), "GetImmunization");
-            Log.d("GetImmunization", immunizationRequest.toString());
+            //Log.d"GetImmunization", immunizationRequest.toString());
         } else {
 
             getReportsTypeData.get(position).getId();

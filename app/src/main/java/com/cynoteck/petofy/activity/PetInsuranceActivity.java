@@ -55,7 +55,10 @@ public class PetInsuranceActivity extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.insurance_card_LL:
-                startActivityForResult(new Intent(this,BuyInsuranceActivity.class),1);
+                Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
+                insuranceIntent.putExtra("afterLogin","no");
+                startActivity(insuranceIntent);
+                startActivityForResult(insuranceIntent,1);
                 break;
 
         }

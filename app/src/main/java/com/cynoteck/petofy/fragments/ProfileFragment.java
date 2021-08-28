@@ -369,7 +369,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         } else if (requestCode == CAMERA) {
             if (data.getData() == null) {
                 thumbnail = (Bitmap) data.getExtras().get("data");
-                Log.e("jghl", "" + thumbnail);
                 parent_image_CIV.setImageBitmap(thumbnail);
 
                 saveImage(thumbnail);
@@ -411,7 +410,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                     new String[]{catfile1.getPath()},
                     new String[]{"image/png"}, null);
             fo.close();
-            Log.d("TAG", "File Saved::---&gt;" + catfile1.getAbsolutePath());
+            //Log.d"TAG", "File Saved::---&gt;" + catfile1.getAbsolutePath());
             UploadImages(catfile1);
             return catfile1.getAbsolutePath();
 
@@ -431,7 +430,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
         ApiService<ImageResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().uploadImages(Config.token, userDpFilePart), "UploadDocument");
-        Log.e("DATALOG", "check1=> " + service);
+//        Log.d("DATALOG", "check1=> " + service);
 
     }
 
@@ -456,7 +455,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         switch (key) {
             case "UpdateProfileImage":
                 try {
-                    Log.d("UploadDocument", response.body().toString());
+                    //Log.d"UploadDocument", response.body().toString());
                     JsonObject jsonObject = new JsonObject();
                     jsonObject = (JsonObject) response.body();
                     int responseCode = Integer.parseInt(String.valueOf(jsonObject.getAsJsonObject("response").get("responseCode")));
@@ -479,7 +478,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
             case "UploadDocument":
                 try {
                     parent_image_progress_bar.setVisibility(View.GONE);
-                    Log.e("UploadDocument", response.body().toString());
+//                    Log.d("UploadDocument", response.body().toString());
                     ImageResponse imageResponse = (ImageResponse) response.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -499,7 +498,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                         uploadVetProfileImageData.setData(uploadProfileImageParams);
                         ApiService<JsonObject> service = new ApiService<>();
                         service.get(this, ApiClient.getApiInterface().updateProfileImage(Config.token, uploadVetProfileImageData), "UpdateProfileImage");
-                        Log.d("UpdateProfileImage", uploadVetProfileImageData.toString());
+                        //Log.d"UpdateProfileImage", uploadVetProfileImageData.toString());
 
                     } else if (responseCode == 614) {
                         Toast.makeText(getActivity(), imageResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();

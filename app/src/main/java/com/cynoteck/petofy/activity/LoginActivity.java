@@ -235,7 +235,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         methods.showCustomProgressBarDialog(this);
         ApiService<LoginWithEmailRegisterResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().loginApi(loginparams), "Login");
-        Log.e("DATALOG", "check1=> " + loginparams);
+        //Log.d"DATALOG", "check1=> " + loginparams);
 
     }
 
@@ -245,7 +245,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         switch (key) {
             case "Login":
                 try {
-                    Log.d("DATALOG", response.body().toString());
+                    //Log.d"DATALOG", response.body().toString());
                     responseLogin = (LoginWithEmailRegisterResponse) response.body();
                     int responseCode = Integer.parseInt(responseLogin.getResponseLogin().getResponseCode());
                     if (responseCode == 109) {
@@ -283,7 +283,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         login_editor.putString("twoFactAuth", responseLogin.getData().getEnableTwoStepVerification());
         Config.token = responseLogin.getResponseLogin().getToken();
         login_editor.putString("loggedIn", "loggedIn");
-        Log.e("TOKEN",responseLogin.getResponseLogin().getToken());
+        //Log.d"TOKEN",responseLogin.getResponseLogin().getToken());
         login_editor.apply();
         Intent intent = new Intent(this, DashBoardActivity.class);
         intent.putExtra("from","OTP_ACTIVITY");
@@ -295,8 +295,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     @Override
     public void onError(Throwable t, String key) {
         methods.customProgressDismiss();
-        Log.e("error", Objects.requireNonNull(t.getMessage()));
-        Log.e("errrrr", Objects.requireNonNull(t.getLocalizedMessage()));
+        //Log.d"error", Objects.requireNonNull(t.getMessage()));
+        //Log.d"errrrr", Objects.requireNonNull(t.getLocalizedMessage()));
     }
 
     @Override

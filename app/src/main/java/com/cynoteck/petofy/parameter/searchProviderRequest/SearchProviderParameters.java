@@ -6,25 +6,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class SearchProviderParameters {
 
-    @SerializedName("searchkeyword")
+    @SerializedName("searchText")
     @Expose
-    private String searchkeyword;
+    private String searchText;
     @SerializedName("cityId")
     @Expose
     private Integer cityId;
-    @SerializedName("latitude")
+    @SerializedName("page")
     @Expose
-    private String latitude;
-    @SerializedName("longitude")
-    @Expose
-    private String longitude;
+    private Integer page;
 
-    public String getSearchkeyword() {
-        return searchkeyword;
+    public Integer getPage() {
+        return page;
     }
 
-    public void setSearchkeyword(String searchkeyword) {
-        this.searchkeyword = searchkeyword;
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public String getSearchText() {
+        return searchText;
+    }
+
+    public void setSearchText(String searchkeyword) {
+        this.searchText = searchkeyword;
     }
 
     public Integer getCityId() {
@@ -33,22 +38,6 @@ public class SearchProviderParameters {
 
     public void setCityId(Integer cityId) {
         this.cityId = cityId;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
     }
 
 }

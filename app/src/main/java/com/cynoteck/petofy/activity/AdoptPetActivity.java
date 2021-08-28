@@ -172,7 +172,7 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
 
         ApiService<AdoptionListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getAdoptionList(Config.token, adoptionListRequestModel), "getAdoptionList");
-        Log.e("DIOLOG====>", "" + adoptionListRequestModel);
+        //Log.d("DIOLOG====>", "" + adoptionListRequestModel);
     }
 
 

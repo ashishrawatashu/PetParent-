@@ -147,7 +147,7 @@ public class ScannerQR extends AppCompatActivity {
 
                     Intent intent = new Intent();
                     if (IsInsurance==null){
-                        Log.e("intentData", key + "" + veterinarianUserId);
+                        //Log.d"intentData", key + "" + veterinarianUserId);
                         intent.putExtra("veterinarianUserId", veterinarianUserId);
                         intent.putExtra("veterinarianName", veterinarianName);
                         intent.putExtra("clinicName", clinicName);
@@ -192,7 +192,7 @@ public class ScannerQR extends AppCompatActivity {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                 }
             } else {
-                Log.e("NOPERMISION", "no");
+                //Log.d"NOPERMISION", "no");
             }
         } else
             finish();

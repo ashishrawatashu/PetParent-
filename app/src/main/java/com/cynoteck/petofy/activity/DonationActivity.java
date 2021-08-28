@@ -202,6 +202,6 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
 
         ApiService<JsonObject> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().donatePetById(Config.token, jsonObjectRequest), "DonatePetById");
-        Log.e("DATALOG", "check1=> " + jsonObjectRequest);
+        //Log.d("DATALOG", "check1=> " + jsonObjectRequest);
     }
 }

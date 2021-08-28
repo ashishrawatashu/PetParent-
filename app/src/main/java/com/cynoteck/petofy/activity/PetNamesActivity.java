@@ -76,7 +76,7 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
         search_names_ET.setEnabled(false);
         ApiService<GetPetNamesResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getNamesList("pet/getpetnames/"+petCategoryId+"/"+petGenderId), "GetPetNamesList");
-        Log.e("GET_NAMES","pet/getpetnames/"+petCategoryId+"/"+petGenderId);
+        //Log.d"GET_NAMES","pet/getpetnames/"+petCategoryId+"/"+petGenderId);
     }
 
     private void searchingPetNames() {

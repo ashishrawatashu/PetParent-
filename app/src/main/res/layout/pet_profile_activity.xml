@@ -597,10 +597,11 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="30dp"
                         android:orientation="horizontal"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:weightSum="2">
 
                         <LinearLayout
+                            android:id="@+id/insurance_LL"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginRight="6dp"
@@ -621,7 +622,7 @@
                                 android:layout_height="match_parent"
                                 android:fontFamily="@font/nunito_bold"
                                 android:gravity="center"
-                                android:text="Traning"
+                                android:text="Insurance"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14sp" />
 

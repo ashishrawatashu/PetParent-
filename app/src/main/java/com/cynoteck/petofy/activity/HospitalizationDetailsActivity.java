@@ -130,7 +130,7 @@ public class HospitalizationDetailsActivity extends AppCompatActivity implements
                 break;
 
             case R.id.deleteReport_BT:
-                Log.d("Add Anotheer Veterian","vet");
+                //Log.d"Add Anotheer Veterian","vet");
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
                 alertDialog.setTitle("Are you sure?");
                 alertDialog.setMessage("Do You Want to Delete This Report ?");
@@ -164,7 +164,7 @@ public class HospitalizationDetailsActivity extends AppCompatActivity implements
         petClinicVistsDetailsParams.setId(report_type_id.substring(0,report_type_id.length()-2));
         PetClinicVisitDetailsRequest petClinicVisitDetailsRequest = new PetClinicVisitDetailsRequest();
         petClinicVisitDetailsRequest.setData(petClinicVistsDetailsParams);
-        Log.d("DeleteHospitalization",petClinicVisitDetailsRequest.toString());
+        //Log.d"DeleteHospitalization",petClinicVisitDetailsRequest.toString());
         ApiService<AddUpdateDeleteClinicVisitResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().deletePetHospitalization(Config.token,petClinicVisitDetailsRequest), "DeleteHospitalization");
 
@@ -176,7 +176,7 @@ public class HospitalizationDetailsActivity extends AppCompatActivity implements
         petClinicVistsDetailsParams.setId(report_type_id.substring(0,report_type_id.length()-2));
         PetClinicVisitDetailsRequest petClinicVisitDetailsRequest = new PetClinicVisitDetailsRequest();
         petClinicVisitDetailsRequest.setData(petClinicVistsDetailsParams);
-        Log.d("petClinicVisitDetail",petClinicVisitDetailsRequest.toString());
+        //Log.d"petClinicVisitDetail",petClinicVisitDetailsRequest.toString());
 
         ApiService<GetHospitalizationDeatilsResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetHospitalizationDetails(Config.token,petClinicVisitDetailsRequest), "GetHospitalizationDetails");
@@ -189,7 +189,7 @@ public class HospitalizationDetailsActivity extends AppCompatActivity implements
             case "GetHospitalizationDetails":
                 try {
                     progressBar.setVisibility(View.GONE);
-                    Log.d("GetHospitalization",response.body().toString());
+                    //Log.d"GetHospitalization",response.body().toString());
                     GetHospitalizationDeatilsResponse getHospitalizationDeatilsResponse = (GetHospitalizationDeatilsResponse) response.body();
                     int responseCode = Integer.parseInt(getHospitalizationDeatilsResponse.getResponse().getResponseCode());
                     if (responseCode== 109){
@@ -219,7 +219,7 @@ public class HospitalizationDetailsActivity extends AppCompatActivity implements
 
             case "DeleteHospitalization":
                 try {
-                    Log.d("DeleteHospitalization",response.body().toString());
+                    //Log.d"DeleteHospitalization",response.body().toString());
                     AddUpdateDeleteClinicVisitResponse addUpdateDeleteClinicVisitResponse = (AddUpdateDeleteClinicVisitResponse) response.body();
                     int responseCode = Integer.parseInt(addUpdateDeleteClinicVisitResponse.getResponse().getResponseCode());
                     if (responseCode== 109){

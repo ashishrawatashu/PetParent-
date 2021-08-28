@@ -170,13 +170,13 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         getPetAgeRequestData.setData(getPetAgeParameter);
         ApiService<GetPetAgeresponseData> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetAgeString(getPetAgeRequestData), "GetPetAgeString");
-        Log.e("DAILOG", "getPetAgeString==>" + getPetAgeRequestData);
+//        //Log.d"DAILOG", "getPetAgeString==>" + getPetAgeRequestData);
     }
 
     private void currentDateAndTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy h:mm:ss a", Locale.getDefault());
         currentDateandTime = sdf.format(new Date());
-        Log.d("currentDateandTime", "" + currentDateandTime);
+        //Log.d"currentDateandTime", "" + currentDateandTime);
     }
 
 
@@ -198,7 +198,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
         ApiService<BreedCatRespose> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(breedParams), "GetPetBreed");
-        Log.d("Diolog_Breed", "===>" + breedParams);
+        //Log.d"Diolog_Breed", "===>" + breedParams);
     }
 
     private void getPetAge() {
@@ -291,7 +291,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Log.d("dataChange", "afterTextChanged" + new String(editable.toString()));
+                //Log.d"dataChange", "afterTextChanged" + new String(editable.toString()));
                 String value = editable.toString();
                 if (methods.isInternetOn()) {
                     if (age_neumeric.isFocused()) {
@@ -392,7 +392,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 } else {
                     pet_name.setError(null);
                     calenderView.setError(null);
-                    Log.d("hahahah", "" + getStrSpnerItemPetNmId + " " + strSpnrSexId + " " + strSpnrAgeId + " " + strSpneSizeId + " " + strSpnrColorId + " " + strSpnrBreedId + " " + strPetName + " " + strPetBirthDay + " " + strPetDescription + " " + currentDateandTime);
+                    //Log.d"hahahah", "" + getStrSpnerItemPetNmId + " " + strSpnrSexId + " " + strSpnrAgeId + " " + strSpneSizeId + " " + strSpnrColorId + " " + strSpnrBreedId + " " + strPetName + " " + strPetBirthDay + " " + strPetDescription + " " + currentDateandTime);
                     AddPetRequset addPetRequset = new AddPetRequset();
                     AddPetParams data = new AddPetParams();
                     data.setPetUniqueId(petUniqueId);
@@ -534,7 +534,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                         new String[]{file.getPath()},
                         new String[]{"image/png"}, null);
                 fo.close();
-                Log.d("TAG", "File Saved::---&gt;" + file.getAbsolutePath());
+                //Log.d"TAG", "File Saved::---&gt;" + file.getAbsolutePath());
                 image_path_TV.setText(file.getAbsolutePath());
                 UploadImages(file);
                 return file.getAbsolutePath();
@@ -555,7 +555,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
         ApiService<ImageResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().uploadImages(Config.token, userDpFilePart), "UploadDocument");
-        Log.e("DATALOG", "check1=> " + service);
+//        //Log.d"DATALOG", "check1=> " + service);
 
     }
     private void checkStorageAndCameraPermission() {
@@ -652,11 +652,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     }
 
     private void addPetData(AddPetRequset addPetRequset) {
-        Log.e("yes", "yes");
         methods.showCustomProgressBarDialog(this);
         ApiService<AddPetValueResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().addNewPet(Config.token, addPetRequset), "AddPet");
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(addPetRequset));
+//      Log.d"DATALOG", "check1=> " + methods.getRequestJson(addPetRequset));
 
     }
 
@@ -666,11 +665,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         switch (key) {
             case "SearchPetParent":
                 try {
-                    Log.d("SearchPetParent", arg0.body().toString());
+                    //Log.d"SearchPetParent", arg0.body().toString());
                     GetPetParentResponseData getPetParentResponseData = (GetPetParentResponseData) arg0.body();
                     int responseCode = Integer.parseInt(getPetParentResponseData.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        Log.d("SearchPetParent", "" + getPetParentResponseData.getData().size());
                         ArrayList remarksSearchList = new ArrayList<>();
                         for (int i = 0; i < getPetParentResponseData.getData().size(); i++) {
                             remarksSearchList.add(getPetParentResponseData.getData().get(i).getPetParentName()
@@ -700,7 +698,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             case "getDateOfYear":
                 try {
                     DateOfBirthResponse dateOfBirthResponse = (DateOfBirthResponse) arg0.body();
-                    Log.d("getDateOfYear", dateOfBirthResponse.toString());
+                    //Log.d"getDateOfYear", dateOfBirthResponse.toString());
                     int responseCode = Integer.parseInt(dateOfBirthResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         calenderView.setText(dateOfBirthResponse.getData());
@@ -716,7 +714,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 break;
             case "GetPetAgeString":
                 try {
-                    Log.d("GetPetAgeString", arg0.body().toString());
+                    //Log.d"GetPetAgeString", arg0.body().toString());
                     GetPetAgeresponseData getPetAgeresponseData = (GetPetAgeresponseData) arg0.body();
                     int responseCode = Integer.parseInt(getPetAgeresponseData.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -734,14 +732,12 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             case "GetPetAgeUnit":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("GetPetTypes", arg0.body().toString());
+                    //Log.d"GetPetTypes", arg0.body().toString());
                     PetAgeUnitResponseData petAgeUnitResponseData = (PetAgeUnitResponseData) arg0.body();
                     int responseCode = Integer.parseInt(petAgeUnitResponseData.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petAgeType = new ArrayList<>();
-                        Log.d("lalal", "" + petAgeUnitResponseData.getData().size());
                         for (int i = 0; i < petAgeUnitResponseData.getData().size(); i++) {
-                            Log.d("petttt", "" + petAgeUnitResponseData.getData().get(i).getAge());
                             petAgeType.add(petAgeUnitResponseData.getData().get(i).getAgeUnit());
                             petAgeUnitHash.put(petAgeUnitResponseData.getData().get(i).getAgeUnit(), petAgeUnitResponseData.getData().get(i).getAge());
                         }
@@ -758,16 +754,14 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 break;
             case "GetPetTypes":
                 try {
-                    Log.d("GetPetTypes", arg0.body().toString());
+                    //Log.d"GetPetTypes", arg0.body().toString());
                     PetTypeResponse petTypeResponse = (PetTypeResponse) arg0.body();
                     int responseCode = Integer.parseInt(petTypeResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petType = new ArrayList<>();
                         petType.add("Select Pet Type");
                         petTypeHashMap.put("Select Pet Type", "0");
-                        Log.d("lalal", "" + petTypeResponse.getData().size());
                         for (int i = 0; i < petTypeResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petTypeResponse.getData().get(i).getPetType1());
                             petType.add(petTypeResponse.getData().get(i).getPetType1());
                             petTypeHashMap.put(petTypeResponse.getData().get(i).getPetType1(), petTypeResponse.getData().get(i).getId());
                         }
@@ -786,16 +780,14 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
             case "GetPetBreed":
                 try {
-                    Log.d("GetPetBreed", arg0.body().toString());
+                    //Log.d"GetPetBreed", arg0.body().toString());
                     BreedCatRespose breedCatRespose = (BreedCatRespose) arg0.body();
                     int responseCode = Integer.parseInt(breedCatRespose.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petBreed = new ArrayList<>();
                         petBreed.add("Pet Breed");
                         petBreedHashMap.put("Pet Breed", "0");
-                        Log.d("lalal", "" + breedCatRespose.getData().size());
                         for (int i = 0; i < breedCatRespose.getData().size(); i++) {
-                            Log.d("petttt", "" + breedCatRespose.getData().get(i).getBreed());
                             petBreed.add(breedCatRespose.getData().get(i).getBreed());
                             petBreedHashMap.put(breedCatRespose.getData().get(i).getBreed(), breedCatRespose.getData().get(i).getId());
                         }
@@ -811,15 +803,13 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 break;
             case "GetPetAge":
                 try {
-                    Log.d("GetPetAge", arg0.body().toString());
+                    //Log.d"GetPetAge", arg0.body().toString());
                     PetAgeValueResponse petAgeValueResponse = (PetAgeValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petAgeValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petAge = new ArrayList<>();
                         petAge.add("Select Pet Age");
-                        Log.d("lalal", "" + petAgeValueResponse.getData().size());
                         for (int i = 0; i < petAgeValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petAgeValueResponse.getData().get(i).getAge());
                             petAge.add(petAgeValueResponse.getData().get(i).getAge());
                             petAgeHashMap.put(petAgeValueResponse.getData().get(i).getAge(), petAgeValueResponse.getData().get(i).getId());
                         }
@@ -836,15 +826,13 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
             case "GetPetColor":
                 try {
-                    Log.d("GetPetColor", arg0.body().toString());
+                    //Log.d"GetPetColor", arg0.body().toString());
                     PetColorValueResponse petColorValueResponse = (PetColorValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petColorValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petColor = new ArrayList<>();
                         petColor.add("Pet Color");
-                        Log.d("lalal", "" + petColorValueResponse.getData().size());
                         for (int i = 0; i < petColorValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petColorValueResponse.getData().get(i).getColor());
                             petColor.add(petColorValueResponse.getData().get(i).getColor());
                             petColorHashMap.put(petColorValueResponse.getData().get(i).getColor(), petColorValueResponse.getData().get(i).getId());
                         }
@@ -862,9 +850,8 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             case "AddPet":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("AddPet", arg0.body().toString());
+                    //Log.d"AddPet", arg0.body().toString());
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
-                    Log.d("addPetValueResponse", "" + addPetValueResponse);
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                             if (!intentFrom.equals("AfterScanScreenActivity")){
@@ -897,7 +884,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             case "UploadDocument":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("UploadDocument", arg0.body().toString());
+                    //Log.d"UploadDocument", arg0.body().toString());
                     ImageResponse imageResponse = (ImageResponse) arg0.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -943,7 +930,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnerItemPetNm = item;
-                Log.d("spnerType", "" + strSpnerItemPetNm);
+                //Log.d"spnerType", "" + strSpnerItemPetNm);
                 getStrSpnerItemPetNmId = petTypeHashMap.get(strSpnerItemPetNm);
                 if (!getStrSpnerItemPetNmId.equals("0")) {
                     getPetBreed();
@@ -968,7 +955,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrBreed = item;
-                Log.d("spnerType", "" + strSpnrBreed);
+                //Log.d"spnerType", "" + strSpnrBreed);
                 strSpnrBreedId = petBreedHashMap.get(strSpnrBreed);
 
             }
@@ -988,7 +975,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrAge = item;
-                Log.d("spnerType", "" + strSpnrAge);
+                //Log.d"spnerType", "" + strSpnrAge);
                 strSpnrAgeId = petAgeHashMap.get(strSpnrAge);
             }
 
@@ -1007,7 +994,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrColor = item;
-                Log.d("spnerType", "" + strSpnrColor);
+                //Log.d"spnerType", "" + strSpnrColor);
                 strSpnrColorId = petColorHashMap.get(strSpnrColor);
             }
 
@@ -1026,7 +1013,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strAgeCount = item;
-                Log.d("spnerType", "PetAge" + item);
+                //Log.d"spnerType", "PetAge" + item);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {

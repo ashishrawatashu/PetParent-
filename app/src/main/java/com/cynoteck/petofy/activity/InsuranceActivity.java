@@ -2,10 +2,12 @@ package com.cynoteck.petofy.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -30,6 +32,8 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
     MaterialCardView    back_arrow_CV;
     Dialog              insurance_successfully_dialog;
     LinearLayout        insurance_card_LL;
+    CardView            download_brochure_CV;
+    TextView            see_all_cover_TV ,see_all_about_TV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +47,17 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
         buy_now_BT          = findViewById(R.id.buy_now_BT);
         back_arrow_CV       = findViewById(R.id.back_arrow_CV);
         insurance_card_LL   = findViewById(R.id.insurance_card_LL);
+        download_brochure_CV= findViewById(R.id.download_brochure_CV);
+        see_all_about_TV    = findViewById(R.id.see_all_about_TV);
+        see_all_cover_TV    = findViewById(R.id.see_all_cover_TV);
+
+        see_all_cover_TV.setOnClickListener(this);
+        see_all_about_TV.setOnClickListener(this);
 
         back_arrow_CV.setOnClickListener(this);
         buy_now_BT.setOnClickListener(this);
         insurance_card_LL.setOnClickListener(this);
+        download_brochure_CV.setOnClickListener(this);
     }
 
     @Override
@@ -55,11 +66,31 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
             case R.id.insurance_card_LL:
 
             case R.id.buy_now_BT:
-                startActivityForResult(new Intent(this,BuyInsuranceActivity.class),1);
+                Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
+                insuranceIntent.putExtra("afterLogin","no");
+                startActivity(insuranceIntent);
+                startActivityForResult(insuranceIntent,1);
                 break;
 
             case R.id.back_arrow_CV:
                 finish();
+                break;
+            case R.id.see_all_about_TV:
+
+            case R.id.see_all_cover_TV:
+
+                String InsuranceUrl = "https://www.petofy.com/pet-insurance";
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
+                startActivity(browserIntent);
+                break;
+
+            case R.id.download_brochure_CV:
+                Uri linkUri;
+                linkUri = Uri.parse("https://petofy.com/files/Bajaj-Allianz-Pet-Dog-Insurance-Brochure.pdf");
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                i.setDataAndType(linkUri, getContentResolver().getType(linkUri));
+                startActivity(i);
                 break;
         }
 

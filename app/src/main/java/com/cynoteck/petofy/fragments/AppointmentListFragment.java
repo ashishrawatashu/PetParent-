@@ -142,7 +142,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         ApiService<GetAppointmentResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getAppointment(Config.token, getAppointmentRequest), "GetUpcomingAppointment");
 
-        Log.e("appointment", methods.getRequestJson(getAppointmentRequest));
+//        Log.d("appointment", methods.getRequestJson(getAppointmentRequest));
     }
 
     private void initization() {
@@ -257,7 +257,6 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                     appoint_tabs_LL.setVisibility(View.VISIBLE);
                     upcoming_appointment_tab_LL.setEnabled(true);
                     getUpcomingAppointmentResponse = (GetAppointmentResponse) arg0.body();
-                    Log.e("upcoming", methods.getRequestJson(getUpcomingAppointmentResponse));
                     int responseCode = Integer.parseInt(getUpcomingAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (getUpcomingAppointmentResponse.getData().isEmpty()) {
@@ -287,7 +286,6 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                             upcomingAppointmentListAdapter.notifyDataSetChanged();
 
                             if (upcomingTabClick) {
-                                Log.e("error","ye rahi");
                                 upcoming_appointment_RV.setVisibility(View.VISIBLE);
                             } else {
                                 no_upcoming_appointment_TV.setVisibility(View.GONE);
@@ -308,7 +306,6 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                 try {
                     past_appointment_tab_LL.setEnabled(true);
                     pastAppointmentResponse = (GetAppointmentResponse) arg0.body();
-                    Log.e("past", methods.getRequestJson(pastAppointmentResponse));
                     int responseCode = Integer.parseInt(pastAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (pastAppointmentResponse.getData().isEmpty()) {
@@ -409,7 +406,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
             intent.putExtra("mettingId", appointmentLists.get(position).getId());
             intent.putExtra("vet_image_url", appointmentLists.get(position).getVetProfileImage());
 
-            Log.e("PaymentOrder", intent.toString());
+//            Log.d("PaymentOrder", intent.toString());
 
             startActivityForResult(intent, 1);
         } else {
@@ -422,7 +419,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
     public void onCancelClick(int position, ArrayList<AppointmentList> appointmentLists, Button button) {
         cancelPosition = position;
         mettingId = appointmentLists.get(position).getId();
-        Log.d("Add Anotheer Veterian", "vet");
+        //Log.d"Add Anotheer Veterian", "vet");
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle("");
         alertDialog.setMessage("Do you want to cancel this appointment?");
@@ -499,7 +496,6 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
     public static void dialog(boolean value) {
 
         if (value) {
-            Log.e("Connected", "Yes");
             isOnline = true;
 
             Handler handler = new Handler();
@@ -512,14 +508,12 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
             handler.postDelayed(delayrunnable, 3000);
         } else {
             isOnline = false;
-            Log.e("Connected", "NO");
             somethingWrong();
 
         }
     }
 
     private static void somethingWrong() {
-        Log.e("Error","HI");
         progressBar.setVisibility(View.GONE);
         if (isLoaded) {
             something_wrong_LL.setVisibility(View.GONE);

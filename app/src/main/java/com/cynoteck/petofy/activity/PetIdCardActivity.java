@@ -95,7 +95,7 @@ public class PetIdCardActivity extends AppCompatActivity implements ApiResponse 
 
         ApiService<PetIdCardResponse> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().getPetIdCard(Config.token,petClinicVisitDetailsRequest), "GetIdCard");
-        Log.e("IDCARD_REQUEST","===>"+petClinicVisitDetailsRequest);
+        //Log.d"IDCARD_REQUEST","===>"+petClinicVisitDetailsRequest);
         methods.showCustomProgressBarDialog(this);
 
     }
@@ -197,7 +197,7 @@ public class PetIdCardActivity extends AppCompatActivity implements ApiResponse 
 
     @Override
     public void onResponse(Response arg0, String key) {
-        Log.e("IDCARD_REQUEST","===>"+arg0.body());
+        //Log.d"IDCARD_REQUEST","===>"+arg0.body());
         methods.customProgressDismiss();
         switch (key){
             case "GetIdCard":
@@ -225,7 +225,7 @@ public class PetIdCardActivity extends AppCompatActivity implements ApiResponse 
 
     @Override
     public void onError(Throwable t, String key) {
-        Log.e("IDCARD_Error","===>"+t.getLocalizedMessage());
+        //Log.d"IDCARD_Error","===>"+t.getLocalizedMessage());
 
     }
 }

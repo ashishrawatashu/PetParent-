@@ -128,8 +128,6 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
 
 
-
-
         if (type.equals("add")) {
             currentTime = new SimpleDateFormat("hh:mm a").format(new Date());
             select_time_TV.setText(currentTime);
@@ -245,7 +243,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
 
         ApiService<GetPetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetList");
-        Log.e("DATALOG", "check1=> " + getPetDataRequest);
+        //Log.d("DATALOG", "check1=> " + getPetDataRequest);
 
 
     }
@@ -316,7 +314,7 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 break;
 
             case R.id.create_appointment_BT:
-                Log.e("user_id", Config.user_id);
+                //Log.d("user_id", Config.user_id);
                 titleString     = select_purpose_ET.getText().toString();
                 dateString      = calenderTextView_dialog.getText().toString();
                 timeString      = select_time_TV.getText().toString();

@@ -269,5 +269,6 @@
     <string name="left_image">Left Image</string>
     <string name="right_image">Right Image</string>
     <string name="top_image">Top Image</string>
+    <string name="search_headline">Search top service provider in your city </string>
 
 </resources>

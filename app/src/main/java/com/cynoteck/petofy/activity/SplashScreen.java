@@ -62,13 +62,13 @@ public class SplashScreen extends AppCompatActivity {
         if (WIFI) {
             Config.IpAddress = GetDeviceipWiFiData();
 //            Constants.EndUserIp= Config.IpAddress;
-            Log.e("WIFI", Config.IpAddress + "");
+            //Log.d"WIFI", Config.IpAddress + "");
         }
 
         if (MOBILE) {
             Config.IpAddress = getLocalIpAddress();
 //          Constants.EndUserIp= Config.IpAddress;
-            Log.e("MOBILE", Config.IpAddress + "");
+            //Log.d"MOBILE", Config.IpAddress + "");
         }
     }
 
@@ -87,13 +87,13 @@ public class SplashScreen extends AppCompatActivity {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
                         String ip = Formatter.formatIpAddress(inetAddress.hashCode());
-                        Log.e("sssss", ip + "");
+                        //Log.d"sssss", ip + "");
                         return ip;
                     }
                 }
             }
         } catch (Exception ex) {
-            Log.e("IP Address", ex.toString());
+            //Log.d"IP Address", ex.toString());
         }
         return null;
     }

@@ -90,7 +90,7 @@ public class SettingActivity extends AppCompatActivity implements ApiResponse, V
         switch (key){
             case "EnableDisable":
                 try {
-                    Log.d("EnableDisable",response.body().toString());
+                    //Log.d"EnableDisable",response.body().toString());
                     TwoFactAuthResponse onlineAppointmentResponse = (TwoFactAuthResponse) response.body();
                     int responseCode = Integer.parseInt(onlineAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode== 109){

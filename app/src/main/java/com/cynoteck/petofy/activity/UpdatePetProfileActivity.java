@@ -307,13 +307,13 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         methods.showCustomProgressBarDialog(this);
         ApiService<GetPetResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetDetails(Config.token, getPetListRequest), "GetPetDetail");
-        Log.e("DATALOG", "check1=> PET_DETAILS " + methods.getRequestJson(getPetListRequest));
+        //Log.d"DATALOG", "check1=> PET_DETAILS " + methods.getRequestJson(getPetListRequest));
     }
 
     private void currentDateAndTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy h:mm:ss a", Locale.getDefault());
         currentDateandTime = sdf.format(new Date());
-        Log.d("currentDateandTime", "" + currentDateandTime);
+        //Log.d"currentDateandTime", "" + currentDateandTime);
     }
 
 
@@ -341,7 +341,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
 
         ApiService<BreedCatRespose> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(breedParams), "GetPetBreed");
-        Log.d("Diolog_Breed", "===>" + breedParams);
+        //Log.d"Diolog_Breed", "===>" + breedParams);
     }
 
     private void getPetAge() {
@@ -496,7 +496,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 try {
                     methods.customProgressDismiss();
                     GetPetResponse getPetResponse = (GetPetResponse) arg0.body();
-                    Log.d("GetPetDetail", methods.getRequestJson(getPetResponse));
+                    //Log.d"GetPetDetail", methods.getRequestJson(getPetResponse));
                     int responseCode = Integer.parseInt(getPetResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         pet_name_ET.setText(getPetResponse.getData().getPetName());
@@ -514,16 +514,16 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 break;
             case "GetPetTypes":
                 try {
-                    Log.d("GetPetTypes", arg0.body().toString());
+                    //Log.d"GetPetTypes", arg0.body().toString());
                     PetTypeResponse petTypeResponse = (PetTypeResponse) arg0.body();
                     int responseCode = Integer.parseInt(petTypeResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petType = new ArrayList<>();
                         petType.add("Select Pet Type");
                         petTypeHashMap.put("Select Pet Type", "0");
-                        Log.d("lalal", "" + petTypeResponse.getData().size());
+                        //Log.d"lalal", "" + petTypeResponse.getData().size());
                         for (int i = 0; i < petTypeResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petTypeResponse.getData().get(i).getPetType1());
+                            //Log.d"petttt", "" + petTypeResponse.getData().get(i).getPetType1());
                             petType.add(petTypeResponse.getData().get(i).getPetType1());
                             petTypeHashMap.put(petTypeResponse.getData().get(i).getPetType1(), petTypeResponse.getData().get(i).getId());
                         }
@@ -539,15 +539,15 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 }
             case "GetPetBreed":
                 try {
-                    Log.d("GetPetBreed", arg0.body().toString());
+                    //Log.d"GetPetBreed", arg0.body().toString());
                     BreedCatRespose breedCatRespose = (BreedCatRespose) arg0.body();
                     int responseCode = Integer.parseInt(breedCatRespose.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petBreed = new ArrayList<>();
                         petBreed.add("Pet Breed");
-                        Log.d("lalal", "" + breedCatRespose.getData().size());
+                        //Log.d"lalal", "" + breedCatRespose.getData().size());
                         for (int i = 0; i < breedCatRespose.getData().size(); i++) {
-                            Log.d("petttt", "" + breedCatRespose.getData().get(i).getBreed());
+                            //Log.d"petttt", "" + breedCatRespose.getData().get(i).getBreed());
                             petBreed.add(breedCatRespose.getData().get(i).getBreed());
                             petBreedHashMap.put(breedCatRespose.getData().get(i).getBreed(), breedCatRespose.getData().get(i).getId());
                         }
@@ -555,7 +555,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                     } else if (responseCode == 614) {
                         Toast.makeText(this, breedCatRespose.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Log.e("error","PETBREED");
+                        //Log.d"error","PETBREED");
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
@@ -564,15 +564,15 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 break;
             case "GetPetAge":
                 try {
-                    Log.d("GetPetAge", arg0.body().toString());
+                    //Log.d"GetPetAge", arg0.body().toString());
                     PetAgeValueResponse petAgeValueResponse = (PetAgeValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petAgeValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petAge = new ArrayList<>();
                         petAge.add("Select Pet Age");
-                        Log.d("lalal", "" + petAgeValueResponse.getData().size());
+                        //Log.d"lalal", "" + petAgeValueResponse.getData().size());
                         for (int i = 0; i < petAgeValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petAgeValueResponse.getData().get(i).getAge());
+                            //Log.d"petttt", "" + petAgeValueResponse.getData().get(i).getAge());
                             petAge.add(petAgeValueResponse.getData().get(i).getAge());
                             petAgeHashMap.put(petAgeValueResponse.getData().get(i).getAge(), petAgeValueResponse.getData().get(i).getId());
                         }
@@ -588,15 +588,15 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
 
             case "GetPetColor":
                 try {
-                    Log.d("GetPetColor", arg0.body().toString());
+                    //Log.d"GetPetColor", arg0.body().toString());
                     PetColorValueResponse petColorValueResponse = (PetColorValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petColorValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petColor = new ArrayList<>();
                         petColor.add("Pet Color");
-                        Log.d("lalal", "" + petColorValueResponse.getData().size());
+                        //Log.d"lalal", "" + petColorValueResponse.getData().size());
                         for (int i = 0; i < petColorValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petColorValueResponse.getData().get(i).getColor());
+                            //Log.d"petttt", "" + petColorValueResponse.getData().get(i).getColor());
                             petColor.add(petColorValueResponse.getData().get(i).getColor());
                             petColorHashMap.put(petColorValueResponse.getData().get(i).getColor(), petColorValueResponse.getData().get(i).getId());
                         }
@@ -612,15 +612,15 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 break;
             case "GetPetSize":
                 try {
-                    Log.d("GetPetSize", arg0.body().toString());
+                    //Log.d"GetPetSize", arg0.body().toString());
                     PetSizeValueResponse petSizeValueResponse = (PetSizeValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petSizeValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petSize = new ArrayList<>();
                         petSize.add("Pet Size");
-                        Log.d("lalal", "" + petSizeValueResponse.getData().size());
+                        //Log.d"lalal", "" + petSizeValueResponse.getData().size());
                         for (int i = 0; i < petSizeValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petSizeValueResponse.getData().get(i).getSize());
+                            //Log.d"petttt", "" + petSizeValueResponse.getData().get(i).getSize());
                             petSize.add(petSizeValueResponse.getData().get(i).getSize());
                             petSizeHashMap.put(petSizeValueResponse.getData().get(i).getSize(), petSizeValueResponse.getData().get(i).getId());
                         }
@@ -637,13 +637,13 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
             case "UpdatePetDetails":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("UpdatePetDetails", arg0.body().toString());
+                    //Log.d"UpdatePetDetails", arg0.body().toString());
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         Config.isLoaded = true;
                         Intent intent = new Intent();
-                        Log.e("AGE",addPetValueResponse.getData().getDateOfBirth()+"AGE"+addPetValueResponse.getData().getPetAge());
+                        //Log.d"AGE",addPetValueResponse.getData().getDateOfBirth()+"AGE"+addPetValueResponse.getData().getPetAge());
                         intent.putExtra("pet_id", addPetValueResponse.getData().getId().substring(0,addPetValueResponse.getData().getId().length()-2));
                         intent.putExtra("pet_unique_id", addPetValueResponse.getData().getPetUniqueId());
                         intent.putExtra("pet_image_url", addPetValueResponse.getData().getPetProfileImageUrl());
@@ -670,7 +670,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
             case "UploadDocument":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("UploadDocument", arg0.body().toString());
+                    //Log.d"UploadDocument", arg0.body().toString());
                     ImageResponse imageResponse = (ImageResponse) arg0.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -703,7 +703,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     public void onError(Throwable t, String key) {
         methods.customProgressDismiss();
         Toast.makeText(this, "Please try again!", Toast.LENGTH_SHORT).show();
-        Log.e("ERROR",t.getLocalizedMessage());
+        //Log.d"ERROR",t.getLocalizedMessage());
 
     }
 
@@ -720,7 +720,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 strSpnerItemPetNm = item;
-                Log.d("spnerType", "" + strSpnerItemPetNm);
+                //Log.d"spnerType", "" + strSpnerItemPetNm);
                 getStrSpnerItemPetNmId = petTypeHashMap.get(strSpnerItemPetNm);
                 if (!getStrSpnerItemPetNmId.equals("0")) {
                     getPetBreed();
@@ -749,7 +749,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrBreed = item;
-                Log.d("spnerType", "" + strSpnrBreed);
+                //Log.d"spnerType", "" + strSpnrBreed);
                 strSpnrBreedId = petBreedHashMap.get(strSpnrBreed);
             }
 
@@ -757,8 +757,6 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
             }
         });
     }
-
-
 
     private void setPetColorSpinner() {
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petColor);
@@ -774,7 +772,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrColor = item;
-                Log.d("spnerType", "" + strSpnrColor);
+                //Log.d"spnerType", "" + strSpnrColor);
                 strSpnrColorId = petColorHashMap.get(strSpnrColor);
             }
 
@@ -848,7 +846,7 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
                         new String[]{file.getPath()},
                         new String[]{"image/png"}, null);
                 fo.close();
-                Log.d("TAG", "File Saved::---&gt;" + file.getAbsolutePath());
+                //Log.d"TAG", "File Saved::---&gt;" + file.getAbsolutePath());
                 image_path_TV.setText(file.getAbsolutePath());
                 UploadImages(file);
                 return file.getAbsolutePath();
@@ -869,14 +867,14 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
 
         ApiService<ImageResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().uploadImages(Config.token, userDpFilePart), "UploadDocument");
-        Log.e("DATALOG", "check1=> " + service);
+        //Log.d"DATALOG", "check1=> " + service);
 
     }
     private void updatePetDetails(UpdatePetRequest addPetRequset) {
         methods.showCustomProgressBarDialog(this);
         ApiService<AddPetValueResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().updatePetDetails(Config.token, addPetRequset), "UpdatePetDetails");
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(addPetRequset));
+        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(addPetRequset));
 
     }
 

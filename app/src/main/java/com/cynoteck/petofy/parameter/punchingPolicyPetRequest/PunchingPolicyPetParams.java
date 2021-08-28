@@ -47,6 +47,17 @@ public class PunchingPolicyPetParams {
     @SerializedName("Features")
     @Expose
     private String features;
+    @SerializedName("PetId")
+    @Expose
+    private String PetId;
+
+    public String getPetId() {
+        return PetId;
+    }
+
+    public void setPetId(String petId) {
+        PetId = petId;
+    }
 
     public String getPetCategoryId() {
         return petCategoryId;

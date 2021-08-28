@@ -97,7 +97,7 @@ public class SearchActivity extends AppCompatActivity implements TextWatcher, Ap
 
         ApiService<GetPetListResponse> service = new ApiService<>();
         service.get(SearchActivity.this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetListBySearch");
-        Log.e("DATALOG", "check1=> " + getPetDataRequest);
+        //Log.d"DATALOG", "check1=> " + getPetDataRequest);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class SearchActivity extends AppCompatActivity implements TextWatcher, Ap
 
 
                             } else {
-                                Log.e("No_DATA", "NO_DATA");
+                                //Log.d"No_DATA", "NO_DATA");
                             }
                         }
 

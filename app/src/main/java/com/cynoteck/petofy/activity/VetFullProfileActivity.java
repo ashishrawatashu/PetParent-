@@ -103,7 +103,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
         ApiService<SearchProviderFullDetailResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getProviderDetail(Config.token, searchProviderFullDetailRequest), "GetProviderFullDetails");
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(searchProviderFullDetailRequest));
+//        Log.d("DATALOG", "check1=> " + methods.getRequestJson(searchProviderFullDetailRequest));
 
 
     }
@@ -211,7 +211,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
                     ApiService<GetSaveFeedbackResponse> service = new ApiService<>();
                     service.get(this, ApiClient.getApiInterface().giveFeedbackToProvider(Config.token, saveFeedbackRequest), "GiveFeedbackToProvider");
-                    Log.e("DATALOG", "check1=> " + methods.getRequestJson(saveFeedbackRequest));
+                    //Log.d"DATALOG", "check1=> " + methods.getRequestJson(saveFeedbackRequest));
 
 
                 }
@@ -288,14 +288,10 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
             case "GetProviderFullDetails":
                 try {
                     searchProviderFullDetailResponse = (SearchProviderFullDetailResponse) arg0.body();
-                    Log.e("FULL_DETAILS", methods.getRequestJson(searchProviderFullDetailResponse));
                     int responseCode = Integer.parseInt(searchProviderFullDetailResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         progressBar.setVisibility(View.GONE);
                         scroll_view_vet_profile.setVisibility(View.VISIBLE);
-                        Log.e("IsOnlineVet",searchProviderFullDetailResponse.getData().getIsVeterinarian()+"");
-                        Log.e("IsOnline",searchProviderFullDetailResponse.getData().getEnableOnlineAppointments()+"");
-
                         if (serviceTypeId.equals("1")&&searchProviderFullDetailResponse.getData().getIsVeterinarian()&&searchProviderFullDetailResponse.getData().getEnableOnlineAppointments()){
                             book_appointment_BT.setVisibility(View.VISIBLE);
                             book_appointment_BT.setEnabled(true);
@@ -315,7 +311,6 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         vet_name_TV.setText(searchProviderFullDetailResponse.getData().getName());
                         vet_study_TV.setText(searchProviderFullDetailResponse.getData().getVetQualifications());
                         vet_address_TV.setText(searchProviderFullDetailResponse.getData().getAddress());
-//                        vet_chargers_TV.setText(String.valueOf(searchProviderFullDetailResponse.getData().getOnlineConsultationCharges()));
                         clinic_name_TV.setText(searchProviderFullDetailResponse.getData().getCompany());
                         vet_full_address_TV.setText(searchProviderFullDetailResponse.getData().getAddress());
                         appointment_duration = searchProviderFullDetailResponse.getData().getAppointmentDuration();
@@ -330,9 +325,6 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         providerClinicTimingsAdapter = new ProviderClinicTimingsAdapter(this, serviceProviderDetailOperatingHours);
                         clinic_timings_RV.setAdapter(providerClinicTimingsAdapter);
                         providerClinicTimingsAdapter.notifyDataSetChanged();
-                        Log.e("RATING",methods.getRequestJson(providerRatingLists));
-                        Log.e("RATING",methods.getRequestJson(serviceProviderDetailOperatingHours));
-
 
                         providerReviewsAdapter = new ProviderReviewsAdapter(this, providerRatingLists);
                         reviews_RV.setAdapter(providerReviewsAdapter);
@@ -352,7 +344,6 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
             case "GiveFeedbackToProvider":
                 try {
                     GetSaveFeedbackResponse getSaveFeedbackResponse = (GetSaveFeedbackResponse) arg0.body();
-                    Log.e("FULL_DETAILS", methods.getRequestJson(getSaveFeedbackResponse));
                     int responseCode = Integer.parseInt(getSaveFeedbackResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         Toast.makeText(this, "Feedback Uploaded Successfully ", Toast.LENGTH_SHORT).show();

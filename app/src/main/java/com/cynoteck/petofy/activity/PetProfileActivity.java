@@ -2,12 +2,16 @@ package com.cynoteck.petofy.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -51,8 +55,9 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     RelativeLayout              edit_profile_RL;
     ScrollView                  pet_full_details_SV;
     int                         pet_list_position;
-    LinearLayout                pet_reports_LL, consultation_LL, donate_pet_LL,hostels_LL,grooming_LL,pet_shops_LL;
+    LinearLayout                insurance_LL,pet_reports_LL, consultation_LL, donate_pet_LL,hostels_LL,grooming_LL,pet_shops_LL;
     //    ConstraintLayout pet_profile_details_CL;
+    Dialog                      insurance_successfully_dialog;
 
 
     @Override
@@ -62,10 +67,6 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         methods = new Methods(this);
         intentData();
         initView();
-
-
-
-
         setViewDetails();
 
         GetPetListParams getPetListParams = new GetPetListParams();
@@ -96,6 +97,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         pet_gender_TV           = findViewById(R.id.pet_gender_TV);
 
         edit_profile_RL         = findViewById(R.id.edit_profile_RL);
+        insurance_LL            = findViewById(R.id.insurance_LL);
 
         consultation_LL.setOnClickListener(this);
         donate_pet_LL.setOnClickListener(this);
@@ -105,6 +107,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         pet_shops_LL.setOnClickListener(this);
 
         edit_profile_RL.setOnClickListener(this);
+        insurance_LL.setOnClickListener(this);
 
         edit_profile_RL.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
@@ -123,6 +126,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         pet_category        = extras.getStringExtra("pet_category");
         pet_DOB             = extras.getStringExtra("pet_DOB");
         pet_color           = extras.getStringExtra("pet_color");
+
     }
 
     private void setViewDetails() {
@@ -141,7 +145,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         image_edit_CV.setVisibility(View.GONE);
         ApiService<GetPetResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetDetails(Config.token, getPetListRequest), "GetPetDetail");
-        Log.e("DATALOG", "check1=> " + getPetListRequest);
+        //Log.d"DATALOG", "check1=> " + getPetListRequest);
 
     }
 
@@ -251,6 +255,13 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 startActivity(trainingIntent);
                 break;
 
+            case R.id.insurance_LL:
+                Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
+                insuranceIntent.putExtra("petId",petId);
+                insuranceIntent.putExtra("afterLogin","yes");
+                startActivityForResult(insuranceIntent,2);
+                break;
+
 
         }
 
@@ -265,7 +276,29 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
 
         ApiService<JsonObject> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().donatePetById(Config.token, jsonObjectRequest), "DonatePetById");
-        Log.e("DATALOG", "check1=> " + jsonObjectRequest);
+        //Log.d"DATALOG", "check1=> " + jsonObjectRequest);
+    }
+    private void showAppointmentSuccessfully() {
+        insurance_successfully_dialog = new Dialog(this);
+        insurance_successfully_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        insurance_successfully_dialog.setCancelable(false);
+        insurance_successfully_dialog.setContentView(R.layout.insurance_submitted_dilog);
+        insurance_successfully_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        TextView back_to_appointments_TV = insurance_successfully_dialog.findViewById(R.id.back_to_appointments_TV);
+        back_to_appointments_TV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insurance_successfully_dialog.dismiss();
+            }
+        });
+
+        insurance_successfully_dialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = insurance_successfully_dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
     }
 
     @Override
@@ -277,7 +310,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                     pet_full_details_SV.setVisibility(View.VISIBLE);
                     edit_profile_RL.setVisibility(View.VISIBLE);
                     image_edit_CV.setVisibility(View.VISIBLE);
-                    Log.d("GetPetDetail", arg0.body().toString());
+                    //Log.d"GetPetDetail", arg0.body().toString());
                     getPetResponse = (GetPetResponse) arg0.body();
                     int responseCode = Integer.parseInt(getPetResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -364,6 +397,10 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 registerPetAdapter.notifyDataSetChanged();
                 petListHorizontalAdapter.notifyDataSetChanged();
                 setViewDetails();
+            }
+        }else  if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                showAppointmentSuccessfully();
             }
         }
     }

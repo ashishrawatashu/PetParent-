@@ -133,7 +133,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
 
         ApiService<GetPetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetList");
-        Log.e("DATALOG", "check1=> " + getPetDataRequest);
+        //Log.d("DATALOG", "check1=> " + getPetDataRequest);
 
     }
 
@@ -243,7 +243,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
                 addPetToVetRegisterUsingQRRequest.setData(addPetToVetRegisterUsingQRCodeParams);
                 ApiService<RegisterParentWithQRResponse> service = new ApiService<>();
                 service.get(this, ApiClient.getApiInterface().addPetToVetRegisterUsingQRCode(Config.token, addPetToVetRegisterUsingQRRequest), "AddPetWithQR");
-                Log.e("AddPetWithQR", "AddPetWithQR=> " + addPetToVetRegisterUsingQRRequest);
+                //Log.d("AddPetWithQR", "AddPetWithQR=> " + addPetToVetRegisterUsingQRRequest);
 
 
             }
@@ -329,7 +329,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
                 try {
                     methods.customProgressDismiss();
                     RegisterParentWithQRResponse registerParentWithQRResponse = (RegisterParentWithQRResponse) response.body();
-                    Log.e("RegistrationQR", registerParentWithQRResponse.toString());
+                    //Log.d("RegistrationQR", registerParentWithQRResponse.toString());
 
                     if (registerParentWithQRResponse.getResponse().getResponseCode().equals("109")) {
 
@@ -386,7 +386,7 @@ public class AfterScanScreenActivity extends AppCompatActivity implements TextWa
         addPetToVetRegisterUsingQRRequest.setData(addPetToVetRegisterUsingQRCodeParams);
         ApiService<RegisterParentWithQRResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().addPetToVetRegisterUsingQRCode(Config.token, addPetToVetRegisterUsingQRRequest), "AddPetWithQR");
-        Log.e("AddPetWithQR", "AddPetWithQR=> " + addPetToVetRegisterUsingQRRequest);
+        //Log.d("AddPetWithQR", "AddPetWithQR=> " + addPetToVetRegisterUsingQRRequest);
 
 
     }

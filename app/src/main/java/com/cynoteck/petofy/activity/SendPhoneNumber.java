@@ -161,7 +161,7 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
                         methods.showCustomProgressBarDialog(this);
                         ApiService<JsonObject> service = new ApiService<>();
                         service.get(SendPhoneNumber.this, ApiClient.getApiInterface().sendRegistrationOtp(saveRequest), "SendRegistrationOtp");
-                        Log.e("SendRegistrationOtp",""+saveRequest);
+                        //Log.d"SendRegistrationOtp",""+saveRequest);
                     }else {
                         methods.DialogInternet();
                     }
@@ -206,7 +206,7 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
             case "SendRegistrationOtp":
                 try {
                     methods.customProgressDismiss();
-                    Log.e("SendRegistrationOtp",arg0.body().toString());
+                    //Log.d"SendRegistrationOtp",arg0.body().toString());
                     JsonObject sendRegistrationOtp = (JsonObject) arg0.body();
                     JsonObject response = sendRegistrationOtp.getAsJsonObject("response");
                     int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));

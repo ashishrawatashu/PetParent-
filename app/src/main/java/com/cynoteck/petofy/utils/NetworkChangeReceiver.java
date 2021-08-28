@@ -15,10 +15,10 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
         try {
             if (isOnline(context)) {
                 dialog(true);
-                Log.e("Petofy Parent", "Online Connect Intenet ");
+//                Log.e("Petofy Parent", "Online Connect Intenet ");
             } else {
                 dialog(false);
-                Log.e("Petofy Parent", "Conectivity Failure !!! ");
+//                Log.e("Petofy Parent", "Conectivity Failure !!! ");
             }
         } catch (NullPointerException e) {
             e.printStackTrace();

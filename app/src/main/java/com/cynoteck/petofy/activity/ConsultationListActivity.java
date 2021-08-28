@@ -126,7 +126,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
         ApiService<GetVetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getServiceProvidersListByServiceAndCity(Config.token, getServiceProviderListRequest), "GetVetList");
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(getServiceProviderListRequest));
+        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(getServiceProviderListRequest));
 
     }
 
@@ -188,7 +188,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
         ApiService<GetVetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getVetList(Config.token, getVetListRequest), "GetVetList");
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(getVetListRequest));
+        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(getVetListRequest));
 
     }
 
@@ -219,7 +219,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
             case "GetCityListWithState":
                 try {
                     dialog_progressBar.setVisibility(View.GONE);
-                    Log.e("rer", methods.getRequestJson(arg0.body()));
+                    //Log.d"rer", methods.getRequestJson(arg0.body()));
                     getCityListWithStateResponse = (GetCityListWithStateResponse) arg0.body();
                     if (getCityListWithStateResponse.getResponse().getResponseCode().equals("109")) {
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -241,7 +241,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
                     progressBar.setVisibility(View.GONE);
                     getVetListResponse = (GetVetListResponse) arg0.body();
                     search_vet_ET.setEnabled(true);
-                    Log.d("DATALOG", getVetListResponse.toString());
+//                    Log.d("DATALOG", getVetListResponse.toString());
                     int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (getVetListResponse.getData().getProviderList().isEmpty()) {

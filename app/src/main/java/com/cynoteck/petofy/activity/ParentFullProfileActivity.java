@@ -143,7 +143,6 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
                     storageDialog = false;
                     showStoragePermissionDialog();
                 }
-                return;
             }
 
         }
@@ -311,7 +310,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
                     new String[]{catfile1.getPath()},
                     new String[]{"image/png"}, null);
             fo.close();
-            Log.d("TAG", "File Saved::---&gt;" + catfile1.getAbsolutePath());
+            //Log.d"TAG", "File Saved::---&gt;" + catfile1.getAbsolutePath());
             UploadImages(catfile1);
             return catfile1.getAbsolutePath();
 
@@ -337,7 +336,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
 
         ApiService<ImageResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().uploadImages(Config.token, userDpFilePart), "UploadDocument");
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(userDpFilePart));
+        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(userDpFilePart));
 
     }
 
@@ -346,7 +345,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
         switch (key) {
             case "UpdateProfileImage":
                 try {
-                    Log.d("UploadDocument", response.body().toString());
+                    //Log.d"UploadDocument", response.body().toString());
                     JsonObject jsonObject = new JsonObject();
                     jsonObject = (JsonObject) response.body();
                     int responseCode = Integer.parseInt(String.valueOf(jsonObject.getAsJsonObject("response").get("responseCode")));
@@ -367,16 +366,16 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
             case "UploadDocument":
                 try {
                     parent_image_progress_bar.setVisibility(View.GONE);
-                    Log.e("UploadDocument", response.body().toString());
+                    //Log.d"UploadDocument", response.body().toString());
                     ImageResponse imageResponse = (ImageResponse) response.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        Log.e("Glide","error");
+                        //Log.d"Glide","error");
                         Glide.with(this)
                                 .load(imageResponse.getData().getDocumentUrl())
                                 .placeholder(R.drawable.user_profile)
                                 .into(parent_image_IV);
-                        Log.e("Glide","error2");
+                        //Log.d"Glide","error2");
                         Config.user_url = imageResponse.getData().getDocumentUrl();
                         sharedPreferences = this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
@@ -388,7 +387,7 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
                         uploadVetProfileImageData.setData(uploadProfileImageParams);
                         ApiService<JsonObject> service = new ApiService<>();
                         service.get(this, ApiClient.getApiInterface().updateProfileImage(Config.token, uploadVetProfileImageData), "UpdateProfileImage");
-                        Log.d("UpdateProfileImage", uploadVetProfileImageData.toString());
+                        //Log.d"UpdateProfileImage", uploadVetProfileImageData.toString());
 
                     } else if (responseCode == 614) {
                         Toast.makeText(this, imageResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
@@ -410,8 +409,8 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
 
             case "UploadDocument":
 
-                Log.e("UploadDocument", t.getLocalizedMessage().toString());
-                Log.e("UploadDocument", t.getLocalizedMessage().toString());
+                //Log.d"UploadDocument", t.getLocalizedMessage().toString());
+                //Log.d"UploadDocument", t.getLocalizedMessage().toString());
                 break;
         }
 

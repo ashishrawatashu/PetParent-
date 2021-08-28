@@ -130,7 +130,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements ApiResp
             case "ChangePassword":
 
                 try {
-                    Log.d("DATALOG",response.body().toString());
+                    //Log.d("DATALOG",response.body().toString());
                     PasswordResponse passwordResponse = (PasswordResponse) response.body();
                     int responseCode = Integer.parseInt(passwordResponse.getResponse().getResponseCode());
                     if (responseCode== 109){

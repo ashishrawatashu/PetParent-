@@ -78,7 +78,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         methods.showCustomProgressBarDialog(this);
         ApiService<LoginRegisterResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().registerApi(registerparams), "Register");
-        Log.d("DATALOG", "check1=> " + methods.getRequestJson(registerparams));
+        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(registerparams));
     }
 
     @Override
@@ -87,7 +87,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         switch (key) {
             case "Register":
                 try {
-                    Log.d("DATALOG", "" + response.body().toString());
+                    //Log.d"DATALOG", "" + response.body().toString());
                     LoginRegisterResponse loginRegisterResponse = (LoginRegisterResponse) response.body();
                     int responseCode = Integer.parseInt(loginRegisterResponse.getResponseLogin().getResponseCode());
                     if (responseCode == 109) {
@@ -107,7 +107,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                         login_editor.putString("twoFactAuth", loginRegisterResponse.getData().getEnableTwoStepVerification());
                         Config.token = loginRegisterResponse.getResponseLogin().getToken();
                         login_editor.putString("loggedIn", "loggedIn");
-                        Log.e("TOKEN", loginRegisterResponse.getResponseLogin().getToken());
+                        //Log.d"TOKEN", loginRegisterResponse.getResponseLogin().getToken());
                         login_editor.apply();
                         Intent intent = new Intent(this, DashBoardActivity.class);
                         intent.putExtra("from", "REGISTER");
@@ -122,7 +122,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("eeeeeee", e.getLocalizedMessage());
+                    //Log.d"eeeeeee", e.getLocalizedMessage());
                 }
                 break;
         }
@@ -131,7 +131,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
     @Override
     public void onError(Throwable t, String key) {
         methods.customProgressDismiss();
-        Log.e("ERROR", t.getLocalizedMessage());
+        //Log.d"ERROR", t.getLocalizedMessage());
 
     }
 

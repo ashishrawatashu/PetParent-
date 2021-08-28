@@ -122,7 +122,7 @@ public class AdoptionPetDetailsActivity extends AppCompatActivity implements Api
 
         ApiService<JsonObject> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().sendAdoptionRequest(Config.token, adoptionRequest), "sendAdoptionRequest");
-        Log.e("DIOLOG====>", "" + adoptionRequest);
+        //Log.d"DIOLOG====>", "" + adoptionRequest);
     }
 
     @Override
@@ -132,9 +132,9 @@ public class AdoptionPetDetailsActivity extends AppCompatActivity implements Api
                 try {
                     methods.customProgressDismiss();
                     JsonObject adoptionResponse = (JsonObject) arg0.body();
-                    Log.d("sendAdoptionRequest", adoptionResponse.toString());
+                    //Log.d"sendAdoptionRequest", adoptionResponse.toString());
                     JsonObject response = adoptionResponse.getAsJsonObject("response");
-                    Log.d("hhshshhs", "" + response);
+                    //Log.d"hhshshhs", "" + response);
 
                     int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));
                     if (responseCode == 109) {

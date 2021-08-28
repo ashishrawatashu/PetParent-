@@ -76,7 +76,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements ApiResp
         methods.showCustomProgressBarDialog(this);
         ApiService<PasswordResponse> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().getPasswordResponse(forgetPassRequest), "ForgetPassword");
-        Log.e("DATALOG","check1=> "+forgetPassRequest);
+        //Log.d"DATALOG","check1=> "+forgetPassRequest);
 
     }
 
@@ -88,7 +88,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements ApiResp
             case "ForgetPassword":
 
                 try {
-                    Log.d("DATALOG",response.body().toString());
+                    //Log.d("DATALOG",response.body().toString());
                     PasswordResponse passwordResponse = (PasswordResponse) response.body();
                     int responseCode = Integer.parseInt(passwordResponse.getResponse().getResponseCode());
                     if (responseCode== 109){

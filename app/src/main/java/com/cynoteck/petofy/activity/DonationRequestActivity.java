@@ -81,7 +81,7 @@ public class DonationRequestActivity extends AppCompatActivity implements OnAdap
     private void deleteDonationRequest(String realId) {
         ApiService<JsonObject> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().deleteDonationRequest(Config.token, "social-service/cancel-donation-request/"+realId), "CancelRequest");
-        Log.e("DIOLOG====>",  "social-service/cancel-adoption-request/"+realId);
+        //Log.d"DIOLOG====>",  "social-service/cancel-adoption-request/"+realId);
     }
 
     @Override
@@ -120,9 +120,8 @@ public class DonationRequestActivity extends AppCompatActivity implements OnAdap
             case "CancelRequest":
                 try {
                     JsonObject adoptionResponse = (JsonObject) arg0.body();
-                    Log.d("Cancel", adoptionResponse.toString());
+//                    Log.d("Cancel", adoptionResponse.toString());
                     JsonObject response = adoptionResponse.getAsJsonObject("response");
-                    Log.d("hhshshhs", "" + response);
                     int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));
                     if (responseCode == 109) {
                         Toast.makeText(this, "Request cancel Successfully..", Toast.LENGTH_SHORT).show();

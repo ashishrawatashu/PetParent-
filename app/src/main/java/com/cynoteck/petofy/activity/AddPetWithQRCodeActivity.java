@@ -116,7 +116,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
             @Override
             public void afterTextChanged(Editable editable) {
-                Log.d("dataChange", "afterTextChanged" + new String(editable.toString()));
+                ////Log.d"dataChange", "afterTextChanged" + new String(editable.toString()));
                 String value = editable.toString();
                 if (methods.isInternetOn()) {
                     if (age_neumeric.isFocused()) {
@@ -210,7 +210,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
     private void currentDateAndTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMM yyyy h:mm:ss a", Locale.getDefault());
         currentDateandTime = sdf.format(new Date());
-        Log.d("currentDateandTime", "" + currentDateandTime);
+        ////Log.d"currentDateandTime", "" + currentDateandTime);
     }
 
     private void getPetAgeUnit() {
@@ -230,7 +230,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrSex = item;
-                Log.d("spnerType", "" + strSpnrSex);
+                ////Log.d"spnerType", "" + strSpnrSex);
                 strSpnrSexId = petSexHashMap.get(strSpnrSex);
             }
 
@@ -296,7 +296,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 calenderView.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                 String DoB = dayOfMonth + " " + (monthOfYear + 1) + " " + year;
-                                Log.d("jajajaajja", "" + methods.getDays(DoB, methods.getDate()));
+                                ////Log.d"jajajaajja", "" + methods.getDays(DoB, methods.getDate()));
                                 String age = String.valueOf(methods.getDays(DoB, methods.getDate()));
                                 String DoBforage = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                                 age = age.substring(0, age.length() - 2);
@@ -394,7 +394,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
     }
 
     private void petParentRegistrationUsingQRCode(RegistrationWithQrCodeRequest registrationWithQrCodeRequest) {
-        Log.e("DATALOG", "check1=> " + methods.getRequestJson(registrationWithQrCodeRequest));
+        ////Log.d"DATALOG", "check1=> " + methods.getRequestJson(registrationWithQrCodeRequest));
         methods.showCustomProgressBarDialog(this);
         ApiService<RegisterParentWithQRResponse> service = new ApiService<>();
         service.get( this, ApiClient.getApiInterface().petParentRegistrationUsingQRCode(Config.token,registrationWithQrCodeRequest), "ParentRegistrationUsingQRCode");
@@ -409,7 +409,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 try {
                     methods.customProgressDismiss();
                     RegisterParentWithQRResponse registerParentWithQRResponse = (RegisterParentWithQRResponse) arg0.body();
-                    Log.e("RegistrationQR", registerParentWithQRResponse.toString());
+                    ////Log.d"RegistrationQR", registerParentWithQRResponse.toString());
 
                     if (registerParentWithQRResponse.getResponse().getResponseCode().equals("109")) {
 
@@ -428,16 +428,16 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
             case "GetPetTypes":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("GetPetTypes", arg0.body().toString());
+                    ////Log.d"GetPetTypes", arg0.body().toString());
                     PetTypeResponse petTypeResponse = (PetTypeResponse) arg0.body();
                     int responseCode = Integer.parseInt(petTypeResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petType = new ArrayList<>();
                         petType.add("Select Pet Type");
                         petTypeHashMap.put("Select Pet Type", "0");
-                        Log.d("lalal", "" + petTypeResponse.getData().size());
+                        ////Log.d"lalal", "" + petTypeResponse.getData().size());
                         for (int i = 0; i < petTypeResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petTypeResponse.getData().get(i).getPetType1());
+                            ////Log.d"petttt", "" + petTypeResponse.getData().get(i).getPetType1());
                             petType.add(petTypeResponse.getData().get(i).getPetType1());
                             petTypeHashMap.put(petTypeResponse.getData().get(i).getPetType1(), petTypeResponse.getData().get(i).getId());
                         }
@@ -456,16 +456,16 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
             case "GetPetBreed":
                 try {
-                    Log.d("GetPetBreed", arg0.body().toString());
+                    ////Log.d"GetPetBreed", arg0.body().toString());
                     BreedCatRespose breedCatRespose = (BreedCatRespose) arg0.body();
                     int responseCode = Integer.parseInt(breedCatRespose.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petBreed = new ArrayList<>();
                         petBreed.add("Pet Breed");
                         petBreedHashMap.put("Pet Breed", "0");
-                        Log.d("lalal", "" + breedCatRespose.getData().size());
+                        ////Log.d"lalal", "" + breedCatRespose.getData().size());
                         for (int i = 0; i < breedCatRespose.getData().size(); i++) {
-                            Log.d("petttt", "" + breedCatRespose.getData().get(i).getBreed());
+                            ////Log.d"petttt", "" + breedCatRespose.getData().get(i).getBreed());
                             petBreed.add(breedCatRespose.getData().get(i).getBreed());
                             petBreedHashMap.put(breedCatRespose.getData().get(i).getBreed(), breedCatRespose.getData().get(i).getId());
                         }
@@ -482,15 +482,15 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
             case "GetPetColor":
                 try {
-                    Log.d("GetPetColor", arg0.body().toString());
+                    ////Log.d"GetPetColor", arg0.body().toString());
                     PetColorValueResponse petColorValueResponse = (PetColorValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petColorValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petColor = new ArrayList<>();
                         petColor.add("Pet Color");
-                        Log.d("lalal", "" + petColorValueResponse.getData().size());
+                        ////Log.d"lalal", "" + petColorValueResponse.getData().size());
                         for (int i = 0; i < petColorValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petColorValueResponse.getData().get(i).getColor());
+                            ////Log.d"petttt", "" + petColorValueResponse.getData().get(i).getColor());
                             petColor.add(petColorValueResponse.getData().get(i).getColor());
                             petColorHashMap.put(petColorValueResponse.getData().get(i).getColor(), petColorValueResponse.getData().get(i).getId());
                         }
@@ -507,15 +507,15 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
             case "GetPetSize":
                 try {
-                    Log.d("GetPetSize", arg0.body().toString());
+                    ////Log.d"GetPetSize", arg0.body().toString());
                     PetSizeValueResponse petSizeValueResponse = (PetSizeValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(petSizeValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petSize = new ArrayList<>();
                         petSize.add("Pet Size");
-                        Log.d("lalal", "" + petSizeValueResponse.getData().size());
+                        ////Log.d"lalal", "" + petSizeValueResponse.getData().size());
                         for (int i = 0; i < petSizeValueResponse.getData().size(); i++) {
-                            Log.d("petttt", "" + petSizeValueResponse.getData().get(i).getSize());
+                            ////Log.d"petttt", "" + petSizeValueResponse.getData().get(i).getSize());
                             petSize.add(petSizeValueResponse.getData().get(i).getSize());
                             petSizeHashMap.put(petSizeValueResponse.getData().get(i).getSize(), petSizeValueResponse.getData().get(i).getId());
                         }
@@ -532,14 +532,14 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
             case "GetPetAgeUnit":
                 try {
-                    Log.d("GetPetTypes", arg0.body().toString());
+                    ////Log.d"GetPetTypes", arg0.body().toString());
                     PetAgeUnitResponseData petAgeUnitResponseData = (PetAgeUnitResponseData) arg0.body();
                     int responseCode = Integer.parseInt(petAgeUnitResponseData.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petAgeType = new ArrayList<>();
-                        Log.d("lalal", "" + petAgeUnitResponseData.getData().size());
+                        ////Log.d"lalal", "" + petAgeUnitResponseData.getData().size());
                         for (int i = 0; i < petAgeUnitResponseData.getData().size(); i++) {
-                            Log.d("petttt", "" + petAgeUnitResponseData.getData().get(i).getAge());
+                            ////Log.d"petttt", "" + petAgeUnitResponseData.getData().get(i).getAge());
                             petAgeType.add(petAgeUnitResponseData.getData().get(i).getAgeUnit());
                             petAgeUnitHash.put(petAgeUnitResponseData.getData().get(i).getAgeUnit(), petAgeUnitResponseData.getData().get(i).getAge());
                         }
@@ -558,7 +558,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
             case "getDateOfYear":
                 try {
                     DateOfBirthResponse dateOfBirthResponse = (DateOfBirthResponse) arg0.body();
-                    Log.d("getDateOfYear", dateOfBirthResponse.toString());
+                    ////Log.d"getDateOfYear", dateOfBirthResponse.toString());
                     int responseCode = Integer.parseInt(dateOfBirthResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         calenderView.setText(dateOfBirthResponse.getData());
@@ -574,7 +574,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 break;
             case "GetPetAgeString":
                 try {
-                    Log.d("GetPetAgeString", arg0.body().toString());
+                    ////Log.d"GetPetAgeString", arg0.body().toString());
                     GetPetAgeresponseData getPetAgeresponseData = (GetPetAgeresponseData) arg0.body();
                     int responseCode = Integer.parseInt(getPetAgeresponseData.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -598,7 +598,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
         getPetAgeRequestData.setData(getPetAgeParameter);
         ApiService<GetPetAgeresponseData> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetAgeString(getPetAgeRequestData), "GetPetAgeString");
-        Log.e("DAILOG", "getPetAgeString==>" + methods.getRequestJson(getPetAgeRequestData));
+        ////Log.d"DAILOG", "getPetAgeString==>" + methods.getRequestJson(getPetAgeRequestData));
     }
 
     private void setPetAgeType() {
@@ -611,7 +611,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strAgeCount = item;
-                Log.d("spnerType", "PetAge" + item);
+                ////Log.d"spnerType", "PetAge" + item);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -629,7 +629,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrSize = item;
-                Log.d("spnerType", "" + strSpnrSize);
+                ////Log.d"spnerType", "" + strSpnrSize);
                 strSpneSizeId = petSizeHashMap.get(strSpnrSize);
             }
 
@@ -648,7 +648,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrColor = item;
-                Log.d("spnerType", "" + strSpnrColor);
+                ////Log.d"spnerType", "" + strSpnrColor);
                 strSpnrColorId = petColorHashMap.get(strSpnrColor);
             }
 
@@ -667,7 +667,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
                 String item = parent.getItemAtPosition(position).toString();
                 // Showing selected spinner item
                 strSpnrBreed = item;
-                Log.d("spnerType", "" + strSpnrBreed);
+                ////Log.d"spnerType", "" + strSpnrBreed);
                 strSpnrBreedId = petBreedHashMap.get(strSpnrBreed);
 
             }
@@ -686,7 +686,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
                 strSpnerItemPetNm = item;
-                Log.d("spnerType", "" + strSpnerItemPetNm);
+                ////Log.d"spnerType", "" + strSpnerItemPetNm);
                 getStrSpnerItemPetNmId = petTypeHashMap.get(strSpnerItemPetNm);
                 if (!getStrSpnerItemPetNmId.equals("0")) {
                     getPetBreed();
@@ -713,7 +713,7 @@ public class AddPetWithQRCodeActivity extends AppCompatActivity implements ApiRe
 
         ApiService<BreedCatRespose> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getGetPetBreedApi(breedParams), "GetPetBreed");
-        Log.d("Diolog_Breed", "===>" + breedParams);
+        ////Log.d"Diolog_Breed", "===>" + breedParams);
     }
 
     private void getPetAge() {

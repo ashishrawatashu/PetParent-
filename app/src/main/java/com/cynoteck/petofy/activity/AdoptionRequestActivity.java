@@ -94,7 +94,7 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
     private void deleteAdoptionRequest(String realId) {
         ApiService<JsonObject> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().deleteAdoptionRequest(Config.token, "social-service/cancel-adoption-request/"+realId), "CancelRequest");
-        Log.e("DIOLOG====>",  "social-service/cancel-adoption-request/"+realId);
+        //Log.d("DIOLOG====>",  "social-service/cancel-adoption-request/"+realId);
     }
 
     @Override

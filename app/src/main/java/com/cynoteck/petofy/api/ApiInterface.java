@@ -67,9 +67,11 @@ import com.cynoteck.petofy.response.getPetReportsResponse.AddUpdateDeleteClinicV
 import com.cynoteck.petofy.response.getProviderFeedbackResponse.GetProviderFeedbackResponse;
 import com.cynoteck.petofy.response.getSaveFeedbackResponse.GetSaveFeedbackResponse;
 import com.cynoteck.petofy.response.getSearchKeywordResponse.SearchKeywordResponse;
+import com.cynoteck.petofy.response.getSearchResultsResponse.GetSearchResultsResponse;
 import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.SearchProviderFullDetailResponse;
 import com.cynoteck.petofy.response.getXRayReports.getXRayReportDetailsResponse.GetXRayReportDeatilsResponse;
 import com.cynoteck.petofy.response.getpetbreedsResponse.GetPetBreedsResponse;
+import com.cynoteck.petofy.response.insuranceAfterLoginResponses.getAllDetailsAfterLogin.GetAllDetailAfterLoginResponse;
 import com.cynoteck.petofy.response.loginRegisterResponse.LoginWithEmailRegisterResponse;
 import com.cynoteck.petofy.response.petAgeUnitResponse.PetAgeUnitResponseData;
 import com.cynoteck.petofy.response.registerParentWithQRResponse.RegisterParentWithQRResponse;
@@ -122,7 +124,7 @@ public interface ApiInterface {
 
     //TODO=============SEND OTP TO USER======================
 
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({ "Content-Type:  ;charset=UTF-8"})
     @POST("common/SendOtp")
     Call<OtpResponse> senOtp(@Header("Authorization") String auth, @Body SendOtpRequest inPetRegisterRequest);
 
@@ -153,8 +155,7 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("pet/GetPetDetail")
-    Call<GetPetResponse> getPetDetails(@Header("Authorization") String auth,
-                                       @Body GetPetListRequest addPetRequset);
+    Call<GetPetResponse> getPetDetails(@Header("Authorization") String auth, @Body GetPetListRequest addPetRequset);
 
     //TODO==========Pet Type API===============================
 
@@ -525,7 +526,7 @@ public interface ApiInterface {
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("search/GetSearchResults")
-    Call<GetVetListResponse> getSearchProviderResults(@Header("Authorization") String auth, @Body SearchProviderRequest searchProviderRequest);
+    Call<GetSearchResultsResponse> getSearchProviderResults(@Header("Authorization") String auth, @Body SearchProviderRequest searchProviderRequest);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("search/GetServiceProviderDetails")
@@ -540,6 +541,7 @@ public interface ApiInterface {
 
 
 //  Insurance API
+
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("insurance-masters")
     Call<InsuranceMastersResponse> insuranceMasters();
@@ -548,16 +550,29 @@ public interface ApiInterface {
     @POST("punching-policy")
     Call<JsonObject> punchingPolicy(@Header("Authorization") String auth,@Body PunchingPolicyRequest punchingPolicyRequest);
 
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user-punching-policy")
+    Call<JsonObject> parentAfterLoginPunchingPolicy(@Header("Authorization") String auth,@Body PunchingPolicyRequest punchingPolicyRequest);
+
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("punching-policy-pet")
     Call<JsonObject> punchingPolicyPet(@Header("Authorization") String auth, @Body PunchingPolicyPetRequest punchingPolicyRequest);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user-punching-policy-pet")
+    Call<JsonObject> petAfterLoginPunchingPolicyPet(@Header("Authorization") String auth, @Body PunchingPolicyPetRequest punchingPolicyRequest);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("punching-policy-pet-documents")
     Call<JsonObject> punchingPolicyDocumentsUpload(@Header("Authorization") String auth, @Body PunchingPolicyPetDocumentsRequest punchingPolicyPetDocumentsRequest);
 
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user-punching-policy-pet-documents")
+    Call<JsonObject> userPunchingPolicyDocumentsUpload(@Header("Authorization") String auth, @Body PunchingPolicyPetDocumentsRequest punchingPolicyPetDocumentsRequest);
 
+    @GET
+    Call<GetAllDetailAfterLoginResponse> getAllDetailAfterLogin(@Header("Authorization") String auth,@Url String url);
 
 
 }

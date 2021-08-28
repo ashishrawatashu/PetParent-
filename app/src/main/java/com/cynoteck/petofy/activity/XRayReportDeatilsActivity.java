@@ -138,7 +138,7 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
                 break;
 
             case R.id.deleteReport_BT:
-                Log.d("Add Anotheer Veterian", "vet");
+                //Log.d"Add Anotheer Veterian", "vet");
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
                 alertDialog.setTitle("Are you sure?");
                 alertDialog.setMessage("Do You Want to Delete This Report ?");
@@ -173,7 +173,7 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
         petClinicVistsDetailsParams.setId(report_type_id.substring(0, report_type_id.length() - 2));
         PetClinicVisitDetailsRequest petClinicVisitDetailsRequest = new PetClinicVisitDetailsRequest();
         petClinicVisitDetailsRequest.setData(petClinicVistsDetailsParams);
-        Log.d("GetXRaykDetails", petClinicVisitDetailsRequest.toString());
+        //Log.d"GetXRaykDetails", petClinicVisitDetailsRequest.toString());
 
         ApiService<GetXRayReportDeatilsResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getTestXRayDetails(Config.token, petClinicVisitDetailsRequest), "GetXRaykDetails");
@@ -187,7 +187,7 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
         petClinicVistsDetailsParams.setId(report_type_id.substring(0, report_type_id.length() - 2));
         PetClinicVisitDetailsRequest petClinicVisitDetailsRequest = new PetClinicVisitDetailsRequest();
         petClinicVisitDetailsRequest.setData(petClinicVistsDetailsParams);
-        Log.d("DeleteTestXRay", petClinicVisitDetailsRequest.toString());
+        //Log.d"DeleteTestXRay", petClinicVisitDetailsRequest.toString());
         ApiService<AddUpdateDeleteClinicVisitResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().deleteTestXRay(Config.token, petClinicVisitDetailsRequest), "DeleteTestXRay");
 
@@ -199,9 +199,8 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
             case "GetXRaykDetails":
                 try {
                     progressBar.setVisibility(View.GONE);
-                    Log.d("GetXRaykDetails", response.body().toString());
+                    //Log.d"GetXRaykDetails", response.body().toString());
                     GetXRayReportDeatilsResponse getXRayReportDeatilsResponse = (GetXRayReportDeatilsResponse) response.body();
-                    Log.e("GetXRaykDetails", methods.getRequestJson(getXRayReportDeatilsResponse));
                     int responseCode = Integer.parseInt(getXRayReportDeatilsResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         card_view.setVisibility(View.VISIBLE);
@@ -238,7 +237,7 @@ public class XRayReportDeatilsActivity extends AppCompatActivity implements ApiR
 
             case "DeleteTestXRay":
                 try {
-                    Log.d("DeleteClinicVisit", response.body().toString());
+                    //Log.d"DeleteClinicVisit", response.body().toString());
                     AddUpdateDeleteClinicVisitResponse addUpdateDeleteClinicVisitResponse = (AddUpdateDeleteClinicVisitResponse) response.body();
                     int responseCode = Integer.parseInt(addUpdateDeleteClinicVisitResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {

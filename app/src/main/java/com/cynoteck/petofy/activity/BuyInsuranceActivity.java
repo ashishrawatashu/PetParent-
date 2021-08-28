@@ -64,6 +64,7 @@ import com.cynoteck.petofy.response.getInsuranceMasterResponse.DiseasesListModel
 import com.cynoteck.petofy.response.getInsuranceMasterResponse.InsuranceMastersResponse;
 import com.cynoteck.petofy.response.getInsuranceMasterResponse.InsurancePlanModel;
 import com.cynoteck.petofy.response.getPetAgeResponse.GetPetAgeresponseData;
+import com.cynoteck.petofy.response.insuranceAfterLoginResponses.getAllDetailsAfterLogin.GetAllDetailAfterLoginResponse;
 import com.cynoteck.petofy.response.petAgeUnitResponse.PetAgeUnitResponseData;
 import com.cynoteck.petofy.response.stateResponse.StateResponse;
 import com.cynoteck.petofy.response.updateProfileResponse.CityResponse;
@@ -131,7 +132,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
     ArrayList<String> petBreed;
     ArrayList<String> petAge;
     ArrayList<String> petColor;
-
+    GetAllDetailAfterLoginResponse getAllDetailAfterLoginResponse;
     HashMap<String, String> petTypeHashMap = new HashMap<>();
     HashMap<String, String> petBreedHashMap = new HashMap<>();
     HashMap<String, String> petAgeHashMap = new HashMap<>();
@@ -140,10 +141,10 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
     ArrayList<InsurancePlanModel> insurancePlanModels = new ArrayList<>();
     ArrayList<DiseasesListModel>  diseasesListModels = new ArrayList<>();
-    HashMap<String, String> stateHasmap         = new HashMap<>();
-    HashMap<String, String> cityHasmap          = new HashMap<>();
-    HashMap<String, String> insuranceHashMap     = new HashMap<>();
-    HashMap<String, String> diseasesListHashMap  = new HashMap<>();
+    HashMap<String, String> stateHasmap             = new HashMap<>();
+    HashMap<String, String> cityHasmap              = new HashMap<>();
+    HashMap<String, String> insuranceHashMap        = new HashMap<>();
+    HashMap<String, String> diseasesListHashMap     = new HashMap<>();
 
     Dialog          dialog;
     MediaUtils      mediaUtils;
@@ -155,19 +156,19 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
     boolean                 isFrontImage =false,isBackImage=false,isTopImage=false,isLeftImage=false,isRightImage=false,isRfidImage=false,isPurchaseProof=false;
 
 
-    int front_status    = 0;
-    int back_status     = 0;
-    int top_status      = 0;
-    int left_status     = 0;
-    int right_status    = 0;
-    int rfid_status     = 0;
-    int purchase_proof_status     = 0;
-    int pedigree_status = 0;
-    int vaccination_card = 0;
+    int front_status            = 0;
+    int back_status             = 0;
+    int top_status              = 0;
+    int left_status             = 0;
+    int right_status            = 0;
+    int rfid_status             = 0;
+    int purchase_proof_status   = 0;
+    int pedigree_status         = 0;
+    int vaccination_card        = 0;
 
 
     private int                 DOC_UPLOAD=105;
-    String           imageTypeName="", petId, backImageUrl="", topImageUrl="",leftImageUrl="",rightImageUrl="",rfidImageUrl="",pedigreeDocumentUrl="",vaccinationCardUrl="",purchaseProofUrl="",frontImageUrl="";
+    String           imageTypeName="", petId, backImageUrl=null, topImageUrl=null,leftImageUrl=null,rightImageUrl=null,rfidImageUrl=null,pedigreeDocumentUrl=null,vaccinationCardUrl=null,purchaseProofUrl=null,frontImageUrl=null;
 
     String[] mimeTypes = {"image/*",
             "application/pdf",
@@ -175,11 +176,15 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             "text/plain"
     };
+
+    String afterLogin = "no";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_insurance);
 
+        Intent intent = getIntent();
+        afterLogin = intent.getStringExtra("afterLogin");
         methods         = new Methods(this);
         mediaUtils      = new MediaUtils(this);
         initAllSectionView();
@@ -187,6 +192,17 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         getInsuranceMasters();
         getPetAgeUnit();
         getPetType();
+
+        if (afterLogin.equals("yes")){
+            petId      = intent.getStringExtra("petId");
+            String  url = "pet-punching-policy/"+petId;
+            Log.e("Url",url);
+            methods.showCustomProgressBarDialog(this);
+            ApiService<GetAllDetailAfterLoginResponse> service = new ApiService<>();
+            service.get(this, ApiClient.getApiInterface().getAllDetailAfterLogin(Config.token,url), "GetAllDetailOfPet");
+
+
+        }
     }
 
     private void initAllSectionView() {
@@ -456,7 +472,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            
+
             case R.id.front_image_upload_IV:
                 imageTypeName = "front_image";
                 showPictureDialog();
@@ -626,16 +642,6 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
             case R.id.next_BT:
 
                 if (countSteps==1){
-//                    step_count_TV.setText("2 of 3");
-//                    step_name_TV.setText("Pet Details");
-//                    next_step_TV.setVisibility(View.VISIBLE);
-//                    next_step_TV.setText("Next: Document Section");
-//                    pet_parent_details_layout_frame.setVisibility(View.GONE);
-//                    insurance_pet_details_layout_frame.setVisibility(View.VISIBLE);
-//                    insurance_images_layout_frame.setVisibility(View.GONE);
-//                    privious_BT.setVisibility(View.VISIBLE);
-//                    circular_PB.setProgress(50);
-//                    countSteps = 2;
                     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
                     String pet_parent_first_name, pet_parent_last_name, pet_parent_email, pet_parent_phone_no, pet_parent_dob, pet_parent_address, pet_parent_pinCode, pet_parent_rf_code;
                     pet_parent_first_name       = parent_first_name_ET.getText().toString().trim();
@@ -702,21 +708,18 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     circular_PB.setVisibility(View.GONE);
                     next_BT.setEnabled(false);
                     privious_BT.setEnabled(false);
-                    ApiService<JsonObject> service = new ApiService<>();
-                    service.get(this, ApiClient.getApiInterface().punchingPolicy(tokenForInsurance,punchingPolicyRequest), "PunchingPolicyRequest");
-                    Log.e("PunchingPolicyRequest", "Request=> " +methods.getRequestJson(punchingPolicyRequest));
+                    if (afterLogin.equals("yes")){
+                        ApiService<JsonObject> service = new ApiService<>();
+                        service.get(this, ApiClient.getApiInterface().parentAfterLoginPunchingPolicy(Config.token,punchingPolicyRequest), "PunchingPolicyRequest");
+//                        Log.e("PunchingPolicyRequest"+"AfterLogin", "Request=> " +methods.getRequestJson(punchingPolicyRequest));
+                    }else {
+                        ApiService<JsonObject> service1 = new ApiService<>();
+                        service1.get(this, ApiClient.getApiInterface().punchingPolicy(tokenForInsurance,punchingPolicyRequest), "PunchingPolicyRequest");
+//                        Log.e("PunchingPolicyRequest", "Request=> " +methods.getRequestJson(punchingPolicyRequest));
+                    }
 
                 }
                 else if (countSteps==2){
-//                    step_count_TV.setText("3 of 3");
-//                    step_name_TV.setText("Document Section");
-//                    next_step_TV.setVisibility(View.GONE);
-//                    pet_parent_details_layout_frame.setVisibility(View.GONE);
-//                    insurance_pet_details_layout_frame.setVisibility(View.GONE);
-//                    insurance_images_layout_frame.setVisibility(View.VISIBLE);
-//                    privious_BT.setVisibility(View.VISIBLE);
-//                    circular_PB.setProgress(85);
-//                    countSteps = 3;
                     if (do_you_have_microchip_CB.isChecked()){
                         upload_five_images_LL.setVisibility(View.GONE);
                         pet_rfid_LL.setVisibility(View.VISIBLE);
@@ -772,7 +775,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                         castrated_neutered_ET.setError("Enter Castrated/Neutered");
                         Toast.makeText(this, "Enter Castrated/Neutered", Toast.LENGTH_SHORT).show();
                         break;
-                    }if (!isVaccinated){
+                    }if (!is_vaccinated_CB.isChecked()){
                         Toast.makeText(this, "Is Your Pet Vaccinated", Toast.LENGTH_SHORT).show();
                         break;
                     }
@@ -793,45 +796,55 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     punchingPolicyPetParams.setCastratedReason(strCastrated);
                     punchingPolicyPetParams.setFeatures(strFeatures);
 
-                    PunchingPolicyPetRequest punchingPolicyPetRequest = new PunchingPolicyPetRequest();
-                    punchingPolicyPetRequest.setData(punchingPolicyPetParams);
 
                     loading_PB.setVisibility(View.VISIBLE);
                     circular_PB.setVisibility(View.GONE);
                     next_BT.setEnabled(false);
                     privious_BT.setEnabled(false);
-                    ApiService<JsonObject> service = new ApiService<>();
-                    service.get(this, ApiClient.getApiInterface().punchingPolicyPet(tokenForInsurance,punchingPolicyPetRequest), "PunchingPolicyPetRequest");
-                    Log.e("PunchingPolicyPetRequest", "Request=> " +methods.getRequestJson(punchingPolicyPetRequest));
+                    if (afterLogin.equals("yes")){
+                        punchingPolicyPetParams.setPetId(petId);
+                        PunchingPolicyPetRequest punchingPolicyPetRequest = new PunchingPolicyPetRequest();
+                        punchingPolicyPetRequest.setData(punchingPolicyPetParams);
+                        ApiService<JsonObject> service1 = new ApiService<>();
+                        service1.get(this, ApiClient.getApiInterface().petAfterLoginPunchingPolicyPet(Config.token,punchingPolicyPetRequest), "PunchingPolicyPetRequest");
+//                        Log.e("PunchingPolicyPetRequest", "Request=> " +methods.getRequestJson(punchingPolicyPetRequest));
+                    }else {
+                        PunchingPolicyPetRequest punchingPolicyPetRequest = new PunchingPolicyPetRequest();
+                        punchingPolicyPetRequest.setData(punchingPolicyPetParams);
+                        ApiService<JsonObject> service1 = new ApiService<>();
+                        service1.get(this, ApiClient.getApiInterface().punchingPolicyPet(tokenForInsurance,punchingPolicyPetRequest), "PunchingPolicyPetRequest");
+//                        Log.e("PunchingPolicyPetRequest", "Request=> " +methods.getRequestJson(punchingPolicyPetRequest));
+                    }
+
 
                 }
                 else if(countSteps==3){
-                    if (do_you_have_microchip_CB.isChecked()&&rfidImageUrl.equals("")){
+                    if (do_you_have_microchip_CB.isChecked()&&rfidImageUrl==null){
                         Toast.makeText(this, "Please upload RFID image", Toast.LENGTH_SHORT).show();
                     }else {
-                        if (!do_you_have_microchip_CB.isChecked()&&frontImageUrl.equals("")){
+                        if (!do_you_have_microchip_CB.isChecked()&&frontImageUrl==null){
                             Toast.makeText(this, "Please upload pet front image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (!do_you_have_microchip_CB.isChecked()&&backImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&backImageUrl==null){
                             Toast.makeText(this, "Please upload pet back image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (!do_you_have_microchip_CB.isChecked()&&leftImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&leftImageUrl==null){
                             Toast.makeText(this, "Please upload pet left image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (!do_you_have_microchip_CB.isChecked()&&rightImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&rightImageUrl==null){
                             Toast.makeText(this, "Please upload pet right image", Toast.LENGTH_SHORT).show();
                             break;
-                        }if (!do_you_have_microchip_CB.isChecked()&&topImageUrl.equals("")){
+                        }if (!do_you_have_microchip_CB.isChecked()&&topImageUrl==null){
                             Toast.makeText(this, "Please upload pet top image", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
 
 
-                    if (pedigree_lineage_CB.isChecked()&&pedigreeDocumentUrl.equals("")){
+                    if (pedigree_lineage_CB.isChecked()&&pedigreeDocumentUrl==null){
                         Toast.makeText(this, "Please upload pet pedigree certificate", Toast.LENGTH_SHORT).show();
                         break;
-                    }if (vaccinationCardUrl.equals("")){
+                    }if (vaccinationCardUrl==null){
                         Toast.makeText(this, "Please upload pet vaccination card", Toast.LENGTH_SHORT).show();
                         break;
                     }
@@ -854,9 +867,17 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     punchingPolicyPetDocumentsRequest.setData(punchingPolicyPetDocumentsParams);
                     privious_BT.setEnabled(false);
                     next_BT.setEnabled(false);
-                    ApiService<JsonObject> service = new ApiService<>();
-                    service.get(this, ApiClient.getApiInterface().punchingPolicyDocumentsUpload(tokenForInsurance,punchingPolicyPetDocumentsRequest), "PunchingPolicyPetDocuments");
-                    Log.e("PunchingPolicyPetRequest", "Request=> " +methods.getRequestJson(punchingPolicyPetDocumentsRequest));
+                    if (afterLogin.equals("yes")){
+                        ApiService<JsonObject> service = new ApiService<>();
+                        service.get(this, ApiClient.getApiInterface().userPunchingPolicyDocumentsUpload(Config.token,punchingPolicyPetDocumentsRequest), "PunchingPolicyPetDocuments");
+//                        Log.e("PunchingPolicyPetRequest", "Request=> " +methods.getRequestJson(punchingPolicyPetDocumentsRequest));
+
+                    }else {
+                        ApiService<JsonObject> service1 = new ApiService<>();
+                        service1.get(this, ApiClient.getApiInterface().punchingPolicyDocumentsUpload(tokenForInsurance,punchingPolicyPetDocumentsRequest), "PunchingPolicyPetDocuments");
+//                        Log.e("PunchingPolicyPetRequest", "Request=> " +methods.getRequestJson(punchingPolicyPetDocumentsRequest));
+
+                    }
 
                 }
 
@@ -911,15 +932,15 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     castrated_neutered_ET.setVisibility(View.GONE);
                 }
                 break;
-                
+
             case R.id.pet_choosePlan:
                     showPlansDialog();
-                
+
                 break;
-            
+
             case R.id.pet_declaration:
                     showDeclaration();
-                    
+
                 break;
 
             case R.id.front_image_delete_IV:
@@ -1143,17 +1164,65 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
     @Override
     public void onResponse(Response response, String key) {
         switch (key){
+            case  "GetAllDetailOfPet":
+                try {
+                    methods.customProgressDismiss();
+                    Log.e("GetAllDetailOfPet",response.body().toString());
+                    getAllDetailAfterLoginResponse = (GetAllDetailAfterLoginResponse) response.body();
+                    int responseCode = Integer.parseInt(getAllDetailAfterLoginResponse.getResponse().getResponseCode());
+                    if (responseCode==109) {
+                        String stepperCount = getAllDetailAfterLoginResponse.getData().getStepper();
+                        if (stepperCount==null){
+                            Log.e("Step_COUNT",stepperCount);
+                            //parent Data
+                            setIstStepData();
+                            //pet data
+                            set2ndStepData();
+                            // document Section
+                            set3rdStepData();
+                        }else if (stepperCount.equals("2")){
+                            Log.e("Step_COUNT",stepperCount);
 
+                            //parent Data
+                            setIstStepData();
+                            //pet data
+                            set2ndStepData();
+                            // document Section
+                            set3rdStepData();
+                        }else if (stepperCount.equals("3")){
+                            Log.e("Step_COUNT",stepperCount);
+
+                            //parent Data
+                            setIstStepData();
+                            //pet data
+                            set2ndStepData();
+                            // document Section
+                            set3rdStepData();
+                        }else if (stepperCount.equals("4")){
+                            Log.e("Step_COUNT",stepperCount);
+                            setResult(RESULT_OK);
+                            finish();
+                        }
+                    }else {
+                        finish();
+                        Toast.makeText(this, "Please try again !", Toast.LENGTH_SHORT).show();
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                break;
             case "PunchingPolicyRequest":
                 try {
+                    Log.e("PunchingPolicyRequest","Response=>"+response.body().toString());
                     next_BT.setEnabled(true);
                     privious_BT.setEnabled(true);
-                    Log.e("PunchingPolicyRequest","Response=>"+response.body().toString());
                     JsonObject jsonObject = (JsonObject) response.body();
                     JsonObject punchingPolicyResponse = jsonObject.getAsJsonObject("response");
                     int responseCode = Integer.parseInt(String.valueOf(punchingPolicyResponse.get("responseCode")));
                     if (responseCode == 109) {
-
+                        Log.e("CHECK_ERROR","HERE");
                         loading_PB.setVisibility(View.GONE);
                         circular_PB.setVisibility(View.VISIBLE);
                         tokenForInsurance = String.valueOf(punchingPolicyResponse.get("token"));
@@ -1182,9 +1251,9 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
             case  "PunchingPolicyPetRequest":
                 try {
+                    Log.e("PunchingPolicyPetRequest","Response=>"+response.body().toString());
                     next_BT.setEnabled(true);
                     privious_BT.setEnabled(true);
-                    Log.e("PunchingPolicyPetRequest","Response=>"+response.body().toString());
                     JsonObject jsonObject = (JsonObject) response.body();
                     JsonObject punchingPolicyResponse = jsonObject.getAsJsonObject("response");
                     int responseCode = Integer.parseInt(String.valueOf(punchingPolicyResponse.get("responseCode")));
@@ -1382,8 +1451,6 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     int responseCode = Integer.parseInt(petTypeResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         petType = new ArrayList<>();
-//                        petType.add("Select Pet Type");
-//                        petTypeHashMap.put("Select Pet Type", "0");
                         Log.d("lalal", "" + petTypeResponse.getData().size());
                         for (int i = 0; i < petTypeResponse.getData().size(); i++) {
                             if (petTypeResponse.getData().get(i).getPetType1().equals("Dog")){
@@ -1459,7 +1526,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
             case "FrontImageUpload":
                 try {
-                    Log.e("UploadDocument", response.body().toString());
+//                    Log.e("UploadDocument", response.body().toString());
                     ImageResponse imageResponse = (ImageResponse) response.body();
                     int responseCode = Integer.parseInt(imageResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -1678,11 +1745,149 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
     }
 
+    @Override
+    public void onError(Throwable t, String key) {
+
+        Log.e("error",t.getLocalizedMessage());
+
+    }
+
+    private void set3rdStepData() {
+        frontImageUrl       = getAllDetailAfterLoginResponse.getData().getPetImageUrl();
+        backImageUrl        = getAllDetailAfterLoginResponse.getData().getPetImageUrl2();
+        leftImageUrl        = getAllDetailAfterLoginResponse.getData().getPetImageUrl3();
+        rightImageUrl       = getAllDetailAfterLoginResponse.getData().getPetImageUrl4();
+        topImageUrl         = getAllDetailAfterLoginResponse.getData().getPetImageUrl5();
+        rfidImageUrl        = getAllDetailAfterLoginResponse.getData().getPetImageUrl6();
+        purchaseProofUrl    = getAllDetailAfterLoginResponse.getData().getPurchaseProofUrl();
+        pedigreeDocumentUrl = getAllDetailAfterLoginResponse.getData().getPedigreeCertificateUrl();
+        vaccinationCardUrl  = getAllDetailAfterLoginResponse.getData().getVaccinationUrl();
+
+        if (frontImageUrl!=null){
+            Glide.with(this)
+                    .load(frontImageUrl)
+                    .placeholder(R.drawable.empty_pet_image)
+                    .into(front_image_CIV);
+
+            front_image_delete_IV.setVisibility(View.VISIBLE);
+            front_image_upload_IV.setVisibility(View.GONE);
+        }if (backImageUrl!=null){
+            Glide.with(this)
+                    .load(backImageUrl)
+                    .placeholder(R.drawable.empty_pet_image)
+                    .into(back_image_CIV);
+            back_image_delete_IV.setVisibility(View.VISIBLE);
+            back_image_upload_IV.setVisibility(View.GONE);
+        }if (leftImageUrl!=null){
+            Glide.with(this)
+                    .load(leftImageUrl)
+                    .placeholder(R.drawable.empty_pet_image)
+                    .into(left_image_CIV);
+            left_image_delete_IV.setVisibility(View.VISIBLE);
+            left_image_upload_IV.setVisibility(View.GONE);
+        }if (rightImageUrl!=null){
+            Glide.with(this)
+                    .load(rightImageUrl)
+                    .placeholder(R.drawable.empty_pet_image)
+                    .into(right_image_CIV);
+            right_image_delete_IV.setVisibility(View.VISIBLE);
+            right_image_upload_IV.setVisibility(View.GONE);
+        }if (topImageUrl!=null){
+            Glide.with(this)
+                    .load(topImageUrl)
+                    .placeholder(R.drawable.empty_pet_image)
+                    .into(top_image_CIV);
+            top_image_delete_IV.setVisibility(View.VISIBLE);
+            top_image_upload_IV.setVisibility(View.GONE);
+        }if (rfidImageUrl!=null){
+            Glide.with(this)
+                    .load(rfidImageUrl)
+                    .placeholder(R.drawable.empty_pet_image)
+                    .into(rfid_image_CIV);
+            rfid_image_delete_IV.setVisibility(View.VISIBLE);
+            rfid_image_upload_IV.setVisibility(View.GONE);
+        }if (purchaseProofUrl!=null){
+            purchase_proof_image_delete_IV.setVisibility(View.VISIBLE);
+            purchase_proof_image_upload_IV.setVisibility(View.GONE);
+        }if (pedigreeDocumentUrl!=null){
+            pedigree_cert_image_delete_IV.setVisibility(View.VISIBLE);
+            pedigree_cert_image_upload_IV.setVisibility(View.GONE);
+        }if (vaccinationCardUrl!=null){
+            vaccination_card_image_delete_IV.setVisibility(View.VISIBLE);
+            vaccination_card_image_upload_IV.setVisibility(View.GONE);
+        }
+    }
+
+    private void set2ndStepData() {
+        strSpnerItemPetNm = "Dog";
+
+        strSpnrSexId = String.valueOf(getAllDetailAfterLoginResponse.getData().getPetSexId());
+        if (strSpnrSexId.equals("1.0")){
+            maleRB.setChecked(true);
+        }else {
+            femaleRB.setChecked(true);
+        }
+        String petDOB = getAllDetailAfterLoginResponse.getData().getPetDateofBirth().substring(0,getAllDetailAfterLoginResponse.getData().getPetDateofBirth().length()-11);
+        String age          = String.valueOf(methods.getDays(petDOB, methods.getDate()));
+        pet_layout_calenderTextView_dialog.setText(petDOB);
+        age_neumeric.setText(age);
+
+        strSpnrBreed = getAllDetailAfterLoginResponse.getData().getPetBreedName();
+        strSpnrColor= getAllDetailAfterLoginResponse.getData().getPetColorName();
+        if (getAllDetailAfterLoginResponse.getData().getMicrochipNumber()!=null){
+            do_you_have_microchip_CB.setChecked(true);
+            pet_microchip_no_ET.setText(getAllDetailAfterLoginResponse.getData().getMicrochipNumber());
+        }
+        if (getAllDetailAfterLoginResponse.getData().getVaccinated()){
+            is_vaccinated_CB.setChecked(true);
+        }
+
+        if (getAllDetailAfterLoginResponse.getData().getRegistrationPet()){
+            kic_CB.setChecked(true);
+        }
+
+        if (getAllDetailAfterLoginResponse.getData().getPedigreeLineage()){
+            pedigree_lineage_CB.setChecked(true);
+        }
+        if (getAllDetailAfterLoginResponse.getData().getCastrated()){
+            castrated_neutered_CB.setChecked(true);
+        }
+
+        pet_features_ET.setText(getAllDetailAfterLoginResponse.getData().getFeatures());
+        pet_name_ET.setText(getAllDetailAfterLoginResponse.getData().getPetName());
+
+//        setPetTypeSpinner();
+//        setPetColorSpinner();
+//        setPetBreeSpinner();
+
+
+    }
+
+    private void setIstStepData() {
+        parent_first_name_ET.setText(getAllDetailAfterLoginResponse.getData().getFirstName());
+        parent_last_name_ET.setText(getAllDetailAfterLoginResponse.getData().getLastName());
+        parent_email_ET.setText(getAllDetailAfterLoginResponse.getData().getEmail());
+        parent_phone_ET.setText(getAllDetailAfterLoginResponse.getData().getPhoneNumber());
+        calenderTextView_dialog.setText(getAllDetailAfterLoginResponse.getData().getOwnerDob().substring(0,getAllDetailAfterLoginResponse.getData().getOwnerDob().length()-11));
+        parent_address_ET.setText(getAllDetailAfterLoginResponse.getData().getAddress());
+        parent_pinCode_ET.setText(getAllDetailAfterLoginResponse.getData().getPinCode());
+        parent_referralCode_ET.setText(getAllDetailAfterLoginResponse.getData().getReferralCode());
+
+        strStateSpnr = getAllDetailAfterLoginResponse.getData().getStateName();
+        strCitySpnr  = getAllDetailAfterLoginResponse.getData().getCityName();
+        setStateSpinner();
+        setCitySpinner();
+    }
+
     private void setPetColorSpinner() {
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, petColor);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_pet_color.setAdapter(aa);
+        if (!strSpnrColor.equals("")) {
+            int spinnerPosition = aa.getPosition(strSpnrColor);
+            add_pet_color.setSelection(spinnerPosition);
+        }
         add_pet_color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
@@ -1702,6 +1907,10 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_pet_breed.setAdapter(aa);
+        if (!strSpnrBreed.equals("")) {
+            int spinnerPosition = aa.getPosition(strSpnrBreed);
+            add_pet_breed.setSelection(spinnerPosition);
+        }
         add_pet_breed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
@@ -1722,6 +1931,10 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         add_pet_type.setAdapter(aa);
+        if (strSpnerItemPetNm!=null) {
+            int spinnerPosition = aa.getPosition(strSpnerItemPetNm);
+            add_pet_type.setSelection(spinnerPosition);
+        }
         add_pet_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
@@ -1769,8 +1982,8 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         ApiService<PetColorValueResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getGetPetColorApi(breedParams), "GetPetColor");
     }
-    
-    
+
+
     private void getPetAgeString(String DOB) {
         GetPetAgeParameter getPetAgeParameter = new GetPetAgeParameter();
         getPetAgeParameter.setDateOfBirth(DOB);
@@ -1863,10 +2076,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         service.get(this, ApiClient.getApiInterface().getCityApi(stateId), "GetCity");
     }
 
-    @Override
-    public void onError(Throwable t, String key) {
 
-    }
 
     @Override
     public void onInsurancePlanClick(int position, boolean checkBox) {

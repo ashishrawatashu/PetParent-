@@ -76,7 +76,7 @@ public class DashBoardActivity extends AppCompatActivity {
         methods = new Methods(this);
 
         notificationMethod();
-        checkCameraPermission();
+//        checkCameraPermission();
         registerNetworkBroadcastForNougat();
 
 
@@ -124,9 +124,9 @@ public class DashBoardActivity extends AppCompatActivity {
             getLocation();
         }
 
-        Log.e("token", Config.token);
-        Log.e("user_id", Config.user_id);
-        Log.e("LOCATION", Config.latitude + "  " + Config.longitude);
+        Log.d("TOKEN", Config.token);
+        Log.d("user_id", Config.user_id);
+//        Log.d("LOCATION", Config.latitude + "  " + Config.longitude);
 
     }
 
@@ -219,7 +219,6 @@ public class DashBoardActivity extends AppCompatActivity {
                     showLocationPermissionDialog();
                 }
 
-                return;
             }
 
         }
@@ -282,19 +281,19 @@ public class DashBoardActivity extends AppCompatActivity {
     public static void dialog(boolean value) {
 
         if (value) {
-            Log.e("Connected", "Yes");
+//            Log.e("Connected", "Yes");
 
             Handler handler = new Handler();
             Runnable delayrunnable = new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("Connected", "Yes1");
+//                    Log.e("Connected", "Yes1");
 
                 }
             };
             handler.postDelayed(delayrunnable, 3000);
         } else {
-            Log.e("Connected", "NO");
+//            Log.e("Connected", "NO");
         }
     }
 

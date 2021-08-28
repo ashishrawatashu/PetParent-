@@ -92,7 +92,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         routine_report_RV = view.findViewById(R.id.routine_report_RV);
         empty_IV = view.findViewById(R.id.empty_IV);
         progressBar = view.findViewById(R.id.progressBar);
-        Log.e("petid",pet_id);
+        //Log.d"petid",pet_id);
 
 
         switch (type) {
@@ -127,7 +127,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         visitTypeData.setPetId(pet_id);
         visitTypeRequest.setHeader(petDataParams);
         visitTypeRequest.setData(visitTypeData);
-        Log.e("Hospital",methods.getRequestJson(visitTypeRequest));
+        //Log.d"Hospital",methods.getRequestJson(visitTypeRequest));
 
 
         ApiService<GetPetHospitalizationResponse> service = new ApiService<GetPetHospitalizationResponse>();
@@ -148,7 +148,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         visitTypeData.setPetId(pet_id);
         visitTypeRequest.setHeader(petDataParams);
         visitTypeRequest.setData(visitTypeData);
-        Log.d("LabTestRequest", visitTypeRequest.toString());
+        //Log.d"LabTestRequest", visitTypeRequest.toString());
 
 
         ApiService<PetLabWorkResponse> service = new ApiService<PetLabWorkResponse>();
@@ -169,7 +169,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         visitTypeData.setPetId(pet_id);
         visitTypeRequest.setHeader(petDataParams);
         visitTypeRequest.setData(visitTypeData);
-        Log.d("visitTypeRequest",methods.getRequestJson(visitTypeRequest));
+        //Log.d"visitTypeRequest",methods.getRequestJson(visitTypeRequest));
 
 
         ApiService<GetPetClinicVisitListResponse> service = new ApiService<GetPetClinicVisitListResponse>();
@@ -192,7 +192,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
         ApiService<GetPetTestAndXRayResponse> service = new ApiService<GetPetTestAndXRayResponse>();
         service.get(this, ApiClient.getApiInterface().getPetTestAndXRay(Config.token, visitTypeRequest), "GetPetTestAndXRay");
-        Log.e("GetPetTestAndXRay",methods.getRequestJson(visitTypeRequest));
+        //Log.d"GetPetTestAndXRay",methods.getRequestJson(visitTypeRequest));
 
 
     }
@@ -203,7 +203,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         switch (key) {
             case "GetPetClinicVisit":
                 try {
-                    Log.d("ResponseClinicVisit", response.body().toString());
+                    //Log.d"ResponseClinicVisit", response.body().toString());
                     GetPetClinicVisitListResponse petServiceResponse = (GetPetClinicVisitListResponse) response.body();
                     int responseCode = Integer.parseInt(petServiceResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -231,7 +231,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
             case "GetPetTestAndXRay":
                 try {
-                    Log.d("GetPetTestAndXRay", "GetPetTestAndXRay=> " + (response.body()));
+                    //Log.d"GetPetTestAndXRay", "GetPetTestAndXRay=> " + (response.body()));
                     GetPetTestAndXRayResponse getPetTestAndXRayResponse = (GetPetTestAndXRayResponse) response.body();
                     int responseCode = Integer.parseInt(getPetTestAndXRayResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -258,7 +258,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
             case "GetLabTest":
                 try {
-                    Log.d("GetLabTest", "GetLabTest=> " + (response.body()));
+                    //Log.d"GetLabTest", "GetLabTest=> " + (response.body()));
                     PetLabWorkResponse petLabWorkResponse = (PetLabWorkResponse) response.body();
                     int responseCode = Integer.parseInt(petLabWorkResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -285,7 +285,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
 
             case "GetHospitalization":
                 try {
-                    Log.d("GetHospitalization", "GetHospitalization=> " + (response.body()));
+                    //Log.d"GetHospitalization", "GetHospitalization=> " + (response.body()));
                     GetPetHospitalizationResponse getPetHospitalizationResponse = (GetPetHospitalizationResponse) response.body();
                     int responseCode = Integer.parseInt(getPetHospitalizationResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {

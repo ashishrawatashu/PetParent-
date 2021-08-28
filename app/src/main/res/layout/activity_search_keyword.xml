@@ -23,17 +23,17 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@null"
-        android:paddingLeft="10dp"
-        android:inputType="text"
         android:fontFamily="@font/nunito"
         android:hint="Search"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@id/back_arrow_IV"
         app:layout_constraintEnd_toStartOf="@+id/cancel_IV"
         app:layout_constraintStart_toEndOf="@id/back_arrow_IV"
         app:layout_constraintTop_toTopOf="@id/back_arrow_IV" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/cancel_IV"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -41,40 +41,230 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:src="@drawable/cancel_cross"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/search_icon_IV"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:padding="2dp"
+        android:src="@drawable/search_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:id="@+id/line"
-        app:layout_constraintTop_toBottomOf="@id/back_arrow_IV"
-        android:background="@color/gray_3"/>
-    
+        android:background="@color/gray_3"
+        app:layout_constraintTop_toBottomOf="@id/back_arrow_IV" />
+
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_headline_TV" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_keyword_RV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        tools:listitem="@layout/search_keyword_list"/>
+        app:layout_constraintTop_toBottomOf="@+id/search_headline_TV"
+        tools:listitem="@layout/search_keyword_list" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_keyword_result_RV"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/vet_list"/>
+        app:layout_constraintTop_toBottomOf="@+id/search_headline_TV">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_keyword_result_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_headline_TV"
+                tools:listitem="@layout/vet_list" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar_below"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <TextView
+        android:id="@+id/search_headline_TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito"
+        android:text="@string/search_headline"
+        android:textColor="@color/gray_2"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@id/search_icon_IV"
+        app:layout_constraintStart_toStartOf="@id/back_arrow_IV"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+
+    <LinearLayout
+        android:id="@+id/all_provider_LL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/search_headline_TV">
+
+        <LinearLayout
+            android:id="@+id/cosultation_LL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/consultation_icon_search" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="Consultation"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_2"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pet_shops_LL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/pet_shops_search" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="Pet Shops"
+                android:textColor="@color/gray_2"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/training_LL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/traning_icon_search" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="Training"
+                android:textColor="@color/gray_2"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/grooming_LL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/grommer_icon_search" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="Grooming"
+                android:textColor="@color/gray_2"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/hostels_LL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/hostel_icon_search" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="Hostels"
+                android:textColor="@color/gray_2"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

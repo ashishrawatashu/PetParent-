@@ -153,8 +153,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     methods.showCustomProgressBarDialog(this);
                     ApiService<UpdatePetParentProfile> service = new ApiService<>();
                     service.get(this, ApiClient.getApiInterface().updatePetParent(Config.token, updateParentDetailsRequest), "UpdateParent");
-                    Log.e("ValidatePetParentOtp", methods.getRequestJson(updateParentDetailsRequest));
-                    Log.e("ValidatePetParentOtp", Config.token);
+                    //Log.d"ValidatePetParentOtp", methods.getRequestJson(updateParentDetailsRequest));
+                    //Log.d"ValidatePetParentOtp", Config.token);
 
                 }
 
@@ -171,9 +171,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             case "UpdateParent":
                 try {
                     methods.customProgressDismiss();
-                    Log.d("DATALOG", "" + response.body());
+                    //Log.d"DATALOG", "" + response.body());
                     UpdatePetParentProfile loginRegisterResponse = (UpdatePetParentProfile) response.body();
-                    Log.d("DATALOG", "" + loginRegisterResponse.getResponse().getResponseCode());
+                    //Log.d"DATALOG", "" + loginRegisterResponse.getResponse().getResponseCode());
                     int responseCode = Integer.parseInt(loginRegisterResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         Config.first_name = loginRegisterResponse.getData().getFirstName();
@@ -201,7 +201,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("eeeeeee", e.getLocalizedMessage());
+                    //Log.d"eeeeeee", e.getLocalizedMessage());
                 }
                 break;
 
@@ -213,6 +213,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     public void onError(Throwable t, String key) {
         methods.customProgressDismiss();
         Toast.makeText(this, "Please try again !", Toast.LENGTH_SHORT).show();
-        Log.e("Error", t.getLocalizedMessage());
+        //Log.d"Error", t.getLocalizedMessage());
     }
 }

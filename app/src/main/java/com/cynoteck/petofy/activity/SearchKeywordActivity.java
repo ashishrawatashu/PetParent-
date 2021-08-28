@@ -1,21 +1,32 @@
 package com.cynoteck.petofy.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cynoteck.petofy.R;
+import com.cynoteck.petofy.adapter.SearchAdapter;
 import com.cynoteck.petofy.adapter.SearchKeywordAdapter;
+import com.cynoteck.petofy.adapter.SearchResultsAdapter;
 import com.cynoteck.petofy.adapter.VetListAdapter;
 import com.cynoteck.petofy.api.ApiClient;
 import com.cynoteck.petofy.api.ApiResponse;
@@ -26,6 +37,8 @@ import com.cynoteck.petofy.parameter.searchProviderRequest.SearchProviderParamet
 import com.cynoteck.petofy.parameter.searchProviderRequest.SearchProviderRequest;
 import com.cynoteck.petofy.response.getSearchKeywordResponse.SearchKeywordData;
 import com.cynoteck.petofy.response.getSearchKeywordResponse.SearchKeywordResponse;
+import com.cynoteck.petofy.response.getSearchResultsResponse.GetSearchResultsResponse;
+import com.cynoteck.petofy.response.getSearchResultsResponse.Provider;
 import com.cynoteck.petofy.response.getVetListResponse.GetVetListResponse;
 import com.cynoteck.petofy.response.getVetListResponse.ProviderList;
 import com.cynoteck.petofy.utils.Config;
@@ -34,98 +47,106 @@ import com.cynoteck.petofy.onClicks.OnItemClickListener;
 import com.cynoteck.petofy.onClicks.RegisterRecyclerViewClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import retrofit2.Response;
 
-public class SearchKeywordActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener, OnItemClickListener, RegisterRecyclerViewClickListener {
+public class SearchKeywordActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener,RegisterRecyclerViewClickListener {
 
     EditText                        search_keyword_ET;
-    ImageView                       back_arrow_IV, cancel_IV;
+    ImageView                       back_arrow_IV, cancel_IV,search_icon_IV;
     Methods                         methods;
-    ProgressBar                     progressBar;
+    ProgressBar                     progressBar,progress_bar_below;
     RecyclerView                    search_keyword_RV,search_keyword_result_RV;
-    ArrayList<SearchKeywordData>    searchKeywordDataArrayList = new ArrayList<>();
-    SearchKeywordAdapter            searchKeywordAdapter;
-    boolean                         stopShowPetList = true;
-    VetListAdapter                  vetListAdapter;
-    GetVetListResponse              getVetListResponse;
-    private ArrayList<ProviderList> providerLists = new ArrayList<>();
-    private Timer                   timer;
+    SearchResultsAdapter            searchListAdapter;
+    ArrayList<Provider>             providerLists;
+    LinearLayout                    all_provider_LL,cosultation_LL,pet_shops_LL,grooming_LL,hostels_LL,training_LL;
+    TextView                        search_headline_TV;
+    NestedScrollView                nested_scroll_view;
+    Integer                         page = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_keyword);
         methods = new Methods(this);
-
+        providerLists = new ArrayList<>();
         search_keyword_ET           = findViewById(R.id.search_keyword_ET);
         back_arrow_IV               = findViewById(R.id.back_arrow_IV);
         cancel_IV                   = findViewById(R.id.cancel_IV);
         search_keyword_RV           = findViewById(R.id.search_keyword_RV);
         search_keyword_result_RV    = findViewById(R.id.search_keyword_result_RV);
         progressBar                 = findViewById(R.id.progressBar);
+        search_icon_IV              = findViewById(R.id.search_icon_IV);
+        cosultation_LL              = findViewById(R.id.cosultation_LL);
+        pet_shops_LL                = findViewById(R.id.pet_shops_LL);
+        grooming_LL                 = findViewById(R.id.grooming_LL);
+        hostels_LL                  = findViewById(R.id.hostels_LL);
+        training_LL                 = findViewById(R.id.training_LL);
+        all_provider_LL             = findViewById(R.id.all_provider_LL);
+        search_headline_TV          = findViewById(R.id.search_headline_TV);
+        progress_bar_below          = findViewById(R.id.progress_bar_below);
+        nested_scroll_view          = findViewById(R.id.nested_scroll_view);
 
         back_arrow_IV.setOnClickListener(this);
+        search_icon_IV.setOnClickListener(this);
         cancel_IV.setOnClickListener(this);
+        hostels_LL.setOnClickListener(this);
+        grooming_LL.setOnClickListener(this);
+        training_LL.setOnClickListener(this);
+        pet_shops_LL.setOnClickListener(this);
+        cosultation_LL.setOnClickListener(this);
         search_keyword_ET.requestFocus();
-        searchKeywordAdapter = new SearchKeywordAdapter(this, searchKeywordDataArrayList, this);
-        search_keyword_RV.setAdapter(searchKeywordAdapter);
-        searchKeywordAdapter.notifyDataSetChanged();
 
-
-
-        search_keyword_ET.addTextChangedListener(new TextWatcher() {
+        search_keyword_ET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) { }
-            @Override
-            public void afterTextChanged(Editable s) {
-                timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        SearchKeywordActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setVisibility(View.VISIBLE);
-                                search_keyword_RV.setVisibility(View.GONE);
-                            }
-                        });
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String searchText = search_keyword_ET.getText().toString();
+                    if (searchText.equals("")){
+                        search_keyword_ET.setFocusable(true);
+                    }else {
 
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        SearchKeywordActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setVisibility(View.VISIBLE);
-                                SearchKeywordParams searchKeywordParams = new SearchKeywordParams();
-                                searchKeywordParams.setCityId(1);
-                                searchKeywordParams.setSearchkeyword(search_keyword_ET.getText().toString());
-                                SearchKeywordRequest searchKeywordRequest = new SearchKeywordRequest();
-                                searchKeywordRequest.setData(searchKeywordParams);
-                                getSearchData(searchKeywordRequest);
-                            }
-                        });
+                        getSearchResults(searchText,0);
                     }
-                }, 600);
+                    return true;
+                }
+                return false;
             }
         });
 
+        nested_scroll_view.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    page++;
+                    String searchText = search_keyword_ET.getText().toString();
+                    progress_bar_below.setVisibility(View.VISIBLE);
+                    getSearchResultsScroll(searchText,page);
 
+                }
+            }
+        });
     }
 
-    private void getSearchData(SearchKeywordRequest searchKeywordRequest) {
-        ApiService<SearchKeywordResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().searchKeyWords(Config.token, searchKeywordRequest), "SearchKeyword");
-        Log.e("DATALOG", "check1=> " + searchKeywordRequest);
+    private void getSearchResultsScroll(String searchText, Integer page) {
+        search_keyword_RV.setVisibility(View.GONE);
+        search_keyword_result_RV.setVisibility(View.VISIBLE);
+        SearchProviderParameters searchProviderParameters = new SearchProviderParameters();
+        searchProviderParameters.setPage(page);
+        searchProviderParameters.setCityId(Integer.valueOf(Config.cityId));
+        searchProviderParameters.setSearchText(searchText);
+
+        SearchProviderRequest searchProviderRequest = new SearchProviderRequest();
+        searchProviderRequest.setData(searchProviderParameters);
+
+        ApiService<GetSearchResultsResponse> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getSearchProviderResults(Config.token, searchProviderRequest), "GetProviderBySearchScroll");
+//        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(searchProviderRequest));
     }
+
 
     @Override
     public void onClick(View v) {
@@ -134,80 +155,116 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
                 onBackPressed();
                 break;
 
+            case R.id.search_icon_IV:
+                String searchText = search_keyword_ET.getText().toString();
+                if (searchText.equals("")){
+                    search_keyword_ET.setFocusable(true);
+                }else {
+                    getSearchResults(searchText,0);
+                }
+                break;
+
             case R.id.cancel_IV:
                 search_keyword_ET.requestFocus();
                 progressBar.setVisibility(View.GONE);
                 search_keyword_ET.getText().clear();
                 providerLists.clear();
-                search_keyword_result_RV.setVisibility(View.GONE);
-                searchKeywordDataArrayList.clear();
                 cancel_IV.setVisibility(View.GONE);
-                searchKeywordAdapter.notifyDataSetChanged();
+                break;
+
+            case R.id.cosultation_LL:
+                search_keyword_ET.setText("Pet Consultation");
+                getSearchResults("Pet Consultation",0);
+                search_keyword_ET.setSelection(search_keyword_ET.getText().length());
+
+                break;
+
+            case R.id.hostels_LL:
+                search_keyword_ET.setText("Pet Hostel");
+                getSearchResults("Pet Hostel",0);
+                search_keyword_ET.setSelection(search_keyword_ET.getText().length());
+
+                break;
+
+            case R.id.grooming_LL:
+                search_keyword_ET.setText("Pet Grooming");
+                getSearchResults("Pet Grooming",0);
+                search_keyword_ET.setSelection(search_keyword_ET.getText().length());
+
+                break;
+
+            case R.id.pet_shops_LL:
+                search_keyword_ET.setText("Pet Shop");
+                getSearchResults("Pet Shop",0);
+                search_keyword_ET.setSelection(search_keyword_ET.getText().length());
+
+                break;
+
+            case R.id.training_LL:
+                search_keyword_ET.setText("Pet Training");
+                getSearchResults("Pet Training",0);
+                search_keyword_ET.setSelection(search_keyword_ET.getText().length());
                 break;
         }
     }
+
+    private void getSearchResults(String searchText ,Integer page) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Hide:
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        providerLists.clear();
+        progressBar.setVisibility(View.VISIBLE);
+        search_keyword_RV.setVisibility(View.GONE);
+        search_keyword_result_RV.setVisibility(View.VISIBLE);
+        SearchProviderParameters searchProviderParameters = new SearchProviderParameters();
+        searchProviderParameters.setPage(page);
+        searchProviderParameters.setCityId(Integer.valueOf(Config.cityId));
+        searchProviderParameters.setSearchText(searchText);
+
+        SearchProviderRequest searchProviderRequest = new SearchProviderRequest();
+        searchProviderRequest.setData(searchProviderParameters);
+
+        ApiService<GetSearchResultsResponse> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getSearchProviderResults(Config.token, searchProviderRequest), "GetProviderBySearch");
+//        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(searchProviderRequest));
+    }
+
 
     @Override
     public void onResponse(Response arg0, String key) {
 
         switch (key) {
-            case "SearchKeyword":
-                try {
-                    progressBar.setVisibility(View.GONE);
-                    SearchKeywordResponse searchKeywordResponse = (SearchKeywordResponse) arg0.body();
-                    int responseCode = Integer.parseInt(searchKeywordResponse.getResponse().getResponseCode());
-                    Log.e("Response",searchKeywordResponse.getData().toString());
-                    searchKeywordDataArrayList.clear();
-                    if (responseCode == 109) {
-                        if (searchKeywordResponse.getData().isEmpty()) { }
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                        search_keyword_RV.setLayoutManager(linearLayoutManager);
-                        if (searchKeywordResponse.getData().size() > 0) {cancel_IV.setVisibility(View.VISIBLE);
-                            for (int i = 0; i < searchKeywordResponse.getData().size(); i++) {
-                                SearchKeywordData searchKeywordData = new SearchKeywordData();
-                                searchKeywordData.setId(searchKeywordResponse.getData().get(i).getId());
-                                searchKeywordData.setSearchKeyWord(searchKeywordResponse.getData().get(i).getSearchKeyWord());
-                                searchKeywordData.setSearchedOn(searchKeywordResponse.getData().get(i).getSearchedOn());
-
-                                searchKeywordDataArrayList.add(searchKeywordData);
-                            }
-                            Log.e("List",methods.getRequestJson(searchKeywordDataArrayList));
-                            if (stopShowPetList == true) {
-                                search_keyword_RV.setVisibility(View.VISIBLE);
-                            } else {
-                                search_keyword_RV.setVisibility(View.GONE);
-                            }
-                            searchKeywordAdapter = new SearchKeywordAdapter(this, searchKeywordDataArrayList, this);
-                            search_keyword_RV.setAdapter(searchKeywordAdapter);
-                            searchKeywordAdapter.notifyDataSetChanged();
-
-                        } else {
-                            Log.e("No_DATA", "NO_DATA");
-                        }
-
-
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                break;
-
             case "GetProviderBySearch":
                 try {
+                    progress_bar_below.setVisibility(View.GONE);
                     progressBar.setVisibility(View.GONE);
                     providerLists.clear();
-                    getVetListResponse = (GetVetListResponse) arg0.body();
-                    Log.d("DATALOG", getVetListResponse.toString());
+                    GetSearchResultsResponse getVetListResponse = (GetSearchResultsResponse) arg0.body();
+                    //Log.d"DATALOG", methods.getRequestJson(getVetListResponse));
                     int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (getVetListResponse.getData().getProviderList().isEmpty()) { } else {
+                            for (int i = 0; i < getVetListResponse.getData().getProviderList().size(); i++) {
+                                Provider providerList = new Provider();
+                                providerList.setId(getVetListResponse.getData().getProviderList().get(i).getId());
+                                providerList.setName(getVetListResponse.getData().getProviderList().get(i).getName());
+                                providerList.setCompany(getVetListResponse.getData().getProviderList().get(i).getCompany());
+
+                                providerList.setVetQualifications(getVetListResponse.getData().getProviderList().get(i).getVetQualifications());
+                                providerList.setAddress(getVetListResponse.getData().getProviderList().get(i).getAddress());
+                                providerList.setOnlineConsultationCharges(getVetListResponse.getData().getProviderList().get(i).getOnlineConsultationCharges());
+                                providerList.setProfileImageURL(getVetListResponse.getData().getProviderList().get(i).getProfileImageURL());
+                                providerList.setRating(getVetListResponse.getData().getProviderList().get(i).getRating());
+                                providerList.setEncryptedId(getVetListResponse.getData().getProviderList().get(i).getEncryptedId());
+                                providerLists.add(providerList);
+                            }
+//                            //Log.d"LIST_SIZE",providerLists.size()+"");
+                            all_provider_LL.setVisibility(View.GONE);
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                             search_keyword_result_RV.setLayoutManager(linearLayoutManager);
-                            providerLists = getVetListResponse.getData().getProviderList();
-                            vetListAdapter = new VetListAdapter(this, providerLists, this);
-                            search_keyword_result_RV.setAdapter(vetListAdapter);
-                            vetListAdapter.notifyDataSetChanged();
+                            searchListAdapter = new SearchResultsAdapter(this, providerLists, this);
+                            search_keyword_result_RV.setAdapter(searchListAdapter);
+                            searchListAdapter.notifyDataSetChanged();
                         }
 
                     }
@@ -216,49 +273,69 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
                 }
 
                 break;
+            case "GetProviderBySearchScroll":
+                try {
+                    progress_bar_below.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
+                    GetSearchResultsResponse getVetListResponse = (GetSearchResultsResponse) arg0.body();
+                    //Log.d"DATALOG_scrool", methods.getRequestJson(getVetListResponse));
+                    int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
+                    if (responseCode == 109) {
+                        if (getVetListResponse.getData().getProviderList().isEmpty()) { } else {
+                            for (int i = 0; i < getVetListResponse.getData().getProviderList().size(); i++) {
+                                Provider providerList = new Provider();
+                                providerList.setId(getVetListResponse.getData().getProviderList().get(i).getId());
+                                providerList.setCompany(getVetListResponse.getData().getProviderList().get(i).getCompany());
+                                providerList.setName(getVetListResponse.getData().getProviderList().get(i).getName());
+                                providerList.setVetQualifications(getVetListResponse.getData().getProviderList().get(i).getVetQualifications());
+                                providerList.setAddress(getVetListResponse.getData().getProviderList().get(i).getAddress());
+                                providerList.setOnlineConsultationCharges(getVetListResponse.getData().getProviderList().get(i).getOnlineConsultationCharges());
+                                providerList.setProfileImageURL(getVetListResponse.getData().getProviderList().get(i).getProfileImageURL());
+                                providerList.setRating(getVetListResponse.getData().getProviderList().get(i).getRating());
+                                providerList.setEncryptedId(getVetListResponse.getData().getProviderList().get(i).getEncryptedId());
+                                providerLists.add(providerLists.size()-1,providerList);
+                            }
+//                          Log.d"LIST_SIZE_SCROOL",providerLists.size()+"");
+                            all_provider_LL.setVisibility(View.GONE);
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                            search_keyword_result_RV.setLayoutManager(linearLayoutManager);
+                            searchListAdapter = new SearchResultsAdapter(this, providerLists, this);
+                            search_keyword_result_RV.setAdapter(searchListAdapter);
+                            searchListAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 
     @Override
     public void onError(Throwable t, String key) {
 
-    }
-
-    @Override
-    public void onViewDetailsClick(int position) {
-        progressBar.setVisibility(View.VISIBLE);
-        search_keyword_RV.setVisibility(View.GONE);
-        search_keyword_result_RV.setVisibility(View.VISIBLE);
-        search_keyword_ET.setFocusable(false);
-        SearchProviderParameters searchProviderParameters = new SearchProviderParameters();
-        searchProviderParameters.setCityId(Integer.valueOf(Config.cityId));
-        searchProviderParameters.setLatitude(Config.latitude);
-        searchProviderParameters.setLongitude(Config.longitude);
-        searchProviderParameters.setSearchkeyword(searchKeywordDataArrayList.get(position).getSearchKeyWord());
-
-        SearchProviderRequest searchProviderRequest = new SearchProviderRequest();
-        searchProviderRequest.setData(searchProviderParameters);
-
-        ApiService<GetVetListResponse> service = new ApiService<>();
-        service.get(this, ApiClient.getApiInterface().getSearchProviderResults(Config.token, searchProviderRequest), "GetProviderBySearch");
-        Log.e("DATALOG", "check1=> " + searchProviderRequest);
+        //Log.d"ERROR",t.getLocalizedMessage());
     }
 
     @Override
     public void onProductClick(int position) {
         Intent viewVetDetailsIntent = new Intent(this, VetFullProfileActivity.class);
-        viewVetDetailsIntent.putExtra("EncryptId", getVetListResponse.getData().getProviderList().get(position).getEncryptedId());
-        viewVetDetailsIntent.putExtra("vetUserId",getVetListResponse.getData().getProviderList().get(position).getId());
-        viewVetDetailsIntent.putExtra("vet_fee",getVetListResponse.getData().getProviderList().get(position).getOnlineConsultationCharges());
-        viewVetDetailsIntent.putExtra("vet_image_url",getVetListResponse.getData().getProviderList().get(position).getProfileImageURL());
-        viewVetDetailsIntent.putExtra("vet_study",getVetListResponse.getData().getProviderList().get(position).getVetQualifications());
-        viewVetDetailsIntent.putExtra("vet_rating",getVetListResponse.getData().getProviderList().get(position).getRating());
-        viewVetDetailsIntent.putExtra("vet_address",getVetListResponse.getData().getProviderList().get(position).getAddress());
-        viewVetDetailsIntent.putExtra("vet_name",getVetListResponse.getData().getProviderList().get(position).getName());
-        viewVetDetailsIntent.putExtra("serviceTypeId", "0");
+        viewVetDetailsIntent.putExtra("EncryptId", providerLists.get(position).getEncryptedId());
+        viewVetDetailsIntent.putExtra("vetUserId",providerLists.get(position).getId());
+        viewVetDetailsIntent.putExtra("vet_fee",providerLists.get(position).getOnlineConsultationCharges());
+        viewVetDetailsIntent.putExtra("vet_image_url",providerLists.get(position).getProfileImageURL());
+        viewVetDetailsIntent.putExtra("vet_study",providerLists.get(position).getVetQualifications());
+        viewVetDetailsIntent.putExtra("vet_rating",providerLists.get(position).getRating());
+        viewVetDetailsIntent.putExtra("vet_address",providerLists.get(position).getAddress());
+        viewVetDetailsIntent.putExtra("vet_name",providerLists.get(position).getName());
+        viewVetDetailsIntent.putExtra("serviceTypeId", "1");
         viewVetDetailsIntent.putExtra("type", "add");
         viewVetDetailsIntent.putExtra("id", "");
         viewVetDetailsIntent.putExtra("pet_id", "");
         startActivity(viewVetDetailsIntent);
+
+
+
     }
 }

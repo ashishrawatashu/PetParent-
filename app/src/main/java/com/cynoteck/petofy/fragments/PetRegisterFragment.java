@@ -30,6 +30,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
@@ -60,6 +61,7 @@ import static com.cynoteck.petofy.activity.DonationActivity.donatePetAdapter;
 public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDeatilsAndIdCardClick, View.OnClickListener, TextWatcher {
     View                                view;
     Context                             context;
+    SwipeRefreshLayout                  petList_swipe_RL;
     Methods                             methods;
     CardView                            materialCardView;
     RecyclerView                        register_pet_RV;
@@ -102,20 +104,15 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
         mNetworkReceiver    =   new NetworkChangeReceiver();
         registerNetworkBroadcastForNougat();
-
-        Log.e("CHECK", "CKECK1");
         init();
-        Log.e("CHECK", "CKECK1");
-
         return view;
     }
 
 
     @SuppressLint("SetTextI18n")
     private void init() {
-        Log.e("CHECK", "CKECK1");
-
         methods = new Methods(context);
+        petList_swipe_RL        = view.findViewById(R.id.petList_swipe_RL);
         something_wrong_LL      = view.findViewById(R.id.something_wrong_LL);
         retry_BT                = view.findViewById(R.id.retry_BT);
         empty_IV                = view.findViewById(R.id.empty_IV);
@@ -149,6 +146,18 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 progressBarFirst.setVisibility(View.VISIBLE);
                 getPetList(page, pagelimit);
         }
+
+        petList_swipe_RL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                empty_IV.setVisibility(View.GONE);
+                total_pets_TV.setText(" ");
+                PetParentSingleton.getInstance().getArrayList().clear();
+                registerPetAdapter.notifyDataSetChanged();
+                petListHorizontalAdapter.notifyDataSetChanged();
+                getPetList(page, pagelimit);
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
@@ -214,8 +223,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
         ApiService<GetPetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetList");
-
-        Log.e("REQUESTT", methods.getRequestJson(getPetDataRequest));
+//        Log.d("PET_LIST_REQ", methods.getRequestJson(getPetDataRequest));
 
     }
 
@@ -225,6 +233,8 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
         switch (key) {
             case "GetPetList":
                 try {
+                    petList_swipe_RL.setRefreshing(false);
+                    //Log.d"PET_LIST",methods.getRequestJson(response.body()));
                     isLoaded = true;
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
@@ -268,7 +278,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                                 registerPetAdapter.notifyDataSetChanged();
                                 petListHorizontalAdapter.notifyDataSetChanged();
                                 pet_list_LL.setVisibility(View.VISIBLE);
-                                donatePetAdapter.notifyDataSetChanged();
+//                                donatePetAdapter.notifyDataSetChanged();
 
                             }
                         }
@@ -288,7 +298,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onError(Throwable t, String key) {
-        Log.e("ERROR", t.getLocalizedMessage());
+        //Log.d"ERROR", t.getLocalizedMessage());
         somethingWrongMethod();
 
     }
@@ -307,6 +317,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     @Override
     public void onViewDetailsClick(int position) {
+        //Log.d"Encrppt",PetParentSingleton.getInstance().getArrayList().get(position).getId());
         Intent intent = new Intent(getActivity(), PetProfileActivity.class);
         intent.putExtra("pet_list_position", String.valueOf(position));
         intent.putExtra("pet_id", PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2));
@@ -319,7 +330,6 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
         intent.putExtra("pet_category", PetParentSingleton.getInstance().getArrayList().get(position).getPetCategory());
         intent.putExtra("pet_DOB", PetParentSingleton.getInstance().getArrayList().get(position).getDateOfBirth());
         intent.putExtra("pet_color", PetParentSingleton.getInstance().getArrayList().get(position).getPetColor());
-
         startActivity(intent);
 
     }
@@ -373,7 +383,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
     public static void dialog(boolean value) {
         if (value) {
-            Log.e("Connected", "Yes");
+            //Log.d"Connected", "Yes");
             isOnline = true;
             Handler handler = new Handler();
             Runnable delayrunnable = new Runnable() {
@@ -385,20 +395,20 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
             handler.postDelayed(delayrunnable, 3000);
         } else {
             isOnline = false;
-            Log.e("Connected", "NO");
+            //Log.d"Connected", "NO");
             somethingWrongMethod();
         }
     }
 
     private static void somethingWrongMethod() {
         progressBarFirst.setVisibility(View.GONE);
-        Log.e("RUN", "RUN");
+        //Log.d"RUN", "RUN");
         if (isLoaded) {
-            Log.e("RUN", "NOT_EMPTY");
+            //Log.d"RUN", "NOT_EMPTY");
             something_wrong_LL.setVisibility(View.GONE);
             nestedScrollView.setVisibility(View.VISIBLE);
         } else {
-            Log.e("RUN", "EMPTY");
+            //Log.d"RUN", "EMPTY");
             something_wrong_LL.setVisibility(View.VISIBLE);
             nestedScrollView.setVisibility(View.GONE);
         }
