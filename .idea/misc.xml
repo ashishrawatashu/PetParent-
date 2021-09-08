@@ -8,7 +8,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/activity_add_pet_register.xml" value="0.20102564102564102" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/activity_insurance.xml" value="0.14351851851851852" />
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/activity_vet_full_profile.xml" value="0.13240740740740742" />
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_pet_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/pet_profile_activity.xml" value="0.1" />
       </map>
     </option>
   </component>

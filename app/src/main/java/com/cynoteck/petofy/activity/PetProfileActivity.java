@@ -55,7 +55,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     RelativeLayout              edit_profile_RL;
     ScrollView                  pet_full_details_SV;
     int                         pet_list_position;
-    LinearLayout                insurance_LL,pet_reports_LL, consultation_LL, donate_pet_LL,hostels_LL,grooming_LL,pet_shops_LL;
+    LinearLayout                training_LL,insurance_LL,pet_reports_LL, consultation_LL, donate_pet_LL,hostels_LL,grooming_LL,pet_shops_LL;
     //    ConstraintLayout pet_profile_details_CL;
     Dialog                      insurance_successfully_dialog;
 
@@ -86,6 +86,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         hostels_LL              = findViewById(R.id.hostels_LL);
         pet_reports_LL          = findViewById(R.id.pet_reports_LL);
         pet_shops_LL            = findViewById(R.id.pet_shops_LL);
+        training_LL             = findViewById(R.id.training_LL);
 
         pet_profile_image_IV    = findViewById(R.id.pet_profile_image_IV);
         image_edit_CV           = findViewById(R.id.image_edit_CV);
@@ -105,7 +106,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
         hostels_LL.setOnClickListener(this);
         pet_reports_LL.setOnClickListener(this);
         pet_shops_LL.setOnClickListener(this);
-
+        training_LL.setOnClickListener(this);
         edit_profile_RL.setOnClickListener(this);
         insurance_LL.setOnClickListener(this);
 
@@ -259,6 +260,9 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
                 insuranceIntent.putExtra("petId",petId);
                 insuranceIntent.putExtra("afterLogin","yes");
+                insuranceIntent.putExtra("pet_breed", pet_breed);
+                insuranceIntent.putExtra("pet_color", pet_color);
+
                 startActivityForResult(insuranceIntent,2);
                 break;
 

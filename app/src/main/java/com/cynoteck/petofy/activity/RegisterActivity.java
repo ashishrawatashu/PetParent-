@@ -78,7 +78,7 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
         methods.showCustomProgressBarDialog(this);
         ApiService<LoginRegisterResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().registerApi(registerparams), "Register");
-        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(registerparams));
+        Log.d("DATALOG", "check1=> " + methods.getRequestJson(registerparams));
     }
 
     @Override

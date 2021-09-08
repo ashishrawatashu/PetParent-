@@ -267,9 +267,17 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(RESULT_OK);
+        finish();
+    }
+
     private void setParentData() {
-        parent_name_TV.setText(Config.user_name);
+        parent_name_TV.setText(Config.first_name+" "+Config.last_name);
         parent_phone_TV.setText(Config.user_phone);
+
         if (Config.user_address.equals("")) {
             parent_address_RL.setVisibility(View.GONE);
             parent_address_TV.setVisibility(View.GONE);
@@ -409,8 +417,8 @@ public class ParentFullProfileActivity extends AppCompatActivity implements View
 
             case "UploadDocument":
 
-                //Log.d"UploadDocument", t.getLocalizedMessage().toString());
-                //Log.d"UploadDocument", t.getLocalizedMessage().toString());
+                Log.d("UploadDocument", t.getLocalizedMessage().toString());
+                Log.d("UploadDocument", t.getLocalizedMessage().toString());
                 break;
         }
 

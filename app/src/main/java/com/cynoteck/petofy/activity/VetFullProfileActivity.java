@@ -296,7 +296,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                             book_appointment_BT.setVisibility(View.VISIBLE);
                             book_appointment_BT.setEnabled(true);
                         }else {
-                            book_appointment_BT.setVisibility(View.GONE);
+                            book_appointment_BT.setVisibility(View.VISIBLE);
                             book_appointment_BT.setEnabled(false);
                             book_appointment_BT.setBackgroundResource(R.drawable.next_button_grey_bg);
                         }

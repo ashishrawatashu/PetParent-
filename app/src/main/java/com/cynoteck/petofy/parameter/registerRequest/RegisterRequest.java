@@ -1,7 +1,6 @@
 package com.cynoteck.petofy.parameter.registerRequest;
 
-public class RegisterRequest
-{
+public class RegisterRequest {
     private String Email;
 
     private String FirstName;

@@ -83,6 +83,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     private BroadcastReceiver           mNetworkReceiver;
     static boolean                      isOnline = true;
     static boolean                      isLoaded = false;
+    static boolean                      fromSwipe = false;
 
     @Override
     public void onAttach(@Nullable Context context) {
@@ -150,6 +151,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
         petList_swipe_RL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                fromSwipe = true;
                 empty_IV.setVisibility(View.GONE);
                 total_pets_TV.setText(" ");
                 PetParentSingleton.getInstance().getArrayList().clear();
@@ -179,9 +181,26 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
+                if (!PetParentSingleton.getInstance().getArrayList().isEmpty()) {
+                    empty_IV.setVisibility(View.GONE);
+                    register_pet_RV.setVisibility(View.VISIBLE);
+                    something_wrong_LL.setVisibility(View.GONE);
+                    nestedScrollView.setVisibility(View.VISIBLE);
+                    progressBarFirst.setVisibility(View.GONE);
+                    pet_list_LL.setVisibility(View.VISIBLE);
+                    total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
+                    register_pet_RV.setAdapter(registerPetAdapter);
+                    registerPetAdapter.notifyDataSetChanged();
+                    petListHorizontalAdapter.notifyDataSetChanged();
+                }else {
+                    progressBarFirst.setVisibility(View.VISIBLE);
+                    getPetList(page, pagelimit);
+                }
                 registerPetAdapter.notifyDataSetChanged();
                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
                 petListHorizontalAdapter.notifyDataSetChanged();
+
+
             }
         }
     }
@@ -198,6 +217,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 break;
 
             case R.id.retry_BT:
+                fromSwipe = false;
                 if (isOnline) {
                     something_wrong_LL.setVisibility(View.GONE);
                     progressBarFirst.setVisibility(View.VISIBLE);
@@ -234,7 +254,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
             case "GetPetList":
                 try {
                     petList_swipe_RL.setRefreshing(false);
-                    //Log.d"PET_LIST",methods.getRequestJson(response.body()));
+                    Log.d("PET_LIST",methods.getRequestJson(response.body()));
                     isLoaded = true;
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
@@ -245,12 +265,10 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                         if (getPetListResponse.getData().getPetList().isEmpty()) {
                             total_pets_TV.setText("No pet registered ! ");
                             empty_IV.setVisibility(View.VISIBLE);
-                            search_register_pet.setVisibility(View.INVISIBLE);
                             pet_list_LL.setVisibility(View.GONE);
                         } else {
                             PetParentSingleton.getInstance().getArrayList().clear();
-                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-                            register_pet_RV.setLayoutManager(linearLayoutManager);
+
                             if (getPetListResponse.getData().getPetList().size() > 0) {
                                 for (int i = 0; i < getPetListResponse.getData().getPetList().size(); i++) {
                                     PetList petList = new PetList();
@@ -299,6 +317,9 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     @Override
     public void onError(Throwable t, String key) {
         //Log.d"ERROR", t.getLocalizedMessage());
+        if (fromSwipe){
+            petList_swipe_RL.setRefreshing(false);
+        }
         somethingWrongMethod();
 
     }
@@ -401,7 +422,9 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     }
 
     private static void somethingWrongMethod() {
-        progressBarFirst.setVisibility(View.GONE);
+        if (!fromSwipe){
+            progressBarFirst.setVisibility(View.GONE);
+        }
         //Log.d"RUN", "RUN");
         if (isLoaded) {
             //Log.d"RUN", "NOT_EMPTY");

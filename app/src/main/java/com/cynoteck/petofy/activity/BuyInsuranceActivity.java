@@ -168,7 +168,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
 
     private int                 DOC_UPLOAD=105;
-    String           imageTypeName="", petId, backImageUrl=null, topImageUrl=null,leftImageUrl=null,rightImageUrl=null,rfidImageUrl=null,pedigreeDocumentUrl=null,vaccinationCardUrl=null,purchaseProofUrl=null,frontImageUrl=null;
+    String                      imageTypeName="", petId, backImageUrl=null, topImageUrl=null,leftImageUrl=null,rightImageUrl=null,rfidImageUrl=null,pedigreeDocumentUrl=null,vaccinationCardUrl=null,purchaseProofUrl=null,frontImageUrl=null;
 
     String[] mimeTypes = {"image/*",
             "application/pdf",
@@ -195,6 +195,8 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
         if (afterLogin.equals("yes")){
             petId      = intent.getStringExtra("petId");
+            strSpnrBreed = intent.getStringExtra("pet_breed");
+            strSpnrColor = intent.getStringExtra("pet_color");
             String  url = "pet-punching-policy/"+petId;
             Log.e("Url",url);
             methods.showCustomProgressBarDialog(this);
@@ -711,7 +713,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     if (afterLogin.equals("yes")){
                         ApiService<JsonObject> service = new ApiService<>();
                         service.get(this, ApiClient.getApiInterface().parentAfterLoginPunchingPolicy(Config.token,punchingPolicyRequest), "PunchingPolicyRequest");
-//                        Log.e("PunchingPolicyRequest"+"AfterLogin", "Request=> " +methods.getRequestJson(punchingPolicyRequest));
+                        Log.e("PunchingPolicyRequest"+"AfterLogin", "Request=> " +methods.getRequestJson(punchingPolicyRequest));
                     }else {
                         ApiService<JsonObject> service1 = new ApiService<>();
                         service1.get(this, ApiClient.getApiInterface().punchingPolicy(tokenForInsurance,punchingPolicyRequest), "PunchingPolicyRequest");
@@ -1167,13 +1169,13 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
             case  "GetAllDetailOfPet":
                 try {
                     methods.customProgressDismiss();
-                    Log.e("GetAllDetailOfPet",response.body().toString());
                     getAllDetailAfterLoginResponse = (GetAllDetailAfterLoginResponse) response.body();
                     int responseCode = Integer.parseInt(getAllDetailAfterLoginResponse.getResponse().getResponseCode());
+                    Log.e("GetAllDetailOfPet",methods.getRequestJson(getAllDetailAfterLoginResponse));
                     if (responseCode==109) {
                         String stepperCount = getAllDetailAfterLoginResponse.getData().getStepper();
                         if (stepperCount==null){
-                            Log.e("Step_COUNT",stepperCount);
+//                            Log.e("Step_COUNT",stepperCount);
                             //parent Data
                             setIstStepData();
                             //pet data
@@ -1827,13 +1829,11 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         }else {
             femaleRB.setChecked(true);
         }
-        String petDOB = getAllDetailAfterLoginResponse.getData().getPetDateofBirth().substring(0,getAllDetailAfterLoginResponse.getData().getPetDateofBirth().length()-11);
-        String age          = String.valueOf(methods.getDays(petDOB, methods.getDate()));
-        pet_layout_calenderTextView_dialog.setText(petDOB);
-        age_neumeric.setText(age);
-
+        pet_name_ET.setText(getAllDetailAfterLoginResponse.getData().getPetName());
         strSpnrBreed = getAllDetailAfterLoginResponse.getData().getPetBreedName();
         strSpnrColor= getAllDetailAfterLoginResponse.getData().getPetColorName();
+        Log.d("BREEDDD",strSpnrBreed+strSpnrColor);
+
         if (getAllDetailAfterLoginResponse.getData().getMicrochipNumber()!=null){
             do_you_have_microchip_CB.setChecked(true);
             pet_microchip_no_ET.setText(getAllDetailAfterLoginResponse.getData().getMicrochipNumber());
@@ -1854,11 +1854,11 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         }
 
         pet_features_ET.setText(getAllDetailAfterLoginResponse.getData().getFeatures());
-        pet_name_ET.setText(getAllDetailAfterLoginResponse.getData().getPetName());
 
-//        setPetTypeSpinner();
-//        setPetColorSpinner();
-//        setPetBreeSpinner();
+        String petDOB = (getAllDetailAfterLoginResponse.getData().getPetDateofBirth());
+        getPetAgeString(petDOB);
+        pet_layout_calenderTextView_dialog.setText(petDOB);
+
 
 
     }
@@ -1868,10 +1868,18 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         parent_last_name_ET.setText(getAllDetailAfterLoginResponse.getData().getLastName());
         parent_email_ET.setText(getAllDetailAfterLoginResponse.getData().getEmail());
         parent_phone_ET.setText(getAllDetailAfterLoginResponse.getData().getPhoneNumber());
-        calenderTextView_dialog.setText(getAllDetailAfterLoginResponse.getData().getOwnerDob().substring(0,getAllDetailAfterLoginResponse.getData().getOwnerDob().length()-11));
-        parent_address_ET.setText(getAllDetailAfterLoginResponse.getData().getAddress());
-        parent_pinCode_ET.setText(getAllDetailAfterLoginResponse.getData().getPinCode());
-        parent_referralCode_ET.setText(getAllDetailAfterLoginResponse.getData().getReferralCode());
+        if (getAllDetailAfterLoginResponse.getData().getOwnerDob()!=null){
+            calenderTextView_dialog.setText(Config.changeDateFormat(getAllDetailAfterLoginResponse.getData().getOwnerDob()));
+        }
+        if (getAllDetailAfterLoginResponse.getData().getAddress()!=null){
+            parent_address_ET.setText(getAllDetailAfterLoginResponse.getData().getAddress());
+        }
+        if (getAllDetailAfterLoginResponse.getData().getPinCode()!=null){
+            parent_pinCode_ET.setText(getAllDetailAfterLoginResponse.getData().getPinCode());
+        }
+        if (getAllDetailAfterLoginResponse.getData().getReferralCode()!=null){
+            parent_referralCode_ET.setText(getAllDetailAfterLoginResponse.getData().getReferralCode());
+        }
 
         strStateSpnr = getAllDetailAfterLoginResponse.getData().getStateName();
         strCitySpnr  = getAllDetailAfterLoginResponse.getData().getCityName();
@@ -1982,8 +1990,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         ApiService<PetColorValueResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getGetPetColorApi(breedParams), "GetPetColor");
     }
-
-
+    
     private void getPetAgeString(String DOB) {
         GetPetAgeParameter getPetAgeParameter = new GetPetAgeParameter();
         getPetAgeParameter.setDateOfBirth(DOB);

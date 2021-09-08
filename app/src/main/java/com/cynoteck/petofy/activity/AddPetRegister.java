@@ -655,7 +655,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         methods.showCustomProgressBarDialog(this);
         ApiService<AddPetValueResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().addNewPet(Config.token, addPetRequset), "AddPet");
-//      Log.d"DATALOG", "check1=> " + methods.getRequestJson(addPetRequset));
+        Log.d("DATALOG", "ADD_PET=> " + methods.getRequestJson(addPetRequset));
 
     }
 
@@ -850,7 +850,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             case "AddPet":
                 try {
                     methods.customProgressDismiss();
-                    //Log.d"AddPet", arg0.body().toString());
+                    Log.d("AddPet", arg0.body().toString());
                     AddPetValueResponse addPetValueResponse = (AddPetValueResponse) arg0.body();
                     int responseCode = Integer.parseInt(addPetValueResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {

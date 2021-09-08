@@ -241,8 +241,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 break;
 
             case R.id.general_details_CL:
-                Intent parentFullProfileIntent = new Intent(getContext(), ParentFullProfileActivity.class);
-                startActivity(parentFullProfileIntent);
+                Intent parentFullProfileIntent = new Intent(getActivity(), ParentFullProfileActivity.class);
+                startActivityForResult(parentFullProfileIntent, UPDATE);
                 break;
 
             case R.id.camera_IV:
@@ -324,11 +324,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == UPDATE) {
-            if (resultCode == RESULT_OK) {
-                parent_name_TV.setText(Config.first_name + " " + Config.last_name);
-                parent_mail_TV.setText(Config.user_emial);
-                parent_phone_no_TV.setText(Config.user_phone);
-            }
+            String name = Config.first_name+" "+Config.last_name;
+            parent_name_TV.setText(name);
+
         } else if (requestCode == ADD_PET) {
             if (resultCode == RESULT_OK) {
                 PetList petList = new PetList();

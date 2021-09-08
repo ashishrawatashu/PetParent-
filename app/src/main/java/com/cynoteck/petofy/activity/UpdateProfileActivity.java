@@ -189,7 +189,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                         login_editor.putString("lastName", loginRegisterResponse.getData().getLastName());
                         login_editor.putString("phoneNumber", loginRegisterResponse.getData().getPhoneNumber());
                         login_editor.putString("address", loginRegisterResponse.getData().getAddress());
-                        login_editor.commit();
+                        login_editor.apply();
+                        Config.first_name                       = sharedPreferences.getString("firstName", "");
+                        Config.last_name                        = sharedPreferences.getString("lastName", "");
                         setResult(RESULT_OK);
                         finish();
 
