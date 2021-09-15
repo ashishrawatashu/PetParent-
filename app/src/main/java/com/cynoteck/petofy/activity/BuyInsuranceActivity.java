@@ -245,6 +245,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
             next_step_TV.setText("Next: Pet Details");
             step_count_TV.setText("1 of 3");
 
+
         }
 
 
@@ -691,7 +692,6 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     }
 
                     PunchingPolicyParams    punchingPolicyParams = new PunchingPolicyParams();
-
                     punchingPolicyParams.setFirstName(pet_parent_first_name);
                     punchingPolicyParams.setLastName(pet_parent_last_name);
                     punchingPolicyParams.setEmail(pet_parent_email);
@@ -888,8 +888,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
             case R.id.privious_BT:
 
             case R.id.back_arrow_CV:
-
-                if (countSteps==3){
+                if(countSteps==3){
                     step_count_TV.setText("2 of 3");
                     step_name_TV.setText("Pet Details");
                     next_step_TV.setVisibility(View.VISIBLE);
@@ -911,10 +910,12 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     privious_BT.setVisibility(View.GONE);
                     circular_PB.setProgress(10);
                     countSteps = 1;
-                }else {
+                }else if(countSteps==1){
+//                    Toast.makeText(this,"THis is step first"+countSteps,Toast.LENGTH_SHORT).show();
                     finish();
-                }
 
+
+                }
                 break;
 
 
@@ -1133,35 +1134,34 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         plans_BSD.show();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (countSteps==3){
-            step_count_TV.setText("2 of 3");
-            step_name_TV.setText("Pet Details");
-            next_step_TV.setVisibility(View.VISIBLE);
-            next_step_TV.setText("Next: Document Section");
-            pet_parent_details_layout_frame.setVisibility(View.GONE);
-            insurance_pet_details_layout_frame.setVisibility(View.VISIBLE);
-            insurance_images_layout_frame.setVisibility(View.GONE);
-            privious_BT.setVisibility(View.VISIBLE);
-            circular_PB.setProgress(50);
-            countSteps = 2;
-        }else if (countSteps==2){
-            step_count_TV.setText("1 of 3");
-            step_name_TV.setText("Pet Parent Details");
-            next_step_TV.setVisibility(View.VISIBLE);
-            next_step_TV.setText("Next: Pet Details");
-            pet_parent_details_layout_frame.setVisibility(View.VISIBLE);
-            insurance_pet_details_layout_frame.setVisibility(View.GONE);
-            insurance_images_layout_frame.setVisibility(View.GONE);
-            privious_BT.setVisibility(View.GONE);
-            circular_PB.setProgress(10);
-            countSteps = 1;
-
-        }else {
-            finish();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (countSteps==3){
+//            step_count_TV.setText("2 of 3");
+//            step_name_TV.setText("Pet Details");
+//            next_step_TV.setVisibility(View.VISIBLE);
+//            next_step_TV.setText("Next: Document Section");
+//            pet_parent_details_layout_frame.setVisibility(View.GONE);
+//            insurance_pet_details_layout_frame.setVisibility(View.VISIBLE);
+//            insurance_images_layout_frame.setVisibility(View.GONE);
+//            privious_BT.setVisibility(View.VISIBLE);
+//            circular_PB.setProgress(50);
+//            countSteps = 2;
+//        }else if (countSteps==2){
+//            step_count_TV.setText("1 of 3");
+//            step_name_TV.setText("Pet Parent Details");
+//            next_step_TV.setVisibility(View.VISIBLE);
+//            next_step_TV.setText("Next: Pet Details");
+//            pet_parent_details_layout_frame.setVisibility(View.VISIBLE);
+//            insurance_pet_details_layout_frame.setVisibility(View.GONE);
+//            insurance_images_layout_frame.setVisibility(View.GONE);
+//            privious_BT.setVisibility(View.GONE);
+//            circular_PB.setProgress(10);
+//            countSteps = 1;
+//        }else if (countSteps==1) {
+//           finish();
+//        }
+//    }
 
     @Override
     public void onResponse(Response response, String key) {
@@ -1184,7 +1184,6 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                             set3rdStepData();
                         }else if (stepperCount.equals("2")){
                             Log.e("Step_COUNT",stepperCount);
-
                             //parent Data
                             setIstStepData();
                             //pet data
@@ -1193,7 +1192,6 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                             set3rdStepData();
                         }else if (stepperCount.equals("3")){
                             Log.e("Step_COUNT",stepperCount);
-
                             //parent Data
                             setIstStepData();
                             //pet data
@@ -1302,6 +1300,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                         loading_PB.setVisibility(View.VISIBLE);
                         circular_PB.setVisibility(View.GONE);
                         setResult(RESULT_OK);
+                        countSteps = 1;
                         finish();
                     }else {
                         loading_PB.setVisibility(View.VISIBLE);

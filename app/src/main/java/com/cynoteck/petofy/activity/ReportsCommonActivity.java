@@ -65,7 +65,6 @@ public class ReportsCommonActivity extends AppCompatActivity {
                 FragmentTransaction selectPetReportsFragmentFT = getSupportFragmentManager().beginTransaction();
                 selectPetReportsFragmentFT.replace(R.id.report_type_frame, fragment1);
                 selectPetReportsFragmentFT.commit();
-
                 break;
 
             case "2.0":

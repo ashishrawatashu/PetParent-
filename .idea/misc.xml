@@ -14,6 +14,21 @@
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_pet_register.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/pet_profile_activity.xml" value="0.1" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_add_update_appointment.xml" value="0.20416666666666666" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_adoption_pet_details.xml" value="0.20416666666666666" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_buy_insurance.xml" value="0.19021739130434784" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_insurance.xml" value="0.16354166666666667" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_parent_full_profile.xml" value="0.1" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_pet_id_card.xml" value="0.1" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_pet_insurance.xml" value="0.1598731884057971" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_reports_common.xml" value="0.12447916666666667" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_scanner.xml" value="0.1" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_selected_pet_reports.xml" value="0.1" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/camera_permission_dialog.xml" value="0.14791666666666667" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_reports_list.xml" value="0.1598731884057971" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/insurance_images_document_section_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/location_permission_dialog.xml" value="0.16145833333333334" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/pet_profile_activity.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -61,7 +76,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

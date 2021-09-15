@@ -53,11 +53,11 @@ public class PetInsuranceActivity extends AppCompatActivity implements View.OnCl
                 Intent insurancesIntent = new Intent(this, InsuranceActivity.class);
                 startActivity(insurancesIntent);
                 break;
-
             case R.id.insurance_card_LL:
                 Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
                 insuranceIntent.putExtra("afterLogin","no");
-                startActivity(insuranceIntent);
+//                ----------------------------------------------------------------------------------------
+//                startActivity(insuranceIntent);
                 startActivityForResult(insuranceIntent,1);
                 break;
 

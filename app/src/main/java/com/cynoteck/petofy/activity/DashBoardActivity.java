@@ -12,15 +12,18 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -153,6 +156,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
                         ActivityCompat.requestPermissions(DashBoardActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
                     }
+
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -215,7 +219,8 @@ public class DashBoardActivity extends AppCompatActivity {
                         locationPermission = false;
                     }
                 } else {
-                    locationPermission = false;
+                    locationPermission = true;
+//                    sendToSetting();
                     showLocationPermissionDialog();
                 }
 
@@ -248,6 +253,14 @@ public class DashBoardActivity extends AppCompatActivity {
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(lp);
     }
+
+//    private void sendToSetting(){
+//        Intent intent = new Intent();
+//        intent.setAction(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+//        Uri uri = Uri.fromParts("package",getPackageName(), null);
+//        intent.setData(uri);
+//        startActivity(intent);
+//    }
 
 
     private void notificationMethod() {
