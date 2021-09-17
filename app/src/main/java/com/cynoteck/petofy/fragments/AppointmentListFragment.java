@@ -178,7 +178,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "NonConstantResourceId"})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

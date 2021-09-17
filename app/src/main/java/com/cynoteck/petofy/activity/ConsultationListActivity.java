@@ -188,7 +188,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
         ApiService<GetVetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getVetList(Config.token, getVetListRequest), "GetVetList");
-        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(getVetListRequest));
+        Log.d("DATALOG", "check1=> " + methods.getRequestJson(getVetListRequest));
 
     }
 

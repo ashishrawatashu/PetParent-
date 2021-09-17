@@ -52,6 +52,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_screen);
         methods = new Methods(this);
+        Checkout.preload(getApplicationContext());
         intentData();
 
         initization();
@@ -105,8 +106,11 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
     }
 
     private void startPayment() {
+
         Checkout checkout = new Checkout();
-        checkout.setKeyID("rzp_test_f1R6dTWpxaiwgg");
+        checkout.setKeyID("rzp_live_33I1Yzt5hkmdzN");
+
+        // rzp_test_f1R6dTWpxaiwgg   testing key
         checkout.setImage(R.drawable.petofy_p_logo);
         final Activity activity = this;
         try {
@@ -124,7 +128,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
             options.put("prefill", preFill);
             checkout.open(activity, options);
         } catch(Exception e) {
-            //Log.d"TAG", "Error in starting Razorpay Checkout", e);
+            Log.d("TAG", "Error in starting Razorpay Checkout", e);
         }
     }
 
@@ -167,9 +171,9 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
             case "GetOrder":
                 try {
                     methods.customProgressDismiss();
-                    //Log.d"GetOrder",arg0.body().toString());
+                    Log.d("GetOrder",arg0.body().toString());
                     GetOrderResponse getOrderResponse = (GetOrderResponse) arg0.body();
-                    //Log.d"getOrderResponse",getOrderResponse.toString());
+                    Log.d("getOrderResponse",getOrderResponse.toString());
                     int responseCode = Integer.parseInt(getOrderResponse.getResponse().getResponseCode());
                     if (responseCode==109) {
                         payment_details_CL.setVisibility(View.VISIBLE);
