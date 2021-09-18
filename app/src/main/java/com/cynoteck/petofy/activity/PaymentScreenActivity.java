@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,10 +43,11 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
     Button              procced_appointment_BT;
     MaterialCardView    back_arrow_CV;
     TextView            vetName_TV,topic_TV,appointment_time_TV,date_TV,pet_name_TV,consultation_fee_TV;
-    String              vetUserId,vetName,appointment_time,topic,mettingID,order_ID,amount,vet_image_url;
+    String              petName,vetUserId,vetName,appointment_time,topic,mettingID,order_ID,amount,vet_image_url;
     Methods             methods;
     ConstraintLayout    payment_details_CL;
     CircleImageView     parent_profile_CIV;
+    ProgressBar         progress_bar_payment_PB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
     private void intentData() {
         Intent intent       = getIntent();
+        petName             = intent.getStringExtra("petName");
         vetUserId           = intent.getStringExtra("vetId");
         vetName             = intent.getStringExtra("vetName");
         appointment_time    = intent.getStringExtra("appointment_time");
@@ -77,7 +80,9 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
     private void getOrderDetails() {
         payment_details_CL.setVisibility(View.INVISIBLE);
-        methods.showCustomProgressBarDialog(this);
+        progress_bar_payment_PB.setVisibility(View.VISIBLE);
+        procced_appointment_BT.setVisibility(View.GONE);
+//        methods.showCustomProgressBarDialog(this);
         GetOrderParams getOrderParams = new GetOrderParams();
         getOrderParams.setVeterinarianId(vetUserId);
         GetOrderRequest getOrderRequest = new GetOrderRequest();
@@ -99,6 +104,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
         pet_name_TV                 = findViewById(R.id.pet_name_TV);
         back_arrow_CV               = findViewById(R.id.back_arrow_CV);
         parent_profile_CIV          = findViewById(R.id.parent_profile_CIV);
+        progress_bar_payment_PB     = findViewById(R.id.progress_bar_payment_PB);
 
         back_arrow_CV.setOnClickListener(this);
         procced_appointment_BT.setOnClickListener(this);
@@ -106,12 +112,12 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
     }
 
     private void startPayment() {
-
+        progress_bar_payment_PB.setVisibility(View.VISIBLE);
+        procced_appointment_BT.setVisibility(View.GONE);
         Checkout checkout = new Checkout();
-        checkout.setKeyID("rzp_live_33I1Yzt5hkmdzN");
-
-        // rzp_test_f1R6dTWpxaiwgg   testing key
-        checkout.setImage(R.drawable.petofy_p_logo);
+        checkout.setKeyID("rzp_live_33I1Yzt5hkmdzN");// live key
+//        checkout.setKeyID("rzp_test_f1R6dTWpxaiwgg");//testing KEY
+        checkout.setImage(R.drawable.petofy_logo_razorpay);
         final Activity activity = this;
         try {
             JSONObject options = new JSONObject();
@@ -134,22 +140,15 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
     @Override
     public void onPaymentSuccess(String s, PaymentData paymentData) {
-//        Toast.makeText(PaymentScreenActivity.this, "Transaction Successful: " + paymentData.getOrderId(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.putExtra("Amount",amount);
         setResult(RESULT_OK, intent);
         finish();
-        //Log.d"mettingId",mettingID);
-        //Log.d"orderId",paymentData.getOrderId());
-        //Log.d"PaymentId",paymentData.getPaymentId());
-        //Log.d"amount",amount);
-
         PaymentHistoryParms paymentHistoryParms = new PaymentHistoryParms();
         paymentHistoryParms.setAmount(amount);
         paymentHistoryParms.setAppointmentId(mettingID);
         paymentHistoryParms.setOrderId(paymentData.getOrderId());
         paymentHistoryParms.setPaymentId(paymentData.getPaymentId());
-
         PaymentHistoryRequest paymentHistoryRequest = new PaymentHistoryRequest();
         paymentHistoryRequest.setData(paymentHistoryParms);
 
@@ -161,16 +160,21 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
 
     @Override
     public void onPaymentError(int i, String s, PaymentData paymentData) {
-
+//        Log.d("DATA",methods.getRequestJson(paymentData));
+        finish();
+        Toast.makeText(this, "Payment transaction failed !", Toast.LENGTH_SHORT).show();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onResponse(Response arg0, String key) {
 
         switch (key){
             case "GetOrder":
                 try {
-                    methods.customProgressDismiss();
+//                    methods.customProgressDismiss();
+                    progress_bar_payment_PB.setVisibility(View.GONE);
+                    procced_appointment_BT.setVisibility(View.VISIBLE);
                     Log.d("GetOrder",arg0.body().toString());
                     GetOrderResponse getOrderResponse = (GetOrderResponse) arg0.body();
                     Log.d("getOrderResponse",getOrderResponse.toString());
@@ -180,8 +184,10 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
                         order_ID = getOrderResponse.getData().getAttributes().getId();
                         amount = getOrderResponse.getData().getAttributes().getAmount();
                         vetName_TV.setText(vetName);
+                        pet_name_TV.setText(petName);
+                        double total = Double.parseDouble(getOrderResponse.getData().getAttributes().getAmount());
                         appointment_time_TV.setText(appointment_time);
-                        consultation_fee_TV.setText("₹ "+amount);
+                        consultation_fee_TV.setText("₹ "+total/100);
                         Glide.with(this)
                                 .load(vet_image_url)
                                 .placeholder(R.drawable.doctor_dummy_image)

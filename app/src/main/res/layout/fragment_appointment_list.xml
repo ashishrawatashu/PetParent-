@@ -90,159 +90,186 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/appoint_tabs_LL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:weightSum="2"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/appointments_list_SRL"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
 
-        <LinearLayout
-            android:id="@+id/upcoming_appointment_tab_LL"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appointments_layout_CL"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/upcoming_appointment_TV"
+
+            <LinearLayout
+                android:id="@+id/appoint_tabs_LL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito"
-                android:gravity="center"
-                android:text="Upcoming Appointments"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp" />
-
-            <View
-                android:id="@+id/upcoming_appointment_line"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/colorPrimary" />
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="2"
+                app:layout_constraintTop_toTopOf="parent">
 
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/upcoming_appointment_tab_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/past_appointment_tab_LL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/upcoming_appointment_TV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito"
+                        android:gravity="center"
+                        android:text="Upcoming Appointments"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:id="@+id/upcoming_appointment_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@color/colorPrimary" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/past_appointment_tab_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/past_appointment_TV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito"
+                        android:gravity="center"
+                        android:text="Past Appointments"
+                        android:textColor="@color/gray_3"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:id="@+id/past_appointment_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#E0E0E0" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/past_appointment_TV"
-                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:id="@+id/no_upcoming_appointment_TV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="There is no appointment !"
+                android:textSize="22sp"
                 android:fontFamily="@font/nunito"
-                android:gravity="center"
-                android:text="Past Appointments"
-                android:textColor="@color/gray_3"
-                android:textSize="15sp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
 
-            <View
-                android:id="@+id/past_appointment_view"
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/no_past_appointment_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="There is no appointment !"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcoming_appointment_RV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appoint_tabs_LL"
+                tools:listitem="@layout/appointments_list" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/past_appointment_RV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appoint_tabs_LL"
+                tools:listitem="@layout/appointments_list" />
+
+            <LinearLayout
+                android:id="@+id/something_wrong_LL"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="4dp"
-                android:background="#E0E0E0" />
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:text="@string/somethingWrong"
+                    android:textColor="@color/gray_2" />
+
+                <Button
+                    android:id="@+id/retry_BT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/blue_background_bg"
+                    android:text="RETRY"
+                    android:textColor="@color/whiteColor" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </LinearLayout>
 
 
-    </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbar" />
-
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/no_upcoming_appointment_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="There is no appointment !"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/no_past_appointment_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="There is no appointment !"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcoming_appointment_RV"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="@id/toolbar"
-        app:layout_constraintTop_toBottomOf="@id/appoint_tabs_LL"
-        tools:listitem="@layout/appointments_list" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/past_appointment_RV"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="@id/toolbar"
-        app:layout_constraintTop_toBottomOf="@id/appoint_tabs_LL"
-        tools:listitem="@layout/appointments_list" />
-
-    <LinearLayout
-        android:id="@+id/something_wrong_LL"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbar">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito"
-            android:text="@string/somethingWrong"
-            android:textColor="@color/gray_2" />
-
-        <Button
-            android:id="@+id/retry_BT"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/blue_background_bg"
-            android:text="RETRY"
-            android:textColor="@color/whiteColor" />
-
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

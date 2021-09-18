@@ -82,6 +82,8 @@
     </LinearLayout>
 
 
+
+
     <LinearLayout
         android:id="@+id/search_bar_LL"
         android:layout_width="0dp"
@@ -103,6 +105,8 @@
         <EditText
             android:id="@+id/search_vet_ET"
             android:layout_width="match_parent"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
@@ -155,6 +159,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vet_list_RV"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"

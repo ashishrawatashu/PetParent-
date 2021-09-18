@@ -14,9 +14,11 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.util.Log;
@@ -32,9 +34,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cynoteck.petofy.activity.ConsultationListActivity;
+import com.cynoteck.petofy.activity.PaymentScreenActivity;
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
-import com.cynoteck.petofy.activity.PaymentScreenActivity;
 import com.cynoteck.petofy.adapter.PastAppointmentListAdapter;
 import com.cynoteck.petofy.adapter.UpcomingAppointmentListAdapter;
 import com.cynoteck.petofy.api.ApiClient;
@@ -68,8 +70,10 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
     MaterialCardView                back_arrow_CV,appointment_CV;
     LinearLayout                    upcoming_appointment_tab_LL, past_appointment_tab_LL;
     TextView                        upcoming_appointment_TV, past_appointment_TV;
+    SwipeRefreshLayout              appointments_list_SRL;
     View                            upcoming_appointment_line, past_appointment_view;
     static RecyclerView             upcoming_appointment_RV, past_appointment_RV;
+    ConstraintLayout                appointments_layout_CL;
     GetAppointmentResponse          getUpcomingAppointmentResponse, pastAppointmentResponse;
     PastAppointmentListAdapter      pastAppointmentListAdapter;
     String                          mettingId = "";
@@ -85,6 +89,8 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
     static boolean                  isOnline = true;
     static  boolean                 upcomingTabClick = true, pastAppointmentClick = false;
     int                             cancelPosition;
+    static boolean                  fromSwipe = false;
+
 
     public AppointmentListFragment() {
 
@@ -101,24 +107,17 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         progressBar.setVisibility(View.VISIBLE);
 
         getUpcomingAppointments();
-        getPastAppointments();
+//        getPastAppointments();
+
+
         upcoming_appointment_RV.setLayoutManager(new LinearLayoutManager(getContext()));
         upcomingAppointmentListAdapter = new UpcomingAppointmentListAdapter(getContext(), PetParentSingleton.getInstance().getUpComingAppointmentList(), this);
         upcoming_appointment_RV.setAdapter(upcomingAppointmentListAdapter);
 
-        past_appointment_RV.setLayoutManager(new LinearLayoutManager(getContext()));
-        pastAppointmentListAdapter = new PastAppointmentListAdapter(getContext(), PetParentSingleton.getInstance().getPastAppointmentList());
-        past_appointment_RV.setAdapter(pastAppointmentListAdapter);
+//        past_appointment_RV.setLayoutManager(new LinearLayoutManager(getContext()));
+//        pastAppointmentListAdapter = new PastAppointmentListAdapter(getContext(), PetParentSingleton.getInstance().getPastAppointmentList());
+//        past_appointment_RV.setAdapter(pastAppointmentListAdapter);
 
-        Timer timer = new Timer();
-        TimerTask hourlyTask = new TimerTask() {
-            @Override
-            public void run() {
-                getUpcomingAppointments();
-            }
-        };
-
-        timer.schedule(hourlyTask, 0l, 10000);
         return view;
 
     }
@@ -149,6 +148,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
         progressBar                 =   view.findViewById(R.id.progressBar);
         back_arrow_CV               =   view.findViewById(R.id.back_arrow_CV);
+        appointments_layout_CL      =   view.findViewById(R.id.appointments_layout_CL);
         appointment_CV              =   view.findViewById(R.id.appointment_CV);
         appoint_tabs_LL             =   view.findViewById(R.id.appoint_tabs_LL);
         upcoming_appointment_tab_LL =   view.findViewById(R.id.upcoming_appointment_tab_LL);
@@ -163,6 +163,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         retry_BT                    =   view.findViewById(R.id.retry_BT);
         no_past_appointment_TV      =   view.findViewById(R.id.no_past_appointment_TV);
         no_upcoming_appointment_TV  =   view.findViewById(R.id.no_upcoming_appointment_TV);
+        appointments_list_SRL       =   view.findViewById(R.id.appointments_list_SRL);
 
 
         retry_BT.setOnClickListener(this);
@@ -170,6 +171,18 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         back_arrow_CV.setOnClickListener(this);
         upcoming_appointment_tab_LL.setOnClickListener(this);
         past_appointment_tab_LL.setOnClickListener(this);
+        appointments_list_SRL.setEnabled(false);
+
+        appointments_list_SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fromSwipe = true;
+                appointments_layout_CL.setVisibility(View.GONE);
+                getUpcomingAppointments();
+
+
+            }
+        });
 
 
 //        upcoming_appointment_tab_LL.setEnabled(false);
@@ -232,11 +245,12 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                 break;
 
             case R.id.retry_BT:
+                fromSwipe = false;
                 if (isOnline) {
                     something_wrong_LL.setVisibility(View.GONE);
                     progressBar.setVisibility(View.VISIBLE);
                     getUpcomingAppointments();
-                    getPastAppointments();
+//                    getPastAppointments();
                 } else {
                     somethingWrong();
                 }
@@ -245,6 +259,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key) {
@@ -252,9 +267,12 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
             case "GetUpcomingAppointment":
                 try {
                     isLoaded = true;
+                    appointments_list_SRL.setRefreshing(false);
+                    appointments_list_SRL.setEnabled(true);
+                    appointments_layout_CL.setVisibility(View.VISIBLE);
                     somethingWrong();
                     progressBar.setVisibility(View.GONE);
-                    appoint_tabs_LL.setVisibility(View.VISIBLE);
+//                    appoint_tabs_LL.setVisibility(View.VISIBLE);
                     upcoming_appointment_tab_LL.setEnabled(true);
                     getUpcomingAppointmentResponse = (GetAppointmentResponse) arg0.body();
                     int responseCode = Integer.parseInt(getUpcomingAppointmentResponse.getResponse().getResponseCode());
@@ -380,6 +398,9 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onError(Throwable t, String key) {
+        if (fromSwipe){
+            appointments_list_SRL.setRefreshing(false);
+        }
         somethingWrong();
     }
 
@@ -405,6 +426,7 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
             intent.putExtra("appointment_time", appointmentLists.get(position).getAppointmentDate() + " " + appointmentLists.get(position).getStartDateString() + " " + appointmentLists.get(position).getEndDateString());
             intent.putExtra("mettingId", appointmentLists.get(position).getId());
             intent.putExtra("vet_image_url", appointmentLists.get(position).getVetProfileImage());
+            intent.putExtra("petName", appointmentLists.get(position).getPetName());
 
 //            Log.d("PaymentOrder", intent.toString());
 
@@ -514,7 +536,9 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
     }
 
     private static void somethingWrong() {
-        progressBar.setVisibility(View.GONE);
+        if (!fromSwipe){
+            progressBar.setVisibility(View.GONE);
+        }
         if (isLoaded) {
             something_wrong_LL.setVisibility(View.GONE);
             if (upcomingTabClick) {
