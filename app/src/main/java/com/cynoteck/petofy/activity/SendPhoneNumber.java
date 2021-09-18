@@ -270,4 +270,11 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
     public void afterTextChanged(Editable s) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+
+    }
 }

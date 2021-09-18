@@ -68,7 +68,7 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
             case R.id.buy_now_BT:
                 Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
                 insuranceIntent.putExtra("afterLogin","no");
-                startActivity(insuranceIntent);
+//                startActivity(insuranceIntent);
                 startActivityForResult(insuranceIntent,1);
                 break;
 
