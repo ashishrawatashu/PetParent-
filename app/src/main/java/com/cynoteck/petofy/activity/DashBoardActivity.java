@@ -469,11 +469,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     public void onError(DexterError error) {
                         Log.e("DEXTER", error.name() );
                         Toast.makeText(DashBoardActivity.this, "Some Error! ", Toast.LENGTH_SHORT).show();
-//                        startActivity();
-//                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-//                        intent.setData(uri);
-//                        startActivity(intent);
+
                     }
                 })
                 .onSameThread()
