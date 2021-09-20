@@ -35,8 +35,6 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
     CardView            download_brochure_CV;
     TextView            see_all_cover_TV ,see_all_about_TV;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +68,6 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
             case R.id.buy_now_BT:
                 Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
                 insuranceIntent.putExtra("afterLogin","no");
-//                ----------------------------------------------------------------------------------------
 //                startActivity(insuranceIntent);
                 startActivityForResult(insuranceIntent,1);
                 break;
@@ -127,8 +124,6 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                startActivity(data);
-
                 showAppointmentSuccessfully();
             }
         }

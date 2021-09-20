@@ -53,6 +53,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
     Methods                         methods;
     TextView                        location_TV, consultation_TV,heading_one_TV,heading_two_TV;
     VetListAdapter                  vetListAdapter;
+    LinearLayout                    search_bar_LL;
 
     //location Dialog.........
     Dialog                          location_dialog;
@@ -86,13 +87,12 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
             ApiService<GetCityListWithStateResponse> service = new ApiService<>();
             service.get(this, ApiClient.getApiInterface().getCityListWithState(Config.token), "GetCityListWithState");
         } else {
-            progressBar.setVisibility(View.VISIBLE);
-            if (serviceTypeId.equals("1")){
-                getVetList();
-
-            }else {
+//            if (serviceTypeId.equals("1")){
+//                getVetList();
+//
+//            }else {
                 getServiceProviderList(serviceTypeId);
-            }
+//            }
         }
 
         search_vet_ET.addTextChangedListener(new TextWatcher() {
@@ -115,6 +115,10 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
     }
 
     private void getServiceProviderList(String serviceTypeId) {
+        search_vet_ET.setEnabled(false);
+        search_bar_LL.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        vet_list_RV.setVisibility(View.GONE);
         GetServiceProviderListParams getServiceProviderListParams = new GetServiceProviderListParams();
         getServiceProviderListParams.setCityId(Config.cityId);
         getServiceProviderListParams.setLattitude(Config.latitude);
@@ -141,6 +145,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
         consultation_TV =   findViewById(R.id.consultation_TV);
         heading_one_TV  =   findViewById(R.id.heading_one_TV);
         heading_two_TV  =   findViewById(R.id.heading_two_TV);
+        search_bar_LL   =   findViewById(R.id.search_bar_LL);
 
 
         search_vet_ET.setEnabled(false);
@@ -188,7 +193,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
         ApiService<GetVetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getVetList(Config.token, getVetListRequest), "GetVetList");
-        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(getVetListRequest));
+        Log.d("DATALOG", "check1=> " + methods.getRequestJson(getVetListRequest));
 
     }
 
@@ -213,6 +218,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key) {
@@ -247,6 +253,8 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
                         if (getVetListResponse.getData().getProviderList().isEmpty()) {
                             Toast.makeText(this, "No Data Found!", Toast.LENGTH_SHORT).show();
                         } else {
+                            search_bar_LL.setVisibility(View.VISIBLE);
+                            vet_list_RV.setVisibility(View.VISIBLE);
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
                             vet_list_RV.setLayoutManager(linearLayoutManager);
                             vetListAdapter = new VetListAdapter(this, getVetListResponse.getData().getProviderList(), this);
@@ -326,7 +334,8 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
         Config.cityName     = sharedPreferences.getString("cityName", "");
         Config.cityFullName = sharedPreferences.getString("CityFullName", "");
         location_dialog.dismiss();
-        getVetList();
+//        getVetList();
+        getServiceProviderList(serviceTypeId);
     }
 
     @Override

@@ -280,6 +280,11 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
             case "ValidatePetParentOtp":
                 try {
                     Log.e("ValidatePetParentOtp",arg0.body().toString());
+                    editText_one.getText().clear();
+                    editText_two.getText().clear();
+                    editText_three.getText().clear();
+                    editText_four.getText().clear();
+                    editText_one.requestFocus();
                     LoginRegisterResponse loginRegisterResponse = (LoginRegisterResponse) arg0.body();
                     int responseCode = Integer.parseInt(String.valueOf(loginRegisterResponse.getResponseLogin().getResponseCode()));
                     if (responseCode==117){

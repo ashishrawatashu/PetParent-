@@ -249,7 +249,23 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    <ProgressBar
+        android:id="@+id/progress_bar_payment_PB"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="15dp"
+        android:fontFamily="@font/nunito"
+        android:visibility="gone"
+        android:text="@string/payPaymet"
+        android:textAllCaps="false"
+        android:textColor="@color/whiteColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
+        android:visibility="visible"
         android:id="@+id/procced_appointment_BT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -257,13 +257,17 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
                 break;
 
             case R.id.insurance_LL:
-                Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
-                insuranceIntent.putExtra("petId",petId);
-                insuranceIntent.putExtra("afterLogin","yes");
-                insuranceIntent.putExtra("pet_breed", pet_breed);
-                insuranceIntent.putExtra("pet_color", pet_color);
+                if (pet_category.equals("Dog")){
+                    Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
+                    insuranceIntent.putExtra("petId", petId);
+                    insuranceIntent.putExtra("afterLogin", "yes");
+                    insuranceIntent.putExtra("pet_breed", pet_breed);
+                    insuranceIntent.putExtra("pet_color", pet_color);
 
-                startActivityForResult(insuranceIntent,2);
+                    startActivityForResult(insuranceIntent, 2);
+                }else {
+                    Toast.makeText(this, "Insurance is only for dog !", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
 

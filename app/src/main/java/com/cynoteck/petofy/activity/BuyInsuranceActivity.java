@@ -748,7 +748,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     if (strSpnrSexId.equals("")){
                         Toast.makeText(this, "Select Gender !", Toast.LENGTH_SHORT).show();
                         break;
-                    }if (strSpnrBreed.isEmpty() || (strSpnrBreed.equals("Pet Breed"))) {
+                    }if (strSpnrBreed.equals("") || (strSpnrBreed.equals("Pet Breed"))) {
                         Toast.makeText(this, "Select Breed!!", Toast.LENGTH_SHORT).show();
                         break;
                     }if (strPetName.isEmpty()) {
