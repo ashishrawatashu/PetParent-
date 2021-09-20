@@ -15,8 +15,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="22dp"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,14 +26,13 @@
                 android:src="@drawable/permission_alert_icon"/>
 
             <TextView
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/red_location_icon"
                 android:id="@+id/location_heading_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Camera permission required!"
+                android:text="@string/cameraAndStorage"
                 android:textColor="#EF233C"
                 android:fontFamily="@font/nunito"
                 android:textSize="18sp"/>
@@ -44,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Grant camera permission to update your images."
+                android:text="Allow storage/camera permission to upload your images and files."
                 android:fontFamily="@font/nunito"
                 android:textSize="18sp"
                 android:gravity="center"
@@ -53,15 +50,17 @@
                 android:layout_marginRight="40dp"/>
 
             <Button
-                android:id="@+id/grant_permission_BT"
-                android:layout_width="165dp"
+                android:id="@+id/allow_BT"
+                android:layout_margin="5dp"
+                android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:background="@drawable/blue_background_bg"
                 android:textColor="@color/whiteColor"
-                android:text="grant"
+                android:text="@string/openSetting"
                 android:textSize="14sp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/nunito"/>
+
 
         </LinearLayout>
 

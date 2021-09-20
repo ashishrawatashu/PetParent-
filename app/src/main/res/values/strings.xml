@@ -23,6 +23,12 @@
     <string name="donation_details">DONATION DETAILS</string>
     <string name="adpotion_donation">ADOPTION &amp; DONATION</string>
     <string name="CheckInternet">Check your internet connection</string>
+    <string name="openSetting">Open Setting</string>
+    <string name="cameraAndStorage">Cmera and Storage</string>
+
+
+
+    openSetting
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="LastPrescription">Last Prescription</string>
@@ -233,6 +239,8 @@
     <string name="search">Search </string>
     <string name="petnames">Pet Names</string>
     <string name="grant">Grant</string>
+    <string name="opensetting">OPEN SETTINGS</string>
+
     <string name="loginUsingPhone">Login with phone number</string>
     <string name="ok">OK</string>
     <string name="scanAndAdd"><![CDATA[Scan & Add]]></string>

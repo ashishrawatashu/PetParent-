@@ -65,14 +65,14 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
         enter_phone_ET.addTextChangedListener(this);
 //        qrCodeScanner_IV.setOnClickListener(this);
 
-        if (checkPermission()) {
-        } else {
-            if (!checkPermission()) {
-                requestPermission();
-            } else {
-                Toast.makeText(this, "Permission already granted.", Toast.LENGTH_SHORT).show();
-            }
-        }
+//        if (checkPermission()) {
+//        } else {
+//            if (!checkPermission()) {
+//                requestPermission();
+//            } else {
+//                Toast.makeText(this, "Permission already granted.", Toast.LENGTH_SHORT).show();
+//            }
+//        }
 
         next_BT.setOnClickListener(this);
         cross_IV.setOnClickListener(this);

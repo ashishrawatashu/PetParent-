@@ -12,6 +12,7 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -42,6 +43,15 @@ import com.cynoteck.petofy.utils.Config;
 import com.cynoteck.petofy.utils.Methods;
 import com.cynoteck.petofy.utils.NetworkChangeReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
 
 
 public class DashBoardActivity extends AppCompatActivity {
@@ -70,17 +80,18 @@ public class DashBoardActivity extends AppCompatActivity {
     Fragment                    active    = fragment1;
     boolean                     cameraDialog= false, storageDialog= false;
     boolean                     locationPermission = false;
+    Button open_setting_BT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-
+        open_setting_BT=findViewById(R.id.open_setting);
         methods = new Methods(this);
-
         notificationMethod();
 //        checkCameraPermission();
         registerNetworkBroadcastForNougat();
+        requestMultiplePermissions();
 
 
         navigation = findViewById(R.id.navigation);
@@ -121,56 +132,58 @@ public class DashBoardActivity extends AppCompatActivity {
         Config.locationPermission               = sharedPreferences.getString("locationPermission", "");
 //      Config.latitude                         = sharedPreferences.getString("userLatitude", "");
 //      Config.longitude                        = sharedPreferences.getString("userLongitude", "");
-        if (Config.locationPermission.equals("false")){
-            showLocationPermissionDialog();
-        }else {
-            getLocation();
+        if (Config.locationPermission.equals("true")){
+             getLocation();
         }
+//        else {
+////            getLocation();
+//        }
 
         Log.d("TOKEN", Config.token);
         Log.d("user_id", Config.user_id);
+//        getLocation();
 //        Log.d("LOCATION", Config.latitude + "  " + Config.longitude);
 
     }
 
-    private void checkCameraPermission() {
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_CAMERA);
-            return;
-        }
-    }
+//    private void checkCameraPermission() {
+//        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_CAMERA);
+//            return;
+//        }
+//    }
 
-    private void showLocationPermissionDialog() {
-        locationPermission = true;
-        location_permission_dialog = new Dialog(this);
-        location_permission_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        location_permission_dialog.setCancelable(false);
-        location_permission_dialog.setContentView(R.layout.location_permission_dialog);
-        location_permission_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        Button grant_permission_BT = location_permission_dialog.findViewById(R.id.grant_permission_BT);
-        location_permission_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                        ActivityCompat.requestPermissions(DashBoardActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
-                    }
-
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        location_permission_dialog.show();
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = location_permission_dialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(lp);
-    }
+//    private void showLocationPermissionDialog() {
+//        locationPermission = true;
+//        location_permission_dialog = new Dialog(this);
+//        location_permission_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        location_permission_dialog.setCancelable(false);
+//        location_permission_dialog.setContentView(R.layout.location_permission_dialog);
+//        location_permission_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        Button grant_permission_BT = location_permission_dialog.findViewById(R.id.open_setting);
+//        location_permission_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                        intent.setData(uri);
+//                        startActivity(intent);
+//
+//
+//
+//            }
+//        });
+//
+//        location_permission_dialog.show();
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        Window window = location_permission_dialog.getWindow();
+//        lp.copyFrom(window.getAttributes());
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        window.setAttributes(lp);
+//    }
 
     public void getLocation(){
         gpsTracker = new GpsTracker(DashBoardActivity.this);
@@ -190,72 +203,82 @@ public class DashBoardActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_CAMERA: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (cameraDialog) {
-                        cameraPermissionDialog.dismiss();
-                        cameraDialog = false;
-                        checkCameraPermission();
-                    }
-                } else {
-                    cameraDialog = false;
-                    showCameraPermissionDialog();
-                }
 
-                return;
-            }
-            case 101: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    sharedPreferences = this.getSharedPreferences("userDetails", 0);
-                    login_editor = sharedPreferences.edit();
-                    login_editor.putString("locationPermission", "true");
-                    login_editor.apply();
-                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                    if (locationPermission) {
-                        location_permission_dialog.dismiss();
-                        locationPermission = false;
-                    }
-                } else {
-                    locationPermission = true;
-//                    sendToSetting();
-                    showLocationPermissionDialog();
-                }
+//
 
-            }
 
-        }
-    }
 
-    private void showCameraPermissionDialog() {
-        cameraDialog            = true;
-        cameraPermissionDialog  = new Dialog(this);
-        cameraPermissionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        cameraPermissionDialog.setCancelable(false);
-        cameraPermissionDialog.setContentView(R.layout.camera_permission_dialog);
-        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        Button grant_permission_BT = cameraPermissionDialog.findViewById(R.id.grant_permission_BT);
-        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkCameraPermission();
-            }
-        });
 
-        cameraPermissionDialog.show();
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = cameraPermissionDialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(lp);
-    }
 
+
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        switch (requestCode) {
+//            case MY_PERMISSIONS_REQUEST_READ_CAMERA: {
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    if (cameraDialog) {
+//                        cameraPermissionDialog.dismiss();
+//                        cameraDialog = false;
+////                        checkCameraPermission();
+//                    }
+//                } else {
+//                    cameraDialog = false;
+////                    showCameraPermissionDialog();
+//                }
+//
+//                return;
+//            }
+//            case 101: {
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    sharedPreferences = this.getSharedPreferences("userDetails", 0);
+//                    login_editor = sharedPreferences.edit();
+//                    login_editor.putString("locationPermission", "true");
+//                    login_editor.apply();
+//                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+//                    if (locationPermission) {
+//                        location_permission_dialog.dismiss();
+//                        locationPermission = false;
+//                    }
+//                } else {
+//                    locationPermission = true;
+//                    showLocationPermissionDialog();
+//                }
+////                -----------------------------------------
+//                break;
+//
+//            }
+//        }
+//    }
+
+//    private void showCameraPermissionDialog() {
+//        cameraDialog            = true;
+//        cameraPermissionDialog  = new Dialog(this);
+//        cameraPermissionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        cameraPermissionDialog.setCancelable(false);
+//        cameraPermissionDialog.setContentView(R.layout.camera_permission_dialog);
+//        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        Button grant_permission_BT = cameraPermissionDialog.findViewById(R.id.grant_permission_BT);
+//        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                checkCameraPermission();
+////                Toast.makeText(getApplicationContext(),"this is if condtion showCameraPermissionDialog",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+//        cameraPermissionDialog.show();
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        Window window = cameraPermissionDialog.getWindow();
+//        lp.copyFrom(window.getAttributes());
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        window.setAttributes(lp);
+//    }
+//
 //    private void sendToSetting(){
-//        Intent intent = new Intent();
+//        Intent intent = new Intent(this,DashBoardActivity.class);
 //        intent.setAction(Settings.ACTION_ACCESSIBILITY_SETTINGS);
 //        Uri uri = Uri.fromParts("package",getPackageName(), null);
 //        intent.setData(uri);
@@ -359,6 +382,7 @@ public class DashBoardActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+//        requestMultiplePermissions();
 
     }
 
@@ -394,4 +418,78 @@ public class DashBoardActivity extends AppCompatActivity {
         unregisterNetworkChanges();
 
     }
+
+    private void requestMultiplePermissions() {
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            Log.d("STORAGE_DIALOG","All permissions are granted by user!");
+                            try {
+//                                settingDialog.dismiss();
+//                            startActivity(new Intent(PermissionCheckActivity.this,DashBoardActivity.class));
+                            location_permission_dialog.dismiss();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
+                            Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
+                            Log.d("DEXTER","storagePermissionDialog");
+//                            storagePermissionDialog();
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
+
+                            // show alert dialog navigating to Settings
+//                            openSettingsDialog();
+//                            showLocationPermissionDialog();
+                            Log.d("STORAGE_DIALOG","openSettingsDialog");
+
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Log.e("DEXTER", error.name() );
+                        Toast.makeText(DashBoardActivity.this, "Some Error! ", Toast.LENGTH_SHORT).show();
+//                        startActivity();
+//                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+//                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+//                        intent.setData(uri);
+//                        startActivity(intent);
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
