@@ -368,6 +368,17 @@
                 tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/reviews_list" />
 
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/reviews_PB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/reviews_TV"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/reviews_list" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

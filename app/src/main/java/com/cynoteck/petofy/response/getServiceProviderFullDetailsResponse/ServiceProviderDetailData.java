@@ -131,7 +131,7 @@ public class ServiceProviderDetailData {
     private String route;
     @SerializedName("rating")
     @Expose
-    private Integer rating;
+    private String rating;
     @SerializedName("userRating")
     @Expose
     private Integer userRating;
@@ -591,11 +591,11 @@ public class ServiceProviderDetailData {
         this.route = route;
     }
 
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

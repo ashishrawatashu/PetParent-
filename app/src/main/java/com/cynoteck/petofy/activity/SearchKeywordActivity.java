@@ -57,7 +57,7 @@ import retrofit2.Response;
 public class SearchKeywordActivity extends AppCompatActivity implements ApiResponse, View.OnClickListener,RegisterRecyclerViewClickListener {
 
     EditText                        search_keyword_ET;
-    ImageView                       back_arrow_IV, cancel_IV,search_icon_IV;
+    ImageView                       back_arrow_IV, cancel_IV,search_icon_IV,empty_IV;
     Methods                         methods;
     ProgressBar                     progressBar,progress_bar_below;
     RecyclerView                    search_keyword_RV,search_keyword_result_RV;
@@ -90,6 +90,7 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
         search_headline_TV          = findViewById(R.id.search_headline_TV);
         progress_bar_below          = findViewById(R.id.progress_bar_below);
         nested_scroll_view          = findViewById(R.id.nested_scroll_view);
+        empty_IV                    = findViewById(R.id.empty_IV);
 
         back_arrow_IV.setOnClickListener(this);
         search_icon_IV.setOnClickListener(this);
@@ -218,6 +219,7 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
         progressBar.setVisibility(View.VISIBLE);
         search_keyword_RV.setVisibility(View.GONE);
         search_keyword_result_RV.setVisibility(View.VISIBLE);
+        empty_IV.setVisibility(View.GONE);
         SearchProviderParameters searchProviderParameters = new SearchProviderParameters();
         searchProviderParameters.setPage(page);
         searchProviderParameters.setCityId(Integer.valueOf(Config.cityId));
@@ -228,7 +230,7 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
 
         ApiService<GetSearchResultsResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getSearchProviderResults(Config.token, searchProviderRequest), "GetProviderBySearch");
-//        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(searchProviderRequest));
+        Log.d("DATALOG", "check1=> " + methods.getRequestJson(searchProviderRequest));
     }
 
 
@@ -245,7 +247,10 @@ public class SearchKeywordActivity extends AppCompatActivity implements ApiRespo
                     //Log.d"DATALOG", methods.getRequestJson(getVetListResponse));
                     int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        if (getVetListResponse.getData().getProviderList().isEmpty()) { } else {
+                        if (getVetListResponse.getData().getProviderList().isEmpty()) {
+                            empty_IV.setVisibility(View.VISIBLE);
+                            Toast.makeText(this, "No data found !", Toast.LENGTH_SHORT).show();
+                        } else {
                             for (int i = 0; i < getVetListResponse.getData().getProviderList().size(); i++) {
                                 Provider providerList = new Provider();
                                 providerList.setId(getVetListResponse.getData().getProviderList().get(i).getId());

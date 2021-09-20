@@ -300,5 +300,14 @@
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/pet_names_list" />
 
+    <ImageView
+        android:id="@+id/empty_IV"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/empty"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

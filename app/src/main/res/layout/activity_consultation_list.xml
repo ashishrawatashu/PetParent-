@@ -112,7 +112,7 @@
             android:layout_marginRight="15dp"
             android:background="@null"
             android:fontFamily="@font/lato"
-            android:hint="Search here"
+            android:hint="Search service providers by name"
             android:textColorHint="@color/gray_3"
             android:textSize="14sp" />
 
@@ -152,6 +152,17 @@
         android:visibility="gone"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/heading_two_TV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/empty_IV"
+        android:visibility="gone"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/empty"
         app:layout_constraintTop_toBottomOf="@id/heading_two_TV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

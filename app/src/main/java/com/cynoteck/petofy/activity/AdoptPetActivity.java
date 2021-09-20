@@ -42,6 +42,7 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
     RecyclerView                    adoption_RV;
     MaterialCardView                back_arrow_CV;
     Methods                         methods;
+    ImageView                       empty_IV;
     AdoptionListAdopter             adoptionListAdopter;
     List<PetDonationList>           petDonationLists;
     NestedScrollView                nestedSV;
@@ -72,6 +73,7 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
         total_adoption_RL           = findViewById(R.id.total_adoption_RL);
         total_adoption_request_TV   = findViewById(R.id.total_adoption_request_TV);
         cart_icon_IV                = findViewById(R.id.cart_icon_IV);
+        empty_IV                    = findViewById(R.id.empty_IV);
 
 
         total_adoption_RL.setOnClickListener(this);
@@ -153,6 +155,9 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void getAdoptionList(String petCategoryId) {
+        progressBar.setVisibility(View.VISIBLE);
+        adoption_RV.setVisibility(View.GONE);
+        empty_IV.setVisibility(View.GONE);
         AdoptionListParameter adoptionListParameter = new AdoptionListParameter();
         adoptionListParameter.setPetCategoryId(petCategoryId);
         adoptionListParameter.setPetSexId("0.0");
@@ -176,6 +181,7 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key) {
@@ -187,8 +193,10 @@ public class AdoptPetActivity extends AppCompatActivity implements View.OnClickL
                     int responseCode = Integer.parseInt(adoptionListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (adoptionListResponse.getData().getPetDonationList().isEmpty()){
+                            empty_IV.setVisibility(View.VISIBLE);
                             Toast.makeText(this, "No pet found !", Toast.LENGTH_SHORT).show();
                         }else {
+                            adoption_RV.setVisibility(View.VISIBLE);
                             adoption_RV.setLayoutManager(new GridLayoutManager(this, 2));
                             adoptionListAdopter = new AdoptionListAdopter(this, adoptionListResponse.getData().getPetDonationList(), this);
                             adoption_RV.setAdapter(adoptionListAdopter);

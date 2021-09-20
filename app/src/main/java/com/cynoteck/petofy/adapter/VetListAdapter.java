@@ -9,6 +9,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -129,6 +130,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHo
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             providerLists.clear();
+
             providerLists.addAll((List<ProviderList>) results.values);
             notifyDataSetChanged();
 

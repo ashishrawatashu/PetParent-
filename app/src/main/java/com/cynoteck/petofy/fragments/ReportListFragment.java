@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.activity.HospitalizationDetailsActivity;
+import com.cynoteck.petofy.activity.PdfReaderActivity;
 import com.cynoteck.petofy.activity.ViewReportsDeatilsActivity;
 import com.cynoteck.petofy.activity.XRayReportDeatilsActivity;
 import com.cynoteck.petofy.adapter.HospitalizationReportsAdapter;
@@ -45,7 +46,7 @@ import retrofit2.Response;
 
 public class ReportListFragment extends Fragment implements ApiResponse, ViewAndUpdateClickListener {
 
-    String pet_DOB,pet_image_url,pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, type, button_type;
+    String encryptId,pet_DOB,pet_image_url,pet_unique_id, pet_name, pet_sex, pet_owner_name, pet_owner_contact, pet_id, report_type_id, type, button_type;
 
     RecyclerView routine_report_RV;
     View view;
@@ -72,8 +73,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_reports_list, container, false);
         methods = new Methods(getActivity());
@@ -89,6 +89,7 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
         button_type = extras.getString("button_type");
         pet_image_url = extras.getString("pet_image_url");
         pet_DOB = extras.getString("pet_DOB");
+        encryptId = extras.getString("pet_encrypted_id");
         routine_report_RV = view.findViewById(R.id.routine_report_RV);
         empty_IV = view.findViewById(R.id.empty_IV);
         progressBar = view.findViewById(R.id.progressBar);
@@ -469,19 +470,24 @@ public class ReportListFragment extends Fragment implements ApiResponse, ViewAnd
     @Override
     public void onViewClick(int position) {
 //        Toast.makeText(getContext(), ""+petClinicVisitListArrayList.get(position).getId(), Toast.LENGTH_SHORT).show();
-        Intent viewReportsDeatilsActivityIntent = new Intent(getActivity().getApplication(), ViewReportsDeatilsActivity.class);
-        viewReportsDeatilsActivityIntent.putExtra("clinic_id", petClinicVisitListArrayList.get(position).getId());
-        viewReportsDeatilsActivityIntent.putExtra("pet_id", pet_id);
-        viewReportsDeatilsActivityIntent.putExtra("pet_name", pet_name);
-        viewReportsDeatilsActivityIntent.putExtra("pet_unique_id", pet_unique_id);
-        viewReportsDeatilsActivityIntent.putExtra("pet_sex", pet_sex);
-        viewReportsDeatilsActivityIntent.putExtra("pet_owner_name", pet_owner_name);
-        viewReportsDeatilsActivityIntent.putExtra("pet_owner_contact", pet_owner_contact);
-        viewReportsDeatilsActivityIntent.putExtra("pet_image_url", pet_image_url);
-        viewReportsDeatilsActivityIntent.putExtra("pet_DOB", pet_DOB);
-        viewReportsDeatilsActivityIntent.putExtra("id", petClinicVisitListArrayList.get(position).getNatureOfVisitId());
-        viewReportsDeatilsActivityIntent.putExtras(viewReportsDeatilsActivityIntent);
-        startActivity(viewReportsDeatilsActivityIntent);
+        Intent lastPrescriptionIntent = new Intent(getContext(), PdfReaderActivity.class);
+        lastPrescriptionIntent.putExtra("encryptId",petClinicVisitListArrayList.get(position).getEncryptedId());
+        lastPrescriptionIntent.putExtra("type","Pet Report");
+        startActivity(lastPrescriptionIntent);
+
+//        Intent viewReportsDeatilsActivityIntent = new Intent(getActivity().getApplication(), ViewReportsDeatilsActivity.class);
+//        viewReportsDeatilsActivityIntent.putExtra("clinic_id", petClinicVisitListArrayList.get(position).getId());
+//        viewReportsDeatilsActivityIntent.putExtra("pet_id", pet_id);
+//        viewReportsDeatilsActivityIntent.putExtra("pet_name", pet_name);
+//        viewReportsDeatilsActivityIntent.putExtra("pet_unique_id", pet_unique_id);
+//        viewReportsDeatilsActivityIntent.putExtra("pet_sex", pet_sex);
+//        viewReportsDeatilsActivityIntent.putExtra("pet_owner_name", pet_owner_name);
+//        viewReportsDeatilsActivityIntent.putExtra("pet_owner_contact", pet_owner_contact);
+//        viewReportsDeatilsActivityIntent.putExtra("pet_image_url", pet_image_url);
+//        viewReportsDeatilsActivityIntent.putExtra("pet_DOB", pet_DOB);
+//        viewReportsDeatilsActivityIntent.putExtra("id", petClinicVisitListArrayList.get(position).getNatureOfVisitId());
+//        viewReportsDeatilsActivityIntent.putExtras(viewReportsDeatilsActivityIntent);
+//        startActivity(viewReportsDeatilsActivityIntent);
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 

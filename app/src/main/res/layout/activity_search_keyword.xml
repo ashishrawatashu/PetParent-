@@ -24,7 +24,7 @@
         android:layout_height="0dp"
         android:background="@null"
         android:fontFamily="@font/nunito"
-        android:hint="Search"
+        android:hint="@string/searchHint"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:paddingLeft="10dp"
@@ -73,6 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_headline_TV" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_keyword_RV"
@@ -265,6 +266,17 @@
 
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/empty_IV"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/empty"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

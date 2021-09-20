@@ -36,7 +36,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.BuyInsuranceActivity"></activity>
+        <activity
+            android:name=".activity.PdfReaderActivity"
+            android:exported="true" />
+        <activity android:name=".activity.BuyInsuranceActivity" />
         <activity android:name=".activity.InsuranceActivity" />
 
         <provider

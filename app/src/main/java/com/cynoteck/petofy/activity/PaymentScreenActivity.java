@@ -104,7 +104,7 @@ public class PaymentScreenActivity extends AppCompatActivity implements PaymentR
         pet_name_TV                 = findViewById(R.id.pet_name_TV);
         back_arrow_CV               = findViewById(R.id.back_arrow_CV);
         parent_profile_CIV          = findViewById(R.id.parent_profile_CIV);
-        progress_bar_payment_PB     = findViewById(R.id.progress_bar_payment_PB);
+        progress_bar_payment_PB       = findViewById(R.id.progress_bar_payment_PB);
 
         back_arrow_CV.setOnClickListener(this);
         procced_appointment_BT.setOnClickListener(this);
