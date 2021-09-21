@@ -95,6 +95,13 @@ public class DashBoardActivity extends AppCompatActivity {
             active = fragment3;
             MenuItem homeItem = navigation.getMenu().getItem(2);
             navigation.setSelectedItemId(homeItem.getItemId());
+            Toast.makeText(this, "Select your pet for insurance ", Toast.LENGTH_SHORT).show();
+        }else if (Config.fragmentNumber==2){
+            Config.fragmentNumber = 0;
+            fm.beginTransaction().hide(active).show(fragment2).commit();
+            active = fragment2;
+            MenuItem homeItem = navigation.getMenu().getItem(1);
+            navigation.setSelectedItemId(homeItem.getItemId());
         }
 
 
