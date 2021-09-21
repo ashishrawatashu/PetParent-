@@ -474,6 +474,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         rate_five_IV.setOnClickListener(this);
 
         reviewDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        reviewDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         reviewDialog.show();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();

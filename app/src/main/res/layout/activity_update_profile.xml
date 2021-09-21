@@ -174,7 +174,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:inputType="phone"
+                        android:inputType="number"
+                        android:digits="1234567890"
                         android:maxLines="1"
                         android:visibility="visible"
                         android:layout_height="50dp"

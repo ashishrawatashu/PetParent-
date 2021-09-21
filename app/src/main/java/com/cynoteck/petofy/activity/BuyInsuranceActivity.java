@@ -519,7 +519,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                 Intent intent1 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent1.addCategory(Intent.CATEGORY_OPENABLE);
                 intent1.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-                intent1.setType("*application/pdf||*application/doc");
+                intent1.setType("application/pdf||*application/doc");
                 startActivityForResult(Intent.createChooser(intent1, "Select a file"), DOC_UPLOAD);
                 break;
 
@@ -1085,10 +1085,13 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==DOC_UPLOAD){
-            Uri uri = data.getData();
-            String fullPath = Commons.getPath(uri, this);
-            File file = new File(fullPath);
-            uploadImage(file);
+            if (data.getData()!=null){
+                Uri uri = data.getData();
+                String fullPath = Commons.getPath(uri, this);
+                File file = new File(fullPath);
+                uploadImage(file);
+            }
+
         }else {
             mediaUtils.onActivityResult(requestCode, resultCode, data);
         }
