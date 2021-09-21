@@ -35,7 +35,6 @@
         android:roundIcon="@mipmap/pet_parent_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustPan|adjustResize"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activity.PdfReaderActivity"

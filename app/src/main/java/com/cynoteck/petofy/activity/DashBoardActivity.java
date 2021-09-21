@@ -12,7 +12,6 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -68,7 +67,6 @@ public class DashBoardActivity extends AppCompatActivity {
     Fragment                    active    = fragment1;
     boolean                     cameraDialog= false, storageDialog= false;
     boolean                     locationPermission = false;
-    String                      insuranceIntent="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +74,7 @@ public class DashBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dash_board);
 
         methods = new Methods(this);
+
         notificationMethod();
 //        checkCameraPermission();
         registerNetworkBroadcastForNougat();
@@ -90,20 +89,14 @@ public class DashBoardActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.content_frame, fragment2, "2").hide(fragment2).commit();
         fm.beginTransaction().add(R.id.content_frame, fragment1, "1").commit();
 
-        if (Config.fragmentNumber==2){
-            Config.fragmentNumber = 0;
-            fm.beginTransaction().hide(active).show(fragment2).commit();
-            active = fragment2;
-            MenuItem homeItem = navigation.getMenu().getItem(1);
-            navigation.setSelectedItemId(homeItem.getItemId());
-            Toast.makeText(this, "Select your Pet for insurance", Toast.LENGTH_SHORT).show();
-        }else if (Config.fragmentNumber==3){
+        if (Config.fragmentNumber==3){
             Config.fragmentNumber = 0;
             fm.beginTransaction().hide(active).show(fragment3).commit();
             active = fragment3;
             MenuItem homeItem = navigation.getMenu().getItem(2);
             navigation.setSelectedItemId(homeItem.getItemId());
         }
+
 
         SharedPreferences sharedPreferences     = getSharedPreferences("userDetails", 0);
         Config.token                            = sharedPreferences.getString("token", "");
