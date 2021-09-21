@@ -1,5 +1,10 @@
 package com.cynoteck.petofy.activity;
 
+import static com.cynoteck.petofy.fragments.PetRegisterFragment.registerPetAdapter;
+import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
+import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,12 +43,14 @@ import com.cynoteck.petofy.parameter.saveFeedbackRequest.SaveFeedbackParams;
 import com.cynoteck.petofy.parameter.saveFeedbackRequest.SaveFeedbackRequest;
 import com.cynoteck.petofy.parameter.serviceProviderDetailRequest.SearchProviderFullDetailData;
 import com.cynoteck.petofy.parameter.serviceProviderDetailRequest.SearchProviderFullDetailRequest;
+import com.cynoteck.petofy.response.getPetReportsResponse.getPetListResponse.PetList;
 import com.cynoteck.petofy.response.getSaveFeedbackResponse.GetSaveFeedbackResponse;
 import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.ProviderRatingList;
 import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.SearchProviderFullDetailResponse;
 import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.ServiceProviderDetailOperatingHour;
 import com.cynoteck.petofy.utils.Config;
 import com.cynoteck.petofy.utils.Methods;
+import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 
@@ -81,6 +88,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     int                                         rate = 0,providerId;
     int                                         page_position = 0;
     String                                      phone = "";
+    private final int                           ADD_PET = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -491,14 +499,43 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     public void onSliderClickListener(int position) {
 
         if (position==0){
-
+            Intent consultationIntent = new Intent(this, ConsultationListActivity.class);
+            consultationIntent.putExtra("serviceTypeId","1");
+            startActivity(consultationIntent);
         }else if (position==1){
-
-        }else if (position==2){
-
+            Intent adNewIntent = new Intent(this, AddPetRegister.class);
+            adNewIntent.putExtra("intent_from", "add");
+            startActivityForResult(adNewIntent, ADD_PET);
+        }else {
+            Intent insurancesIntent = new Intent(this, PetInsuranceActivity.class);
+            startActivity(insurancesIntent);
         }
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+         if (requestCode == ADD_PET) {
+            if (resultCode == RESULT_OK) {
+                PetList petList = new PetList();
+                petList.setId(data.getStringExtra("pet_id"));
+                petList.setPetUniqueId(data.getStringExtra("pet_unique_id"));
+                petList.setPetProfileImageUrl(data.getStringExtra("pet_image_url"));
+                petList.setPetBreed(data.getStringExtra("pet_breed"));
+                petList.setPetAge(data.getStringExtra("pet_age"));
+                petList.setPetSex(data.getStringExtra("pet_sex"));
+                petList.setPetName(data.getStringExtra("pet_name"));
+                petList.setPetParentName(data.getStringExtra("pet_parent"));
+                petList.setPetCategory(data.getStringExtra("pet_category"));
+                petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
+                petList.setPetColor(data.getStringExtra("pet_color"));
+                PetParentSingleton.getInstance().getArrayList().add(0, petList);
+                registerPetAdapter.notifyDataSetChanged();
+                total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
+                petListHorizontalAdapter.notifyDataSetChanged();
+            }
+        }
 
+    }
 }

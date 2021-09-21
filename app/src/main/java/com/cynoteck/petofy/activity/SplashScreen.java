@@ -211,7 +211,7 @@ public class SplashScreen extends AppCompatActivity {
     private void intentActivity() {
         internetChkCode=0;
         Intent intent;
-        SharedPreferences sharedPreferences = getSharedPreferences("userdetails", 0);
+        SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
         String loggedIn = sharedPreferences.getString("loggedIn", "");
 
         if (loggedIn.equals("loggedIn")){

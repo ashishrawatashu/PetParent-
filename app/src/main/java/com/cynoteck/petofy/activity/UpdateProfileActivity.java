@@ -3,7 +3,6 @@ package com.cynoteck.petofy.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +31,7 @@ import com.cynoteck.petofy.api.ApiResponse;
 import com.cynoteck.petofy.api.ApiService;
 import com.cynoteck.petofy.parameter.updatePArentDeatils.UpdateParentDeatilsParams;
 import com.cynoteck.petofy.parameter.updatePArentDeatils.UpdateParentDetailsRequest;
-import com.cynoteck.petofy.response.loginResponse.LoginRegisterResponse;
+import com.cynoteck.petofy.response.getPetParentDetailsResponse.GetPetParentDetails;
 import com.cynoteck.petofy.response.resendOTPResposne.ResendOTPResponse;
 import com.cynoteck.petofy.response.updatepetparentprofile.UpdatePetParentProfile;
 import com.cynoteck.petofy.utils.Config;
@@ -62,7 +62,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     Methods                     methods;
     SharedPreferences           sharedPreferences;
     SharedPreferences.Editor    login_editor;
-    BottomSheetDialog           otp_verification_dialog;
+    BottomSheetDialog           otp_verification_dialog, emailVerificationDialog;
     Button                      submit_otp_BT;
     EditText                    editText_one, editText_two, editText_three, editText_four ;
     TextView                    we_send_sms_TV;
@@ -71,6 +71,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     private static final int    REQ_USER_CONSENT = 200;
     String                      otpString;
     ImageView                   cross_IV;
+    LinearLayout                email_status_LL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +97,17 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         address_TIET.setText(Config.user_address);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getParentDetails();
+    }
+
+    private void getParentDetails() {
+        ApiService<GetPetParentDetails> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getPetParentDetails(Config.token), "GetPetParentDetails");
     }
 
     private void initDialog() {
@@ -152,8 +164,18 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         phoneNumber_TIL         = findViewById(R.id.number_TIL);
         address_TIET            = findViewById(R.id.address_TIET);
         update_BT               = findViewById(R.id.update_BT);
+        email_status_LL         = findViewById(R.id.email_status_LL);
+        email_status_LL.setOnClickListener(this);
+        checkEmailStatus();
 
+    }
 
+    private void checkEmailStatus() {
+        if (Config.emailStatus.equals("false")){
+            email_status_LL.setVisibility(View.VISIBLE);
+        }else {
+            email_status_LL.setVisibility(View.GONE);
+        }
     }
 
     private void showOtpDialog() {
@@ -176,6 +198,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.email_status_LL:
+                sendEmailVerification();
+
+                break;
+
             case R.id.back_arrow_IV:
 
                 onBackPressed();
@@ -288,6 +315,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    private void sendEmailVerification() {
+        ApiService<JsonObject> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().sendEmailVerification(Config.token), "SendEmailVerification");
+    }
+
     private void updateParentProfile() {
         UpdateParentDeatilsParams updateParentDeatilsParams = new UpdateParentDeatilsParams();
         updateParentDeatilsParams.setuserId(Config.user_id);
@@ -327,6 +359,69 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onResponse(Response response, String key) {
         switch (key) {
+
+            case "GetPetParentDetails":
+
+                try {
+                    GetPetParentDetails getPetParentDetails = (GetPetParentDetails) response.body();
+                    Log.d("GetPetParentDetails",methods.getRequestJson(getPetParentDetails));
+                    int responseCode = Integer.parseInt(String.valueOf(getPetParentDetails.getResponse().getResponseCode()));
+                    if (responseCode==109){
+                        sharedPreferences = getSharedPreferences("userDetails", 0);
+                        login_editor = sharedPreferences.edit();
+                        login_editor.putString("email", getPetParentDetails.getData().getEmail());
+                        login_editor.putString("userId", getPetParentDetails.getData().getUserId());
+                        login_editor.putString("firstName", getPetParentDetails.getData().getFirstName());
+                        login_editor.putString("lastName", getPetParentDetails.getData().getLastName());
+                        login_editor.putString("phoneNumber", getPetParentDetails.getData().getPhoneNumber());
+                        login_editor.putString("address", getPetParentDetails.getData().getAddress());
+                        login_editor.putString("token", getPetParentDetails.getResponse().getToken());
+                        login_editor.putString("profilePic", getPetParentDetails.getData().getProfileImageUrl());
+                        login_editor.putString("emailStatus", getPetParentDetails.getData().getIsEmailVerified());
+                        Log.d("Status",getPetParentDetails.getData().getIsEmailVerified());
+
+                        Config.token = getPetParentDetails.getResponse().getToken();
+                        login_editor.putString("loggedIn", "loggedIn");
+                        login_editor.apply();
+                        Config.user_id                          = sharedPreferences.getString("userId", "");
+                        Config.user_phone                       = sharedPreferences.getString("phoneNumber", "");
+                        Config.user_emial                       = sharedPreferences.getString("email", "");
+                        Config.user_name                        = sharedPreferences.getString("firstName", "") + " " + sharedPreferences.getString("lastName", "");
+                        Config.user_address                     = sharedPreferences.getString("address", "");
+                        Config.user_url                         = sharedPreferences.getString("profilePic", "");
+                        Config.first_name                       = sharedPreferences.getString("firstName", "");
+                        Config.last_name                        = sharedPreferences.getString("lastName", "");
+                        Config.emailStatus                      = sharedPreferences.getString("emailStatus", "");
+                        checkEmailStatus();
+
+                    }else {
+                        Toast.makeText(this, "Please try again !", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case "SendEmailVerification":
+                try {
+                    Log.d("SendRegistrationOtp",response.body().toString());
+                    JsonObject sendRegistrationOtp = (JsonObject) response.body();
+                    JsonObject sendRegistrationOtpResponse = sendRegistrationOtp.getAsJsonObject("response");
+                    int responseCode = Integer.parseInt(String.valueOf(sendRegistrationOtpResponse.get("responseCode")));
+                    if (responseCode==109){
+                       showEmailVerificationDialog();
+                    }else {
+                        Toast.makeText(this, "Please try again !", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
             case "SendRegistrationOtp":
                 try {
                     methods.customProgressDismiss();
@@ -368,8 +463,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                         sharedPreferences = this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
                         if (loginRegisterResponse.getData().getIsEmailVerified().equals("false")){
-
+                            login_editor.putString("emailStatus", loginRegisterResponse.getData().getIsEmailVerified());
+                            Config.emailStatus = loginRegisterResponse.getData().getIsEmailVerified();
+                            checkEmailStatus();
                         }
+
                         login_editor.putString("email", loginRegisterResponse.getData().getEmail());
                         login_editor.putString("firstName", loginRegisterResponse.getData().getFirstName());
                         login_editor.putString("lastName", loginRegisterResponse.getData().getLastName());
@@ -424,6 +522,32 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
 
         }
 
+    }
+
+    private void showEmailVerificationDialog() {
+        emailVerificationDialog = new BottomSheetDialog(this);
+        emailVerificationDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        emailVerificationDialog.setCancelable(true);
+        emailVerificationDialog.setCanceledOnTouchOutside(false);
+        emailVerificationDialog.setContentView(R.layout.email_verification_dialog);
+
+        Button ok_BT = emailVerificationDialog.findViewById(R.id.ok_BT);
+        ok_BT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emailVerificationDialog.dismiss();
+            }
+        });
+
+
+        emailVerificationDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        emailVerificationDialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = emailVerificationDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(lp);
     }
 
     @Override

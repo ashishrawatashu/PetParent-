@@ -62,6 +62,7 @@ import com.cynoteck.petofy.response.getInsuranceMasterResponse.InsuranceMastersR
 import com.cynoteck.petofy.response.getPetAgeResponse.GetPetAgeresponseData;
 import com.cynoteck.petofy.response.getPetHospitalizationResponse.getHospitalizationDeatilsResponse.GetHospitalizationDeatilsResponse;
 import com.cynoteck.petofy.response.getPetNamesResponse.GetPetNamesResponse;
+import com.cynoteck.petofy.response.getPetParentDetailsResponse.GetPetParentDetails;
 import com.cynoteck.petofy.response.getPetParrentnameReponse.GetPetParentResponseData;
 import com.cynoteck.petofy.response.getPetReportsResponse.AddUpdateDeleteClinicVisitResponse;
 import com.cynoteck.petofy.response.getProviderFeedbackResponse.GetProviderFeedbackResponse;
@@ -139,6 +140,12 @@ public interface ApiInterface {
 
     @POST("user/forgotpassword")
     Call<PasswordResponse> getPasswordResponse(@Body ForgetPassRequest forgetPassRequest);
+
+    //TODO===========Get Pet Parent Details==========================
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @GET("user/get-petparent-profiledetail")
+    Call<GetPetParentDetails> getPetParentDetails(@Header("Authorization") String auth);
 
     //TODO===========Get Pet List API===========================
 
@@ -580,6 +587,9 @@ public interface ApiInterface {
     @GET
     Call<GetAllDetailAfterLoginResponse> getAllDetailAfterLogin(@Header("Authorization") String auth,@Url String url);
 
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("user/send-email-verification-link")
+    Call<JsonObject> sendEmailVerification(@Header("Authorization") String auth);
 
 }
 

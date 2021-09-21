@@ -516,29 +516,33 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
             case R.id.purchase_proof_image_upload_IV:
                 imageTypeName = "purchase_proof_image";
-                Intent intent1 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent1.addCategory(Intent.CATEGORY_OPENABLE);
-                intent1.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-                intent1.setType("application/pdf||*application/doc");
-                startActivityForResult(Intent.createChooser(intent1, "Select a file"), DOC_UPLOAD);
+                showPictureDialog();
+
+//                Intent intent1 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//                intent1.addCategory(Intent.CATEGORY_OPENABLE);
+//                intent1.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+//                intent1.setType("application/pdf||*application/doc");
+//                startActivityForResult(Intent.createChooser(intent1, "Select a file"), DOC_UPLOAD);
                 break;
 
             case R.id.pedigree_cert_image_upload_IV:
                 imageTypeName = "pedigree_proof_image";
-                Intent intent2 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent2.addCategory(Intent.CATEGORY_OPENABLE);
-                intent2.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-                intent2.setType("*application/pdf||*application/doc");
-                startActivityForResult(Intent.createChooser(intent2, "Select a file"), DOC_UPLOAD);
+                showPictureDialog();
+//                Intent intent2 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//                intent2.addCategory(Intent.CATEGORY_OPENABLE);
+//                intent2.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+//                intent2.setType("*application/pdf||*application/doc");
+//                startActivityForResult(Intent.createChooser(intent2, "Select a file"), DOC_UPLOAD);
                 break;
 
             case R.id.vaccination_card_image_upload_IV:
                 imageTypeName = "vaccination_card";
-                Intent intent3 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent3.addCategory(Intent.CATEGORY_OPENABLE);
-                intent3.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-                intent3.setType("*application/pdf||*application/doc");
-                startActivityForResult(Intent.createChooser(intent3, "Select a file"), DOC_UPLOAD);
+                showPictureDialog();
+//                Intent intent3 = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//                intent3.addCategory(Intent.CATEGORY_OPENABLE);
+//                intent3.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+//                intent3.setType("*application/pdf||*application/doc");
+//                startActivityForResult(Intent.createChooser(intent3, "Select a file"), DOC_UPLOAD);
                 break;
 
             case R.id.is_vaccinated_CB:
@@ -1085,13 +1089,17 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==DOC_UPLOAD){
-            if (data.getData()!=null){
+            try {
                 Uri uri = data.getData();
-                String fullPath = Commons.getPath(uri, this);
-                File file = new File(fullPath);
-                uploadImage(file);
-            }
+                if (uri!=null){
+                    String fullPath = Commons.getPath(uri, this);
+                    File file = new File(fullPath);
+                    uploadImage(file);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
 
+            }
         }else {
             mediaUtils.onActivityResult(requestCode, resultCode, data);
         }
@@ -1900,7 +1908,8 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         }
 
         strStateSpnr = getAllDetailAfterLoginResponse.getData().getStateName();
-        strCitySpnr  = getAllDetailAfterLoginResponse.getData().getCityName();
+//        strCitySpnr  = getAllDetailAfterLoginResponse.getData().getCityName();
+//        Log.d("strCitySpnr",strCitySpnr);
         setStateSpinner();
         setCitySpinner();
     }
@@ -2044,10 +2053,10 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         //Setting the ArrayAdapter data on the Spinner
 
         parent_city_spinner.setAdapter(aa);
-        if (!parent_city_spinner.equals("")) {
-            int spinnerPosition = aa.getPosition(strCitySpnr);
-            parent_city_spinner.setSelection(spinnerPosition);
-        }
+//        if (!strCitySpnr.equals("")) {
+//            int spinnerPosition = aa.getPosition(strCitySpnr);
+//            parent_city_spinner.setSelection(spinnerPosition);
+//        }
         parent_city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();

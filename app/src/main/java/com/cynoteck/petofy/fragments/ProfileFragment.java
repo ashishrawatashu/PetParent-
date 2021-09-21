@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -55,6 +57,7 @@ import com.cynoteck.petofy.response.getPetReportsResponse.getPetListResponse.Pet
 import com.cynoteck.petofy.utils.Config;
 import com.cynoteck.petofy.utils.Methods;
 import com.cynoteck.petofy.onClicks.OnItemClickListener;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -105,6 +108,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
     public static LinearLayout                  pet_list_LL;
     public static PetListHorizontalAdapter      petListHorizontalAdapter;
     private final int                           GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4;
+    BottomSheetDialog                           user_dialog_confirmation_dialog;
 
     //    ArrayList<PetList> profileList = new ArrayList<>();
 
@@ -265,17 +269,51 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 break;
 
             case R.id.logout_CL:
+                showLogOutDialog();
+
+                break;
+
+        }
+    }
+
+    private void showLogOutDialog() {
+        user_dialog_confirmation_dialog = new BottomSheetDialog(getContext());
+        user_dialog_confirmation_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        user_dialog_confirmation_dialog.setCancelable(true);
+        user_dialog_confirmation_dialog.setCanceledOnTouchOutside(false);
+        user_dialog_confirmation_dialog.setContentView(R.layout.user_log_out_dialog);
+        Button cancel_BT = user_dialog_confirmation_dialog.findViewById(R.id.cancel_BT);
+
+        Button ok_BT = user_dialog_confirmation_dialog.findViewById(R.id.log_out_BT);
+        ok_BT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 SharedPreferences preferences   =   getActivity().getSharedPreferences("userDetails", 0);
                 SharedPreferences.Editor editor =   preferences.edit();
                 editor.clear();
                 editor.apply();
-                editor.commit();
+                editor.apply();
                 PetParentSingleton.getInstance().getArrayList().clear();
                 startActivity(new Intent(getActivity(), SendPhoneNumber.class));
                 getActivity().finish();
-                break;
+            }
+        });
+        cancel_BT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user_dialog_confirmation_dialog.dismiss();
+            }
+        });
 
-        }
+        user_dialog_confirmation_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = user_dialog_confirmation_dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(lp);
+        user_dialog_confirmation_dialog.show();
+
     }
 
     private void showPictureDialog() {

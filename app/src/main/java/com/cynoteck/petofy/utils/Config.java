@@ -33,6 +33,7 @@ public class Config {
     public static String user_Veterian_address = "";
     public static String first_name = "";
     public static String last_name = "";
+    public static String emailStatus = "";
 
     public static String longitude = "";
     public static String latitude = "";

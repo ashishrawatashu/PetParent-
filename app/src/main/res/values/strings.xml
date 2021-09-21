@@ -279,5 +279,10 @@
     <string name="top_image">Top Image</string>
     <string name="search_headline">Search top service provider in your city </string>
     <string name="searchHint">Search services and more</string>
+    <string name="emailHeadline">We have sent an email to your registered email. Please check your inbox and click on the link to confirm your email.</string>
+    <string name="emailAlert">Email Verification</string>
+    <string name="confimation">Confirmation</string>
+    <string name="log_out_msg">Are you sure, You want to exit</string>
+    <string name="yes">Yes</string>
 
 </resources>

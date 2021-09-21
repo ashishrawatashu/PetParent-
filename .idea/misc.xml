@@ -23,10 +23,11 @@
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/activity_selected_pet_reports.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/activity_update_profile.xml" value="0.22" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/activity_vet_full_profile.xml" value="0.11" />
-        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/buttom_sheet_otp_layout.xml" value="0.16" />
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/buttom_sheet_otp_layout.xml" value="0.18" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/camera_permission_dialog.xml" value="0.1" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/check_box_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/choose_plan_dilaog_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/email_verification_dialog.xml" value="0.25" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_parent_home.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_pet_register.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
@@ -36,6 +37,7 @@
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/pet_parent_deatils_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/pet_profile_activity.xml" value="0.1" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/reviews_dilog_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/user_log_out_dialog.xml" value="0.22" />
       </map>
     </option>
   </component>
