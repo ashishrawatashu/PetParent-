@@ -66,10 +66,10 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
             case R.id.insurance_card_LL:
 
             case R.id.buy_now_BT:
-                Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
-                insuranceIntent.putExtra("afterLogin","no");
-//                startActivity(insuranceIntent);
-                startActivityForResult(insuranceIntent,1);
+                Config.fragmentNumber = 2;
+                Intent insuranceIntent = new Intent(this, DashBoardActivity.class);
+                startActivity(insuranceIntent);
+//                startActivityForResult(insuranceIntent,1);
                 break;
 
             case R.id.back_arrow_CV:

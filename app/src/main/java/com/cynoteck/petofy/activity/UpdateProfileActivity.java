@@ -3,6 +3,7 @@ package com.cynoteck.petofy.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -69,20 +70,23 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     SmsBroadcastReceiver        smsBroadcastReceiver;
     private static final int    REQ_USER_CONSENT = 200;
     String                      otpString;
-
+    ImageView                   cross_IV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         methods = new Methods(this);
         initView();
+        initDialog();
         startSmsUserConsent();
 
         back_arrow_IV.setOnClickListener(this);
         update_BT.setOnClickListener(this);
 
 //        number_TIET.setEnabled(false);
-        email_TIET.setEnabled(false);
+//        email_TIET.setEnabled(false);
 
 
         firstName_TIET.setText(Config.first_name);
@@ -92,6 +96,30 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         address_TIET.setText(Config.user_address);
 
 
+    }
+
+    private void initDialog() {
+        otp_verification_dialog = new BottomSheetDialog(this);
+        otp_verification_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        otp_verification_dialog.setCancelable(true);
+        otp_verification_dialog.setCanceledOnTouchOutside(false);
+        otp_verification_dialog.setContentView(R.layout.buttom_sheet_otp_layout);
+
+        we_send_sms_TV  = otp_verification_dialog.findViewById(R.id.we_send_sms_TV);
+        editText_one    = otp_verification_dialog.findViewById(R.id.editTextone);
+        editText_two    = otp_verification_dialog.findViewById(R.id.editTexttwo);
+        editText_three  = otp_verification_dialog.findViewById(R.id.editTextthree);
+        editText_four   = otp_verification_dialog.findViewById(R.id.editTextfour);
+        submit_otp_BT   = otp_verification_dialog.findViewById(R.id.submit_otp_BT);
+        cross_IV        = otp_verification_dialog.findViewById(R.id.cross_IV);
+
+        cross_IV.setOnClickListener(this);
+        submit_otp_BT.setOnClickListener(this);
+        editText_one.requestFocus();
+        editText_one.addTextChangedListener(this);
+        editText_two.addTextChangedListener(this);
+        editText_three.addTextChangedListener(this);
+        editText_four.addTextChangedListener(this);
     }
 
     private void startSmsUserConsent() {
@@ -129,24 +157,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     }
 
     private void showOtpDialog() {
-        otp_verification_dialog = new BottomSheetDialog(this);
-        otp_verification_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        otp_verification_dialog.setCancelable(true);
-        otp_verification_dialog.setCanceledOnTouchOutside(false);
-        otp_verification_dialog.setContentView(R.layout.buttom_sheet_otp_layout);
-
-        we_send_sms_TV  = otp_verification_dialog.findViewById(R.id.we_send_sms_TV);
-        editText_one    = otp_verification_dialog.findViewById(R.id.editTextone);
-        editText_two    = otp_verification_dialog.findViewById(R.id.editTexttwo);
-        editText_three  = otp_verification_dialog.findViewById(R.id.editTextthree);
-        editText_four   = otp_verification_dialog.findViewById(R.id.editTextfour);
-        submit_otp_BT   = otp_verification_dialog.findViewById(R.id.submit_otp_BT);
-
-        submit_otp_BT.setOnClickListener(this);
         we_send_sms_TV.setText("We sent 4-digit code to +91"+numberStr);
-
         otp_verification_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
+        otp_verification_dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         otp_verification_dialog.show();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = otp_verification_dialog.getWindow();
@@ -166,6 +179,10 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             case R.id.back_arrow_IV:
 
                 onBackPressed();
+                break;
+
+            case R.id.cross_IV:
+                otp_verification_dialog.dismiss();
                 break;
 
             case R.id.update_BT:
@@ -286,7 +303,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         methods.showCustomProgressBarDialog(this);
         ApiService<UpdatePetParentProfile> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().updatePetParent(Config.token, updateParentDetailsRequest), "UpdateParent");
-        //Log.d"ValidatePetParentOtp", methods.getRequestJson(updateParentDetailsRequest));
+        Log.d("ValidatePetParentOtp", methods.getRequestJson(updateParentDetailsRequest));
         //Log.d"ValidatePetParentOtp", Config.token);
 
     }
@@ -350,6 +367,9 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                         Toast.makeText(this, "Update Successfully", Toast.LENGTH_SHORT).show();
                         sharedPreferences = this.getSharedPreferences("userDetails", 0);
                         login_editor = sharedPreferences.edit();
+                        if (loginRegisterResponse.getData().getIsEmailVerified().equals("false")){
+
+                        }
                         login_editor.putString("email", loginRegisterResponse.getData().getEmail());
                         login_editor.putString("firstName", loginRegisterResponse.getData().getFirstName());
                         login_editor.putString("lastName", loginRegisterResponse.getData().getLastName());
@@ -362,6 +382,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                         finish();
 
                     } else if (responseCode == 615) {
+                        Toast.makeText(this, loginRegisterResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
+                    }else if (responseCode == 625) {
                         Toast.makeText(this, loginRegisterResponse.getResponse().getResponseMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Please Try Again !", Toast.LENGTH_SHORT).show();

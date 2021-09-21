@@ -106,6 +106,8 @@ import com.google.gson.JsonObject;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -198,6 +200,10 @@ public interface ApiInterface {
     @Multipart
     @POST("document/UploadDocument")
     Call<ImageResponse> uploadImages(@Header("Authorization") String auth, @Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST("document/UploadDocument")
+    Call<ImageResponse> uploadPDF(@Header("Authorization") String auth, @Field("PDF") String s);
 
     //TODO=========Update data API==============================
 
