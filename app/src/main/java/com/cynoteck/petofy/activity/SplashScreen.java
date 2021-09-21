@@ -50,6 +50,7 @@ public class SplashScreen extends AppCompatActivity {
         animation       = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.bounce);
         splash_logo.setAnimation(animation);
         NetwordDetect();
+//        requestMultiplePermissions();
         try {
             if (methods.isInternetOn()) {
                 internetChkCode=1;
@@ -162,16 +163,17 @@ public class SplashScreen extends AppCompatActivity {
                         if (report.areAllPermissionsGranted()) {
                             Log.d("STORAGE_DIALOG","All permissions are granted by user!");
                             intentActivity();
-                        }else {
-                            Log.d("STORAGE_DIALOG","storagePermissionDialog");
-                            intentActivity();
-
                         }
+//                        else {
+//                            Log.d("STORAGE_DIALOG","storagePermissionDialog");
+                            intentActivity();
+//
+//                        }
 
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
                             // show alert dialog navigating to Settings
-                            Log.d("STORAGE_DIALOG","openSettingsDialog");
+                            Log.d("STORAGE_DIALOG","splash screen openSettingsDialog");
                             startActivity(new Intent(SplashScreen.this,PermissionCheckActivity.class));
 
                         }

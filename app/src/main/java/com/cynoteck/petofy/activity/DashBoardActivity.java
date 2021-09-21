@@ -12,15 +12,18 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,46 +42,57 @@ import com.cynoteck.petofy.utils.Config;
 import com.cynoteck.petofy.utils.Methods;
 import com.cynoteck.petofy.utils.NetworkChangeReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
 
 
 public class DashBoardActivity extends AppCompatActivity {
-    public static final int     MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private final int           MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
-    private GpsTracker          gpsTracker;
-    public static final         String channel_id = "channel_id";
-    private static final        String channel_name = "channel_name";
-    private static final        String channel_desc = "channel_desc";
-    boolean                     exit = false;
-    Methods                     methods;
-    String                      petId = "", from = "";
-    LocationManager             locationManager;
-    private static final int    REQUEST_LOCATION = 1;
-    private BroadcastReceiver   mNetworkReceiver;
-    SharedPreferences           sharedPreferences;
-    SharedPreferences.Editor    login_editor;
-    Dialog                      location_permission_dialog;
-    Dialog                      storagePermissionDialog,cameraPermissionDialog;
-    BottomNavigationView        navigation;
-    final Fragment              fragment1 = new ParentHomeFragment();
-    final Fragment              fragment2 = new PetRegisterFragment();
-    final Fragment              fragment3 = new AppointmentListFragment();
-    final Fragment              fragment4 = new ProfileFragment();
-    final FragmentManager       fm        = getSupportFragmentManager();
-    Fragment                    active    = fragment1;
-    boolean                     cameraDialog= false, storageDialog= false;
-    boolean                     locationPermission = false;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
+    private GpsTracker gpsTracker;
+    public static final String channel_id = "channel_id";
+    private static final String channel_name = "channel_name";
+    private static final String channel_desc = "channel_desc";
+    boolean exit = false;
+    Methods methods;
+    String petId = "", from = "";
+    LocationManager locationManager;
+    private static final int REQUEST_LOCATION = 1;
+    private BroadcastReceiver mNetworkReceiver;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor login_editor;
+    Dialog location_permission_dialog,settingDialog;
+    Dialog storagePermissionDialog, cameraPermissionDialog;
+    BottomNavigationView navigation;
+    final Fragment fragment1 = new ParentHomeFragment();
+    final Fragment fragment2 = new PetRegisterFragment();
+    final Fragment fragment3 = new AppointmentListFragment();
+    final Fragment fragment4 = new ProfileFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
+    boolean cameraDialog = false, storageDialog = false;
+    boolean  dialogStatus = false;
+    boolean locationPermission = false;
+    Button open_setting_BT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-
         methods = new Methods(this);
-
         notificationMethod();
+//        getLocation();
 //        checkCameraPermission();
         registerNetworkBroadcastForNougat();
 
+        requestMultiplePermissions();
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -89,47 +103,53 @@ public class DashBoardActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.content_frame, fragment2, "2").hide(fragment2).commit();
         fm.beginTransaction().add(R.id.content_frame, fragment1, "1").commit();
 
-        if (Config.fragmentNumber==3){
+        if (Config.fragmentNumber == 3) {
             Config.fragmentNumber = 0;
             fm.beginTransaction().hide(active).show(fragment3).commit();
             active = fragment3;
             MenuItem homeItem = navigation.getMenu().getItem(2);
             navigation.setSelectedItemId(homeItem.getItemId());
-        }else if (Config.fragmentNumber==2){
+            Toast.makeText(this, "Select your pet for insurance ", Toast.LENGTH_SHORT).show();
+        } else if (Config.fragmentNumber == 2) {
             Config.fragmentNumber = 0;
             fm.beginTransaction().hide(active).show(fragment2).commit();
             active = fragment2;
             MenuItem homeItem = navigation.getMenu().getItem(1);
             navigation.setSelectedItemId(homeItem.getItemId());
-            Toast.makeText(this, "Select your pet for Insurance", Toast.LENGTH_SHORT).show();
         }
 
 
-        SharedPreferences sharedPreferences     = getSharedPreferences("userDetails", 0);
-        Config.token                            = sharedPreferences.getString("token", "");
-        Config.user_id                          = sharedPreferences.getString("userId", "");
-        Config.user_phone                       = sharedPreferences.getString("phoneNumber", "");
-        Config.user_emial                       = sharedPreferences.getString("email", "");
-        Config.user_name                        = sharedPreferences.getString("firstName", "") + " " + sharedPreferences.getString("lastName", "");
-        Config.user_address                     = sharedPreferences.getString("address", "");
-        Config.user_online                      = sharedPreferences.getString("onlineAppoint", "");
-        Config.user_study                       = sharedPreferences.getString("study", "");
-        Config.user_url                         = sharedPreferences.getString("profilePic", "");
-        Config.two_fact_auth_status             = sharedPreferences.getString("twoFactAuth", "");
-        Config.parent_encryptedId               = sharedPreferences.getString("encryptedId", "");
-        Config.first_name                       = sharedPreferences.getString("firstName", "");
-        Config.last_name                        = sharedPreferences.getString("lastName", "");
-        Config.cityId                           = sharedPreferences.getString("CityId", "");
-        Config.cityName                         = sharedPreferences.getString("cityName", "");
-        Config.cityFullName                     = sharedPreferences.getString("CityFullName", "");
-        Config.locationPermission               = sharedPreferences.getString("locationPermission", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
+        Config.token = sharedPreferences.getString("token", "");
+        Config.user_id = sharedPreferences.getString("userId", "");
+        Config.user_phone = sharedPreferences.getString("phoneNumber", "");
+        Config.user_emial = sharedPreferences.getString("email", "");
+        Config.user_name = sharedPreferences.getString("firstName", "") + " " + sharedPreferences.getString("lastName", "");
+        Config.user_address = sharedPreferences.getString("address", "");
+        Config.user_online = sharedPreferences.getString("onlineAppoint", "");
+        Config.user_study = sharedPreferences.getString("study", "");
+        Config.user_url = sharedPreferences.getString("profilePic", "");
+        Config.two_fact_auth_status = sharedPreferences.getString("twoFactAuth", "");
+        Config.parent_encryptedId = sharedPreferences.getString("encryptedId", "");
+        Config.first_name = sharedPreferences.getString("firstName", "");
+        Config.last_name = sharedPreferences.getString("lastName", "");
+        Config.cityId = sharedPreferences.getString("CityId", "");
+        Config.cityName = sharedPreferences.getString("cityName", "");
+        Config.cityFullName = sharedPreferences.getString("CityFullName", "");
+        Config.locationPermission = sharedPreferences.getString("locationPermission", "");
 //      Config.latitude                         = sharedPreferences.getString("userLatitude", "");
 //      Config.longitude                        = sharedPreferences.getString("userLongitude", "");
-        if (Config.locationPermission.equals("false")){
-            showLocationPermissionDialog();
-        }else {
+
+
+
+
+        if (Config.locationPermission.equals("true")) {
             getLocation();
         }
+
+
+//        requestMultiplePermissions();
+//        getLocation();
 
         Log.d("TOKEN", Config.token);
         Log.d("user_id", Config.user_id);
@@ -137,12 +157,12 @@ public class DashBoardActivity extends AppCompatActivity {
 
     }
 
-    private void checkCameraPermission() {
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_CAMERA);
-            return;
-        }
-    }
+//    private void checkCameraPermission() {
+//        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_CAMERA);
+//            return;
+//        }
+//    }
 
     private void showLocationPermissionDialog() {
         locationPermission = true;
@@ -156,16 +176,14 @@ public class DashBoardActivity extends AppCompatActivity {
         grant_permission_BT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                        ActivityCompat.requestPermissions(DashBoardActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
-                    }
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+
             }
         });
-
         location_permission_dialog.show();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = location_permission_dialog.getWindow();
@@ -175,9 +193,9 @@ public class DashBoardActivity extends AppCompatActivity {
         window.setAttributes(lp);
     }
 
-    public void getLocation(){
+    public void getLocation() {
         gpsTracker = new GpsTracker(DashBoardActivity.this);
-        if(gpsTracker.canGetLocation()){
+        if (gpsTracker.canGetLocation()) {
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
             Config.latitude = String.valueOf(latitude);
@@ -188,73 +206,73 @@ public class DashBoardActivity extends AppCompatActivity {
             login_editor.putString("userLatitude", String.valueOf(latitude));
             login_editor.putString("userLongitude", String.valueOf(longitude));
             login_editor.apply();
-        }else{
+        } else {
             gpsTracker.showSettingsAlert();
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_READ_CAMERA: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (cameraDialog) {
-                        cameraPermissionDialog.dismiss();
-                        cameraDialog = false;
-                        checkCameraPermission();
-                    }
-                } else {
-                    cameraDialog = false;
-                    showCameraPermissionDialog();
-                }
-
-                return;
-            }
-            case 101: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    sharedPreferences = this.getSharedPreferences("userDetails", 0);
-                    login_editor = sharedPreferences.edit();
-                    login_editor.putString("locationPermission", "true");
-                    login_editor.apply();
-                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                    if (locationPermission) {
-                        location_permission_dialog.dismiss();
-                        locationPermission = false;
-                    }
-                } else {
-                    locationPermission = false;
-                    showLocationPermissionDialog();
-                }
-
-            }
-
-        }
-    }
-
-    private void showCameraPermissionDialog() {
-        cameraDialog            = true;
-        cameraPermissionDialog  = new Dialog(this);
-        cameraPermissionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        cameraPermissionDialog.setCancelable(false);
-        cameraPermissionDialog.setContentView(R.layout.camera_permission_dialog);
-        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        Button grant_permission_BT = cameraPermissionDialog.findViewById(R.id.grant_permission_BT);
-        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkCameraPermission();
-            }
-        });
-
-        cameraPermissionDialog.show();
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = cameraPermissionDialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(lp);
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        switch (requestCode) {
+//            case MY_PERMISSIONS_REQUEST_READ_CAMERA: {
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    if (cameraDialog) {
+//                        cameraPermissionDialog.dismiss();
+//                        cameraDialog = false;
+//                        checkCameraPermission();
+//                    }
+//                } else {
+//                    cameraDialog = false;
+//                    showCameraPermissionDialog();
+//                }
+//
+//                return;
+//            }
+//            case 101: {
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    sharedPreferences = this.getSharedPreferences("userDetails", 0);
+//                    login_editor = sharedPreferences.edit();
+//                    login_editor.putString("locationPermission", "true");
+//                    login_editor.apply();
+//                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+//                    if (locationPermission) {
+//                        location_permission_dialog.dismiss();
+//                        locationPermission = false;
+//                    }
+//                } else {
+//                    locationPermission = false;
+//                    showLocationPermissionDialog();
+//                }
+//
+//            }
+//
+//        }
+//    }
+//
+//    private void showCameraPermissionDialog() {
+//        cameraDialog            = true;
+//        cameraPermissionDialog  = new Dialog(this);
+//        cameraPermissionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        cameraPermissionDialog.setCancelable(false);
+//        cameraPermissionDialog.setContentView(R.layout.camera_permission_dialog);
+//        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        Button grant_permission_BT = cameraPermissionDialog.findViewById(R.id.grant_permission_BT);
+//        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                checkCameraPermission();
+//            }
+//        });
+//
+//        cameraPermissionDialog.show();
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        Window window = cameraPermissionDialog.getWindow();
+//        lp.copyFrom(window.getAttributes());
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+//        window.setAttributes(lp);
+//    }
 
 
     private void notificationMethod() {
@@ -382,10 +400,106 @@ public class DashBoardActivity extends AppCompatActivity {
         }
     }
 
+    //    it will check all the permission related to the app
+    private void requestMultiplePermissions() {
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            Log.d("STORAGE_DIALOG", "All permissions are granted by user!");
+//                            try {
+                                //    settingDialog.dismiss();
+                                settingDialog.dismiss();
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+
+                        } else
+                            {
+//                                openSettingsDialog();
+                                startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
+                            Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
+                            Log.d("DEXTER", "storagePermissionDialog");
+
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+//                            openSettingsDialog();
+//                            openSettingsDialog();
+                            startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
+                            Log.d("STORAGE_DIALOG", "dashboardopenSettingsDialog");
+
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Log.e("DEXTER", error.name());
+                        Toast.makeText(DashBoardActivity.this, "Some Error! ", Toast.LENGTH_SHORT).show();
+                           }
+                })
+                .onSameThread()
+                .check();
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterNetworkChanges();
 
     }
+
+
+    private void openSettingsDialog() {
+        dialogStatus  = true;
+        settingDialog  = new Dialog(this);
+        settingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        settingDialog.setCancelable(false);
+        settingDialog.setContentView(R.layout.location_permission_dialog);
+        settingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        open_setting_BT = settingDialog.findViewById(R.id.open_setting);
+
+        open_setting_BT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+
+            }
+        });
+        settingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        settingDialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = settingDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(lp);
+    }
+
+
+
+
+
+
+
+
+
 }

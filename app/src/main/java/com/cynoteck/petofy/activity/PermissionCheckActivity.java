@@ -54,9 +54,9 @@ public class PermissionCheckActivity extends AppCompatActivity implements View.O
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-                            startActivity(new Intent(PermissionCheckActivity.this,DashBoardActivity.class));
                             Log.d("STORAGE_DIALOG","All permissions are granted by user!");
                         }else {
+                            startActivity(new Intent(PermissionCheckActivity.this,DashBoardActivity.class));
                             Log.d("STORAGE_DIALOG","storagePermissionDialog");
                         }
 
