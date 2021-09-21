@@ -328,11 +328,11 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         Glide.with(this).load(searchProviderFullDetailResponse.getData().getProfileImageUrl()).placeholder(R.drawable.doctor_dummy_image).into(vet_profile_pic);
                         vet_name_TV.setText(searchProviderFullDetailResponse.getData().getName());
                         vet_study_TV.setText(searchProviderFullDetailResponse.getData().getVetQualifications());
+
                         vet_address_TV.setText(searchProviderFullDetailResponse.getData().getAddress());
                         clinic_name_TV.setText(searchProviderFullDetailResponse.getData().getCompany());
                         vet_full_address_TV.setText(searchProviderFullDetailResponse.getData().getAddress());
                         appointment_duration = searchProviderFullDetailResponse.getData().getAppointmentDuration();
-
 
                         providerClinicTimingsAdapter = new ProviderClinicTimingsAdapter(this, serviceProviderDetailOperatingHours);
                         clinic_timings_RV.setAdapter(providerClinicTimingsAdapter);

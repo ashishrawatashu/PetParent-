@@ -37,8 +37,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.PermissionCheckActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.PdfReaderActivity"
             android:exported="true" />
+
+
         <activity android:name=".activity.BuyInsuranceActivity" />
         <activity android:name=".activity.InsuranceActivity" />
 
