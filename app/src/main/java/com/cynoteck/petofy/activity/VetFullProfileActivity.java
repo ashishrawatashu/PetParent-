@@ -1,19 +1,16 @@
 package com.cynoteck.petofy.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +44,7 @@ import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.Search
 import com.cynoteck.petofy.response.getServiceProviderFullDetailsResponse.ServiceProviderDetailOperatingHour;
 import com.cynoteck.petofy.utils.Config;
 import com.cynoteck.petofy.utils.Methods;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -70,13 +68,13 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     ScrollView                                  scroll_view_vet_profile;
     ArrayList<ProviderRatingList>               providerRatingLists = new ArrayList<>();
     List<ServiceProviderDetailOperatingHour>    serviceProviderDetailOperatingHours = new ArrayList<>();
-    ProgressBar                                 progressBar;
+    ProgressBar                                 progressBar,reviews_PB;
     ViewPager                                   pager;
     LinearLayout                                ll_dots;
     private ImageView[]                         dots;
     ArrayList<Integer>                          slider_image_list;
     SliderPagerAdapter                          sliderPagerAdapter;
-    Dialog                                      reviewDialog;
+    BottomSheetDialog                           reviewDialog;
     EditText                                    dialog_give_reviews_ET;
     Button                                      dialog_submit_feedback_BT;
     ImageView                                   rate_one_IV, rate_two_IV,rate_three_IV,rate_four_IV,rate_five_IV;
@@ -91,8 +89,18 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
         intentData();
         init();
-
+        slider_image_list = new ArrayList<Integer>();
+        slider_image_list.add(R.drawable.slider_one);
+        slider_image_list.add(R.drawable.slider_two);
+        slider_image_list.add(R.drawable.slider_three);
+        setupPagerIndidcatorDots();
+        autoSlider();
+        SetViewPager();
         methods = new Methods(this);
+        getServiceProviderAllDetails();
+    }
+
+    private void getServiceProviderAllDetails() {
         SearchProviderFullDetailData searchProviderFullDetailData = new SearchProviderFullDetailData();
         searchProviderFullDetailData.setEncryptedId(EncryptId);
         searchProviderFullDetailData.setLatitude(Config.latitude);
@@ -104,7 +112,6 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         ApiService<SearchProviderFullDetailResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getProviderDetail(Config.token, searchProviderFullDetailRequest), "GetProviderFullDetails");
 //        Log.d("DATALOG", "check1=> " + methods.getRequestJson(searchProviderFullDetailRequest));
-
 
     }
 
@@ -144,6 +151,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         vet_profile_pic         = findViewById(R.id.vet_profile_pic);
         back_arrow_CV           = findViewById(R.id.back_arrow_CV);
         book_appointment_BT     = findViewById(R.id.book_appointment_BT);
+        reviews_PB              = findViewById(R.id.reviews_PB);
 
 
         book_appointment_BT.setOnClickListener(this);
@@ -161,7 +169,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
     }
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "NotifyDataSetChanged"})
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -196,9 +204,16 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
             case R.id.dialog_submit_feedback_BT:
                 String feedback = dialog_give_reviews_ET.getText().toString();
+                Log.d("RATE",""+rate);
                 if (rate == 0){
                     Toast.makeText(this, "Give rating to " +vet_name, Toast.LENGTH_SHORT).show();
                 }else {
+                    reviewDialog.dismiss();
+                    reviews_PB.setVisibility(View.VISIBLE);
+                    providerRatingLists.clear();
+                    providerReviewsAdapter.notifyDataSetChanged();
+                    Toast.makeText(this, "Thank you for giving you feedback !", Toast.LENGTH_SHORT).show();
+
                     SaveFeedbackParams saveFeedbackParams = new SaveFeedbackParams();
                     saveFeedbackParams.setFeedback(feedback);
                     saveFeedbackParams.setRating(rate);
@@ -282,11 +297,13 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key){
             case "GetProviderFullDetails":
                 try {
+                    reviews_PB.setVisibility(View.GONE);
                     searchProviderFullDetailResponse = (SearchProviderFullDetailResponse) arg0.body();
                     int responseCode = Integer.parseInt(searchProviderFullDetailResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -296,8 +313,9 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                             book_appointment_BT.setVisibility(View.VISIBLE);
                             book_appointment_BT.setEnabled(true);
                         }else {
-                            book_appointment_BT.setVisibility(View.VISIBLE);
+                            book_appointment_BT.setVisibility(View.GONE);
                             book_appointment_BT.setEnabled(false);
+                            book_appointment_BT.setText("");
                             book_appointment_BT.setBackgroundResource(R.drawable.next_button_grey_bg);
                         }
                         LinearLayoutManager reviewsHorizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -315,13 +333,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         vet_full_address_TV.setText(searchProviderFullDetailResponse.getData().getAddress());
                         appointment_duration = searchProviderFullDetailResponse.getData().getAppointmentDuration();
 
-                        slider_image_list = new ArrayList<Integer>();
-                        slider_image_list.add(R.drawable.slider_one);
-                        slider_image_list.add(R.drawable.slider_two);
-                        slider_image_list.add(R.drawable.slider_three);
-                        setupPagerIndidcatorDots();
-                        autoSlider();
-                        SetViewPager();
+
                         providerClinicTimingsAdapter = new ProviderClinicTimingsAdapter(this, serviceProviderDetailOperatingHours);
                         clinic_timings_RV.setAdapter(providerClinicTimingsAdapter);
                         providerClinicTimingsAdapter.notifyDataSetChanged();
@@ -331,6 +343,8 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         providerReviewsAdapter.notifyDataSetChanged();
 
                         phone = searchProviderFullDetailResponse.getData().getPhone();
+                        Log.d("rarting",searchProviderFullDetailResponse.getData().getRating());
+                        rating_TV.setText(searchProviderFullDetailResponse.getData().getRating());
 
 
                     }
@@ -346,8 +360,9 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                     GetSaveFeedbackResponse getSaveFeedbackResponse = (GetSaveFeedbackResponse) arg0.body();
                     int responseCode = Integer.parseInt(getSaveFeedbackResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
-                        Toast.makeText(this, "Feedback Uploaded Successfully ", Toast.LENGTH_SHORT).show();
-                        reviewDialog.dismiss();
+                        getServiceProviderAllDetails();
+//                        Toast.makeText(this, "Feedback Uploaded Successfully ", Toast.LENGTH_SHORT).show();
+//                        reviewDialog.dismiss();
                     }
                     }catch (Exception e){
                     e.printStackTrace();
@@ -435,7 +450,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     }
 
     private void showReviewDialog() {
-        reviewDialog = new Dialog(this);
+        reviewDialog = new BottomSheetDialog(this);
         reviewDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         reviewDialog.setCancelable(true);
         reviewDialog.setCanceledOnTouchOutside(false);

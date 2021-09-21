@@ -35,7 +35,7 @@ import retrofit2.Response;
 
 public class PetNamesActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnAlphabetClickListener, OnItemClickListener {
 
-    ImageView                   back_arrow_IV;
+    ImageView                   back_arrow_IV,empty_IV;
     EditText                    search_names_ET;
     RelativeLayout              all_pet_RL;
     TextView                    all_TV;
@@ -74,6 +74,8 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
 
     private void getPetNames(String petCategoryId, String petGenderId) {
         search_names_ET.setEnabled(false);
+        empty_IV.setVisibility(View.GONE);
+        pet_names_RV.setVisibility(View.GONE);
         ApiService<GetPetNamesResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getNamesList("pet/getpetnames/"+petCategoryId+"/"+petGenderId), "GetPetNamesList");
         //Log.d"GET_NAMES","pet/getpetnames/"+petCategoryId+"/"+petGenderId);
@@ -123,6 +125,7 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
         cat_TV                  = findViewById(R.id.cat_TV);
         pet_names_RV            = findViewById(R.id.pet_names_RV);
         a_to_z_RV               = findViewById(R.id.a_to_z_RV);
+        empty_IV                = findViewById(R.id.empty_IV);
 
         male_select_LL          = findViewById(R.id.male_select_LL);
         female_select_LL        = findViewById(R.id.female_select_LL);
@@ -214,6 +217,7 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key){
@@ -235,12 +239,19 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
                                 getPetNamesDataList.add(getPetNamesData);
                             }
                         }
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                        pet_names_RV.setLayoutManager(linearLayoutManager);
-                        petNamesAdapter = new PetNamesAdapter(this, getPetNamesDataList, this);
-                        pet_names_RV.setAdapter(petNamesAdapter);
-                        petNamesAdapter.notifyDataSetChanged();
-                        pet_names_RV.setEnabled(true);
+                        if (getPetNamesDataList.isEmpty()){
+                            empty_IV.setVisibility(View.VISIBLE);
+
+                        }else {
+                            pet_names_RV.setVisibility(View.VISIBLE);
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                            pet_names_RV.setLayoutManager(linearLayoutManager);
+                            petNamesAdapter = new PetNamesAdapter(this, getPetNamesDataList, this);
+                            pet_names_RV.setAdapter(petNamesAdapter);
+                            petNamesAdapter.notifyDataSetChanged();
+                            pet_names_RV.setEnabled(true);
+                        }
+
 
                     }
 

@@ -215,6 +215,7 @@
             <EditText
                 android:id="@+id/pet_name_ET"
                 android:layout_width="0dp"
+                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
     TextView                        location_TV, consultation_TV,heading_one_TV,heading_two_TV;
     VetListAdapter                  vetListAdapter;
     LinearLayout                    search_bar_LL;
+    ImageView                       empty_IV;
 
     //location Dialog.........
     Dialog                          location_dialog;
@@ -119,6 +121,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
         search_bar_LL.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         vet_list_RV.setVisibility(View.GONE);
+        empty_IV.setVisibility(View.GONE);
         GetServiceProviderListParams getServiceProviderListParams = new GetServiceProviderListParams();
         getServiceProviderListParams.setCityId(Config.cityId);
         getServiceProviderListParams.setLattitude(Config.latitude);
@@ -130,12 +133,13 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
         ApiService<GetVetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getServiceProvidersListByServiceAndCity(Config.token, getServiceProviderListRequest), "GetVetList");
-        //Log.d"DATALOG", "check1=> " + methods.getRequestJson(getServiceProviderListRequest));
+        Log.d("DATALOG", "check1=> " + methods.getRequestJson(getServiceProviderListRequest));
 
     }
 
     @SuppressLint("SetTextI18n")
     private void init() {
+        empty_IV        =   findViewById(R.id.empty_IV);
         back_arrow_CV   =   findViewById(R.id.back_arrow_CV);
         location_LL     =   findViewById(R.id.location_LL);
         search_vet_ET   =   findViewById(R.id.search_vet_ET);
@@ -251,7 +255,8 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
                     int responseCode = Integer.parseInt(getVetListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (getVetListResponse.getData().getProviderList().isEmpty()) {
-                            Toast.makeText(this, "No Data Found!", Toast.LENGTH_SHORT).show();
+                            empty_IV.setVisibility(View.VISIBLE);
+                            Toast.makeText(this, "No data found in your city !", Toast.LENGTH_SHORT).show();
                         } else {
                             search_bar_LL.setVisibility(View.VISIBLE);
                             vet_list_RV.setVisibility(View.VISIBLE);
@@ -294,11 +299,11 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
         search_location_ET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                cityListAdapter.getFilter().filter(s);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                cityListAdapter.getFilter().filter(s);
 
             }
 

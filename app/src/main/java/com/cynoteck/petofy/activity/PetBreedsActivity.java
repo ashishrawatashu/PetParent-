@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.adapter.AToZAlphabetsAdapter;
@@ -35,7 +36,7 @@ import java.util.List;
 import retrofit2.Response;
 
 public class PetBreedsActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnAlphabetClickListener, OnItemClickListener {
-    ImageView                   back_arrow_IV;
+    ImageView                   back_arrow_IV,empty_IV;
     EditText                    search_breed_ET;
     RelativeLayout              all_pet_RL;
     TextView                    all_TV;
@@ -97,6 +98,8 @@ public class PetBreedsActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void getPetBreed(String apiUrl) {
+        empty_IV.setVisibility(View.GONE);
+        pet_breeds_RV.setVisibility(View.GONE);
         ApiService<GetPetBreedsResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetBreedsList("services/getpetbreeds/"+apiUrl), "GetBreedsList");
 
@@ -115,6 +118,7 @@ public class PetBreedsActivity extends AppCompatActivity implements View.OnClick
         cat_TV                      = findViewById(R.id.cat_TV);
         pet_breeds_RV               = findViewById(R.id.pet_breeds_RV);
         a_to_z_RV                   = findViewById(R.id.a_to_z_RV);
+        empty_IV                    = findViewById(R.id.empty_IV);
 
         back_arrow_IV.setOnClickListener(this);
         cat_select_LL.setOnClickListener(this);
@@ -172,6 +176,7 @@ public class PetBreedsActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key){
@@ -209,12 +214,19 @@ public class PetBreedsActivity extends AppCompatActivity implements View.OnClick
                                 getPetbreedsDataList.add(getPetbreedsData);
                             }
                         }
-                        GridLayoutManager linearLayoutManager = new GridLayoutManager(this,2);
-                        pet_breeds_RV.setLayoutManager(linearLayoutManager);
-                        petBreedsAdapter = new PetBreedsAdapter(this, getPetbreedsDataList, this);
-                        pet_breeds_RV.setAdapter(petBreedsAdapter);
-                        petBreedsAdapter.notifyDataSetChanged();
-                        search_breed_ET.setEnabled(true);
+                        if (getPetbreedsDataList.isEmpty()){
+                            empty_IV.setVisibility(View.VISIBLE);
+//                            Toast.makeText(this, "No data found !", Toast.LENGTH_SHORT).show();
+                        }else {
+                            pet_breeds_RV.setVisibility(View.VISIBLE);
+                            GridLayoutManager linearLayoutManager = new GridLayoutManager(this,2);
+                            pet_breeds_RV.setLayoutManager(linearLayoutManager);
+                            petBreedsAdapter = new PetBreedsAdapter(this, getPetbreedsDataList, this);
+                            pet_breeds_RV.setAdapter(petBreedsAdapter);
+                            petBreedsAdapter.notifyDataSetChanged();
+                            search_breed_ET.setEnabled(true);
+                        }
+
 
                     }
 

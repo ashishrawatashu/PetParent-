@@ -59,52 +59,51 @@
                 android:visibility="visible" />
 
         </com.google.android.material.card.MaterialCardView>
-        
+
         <RelativeLayout
             android:id="@+id/total_adoption_RL"
             android:layout_width="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="10dp"
-            android:layout_height="40dp">
-            
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
                 android:id="@+id/cart_icon_IV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/cart_inactive"/>
-            
+                android:src="@drawable/cart_inactive" />
+
             <RelativeLayout
                 android:id="@+id/total_RL"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="4dp"
-                android:layout_marginTop="8dp"
                 android:layout_width="10dp"
-                android:layout_height="10dp">
+                android:layout_height="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="4dp">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/round_blue_icon"/>
+                    android:src="@drawable/round_blue_icon" />
 
                 <TextView
                     android:id="@+id/total_adoption_request_TV"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/nunito_bold"
-                    android:textSize="6sp"
-                    android:textColor="@color/whiteColor"/>
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="6sp" />
 
 
             </RelativeLayout>
         </RelativeLayout>
 
-        
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -130,62 +129,59 @@
         app:layout_constraintTop_toBottomOf="@+id/choose_category_TV">
 
         <LinearLayout
-            android:background="@drawable/background_grey"
             android:layout_width="110dp"
             android:layout_height="50dp"
+            android:background="@drawable/background_grey"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/cat"
-                android:gravity="center_vertical"
-                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="12dp"
                 android:fontFamily="@font/nunito_bold"
-                android:textColor="@color/gray_1"/>
+                android:gravity="center_vertical"
+                android:text="@string/cat"
+                android:textColor="@color/gray_1"
+                android:textSize="18sp" />
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/cats_RB"
-                android:layout_marginRight="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:checked="true" />
 
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/background_grey"
             android:layout_width="110dp"
             android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/background_grey"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/dogs"
-                android:gravity="center_vertical"
-                android:textSize="18sp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginRight="12dp"
                 android:fontFamily="@font/nunito_bold"
-                android:textColor="@color/gray_1"/>
+                android:gravity="center_vertical"
+                android:text="@string/dogs"
+                android:textColor="@color/gray_1"
+                android:textSize="18sp" />
 
             <RadioButton
                 android:id="@+id/dog_RB"
-                android:layout_marginRight="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp" />
 
 
         </LinearLayout>
-
-
-
 
 
     </LinearLayout>
@@ -215,9 +211,6 @@
         </LinearLayout>
 
 
-
-
-
     </androidx.core.widget.NestedScrollView>
 
 
@@ -225,6 +218,17 @@
         android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/category_LL" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/empty_IV"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="@id/toolbar"

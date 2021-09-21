@@ -230,6 +230,8 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
 
 
+
+
         next_BT.setOnClickListener(this);
         privious_BT.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
@@ -265,6 +267,12 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         parent_referralCode_ET              = findViewById(R.id.parent_referralCode_ET);
 
         calenderTextView_dialog.setOnClickListener(this);
+        parent_first_name_ET.setText(Config.first_name);
+        parent_last_name_ET.setText(Config.last_name);
+        parent_email_ET.setText(Config.user_emial);
+        parent_phone_ET.setText(Config.user_phone);
+        parent_address_ET.setText(Config.user_address);
+
 
     }
 
@@ -658,24 +666,30 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
                     if (pet_parent_first_name.isEmpty()){
                         parent_first_name_ET.setError("Enter first name !");
+                        Toast.makeText(this, "Enter first name !", Toast.LENGTH_SHORT).show();
                         break;
                     }if (pet_parent_last_name.isEmpty()){
                         parent_last_name_ET.setError("Enter last name !");
+                        Toast.makeText(this, "Enter last name !", Toast.LENGTH_SHORT).show();
                         break;
                     }if (pet_parent_email.isEmpty()){
                         parent_email_ET.setError("Enter email address !");
+                        Toast.makeText(this, "Enter email address !", Toast.LENGTH_SHORT).show();
                         break;
                     }if (!pet_parent_email.matches(emailPattern)) {
                         parent_email_ET.setError("Invalid email !");
+                        Toast.makeText(this, "Invalid email !", Toast.LENGTH_SHORT).show();
                         break;
                     }if (pet_parent_phone_no.isEmpty()){
                         parent_phone_ET.setError("Enter phone no !");
+                        Toast.makeText(this, "Enter phone no !", Toast.LENGTH_SHORT).show();
                         break;
                     }if (pet_parent_dob.isEmpty()){
                         Toast.makeText(this, "Enter date of birth !", Toast.LENGTH_SHORT).show();
                         break;
                     }if (pet_parent_address.isEmpty()){
                         parent_address_ET.setError("Enter your address");
+                        Toast.makeText(this, "Enter your address", Toast.LENGTH_SHORT).show();
                         break;
                     }if (strStateSpnr.equals("Select State")){
                         Toast.makeText(this, "Select State", Toast.LENGTH_SHORT).show();
@@ -685,9 +699,11 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                         break;
                     }if (pet_parent_pinCode.isEmpty()){
                         parent_pinCode_ET.setError("Enter pin code");
+                        Toast.makeText(this, "Enter pin code", Toast.LENGTH_SHORT).show();
                         break;
                     }if (pet_parent_pinCode.length()!=6){
                         parent_pinCode_ET.setError("Invalid pin code !");
+                        Toast.makeText(this, "Invalid pin code !", Toast.LENGTH_SHORT).show();
                         break;
                     }
 
@@ -717,7 +733,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
                     }else {
                         ApiService<JsonObject> service1 = new ApiService<>();
                         service1.get(this, ApiClient.getApiInterface().punchingPolicy(tokenForInsurance,punchingPolicyRequest), "PunchingPolicyRequest");
-//                        Log.e("PunchingPolicyRequest", "Request=> " +methods.getRequestJson(punchingPolicyRequest));
+                        Log.e("PunchingPolicyRequest", "Request=> " +methods.getRequestJson(punchingPolicyRequest));
                     }
 
                 }

@@ -40,7 +40,7 @@ public class ReportsTypeAdapter extends RecyclerView.Adapter<ReportsTypeAdapter.
     public void onBindViewHolder(@NonNull ReportsTypeAdapter.MyViewHolder holder, int position) {
         holder.vetName_TV.setText(petClinicVisitLists.get(position).getVeterinarian());
         holder.vet_visit_date_TV.setText(petClinicVisitLists.get(position).getVisitDate());
-        if (petClinicVisitLists.get(position).getDescription().equals("")) {
+        if (petClinicVisitLists.get(position).getDescription()==null) {
             holder.reason_of_visit_TV.setVisibility(View.INVISIBLE);
             holder.reason_TV.setVisibility(View.INVISIBLE);
             holder.reason_visit_dot_TV.setVisibility(View.INVISIBLE);
