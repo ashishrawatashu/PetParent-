@@ -50,18 +50,18 @@ public class SplashScreen extends AppCompatActivity {
         animation       = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.bounce);
         splash_logo.setAnimation(animation);
         NetwordDetect();
-        try {
-            if (methods.isInternetOn()) {
-                internetChkCode=1;
-                updateMethod();
-
-            } else {
-                internetChkCode=0;
-                methods.DialogInternet();
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            if (methods.isInternetOn()) {
+//                internetChkCode=1;
+//                updateMethod();
+//
+//            } else {
+//                internetChkCode=0;
+//                methods.DialogInternet();
+//            }
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -217,7 +217,7 @@ public class SplashScreen extends AppCompatActivity {
         if (loggedIn.equals("loggedIn")){
             intent = new Intent(SplashScreen.this,DashBoardActivity.class);
         }else {
-            intent = new Intent(SplashScreen.this, SendPhoneNumber.class);
+            intent = new Intent(SplashScreen.this, WelcomeScreenActivity.class);
         }
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
