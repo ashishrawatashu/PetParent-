@@ -106,6 +106,7 @@
             android:id="@+id/search_vet_ET"
             android:layout_width="match_parent"
             android:maxLines="1"
+            android:singleLine="true"
             android:imeOptions="actionDone"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"

@@ -263,8 +263,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/clinic_name_TV">
 
                 <ImageView
+                    android:layout_gravity="start"
                     android:layout_width="10dp"
-                    android:layout_height="15dp"
+                    android:layout_height="25dp"
                     android:layout_marginRight="7dp"
                     android:src="@drawable/location_grey_icon" />
 
@@ -273,7 +274,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
-                    android:text="Dehradun. India, 248001"
+                    android:text="Dehradun. Indiau48001"
                     android:textColor="@color/gray_1"
                     android:textSize="14sp" />
 
