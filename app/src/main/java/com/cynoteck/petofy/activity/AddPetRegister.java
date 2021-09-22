@@ -235,7 +235,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         back_arrow_CV   = findViewById(R.id.back_arrow_CV);
         add_pet_PB      = findViewById(R.id.add_pet_PB);
 
-        scrollView      = findViewById(R.id.scrollView);
+        scrollView      = findViewById(R.id.scroll_view_add_pet);
         maleRB          = findViewById(R.id.maleRB);
         genderRG        = findViewById(R.id.genderRG);
         femaleRB        = findViewById(R.id.femaleRB);
@@ -737,9 +737,6 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
             case "GetPetAgeUnit":
                 try {
-                    add_pet_PB.setVisibility(View.GONE);
-                    scrollView.setVisibility(View.VISIBLE);
-                    pet_submit.setVisibility(View.VISIBLE);
 //                    methods.customProgressDismiss();
                     //Log.d"GetPetTypes", arg0.body().toString());
                     PetAgeUnitResponseData petAgeUnitResponseData = (PetAgeUnitResponseData) arg0.body();
@@ -764,6 +761,9 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
             case "GetPetTypes":
                 try {
                     //Log.d"GetPetTypes", arg0.body().toString());
+                    add_pet_PB.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.VISIBLE);
+                    pet_submit.setVisibility(View.VISIBLE);
                     PetTypeResponse petTypeResponse = (PetTypeResponse) arg0.body();
                     int responseCode = Integer.parseInt(petTypeResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
