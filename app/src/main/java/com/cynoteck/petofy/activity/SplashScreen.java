@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.utils.Config;
@@ -164,11 +165,11 @@ public class SplashScreen extends AppCompatActivity {
                             Log.d("STORAGE_DIALOG","All permissions are granted by user!");
                             intentActivity();
                         }
-//                        else {
+                        else {
 //                            Log.d("STORAGE_DIALOG","storagePermissionDialog");
                             intentActivity();
 //
-//                        }
+                        }
 
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
@@ -191,6 +192,8 @@ public class SplashScreen extends AppCompatActivity {
                     @Override
                     public void onError(DexterError error) {
                         Log.d("STORAGE_DIALOG",error.toString());
+                        Toast.makeText(SplashScreen.this, "Some Error ! ", Toast.LENGTH_SHORT).show();
+
 
                     }
                 })
@@ -198,27 +201,15 @@ public class SplashScreen extends AppCompatActivity {
                 .check();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     private void intentActivity() {
         internetChkCode=0;
         Intent intent;
         SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
         String loggedIn = sharedPreferences.getString("loggedIn", "");
-
         if (loggedIn.equals("loggedIn")){
             intent = new Intent(SplashScreen.this,DashBoardActivity.class);
-        }else {
+        }
+        else {
             intent = new Intent(SplashScreen.this, SendPhoneNumber.class);
         }
         startActivity(intent);

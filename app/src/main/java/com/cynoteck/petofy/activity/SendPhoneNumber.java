@@ -65,14 +65,14 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
         enter_phone_ET.addTextChangedListener(this);
 //        qrCodeScanner_IV.setOnClickListener(this);
 
-        if (checkPermission()) {
-        } else {
-            if (!checkPermission()) {
-                requestPermission();
-            } else {
-                Toast.makeText(this, "Permission already granted.", Toast.LENGTH_SHORT).show();
-            }
-        }
+//        if (checkPermission()) {
+//        } else {
+//            if (!checkPermission()) {
+//                requestPermission();
+//            } else {
+//                Toast.makeText(this, "Permission already granted.", Toast.LENGTH_SHORT).show();
+//            }
+//        }
 
         next_BT.setOnClickListener(this);
         cross_IV.setOnClickListener(this);
@@ -126,22 +126,22 @@ public class SendPhoneNumber extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length>0){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-            }
-        }else if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION){
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            } else {
-                checkLocationPermission();
-            }
-        }
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if(requestCode == REQUEST_CAMERA_PERMISSION && grantResults.length>0){
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+//            } else {
+//                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+//            }
+//        }else if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION){
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//            } else {
+//                checkLocationPermission();
+//            }
+//        }
+//    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){

@@ -91,8 +91,7 @@ public class DashBoardActivity extends AppCompatActivity {
 //        getLocation();
 //        checkCameraPermission();
         registerNetworkBroadcastForNougat();
-
-        requestMultiplePermissions();
+//        requestMultiplePermissions();
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -145,6 +144,9 @@ public class DashBoardActivity extends AppCompatActivity {
 
         if (Config.locationPermission.equals("true")) {
             getLocation();
+        }
+        else{
+            requestMultiplePermissions();
         }
 
 
@@ -414,26 +416,18 @@ public class DashBoardActivity extends AppCompatActivity {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
                             Log.d("STORAGE_DIALOG", "All permissions are granted by user!");
-//                            try {
-                                //    settingDialog.dismiss();
-                                settingDialog.dismiss();
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
 
-                        } else
+                        }
+                        else
                             {
-//                                openSettingsDialog();
-                                startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
+                            startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
                             Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
-                            Log.d("DEXTER", "storagePermissionDialog");
+//                            Log.d("DEXTER", "storagePermissionDialog");
 
                         }
 
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
-//                            openSettingsDialog();
-//                            openSettingsDialog();
                             startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
                             Log.d("STORAGE_DIALOG", "dashboardopenSettingsDialog");
 
@@ -449,7 +443,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     @Override
                     public void onError(DexterError error) {
                         Log.e("DEXTER", error.name());
-                        Toast.makeText(DashBoardActivity.this, "Some Error! ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DashBoardActivity.this, "Some Error ! ", Toast.LENGTH_SHORT).show();
                            }
                 })
                 .onSameThread()
