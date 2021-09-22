@@ -160,23 +160,28 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
 
         if (serviceTypeId.equals("1")){
             consultation_TV.setText("CONSULTATIONS");
+            search_vet_ET.setHint("Search Veterinarian by name");
         }else if (serviceTypeId.equals("3")){
             consultation_TV.setText("HOSTELS");
             heading_one_TV.setText("Select Hostels Near you");
             heading_two_TV.setText("Find the best hostel for your pet with Petofy");
+            search_vet_ET.setHint("Search Hostels by name");
         }else if (serviceTypeId.equals("2")){
             consultation_TV.setText("GROOMING");
             heading_one_TV.setText("Select Your Desired Groomer");
             heading_two_TV.setText("Find the best groomers for your pet with Petofy");
+            search_vet_ET.setHint("Search Groomer by name");
 
         }else if (serviceTypeId.equals("11")){
             consultation_TV.setText("PET SHOPS");
             heading_one_TV.setText("Select Your Desired Pet Shop");
             heading_two_TV.setText("Find the best shop for your pet with Petofy");
+            search_vet_ET.setHint("Search Pet Shop by name");
 
         }else if (serviceTypeId.equals("6")){
             consultation_TV.setText("TRAINING");
             heading_one_TV.setText("Select Your Desired Trainer");
+            search_vet_ET.setHint("Search Trainer by name");
             heading_two_TV.setText("Find the best trainers for your pet with Petofy");
 
         }

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.adapter.AToZAlphabetsAdapter;
@@ -77,8 +78,9 @@ public class PetNamesActivity extends AppCompatActivity implements View.OnClickL
         empty_IV.setVisibility(View.GONE);
         pet_names_RV.setVisibility(View.GONE);
         ApiService<GetPetNamesResponse> service = new ApiService<>();
+//        Toast.makeText(this,"m"+petCategoryId,Toast.LENGTH_SHORT).show();
         service.get(this, ApiClient.getApiInterface().getNamesList("pet/getpetnames/"+petCategoryId+"/"+petGenderId), "GetPetNamesList");
-        //Log.d"GET_NAMES","pet/getpetnames/"+petCategoryId+"/"+petGenderId);
+        Log.d("GET_NAMES","pet/getpetnames/"+petCategoryId+"/"+petGenderId);
     }
 
     private void searchingPetNames() {

@@ -92,6 +92,7 @@ public class DashBoardActivity extends AppCompatActivity {
 //        checkCameraPermission();
         registerNetworkBroadcastForNougat();
 //        requestMultiplePermissions();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -139,15 +140,16 @@ public class DashBoardActivity extends AppCompatActivity {
 //      Config.latitude                         = sharedPreferences.getString("userLatitude", "");
 //      Config.longitude                        = sharedPreferences.getString("userLongitude", "");
 
+        requestMultiplePermissions();
+        getLocation();
 
 
-
-        if (Config.locationPermission.equals("true")) {
-            getLocation();
-        }
-        else{
-            requestMultiplePermissions();
-        }
+//        if (Config.locationPermission.equals("true")) {
+//            getLocation();
+//        }
+//        else{
+//            requestMultiplePermissions();
+//        }
 
 
 //        requestMultiplePermissions();
@@ -415,11 +417,13 @@ public class DashBoardActivity extends AppCompatActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
+//                            login_editor.putString("locationPermission", "true");
                             Log.d("STORAGE_DIALOG", "All permissions are granted by user!");
 
                         }
                         else
                             {
+//                                locationPermission = false;
                             startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
                             Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
 //                            Log.d("DEXTER", "storagePermissionDialog");
@@ -428,6 +432,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
+//                            locationPermission = false;
                             startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
                             Log.d("STORAGE_DIALOG", "dashboardopenSettingsDialog");
 

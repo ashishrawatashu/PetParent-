@@ -12,11 +12,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cynoteck.petofy.R;
+import com.google.android.material.card.MaterialCardView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -32,12 +34,16 @@ import java.util.List;
 public class PermissionCheckActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button allow_BT;
+    MaterialCardView permission_MCB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission_check);
         allow_BT = findViewById(R.id.allow_BT);
+        permission_MCB=findViewById(R.id.permission_MCB);
         allow_BT.setOnClickListener(this);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        requestMultiplePermissions();
 
     }
 
@@ -56,6 +62,8 @@ public class PermissionCheckActivity extends AppCompatActivity implements View.O
                         if (report.areAllPermissionsGranted()) {
                             startActivity(new Intent(PermissionCheckActivity.this,DashBoardActivity.class));
                             Log.d("STORAGE_DIALOG","All permissions are granted by user!");
+                            permission_MCB.setVisibility(View.GONE);
+
                         }
 //                        else {
 //                            Log.d("STORAGE_DIALOG","storagePermissionDialog");
@@ -65,6 +73,7 @@ public class PermissionCheckActivity extends AppCompatActivity implements View.O
                         if (report.isAnyPermissionPermanentlyDenied()) {
                             // show alert dialog navigating to Settings
                             allow_BT.setText("Open Setting");
+                            permission_MCB.setVisibility(View.VISIBLE);
                             Log.d("STORAGE_DIALOG","openSettingsDialog");
                         }
                     }
@@ -104,6 +113,6 @@ public class PermissionCheckActivity extends AppCompatActivity implements View.O
     @Override
     protected void onResume() {
         super.onResume();
-        requestMultiplePermissions();
+        Log.d("TAG", "onResume: hiiiii ");
     }
 }

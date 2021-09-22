@@ -162,6 +162,7 @@ public class SplashScreen extends AppCompatActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
+//                            locationPermission = true;
                             Log.d("STORAGE_DIALOG","All permissions are granted by user!");
                             intentActivity();
                         }

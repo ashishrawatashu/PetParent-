@@ -215,7 +215,12 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                 Log.d("RATE",""+rate);
                 if (rate == 0){
                     Toast.makeText(this, "Give rating to " +vet_name, Toast.LENGTH_SHORT).show();
-                }else {
+                }else if(feedback.equals(""))
+                {
+                    Toast.makeText(this, "Please enter your valuable feedback", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
                     reviewDialog.dismiss();
                     reviews_PB.setVisibility(View.VISIBLE);
                     providerRatingLists.clear();
@@ -341,6 +346,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         clinic_name_TV.setText(searchProviderFullDetailResponse.getData().getCompany());
                         vet_full_address_TV.setText(searchProviderFullDetailResponse.getData().getAddress());
                         appointment_duration = searchProviderFullDetailResponse.getData().getAppointmentDuration();
+                        Log.d("ADDRESS", "onResponse: "+searchProviderFullDetailResponse.getData().getAddress2());
 
                         providerClinicTimingsAdapter = new ProviderClinicTimingsAdapter(this, serviceProviderDetailOperatingHours);
                         clinic_timings_RV.setAdapter(providerClinicTimingsAdapter);

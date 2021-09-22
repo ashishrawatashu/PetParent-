@@ -101,7 +101,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     Dialog                          dialog;
     ImageView                       pet_image_IV;
     ConstraintLayout                uploaded_image_CL;
-    TextView                        upload_image_TV,image_path_TV,change_image_TV;
+    TextView                        upload_image_TV,image_path_TV,change_image_TV,pet_breed_TV,pet_color_TV;
     RelativeLayout                  remove_image_RL;
     Methods                         methods;
     DatePickerDialog                picker;
@@ -249,6 +249,8 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
         //TextView
         calenderView    = findViewById(R.id.calenderTextView_dialog);
+        pet_breed_TV=findViewById(R.id.pet_breed_TV);
+        pet_color_TV=findViewById(R.id.pet_color_TV);
         calenderView.setOnClickListener(this);
 
         //ImageView
@@ -933,9 +935,23 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
                 //Log.d"spnerType", "" + strSpnerItemPetNm);
                 getStrSpnerItemPetNmId = petTypeHashMap.get(strSpnerItemPetNm);
                 if (!getStrSpnerItemPetNmId.equals("0")) {
+
+                    pet_color_TV.setVisibility(View.VISIBLE);
+
+                    add_pet_color.setVisibility(View.VISIBLE);
+                    pet_breed_TV.setVisibility(View.VISIBLE);
+                    add_pet_breed.setVisibility(View.VISIBLE);
                     getPetBreed();
                     getPetAge();
                     getPetColor();
+                }
+                else{
+                    pet_breed_TV.setVisibility(View.GONE);
+                    add_pet_breed.setVisibility(View.GONE);
+                    pet_color_TV.setVisibility(View.GONE);
+                    add_pet_color.setVisibility(View.GONE);
+
+
                 }
 
             }
@@ -1011,6 +1027,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
         age_wise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
+
                 // Showing selected spinner item
                 strAgeCount = item;
                 //Log.d"spnerType", "PetAge" + item);

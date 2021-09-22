@@ -24,7 +24,10 @@
     <string name="adpotion_donation">ADOPTION &amp; DONATION</string>
     <string name="CheckInternet">Check your internet connection</string>
     <string name="openSetting">Open Setting</string>
-    <string name="cameraAndStorage">Cmera and Storage</string>
+    <string name="cameraAndStorage">Location, Camera &amp; Storage</string>
+
+    <string name="permissiondesc">Allow Location, Storage &amp; Camera permission to continue...</string>
+
 
 
 
@@ -61,7 +64,7 @@
     <string name="viewReports">View Reports</string>
     <string name="viewDetails">View Details</string>
     <string name="reports">REPORTS</string>
-    <string name="appointment">Appointment</string>
+    <string name="appointment">Appointments</string>
     <string name="register_pets">Register Pets</string>
     <string name="add_pet">ADD PET</string>
     <string name="pet_details">Pet Details</string>

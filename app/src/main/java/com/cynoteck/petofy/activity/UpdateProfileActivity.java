@@ -375,13 +375,13 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                         login_editor.putString("lastName", getPetParentDetails.getData().getLastName());
                         login_editor.putString("phoneNumber", getPetParentDetails.getData().getPhoneNumber());
                         login_editor.putString("address", getPetParentDetails.getData().getAddress());
-                        login_editor.putString("token", getPetParentDetails.getResponse().getToken());
+//                        login_editor.putString("token", getPetParentDetails.getResponse().getToken());
                         login_editor.putString("profilePic", getPetParentDetails.getData().getProfileImageUrl());
                         login_editor.putString("emailStatus", getPetParentDetails.getData().getIsEmailVerified());
                         Log.d("Status",getPetParentDetails.getData().getIsEmailVerified());
 
-                        Config.token = getPetParentDetails.getResponse().getToken();
-                        login_editor.putString("loggedIn", "loggedIn");
+//                        Config.token = getPetParentDetails.getResponse().getToken();
+//                        login_editor.putString("loggedIn", "loggedIn");
                         login_editor.apply();
                         Config.user_id                          = sharedPreferences.getString("userId", "");
                         Config.user_phone                       = sharedPreferences.getString("phoneNumber", "");

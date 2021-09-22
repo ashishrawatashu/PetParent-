@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -243,7 +244,8 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
         ApiService<GetPetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetList");
-//        Log.d("PET_LIST_REQ", methods.getRequestJson(getPetDataRequest));
+//        Log.d("PET_LIST_REQ", Config.token);
+//        Toast.makeText(getContext(),""+Config.token,Toast.LENGTH_SHORT).show();
 
     }
 

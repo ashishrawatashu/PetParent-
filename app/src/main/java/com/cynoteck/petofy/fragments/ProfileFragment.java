@@ -109,7 +109,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
     public static PetListHorizontalAdapter      petListHorizontalAdapter;
     private final int                           GALLERY = 1, CAMERA = 2, UPDATE = 3, ADD_PET = 4;
     BottomSheetDialog                           user_dialog_confirmation_dialog;
-
+    Button cancel_BT,ok_BT;
     //    ArrayList<PetList> profileList = new ArrayList<>();
 
     public ProfileFragment() {
@@ -124,6 +124,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         requestMultiplePermissions();
 
         initization();
+        initLogOutDialog();
         getParentInfo();
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         pet_list_RV.setLayoutManager(horizontalLayoutManager);
@@ -132,6 +133,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
         return view;
 
+    }
+
+    private void initLogOutDialog() {
+        user_dialog_confirmation_dialog = new BottomSheetDialog(getContext());
+        user_dialog_confirmation_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        user_dialog_confirmation_dialog.setCancelable(true);
+        user_dialog_confirmation_dialog.setCanceledOnTouchOutside(false);
+        user_dialog_confirmation_dialog.setContentView(R.layout.user_log_out_dialog);
+        cancel_BT = user_dialog_confirmation_dialog.findViewById(R.id.cancel_BT);
+        ok_BT = user_dialog_confirmation_dialog.findViewById(R.id.log_out_BT);
+        ok_BT.setOnClickListener(this);
+        cancel_BT.setOnClickListener(this);
     }
 
     private void setPetListLayout() {
@@ -273,21 +286,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
 
                 break;
 
-        }
-    }
-
-    private void showLogOutDialog() {
-        user_dialog_confirmation_dialog = new BottomSheetDialog(getContext());
-        user_dialog_confirmation_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        user_dialog_confirmation_dialog.setCancelable(true);
-        user_dialog_confirmation_dialog.setCanceledOnTouchOutside(false);
-        user_dialog_confirmation_dialog.setContentView(R.layout.user_log_out_dialog);
-        Button cancel_BT = user_dialog_confirmation_dialog.findViewById(R.id.cancel_BT);
-
-        Button ok_BT = user_dialog_confirmation_dialog.findViewById(R.id.log_out_BT);
-        ok_BT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            case R.id.log_out_BT:
+                user_dialog_confirmation_dialog.dismiss();
                 SharedPreferences preferences   =   getActivity().getSharedPreferences("userDetails", 0);
                 SharedPreferences.Editor editor =   preferences.edit();
                 editor.clear();
@@ -296,15 +296,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 PetParentSingleton.getInstance().getArrayList().clear();
                 startActivity(new Intent(getActivity(), SendPhoneNumber.class));
                 getActivity().finish();
-            }
-        });
-        cancel_BT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                user_dialog_confirmation_dialog.dismiss();
-            }
-        });
+                break;
 
+            case R.id.cancel_BT:
+
+                user_dialog_confirmation_dialog.dismiss();
+                break;
+
+        }
+    }
+
+    private void showLogOutDialog() {
         user_dialog_confirmation_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = user_dialog_confirmation_dialog.getWindow();
