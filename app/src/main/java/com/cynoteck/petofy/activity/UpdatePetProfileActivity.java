@@ -23,9 +23,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -116,6 +118,8 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     Dialog                      storagePermissionDialog,cameraPermissionDialog;
     boolean                     cameraDialog= false, storageDialog= false;
     MediaUtils                  mediaUtils;
+    ProgressBar                 update_pet_PB;
+    ScrollView                  scroll_view_update_pet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,6 +197,8 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         maleRB                  = findViewById(R.id.maleRB);
         genderRG                = findViewById(R.id.genderRG);
         femaleRB                = findViewById(R.id.femaleRB);
+        scroll_view_update_pet  = findViewById(R.id.scroll_view_update_pet);
+        update_pet_PB           = findViewById(R.id.update_pet_PB);
 
         add_pet_type            = findViewById(R.id.add_pet_type);
       
@@ -304,7 +310,8 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
     }
 
     private void getPetlistData(GetPetListRequest getPetListRequest) {
-        methods.showCustomProgressBarDialog(this);
+        update_pet_PB.setVisibility(View.VISIBLE);
+//        methods.showCustomProgressBarDialog(this);
         ApiService<GetPetResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetDetails(Config.token, getPetListRequest), "GetPetDetail");
         //Log.d"DATALOG", "check1=> PET_DETAILS " + methods.getRequestJson(getPetListRequest));
@@ -494,7 +501,10 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
         switch (key) {
             case "GetPetDetail":
                 try {
-                    methods.customProgressDismiss();
+                    update_pet_PB.setVisibility(View.GONE);
+                    scroll_view_update_pet.setVisibility(View.VISIBLE);
+                    pet_update.setVisibility(View.VISIBLE);
+//                    methods.customProgressDismiss();
                     GetPetResponse getPetResponse = (GetPetResponse) arg0.body();
                     //Log.d"GetPetDetail", methods.getRequestJson(getPetResponse));
                     int responseCode = Integer.parseInt(getPetResponse.getResponse().getResponseCode());
@@ -701,7 +711,8 @@ public class UpdatePetProfileActivity extends AppCompatActivity implements View.
 
     @Override
     public void onError(Throwable t, String key) {
-        methods.customProgressDismiss();
+//        methods.customProgressDismiss();
+        finish();
         Toast.makeText(this, "Please try again!", Toast.LENGTH_SHORT).show();
         //Log.d"ERROR",t.getLocalizedMessage());
 

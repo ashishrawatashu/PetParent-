@@ -43,6 +43,7 @@
         <entry key="..\:/petofypetparent/app/src/main/res/layout/vet_list.xml" value="0.11770833333333333" />
         <entry key="app/src/main/res/layout/activity_add_new_pet2.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout/activity_add_pet_register.xml" value="0.24010416666666667" />
+        <entry key="app/src/main/res/layout/activity_get_pet_details.xml" value="0.24010416666666667" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.2078125" />
       </map>
     </option>
