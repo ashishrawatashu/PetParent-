@@ -27,11 +27,13 @@
     <string name="cameraAndStorage">Location, Camera &amp; Storage</string>
 
     <string name="permissiondesc">Allow Location, Storage &amp; Camera permission to continue...</string>
+    <string name="newVersion">Petofy new version is available!</string>
+    <string name="pleaseDownload">Please download the latest version. </string>
+    <string name="download">Download</string>
 
 
 
-
-    openSetting
+<!--    openSetting-->
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="LastPrescription">Last Prescription</string>

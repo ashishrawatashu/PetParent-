@@ -11,15 +11,18 @@ import android.Manifest;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -42,6 +45,7 @@ import com.cynoteck.petofy.utils.Config;
 import com.cynoteck.petofy.utils.Methods;
 import com.cynoteck.petofy.utils.NetworkChangeReceiver;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -49,6 +53,10 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.util.List;
 
@@ -81,6 +89,8 @@ public class DashBoardActivity extends AppCompatActivity {
     boolean  dialogStatus = false;
     boolean locationPermission = false;
     Button open_setting_BT;
+    BottomSheetDialog updateDialog;
+    String currentVersion, latestVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +100,11 @@ public class DashBoardActivity extends AppCompatActivity {
         notificationMethod();
 //        getLocation();
 //        checkCameraPermission();
+
+
+//        getCurrentVersion();
+
+
         registerNetworkBroadcastForNougat();
 //        requestMultiplePermissions();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -150,8 +165,6 @@ public class DashBoardActivity extends AppCompatActivity {
 //        else{
 //            requestMultiplePermissions();
 //        }
-
-
 //        requestMultiplePermissions();
 //        getLocation();
 
@@ -161,41 +174,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
     }
 
-//    private void checkCameraPermission() {
-//        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_READ_CAMERA);
-//            return;
-//        }
-//    }
 
-    private void showLocationPermissionDialog() {
-        locationPermission = true;
-        location_permission_dialog = new Dialog(this);
-        location_permission_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        location_permission_dialog.setCancelable(false);
-        location_permission_dialog.setContentView(R.layout.location_permission_dialog);
-        location_permission_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        Button grant_permission_BT = location_permission_dialog.findViewById(R.id.grant_permission_BT);
-        location_permission_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-
-
-            }
-        });
-        location_permission_dialog.show();
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = location_permission_dialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(lp);
-    }
 
     public void getLocation() {
         gpsTracker = new GpsTracker(DashBoardActivity.this);
@@ -215,68 +194,102 @@ public class DashBoardActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        switch (requestCode) {
-//            case MY_PERMISSIONS_REQUEST_READ_CAMERA: {
-//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    if (cameraDialog) {
-//                        cameraPermissionDialog.dismiss();
-//                        cameraDialog = false;
-//                        checkCameraPermission();
-//                    }
-//                } else {
-//                    cameraDialog = false;
-//                    showCameraPermissionDialog();
-//                }
-//
-//                return;
-//            }
-//            case 101: {
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    sharedPreferences = this.getSharedPreferences("userDetails", 0);
-//                    login_editor = sharedPreferences.edit();
-//                    login_editor.putString("locationPermission", "true");
-//                    login_editor.apply();
-//                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-//                    if (locationPermission) {
-//                        location_permission_dialog.dismiss();
-//                        locationPermission = false;
-//                    }
-//                } else {
-//                    locationPermission = false;
-//                    showLocationPermissionDialog();
-//                }
-//
-//            }
-//
-//        }
-//    }
-//
-//    private void showCameraPermissionDialog() {
-//        cameraDialog            = true;
-//        cameraPermissionDialog  = new Dialog(this);
-//        cameraPermissionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        cameraPermissionDialog.setCancelable(false);
-//        cameraPermissionDialog.setContentView(R.layout.camera_permission_dialog);
-//        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//        Button grant_permission_BT = cameraPermissionDialog.findViewById(R.id.grant_permission_BT);
-//        cameraPermissionDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//        grant_permission_BT.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                checkCameraPermission();
-//            }
-//        });
-//
-//        cameraPermissionDialog.show();
-//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//        Window window = cameraPermissionDialog.getWindow();
-//        lp.copyFrom(window.getAttributes());
-//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-//        window.setAttributes(lp);
-//    }
+//    -----------------------------------------------------------------------------------
+
+    private void getCurrentVersion() {
+        PackageManager pm = this.getPackageManager();
+        PackageInfo pInfo = null;
+
+        try {
+            pInfo = pm.getPackageInfo(this.getPackageName(), 0);
+
+        } catch (PackageManager.NameNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        currentVersion = pInfo.versionName;
+        //currentVersion="1.0.2";
+        Log.d("currentVersion", currentVersion);
+        new GetLatestVersion().execute();
+
+    }
+
+
+    private class GetLatestVersion extends AsyncTask<String, String, JSONObject> {
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            try {
+//It retrieves the latest version by scraping the content of current version from play store at runtime
+
+                Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id=com.cynoteck.petofy").get();
+                latestVersion = doc.getElementsByClass("htlgb").get(6).text();
+
+                //latestVersion = "1.0.1";
+                Log.d("latestVersion", latestVersion);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            return new JSONObject();
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            if (latestVersion != null) {
+                if (!currentVersion.equalsIgnoreCase(latestVersion)) {
+                    if (!isFinishing()) { //This would help to prevent Error : BinderProxy@45d459c0 is not valid; is your activity running? error
+                        newUpdateDialog();
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void newUpdateDialog() {
+        updateDialog  = new BottomSheetDialog(this);
+        updateDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        updateDialog.setCancelable(false);
+        updateDialog.setContentView(R.layout.update_new_version_dialog);
+        updateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Button download_BT = updateDialog.findViewById(R.id.download_BT);
+        updateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        download_BT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent;
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setData(Uri.parse("market://details?id=" + "com.cynoteck.petofy"));
+                    startActivity(intent);
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + "com.cynoteck.petofy")));
+                }
+            }
+        });
+
+        updateDialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = updateDialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setAttributes(lp);
+    }
+
+//    -----------------------------------------------------------------------------------
+
+
+
+
 
 
     private void notificationMethod() {
@@ -417,13 +430,13 @@ public class DashBoardActivity extends AppCompatActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-//                            login_editor.putString("locationPermission", "true");
+//
                             Log.d("STORAGE_DIALOG", "All permissions are granted by user!");
 
                         }
                         else
                             {
-//                                locationPermission = false;
+//
                             startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
                             Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
 //                            Log.d("DEXTER", "storagePermissionDialog");
@@ -462,43 +475,6 @@ public class DashBoardActivity extends AppCompatActivity {
         unregisterNetworkChanges();
 
     }
-
-
-    private void openSettingsDialog() {
-        dialogStatus  = true;
-        settingDialog  = new Dialog(this);
-        settingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        settingDialog.setCancelable(false);
-        settingDialog.setContentView(R.layout.location_permission_dialog);
-        settingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        open_setting_BT = settingDialog.findViewById(R.id.open_setting);
-
-        open_setting_BT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-
-            }
-        });
-        settingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        settingDialog.show();
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        Window window = settingDialog.getWindow();
-        lp.copyFrom(window.getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(lp);
-    }
-
-
-
-
-
-
-
 
 
 }

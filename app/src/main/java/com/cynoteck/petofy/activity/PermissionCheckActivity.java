@@ -43,7 +43,7 @@ public class PermissionCheckActivity extends AppCompatActivity implements View.O
         permission_MCB=findViewById(R.id.permission_MCB);
         allow_BT.setOnClickListener(this);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        requestMultiplePermissions();
+//        requestMultiplePermissions();
 
     }
 
@@ -113,6 +113,13 @@ public class PermissionCheckActivity extends AppCompatActivity implements View.O
     @Override
     protected void onResume() {
         super.onResume();
+//        Log.d("TAG", "onResume: hiiiii ");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        requestMultiplePermissions();
         Log.d("TAG", "onResume: hiiiii ");
     }
 }
