@@ -149,6 +149,8 @@ public class SplashScreen extends AppCompatActivity {
     }
 
 
+
+
 //it will check all the permission related to the app
     private void requestMultiplePermissions() {
         Dexter.withActivity(this)
