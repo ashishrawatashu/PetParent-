@@ -28,6 +28,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -130,6 +131,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     HashMap<String, String> petAgeHashMap = new HashMap<>();
     HashMap<String, String> petColorHashMap = new HashMap<>();
     HashMap<String, String> petAgeUnitHash = new HashMap<>();
+    ProgressBar add_pet_PB;
 
 
     @Override
@@ -181,7 +183,8 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
 
     private void petType() {
-        methods.showCustomProgressBarDialog(this);
+        add_pet_PB.setVisibility(View.VISIBLE);
+//        methods.showCustomProgressBarDialog(this);
         ApiService<PetTypeResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().petTypeApi(), "GetPetTypes");
     }
@@ -230,6 +233,7 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
     private void init() {
         back_arrow_CV   = findViewById(R.id.back_arrow_CV);
+        add_pet_PB      = findViewById(R.id.add_pet_PB);
 
         scrollView      = findViewById(R.id.scrollView);
         maleRB          = findViewById(R.id.maleRB);
@@ -733,7 +737,10 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
 
             case "GetPetAgeUnit":
                 try {
-                    methods.customProgressDismiss();
+                    add_pet_PB.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.VISIBLE);
+                    pet_submit.setVisibility(View.VISIBLE);
+//                    methods.customProgressDismiss();
                     //Log.d"GetPetTypes", arg0.body().toString());
                     PetAgeUnitResponseData petAgeUnitResponseData = (PetAgeUnitResponseData) arg0.body();
                     int responseCode = Integer.parseInt(petAgeUnitResponseData.getResponse().getResponseCode());
@@ -917,8 +924,11 @@ public class AddPetRegister extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onError(Throwable t, String key) {
         Log.e("error", "" + t.getLocalizedMessage());
-        pet_submit.setEnabled(true);
-        methods.customProgressDismiss();
+//        Toast.makeText(this, "Please try again !", Toast.LENGTH_SHORT).show();
+        finish();
+//        pet_submit.setEnabled(true);
+//        methods.customProgressDismiss();
+
     }
 
 

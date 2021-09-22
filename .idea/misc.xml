@@ -14,8 +14,6 @@
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_pet_register.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/WORKSPACE/PetofyPetParent/app/src/main/res/layout/pet_profile_activity.xml" value="0.1" />
-        <entry key="..\:/WORKSPACE/petofypetparent/app/src/main/res/layout/activity_consultation_list.xml" value="0.12" />
-        <entry key="..\:/WORKSPACE/petofypetparent/app/src/main/res/layout/activity_vet_full_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_add_update_appointment.xml" value="0.20416666666666666" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_adoption_pet_details.xml" value="0.20416666666666666" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_buy_insurance.xml" value="0.19021739130434784" />
@@ -35,7 +33,6 @@
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_vet_full_profile.xml" value="0.33" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_welcome_screen.xml" value="0.15520833333333334" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/camera_permission_dialog.xml" value="0.14791666666666667" />
-        <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_appointment_list.xml" value="0.17708333333333334" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_parent_home.xml" value="0.15" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_reports_list.xml" value="0.1598731884057971" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/insurance_images_document_section_layout.xml" value="0.20416666666666666" />
@@ -44,6 +41,8 @@
         <entry key="..\:/petofypetparent/app/src/main/res/layout/pet_profile_activity.xml" value="0.1" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/phone_permission_dialog.xml" value="0.1" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/vet_list.xml" value="0.11770833333333333" />
+        <entry key="app/src/main/res/layout/activity_add_pet_register.xml" value="0.24010416666666667" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.2078125" />
       </map>
     </option>
   </component>

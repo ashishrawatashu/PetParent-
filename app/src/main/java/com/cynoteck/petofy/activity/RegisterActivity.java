@@ -181,28 +181,31 @@ public class RegisterActivity extends FragmentActivity implements ApiResponse, V
                     email_TIL.setError(null);
                     password_TIL.setError(null);
                     confirmPassword_TIL.setError(null);
-                }else if (password.isEmpty()){
-                    password_TIL.setError("Password is empty");
-                    firstname_TIL.setError(null);
-                    lastName_TIL.setError(null);
-                    email_TIL.setError(null);
-                    phoneNumber_TIL.setError(null);
-                    confirmPassword_TIL.setError(null);
-                }else if (confirmPassword.isEmpty()){
-                    confirmPassword_TIL.setError("Password is empty");
-                    firstname_TIL.setError(null);
-                    lastName_TIL.setError(null);
-                    email_TIL.setError(null);
-                    phoneNumber_TIL.setError(null);
-                    password_TIL.setError(null);
-                }else if (!password_TIET.getText().toString().equals(confirmPassword_TIET.getText().toString())){
-                    confirmPassword_TIL.setError("Password is not matched ");
-                    firstname_TIL.setError(null);
-                    lastName_TIL.setError(null);
-                    email_TIL.setError(null);
-                    phoneNumber_TIL.setError(null);
-                    password_TIL.setError(null);
-                } else {
+                }
+//                else if (password.isEmpty()){
+//                    password_TIL.setError("Password is empty");
+//                    firstname_TIL.setError(null);
+//                    lastName_TIL.setError(null);
+//                    email_TIL.setError(null);
+//                    phoneNumber_TIL.setError(null);
+//                    confirmPassword_TIL.setError(null);
+//                }else if (confirmPassword.isEmpty()){
+//                    confirmPassword_TIL.setError("Password is empty");
+//                    firstname_TIL.setError(null);
+//                    lastName_TIL.setError(null);
+//                    email_TIL.setError(null);
+//                    phoneNumber_TIL.setError(null);
+//                    password_TIL.setError(null);
+//                }else if (!password_TIET.getText().toString().equals(confirmPassword_TIET.getText().toString())){
+//                    confirmPassword_TIL.setError("Password is not matched ");
+//                    firstname_TIL.setError(null);
+//                    lastName_TIL.setError(null);
+//                    email_TIL.setError(null);
+//                    phoneNumber_TIL.setError(null);
+//                    password_TIL.setError(null);
+//                }
+
+                else {
                     firstname_TIL.setError(null);
                     lastName_TIL.setError(null);
                     email_TIL.setError(null);

@@ -189,7 +189,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/security_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -197,6 +197,7 @@
                 android:layout_marginTop="10dp">
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/security_layout"
                     android:layout_width="match_parent"
                     android:orientation="vertical"
@@ -223,7 +224,7 @@
 
             <RelativeLayout
                 android:layout_marginTop="10dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/passwod_RL"
                 android:layout_below="@+id/security_header"
                 android:layout_width="match_parent"
@@ -252,7 +253,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_below="@+id/passwod_RL"
                 android:id="@+id/confirmPass_RL"
                 android:layout_width="match_parent"

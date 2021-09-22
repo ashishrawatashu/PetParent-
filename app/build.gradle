@@ -94,6 +94,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'in.gauriinfotech:commons:1.0.8'
+
     implementation 'org.jsoup:jsoup:1.10.2'
 
 

@@ -220,7 +220,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/appoint_tabs_LL"
+                app:layout_constraintTop_toTopOf="@id/appoint_tabs_LL"
                 tools:listitem="@layout/appointments_list" />
 
             <androidx.recyclerview.widget.RecyclerView
