@@ -188,7 +188,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 withErrorListener(new PermissionRequestErrorListener() {
                     @Override
                     public void onError(DexterError error) {
-                        Toast.makeText(getActivity(), "Some Error! ", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "Some Error! ", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .onSameThread()

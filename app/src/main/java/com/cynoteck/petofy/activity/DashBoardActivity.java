@@ -461,7 +461,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     @Override
                     public void onError(DexterError error) {
                         Log.e("DEXTER", error.name());
-                        Toast.makeText(DashBoardActivity.this, "Some Error ! ", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(DashBoardActivity.this, "Some Error ! ", Toast.LENGTH_SHORT).show();
                            }
                 })
                 .onSameThread()

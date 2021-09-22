@@ -195,7 +195,7 @@ public class SplashScreen extends AppCompatActivity {
                     @Override
                     public void onError(DexterError error) {
                         Log.d("STORAGE_DIALOG",error.toString());
-                        Toast.makeText(SplashScreen.this, "Some Error ! ", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SplashScreen.this, "Some Error ! ", Toast.LENGTH_SHORT).show();
 
 
                     }
