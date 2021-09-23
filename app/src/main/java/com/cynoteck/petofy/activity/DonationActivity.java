@@ -152,7 +152,9 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
                 petList.setPetCategory(data.getStringExtra("pet_category"));
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
-//                profileList.add(0, petList);
+                petList.setIsDonated("false");
+                petList.setIsAdopted("false");
+                //                profileList.add(0, petList);
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
                 registerPetAdapter.notifyDataSetChanged();

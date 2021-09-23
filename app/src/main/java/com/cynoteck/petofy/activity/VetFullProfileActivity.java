@@ -536,6 +536,8 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                 petList.setPetCategory(data.getStringExtra("pet_category"));
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
+                petList.setIsAdopted("false");
+                petList.setIsDonated("false");
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
                 registerPetAdapter.notifyDataSetChanged();
                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");

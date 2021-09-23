@@ -181,6 +181,8 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 petList.setPetCategory(data.getStringExtra("pet_category"));
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
+                petList.setIsDonated("false");
+                petList.setIsAdopted("false");
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
                 if (!PetParentSingleton.getInstance().getArrayList().isEmpty()) {
                     empty_IV.setVisibility(View.GONE);
@@ -289,6 +291,8 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                                     petList.setPetBreed(getPetListResponse.getData().getPetList().get(i).getPetBreed());
                                     petList.setPetCategory(getPetListResponse.getData().getPetList().get(i).getPetCategory());
                                     petList.setPetColor(getPetListResponse.getData().getPetList().get(i).getPetColor());
+                                    petList.setIsAdopted(getPetListResponse.getData().getPetList().get(i).getIsAdopted());
+                                    petList.setIsDonated(getPetListResponse.getData().getPetList().get(i).getIsDonated());
 
                                     PetParentSingleton.getInstance().getArrayList().add(petList);
                                 }

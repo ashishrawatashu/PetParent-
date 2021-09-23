@@ -381,7 +381,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetParentName(data.getStringExtra("pet_parent"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
-//                profileList.add(0, petList);
+                petList.setIsDonated("false");
+                petList.setIsAdopted("false");
+                //                profileList.add(0, petList);
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
                 registerPetAdapter.notifyDataSetChanged();
@@ -576,7 +578,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                                     petList.setPetBreed(getPetListResponse.getData().getPetList().get(i).getPetBreed());
                                     petList.setPetCategory(getPetListResponse.getData().getPetList().get(i).getPetCategory());
                                     petList.setPetColor(getPetListResponse.getData().getPetList().get(i).getPetColor());
-
+                                    petList.setIsAdopted(getPetListResponse.getData().getPetList().get(i).getIsAdopted());
+                                    petList.setIsDonated(getPetListResponse.getData().getPetList().get(i).getIsDonated());
 //                                    profileList.add(petList);
 //                                    Config.profileListLoaded.add(petList);
                                     PetParentSingleton.getInstance().getArrayList().add(petList);

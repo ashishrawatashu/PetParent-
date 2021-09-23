@@ -268,11 +268,12 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                 try {
                     appointments_list_SRL.setRefreshing(false);
                     appointments_list_SRL.setEnabled(true);
-                    somethingWrong();
+//                    somethingWrong();
                     progressBar.setVisibility(View.GONE);
 //                    appoint_tabs_LL.setVisibility(View.VISIBLE);
                     upcoming_appointment_tab_LL.setEnabled(true);
                     getUpcomingAppointmentResponse = (GetAppointmentResponse) arg0.body();
+//                    int responseCode = 500;
                     int responseCode = Integer.parseInt(getUpcomingAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         isLoaded = true;

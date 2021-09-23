@@ -130,6 +130,9 @@ public class SearchActivity extends AppCompatActivity implements TextWatcher, Ap
                                     petList.setId(getPetListResponse.getData().getPetList().get(i).getId());
                                     petList.setPetAge(getPetListResponse.getData().getPetList().get(i).getPetAge());
                                     petList.setLastVisitEncryptedId(getPetListResponse.getData().getPetList().get(i).getLastVisitEncryptedId());
+                                    petList.setIsAdopted(getPetListResponse.getData().getPetList().get(i).getIsAdopted());
+                                    petList.setIsDonated(getPetListResponse.getData().getPetList().get(i).getIsDonated());
+
 
                                     profileList.add(petList);
                                 }

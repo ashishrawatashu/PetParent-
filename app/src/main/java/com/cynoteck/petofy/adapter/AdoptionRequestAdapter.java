@@ -41,10 +41,10 @@ public class AdoptionRequestAdapter  extends RecyclerView.Adapter<AdoptionReques
     public void onBindViewHolder(@NonNull AdoptionRequestAdapter.MyViewHolder holder, int position) {
         holder.pet_name_TV.setText(getAdoptionRequestListData.get(position).getPet().getPetName());
         holder.pet_breed_TV.setText(getAdoptionRequestListData.get(position).getPet().getPetBreed());
-        Glide.with(context)
-                .load(getAdoptionRequestListData.get(position).getPet().getPetImageList().get(0).getPetImageUrl())
-                .placeholder(R.drawable.empty_pet_image)
-                .into(holder.pet_profile_IV);
+//        Glide.with(context)
+//                .load(getAdoptionRequestListData.get(position).getPet().getPetImageList().get(0).getPetImageUrl())
+//                .placeholder(R.drawable.empty_pet_image)
+//                .into(holder.pet_profile_IV);
         if (getAdoptionRequestListData.get(position).getRequestCurrentStatus().equals("Adopted")){
             holder.ngo_status_IV.setImageResource(R.drawable.accepted_by_ngo);
             holder.ngo_status_TV.setTextColor(context.getResources().getColor(R.color.whiteColor));
