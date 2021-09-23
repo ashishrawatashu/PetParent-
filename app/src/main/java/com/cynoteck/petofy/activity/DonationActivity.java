@@ -97,11 +97,11 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
 ////                if(getIntent().getStringExtra("from").equals("donation"))
 //                Toast.makeText(this,"this else statement from insurance",Toast.LENGTH_SHORT).show();
 //
-//        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-//        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-//        pet_list_RV.setAdapter(donatePetAdapter);
-//        donatePetAdapter.notifyDataSetChanged();
 //            }
+        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+        pet_list_RV.setAdapter(donatePetAdapter);
+        donatePetAdapter.notifyDataSetChanged();
 
     }
 
