@@ -23,6 +23,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cynoteck.petofy.adapter.RegisterPetAdapter;
+import com.cynoteck.petofy.response.getPetReportsResponse.getPetListResponse.GetPetListResponse;
+import com.cynoteck.petofy.utils.Methods;
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.adapter.DonatePetAdapter;
@@ -39,37 +42,53 @@ import retrofit2.Response;
 import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
 import static com.cynoteck.petofy.fragments.PetRegisterFragment.registerPetAdapter;
 import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
+import static com.cynoteck.petofy.fragments.ProfileFragment.pet_list_LL;
+
 @SuppressLint("StaticFieldLeak")
-public class DonationActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnItemClickListener {
+public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity implements View.OnClickListener, ApiResponse, OnItemClickListener {
     private final int               ADD_PET = 4;
     RecyclerView                    pet_list_RV;
     MaterialCardView                back_arrow_CV;
-    @SuppressLint("StaticFieldLeak")
     public static RelativeLayout    total_donation_RL, add_pet_RL,donation_RL;
     public static TextView          total_donation_request_TV,create_headline_TV;
     public static DonatePetAdapter  donatePetAdapter;
     public static ImageView         donation_cart_icon_IV;
-    String intentFrom;
-    Dialog                      insurance_successfully_dialog;
+    String                          intentFrom;
+    Dialog                          insurance_successfully_dialog;
+    Methods                         methods;
+    TextView                        select_pet_TV;
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation);
+        methods = new Methods(this);
 
+        intentFrom                 =  getIntent().getStringExtra("from");
+        initView();
 
+            //check from which activity user is coming
+            if (intentFrom.equals("insurance")) {
+                create_headline_TV.setText("INSURANCE YOUR PET");
+                select_pet_TV.setText("Select pet for insurance");
+                total_donation_RL.setVisibility(View.GONE);
+                add_pet_RL.setVisibility(View.GONE);
 
+            } else {
+                total_donation_RL.setVisibility(View.VISIBLE);
+                add_pet_RL.setVisibility(View.VISIBLE);
 
+            }
+        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+        pet_list_RV.setAdapter(donatePetAdapter);
+        donatePetAdapter.notifyDataSetChanged();
 
+    }
 
-
-
-
-
-
-
-        intentFrom                 =getIntent().getStringExtra("from");
-
+    private void initView() {
+        select_pet_TV               = findViewById(R.id.select_pet_TV);
         pet_list_RV                 = findViewById(R.id.pet_list_RV);
         back_arrow_CV               = findViewById(R.id.back_arrow_CV);
         total_donation_RL           = findViewById(R.id.total_donation_RL);
@@ -82,40 +101,13 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         add_pet_RL.setOnClickListener(this);
         total_donation_RL.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
-
-            //check from which activity user is coming
-            if(intentFrom.equals("insurance"))
-            {
-                create_headline_TV.setText("INSURANCED YOUR PET");
-                total_donation_RL.setVisibility(View.GONE);
-                add_pet_RL.setVisibility(View.GONE);
-
-                pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-                donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-                pet_list_RV.setAdapter(donatePetAdapter);
-                donatePetAdapter.notifyDataSetChanged();
-                    Toast.makeText(this,"this if from insurance",Toast.LENGTH_SHORT).show();
-            }
-            else {
-
-                total_donation_RL.setVisibility(View.VISIBLE);
-                add_pet_RL.setVisibility(View.VISIBLE);
-
-//                if(getIntent().getStringExtra("from").equals("donation"))
-                Toast.makeText(this,"this else statement from insurance",Toast.LENGTH_SHORT).show();
-        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-        pet_list_RV.setAdapter(donatePetAdapter);
-        donatePetAdapter.notifyDataSetChanged();
-
-            }
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (!PetParentSingleton.getInstance().getGetDonationRequestListData().isEmpty()) {
+            Log.d("DONATION_LIST",methods.getRequestJson(PetParentSingleton.getInstance().getGetDonationRequestListData().isEmpty()));
             total_donation_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetDonationRequestListData().size()));
             total_donation_RL.setEnabled(true);
             donation_cart_icon_IV.setImageResource(R.drawable.cart_icon);

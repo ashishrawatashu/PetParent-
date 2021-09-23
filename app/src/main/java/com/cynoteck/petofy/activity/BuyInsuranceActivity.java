@@ -943,6 +943,8 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
             case R.id.do_you_have_microchip_CB:
                 if (do_you_have_microchip_CB.isChecked()){
                     pet_microchip_no_ET.setVisibility(View.VISIBLE);
+                    pet_microchip_no_ET.requestFocus();
+
                 }else {
                     pet_microchip_no_ET.setVisibility(View.GONE);
                 }
@@ -951,6 +953,7 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
             case R.id.castrated_neutered_CB:
                 if (castrated_neutered_CB.isChecked()){
                     castrated_neutered_ET.setVisibility(View.VISIBLE);
+                    castrated_neutered_ET.requestFocus();
                 }else {
                     castrated_neutered_ET.setVisibility(View.GONE);
                 }
@@ -1161,34 +1164,34 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
         plans_BSD.show();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (countSteps==3){
-//            step_count_TV.setText("2 of 3");
-//            step_name_TV.setText("Pet Details");
-//            next_step_TV.setVisibility(View.VISIBLE);
-//            next_step_TV.setText("Next: Document Section");
-//            pet_parent_details_layout_frame.setVisibility(View.GONE);
-//            insurance_pet_details_layout_frame.setVisibility(View.VISIBLE);
-//            insurance_images_layout_frame.setVisibility(View.GONE);
-//            privious_BT.setVisibility(View.VISIBLE);
-//            circular_PB.setProgress(50);
-//            countSteps = 2;
-//        }else if (countSteps==2){
-//            step_count_TV.setText("1 of 3");
-//            step_name_TV.setText("Pet Parent Details");
-//            next_step_TV.setVisibility(View.VISIBLE);
-//            next_step_TV.setText("Next: Pet Details");
-//            pet_parent_details_layout_frame.setVisibility(View.VISIBLE);
-//            insurance_pet_details_layout_frame.setVisibility(View.GONE);
-//            insurance_images_layout_frame.setVisibility(View.GONE);
-//            privious_BT.setVisibility(View.GONE);
-//            circular_PB.setProgress(10);
-//            countSteps = 1;
-//        }else if (countSteps==1) {
-//           finish();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        if (countSteps==3){
+            step_count_TV.setText("2 of 3");
+            step_name_TV.setText("Pet Details");
+            next_step_TV.setVisibility(View.VISIBLE);
+            next_step_TV.setText("Next: Document Section");
+            pet_parent_details_layout_frame.setVisibility(View.GONE);
+            insurance_pet_details_layout_frame.setVisibility(View.VISIBLE);
+            insurance_images_layout_frame.setVisibility(View.GONE);
+            privious_BT.setVisibility(View.VISIBLE);
+            circular_PB.setProgress(50);
+            countSteps = 2;
+        }else if (countSteps==2){
+            step_count_TV.setText("1 of 3");
+            step_name_TV.setText("Pet Parent Details");
+            next_step_TV.setVisibility(View.VISIBLE);
+            next_step_TV.setText("Next: Pet Details");
+            pet_parent_details_layout_frame.setVisibility(View.VISIBLE);
+            insurance_pet_details_layout_frame.setVisibility(View.GONE);
+            insurance_images_layout_frame.setVisibility(View.GONE);
+            privious_BT.setVisibility(View.GONE);
+            circular_PB.setProgress(10);
+            countSteps = 1;
+        }else if (countSteps==1) {
+           finish();
+        }
+    }
 
     @Override
     public void onResponse(Response response, String key) {
@@ -1775,7 +1778,9 @@ public class BuyInsuranceActivity extends AppCompatActivity implements MediaUtil
 
     @Override
     public void onError(Throwable t, String key) {
-
+        methods.customProgressDismiss();
+        finish();
+        Toast.makeText(this, "Please try again !", Toast.LENGTH_SHORT).show();
         Log.e("error",t.getLocalizedMessage());
 
     }

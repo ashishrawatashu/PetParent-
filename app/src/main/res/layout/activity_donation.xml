@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteColor"
-    tools:context=".activity.DonationActivity">
+    tools:context=".activity.SelectPetForDonateAndInsuranceActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/nunito"
-        android:text="Select Pet for donation"
+        android:text="Select pet for donation"
         android:textColor="@color/gray_1"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/toolbar"

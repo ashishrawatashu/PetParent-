@@ -63,15 +63,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/donation_request_RV"
-        android:layout_width="0dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/donation_list_SWL"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="@id/toolbar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/adopt_request_list" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/donation_request_RV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/adopt_request_list" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 
     <Button
