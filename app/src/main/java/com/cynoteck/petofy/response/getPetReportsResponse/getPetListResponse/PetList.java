@@ -111,24 +111,24 @@ public class PetList {
 
     private String lastVisitEncryptedId;
 
-    private String IsAdopted;
+    private String isAdopted;
 
-    private String IsDonated;
+    private String isDonated;
 
     public String getIsAdopted() {
-        return IsAdopted;
+        return isAdopted;
     }
 
     public void setIsAdopted(String isAdopted) {
-        IsAdopted = isAdopted;
+        isAdopted = isAdopted;
     }
 
     public String getIsDonated() {
-        return IsDonated;
+        return isDonated;
     }
 
     public void setIsDonated(String isDonated) {
-        IsDonated = isDonated;
+        isDonated = isDonated;
     }
 
     public String getLastVisitEncryptedId() {

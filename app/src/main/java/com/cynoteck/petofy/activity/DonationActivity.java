@@ -8,12 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,6 +50,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
     public static DonatePetAdapter  donatePetAdapter;
     public static ImageView         donation_cart_icon_IV;
     String intentFrom;
+    Dialog                      insurance_successfully_dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,29 +84,31 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         back_arrow_CV.setOnClickListener(this);
 
             //check from which activity user is coming
-//            if(intentFrom.equals("insurance"))
-//            {
-//                create_headline_TV.setText("INSURANCED YOUR PET");
-//                total_donation_RL.setVisibility(View.GONE);
-//                pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-//                donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-//                pet_list_RV.setAdapter(donatePetAdapter);
-//                donatePetAdapter.notifyDataSetChanged();
-//
-//
-//
-//
-//                Toast.makeText(this,"this if from insurance",Toast.LENGTH_SHORT).show();
-//            }
-//            else {
-////                if(getIntent().getStringExtra("from").equals("donation"))
-//                Toast.makeText(this,"this else statement from insurance",Toast.LENGTH_SHORT).show();
-//
-//            }
+            if(intentFrom.equals("insurance"))
+            {
+                create_headline_TV.setText("INSURANCED YOUR PET");
+                total_donation_RL.setVisibility(View.GONE);
+                add_pet_RL.setVisibility(View.GONE);
+
+                pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+                donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+                pet_list_RV.setAdapter(donatePetAdapter);
+                donatePetAdapter.notifyDataSetChanged();
+                    Toast.makeText(this,"this if from insurance",Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                total_donation_RL.setVisibility(View.VISIBLE);
+                add_pet_RL.setVisibility(View.VISIBLE);
+
+//                if(getIntent().getStringExtra("from").equals("donation"))
+                Toast.makeText(this,"this else statement from insurance",Toast.LENGTH_SHORT).show();
         pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
         donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
         pet_list_RV.setAdapter(donatePetAdapter);
         donatePetAdapter.notifyDataSetChanged();
+
+            }
 
     }
 
@@ -197,36 +204,83 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
                 donatePetAdapter.notifyDataSetChanged();
             }
         }
+        else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                showAppointmentSuccessfully();
+            }
+        }
         return;
+    }
+    private void showAppointmentSuccessfully() {
+        insurance_successfully_dialog = new Dialog(this);
+        insurance_successfully_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        insurance_successfully_dialog.setCancelable(false);
+        insurance_successfully_dialog.setContentView(R.layout.insurance_submitted_dilog);
+        insurance_successfully_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        TextView back_to_appointments_TV = insurance_successfully_dialog.findViewById(R.id.back_to_appointments_TV);
+        back_to_appointments_TV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insurance_successfully_dialog.dismiss();
+            }
+        });
+
+        insurance_successfully_dialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = insurance_successfully_dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
     }
 
     @Override
     public void onViewDetailsClick(int position) {
         String realId = PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2);
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("");
-        alertDialog.setMessage("Do you want to donate this pet?");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        donatePetById(realId);
-                        dialog.dismiss();
 
-                    }
-                });
+        if(intentFrom.equals("insurance")) {
+            if (PetParentSingleton.getInstance().getArrayList().get(position).getPetCategory().equals("Dog")){
+                Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
+                insuranceIntent.putExtra("petId", realId);
+                insuranceIntent.putExtra("afterLogin", "yes");
+                insuranceIntent.putExtra("pet_breed", PetParentSingleton.getInstance().getArrayList().get(position).getPetBreed());
+                insuranceIntent.putExtra("pet_color", PetParentSingleton.getInstance().getArrayList().get(position).getPetColor());
+                startActivityForResult(insuranceIntent, 2);
+            }else {
+                Toast.makeText(this, "Insurance is only for dog !", Toast.LENGTH_SHORT).show();
+            }
 
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+        } else {
+            if(PetParentSingleton.getInstance().getArrayList().get(position).getIsAdopted().equals("true")) {
+                Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
 
-                        dialogInterface.dismiss();
+            } else {
+//                String realId = PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2);
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle("");
+                alertDialog.setMessage("Do you want to donate this pet?");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                donatePetById(realId);
+                                dialog.dismiss();
 
-                    }
+                            }
+                        });
 
-                });
-        alertDialog.show();
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
+                                dialogInterface.dismiss();
+
+                            }
+
+                        });
+                alertDialog.show();
+            }
+        }
 
     }
 
