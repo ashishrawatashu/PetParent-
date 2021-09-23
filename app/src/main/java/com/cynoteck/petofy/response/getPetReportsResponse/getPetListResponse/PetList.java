@@ -108,7 +108,28 @@ public class PetList {
     private String petProfileImageUrl;
 
     private User user;
+
     private String lastVisitEncryptedId;
+
+    private String IsAdopted;
+
+    private String IsDonated;
+
+    public String getIsAdopted() {
+        return IsAdopted;
+    }
+
+    public void setIsAdopted(String isAdopted) {
+        IsAdopted = isAdopted;
+    }
+
+    public String getIsDonated() {
+        return IsDonated;
+    }
+
+    public void setIsDonated(String isDonated) {
+        IsDonated = isDonated;
+    }
 
     public String getLastVisitEncryptedId() {
         return lastVisitEncryptedId;

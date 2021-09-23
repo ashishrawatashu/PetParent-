@@ -519,6 +519,8 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                 petList.setPetCategory(data.getStringExtra("pet_category"));
                 petList.setDateOfBirth(data.getStringExtra("pet_date_of_birth"));
                 petList.setPetColor(data.getStringExtra("pet_color"));
+                petList.setIsDonated("false");
+                petList.setIsAdopted("false");
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
                 registerPetAdapter.notifyDataSetChanged();
@@ -561,6 +563,8 @@ public class AddUpdateAppointmentActivity extends AppCompatActivity implements A
                                     petList.setPetBreed(getPetListResponse.getData().getPetList().get(i).getPetBreed());
                                     petList.setPetCategory(getPetListResponse.getData().getPetList().get(i).getPetCategory());
                                     petList.setPetColor(getPetListResponse.getData().getPetList().get(i).getPetColor());
+                                    petList.setIsAdopted(getPetListResponse.getData().getPetList().get(i).getIsAdopted());
+                                    petList.setIsDonated(getPetListResponse.getData().getPetList().get(i).getIsDonated());
                                     PetParentSingleton.getInstance().getArrayList().add(petList);
                                 }
 
