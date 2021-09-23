@@ -42,14 +42,28 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
     MaterialCardView                back_arrow_CV;
     @SuppressLint("StaticFieldLeak")
     public static RelativeLayout    total_donation_RL, add_pet_RL,donation_RL;
-    public static TextView          total_donation_request_TV;
+    public static TextView          total_donation_request_TV,create_headline_TV;
     public static DonatePetAdapter  donatePetAdapter;
     public static ImageView         donation_cart_icon_IV;
+    String intentFrom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation);
+
+
+
+
+
+
+
+
+
+
+
+
+        intentFrom                 =getIntent().getStringExtra("from");
 
         pet_list_RV                 = findViewById(R.id.pet_list_RV);
         back_arrow_CV               = findViewById(R.id.back_arrow_CV);
@@ -58,15 +72,36 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         total_donation_request_TV   = findViewById(R.id.total_donation_request_TV);
         donation_cart_icon_IV       = findViewById(R.id.donation_cart_icon_IV);
         donation_RL                 = findViewById(R.id.donation_RL);
+        create_headline_TV=findViewById(R.id.create_headline_TV);
 
         add_pet_RL.setOnClickListener(this);
         total_donation_RL.setOnClickListener(this);
         back_arrow_CV.setOnClickListener(this);
 
-        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-        pet_list_RV.setAdapter(donatePetAdapter);
-        donatePetAdapter.notifyDataSetChanged();
+            //check from which activity user is coming
+//            if(intentFrom.equals("insurance"))
+//            {
+//                create_headline_TV.setText("INSURANCED YOUR PET");
+//                total_donation_RL.setVisibility(View.GONE);
+//                pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+//                donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+//                pet_list_RV.setAdapter(donatePetAdapter);
+//                donatePetAdapter.notifyDataSetChanged();
+//
+//
+//
+//
+//                Toast.makeText(this,"this if from insurance",Toast.LENGTH_SHORT).show();
+//            }
+//            else {
+////                if(getIntent().getStringExtra("from").equals("donation"))
+//                Toast.makeText(this,"this else statement from insurance",Toast.LENGTH_SHORT).show();
+//
+//        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+//        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+//        pet_list_RV.setAdapter(donatePetAdapter);
+//        donatePetAdapter.notifyDataSetChanged();
+//            }
 
     }
 

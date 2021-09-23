@@ -64,13 +64,15 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.insurance_card_LL:
-
+//-----------------------------------------------------------------------
             case R.id.buy_now_BT:
                 Config.fragmentNumber = 2;
-                Intent insuranceIntent = new Intent(this, DashBoardActivity.class);
+//                Config.insurance="true";
+                Intent insuranceIntent = new Intent(this, DonationActivity.class).putExtra("from","insurance");
                 startActivity(insuranceIntent);
 //                startActivityForResult(insuranceIntent,1);
                 break;
+//                -----------------------------------------------------
 
             case R.id.back_arrow_CV:
                 finish();

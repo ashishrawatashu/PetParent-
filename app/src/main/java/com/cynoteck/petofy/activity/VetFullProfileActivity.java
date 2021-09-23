@@ -384,6 +384,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
 
                 break;
+
         }
     }
 

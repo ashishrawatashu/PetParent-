@@ -43,6 +43,7 @@ public class Config {
     public static String cityId = "";
     public static String cityName = "";
     public static String cityFullName = "";
+    public static  String insurance="false";
 
     public static Boolean isLoaded = false;
     public static boolean logoutFromAccount = false;

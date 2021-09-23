@@ -156,7 +156,8 @@ public class DashBoardActivity extends AppCompatActivity {
 //      Config.longitude                        = sharedPreferences.getString("userLongitude", "");
 
         requestMultiplePermissions();
-        getLocation();
+
+//        getLocation();
 
 
 //        if (Config.locationPermission.equals("true")) {
@@ -468,6 +469,11 @@ public class DashBoardActivity extends AppCompatActivity {
                 .check();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getLocation();
+    }
 
     @Override
     protected void onDestroy() {

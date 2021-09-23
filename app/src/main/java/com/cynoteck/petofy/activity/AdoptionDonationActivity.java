@@ -71,7 +71,7 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
 
 
             case R.id.donate_IV:
-                Intent donationIntent = new Intent(this, DonationActivity.class);
+                Intent donationIntent = new Intent(this, DonationActivity.class).putExtra("from","donation");
                 startActivity(donationIntent);
                 break;
         }
