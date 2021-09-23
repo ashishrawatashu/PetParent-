@@ -244,7 +244,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
 
         ApiService<GetPetListResponse> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().getPetList(Config.token, getPetDataRequest), "GetPetList");
-//        Log.d("PET_LIST_REQ", Config.token);
+        Log.d("PET_LIST_REQ", methods.getRequestJson(getPetDataRequest));
 //        Toast.makeText(getContext(),""+Config.token,Toast.LENGTH_SHORT).show();
 
     }
@@ -257,13 +257,14 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                 try {
                     petList_swipe_RL.setRefreshing(false);
                     Log.d("PET_LIST",methods.getRequestJson(response.body()));
-                    isLoaded = true;
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
-                    int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
-                    something_wrong_LL.setVisibility(View.GONE);
                     nestedScrollView.setVisibility(View.VISIBLE);
                     progressBarFirst.setVisibility(View.GONE);
+                    int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
+                        isLoaded = true;
+                        something_wrong_LL.setVisibility(View.GONE);
+
                         if (getPetListResponse.getData().getPetList().isEmpty()) {
                             total_pets_TV.setText("No pet registered ! ");
                             empty_IV.setVisibility(View.VISIBLE);
@@ -304,6 +305,8 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                         }
 
 
+                    }else {
+                        somethingWrongMethod();
                     }
 
                 } catch (Exception e) {

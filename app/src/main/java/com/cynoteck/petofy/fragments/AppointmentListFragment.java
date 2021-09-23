@@ -266,10 +266,8 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
 
             case "GetUpcomingAppointment":
                 try {
-                    isLoaded = true;
                     appointments_list_SRL.setRefreshing(false);
                     appointments_list_SRL.setEnabled(true);
-                    appointments_layout_CL.setVisibility(View.VISIBLE);
                     somethingWrong();
                     progressBar.setVisibility(View.GONE);
 //                    appoint_tabs_LL.setVisibility(View.VISIBLE);
@@ -277,6 +275,9 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                     getUpcomingAppointmentResponse = (GetAppointmentResponse) arg0.body();
                     int responseCode = Integer.parseInt(getUpcomingAppointmentResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
+                        isLoaded = true;
+                        appointments_layout_CL.setVisibility(View.VISIBLE);
+
                         if (getUpcomingAppointmentResponse.getData().isEmpty()) {
                             if (upcomingTabClick) {
                                 no_upcoming_appointment_TV.setVisibility(View.VISIBLE);
@@ -312,6 +313,8 @@ public class AppointmentListFragment extends Fragment implements View.OnClickLis
                         }
 
 
+                    }else{
+                        somethingWrong();
                     }
 
                 } catch (Exception e) {
