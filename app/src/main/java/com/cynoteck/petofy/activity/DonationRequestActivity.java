@@ -163,6 +163,7 @@ public class DonationRequestActivity extends AppCompatActivity implements ApiRes
                                 getDonationRequestData.setRequestUpdateDate(getDonationRequestResponse.getData().get(i).getRequestUpdateDate());
                                 getDonationRequestData.setPetName(getDonationRequestResponse.getData().get(i).getPetName());
                                 getDonationRequestData.setPetBreed(getDonationRequestResponse.getData().get(i).getPetBreed());
+                                getDonationRequestData.setPetImageList(getDonationRequestResponse.getData().get(i).getPetImageList());
 
                                 PetParentSingleton.getInstance().getGetDonationRequestListData().add(getDonationRequestData);
                             }

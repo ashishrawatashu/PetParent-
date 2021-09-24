@@ -1,6 +1,7 @@
 package com.cynoteck.petofy.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,16 @@ import com.bumptech.glide.Glide;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.response.getAdoptionRequestListResponse.GetAdoptionRequestListData;
 import com.cynoteck.petofy.onClicks.OnAdaptionDonationListClickListener;
+import com.cynoteck.petofy.utils.Methods;
+import com.cynoteck.petofy.utils.PetParentSingleton;
 
 import java.util.ArrayList;
 
 public class AdoptionRequestAdapter  extends RecyclerView.Adapter<AdoptionRequestAdapter.MyViewHolder> {
-    Context                                     context;
-    ArrayList<GetAdoptionRequestListData>       getAdoptionRequestListData;
-    private OnAdaptionDonationListClickListener onAdaptionDonationListClickListener;
+    Context                                             context;
+    ArrayList<GetAdoptionRequestListData>               getAdoptionRequestListData;
+    private final OnAdaptionDonationListClickListener   onAdaptionDonationListClickListener;
+    Methods methods;
     public AdoptionRequestAdapter(Context context, ArrayList<GetAdoptionRequestListData> getAdoptionRequestListData, OnAdaptionDonationListClickListener onAdaptionDonationListClickListener) {
         this.context                                = context;
         this.getAdoptionRequestListData             = getAdoptionRequestListData;
@@ -39,12 +43,19 @@ public class AdoptionRequestAdapter  extends RecyclerView.Adapter<AdoptionReques
 
     @Override
     public void onBindViewHolder(@NonNull AdoptionRequestAdapter.MyViewHolder holder, int position) {
+        methods = new Methods(context.getApplicationContext());
         holder.pet_name_TV.setText(getAdoptionRequestListData.get(position).getPet().getPetName());
         holder.pet_breed_TV.setText(getAdoptionRequestListData.get(position).getPet().getPetBreed());
-//        Glide.with(context)
-//                .load(getAdoptionRequestListData.get(position).getPet().getPetImageList().get(0).getPetImageUrl())
-//                .placeholder(R.drawable.empty_pet_image)
-//                .into(holder.pet_profile_IV);
+//        Log.d("Adoption_response",methods.getRequestJson(getAdoptionRequestListData));
+//        Log.d("Adoption_response",methods.getRequestJson(getAdoptionRequestListData.get(position).getPet().getPetImageList()));
+//        Log.d("SIZE_PET_IAMGE",""+getAdoptionRequestListData.get(position).getPetImageList().size());
+
+        if (!getAdoptionRequestListData.get(position).getPet().getPetImageList().isEmpty()){
+            Glide.with(context).load(getAdoptionRequestListData.get(position).getPet().getPetImageList().get(0).getPetImageUrl()).into(holder.pet_profile_IV);
+        }else {
+            holder.pet_profile_IV.setImageResource(R.drawable.empty_pet_image);
+        }
+
         if (getAdoptionRequestListData.get(position).getRequestCurrentStatus().equals("Adopted")){
             holder.ngo_status_IV.setImageResource(R.drawable.accepted_by_ngo);
             holder.ngo_status_TV.setTextColor(context.getResources().getColor(R.color.whiteColor));

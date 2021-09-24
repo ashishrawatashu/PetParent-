@@ -1,6 +1,7 @@
 package com.cynoteck.petofy.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.response.getDonationRequestResponse.GetDonationRequestData;
 import com.cynoteck.petofy.onClicks.OnAdaptionDonationListClickListener;
@@ -19,9 +21,9 @@ import com.cynoteck.petofy.onClicks.OnAdaptionDonationListClickListener;
 import java.util.ArrayList;
 
 public class DonationRequestAdapter extends RecyclerView.Adapter<DonationRequestAdapter.MyViewHolder> {
-    Context                                     context;
-    ArrayList<GetDonationRequestData>           getDonationRequestData;
-    private OnAdaptionDonationListClickListener onAdaptionDonationListClickListener;
+    Context                                             context;
+    ArrayList<GetDonationRequestData>                   getDonationRequestData;
+    private final OnAdaptionDonationListClickListener   onAdaptionDonationListClickListener;
     public DonationRequestAdapter(Context context, ArrayList<GetDonationRequestData> getDonationRequestData, OnAdaptionDonationListClickListener onAdaptionDonationListClickListener) {
         this.context                                = context;
         this.getDonationRequestData                 = getDonationRequestData;
@@ -40,6 +42,13 @@ public class DonationRequestAdapter extends RecyclerView.Adapter<DonationRequest
     public void onBindViewHolder(@NonNull DonationRequestAdapter.MyViewHolder holder, int position) {
         holder.pet_name_TV.setText(getDonationRequestData.get(position).getPetName());
         holder.pet_breed_TV.setText(getDonationRequestData.get(position).getPetBreed());
+        if (!getDonationRequestData.get(position).getPetImageList().isEmpty()){
+            Glide.with(context).load(getDonationRequestData.get(position).getPetImageList().get(0).getPetImageUrl()).into(holder.pet_profile_IV);
+        }else {
+            holder.pet_profile_IV.setImageResource(R.drawable.empty_pet_image);
+
+        }
+
         if (getDonationRequestData.get(position).getStatus().equals("Adopted")){
             holder.ngo_status_IV.setImageResource(R.drawable.accepted_by_ngo);
             holder.ngo_status_TV.setTextColor(context.getResources().getColor(R.color.whiteColor));
