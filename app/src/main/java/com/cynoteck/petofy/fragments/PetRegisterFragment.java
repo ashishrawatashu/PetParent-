@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -56,7 +55,7 @@ import retrofit2.Response;
 import static android.app.Activity.RESULT_OK;
 import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
 import static com.cynoteck.petofy.fragments.ProfileFragment.pet_list_LL;
-import static com.cynoteck.petofy.activity.DonationActivity.donatePetAdapter;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.donatePetAdapter;
 
 @SuppressLint("StaticFieldLeak")
 public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDeatilsAndIdCardClick, View.OnClickListener, TextWatcher {
@@ -258,9 +257,11 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
             case "GetPetList":
                 try {
                     petList_swipe_RL.setRefreshing(false);
-                    Log.d("PET_LIST",methods.getRequestJson(response.body()));
+//                    Log.d("PET_LIST",methods.getRequestJson(response.body()));
                     GetPetListResponse getPetListResponse = (GetPetListResponse) response.body();
                     nestedScrollView.setVisibility(View.VISIBLE);
+                    Log.d("PET_LIST",methods.getRequestJson(getPetListResponse));
+
                     progressBarFirst.setVisibility(View.GONE);
                     int responseCode = Integer.parseInt(getPetListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
@@ -297,13 +298,15 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                                     PetParentSingleton.getInstance().getArrayList().add(petList);
                                 }
 
+                                Log.d("PetParentSingleton",methods.getRequestJson(PetParentSingleton.getInstance().getArrayList()));
+
                                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
                                 registerPetAdapter = new RegisterPetAdapter(getContext(), PetParentSingleton.getInstance().getArrayList(), this);
                                 register_pet_RV.setAdapter(registerPetAdapter);
                                 registerPetAdapter.notifyDataSetChanged();
                                 petListHorizontalAdapter.notifyDataSetChanged();
                                 pet_list_LL.setVisibility(View.VISIBLE);
-//                                donatePetAdapter.notifyDataSetChanged();
+                                donatePetAdapter.notifyDataSetChanged();
 
                             }
                         }

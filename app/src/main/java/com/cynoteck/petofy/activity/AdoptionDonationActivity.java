@@ -27,10 +27,10 @@ import static com.cynoteck.petofy.activity.AdoptPetActivity.cart_icon_IV;
 import static com.cynoteck.petofy.activity.AdoptPetActivity.total_RL;
 import static com.cynoteck.petofy.activity.AdoptPetActivity.total_adoption_RL;
 import static com.cynoteck.petofy.activity.AdoptPetActivity.total_adoption_request_TV;
-import static com.cynoteck.petofy.activity.DonationActivity.donation_RL;
-import static com.cynoteck.petofy.activity.DonationActivity.donation_cart_icon_IV;
-import static com.cynoteck.petofy.activity.DonationActivity.total_donation_RL;
-import static com.cynoteck.petofy.activity.DonationActivity.total_donation_request_TV;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.donation_RL;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.donation_cart_icon_IV;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.total_donation_RL;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.total_donation_request_TV;
 
 public class AdoptionDonationActivity extends AppCompatActivity implements View.OnClickListener , ApiResponse {
 
@@ -71,7 +71,7 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
 
 
             case R.id.donate_IV:
-                Intent donationIntent = new Intent(this, DonationActivity.class).putExtra("from","donation");
+                Intent donationIntent = new Intent(this, SelectPetForDonateAndInsuranceActivity.class).putExtra("from","donation");
                 startActivity(donationIntent);
                 break;
         }
@@ -97,6 +97,7 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
                 try {
                     PetParentSingleton.getInstance().getGetAdoptionRequestListData().clear();
                     GetAdoptionRequestListResponse getAdoptionRequestListResponse = (GetAdoptionRequestListResponse) response.body();
+                    Log.d("AdoptionRequest",methods.getRequestJson(getAdoptionRequestListResponse));
                     int responseCode = Integer.parseInt(getAdoptionRequestListResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (getAdoptionRequestListResponse.getData().size() > 0) {
@@ -135,6 +136,7 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
                 try {
                     PetParentSingleton.getInstance().getGetDonationRequestListData().clear();
                     GetDonationRequestResponse getDonationRequestResponse = (GetDonationRequestResponse) response.body();
+                    Log.d("DonationRequest",methods.getRequestJson(getDonationRequestResponse));
                     int responseCode = Integer.parseInt(getDonationRequestResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         if (getDonationRequestResponse.getData().size() > 0) {

@@ -14,10 +14,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cynoteck.petofy.R;
-import com.cynoteck.petofy.utils.Config;
 import com.google.android.material.card.MaterialCardView;
 
 public class PetInsuranceActivity extends AppCompatActivity implements View.OnClickListener {
@@ -56,8 +54,7 @@ public class PetInsuranceActivity extends AppCompatActivity implements View.OnCl
                 break;
 
             case R.id.insurance_card_LL:
-                Config.fragmentNumber = 2;
-                Intent insuranceIntent = new Intent(this, DashBoardActivity.class);
+                Intent insuranceIntent = new Intent(this, SelectPetForDonateAndInsuranceActivity.class).putExtra("from","insurance");
                 startActivity(insuranceIntent);
                 break;
 

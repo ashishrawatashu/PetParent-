@@ -120,7 +120,7 @@ public class PetList {
     }
 
     public void setIsAdopted(String isAdopted) {
-        isAdopted = isAdopted;
+        this.isAdopted = isAdopted;
     }
 
     public String getIsDonated() {
@@ -128,7 +128,7 @@ public class PetList {
     }
 
     public void setIsDonated(String isDonated) {
-        isDonated = isDonated;
+        this.isDonated = isDonated;
     }
 
     public String getLastVisitEncryptedId() {
