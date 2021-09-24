@@ -57,18 +57,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation);
 
-
-
-
-
-
-
-
-
-
-
-
-        intentFrom                 =getIntent().getStringExtra("from");
+        intentFrom                 = getIntent().getStringExtra("from");
 
         pet_list_RV                 = findViewById(R.id.pet_list_RV);
         back_arrow_CV               = findViewById(R.id.back_arrow_CV);
@@ -90,25 +79,22 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
                 total_donation_RL.setVisibility(View.GONE);
                 add_pet_RL.setVisibility(View.GONE);
 
-                pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-                donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-                pet_list_RV.setAdapter(donatePetAdapter);
-                donatePetAdapter.notifyDataSetChanged();
+//                pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+//                donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+//                pet_list_RV.setAdapter(donatePetAdapter);
+//                donatePetAdapter.notifyDataSetChanged();
                     Toast.makeText(this,"this if from insurance",Toast.LENGTH_SHORT).show();
             }
             else {
-
                 total_donation_RL.setVisibility(View.VISIBLE);
                 add_pet_RL.setVisibility(View.VISIBLE);
-
-//                if(getIntent().getStringExtra("from").equals("donation"))
                 Toast.makeText(this,"this else statement from insurance",Toast.LENGTH_SHORT).show();
+
+            }
         pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
         donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
         pet_list_RV.setAdapter(donatePetAdapter);
         donatePetAdapter.notifyDataSetChanged();
-
-            }
 
     }
 
@@ -196,7 +182,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
                 petList.setPetColor(data.getStringExtra("pet_color"));
                 petList.setIsDonated("false");
                 petList.setIsAdopted("false");
-                //                profileList.add(0, petList);
+                //    profileList.add(0, petList);
                 PetParentSingleton.getInstance().getArrayList().add(0, petList);
                 total_pets_TV.setText("You have " + PetParentSingleton.getInstance().getArrayList().size() + " pets registered ");
                 registerPetAdapter.notifyDataSetChanged();
@@ -237,6 +223,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onViewDetailsClick(int position) {
         String realId = PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2);
+        Log.d("Donatevalue", "onViewDetailsClick: "+PetParentSingleton.getInstance().getArrayList().get(position).getIsAdopted());
 
         if(intentFrom.equals("insurance")) {
             if (PetParentSingleton.getInstance().getArrayList().get(position).getPetCategory().equals("Dog")){
@@ -251,10 +238,10 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
             }
 
         } else {
-            if(PetParentSingleton.getInstance().getArrayList().get(position).getIsAdopted().equals("true")) {
-                Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
-
-            } else {
+//            if(PetParentSingleton.getInstance().getArrayList().get(position).getIsAdopted().equals("true")) {
+//                Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
+//
+//            } else if(PetParentSingleton.getInstance().getArrayList().get(position).getIsAdopted().equals("false")){
 //                String realId = PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2);
                 AlertDialog alertDialog = new AlertDialog.Builder(this).create();
                 alertDialog.setTitle("");
@@ -272,7 +259,6 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                                 dialogInterface.dismiss();
 
                             }
@@ -280,7 +266,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
                         });
                 alertDialog.show();
             }
-        }
+//        }
 
     }
 
