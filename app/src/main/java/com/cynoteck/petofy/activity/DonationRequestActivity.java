@@ -1,8 +1,15 @@
 package com.cynoteck.petofy.activity;
 
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.donation_RL;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.donation_cart_icon_IV;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.total_donation_RL;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.total_donation_request_TV;
+import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.cynoteck.petofy.response.getDonationRequestResponse.GetDonationRequestData;
+import com.cynoteck.petofy.response.getDonationRequestResponse.GetDonationRequestResponse;
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.adapter.DonationRequestAdapter;
@@ -25,12 +34,14 @@ import com.google.gson.JsonObject;
 
 import retrofit2.Response;
 
-public class DonationRequestActivity extends AppCompatActivity implements OnAdaptionDonationListClickListener , View.OnClickListener, ApiResponse {
+public class DonationRequestActivity extends AppCompatActivity implements ApiResponse ,OnAdaptionDonationListClickListener , View.OnClickListener {
     RecyclerView            donation_request_RV;
     MaterialCardView        back_arrow_CV;
     DonationRequestAdapter  donationRequestAdapter;
     String                  type;
     int                     donationListPosition;
+    SwipeRefreshLayout      donation_list_SWL;
+    boolean                 fromSwipe = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +51,28 @@ public class DonationRequestActivity extends AppCompatActivity implements OnAdap
 
         donation_request_RV     = findViewById(R.id.donation_request_RV);
         back_arrow_CV           = findViewById(R.id.back_arrow_CV);
+        donation_list_SWL       = findViewById(R.id.donation_list_SWL);
 
+        donation_list_SWL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fromSwipe = true;
+                PetParentSingleton.getInstance().getGetDonationRequestListData().clear();
+                donationRequestAdapter.notifyDataSetChanged();
+                getDonationRequestData();
+
+            }
+        });
         back_arrow_CV.setOnClickListener(this);
         donation_request_RV.setLayoutManager(new LinearLayoutManager(this));
         donationRequestAdapter = new DonationRequestAdapter(this, PetParentSingleton.getInstance().getGetDonationRequestListData(),this);
         donation_request_RV.setAdapter(donationRequestAdapter);
+    }
+
+    private void getDonationRequestData() {
+        ApiService<GetDonationRequestResponse> service1 = new ApiService<>();
+        service1.get(this, ApiClient.getApiInterface().getDonationRequest(Config.token,"social-service/get-donation-request-list/0"), "DonationRequest");
+
     }
 
     @Override
@@ -117,6 +145,48 @@ public class DonationRequestActivity extends AppCompatActivity implements OnAdap
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key){
+            case "DonationRequest":
+                try {
+                    donation_list_SWL.setRefreshing(false);
+
+                    PetParentSingleton.getInstance().getGetDonationRequestListData().clear();
+                    GetDonationRequestResponse getDonationRequestResponse = (GetDonationRequestResponse) arg0.body();
+                    int responseCode = Integer.parseInt(getDonationRequestResponse.getResponse().getResponseCode());
+                    if (responseCode == 109) {
+                        if (getDonationRequestResponse.getData().size() > 0) {
+                            for (int i = 0; i < getDonationRequestResponse.getData().size(); i++) {
+                                GetDonationRequestData getDonationRequestData = new GetDonationRequestData();
+                                getDonationRequestData.setId(getDonationRequestResponse.getData().get(i).getId());
+                                getDonationRequestData.setUserId(getDonationRequestResponse.getData().get(i).getUserId());
+                                getDonationRequestData.setRequestDate(getDonationRequestResponse.getData().get(i).getRequestDate());
+                                getDonationRequestData.setStatus(getDonationRequestResponse.getData().get(i).getStatus());
+                                getDonationRequestData.setRequestUpdateDate(getDonationRequestResponse.getData().get(i).getRequestUpdateDate());
+                                getDonationRequestData.setPetName(getDonationRequestResponse.getData().get(i).getPetName());
+                                getDonationRequestData.setPetBreed(getDonationRequestResponse.getData().get(i).getPetBreed());
+                                getDonationRequestData.setPetImageList(getDonationRequestResponse.getData().get(i).getPetImageList());
+
+                                PetParentSingleton.getInstance().getGetDonationRequestListData().add(getDonationRequestData);
+                            }
+
+                            if (PetParentSingleton.getInstance().getGetDonationRequestListData().isEmpty()){
+                                total_donation_RL.setEnabled(false);
+                                donation_cart_icon_IV.setImageResource(R.drawable.cart_inactive);
+                                donation_RL.setVisibility(View.GONE);
+                            }else {
+                                total_donation_RL.setEnabled(true);
+                                total_donation_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetDonationRequestListData().size()));
+                                donation_cart_icon_IV.setImageResource(R.drawable.cart_icon);
+                                donation_RL.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                break;
+
             case "CancelRequest":
                 try {
                     JsonObject adoptionResponse = (JsonObject) arg0.body();
@@ -139,6 +209,8 @@ public class DonationRequestActivity extends AppCompatActivity implements OnAdap
 
     @Override
     public void onError(Throwable t, String key) {
-
+        if (fromSwipe){
+            donation_list_SWL.setRefreshing(false);
+        }
     }
 }

@@ -1,8 +1,14 @@
 package com.cynoteck.petofy.activity;
 
+import static com.cynoteck.petofy.activity.AdoptPetActivity.cart_icon_IV;
+import static com.cynoteck.petofy.activity.AdoptPetActivity.total_RL;
+import static com.cynoteck.petofy.activity.AdoptPetActivity.total_adoption_RL;
+import static com.cynoteck.petofy.activity.AdoptPetActivity.total_adoption_request_TV;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.cynoteck.petofy.response.getAdoptionRequestListResponse.GetAdoptionRequestListData;
+import com.cynoteck.petofy.response.getAdoptionRequestListResponse.GetAdoptionRequestListResponse;
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.adapter.AdoptionRequestAdapter;
@@ -31,6 +39,9 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
     MaterialCardView        back_arrow_CV;
     AdoptionRequestAdapter  adoptionRequestAdapter;
     int                     adoptionListPosition;
+    SwipeRefreshLayout      adoption_SRL;
+    boolean                 fromSwipe = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,7 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
 
         adoption_request_RV     = findViewById(R.id.adoption_request_RV);
         back_arrow_CV           = findViewById(R.id.back_arrow_CV);
+        adoption_SRL            = findViewById(R.id.adoption_SRL);
 
         back_arrow_CV.setOnClickListener(this);
 
@@ -46,6 +58,22 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
         adoptionRequestAdapter = new AdoptionRequestAdapter(this, PetParentSingleton.getInstance().getGetAdoptionRequestListData(), this);
         adoption_request_RV.setAdapter(adoptionRequestAdapter);
 
+        adoption_SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onRefresh() {
+                fromSwipe = true;
+                PetParentSingleton.getInstance().getGetAdoptionRequestListData().clear();
+                adoptionRequestAdapter.notifyDataSetChanged();
+                getAdoptionRequest();
+
+            }
+        });
+    }
+
+    private void getAdoptionRequest() {
+        ApiService<GetAdoptionRequestListResponse> service = new ApiService<>();
+        service.get(this, ApiClient.getApiInterface().getAdoptionRequest(Config.token,"social-service/get-adoption-request-list/0"), "AdoptionRequest");
 
     }
 
@@ -120,6 +148,46 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
     @Override
     public void onResponse(Response arg0, String key) {
         switch (key){
+            case "AdoptionRequest":
+                try {
+                    fromSwipe = false;
+                    PetParentSingleton.getInstance().getGetAdoptionRequestListData().clear();
+                    GetAdoptionRequestListResponse getAdoptionRequestListResponse = (GetAdoptionRequestListResponse) arg0.body();
+                    int responseCode = Integer.parseInt(getAdoptionRequestListResponse.getResponse().getResponseCode());
+                    if (responseCode == 109) {
+                        if (getAdoptionRequestListResponse.getData().size() > 0) {
+                            for (int i = 0; i < getAdoptionRequestListResponse.getData().size(); i++) {
+                                GetAdoptionRequestListData getAdoptionRequestListData = new GetAdoptionRequestListData();
+                                getAdoptionRequestListData.setId(getAdoptionRequestListResponse.getData().get(i).getId());
+                                getAdoptionRequestListData.setUserId(getAdoptionRequestListResponse.getData().get(i).getUserId());
+                                getAdoptionRequestListData.setRequestDate(getAdoptionRequestListResponse.getData().get(i).getRequestDate());
+                                getAdoptionRequestListData.setRequesterName(getAdoptionRequestListResponse.getData().get(i).getRequesterName());
+                                getAdoptionRequestListData.setRequestCurrentStatus(getAdoptionRequestListResponse.getData().get(i).getRequestCurrentStatus());
+                                getAdoptionRequestListData.setRequestUpdateDate(getAdoptionRequestListResponse.getData().get(i).getRequestUpdateDate());
+                                getAdoptionRequestListData.setPet(getAdoptionRequestListResponse.getData().get(i).getPet());
+                                getAdoptionRequestListData.setPetImageList(getAdoptionRequestListResponse.getData().get(i).getPetImageList());
+
+                                PetParentSingleton.getInstance().getGetAdoptionRequestListData().add(getAdoptionRequestListData);
+                            }
+                            if (PetParentSingleton.getInstance().getGetAdoptionRequestListData().isEmpty()){
+                                total_adoption_RL.setEnabled(false);
+                                cart_icon_IV.setImageResource(R.drawable.cart_inactive);
+                                total_RL.setVisibility(View.GONE);
+                            }else {
+                                total_adoption_RL.setEnabled(true);
+                                total_adoption_request_TV.setText(String.valueOf(PetParentSingleton.getInstance().getGetAdoptionRequestListData().size()));
+                                cart_icon_IV.setImageResource(R.drawable.cart_icon);
+                                total_RL.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                break;
+
             case "CancelRequest":
                 try {
                     JsonObject adoptionResponse = (JsonObject) arg0.body();
@@ -143,6 +211,8 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onError(Throwable t, String key) {
-
+        if (fromSwipe){
+            adoption_SRL.setRefreshing(false);
+        }
     }
 }

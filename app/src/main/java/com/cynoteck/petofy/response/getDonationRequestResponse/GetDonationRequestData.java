@@ -2,6 +2,8 @@
 package com.cynoteck.petofy.response.getDonationRequestResponse;
 
 import java.util.List;
+
+import com.cynoteck.petofy.response.donationResponse.PetImageList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -102,7 +104,7 @@ public class GetDonationRequestData {
     private List<Object> petAdoption = null;
     @SerializedName("petImageList")
     @Expose
-    private List<Object> petImageList = null;
+    private List<PetImageList> petImageList;
     @SerializedName("petTypeList")
     @Expose
     private Object petTypeList;
@@ -433,11 +435,11 @@ public class GetDonationRequestData {
         this.petAdoption = petAdoption;
     }
 
-    public List<Object> getPetImageList() {
+    public List<PetImageList> getPetImageList() {
         return petImageList;
     }
 
-    public void setPetImageList(List<Object> petImageList) {
+    public void setPetImageList(List<PetImageList> petImageList) {
         this.petImageList = petImageList;
     }
 

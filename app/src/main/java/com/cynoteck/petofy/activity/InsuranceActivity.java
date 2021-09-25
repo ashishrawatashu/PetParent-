@@ -17,14 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cynoteck.petofy.R;
-import com.cynoteck.petofy.response.getPetReportsResponse.getPetListResponse.PetList;
-import com.cynoteck.petofy.utils.Config;
-import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.google.android.material.card.MaterialCardView;
-
-import static com.cynoteck.petofy.fragments.PetRegisterFragment.registerPetAdapter;
-import static com.cynoteck.petofy.fragments.PetRegisterFragment.total_pets_TV;
-import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
 
 public class InsuranceActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,9 +59,9 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
             case R.id.insurance_card_LL:
 //-----------------------------------------------------------------------
             case R.id.buy_now_BT:
-                Config.fragmentNumber = 2;
+//                Config.fragmentNumber = 2;
 //                Config.insurance="true";
-                Intent insuranceIntent = new Intent(this, DonationActivity.class).putExtra("from","insurance");
+                Intent insuranceIntent = new Intent(this, SelectPetForDonateAndInsuranceActivity.class).putExtra("from","insurance");
                 startActivity(insuranceIntent);
 //                startActivityForResult(insuranceIntent,1);
                 break;

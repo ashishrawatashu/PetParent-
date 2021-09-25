@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -62,35 +63,26 @@ import java.util.List;
 
 
 public class DashBoardActivity extends AppCompatActivity {
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private final int MY_PERMISSIONS_REQUEST_READ_CAMERA = 200, MY_PERMISSIONS_REQUEST_READ_STORAGE = 300;
-    private GpsTracker gpsTracker;
-    public static final String channel_id = "channel_id";
-    private static final String channel_name = "channel_name";
-    private static final String channel_desc = "channel_desc";
-    boolean exit = false;
-    Methods methods;
-    String petId = "", from = "";
-    LocationManager locationManager;
-    private static final int REQUEST_LOCATION = 1;
-    private BroadcastReceiver mNetworkReceiver;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor login_editor;
-    Dialog location_permission_dialog,settingDialog;
-    Dialog storagePermissionDialog, cameraPermissionDialog;
-    BottomNavigationView navigation;
+    public static final int             MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private BroadcastReceiver           mNetworkReceiver;
+    SharedPreferences                   sharedPreferences;
+    SharedPreferences.Editor            login_editor;
+    BottomNavigationView                navigation;
+    BottomSheetDialog                   updateDialog;
+    String                              currentVersion, latestVersion;
+    public static final String          channel_id = "channel_id";
+    private static final String         channel_name = "channel_name";
+    private static final String         channel_desc = "channel_desc";
+    boolean                             exit = false;
+    Methods                             methods;
+
     final Fragment fragment1 = new ParentHomeFragment();
     final Fragment fragment2 = new PetRegisterFragment();
     final Fragment fragment3 = new AppointmentListFragment();
     final Fragment fragment4 = new ProfileFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
-    boolean cameraDialog = false, storageDialog = false;
-    boolean  dialogStatus = false;
-    boolean locationPermission = false;
-    Button open_setting_BT;
-    BottomSheetDialog updateDialog;
-    String currentVersion, latestVersion;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,20 +90,19 @@ public class DashBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dash_board);
         methods = new Methods(this);
         notificationMethod();
-//        getLocation();
-//        checkCameraPermission();
 
+        getDataFromSharedPreferences();
 
 //        getCurrentVersion();
-
-
         registerNetworkBroadcastForNougat();
-//        requestMultiplePermissions();
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        requestMultiplePermissions();
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setItemIconTintList(null);
+
+        //fragment Set
 
         fm.beginTransaction().add(R.id.content_frame, fragment4, "4").hide(fragment4).commit();
         fm.beginTransaction().add(R.id.content_frame, fragment3, "3").hide(fragment3).commit();
@@ -134,6 +125,9 @@ public class DashBoardActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private void getDataFromSharedPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("userDetails", 0);
         Config.token = sharedPreferences.getString("token", "");
         Config.user_id = sharedPreferences.getString("userId", "");
@@ -155,30 +149,14 @@ public class DashBoardActivity extends AppCompatActivity {
 //      Config.latitude                         = sharedPreferences.getString("userLatitude", "");
 //      Config.longitude                        = sharedPreferences.getString("userLongitude", "");
 
-        requestMultiplePermissions();
-
-//        getLocation();
-
-
-//        if (Config.locationPermission.equals("true")) {
-//            getLocation();
-//        }
-//        else{
-//            requestMultiplePermissions();
-//        }
-//        requestMultiplePermissions();
-//        getLocation();
-
         Log.d("TOKEN", Config.token);
         Log.d("user_id", Config.user_id);
-//        Log.d("LOCATION", Config.latitude + "  " + Config.longitude);
-
+        Log.d("LOCATION", Config.latitude + "  " + Config.longitude);
     }
 
 
-
     public void getLocation() {
-        gpsTracker = new GpsTracker(DashBoardActivity.this);
+        GpsTracker gpsTracker = new GpsTracker(DashBoardActivity.this);
         if (gpsTracker.canGetLocation()) {
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
@@ -194,8 +172,6 @@ public class DashBoardActivity extends AppCompatActivity {
             gpsTracker.showSettingsAlert();
         }
     }
-
-//    -----------------------------------------------------------------------------------
 
     private void getCurrentVersion() {
         PackageManager pm = this.getPackageManager();
@@ -226,7 +202,7 @@ public class DashBoardActivity extends AppCompatActivity {
         @Override
         protected JSONObject doInBackground(String... params) {
             try {
-//It retrieves the latest version by scraping the content of current version from play store at runtime
+            //It retrieves the latest version by scraping the content of current version from play store at runtime
 
                 Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id=com.cynoteck.petofy").get();
                 latestVersion = doc.getElementsByClass("htlgb").get(6).text();
@@ -286,13 +262,6 @@ public class DashBoardActivity extends AppCompatActivity {
         window.setAttributes(lp);
     }
 
-//    -----------------------------------------------------------------------------------
-
-
-
-
-
-
     private void notificationMethod() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(channel_id, channel_name, NotificationManager.IMPORTANCE_DEFAULT);
@@ -342,6 +311,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        @SuppressLint("NonConstantResourceId")
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -398,7 +368,6 @@ public class DashBoardActivity extends AppCompatActivity {
             if (exit) {
                 super.onBackPressed();
                 finishAffinity();
-                return;
             } else {
                 Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
                 exit = true;
@@ -431,22 +400,15 @@ public class DashBoardActivity extends AppCompatActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-//
                             Log.d("STORAGE_DIALOG", "All permissions are granted by user!");
 
-                        }
-                        else
-                            {
-//
+                        } else {
                             startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
                             Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
-//                            Log.d("DEXTER", "storagePermissionDialog");
-
                         }
 
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
-//                            locationPermission = false;
                             startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
                             Log.d("STORAGE_DIALOG", "dashboardopenSettingsDialog");
 
@@ -462,8 +424,7 @@ public class DashBoardActivity extends AppCompatActivity {
                     @Override
                     public void onError(DexterError error) {
                         Log.e("DEXTER", error.name());
-//                        Toast.makeText(DashBoardActivity.this, "Some Error ! ", Toast.LENGTH_SHORT).show();
-                           }
+                    }
                 })
                 .onSameThread()
                 .check();
@@ -479,7 +440,6 @@ public class DashBoardActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterNetworkChanges();
-
     }
 
 
