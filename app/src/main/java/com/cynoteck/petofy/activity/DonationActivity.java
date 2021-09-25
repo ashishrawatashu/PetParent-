@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cynoteck.petofy.utils.Methods;
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.adapter.DonatePetAdapter;
@@ -51,23 +52,13 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
     public static ImageView         donation_cart_icon_IV;
     String intentFrom;
     Dialog                      insurance_successfully_dialog;
+    Methods             methods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation);
-
-
-
-
-
-
-
-
-
-
-
-
+        methods = new Methods(this);
         intentFrom                 =getIntent().getStringExtra("from");
 
         pet_list_RV                 = findViewById(R.id.pet_list_RV);
@@ -84,8 +75,7 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
         back_arrow_CV.setOnClickListener(this);
 
             //check from which activity user is coming
-            if(intentFrom.equals("insurance"))
-            {
+            if(intentFrom.equals("insurance")) {
                 create_headline_TV.setText("INSURANCED YOUR PET");
                 total_donation_RL.setVisibility(View.GONE);
                 add_pet_RL.setVisibility(View.GONE);
@@ -94,19 +84,18 @@ public class DonationActivity extends AppCompatActivity implements View.OnClickL
                 donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
                 pet_list_RV.setAdapter(donatePetAdapter);
                 donatePetAdapter.notifyDataSetChanged();
-                    Toast.makeText(this,"this if from insurance",Toast.LENGTH_SHORT).show();
-            }
-            else {
-
+                Toast.makeText(this,"this if from insurance",Toast.LENGTH_SHORT).show();
+            } else if (intentFrom.equals("donation")){
+                Log.d("PET_LIST_DONATE",methods.getRequestJson(PetParentSingleton.getInstance().getArrayList().get(0).getIsAdopted()));
+                Log.d("PET_LIST_DONATE",methods.getRequestJson(PetParentSingleton.getInstance().getArrayList().get(1).getIsAdopted()));
                 total_donation_RL.setVisibility(View.VISIBLE);
                 add_pet_RL.setVisibility(View.VISIBLE);
+                Toast.makeText(this,"this else statement from donation",Toast.LENGTH_SHORT).show();
 
-//                if(getIntent().getStringExtra("from").equals("donation"))
-                Toast.makeText(this,"this else statement from insurance",Toast.LENGTH_SHORT).show();
-        pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
-        donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
-        pet_list_RV.setAdapter(donatePetAdapter);
-        donatePetAdapter.notifyDataSetChanged();
+                pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
+                donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
+                pet_list_RV.setAdapter(donatePetAdapter);
+                donatePetAdapter.notifyDataSetChanged();
 
             }
 
