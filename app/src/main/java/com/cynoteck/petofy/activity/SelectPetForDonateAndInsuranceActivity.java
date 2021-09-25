@@ -75,7 +75,7 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
 
         //check from which activity user is coming
             if (intentFrom.equals("insurance")) {
-                create_headline_TV.setText("INSURANCE YOUR PET");
+                create_headline_TV.setText("PET INSURANCE");
                 select_pet_TV.setText("Select pet for insurance");
                 total_donation_RL.setVisibility(View.GONE);
 

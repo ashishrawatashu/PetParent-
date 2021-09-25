@@ -285,6 +285,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
     }
 
     private void donatePetById(String realId) {
+        methods.showCustomProgressBarDialog(this);
         JsonObject jsonObjectParams = new JsonObject();
         jsonObjectParams.addProperty("id", realId);
 
@@ -351,6 +352,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
 
             case "DonatePetById":
                 try {
+                    methods.customProgressDismiss();
                     JsonObject jsonObject = (JsonObject) arg0.body();
                     JsonObject response = jsonObject.getAsJsonObject("response");
                     int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));
