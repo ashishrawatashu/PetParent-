@@ -2,6 +2,7 @@ package com.cynoteck.petofy.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,13 +54,13 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
         adopt_IV.setOnClickListener(this);
 
 
-
-
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.back_arrow_CV:
                 onBackPressed();
                 break;
@@ -69,11 +70,11 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
                 startActivity(adoptionIntent);
                 break;
 
-
             case R.id.donate_IV:
                 Intent donationIntent = new Intent(this, SelectPetForDonateAndInsuranceActivity.class).putExtra("from","donation");
                 startActivity(donationIntent);
                 break;
+
         }
     }
 
@@ -110,9 +111,11 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
                                 getAdoptionRequestListData.setRequestCurrentStatus(getAdoptionRequestListResponse.getData().get(i).getRequestCurrentStatus());
                                 getAdoptionRequestListData.setRequestUpdateDate(getAdoptionRequestListResponse.getData().get(i).getRequestUpdateDate());
                                 getAdoptionRequestListData.setPet(getAdoptionRequestListResponse.getData().get(i).getPet());
+                                getAdoptionRequestListData.setPetImageList(getAdoptionRequestListResponse.getData().get(i).getPetImageList());
 
                                 PetParentSingleton.getInstance().getGetAdoptionRequestListData().add(getAdoptionRequestListData);
                             }
+                            Log.d("Adoption_response",methods.getRequestJson(PetParentSingleton.getInstance().getGetAdoptionRequestListData()));
                             if (PetParentSingleton.getInstance().getGetAdoptionRequestListData().isEmpty()){
                                 total_adoption_RL.setEnabled(false);
                                 cart_icon_IV.setImageResource(R.drawable.cart_inactive);
@@ -149,6 +152,7 @@ public class AdoptionDonationActivity extends AppCompatActivity implements View.
                                 getDonationRequestData.setRequestUpdateDate(getDonationRequestResponse.getData().get(i).getRequestUpdateDate());
                                 getDonationRequestData.setPetName(getDonationRequestResponse.getData().get(i).getPetName());
                                 getDonationRequestData.setPetBreed(getDonationRequestResponse.getData().get(i).getPetBreed());
+                                getDonationRequestData.setPetImageList(getDonationRequestResponse.getData().get(i).getPetImageList());
 
                                 PetParentSingleton.getInstance().getGetDonationRequestListData().add(getDonationRequestData);
                             }

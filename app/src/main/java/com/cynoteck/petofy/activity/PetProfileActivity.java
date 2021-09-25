@@ -200,30 +200,39 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
 
 
             case R.id.donate_pet_LL:
-                String realId = PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().substring(0,PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().length()-2);
-                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-                alertDialog.setTitle("");
-                alertDialog.setMessage("Do you want to donate this pet?");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                donatePetById(realId);
-                                dialog.dismiss();
+                if(PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getIsDonated().equals("true")) {
+                    Toast.makeText(this,"Pet is donated !",Toast.LENGTH_SHORT).show();
 
-                            }
-                        });
 
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                }else {
+                    String realId = PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().substring(0,PetParentSingleton.getInstance().getArrayList().get(pet_list_position).getId().length()-2);
+                    AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("");
+                    alertDialog.setMessage("Do you want to donate this pet?");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    PetParentSingleton.getInstance().getArrayList().get(pet_list_position).setIsDonated("true");
 
-                                dialogInterface.dismiss();
+                                    donatePetById(realId);
+                                    dialog.dismiss();
 
-                            }
+                                }
+                            });
 
-                        });
-                alertDialog.show();
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    dialogInterface.dismiss();
+
+                                }
+
+                            });
+                    alertDialog.show();
+                }
+
 
                 break;
 
@@ -284,7 +293,7 @@ public class PetProfileActivity extends AppCompatActivity implements ApiResponse
 
         ApiService<JsonObject> service = new ApiService<>();
         service.get(this, ApiClient.getApiInterface().donatePetById(Config.token, jsonObjectRequest), "DonatePetById");
-        //Log.d"DATALOG", "check1=> " + jsonObjectRequest);
+        Log.d("DATALOG", "check1=> " + jsonObjectRequest);
     }
     private void showAppointmentSuccessfully() {
         insurance_successfully_dialog = new Dialog(this);

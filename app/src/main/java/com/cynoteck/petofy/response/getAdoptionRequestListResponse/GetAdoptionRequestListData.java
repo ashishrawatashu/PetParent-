@@ -1,8 +1,12 @@
 
 package com.cynoteck.petofy.response.getAdoptionRequestListResponse;
 
+import com.cynoteck.petofy.response.donationResponse.PetImageList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GetAdoptionRequestListData {
 
@@ -51,6 +55,18 @@ public class GetAdoptionRequestListData {
     @SerializedName("user")
     @Expose
     private GetAdoptionUserData user;
+
+    @SerializedName("petImageList")
+    @Expose
+    private ArrayList<PetImageList> petImageList;
+
+    public ArrayList<PetImageList> getPetImageList() {
+        return petImageList;
+    }
+
+    public void setPetImageList(ArrayList<PetImageList> petImageList) {
+        this.petImageList = petImageList;
+    }
 
     public String getEncryptedId() {
         return encryptedId;

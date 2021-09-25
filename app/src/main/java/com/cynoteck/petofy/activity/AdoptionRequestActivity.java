@@ -59,6 +59,7 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
         adoption_request_RV.setAdapter(adoptionRequestAdapter);
 
         adoption_SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onRefresh() {
                 fromSwipe = true;
@@ -164,6 +165,7 @@ public class AdoptionRequestActivity extends AppCompatActivity implements View.O
                                 getAdoptionRequestListData.setRequestCurrentStatus(getAdoptionRequestListResponse.getData().get(i).getRequestCurrentStatus());
                                 getAdoptionRequestListData.setRequestUpdateDate(getAdoptionRequestListResponse.getData().get(i).getRequestUpdateDate());
                                 getAdoptionRequestListData.setPet(getAdoptionRequestListResponse.getData().get(i).getPet());
+                                getAdoptionRequestListData.setPetImageList(getAdoptionRequestListResponse.getData().get(i).getPetImageList());
 
                                 PetParentSingleton.getInstance().getGetAdoptionRequestListData().add(getAdoptionRequestListData);
                             }

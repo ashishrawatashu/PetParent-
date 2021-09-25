@@ -243,8 +243,9 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
             }
 
         } else {
-            if(PetParentSingleton.getInstance().getArrayList().get(position).getIsAdopted().equals("true")) {
-                Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
+            if(PetParentSingleton.getInstance().getArrayList().get(position).getIsDonated().equals("true")) {
+                Toast.makeText(this,"Pet is donated !",Toast.LENGTH_SHORT).show();
+
 
             } else {
 //                String realId = PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2);
@@ -255,6 +256,7 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 donatePetById(realId);
+                                PetParentSingleton.getInstance().getArrayList().get(position).setIsDonated("true");
                                 dialog.dismiss();
 
                             }
