@@ -93,7 +93,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
         getDataFromSharedPreferences();
 
-//        getCurrentVersion();
+        getCurrentVersion();
         registerNetworkBroadcastForNougat();
         requestMultiplePermissions();
 

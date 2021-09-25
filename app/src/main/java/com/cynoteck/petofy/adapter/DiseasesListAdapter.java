@@ -71,11 +71,21 @@ public class DiseasesListAdapter extends RecyclerView.Adapter<DiseasesListAdapte
                 public void onClick(View v) {
                     if (onDiseasesListClickListener!=null){
                         if (check_box_id.isChecked()){
-                            diseasesListModels.get(getAdapterPosition()).setStatus(true);
-                            onDiseasesListClickListener.onDiseasesListClickListener(getAdapterPosition(),true,diseasesListModels.get(getAdapterPosition()).getId());
+                            try {
+                                diseasesListModels.get(getAdapterPosition()).setStatus(true);
+                                onDiseasesListClickListener.onDiseasesListClickListener(getAdapterPosition(),true,diseasesListModels.get(getAdapterPosition()).getId());
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
                         }else {
-                            diseasesListModels.get(getAdapterPosition()).setStatus(false);
-                            onDiseasesListClickListener.onDiseasesListClickListener(getAdapterPosition(),false,diseasesListModels.get(getAdapterPosition()).getId());
+                            try {
+                                diseasesListModels.get(getAdapterPosition()).setStatus(false);
+                                onDiseasesListClickListener.onDiseasesListClickListener(getAdapterPosition(),false,diseasesListModels.get(getAdapterPosition()).getId());
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
                         }
                     }
                 }
