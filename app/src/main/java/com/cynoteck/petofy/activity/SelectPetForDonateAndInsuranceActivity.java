@@ -230,7 +230,7 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
     public void onViewDetailsClick(int position) {
         String realId = PetParentSingleton.getInstance().getArrayList().get(position).getId().substring(0, PetParentSingleton.getInstance().getArrayList().get(position).getId().length() - 2);
 
-        if(intentFrom.equals("insurance")) {
+         if(intentFrom.equals("insurance")) {
             if (PetParentSingleton.getInstance().getArrayList().get(position).getPetCategory().equals("Dog")){
                 Intent insuranceIntent = new Intent(this, BuyInsuranceActivity.class);
                 insuranceIntent.putExtra("petId", realId);
