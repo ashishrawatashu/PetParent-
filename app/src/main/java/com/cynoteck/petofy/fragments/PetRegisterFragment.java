@@ -53,6 +53,7 @@ import com.cynoteck.petofy.onClicks.ViewDeatilsAndIdCardClick;
 import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
+import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.donation_insurance_PB;
 import static com.cynoteck.petofy.fragments.ProfileFragment.petListHorizontalAdapter;
 import static com.cynoteck.petofy.fragments.ProfileFragment.pet_list_LL;
 import static com.cynoteck.petofy.activity.SelectPetForDonateAndInsuranceActivity.donatePetAdapter;
@@ -251,6 +252,7 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onResponse(Response response, String key) {
         switch (key) {
@@ -307,6 +309,8 @@ public class PetRegisterFragment extends Fragment implements ApiResponse, ViewDe
                                 petListHorizontalAdapter.notifyDataSetChanged();
                                 pet_list_LL.setVisibility(View.VISIBLE);
                                 donatePetAdapter.notifyDataSetChanged();
+                                donation_insurance_PB.setVisibility(View.GONE);
+                                add_pet_RL.setVisibility(View.VISIBLE);
 
                             }
                         }

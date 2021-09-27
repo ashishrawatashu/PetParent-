@@ -186,7 +186,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                 break;
 
             case R.id.contact_clinic_BT:
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", "6399638639", null));
                 startActivity(intent);
                 break;
 

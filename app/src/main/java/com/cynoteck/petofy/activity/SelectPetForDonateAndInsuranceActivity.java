@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,7 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
     public static TextView          total_donation_request_TV,create_headline_TV;
     public static DonatePetAdapter  donatePetAdapter;
     public static ImageView         donation_cart_icon_IV;
+    public static ProgressBar       donation_insurance_PB;
     String                          intentFrom;
     Dialog                          insurance_successfully_dialog;
     Methods                         methods;
@@ -67,28 +69,36 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
 
         intentFrom                 =  getIntent().getStringExtra("from");
         initView();
-
-            //check from which activity user is coming
-            if (intentFrom.equals("insurance")) {
-                create_headline_TV.setText("INSURANCE YOUR PET");
-                select_pet_TV.setText("Select pet for insurance");
-                total_donation_RL.setVisibility(View.GONE);
-                add_pet_RL.setVisibility(View.GONE);
-
-            } else {
-                total_donation_RL.setVisibility(View.VISIBLE);
-                add_pet_RL.setVisibility(View.VISIBLE);
-
-            }
         pet_list_RV.setLayoutManager(new LinearLayoutManager(this));
         donatePetAdapter = new DonatePetAdapter(this, PetParentSingleton.getInstance().getArrayList(), this);
         pet_list_RV.setAdapter(donatePetAdapter);
-        donatePetAdapter.notifyDataSetChanged();
+
+        //check from which activity user is coming
+            if (intentFrom.equals("insurance")) {
+                create_headline_TV.setText("PET INSURANCE");
+                select_pet_TV.setText("Select pet for insurance");
+                total_donation_RL.setVisibility(View.GONE);
+
+            } else {
+                total_donation_RL.setVisibility(View.VISIBLE);
+
+            }
+            if (PetParentSingleton.getInstance().getArrayList().isEmpty()){
+                donation_insurance_PB.setVisibility(View.VISIBLE);
+            }else {
+                donation_insurance_PB.setVisibility(View.GONE);
+                donatePetAdapter.notifyDataSetChanged();
+            }
+
+
+
+
 
     }
 
     private void initView() {
         select_pet_TV               = findViewById(R.id.select_pet_TV);
+        donation_insurance_PB       = findViewById(R.id.donation_insurance_PB);
         pet_list_RV                 = findViewById(R.id.pet_list_RV);
         back_arrow_CV               = findViewById(R.id.back_arrow_CV);
         total_donation_RL           = findViewById(R.id.total_donation_RL);
@@ -147,6 +157,7 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
         switch (key) {
             case "DonatePetById":
                 try {
+                    methods.customProgressDismiss();
                     JsonObject jsonObject = (JsonObject) arg0.body();
                     JsonObject response = jsonObject.getAsJsonObject("response");
                     int responseCode = Integer.parseInt(String.valueOf(response.get("responseCode")));
@@ -194,6 +205,7 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
                 registerPetAdapter.notifyDataSetChanged();
                 petListHorizontalAdapter.notifyDataSetChanged();
                 donatePetAdapter.notifyDataSetChanged();
+                donation_insurance_PB.setVisibility(View.GONE);
             }
         }
         else if (requestCode == 2) {
@@ -279,9 +291,9 @@ public class SelectPetForDonateAndInsuranceActivity extends AppCompatActivity im
     }
 
     private void donatePetById(String realId) {
+        methods.showCustomProgressBarDialog(this);
         JsonObject jsonObjectParams = new JsonObject();
         jsonObjectParams.addProperty("id", realId);
-
         JsonObject jsonObjectRequest = new JsonObject();
         jsonObjectRequest.add("data", jsonObjectParams);
 
