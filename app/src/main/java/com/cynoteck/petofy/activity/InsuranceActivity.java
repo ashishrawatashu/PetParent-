@@ -74,9 +74,9 @@ public class InsuranceActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.see_all_cover_TV:
 
-                String InsuranceUrl = "https://www.petofy.com/pet-insurance";
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
-                startActivity(browserIntent);
+//                String InsuranceUrl = "https://www.petofy.com/pet-insurance";
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(InsuranceUrl));
+//                startActivity(browserIntent);
                 break;
 
             case R.id.download_brochure_CV:
