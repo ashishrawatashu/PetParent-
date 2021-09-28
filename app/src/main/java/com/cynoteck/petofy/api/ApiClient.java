@@ -1,5 +1,7 @@
 package com.cynoteck.petofy.api;
 
+import com.cynoteck.petofy.utils.Config;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -9,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-   private static final String BASE_URL = "https://petofyapi.azurewebsites.net/api/";
+    private static final String BASE_URL = Config.BASE_URL;
 
     private ApiClient() {
     }
