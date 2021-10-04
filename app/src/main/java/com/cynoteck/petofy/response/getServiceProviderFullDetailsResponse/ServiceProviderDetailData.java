@@ -95,19 +95,19 @@ public class ServiceProviderDetailData {
     private Object serviceImages;
     @SerializedName("firstServiceImageUrl")
     @Expose
-    private Object firstServiceImageUrl;
+    private String firstServiceImageUrl;
     @SerializedName("secondServiceImageUrl")
     @Expose
-    private Object secondServiceImageUrl;
+    private String secondServiceImageUrl;
     @SerializedName("thirdServiceImageUrl")
     @Expose
-    private Object thirdServiceImageUrl;
+    private String thirdServiceImageUrl;
     @SerializedName("fourthServiceImageUrl")
     @Expose
-    private Object fourthServiceImageUrl;
+    private String fourthServiceImageUrl;
     @SerializedName("fifthServiceImageUrl")
     @Expose
-    private Object fifthServiceImageUrl;
+    private String fifthServiceImageUrl;
     @SerializedName("latitude")
     @Expose
     private String latitude;
@@ -495,43 +495,43 @@ public class ServiceProviderDetailData {
         this.serviceImages = serviceImages;
     }
 
-    public Object getFirstServiceImageUrl() {
+    public String getFirstServiceImageUrl() {
         return firstServiceImageUrl;
     }
 
-    public void setFirstServiceImageUrl(Object firstServiceImageUrl) {
+    public void setFirstServiceImageUrl(String firstServiceImageUrl) {
         this.firstServiceImageUrl = firstServiceImageUrl;
     }
 
-    public Object getSecondServiceImageUrl() {
+    public String getSecondServiceImageUrl() {
         return secondServiceImageUrl;
     }
 
-    public void setSecondServiceImageUrl(Object secondServiceImageUrl) {
+    public void setSecondServiceImageUrl(String secondServiceImageUrl) {
         this.secondServiceImageUrl = secondServiceImageUrl;
     }
 
-    public Object getThirdServiceImageUrl() {
+    public String getThirdServiceImageUrl() {
         return thirdServiceImageUrl;
     }
 
-    public void setThirdServiceImageUrl(Object thirdServiceImageUrl) {
+    public void setThirdServiceImageUrl(String thirdServiceImageUrl) {
         this.thirdServiceImageUrl = thirdServiceImageUrl;
     }
 
-    public Object getFourthServiceImageUrl() {
+    public String getFourthServiceImageUrl() {
         return fourthServiceImageUrl;
     }
 
-    public void setFourthServiceImageUrl(Object fourthServiceImageUrl) {
+    public void setFourthServiceImageUrl(String fourthServiceImageUrl) {
         this.fourthServiceImageUrl = fourthServiceImageUrl;
     }
 
-    public Object getFifthServiceImageUrl() {
+    public String getFifthServiceImageUrl() {
         return fifthServiceImageUrl;
     }
 
-    public void setFifthServiceImageUrl(Object fifthServiceImageUrl) {
+    public void setFifthServiceImageUrl(String fifthServiceImageUrl) {
         this.fifthServiceImageUrl = fifthServiceImageUrl;
     }
 

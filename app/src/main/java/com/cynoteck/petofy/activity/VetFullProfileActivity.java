@@ -89,6 +89,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     int                                         page_position = 0;
     String                                      phone = "";
     private final int                           ADD_PET = 2;
+    ArrayList<String>                           serviceTypeImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +102,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         slider_image_list.add(R.drawable.slider_one);
         slider_image_list.add(R.drawable.slider_two);
         slider_image_list.add(R.drawable.slider_three);
-        setupPagerIndidcatorDots();
-        autoSlider();
-        SetViewPager();
+
         methods = new Methods(this);
         getServiceProviderAllDetails();
     }
@@ -318,6 +317,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                 try {
                     reviews_PB.setVisibility(View.GONE);
                     searchProviderFullDetailResponse = (SearchProviderFullDetailResponse) arg0.body();
+                    Log.d("GetProviderFullDetails",methods.getRequestJson(searchProviderFullDetailResponse));
                     int responseCode = Integer.parseInt(searchProviderFullDetailResponse.getResponse().getResponseCode());
                     if (responseCode == 109) {
                         progressBar.setVisibility(View.GONE);
@@ -335,6 +335,9 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         reviews_RV.setLayoutManager(reviewsHorizontalLayoutManager);
                         LinearLayoutManager clinic_timings_horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
                         clinic_timings_RV.setLayoutManager(clinic_timings_horizontalLayoutManager);
+
+                        getServiceImagesList();
+
                         providerId = (searchProviderFullDetailResponse.getData().getId());
                         providerRatingLists = searchProviderFullDetailResponse.getData().getProviderRatingList();
                         serviceProviderDetailOperatingHours = searchProviderFullDetailResponse.getData().getOperatingHourList();
@@ -360,6 +363,10 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
                         Log.d("rarting",searchProviderFullDetailResponse.getData().getRating());
                         rating_TV.setText(searchProviderFullDetailResponse.getData().getRating());
 
+
+                        setupPagerIndidcatorDots();
+                        autoSlider();
+                        SetViewPager();
 
                     }
                 }catch (Exception e){
@@ -388,16 +395,48 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
         }
     }
 
+    private void getServiceImagesList() {
+        if (searchProviderFullDetailResponse.getData().getFirstServiceImageUrl()!=null){
+            serviceTypeImages.add(searchProviderFullDetailResponse.getData().getFirstServiceImageUrl());
+        }if (searchProviderFullDetailResponse.getData().getSecondServiceImageUrl()!=null){
+            serviceTypeImages.add(searchProviderFullDetailResponse.getData().getSecondServiceImageUrl());
+        }if (searchProviderFullDetailResponse.getData().getThirdServiceImageUrl()!=null){
+            serviceTypeImages.add(searchProviderFullDetailResponse.getData().getThirdServiceImageUrl());
+        }if (searchProviderFullDetailResponse.getData().getFourthServiceImageUrl()!=null){
+            serviceTypeImages.add(searchProviderFullDetailResponse.getData().getFourthServiceImageUrl());
+        }if (searchProviderFullDetailResponse.getData().getFifthServiceImageUrl()!=null){
+            serviceTypeImages.add(searchProviderFullDetailResponse.getData().getFifthServiceImageUrl());
+        }
+
+
+        Log.d("serviceTypeImages",methods.getRequestJson(serviceTypeImages));
+
+
+
+    }
+
     private void autoSlider() {
         final Handler handler = new Handler();
         final Runnable update = new Runnable() {
             public void run() {
-                if (page_position == slider_image_list.size()) {
-                    page_position = 0;
-                } else {
-                    page_position = page_position + 1;
+                if (serviceTypeImages.size()>0){
+                    if (page_position == serviceTypeImages.size()) {
+                        page_position = 0;
+                    } else {
+                        page_position = page_position + 1;
+                    }
+                    pager.setCurrentItem(page_position, true);
+
+                }else {
+                    if (page_position == slider_image_list.size()) {
+                        page_position = 0;
+                    } else {
+                        page_position = page_position + 1;
+                    }
+                    pager.setCurrentItem(page_position, true);
+
                 }
-                pager.setCurrentItem(page_position, true);
+
             }
         };
 
@@ -412,8 +451,14 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
 
     private void SetViewPager() {
 
-        sliderPagerAdapter = new SliderPagerAdapter(this, slider_image_list,this);
-        pager.setAdapter(sliderPagerAdapter);
+        if (serviceTypeImages.size()>0){
+            sliderPagerAdapter = new SliderPagerAdapter(this, serviceTypeImages,this,"serviceImages");
+            pager.setAdapter(sliderPagerAdapter);
+        }else {
+            sliderPagerAdapter = new SliderPagerAdapter(this, slider_image_list,this);
+            pager.setAdapter(sliderPagerAdapter);
+        }
+
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -423,11 +468,20 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
             @Override
             public void onPageSelected(int position) {
                 //  addBottomDots(position);
+                if (serviceTypeImages.size()>0){
+                    for (int i = 0; i < serviceTypeImages.size(); i++) {
+                        dots[i].setImageResource(R.drawable.inactive_dot);
+                    }
+                    dots[position].setImageResource(R.drawable.active_dot);
 
-                for (int i = 0; i < slider_image_list.size(); i++) {
-                    dots[i].setImageResource(R.drawable.inactive_dot);
+                }else {
+                    for (int i = 0; i < slider_image_list.size(); i++) {
+                        dots[i].setImageResource(R.drawable.inactive_dot);
+                    }
+                    dots[position].setImageResource(R.drawable.active_dot);
                 }
-                dots[position].setImageResource(R.drawable.active_dot);
+
+
             }
 
             @Override
@@ -443,7 +497,11 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     }
 
     private void setupPagerIndidcatorDots() {
-        dots = new ImageView[slider_image_list.size()];
+        if (serviceTypeImages.size()>0){
+            dots = new ImageView[serviceTypeImages.size()];
+        }else {
+            dots = new ImageView[slider_image_list.size()];
+        }
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new ImageView(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
