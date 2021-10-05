@@ -32,8 +32,7 @@
     <string name="download">Download</string>
 
 
-
-<!--    openSetting-->
+    <!--    openSetting-->
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="LastPrescription">Last Prescription</string>
@@ -232,6 +231,7 @@
     <string name="plans_and_subscription">Plans and subscription</string>
     <string name="privacy">Privacy</string>
     <string name="logout">Logout</string>
+    <string name="connectWithUs">Connect &amp; Like us</string>
     <string name="upload_image">Upload photo</string>
     <string name="change"><u>Change</u></string>
     <string name="home">Home</string>
@@ -245,6 +245,7 @@
     <string name="petnames">Pet Names</string>
     <string name="grant">Grant</string>
     <string name="opensetting">OPEN SETTINGS</string>
+    <string name="Heading">Connect with us  </string>
 
     <string name="loginUsingPhone">Login with phone number</string>
     <string name="ok">OK</string>
