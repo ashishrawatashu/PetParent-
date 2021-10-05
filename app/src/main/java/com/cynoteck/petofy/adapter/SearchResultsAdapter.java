@@ -116,7 +116,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             star_three              = itemView.findViewById(R.id.star_three);
             star_four               = itemView.findViewById(R.id.star_four);
             star_five               = itemView.findViewById(R.id.star_five);
-            view_more_LL.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onProductItemClickListner != null) {
