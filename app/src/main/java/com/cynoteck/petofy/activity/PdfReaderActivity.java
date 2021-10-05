@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cynoteck.petofy.R;
+import com.cynoteck.petofy.utils.Config;
 import com.google.android.material.card.MaterialCardView;
 
 public class PdfReaderActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,7 +35,7 @@ public class PdfReaderActivity extends AppCompatActivity implements View.OnClick
         pdf_headline_TV.setText(type);
         pdfread.getSettings().setBuiltInZoomControls(true);
         pdfread.setWebViewClient(new WebViewClient());
-        pdfread.loadUrl("https://www.petofy.com/PetHealthRecord/DoctorsPrescription?encryptedId="+encryptId+"&&status=1");
+        pdfread.loadUrl(Config.URL+"PetHealthRecord/DoctorsPrescription?encryptedId="+encryptId+"&&status=1");
 
     }
 

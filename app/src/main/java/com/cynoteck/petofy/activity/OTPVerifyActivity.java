@@ -161,21 +161,21 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
             }
         }
     }
-    private void registerBroadcastReceiver() {
-        smsBroadcastReceiver = new SmsBroadcastReceiver();
-        smsBroadcastReceiver.smsBroadcastReceiverListener =
-                new SmsBroadcastReceiver.SmsBroadcastReceiverListener() {
-                    @Override
-                    public void onSuccess(Intent intent) {
-                        startActivityForResult(intent, REQ_USER_CONSENT);
-                    }
-                    @Override
-                    public void onFailure() {
-                    }
-                };
-        IntentFilter intentFilter = new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
-        registerReceiver(smsBroadcastReceiver, intentFilter);
-    }
+//    private void registerBroadcastReceiver() {
+//        smsBroadcastReceiver = new SmsBroadcastReceiver();
+//        smsBroadcastReceiver.smsBroadcastReceiverListener =
+//                new SmsBroadcastReceiver.SmsBroadcastReceiverListener() {
+//                    @Override
+//                    public void onSuccess(Intent intent) {
+//                        startActivityForResult(intent, REQ_USER_CONSENT);
+//                    }
+//                    @Override
+//                    public void onFailure() {
+//                    }
+//                };
+//        IntentFilter intentFilter = new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
+//        registerReceiver(smsBroadcastReceiver, intentFilter);
+//    }
     private void getOtpFromMessage(String message) {
         // This will match any 6 digit number in the message
         Pattern pattern = Pattern.compile("(|^)\\d{4}");
@@ -195,12 +195,12 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
     @Override
     protected void onStart() {
         super.onStart();
-        registerBroadcastReceiver();
+//        registerBroadcastReceiver();
     }
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReceiver(smsBroadcastReceiver);
+//        unregisterReceiver(smsBroadcastReceiver);
     }
 
     @Override
@@ -347,7 +347,7 @@ public class OTPVerifyActivity extends AppCompatActivity implements TextWatcher,
                         editText_four.getText().clear();
                         editText_one.requestFocus();
                         otpString = String.valueOf(resendOTPResponse.getData().getOtp());
-                        registerBroadcastReceiver();
+//                        registerBroadcastReceiver();
 
 
                     }else {

@@ -1,6 +1,7 @@
 package com.cynoteck.petofy.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class ProviderClinicTimingsAdapter extends RecyclerView.Adapter<ProviderC
     @Override
     public void onBindViewHolder(@NonNull ProviderClinicTimingsAdapter.MyViewHolder holder, int position) {
         holder.day_TV.setText(serviceProviderDetailOperatingHours.get(position).getDay().getDayName());
+        Log.d("DAYS",serviceProviderDetailOperatingHours.get(position).getDay().getDayName());
         holder.timing_TV.setText(serviceProviderDetailOperatingHours.get(position).getStartTime() +" " +serviceProviderDetailOperatingHours.get(position).getEndTime());
 
     }

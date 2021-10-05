@@ -238,7 +238,7 @@
     <string name="somethingWrong">Something went wrong. Please try again later.</string>
     <string name="VetProfile">Profile</string>
     <string name="GiveFeedback"><u>Write a review</u></string>
-    <string name="reviewHint">Tell us what went wrong..</string>
+    <string name="reviewHint">Enter your valuable feedback..</string>
     <string name="cat">Cats</string>
     <string name="dogs">Dogs</string>
     <string name="search">Search </string>
