@@ -24,11 +24,11 @@ import java.util.List;
 
 public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.MyViewHolder> implements Filterable {
     Context                             context;
-    List<ProviderList>                  providerLists;
-    RegisterRecyclerViewClickListener   onProductItemClickListner;
-    List<ProviderList>                  getProviderListsFilter;
+    ArrayList<ProviderList>                  providerLists;
+    RegisterRecyclerViewClickListener     onProductItemClickListner;
+    ArrayList<ProviderList>                  getProviderListsFilter;
 
-    public VetListAdapter(Context context, List<ProviderList> providerLists, RegisterRecyclerViewClickListener onProductItemClickListner) {
+    public VetListAdapter(Context context, ArrayList<ProviderList> providerLists, RegisterRecyclerViewClickListener onProductItemClickListner) {
         this.context = context;
         this.providerLists = providerLists;
         this.onProductItemClickListner = onProductItemClickListner;

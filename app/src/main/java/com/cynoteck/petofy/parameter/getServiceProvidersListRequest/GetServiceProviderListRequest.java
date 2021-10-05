@@ -2,6 +2,15 @@ package com.cynoteck.petofy.parameter.getServiceProvidersListRequest;
 
 public class GetServiceProviderListRequest {
     private GetServiceProviderListParams data;
+    private GetServiceProviderListHeader header;
+
+    public GetServiceProviderListHeader getHeader() {
+        return header;
+    }
+
+    public void setHeader(GetServiceProviderListHeader header) {
+        this.header = header;
+    }
 
     public GetServiceProviderListParams getData ()
     {

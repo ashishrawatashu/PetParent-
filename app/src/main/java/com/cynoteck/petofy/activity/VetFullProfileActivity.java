@@ -396,6 +396,7 @@ public class VetFullProfileActivity extends AppCompatActivity implements ApiResp
     }
 
     private void getServiceImagesList() {
+
         if (searchProviderFullDetailResponse.getData().getFirstServiceImageUrl()!=null){
             serviceTypeImages.add(searchProviderFullDetailResponse.getData().getFirstServiceImageUrl());
         }if (searchProviderFullDetailResponse.getData().getSecondServiceImageUrl()!=null){
