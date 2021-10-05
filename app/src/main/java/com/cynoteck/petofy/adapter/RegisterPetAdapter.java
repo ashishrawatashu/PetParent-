@@ -73,7 +73,7 @@ public class RegisterPetAdapter extends RecyclerView.Adapter<RegisterPetAdapter.
             view_reg_pet_details_BT     = itemView.findViewById(R.id.view_reg_pet_details_BT);
             view_reports_BT             = itemView.findViewById(R.id.view_reports_BT);
             view_details_LL             = itemView.findViewById(R.id.view_details_LL);
-            view_details_LL.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(onProductItemClickListner!=null){

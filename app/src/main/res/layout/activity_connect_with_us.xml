@@ -21,12 +21,13 @@
 
             <TextView
                 android:id="@+id/textGrid"
-                android:text="@string/Heading"
-                android:textSize="34sp"
-                android:textColor="@android:color/white"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/nunito"
+                android:text="@string/Heading"
+                android:textColor="@android:color/white"
+                android:textSize="34sp" />
 
         </RelativeLayout>
 
@@ -259,7 +260,7 @@
 
                     <ImageButton
                         android:id="@+id/googleMap"
-                        android:src="@drawable/mapgoogle"
+                        android:src="@drawable/google_map"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:scaleType="fitCenter"
