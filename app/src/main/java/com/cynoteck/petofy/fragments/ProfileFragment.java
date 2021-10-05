@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.cynoteck.petofy.activity.ConnectWithUs;
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.activity.AddPetRegister;
@@ -92,7 +93,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
     View                                        view;
     RelativeLayout                              edit_RL;
     ImageView                                   camera_IV;
-    ConstraintLayout                            general_details_CL, change_password_CL, plans_and_subscription_CL, privacy_CL, logout_CL;
+    ConstraintLayout                            general_details_CL, change_password_CL, plans_and_subscription_CL, privacy_CL, logout_CL,ConnectWithUs_CL;
     String                                      selctProflImage = "";
     Dialog                                      dialog;
     Bitmap                                      bitmap, thumbnail;
@@ -143,6 +144,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         user_dialog_confirmation_dialog.setContentView(R.layout.user_log_out_dialog);
         cancel_BT = user_dialog_confirmation_dialog.findViewById(R.id.cancel_BT);
         ok_BT = user_dialog_confirmation_dialog.findViewById(R.id.log_out_BT);
+
+
+
         ok_BT.setOnClickListener(this);
         cancel_BT.setOnClickListener(this);
     }
@@ -231,6 +235,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         edit_RL                     =   view.findViewById(R.id.edit_RL);
         add_pet_RL                  =   view.findViewById(R.id.add_pet_RL);
         pet_list_RV                 =   view.findViewById(R.id.pet_list_RV);
+        ConnectWithUs_CL            =   view.findViewById(R.id.ConnectWithUs_CL);
 
 
         edit_RL.setOnClickListener(this);
@@ -241,6 +246,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
         logout_CL.setOnClickListener(this);
         camera_IV.setOnClickListener(this);
         add_pet_RL.setOnClickListener(this);
+        ConnectWithUs_CL.setOnClickListener(this);
 
     }
 
@@ -273,6 +279,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 startActivityForResult(updateProfileIntent, UPDATE);
 
                 break;
+
+            case R.id.ConnectWithUs_CL:
+                Intent connectWithUs = new Intent(getActivity(), ConnectWithUs.class);
+                startActivity(connectWithUs);
+//                startActivityForResult(connectWithUs, UPDATE);
+
+                break;
+
 
 
             case R.id.change_password_CL:
