@@ -37,6 +37,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.PrivacyPolicy"
+            android:exported="true" />
+        <activity
             android:name=".activity.ConnectWithUs"
             android:exported="true" />
         <activity
@@ -92,10 +95,9 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.SplashScreen"
+            android:exported="true"
             android:screenOrientation="portrait"
-
-            tools:ignore="LockedOrientationActivity"
-            android:exported="true">
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -160,8 +162,8 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.PaymentScreenActivity"
-            android:screenOrientation="portrait"
             android:exported="false"
+            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.AddUpdateAppointmentActivity"

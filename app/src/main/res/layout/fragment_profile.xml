@@ -402,7 +402,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:id="@+id/privacy_RL"
@@ -502,6 +502,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/logout_CL"
                 android:layout_width="match_parent"
@@ -552,7 +561,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 

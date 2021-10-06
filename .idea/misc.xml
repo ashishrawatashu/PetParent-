@@ -29,6 +29,7 @@
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_adoption_donation.xml" value="0.1125" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_adoption_pet_details.xml" value="0.20416666666666666" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_buy_insurance.xml" value="0.19021739130434784" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_connect_with_us.xml" value="0.18461538461538463" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_consultation_list.xml" value="0.25" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_dash_board.xml" value="0.15" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_donation.xml" value="0.25" />
@@ -40,6 +41,7 @@
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_pet_breed_deatils.xml" value="0.1328125" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_pet_id_card.xml" value="0.1" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_pet_insurance.xml" value="0.1598731884057971" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_privacy_policy.xml" value="0.25" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_reports_common.xml" value="0.12447916666666667" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_scanner.xml" value="0.1" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/activity_selected_pet_reports.xml" value="0.1" />
@@ -50,7 +52,7 @@
         <entry key="..\:/petofypetparent/app/src/main/res/layout/donate_pet_list.xml" value="0.25" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_parent_home.xml" value="0.15" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_pet_register.xml" value="0.1328125" />
-        <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_profile.xml" value="0.1328125" />
+        <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/fragment_reports_list.xml" value="0.1598731884057971" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/insurance_images_document_section_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/petofypetparent/app/src/main/res/layout/location_dialog.xml" value="0.14583333333333334" />

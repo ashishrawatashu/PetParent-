@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.cynoteck.petofy.activity.ConnectWithUs;
+import com.cynoteck.petofy.activity.PrivacyPolicy;
 import com.cynoteck.petofy.utils.PetParentSingleton;
 import com.cynoteck.petofy.R;
 import com.cynoteck.petofy.activity.AddPetRegister;
@@ -285,6 +286,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener, A
                 startActivity(connectWithUs);
 //                startActivityForResult(connectWithUs, UPDATE);
 
+                break;
+
+            case R.id.privacy_CL:
+                Intent privacyPolicy=new Intent(getActivity(), PrivacyPolicy.class);
+                startActivity(privacyPolicy);
                 break;
 
 
