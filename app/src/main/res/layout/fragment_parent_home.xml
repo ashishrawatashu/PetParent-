@@ -37,16 +37,15 @@
     <ImageView
         android:id="@+id/qr_code_IV"
         android:layout_width="25dp"
-        android:visibility="gone"
         android:layout_height="25dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:scaleType="fitXY"
         android:src="@drawable/qr_code_scanner"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <LinearLayout
@@ -89,12 +88,12 @@
 
 
     <LinearLayout
-        android:gravity="center_vertical"
         android:id="@+id/search_layout_LL"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/search_bar_background_grey"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/get_petofy_plus_IV"
         app:layout_constraintStart_toStartOf="@id/location_LL"
@@ -102,24 +101,23 @@
 
 
         <ImageView
-            android:layout_marginLeft="10dp"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/search_icon"/>
-        
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/search_icon" />
+
         <TextView
-            android:fontFamily="@font/nunito"
-            android:textColor="@color/gray_3"
-            android:textSize="15sp"
-            android:layout_marginLeft="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/searchHint"/>
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/searchHint"
+            android:textColor="@color/gray_3"
+            android:textSize="15sp" />
 
 
     </LinearLayout>
-    
-    
+
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -188,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
-                android:text="Browse Category"
+                android:text="Services"
                 android:textColor="@color/gray_2"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -243,7 +241,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/adoption_donation_LL"
+                    android:id="@+id/grooming_LL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -253,18 +251,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="110dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/adoption_donation_card" />
+                        android:src="@drawable/grooming_card" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/montserrat"
                         android:gravity="center"
-                        android:text="@string/adoptionDonation"
+                        android:text="Grooming"
                         android:textColor="@color/black_color"
                         android:textStyle="normal" />
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/training_LL"
@@ -302,136 +301,6 @@
                 app:layout_constraintStart_toStartOf="@id/highlights_TV"
                 app:layout_constraintTop_toBottomOf="@+id/upper_cat_LL">
 
-                <LinearLayout
-                    android:id="@+id/hostels_LL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/hostels_card" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/montserrat"
-                        android:gravity="center"
-                        android:text="Hostels"
-                        android:textColor="@color/black_color"
-                        android:textStyle="normal" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/insurances_LL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/insurances_card" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/montserrat"
-                        android:gravity="center"
-                        android:text="Insurances"
-                        android:textColor="@color/black_color"
-                        android:textStyle="normal" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pet_breed_LL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/pet_breed_card" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/montserrat"
-                        android:gravity="center"
-                        android:text="Pet Breeds"
-                        android:textColor="@color/black_color"
-                        android:textStyle="normal" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                app:layout_constraintEnd_toEndOf="@id/highlights_TV"
-                app:layout_constraintStart_toStartOf="@id/highlights_TV"
-                app:layout_constraintTop_toBottomOf="@+id/middle_cat_LL">
-
-                <LinearLayout
-                    android:id="@+id/grooming_LL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/grooming_card" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/montserrat"
-                        android:gravity="center"
-                        android:text="Grooming"
-                        android:textColor="@color/black_color"
-                        android:textStyle="normal" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/pet_names_LL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/pet_names_card" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/montserrat"
-                        android:gravity="center"
-                        android:text="Pet Names"
-                        android:textColor="@color/black_color"
-                        android:textStyle="normal" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/pet_shops_LL"
@@ -451,7 +320,56 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/montserrat"
                         android:gravity="center"
-                        android:text="Pet Shops"
+                        android:text="@string/petshop"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/hostels_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/hostels_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/hostels"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/petsitter_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/insurances_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/petsitter"
                         android:textColor="@color/black_color"
                         android:textStyle="normal" />
 
@@ -459,6 +377,342 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lastServices_LL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                app:layout_constraintEnd_toEndOf="@id/highlights_TV"
+                app:layout_constraintStart_toStartOf="@id/highlights_TV"
+                app:layout_constraintTop_toBottomOf="@+id/middle_cat_LL">
+
+
+                <LinearLayout
+                    android:id="@+id/petbreeders_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/insurances_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/breederskennels"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/petfriendlyplace_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/insurances_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/petfriendly"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <!--                <LinearLayout-->
+                <!--                    android:id="@+id/pet_names_LL"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:orientation="vertical">-->
+
+                <!--                    <ImageView-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="110dp"-->
+                <!--                        android:scaleType="fitXY"-->
+                <!--                        android:src="@drawable/pet_names_card" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:fontFamily="@font/montserrat"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:text="Pet Names"-->
+                <!--                        android:textColor="@color/black_color"-->
+                <!--                        android:textStyle="normal" />-->
+
+                <!--                </LinearLayout>-->
+                <LinearLayout
+                    android:id="@+id/insurances_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/insurances_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/PetInsurances"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/social_services_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:text="@string/socialservices"
+                android:textColor="@color/gray_2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/lastServices_LL"
+                app:layout_constraintTop_toBottomOf="@id/lastServices_LL" />
+
+
+            <LinearLayout
+                android:id="@+id/firstsocial_LL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                app:layout_constraintStart_toStartOf="@id/social_services_TV"
+                app:layout_constraintEnd_toEndOf="@+id/lastServices_LL"
+                app:layout_constraintTop_toBottomOf="@+id/social_services_TV">
+
+                <LinearLayout
+                    android:id="@+id/pet_breed_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="117dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pet_breed_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+
+                        android:text="@string/petbreeds"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/pet_names_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pet_names_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/petnames"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/adoption_donation_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/adoption_donation_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/adoptionDonation"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/secondsocial_LL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                app:layout_constraintStart_toStartOf="@id/social_services_TV"
+                app:layout_constraintEnd_toEndOf="@+id/lastServices_LL"
+                app:layout_constraintTop_toBottomOf="@+id/firstsocial_LL">
+
+                <LinearLayout
+                    android:id="@+id/pet_NGO_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pet_breed_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/ngo"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/pet_shelter_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/hostels_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/petshelter"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/burial_LL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/adoption_donation_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:gravity="center"
+                        android:text="@string/burial"
+                        android:textColor="@color/black_color"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+
+                <!--                <LinearLayout-->
+                <!--                    android:id="@+id/insurances_LL"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:orientation="vertical">-->
+
+                <!--                    <ImageView-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="110dp"-->
+                <!--                        android:scaleType="fitXY"-->
+                <!--                        android:src="@drawable/insurances_card" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:fontFamily="@font/montserrat"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:text="Insurances"-->
+                <!--                        android:textColor="@color/black_color"-->
+                <!--                        android:textStyle="normal" />-->
+
+                <!--                </LinearLayout>-->
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
