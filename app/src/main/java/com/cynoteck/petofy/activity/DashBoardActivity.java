@@ -403,7 +403,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
                         } else {
                             startActivity(new Intent(DashBoardActivity.this,PermissionCheckActivity.class));
-                            Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(DashBoardActivity.this, "Please allow storage permission !", Toast.LENGTH_SHORT).show();
                         }
 
                         // check for permanent denial of any permission

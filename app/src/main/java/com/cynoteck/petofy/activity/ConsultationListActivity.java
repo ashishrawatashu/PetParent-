@@ -173,31 +173,71 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
         location_TV.setText(Config.cityFullName);
 
         if (serviceTypeId.equals("1")){
-            consultation_TV.setText("CONSULTATIONS");
+            consultation_TV.setText("Consultation");
 //            search_vet_TV.setHint("Search Veterinarian by name");
         }else if (serviceTypeId.equals("3")){
-            consultation_TV.setText("HOSTELS");
+            consultation_TV.setText("Hostel");
             heading_one_TV.setText("Select Hostels Near you");
             heading_two_TV.setText("Find the best hostel for your pet with Petofy");
 //            search_vet_TV.setHint("Search Hostels by name");
         }else if (serviceTypeId.equals("2")){
-            consultation_TV.setText("GROOMING");
+            consultation_TV.setText("Grooming");
             heading_one_TV.setText("Select Your Desired Groomer");
             heading_two_TV.setText("Find the best groomers for your pet with Petofy");
 //            search_vet_TV.setHint("Search Groomer by name");
 
         }else if (serviceTypeId.equals("11")){
-            consultation_TV.setText("PET SHOPS");
+            consultation_TV.setText("Pet Shops");
             heading_one_TV.setText("Select Your Desired Pet Shop");
             heading_two_TV.setText("Find the best shop for your pet with Petofy");
 //            search_vet_TV.setHint("Search Pet Shop by name");
 
         }else if (serviceTypeId.equals("6")){
-            consultation_TV.setText("TRAINING");
+            consultation_TV.setText("Training");
             heading_one_TV.setText("Select Your Desired Trainer");
             heading_two_TV.setText("Find the best trainers for your pet with Petofy");
 //            search_vet_TV.setHint("Search Trainer by name");
 
+        }else if (serviceTypeId.equals("14")){
+            consultation_TV.setText("Pet Sitter/ Dog Walker");
+            heading_one_TV.setText("Select Your Desired Pet Sitter/ Dog Walker");
+            heading_two_TV.setText("Find the best Pet Sitter/ Dog Walker for your pet with Petofy");
+//            search_vet_TV.setHint("Search Trainer by name");
+
+        }else if (serviceTypeId.equals("15")){
+            consultation_TV.setText("Breeders And Kennels");
+            heading_one_TV.setText("Select Your Desired Breeders And Kennels");
+            heading_two_TV.setText("Find the best Breeders And Kennels with Petofy");
+//            search_vet_TV.setHint("Search Trainer by name");
+
+        }else if (serviceTypeId.equals("16")){
+            consultation_TV.setText("Pet Friendly Places");
+            heading_one_TV.setText("Select Your Desired Pet Friendly Places");
+            heading_two_TV.setText("Find the best Pet Friendly Places with Petofy");
+//            search_vet_TV.setHint("Search Trainer by name");
+
+        }else if (serviceTypeId.equals("17")){
+            consultation_TV.setText("Pet Rescue");
+            heading_one_TV.setText("Select Your Desired Trainer");
+            heading_two_TV.setText("Find the best trainers for your pet with Petofy");
+//            search_vet_TV.setHint("Search Trainer by name");
+
+        }else if (serviceTypeId.equals("18")){
+            consultation_TV.setText("Burial Services");
+            heading_one_TV.setText("Select Your Desired Burial Services");
+            heading_two_TV.setText("Find the Burial Services for your pet with Petofy");
+//            search_vet_TV.setHint("Search Trainer by name");
+
+        }else if (serviceTypeId.equals("19")){
+            consultation_TV.setText("Pet Shelter");
+            heading_one_TV.setText("Select Your Desired Pet Shelter");
+            heading_two_TV.setText("Find the best Pet Shelter with Petofy");
+//            search_vet_TV.setHint("Search Trainer by name");
+        }else if (serviceTypeId.equals("9")){
+            consultation_TV.setText("Pet Ngo's");
+            heading_one_TV.setText("Select Your Desired Pet Ngo's");
+            heading_two_TV.setText("Find the Pet Ngo's with Petofy");
+//            search_vet_TV.setHint("Search Trainer by name");
         }
 
         nested_scroll_view.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -314,7 +354,7 @@ public class ConsultationListActivity extends AppCompatActivity implements View.
                     if (responseCode == 109) {
                         if (getVetListResponse.getData().getProviderList().isEmpty()) {
                             empty_IV.setVisibility(View.VISIBLE);
-                            Toast.makeText(this, "No data found in your city !", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(this, "No data found in your city !", Toast.LENGTH_SHORT).show();
                         } else {
                             search_bar_LL.setVisibility(View.VISIBLE);
                             vet_list_RV.setVisibility(View.VISIBLE);

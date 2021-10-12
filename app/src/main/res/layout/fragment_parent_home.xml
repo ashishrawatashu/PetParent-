@@ -352,7 +352,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/petsitter_LL"
+                    android:id="@+id/pet_sitter_LL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -389,7 +389,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/petbreeders_LL"
+                    android:id="@+id/pet_breeders_LL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -414,7 +414,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/petfriendlyplace_LL"
+                    android:id="@+id/pet_friendly_place_LL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -649,7 +649,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/burial_LL"
+                    android:id="@+id/pet_burial_LL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

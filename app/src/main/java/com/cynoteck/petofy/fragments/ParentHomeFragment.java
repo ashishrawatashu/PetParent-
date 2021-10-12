@@ -75,7 +75,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     LinearLayout                        location_LL,search_layout_LL;
     Methods                             methods;
     TextView                            location_TV;
-    LinearLayout                        pet_breed_LL, pet_names_LL,cosultation_LL,insurances_LL,adoption_donation_LL,pet_shops_LL,grooming_LL,hostels_LL,training_LL;
+    LinearLayout                        pet_sitter_LL,pet_breeders_LL,pet_friendly_place_LL,pet_NGO_LL,pet_shelter_LL,pet_burial_LL,pet_breed_LL, pet_names_LL,cosultation_LL,insurances_LL,adoption_donation_LL,pet_shops_LL,grooming_LL,hostels_LL,training_LL;
 
 
     //location Dialog.........
@@ -136,6 +136,13 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
     }
 
     private void init() {
+
+        pet_sitter_LL           = view.findViewById(R.id.pet_sitter_LL);
+        pet_breeders_LL         = view.findViewById(R.id.pet_breeders_LL);
+        pet_friendly_place_LL   = view.findViewById(R.id.pet_friendly_place_LL);
+        pet_NGO_LL              = view.findViewById(R.id.pet_NGO_LL);
+        pet_shelter_LL          = view.findViewById(R.id.pet_shelter_LL);
+        pet_burial_LL           = view.findViewById(R.id.pet_burial_LL);
         search_layout_LL        = view.findViewById(R.id.search_layout_LL);
         qr_code_IV              = view.findViewById(R.id.qr_code_IV);
         location_TV             = view.findViewById(R.id.location_TV);
@@ -169,7 +176,12 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         qr_code_IV.setOnClickListener(this);
         adoption_donation_LL.setOnClickListener(this);
         pet_names_LL.setOnClickListener(this);
-
+        pet_sitter_LL.setOnClickListener(this);
+        pet_breeders_LL.setOnClickListener(this);
+        pet_friendly_place_LL.setOnClickListener(this);
+        pet_NGO_LL.setOnClickListener(this);
+        pet_shelter_LL.setOnClickListener(this);
+        pet_burial_LL.setOnClickListener(this);
 
         location_LL.setOnClickListener(this);
         search_layout_LL.setOnClickListener(this);
@@ -292,6 +304,49 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
                 Intent trainingIntent = new Intent(getContext(), ConsultationListActivity.class);
                 trainingIntent.putExtra("serviceTypeId","6");
                 startActivity(trainingIntent);
+                break;
+
+            case R.id.pet_sitter_LL:
+                Intent petSitterIntent = new Intent(getContext(), ConsultationListActivity.class);
+                petSitterIntent.putExtra("serviceTypeId","14");
+                startActivity(petSitterIntent);
+
+                break;
+
+            case R.id.pet_burial_LL:
+
+                Intent petBurialIntent = new Intent(getContext(), ConsultationListActivity.class);
+                petBurialIntent.putExtra("serviceTypeId","18");
+                startActivity(petBurialIntent);
+                break;
+
+            case R.id.pet_breeders_LL:
+                Intent petBreedersIntent = new Intent(getContext(), ConsultationListActivity.class);
+                petBreedersIntent.putExtra("serviceTypeId","15");
+                startActivity(petBreedersIntent);
+
+                break;
+
+            case R.id.pet_NGO_LL:
+                Intent petNgoIntent = new Intent(getContext(), ConsultationListActivity.class);
+                petNgoIntent.putExtra("serviceTypeId","9");
+                startActivity(petNgoIntent);
+                break;
+
+            case R.id.pet_friendly_place_LL:
+
+                Intent pet_friendly_place_intent = new Intent(getContext(), ConsultationListActivity.class);
+                pet_friendly_place_intent.putExtra("serviceTypeId","16");
+                startActivity(pet_friendly_place_intent);
+
+                break;
+
+            case R.id.pet_shelter_LL:
+
+                Intent petShelterIntent = new Intent(getContext(), ConsultationListActivity.class);
+                petShelterIntent.putExtra("serviceTypeId","19");
+                startActivity(petShelterIntent);
+
                 break;
 
         }
