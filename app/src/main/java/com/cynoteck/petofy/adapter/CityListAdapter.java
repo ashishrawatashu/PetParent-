@@ -22,6 +22,8 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.MyView
     Context                     context;
     List<GetCityListWithData>   cityListWithData;
     List<GetCityListWithData>   cityListWithDataFilter;
+
+
     private OnItemClickListener onProductItemClickListner;
 
     public CityListAdapter(Context context, List<GetCityListWithData> cityListWithData, OnItemClickListener onProductItemClickListner) {

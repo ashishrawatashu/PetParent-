@@ -485,6 +485,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
 
     }
 
+
     @Override
     public void onViewDetailsClick(int position) {
         showCrossButton = false;
@@ -502,6 +503,7 @@ public class ParentHomeFragment extends Fragment implements View.OnClickListener
         Config.cityFullName = sharedPreferences.getString("CityFullName", "");
         location_dialog.dismiss();
     }
+
 
     @Override
     public void onSliderClickListener(int position) {

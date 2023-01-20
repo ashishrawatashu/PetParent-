@@ -23,6 +23,7 @@ public class AdoptionListAdopter extends RecyclerView.Adapter<AdoptionListAdopte
     AdoptionListOnClick     adoptionListOnClick;
     Context                 context;
 
+
     public AdoptionListAdopter(Context context, List<PetDonationList> petDonationLists, AdoptionListOnClick adoptionListOnClick) {
         this.petDonationLists       = petDonationLists;
         this.adoptionListOnClick    = adoptionListOnClick;
